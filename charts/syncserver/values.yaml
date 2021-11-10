@@ -5,14 +5,29 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  pullPolicy: IfNotPresent
+  repository: mozilla/syncserver
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+env: {}
+  # PORT: 5000
+  # SYNCSERVER_ALLOW_NEW_USER: true
+  # SYNCSERVER_BATCH_UPLOAD_ENABLED: true
+  # SYNCSERVER_DEBUG_ENABLED: false
+  # SYNCSERVER_FORCE_WSGI_ENVIRON: false
+  # SYNCSERVER_PUBLIC_URL: http://localhost:5000
+  # SYNCSERVER_SECRET:
+  # SYNCSERVER_SQLURI: sqlite:////tmp/syncserver.db
+
+existingSecret:
+  name: ""
+  # how to generate your secret: https://mozilla-services.readthedocs.io/en/latest/howtos/run-sync-1.5.html#further-configuration
+  syncserverSecretKey: "syncserverSecret"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -38,7 +53,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 5000
 
 ingress:
   enabled: false
@@ -57,23 +72,12 @@ ingress:
   #      - chart-example.local
 
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
   #   memory: 128Mi
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 
