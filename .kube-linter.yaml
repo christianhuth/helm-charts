@@ -1,0 +1,6 @@
+# customChecks defines custom checks.
+checks:
+  exclude:
+    - "unset-cpu-requirements"
+    - "unset-memory-requirements"
+    - "no-read-only-root-fs"
