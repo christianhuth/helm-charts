@@ -1,0 +1,7 @@
+---
+apiVersion: v2
+name: flatcar-linux-update-operator
+description: A Kubernetes operator to manage updates of Flatcar Container Linux
+type: application
+version: 0.8.0
+appVersion: "v0.8.0"
