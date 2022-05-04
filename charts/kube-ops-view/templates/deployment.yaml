@@ -32,6 +32,15 @@ spec:
           args:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          #          env:
+          #            - name: AUTHORIZE_URL
+          #              value: https://auth.diz.uk-erlangen.de/auth/realms/MIRACUM/protocol/openid-connect/auth
+          #            - name: ACCESS_TOKEN_URL
+          #              value: https://auth.diz.uk-erlangen.de/auth/realms/MIRACUM/protocol/openid-connect/token
+          #            - name: CREDENTIALS_DIR
+          #              value: /oidc-credentials
+          #            - name: ROUTE_PREFIX
+          #              value: https://opsview.k8s.diz.uk-erlangen.de
           {{- with .Values.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
@@ -58,6 +67,9 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+      #          volumeMounts:
+      #            - name: oidc-secret
+      #              mountPath: /oidc-credentials
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -70,3 +82,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+#      volumes:
+#        - name: oidc-secret
+#          secret:
+#            secretName: kubeopsview-oidc-secret
