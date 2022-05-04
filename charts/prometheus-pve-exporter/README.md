@@ -1,9 +1,14 @@
 # prometheus-pve-exporter
 
+A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor to collect metrics.
+
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.2.3](https://img.shields.io/badge/AppVersion-2.2.3-informational?style=flat-square)
+
 ## TL;DR;
 
 ```console
 helm repo add christianknell https://charts.knell.it
+helm repo update
 helm install my-release christianknell/prometheus-pve-exporter
 ```
 
@@ -23,30 +28,29 @@ To install the chart with the release name `my-release`:
 
 ```console
 helm repo add christianknell https://charts.knell.it
+helm repo update
 helm install my-release christianknell/prometheus-pve-exporter
 ```
 
-These commands deploy prometheus-pve-exporter on the Kubernetes cluster in the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
+These commands deploy prometheus-pve-exporter on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `my-release` deployment:
+To uninstall the `my-release` deployment:
 
 ```console
-helm delete my-release
+helm uninstall my-release
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
 ## Values
 
-The following tables list the configurable parameters of the prometheus-pve-exporter chart and their default values.
-
 | Key                              | Type   | Default                                                                                                 | Description                                                                                                            |
 | -------------------------------- | ------ | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| affinity                         | object | `{}`                                                                                                    | Assign custom [affinity] rules                                                                                         |
+| affinity                         | object | `{}`                                                                                                    | Affinity settings for pod assignment                                                                                   |
 | args                             | list   | `[]`                                                                                                    |                                                                                                                        |
 | env.pveAuthType                  | string | `"token"`                                                                                               |                                                                                                                        |
 | env.pveExistingSecretName        | string | `""`                                                                                                    |                                                                                                                        |
@@ -56,18 +60,18 @@ The following tables list the configurable parameters of the prometheus-pve-expo
 | env.pveUser                      | string | `""`                                                                                                    |                                                                                                                        |
 | env.pveVerifySsl                 | bool   | `false`                                                                                                 |                                                                                                                        |
 | fullnameOverride                 | string | `""`                                                                                                    | String to fully override `"prometheus-pve-exporter.fullname"`                                                          |
-| image.pullPolicy                 | string | `"Always"`                                                                                              |                                                                                                                        |
-| image.repository                 | string | `"prompve/prometheus-pve-exporter"`                                                                     |                                                                                                                        |
+| image.pullPolicy                 | string | `"Always"`                                                                                              | image pull policy                                                                                                      |
+| image.repository                 | string | `"prompve/prometheus-pve-exporter"`                                                                     | image repository                                                                                                       |
 | image.tag                        | string | `""`                                                                                                    |                                                                                                                        |
 | imagePullSecrets                 | list   | `[]`                                                                                                    | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
 | nameOverride                     | string | `""`                                                                                                    | Provide a name in place of `prometheus-pve-exporter`                                                                   |
-| nodeSelector                     | object | `{}`                                                                                                    | [Node selector]                                                                                                        |
+| nodeSelector                     | object | `{}`                                                                                                    | Node labels for pod assignment                                                                                         |
 | podAnnotations                   | object | `{}`                                                                                                    | Annotations to be added to exporter pods                                                                               |
-| replicaCount                     | int    | `1`                                                                                                     |                                                                                                                        |
+| replicaCount                     | int    | `1`                                                                                                     | Number of replicas                                                                                                     |
 | resources                        | object | `{}`                                                                                                    | Resource limits and requests for the controller pods.                                                                  |
 | securityContext                  | object | `{"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":65534}` | container-level security context                                                                                       |
-| service.port                     | int    | `80`                                                                                                    |                                                                                                                        |
-| service.type                     | string | `"ClusterIP"`                                                                                           |                                                                                                                        |
+| service.port                     | int    | `80`                                                                                                    | Kubernetes port where service is exposed                                                                               |
+| service.type                     | string | `"ClusterIP"`                                                                                           | Kubernetes service type                                                                                                |
 | serviceAccount.annotations       | object | `{}`                                                                                                    | Annotations to add to the service account                                                                              |
 | serviceAccount.create            | bool   | `true`                                                                                                  | Specifies whether a service account should be created                                                                  |
 | serviceAccount.name              | string | `""`                                                                                                    | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
@@ -79,7 +83,7 @@ The following tables list the configurable parameters of the prometheus-pve-expo
 | serviceMonitor.pveTargets        | list   | `[]`                                                                                                    | Prometheus                                                                                                             |
 | serviceMonitor.relabelings       | list   | `[]`                                                                                                    | Prometheus [RelabelConfigs] to apply to samples before scraping                                                        |
 | serviceMonitor.selector          | object | `{}`                                                                                                    | Prometheus ServiceMonitor selector                                                                                     |
-| tolerations                      | list   | `[]`                                                                                                    | [Tolerations] for use with node taints                                                                                 |
+| tolerations                      | list   | `[]`                                                                                                    | Toleration labels for pod assignment                                                                                   |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 
@@ -88,3 +92,7 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```console
 helm install my-release -f values.yaml christianknell/prometheus-pve-exporter
 ```
+
+---
+
+Autogenerated from chart metadata using [helm-docs v1.9.1](https://github.com/norwoodj/helm-docs/releases/v1.9.1)
