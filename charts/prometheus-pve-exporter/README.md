@@ -40,32 +40,46 @@ helm delete my-release
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
-## Relabel Configuration
-
-Add the following to your prometheus configuration:
-
-```yaml
-scrape_configs:
-  - job_name: 'pve'
-    static_configs:
-      - targets:
-        - 192.168.1.2  # Proxmox VE node.
-        - 192.168.1.3  # Proxmox VE node.
-    metrics_path: /pve
-    params:
-      module: [default]
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: prometheus-pve-exporter:9221  # PVE exporter service.
-```
+## Values
 
 The following tables list the configurable parameters of the prometheus-pve-exporter chart and their default values.
 
-FIXME
+| Key                              | Type   | Default                                                                                                 | Description                                                                                                            |
+| -------------------------------- | ------ | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| affinity                         | object | `{}`                                                                                                    | Assign custom [affinity] rules                                                                                         |
+| args                             | list   | `[]`                                                                                                    |                                                                                                                        |
+| env.pveAuthType                  | string | `"token"`                                                                                               |                                                                                                                        |
+| env.pveExistingSecretName        | string | `""`                                                                                                    |                                                                                                                        |
+| env.pvePassword                  | string | `""`                                                                                                    |                                                                                                                        |
+| env.pveTokenName                 | string | `""`                                                                                                    |                                                                                                                        |
+| env.pveTokenValue                | string | `""`                                                                                                    |                                                                                                                        |
+| env.pveUser                      | string | `""`                                                                                                    |                                                                                                                        |
+| env.pveVerifySsl                 | bool   | `false`                                                                                                 |                                                                                                                        |
+| fullnameOverride                 | string | `""`                                                                                                    | String to fully override `"prometheus-pve-exporter.fullname"`                                                          |
+| image.pullPolicy                 | string | `"Always"`                                                                                              |                                                                                                                        |
+| image.repository                 | string | `"prompve/prometheus-pve-exporter"`                                                                     |                                                                                                                        |
+| image.tag                        | string | `""`                                                                                                    |                                                                                                                        |
+| imagePullSecrets                 | list   | `[]`                                                                                                    | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
+| nameOverride                     | string | `""`                                                                                                    | Provide a name in place of `prometheus-pve-exporter`                                                                   |
+| nodeSelector                     | object | `{}`                                                                                                    | [Node selector]                                                                                                        |
+| podAnnotations                   | object | `{}`                                                                                                    | Annotations to be added to exporter pods                                                                               |
+| replicaCount                     | int    | `1`                                                                                                     |                                                                                                                        |
+| resources                        | object | `{}`                                                                                                    | Resource limits and requests for the controller pods.                                                                  |
+| securityContext                  | object | `{"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":65534}` | container-level security context                                                                                       |
+| service.port                     | int    | `80`                                                                                                    |                                                                                                                        |
+| service.type                     | string | `"ClusterIP"`                                                                                           |                                                                                                                        |
+| serviceAccount.annotations       | object | `{}`                                                                                                    | Annotations to add to the service account                                                                              |
+| serviceAccount.create            | bool   | `true`                                                                                                  | Specifies whether a service account should be created                                                                  |
+| serviceAccount.name              | string | `""`                                                                                                    | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| serviceMonitor.additionalLabels  | object | `{}`                                                                                                    | Prometheus ServiceMonitor labels                                                                                       |
+| serviceMonitor.enabled           | bool   | `false`                                                                                                 | Enable a prometheus ServiceMonitor                                                                                     |
+| serviceMonitor.interval          | string | `"30s"`                                                                                                 | Prometheus ServiceMonitor interval                                                                                     |
+| serviceMonitor.metricRelabelings | list   | `[]`                                                                                                    | Prometheus [MetricRelabelConfigs] to apply to samples before ingestion                                                 |
+| serviceMonitor.namespace         | string | `""`                                                                                                    | Prometheus ServiceMonitor namespace                                                                                    |
+| serviceMonitor.pveTargets        | list   | `[]`                                                                                                    | Prometheus                                                                                                             |
+| serviceMonitor.relabelings       | list   | `[]`                                                                                                    | Prometheus [RelabelConfigs] to apply to samples before scraping                                                        |
+| serviceMonitor.selector          | object | `{}`                                                                                                    | Prometheus ServiceMonitor selector                                                                                     |
+| tolerations                      | list   | `[]`                                                                                                    | [Tolerations] for use with node taints                                                                                 |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 

@@ -51,7 +51,13 @@ serviceMonitor:
   metricRelabelings: []
   # -- Prometheus [RelabelConfigs] to apply to samples before scraping
   relabelings: []
-  # -- Prometheus 
+    # - source_labels: [__address__]
+    #   target_label: __param_target
+    # - source_labels: [__param_target]
+    #   target_label: instance
+    # - target_label: __address__
+    #   replacement: prometheus-pve-exporter:9221  # PVE exporter service.
+  # -- Prometheus
   pveTargets: []
 
 replicaCount: 1
