@@ -1,9 +1,10 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "syncserver.fullname" . }}
+  name: {{ include "prometheus-pve-exporter.fullname" . }}
   labels:
-    {{- include "syncserver.labels" . | nindent 4 }}
+    {{- include "prometheus-pve-exporter.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +13,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "syncserver.selectorLabels" . | nindent 4 }}
+    {{- include "prometheus-pve-exporter.selectorLabels" . | nindent 4 }}
