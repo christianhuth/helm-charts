@@ -28,19 +28,24 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- with .Values.args }}
+          {{- if or .Values.args .Values.redis.enabled }}
           args:
+            {{- if .Values.redis.enabled }}
+            - --redis-url=redis://{{ .Release.Name }}-redis-master:6379
+            {{- end }}
+            {{- with .Values.args }}
             {{- toYaml . | nindent 12 }}
+            {{- end }}
           {{- end }}
           #          env:
           #            - name: AUTHORIZE_URL
-          #              value: https://auth.diz.uk-erlangen.de/auth/realms/MIRACUM/protocol/openid-connect/auth
+          #              value: https://auth.keycloak.de/auth/realms/REALM/protocol/openid-connect/auth
           #            - name: ACCESS_TOKEN_URL
-          #              value: https://auth.diz.uk-erlangen.de/auth/realms/MIRACUM/protocol/openid-connect/token
+          #              value: https://auth.keycloak.de/auth/realms/REALM/protocol/openid-connect/token
           #            - name: CREDENTIALS_DIR
           #              value: /oidc-credentials
           #            - name: ROUTE_PREFIX
-          #              value: https://opsview.k8s.diz.uk-erlangen.de
+          #              value: https://{{ .Values.ingress.hosts[0].host }}
           {{- with .Values.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
@@ -85,4 +90,4 @@ spec:
 #      volumes:
 #        - name: oidc-secret
 #          secret:
-#            secretName: kubeopsview-oidc-secret
+#            secretName: {{ include "kube-ops-view.fullname" }}-oidc
