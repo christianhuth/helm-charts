@@ -28,10 +28,24 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- with .Values.args }}
+          {{- if or .Values.args .Values.redis.enabled }}
           args:
+            {{- if .Values.redis.enabled }}
+            - --redis-url=redis://{{ .Release.Name }}-redis-master:6379
+            {{- end }}
+            {{- with .Values.args }}
             {{- toYaml . | nindent 12 }}
+            {{- end }}
           {{- end }}
+          #          env:
+          #            - name: AUTHORIZE_URL
+          #              value: https://auth.keycloak.de/auth/realms/REALM/protocol/openid-connect/auth
+          #            - name: ACCESS_TOKEN_URL
+          #              value: https://auth.keycloak.de/auth/realms/REALM/protocol/openid-connect/token
+          #            - name: CREDENTIALS_DIR
+          #              value: /oidc-credentials
+          #            - name: ROUTE_PREFIX
+          #              value: https://{{ .Values.ingress.hosts[0].host }}
           {{- with .Values.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
@@ -58,6 +72,9 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+      #          volumeMounts:
+      #            - name: oidc-secret
+      #              mountPath: /oidc-credentials
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -70,3 +87,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+#      volumes:
+#        - name: oidc-secret
+#          secret:
+#            secretName: {{ include "kube-ops-view.fullname" }}-oidc

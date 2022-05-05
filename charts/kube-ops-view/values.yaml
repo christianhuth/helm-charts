@@ -92,3 +92,13 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+# -- Values for including the subchart Redis™ from Bitnami
+redis:
+  # -- Redis™ architecture. Allowed values: standalone or replication
+  architecture: standalone
+  auth:
+    # -- Disable password authentication as the kube-ops-view container has no support for password authentication
+    enabled: false
+  # -- enable Redis™ subchart from Bitnami
+  enabled: false
