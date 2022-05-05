@@ -44,8 +44,10 @@ spec:
           #              value: https://auth.keycloak.de/auth/realms/REALM/protocol/openid-connect/token
           #            - name: CREDENTIALS_DIR
           #              value: /oidc-credentials
-          #            - name: ROUTE_PREFIX
-          #              value: https://{{ .Values.ingress.hosts[0].host }}
+          # {{- if .Values.ingress.enabled }}
+          #   - name: ROUTE_PREFIX
+          #     value: https://{{ .Values.ingress.hosts }}
+          # {{- end }}
           {{- with .Values.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
@@ -90,4 +92,4 @@ spec:
 #      volumes:
 #        - name: oidc-secret
 #          secret:
-#            secretName: {{ include "kube-ops-view.fullname" }}-oidc
+#            secretName: {{ include "kube-ops-view.fullname" . }}-oidc
