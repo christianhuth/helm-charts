@@ -8,7 +8,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: goodsmileduck/helm-push-action@v2
       env:
-        CHART_FOLDER: './charts'
+        CHART_FOLDER: './charts/kube-ops-view'
         FORCE: 'False'
         CHARTMUSEUM_URL: 'https://charts.knell.it'
         CHARTMUSEUM_USER: '${{ secrets.CHARTMUSEUM_USER }}'
