@@ -8,8 +8,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: goodsmileduck/helm-push-action@v2
       env:
-        SOURCE_DIR: '../..'
-        CHART_FOLDER: 'charts'
+        CHART_FOLDER: './charts'
         FORCE: 'False'
         CHARTMUSEUM_URL: 'https://charts.knell.it'
         CHARTMUSEUM_USER: '${{ secrets.CHARTMUSEUM_USER }}'
