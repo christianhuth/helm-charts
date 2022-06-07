@@ -61,5 +61,7 @@
 
 1. Publish Chart to HelmRepository (requires a [Helm-Plugin](https://github.com/chartmuseum/helm-push)):
    ```
+   export HELM_REPO_USERNAME=${YOUR_USERNAME}
+   export HELM_REPO_PASSWORD=${YOUR_PASSWORD}
    helm cm-push . https://charts.knell.it
    ```
