@@ -1,50 +1,23 @@
-## Development
+# Kubernetes Helm Charts
 
-### Development Environment Setup
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/christianknell)](https://artifacthub.io/packages/search?repo=christianknell)
 
-1. (Optional) Install the [pre-commit](https://pre-commit.com/) hooks
+These charts are provided as-is with no warranties.
 
-   ```sh
-   pip3 install pre-commit
-   pre-commit install
-   ```
+## Usage
 
-1. (Optional) Setup a KinD cluster with Nginx ingress support
+[Helm](https://helm.sh) must be installed to use the charts, please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 
-   ```sh
-   kind create cluster --config=development/kind-with-ingress-support.yaml
-   kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
-   ```
+Once Helm is set up properly, add the repo as follows:
 
-### Development Process
+```shell
+helm repo add christianknell https://charts.knell.it
+helm repo update
+```
 
-1. Make changes to the charts
+You can then run `helm search repo christianknell` to see the charts.
 
-1. Mount the folder in the [kube-powertools](https://github.com/chgl/kube-powertools) container to easily run linters and checks
+## License
 
-   ```sh
-   docker run --rm -it -v $PWD:/usr/src/app ghcr.io/chgl/kube-powertools:latest
-   ```
-
-1. Run chart-testing and the `chart-powerlint.sh` script to lint the chart
-
-   ```sh
-   ct lint --config .github/ct/ct.yaml && chart-powerlint.sh
-   ```
-
-1. (Optional) View the results of the [polaris audit check](https://github.com/FairwindsOps/polaris) in your browser
-
-   ```sh
-   $ docker run --rm -it -p 9090:8080 -v $PWD:/usr/src/app ghcr.io/chgl/kube-powertools:latest
-   bash-5.0: helm template charts/prometheus-pve-exporter/ | polaris dashboard --config .polaris.yaml --audit-path -
-   ```
-
-   You can now open your browser at <http://localhost:9090> and see the results and recommendations.
-
-1. Run `generate-docs.sh` to auto-generate an updated README
-
-   ```sh
-   generate-docs.sh
-   ```
-
-1. Bump the version in the changed Chart.yaml according to SemVer (The `ct lint` step above will complain if you forget to update the version.)
+[MIT License](./LICENSE).
