@@ -1,0 +1,37 @@
+# Popeye needs get/list access on the following Kubernetes resources.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "popeye.fullname" . }}
+rules:
+- apiGroups: [""]
+  resources:
+    - configmaps
+    - endpoints
+    - horizontalpodautoscalers
+    - namespaces
+    - nodes
+    - persistentvolumes
+    - persistentvolumeclaims
+    - pods
+    - secrets
+    - serviceaccounts
+    - services
+  verbs: ["get", "list"]
+- apiGroups: ["apps"]
+  resources:
+    - deployments
+    - statefulsets
+  verbs: ["get", "list"]
+- apiGroups: ["rbac.authorization.k8s.io"]
+  resources:
+    - clusterroles
+    - clusterrolebindings
+    - roles
+    - rolebindings
+  verbs: ["get", "list"]
+- apiGroups: ["metrics.k8s.io"]
+  resources:
+    - pods
+    - nodes
+  verbs: ["get", "list"]
