@@ -1,0 +1,12 @@
+apiVersion: v2
+name: skooner
+description: Simple Kubernetes real-time dashboard and management.
+type: application
+version: 0.0.1
+appVersion: "stable"
+home: https://github.com/christianknell/helm-charts
+maintainers:
+  - name: christianknell
+    email: christian@knell.it
+sources:
+  - https://github.com/skooner-k8s/skooner
