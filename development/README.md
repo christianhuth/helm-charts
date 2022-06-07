@@ -48,3 +48,13 @@
    ```
 
 1. Bump the version in the changed Chart.yaml according to SemVer (The `ct lint` step above will complain if you forget to update the version.)
+
+1. Exit Docker-Container:
+   ```
+   exit
+   ```
+
+1. Update values.schema.json:
+   ```
+   helm schema-gen values.yaml > values.schema.json
+   ```
