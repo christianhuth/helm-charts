@@ -54,7 +54,7 @@
    exit
    ```
 
-1. Update values.schema.json:
+1. Update values.schema.json (requires a [Helm-Plugin](https://github.com/karuppiah7890/helm-schema-gen)):
    ```
    helm schema-gen values.yaml > values.schema.json
    ```
