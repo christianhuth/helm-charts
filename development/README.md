@@ -58,3 +58,8 @@
    ```
    helm schema-gen values.yaml > values.schema.json
    ```
+
+1. Publish Chart to HelmRepository (requires a [Helm-Plugin](https://github.com/chartmuseum/helm-push)):
+   ```
+   helm cm-push . https://charts.knell.it
+   ```
