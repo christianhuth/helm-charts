@@ -23,7 +23,7 @@
 1. Mount the folder in the [kube-powertools](https://github.com/chgl/kube-powertools) container to easily run linters and checks
 
    ```sh
-   docker run --rm -it -v $PWD:/usr/src/app ghcr.io/chgl/kube-powertools:latest
+   docker run --rm -it -v $PWD/../..:/usr/src/app ghcr.io/chgl/kube-powertools:latest
    ```
 
 1. Run chart-testing and the `chart-powerlint.sh` script to lint the chart
