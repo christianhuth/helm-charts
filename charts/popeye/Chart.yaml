@@ -1,0 +1,13 @@
+apiVersion: v2
+name: popeye
+description: Popeye - A Kubernetes Cluster Sanitizer
+type: application
+version: 0.0.1
+appVersion: "v0.10.0"
+home: https://github.com/christianknell/helm-charts
+icon: https://raw.githubusercontent.com/derailed/popeye/master/assets/popeye_logo.png
+maintainers:
+  - name: christianknell
+    email: christian@knell.it
+sources:
+  - https://github.com/derailed/popeye
