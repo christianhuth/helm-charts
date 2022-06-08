@@ -1,0 +1,6 @@
+# Explanation: Add 'kube-ops-view' to any file changes within 'charts/kube-ops-view' folder
+kube-ops-view: charts/kube-ops-view/*
+popeye: charts/popeye/*
+prometheus-pve-exporter: charts/prometheus-pve-exporter/*
+skooner: charts/skooner/*
+typo3: charts/typo3/*
