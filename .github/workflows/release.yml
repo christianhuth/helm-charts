@@ -1,15 +1,49 @@
-name: Build & Push charts
-on: push
+name: Build, Push & Release Helm Charts
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - charts/*/Chart.yaml
 
 jobs:
-  deploy:
+  release:
     runs-on: ubuntu-latest
+    container: ghcr.io/chgl/kube-powertools:latest
     steps:
-    - uses: actions/checkout@master
-    - uses: goodsmileduck/helm-push-action@v3
-      env:
-        CHART_FOLDER: './charts/kube-ops-view'
-        FORCE: 'False'
-        CHARTMUSEUM_URL: 'https://charts.knell.it'
-        CHARTMUSEUM_USER: '${{ secrets.CHARTMUSEUM_USER }}'
-        CHARTMUSEUM_PASSWORD: ${{ secrets.CHARTMUSEUM_PASSWORD }}
+      - name: checkout git repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      
+      - name: Add Helm repositories
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+      
+      - name: Update dependencies
+        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
+
+      - name: Generate changelogs
+        run: bash .github/generate-chart-changelogs.sh
+        
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.4.0
+        with:
+          config: .github/ct/ct.yaml
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_RELEASE_NOTES_FILE: _release-notes.md
+      
+      - uses: goodsmileduck/helm-push-action@v3
+        env:
+          CHART_FOLDER: './charts/**'
+          FORCE: 'False'
+          CHARTMUSEUM_URL: 'https://charts.knell.it'
+          CHARTMUSEUM_USER: '${{ secrets.CHARTMUSEUM_USER }}'
+          CHARTMUSEUM_PASSWORD: ${{ secrets.CHARTMUSEUM_PASSWORD }}
