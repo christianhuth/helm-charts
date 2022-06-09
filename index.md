@@ -2,14 +2,40 @@ This Helm Repository contains Helm and YAML for deploying various applications i
 
 ## Using the Helm Repository
 
-Add the repository:
+### Add the Repository
 
 ```
-helm repo add portainer https://portainer.github.io/k8s/
+helm repo add christianknell https://christianknell.github.io/helm-charts/
 helm repo update
 ```
 
-### GitHub Pages
+### Search the Repository
+
+```
+helm search repo christianknell
+```
+
+### Install a Helm Chart
+
+#### Using the default configuration
+
+```
+helm install $release_name -n $namespace christianknell/$chart_name
+```
+
+#### Using your own configuration file
+
+```
+helm install $release_name -n $namespace -f values.yaml christianknell/$chart_name
+```
+
+#### Setting values from command-line
+
+```
+helm install $release_name -n $namespace --set $key=$value christianknell/$chart_name
+```
+
+### About GitHub Pages
 
 This Helm Repository is built using the free GitHub Pages service.
 
