@@ -1,4 +1,8 @@
-## Welcome to GitHub Pages
+This Helm Repository contains Helm and YAML for deploying various applications into a Kubernetes environment.
+
+## Using the Helm Repository
+
+
 
 You can use the [editor on GitHub](https://github.com/christianknell/helm-charts/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
