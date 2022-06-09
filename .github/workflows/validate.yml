@@ -1,10 +1,14 @@
-name: Helm Linting
+name: Validation of the Helm Charts
 
 on:
   pull_request:
-  workflow_dispatch:
+    branches:
+      - main
+    paths:
+      - "charts/**"
 
 jobs:
+  
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -14,3 +18,19 @@ jobs:
         uses: azure/setup-helm@v1
       - name: lint
         run : helm lint charts/* 
+
+  readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v2
+      - name: Check readme
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run --rm --volume "$(pwd):/helm-docs" -u "$(id -u)" jnorwood/helm-docs:latest
+          if ! git diff --exit-code
+          then
+            echo "Documentation not up to date. Please run helm-docs and commit changes!" >&2
+            exit 1
+          fi
