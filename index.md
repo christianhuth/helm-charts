@@ -43,7 +43,7 @@ If you experience any issues using these Helm Charts please raise an issue in th
 
 # About GitHub Pages
 
-This Helm Repository is built using the free GitHub Pages service.
+This Helm Repository is built using the free [GitHub Pages](https://docs.github.com/en/pages/quickstart) service.
 
 ## Theme
 
