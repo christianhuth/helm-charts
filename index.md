@@ -2,40 +2,21 @@ This Helm Repository contains Helm and YAML for deploying various applications i
 
 ## Using the Helm Repository
 
+Add the repository:
 
-
-You can use the [editor on GitHub](https://github.com/christianknell/helm-charts/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+helm repo add portainer https://portainer.github.io/k8s/
+helm repo update
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+### GitHub Pages
 
-### Jekyll Themes
+This Helm Repository is built using the free GitHub Pages service.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/christianknell/helm-charts/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+#### Theme
 
-### Support or Contact
+This GitHub Pages site uses the layout and styles from the Jekyll theme. The name and configuration of this theme is saved in the Jekyll `_config.yml` configuration file inside the gh-pages branch.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+#### Support or Contact
+
+Having trouble with Pages? Check out the [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact).
