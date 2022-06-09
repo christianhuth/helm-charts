@@ -51,4 +51,4 @@ This GitHub Pages site uses the layout and styles from the Jekyll theme. The nam
 
 ## Support or Contact
 
-Having trouble with Pages? Check out the [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact).
+Having trouble with GitHub Pages? Check out the [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact).
