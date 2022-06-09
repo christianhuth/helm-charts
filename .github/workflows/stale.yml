@@ -16,8 +16,8 @@ jobs:
           # see https://github.com/actions/stale#all-options	
           close-issue-message: false
           close-pr-message: false
-          days-until-state: 14
-          days-until-close: 14
+          days-before-stale: 14
+          days-before-close: 14
           exempt-issue-labels: pinned, security
           exempt-pr-labels: pinned, security
           stale-issue-label: stale
