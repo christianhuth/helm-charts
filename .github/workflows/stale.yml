@@ -13,5 +13,14 @@ jobs:
     steps:
       - uses: actions/stale@v4
         with:
+          # see https://github.com/actions/stale#all-options	
+          close-issue-message: false
+          close-pr-message: false
+          days-until-state: 14
+          days-until-close: 14
+          exempt-issue-labels: pinned, security
+          exempt-pr-labels: pinned, security
+          stale-issue-label: stale
           stale-issue-message: 'This issue has been automatically marked as stale because it has not had recent activity. It will be closed if no further activity occurs. Thank you for your contributions.'
+          stale-pr-label: stale
           stale-pr-message: 'This PR has been automatically marked as stale because it has not had recent activity. It will be closed if no further activity occurs. Thank you for your contributions.'
