@@ -39,7 +39,7 @@ helm install $release_name -n $namespace --set $key=$value christianknell/$chart
 
 ### Issues
 
-If you experience any issues using these Helm Charts please raise an issue in the [Git Repository](https://github.com/christianknell/helm-charts/issues) or write me christian@knell.it.
+If you experience any issues using these Helm Charts please raise an issue in the [Git Repository](https://github.com/christianknell/helm-charts/issues) or write me [christian@knell.it](mailto: christian@knell.it).
 
 # About GitHub Pages
 
