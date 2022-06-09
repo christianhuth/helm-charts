@@ -1,4 +1,4 @@
-This Helm Repository contains Helm and YAML for deploying various applications into a Kubernetes environment.
+This Helm Repository contains Helm Charts for deploying various applications into a Kubernetes environment.
 
 ## Using the Helm Repository
 
