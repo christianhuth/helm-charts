@@ -47,7 +47,7 @@ This Helm Repository is built using the free [GitHub Pages](https://docs.github.
 
 ## Theme
 
-This GitHub Pages site uses the layout and styles from the Jekyll theme. The name and configuration of this theme is saved in the Jekyll `_config.yml` configuration file inside the gh-pages branch.
+This GitHub Pages site uses the layout and styles from the Jekyll theme. The name and configuration of this theme is saved in the Jekyll `_config.yml` configuration file inside the `gh-pages` branch.
 
 ## Support or Contact
 
