@@ -28,8 +28,12 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
-      - name: check .git content
-        run: ls -al .git
+      - name: check Git version before upgrade
+        run: git version
+      - name: upgrade Git
+        run: apk update && apk add --upgrade git
+      - name: check Git version after upgrade
+        run: git version
       - name: Check if documentation is up-to-date
         run: generate-docs.sh && git diff --exit-code HEAD
 
