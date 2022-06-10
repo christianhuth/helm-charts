@@ -164,6 +164,23 @@ entries:
   skooner:
   - apiVersion: v2
     appVersion: stable
+    created: "2022-06-10T13:59:40.07045227Z"
+    description: Simple Kubernetes real-time dashboard and management.
+    digest: fd06176757113cb9560e522792db2fcf164bb94476e85ef36f43286b736c628d
+    home: https://github.com/christianknell/helm-charts
+    icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu8eQrFBosk7yHTiDEwjnVcMRyDD5uIaNXhlZ1m0yiC4H8RP1j0PlBPtgtv0bdH0JwlOE
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: skooner
+    sources:
+    - https://github.com/skooner-k8s/skooner
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/skooner-0.0.3/skooner-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: stable
     created: "2022-06-10T12:26:08.452765686Z"
     description: Simple Kubernetes real-time dashboard and management.
     digest: ad7fd340451ede31980cdb41d4ed6044dbfe2eab7660775e3e04bd59f70349e6
@@ -180,6 +197,33 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/skooner-0.0.2/skooner-0.0.2.tgz
     version: 0.0.2
   typo3:
+  - apiVersion: v2
+    appVersion: "11.5"
+    created: "2022-06-10T13:59:40.226429504Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.1.6
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.5
+    description: TYPO3 — the Professional, Flexible Content Management System
+    digest: 28041d8aff6f6ebd003877cddf17be1c8c36570cb7f24aa86254d39adf5c6679
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.mdc.de/wp-content/uploads/2016/05/typo3_logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: typo3
+    sources:
+    - https://github.com/martin-helmich/docker-typo3
+    - https://github.com/TYPO3/typo3
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.5/typo3-0.0.5.tgz
+    version: 0.0.5
   - apiVersion: v2
     appVersion: "11.5"
     created: "2022-06-10T13:31:54.423544189Z"
@@ -261,4 +305,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-06-10T13:59:01.253040396Z"
+generated: "2022-06-10T13:59:40.226460404Z"
