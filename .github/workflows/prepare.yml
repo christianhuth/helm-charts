@@ -1,15 +1,38 @@
 name: Chart-Preparation
 
 on:
-  workflow_run:
-    workflows: ["Chart-Testing"]
+  pull_request:
     branches: [main]
-    types: [completed]
+    paths: ["charts/**"]
+  push:
+    branches: [main]
+    paths: ["charts/**"]
+  workflow_dispatch:
 
 jobs:
+  pre-commit:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: pre-commit/action@v2.0.3
 
-  readme:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+#  documentation:
+#    needs:
+#      - pre-commit
+#    runs-on: ubuntu-latest
+#    container: ghcr.io/chgl/kube-powertools:latest
+#    steps:
+#      - name: checkout git repository
+#        uses: actions/checkout@v3
+#        with:
+#          fetch-depth: 0
+#      - name: Check if documentation is up-to-date
+#        run: generate-docs.sh && git diff --exit-code HEAD
+
+  changelog:
+    needs:
+      - pre-commit
     runs-on: ubuntu-latest
     container: ghcr.io/chgl/kube-powertools:latest
     steps:
@@ -17,19 +40,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Check if documentation is up-to-date
-        run: generate-docs.sh && git diff --exit-code HEAD
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
+      # used to test whether the changelog generation process works properly
       - name: Generate changelogs
-        run: generate-chart-changelogs.sh
-      - name: Check readme
-        shell: bash
-        run: |
-          set -euo pipefail
-          docker run --rm --volume "$(pwd):/helm-docs" -u "$(id -u)" jnorwood/helm-docs:latest
-          if ! git diff --exit-code
-          then
-            echo "Documentation not up to date. Please run helm-docs and commit changes!" >&2
-            exit 1
-          fi
+        run: bash .github/generate-chart-changelogs.sh
