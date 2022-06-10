@@ -1,16 +1,15 @@
-name: Make sure Chart README, Changelog, values and version are up-to-date
+name: Chart-Preparation
 
 on:
-  pull_request:
+  workflow_run:
+    workflows: ["Chart-Testing"]
     branches: [main]
-    paths: [charts/**]
-  push:
-    branches: [main]
-    paths: [charts/**]
+    types: [completed]
 
 jobs:
 
   readme:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     container: ghcr.io/chgl/kube-powertools:latest
     steps:
