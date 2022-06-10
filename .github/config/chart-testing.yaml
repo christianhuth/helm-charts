@@ -1,6 +1,6 @@
 # configuration for the chart-testing tool: https://github.com/helm/chart-testing
 remote: origin
-lint-conf: .github/config/lintconf.yaml
+lint-conf: .github/config/yamllint.yaml
 chart-yaml-schema: .github/config/chart-schema.yaml
 validate-maintainers: false
 validate-chart-schema: true
