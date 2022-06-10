@@ -64,7 +64,14 @@ jobs:
         run: helm plugin install https://github.com/chartmuseum/helm-push
 
       - name: Push current version to Helm repository
-        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm cm-push . https://charts.knell.it {} \;
+        run: |
+          cd charts
+          for chart in */;
+          do
+            cd $chart
+            helm cm-push . https://charts.knell.it
+            cd ..
+          done
         env:
           HELM_REPO_USERNAME: '${{ secrets.CHARTMUSEUM_USER }}'
           HELM_REPO_PASSWORD: '${{ secrets.CHARTMUSEUM_PASSWORD }}'
