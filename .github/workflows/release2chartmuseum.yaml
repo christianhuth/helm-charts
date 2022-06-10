@@ -1,0 +1,24 @@
+# https://github.com/Goodsmileduck/helm-push-action
+name: Release Charts to Chartmuseum
+
+on:
+  push:
+    branches: [main]
+    paths: ["charts/*/Chart.yaml"]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - uses: goodsmileduck/helm-push-action@v3
+        env:
+          CHART_FOLDER: './charts/**'
+          FORCE: 'False'
+          CHARTMUSEUM_URL: 'https://charts.knell.it'
+          CHARTMUSEUM_USER: '${{ secrets.CHARTMUSEUM_USER }}'
+          CHARTMUSEUM_PASSWORD: ${{ secrets.CHARTMUSEUM_PASSWORD }}
