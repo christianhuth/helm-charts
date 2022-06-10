@@ -4,10 +4,10 @@ name: Lint and Test Charts
 on:
   pull_request:
     branches: [main]
-    paths:
-      - "charts/**"
+    paths: ["charts/**"]
   push:
     branches: [main]
+    paths: ["charts/**"]
 
 jobs:
   
