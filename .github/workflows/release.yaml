@@ -43,15 +43,30 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - name: checkout git repository
+      - name: checkout Git repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: 3.*
+      
+      - name: Add Helm repository
+        run: helm repo add christianknell https://charts.knell.it
+        
+      - name: Push current version to Helm repository
+        run: |
+          cd charts/
+          foreach i ( * )
+            echo "Working on $i folder ..."
+          end
 
-      - uses: goodsmileduck/helm-push-action@v3
-        env:
-          CHART_FOLDER: 'charts/'
-          FORCE: 'false'
-          CHARTMUSEUM_URL: 'https://charts.knell.it'
-          CHARTMUSEUM_USER: '${{ secrets.CHARTMUSEUM_USER }}'
-          CHARTMUSEUM_PASSWORD: '${{ secrets.CHARTMUSEUM_PASSWORD }}'
+#      - uses: goodsmileduck/helm-push-action@v3
+#        env:
+#          CHART_FOLDER: 'charts/'
+#          FORCE: 'false'
+#          CHARTMUSEUM_URL: 'https://charts.knell.it'
+#          CHARTMUSEUM_USER: '${{ secrets.CHARTMUSEUM_USER }}'
+#          CHARTMUSEUM_PASSWORD: '${{ secrets.CHARTMUSEUM_PASSWORD }}'
