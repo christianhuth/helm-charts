@@ -92,6 +92,23 @@ entries:
   popeye:
   - apiVersion: v2
     appVersion: v0.10.0
+    created: "2022-06-10T13:59:00.976446099Z"
+    description: Popeye - A Kubernetes Cluster Sanitizer
+    digest: 892dd9e169f03aa993d1cfdabdd48cf594f10b3a00c3ef320b1bd7525602137d
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/derailed/popeye/master/assets/popeye_logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: popeye
+    sources:
+    - https://github.com/derailed/popeye
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/popeye-0.0.2/popeye-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: v0.10.0
     created: "2022-06-10T12:26:08.03888459Z"
     description: Popeye - A Kubernetes Cluster Sanitizer
     digest: 6af528449842f6969f7eb609f0879ca5d8dcf5bf6899439403e4aae89b3d0a72
@@ -108,6 +125,24 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/popeye-0.0.1/popeye-0.0.1.tgz
     version: 0.0.1
   prometheus-pve-exporter:
+  - apiVersion: v2
+    appVersion: 2.2.3
+    created: "2022-06-10T13:59:01.253009995Z"
+    description: A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor
+      to collect metrics.
+    digest: bda50ad37ddc517ce32cd91d8bb6c0aa3bd7381c850a66b3bd98f5c287da1c54
+    home: https://github.com/christianknell/helm-charts
+    icon: https://camo.githubusercontent.com/2df2ac41e1b8a1484be236c75e395981b31bfd670eff46b5c182ea0be9475310/68747470733a2f2f7777772e70726f786d6f782e636f6d2f696d616765732f70726f786d6f782f50726f786d6f785f73796d626f6c5f7374616e646172645f6865782e706e67
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: prometheus-pve-exporter
+    sources:
+    - https://github.com/prometheus-pve/prometheus-pve-exporter
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/prometheus-pve-exporter-1.0.3/prometheus-pve-exporter-1.0.3.tgz
+    version: 1.0.3
   - apiVersion: v2
     appVersion: 2.2.3
     created: "2022-06-10T12:26:08.25241962Z"
@@ -226,4 +261,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-06-10T13:58:20.190983597Z"
+generated: "2022-06-10T13:59:01.253040396Z"
