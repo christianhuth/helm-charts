@@ -2,10 +2,8 @@ name: Build, Push & Release Helm Charts
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - charts/*/Chart.yaml
+    branches: [main]
+    paths: ["charts/*/Chart.yaml"]
 
 jobs:
   release:
