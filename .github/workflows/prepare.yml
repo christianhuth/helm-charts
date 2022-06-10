@@ -39,7 +39,7 @@ jobs:
             echo "Documentation not up to date. Please run helm-docs and commit changes!" >&2
             exit 1
           fi
-  
+
   changelog:
     needs:
       - pre-commit
