@@ -2,10 +2,8 @@ name: Release Helm Charts to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - "charts/*/Chart.yaml"
+    branches: [main]
+    paths: ["charts/*/Chart.yaml"]
 
 jobs:
   release2github:
