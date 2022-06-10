@@ -28,7 +28,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Check if documentation is up-to-date
-        run: generate-docs.sh && /usr/bin/git diff --exit-code HEAD
+        run: generate-docs.sh && git init && git diff --exit-code HEAD
 
   changelog:
     needs:
