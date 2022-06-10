@@ -54,15 +54,17 @@ jobs:
         with:
           version: 3.*
 
-      - name: Add Helm repositories
+      - name: Add Helm repository
         run: helm repo add christianknell https://charts.knell.it
+
+      - name: Update dependencies
+        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
 
       - name: Install Helm plugin helm-push
         run: helm plugin install https://github.com/chartmuseum/helm-push
 
       - name: Push current version to Helm repository
-        run: |
-          cd charts && for chart in *; do echo "$chart"; done | xargs -n1 helm cm-push $1 https://charts.knell.it
+        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm cm-push . https://charts.knell.it {} \;
         env:
           HELM_REPO_USERNAME: '${{ secrets.CHARTMUSEUM_USER }}'
           HELM_REPO_PASSWORD: '${{ secrets.CHARTMUSEUM_PASSWORD }}'
