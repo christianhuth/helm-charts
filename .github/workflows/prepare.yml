@@ -52,5 +52,6 @@ jobs:
           fetch-depth: 0
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
+      # used to test whether the changelog generation process works properly
       - name: Generate changelogs
-        run: generate-chart-changelogs.sh
+        run: bash .github/generate-chart-changelogs.sh
