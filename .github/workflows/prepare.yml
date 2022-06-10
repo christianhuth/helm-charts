@@ -2,15 +2,11 @@ name: Make sure Chart README, values and version are up-to-date
 
 on:
   pull_request:
-    branches:
-      - main
-    paths:
-      - "charts/**"
+    branches: [main]
+    paths: [charts/**]
   push:
-    branches:
-      - main
-    paths:
-      - "charts/**"
+    branches: [main]
+    paths: [charts/**]
 
 jobs:
 
