@@ -27,14 +27,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: check which git version is installed
-        run: git version
-      - name: list contents
-        run: ls -al && pwd
       - name: Generate documentation
         run: generate-docs.sh
       - name: Check if documentation is up-to-date
-        run: cd /__w/helm-charts/helm-charts && git diff --exit-code HEAD
+        run: cd /__w/helm-charts/helm-charts && ls -al && pwd && git diff --exit-code HEAD
       - name: Check readme
         shell: bash
         run: |
