@@ -1,4 +1,4 @@
-name: Make sure Chart README, values and version are up-to-date
+name: Make sure Chart README, Changelog, values and version are up-to-date
 
 on:
   pull_request:
@@ -12,9 +12,18 @@ jobs:
 
   readme:
     runs-on: ubuntu-latest
+    container: ghcr.io/chgl/kube-powertools:latest
     steps:
       - name: checkout git repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Check if documentation is up-to-date
+        run: generate-docs.sh && git diff --exit-code HEAD
+      - name: Update dependencies
+        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
+      - name: Generate changelogs
+        run: generate-chart-changelogs.sh
       - name: Check readme
         shell: bash
         run: |
