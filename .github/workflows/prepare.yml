@@ -1,0 +1,31 @@
+name: Make sure Chart README, values and version are up-to-date
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "charts/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "charts/**"
+
+jobs:
+
+  readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v2
+      - name: Check readme
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run --rm --volume "$(pwd):/helm-docs" -u "$(id -u)" jnorwood/helm-docs:latest
+          if ! git diff --exit-code
+          then
+            echo "Documentation not up to date. Please run helm-docs and commit changes!" >&2
+            exit 1
+          fi
