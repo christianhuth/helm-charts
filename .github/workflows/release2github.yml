@@ -1,12 +1,14 @@
 name: Release Helm Charts to GitHub Pages
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Chart-Preparation"]
     branches: [main]
-    paths: ["charts/*/Chart.yaml"]
+    types: [completed]
 
 jobs:
   release2github:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
       contents: write
     runs-on: ubuntu-latest
