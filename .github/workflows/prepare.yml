@@ -17,18 +17,18 @@ jobs:
       - uses: actions/setup-python@v2
       - uses: pre-commit/action@v2.0.3
 
-  documentation:
-    needs:
-      - pre-commit
-    runs-on: ubuntu-latest
-    container: ghcr.io/chgl/kube-powertools:latest
-    steps:
-      - name: checkout git repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Check if documentation is up-to-date
-        run: generate-docs.sh && git init && git diff --exit-code HEAD
+#  documentation:
+#    needs:
+#      - pre-commit
+#    runs-on: ubuntu-latest
+#    container: ghcr.io/chgl/kube-powertools:latest
+#    steps:
+#      - name: checkout git repository
+#        uses: actions/checkout@v3
+#        with:
+#          fetch-depth: 0
+#      - name: Check if documentation is up-to-date
+#        run: generate-docs.sh && git diff --exit-code HEAD
 
   changelog:
     needs:
