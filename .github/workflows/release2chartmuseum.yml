@@ -2,12 +2,14 @@
 name: Release Charts to Chartmuseum
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Chart-Preparation"]
     branches: [main]
-    paths: ["charts/*/Chart.yaml"]
+    types: [completed]
 
 jobs:
   release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout git repository
