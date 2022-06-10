@@ -50,7 +50,7 @@ jobs:
 
       - uses: goodsmileduck/helm-push-action@v3
         env:
-          CHART_FOLDER: './charts/**'
+          CHART_FOLDER: 'charts/**'
           FORCE: 'false'
           CHARTMUSEUM_URL: 'https://charts.knell.it'
           CHARTMUSEUM_USER: '${{ secrets.CHARTMUSEUM_USER }}'
