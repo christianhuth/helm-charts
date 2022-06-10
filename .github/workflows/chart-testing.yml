@@ -1,5 +1,5 @@
 # https://github.com/marketplace/actions/helm-chart-testing
-name: Lint and Test Charts
+name: Chart-Testing
 
 on:
   pull_request:
