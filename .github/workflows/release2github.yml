@@ -1,10 +1,9 @@
 name: Release Helm Charts to GitHub Pages
 
 on:
-  workflow_run:
-    workflows: ["Chart-Preparation"]
+  push:
     branches: [main]
-    types: [completed]
+    paths: ["charts/*/Chart.yaml"]
 
 jobs:
   release2github:
