@@ -1,15 +1,17 @@
 name: Chart-Preparation
 
 on:
-  workflow_run:
-    workflows: ["Chart-Testing"]
+  pull_request:
     branches: [main]
-    types: [completed]
+    paths: ["charts/**"]
+  push:
+    branches: [main]
+    paths: ["charts/**"]
+  workflow_dispatch:
 
 jobs:
 
   readme:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     container: ghcr.io/chgl/kube-powertools:latest
     steps:
