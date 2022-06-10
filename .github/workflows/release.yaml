@@ -69,7 +69,7 @@ jobs:
           for chart in */;
           do
             cd $chart
-            helm cm-push . https://charts.knell.it
+            helm cm-push --force . https://charts.knell.it
             cd ..
           done
         env:
