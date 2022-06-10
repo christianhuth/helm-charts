@@ -31,7 +31,7 @@ jobs:
       - name: Generate documentation
         run: generate-docs.sh
       - name: Check if documentation is up-to-date
-        run: cd /__w/helm-charts/helm-charts && ls -al && pwd && git diff --exit-code HEAD
+        run: whoami && id && git diff --exit-code HEAD
       - name: Check readme
         shell: bash
         run: |
