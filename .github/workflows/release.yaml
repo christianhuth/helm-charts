@@ -58,10 +58,10 @@ jobs:
         
       - name: Push current version to Helm repository
         run: |
-          cd charts/
-          foreach i ( * )
-            echo "Working on $i folder ..."
-          end
+          cd charts && for chart in *; do echo "$chart"; done | xargs -n1 helm cm-push $1 https://charts.knell.it
+        env:
+          HELM_REPO_USERNAME: '${{ secrets.CHARTMUSEUM_USER }}'
+          HELM_REPO_PASSWORD: '${{ secrets.CHARTMUSEUM_PASSWORD }}'
 
 #      - uses: goodsmileduck/helm-push-action@v3
 #        env:
