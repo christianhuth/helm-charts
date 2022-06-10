@@ -1,0 +1,109 @@
+apiVersion: v1
+entries:
+  kube-ops-view:
+  - apiVersion: v2
+    appVersion: 20.4.0
+    created: "2022-06-10T12:26:07.883076206Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ~16.8
+    description: A Helm chart for bootstrapping kube-ops-view.
+    digest: 57d939852698e3630e21960a5f0fd1f0b47a9224f52ceb2ec8a3cfb36677a04a
+    home: https://github.com/christianknell/helm-charts
+    icon: https://codeberg.org/repo-avatars/677-c51f6426305941cab515fdd98368f0bb
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kube-ops-view
+    sources:
+    - https://codeberg.org/hjacobs/kube-ops-view
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kube-ops-view-1.1.2/kube-ops-view-1.1.2.tgz
+    version: 1.1.2
+  popeye:
+  - apiVersion: v2
+    appVersion: v0.10.0
+    created: "2022-06-10T12:26:08.03888459Z"
+    description: Popeye - A Kubernetes Cluster Sanitizer
+    digest: 6af528449842f6969f7eb609f0879ca5d8dcf5bf6899439403e4aae89b3d0a72
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/derailed/popeye/master/assets/popeye_logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: popeye
+    sources:
+    - https://github.com/derailed/popeye
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/popeye-0.0.1/popeye-0.0.1.tgz
+    version: 0.0.1
+  prometheus-pve-exporter:
+  - apiVersion: v2
+    appVersion: 2.2.3
+    created: "2022-06-10T12:26:08.25241962Z"
+    description: A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor
+      to collect metrics.
+    digest: d81f3a96a09364cd36a1dcb9197b0ab93e2f2e64aa688969869b1413c6da608f
+    home: https://github.com/christianknell/helm-charts
+    icon: https://camo.githubusercontent.com/2df2ac41e1b8a1484be236c75e395981b31bfd670eff46b5c182ea0be9475310/68747470733a2f2f7777772e70726f786d6f782e636f6d2f696d616765732f70726f786d6f782f50726f786d6f785f73796d626f6c5f7374616e646172645f6865782e706e67
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: prometheus-pve-exporter
+    sources:
+    - https://github.com/prometheus-pve/prometheus-pve-exporter
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/prometheus-pve-exporter-1.0.2/prometheus-pve-exporter-1.0.2.tgz
+    version: 1.0.2
+  skooner:
+  - apiVersion: v2
+    appVersion: stable
+    created: "2022-06-10T12:26:08.452765686Z"
+    description: Simple Kubernetes real-time dashboard and management.
+    digest: ad7fd340451ede31980cdb41d4ed6044dbfe2eab7660775e3e04bd59f70349e6
+    home: https://github.com/christianknell/helm-charts
+    icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu8eQrFBosk7yHTiDEwjnVcMRyDD5uIaNXhlZ1m0yiC4H8RP1j0PlBPtgtv0bdH0JwlOE
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: skooner
+    sources:
+    - https://github.com/skooner-k8s/skooner
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/skooner-0.0.2/skooner-0.0.2.tgz
+    version: 0.0.2
+  typo3:
+  - apiVersion: v2
+    appVersion: "11.5"
+    created: "2022-06-10T12:26:08.628656417Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.1.6
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.3
+    description: TYPO3 — the Professional, Flexible Content Management System
+    digest: 10c3ed7d8f9ffb5f0b47f31dce9551508a39952203e185b65ecdbb0d4a34191d
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.mdc.de/wp-content/uploads/2016/05/typo3_logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: typo3
+    sources:
+    - https://github.com/martin-helmich/docker-typo3
+    - https://github.com/TYPO3/typo3
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
+    version: 0.0.2
+generated: "2022-06-10T12:26:08.628662217Z"
