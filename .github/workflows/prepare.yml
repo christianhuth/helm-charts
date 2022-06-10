@@ -30,9 +30,11 @@ jobs:
       - name: check which git version is installed
         run: git version
       - name: list contents
-        run: ls -al
+        run: ls -al && pwd
+      - name: Generate documentation
+        run: generate-docs.sh
       - name: Check if documentation is up-to-date
-        run: generate-docs.sh && git diff --exit-code HEAD
+        run: cd / && git diff --exit-code HEAD
       - name: Check readme
         shell: bash
         run: |
