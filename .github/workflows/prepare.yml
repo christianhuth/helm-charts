@@ -27,6 +27,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          submodules: recursive
       - name: Generate documentation
         run: generate-docs.sh
       - name: Check if documentation is up-to-date
