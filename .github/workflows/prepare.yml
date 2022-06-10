@@ -28,10 +28,6 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
-      - name: Generate documentation
-        run: generate-docs.sh
-      - name: Check if documentation is up-to-date
-        run: whoami && id && git diff --exit-code HEAD
       - name: Check readme
         shell: bash
         run: |
@@ -42,6 +38,10 @@ jobs:
             echo "Documentation not up to date. Please run helm-docs and commit changes!" >&2
             exit 1
           fi
+      - name: Generate documentation
+        run: generate-docs.sh
+      - name: Check if documentation is up-to-date
+        run: whoami && id && git diff --exit-code HEAD
 
   changelog:
     needs:
