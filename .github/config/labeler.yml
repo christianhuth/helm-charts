@@ -1,6 +1,12 @@
-# Explanation: Add 'kube-ops-view' to any file changes within 'charts/kube-ops-view' folder
+# Explanation: Add the label 'cusdis' to a PR if any file within the 'charts/cusdis' folder are changed
+cusdis: charts/cusdis/*
+ipmi-exporter: charts/ipmi-exporter/*
+ipsec-exporter: charts/ipsec-exporter/*
+isso: charts/isso/*
 kube-ops-view: charts/kube-ops-view/*
+netcup-scp-exporter: charts/netcup-scp-exporter/*
 popeye: charts/popeye/*
 prometheus-pve-exporter: charts/prometheus-pve-exporter/*
 skooner: charts/skooner/*
+talkyard: charts/talkyard/*
 typo3: charts/typo3/*
