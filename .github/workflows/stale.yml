@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/stale@v4
         with:
-          # see https://github.com/actions/stale#all-options	
+          # see https://github.com/actions/stale#all-options
           close-issue-label: "'This issue has been automatically closed because it has not had recent activity."
           close-issue-message: false
           close-pr-label: "'This PR has been automatically closed because it has not had recent activity."
