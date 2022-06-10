@@ -10,8 +10,16 @@ on:
   workflow_dispatch:
 
 jobs:
+  pre-commit:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: pre-commit/action@v2.0.3
 
-  readme:
+  documentation:
+    needs:
+      - pre-commit
     runs-on: ubuntu-latest
     container: ghcr.io/chgl/kube-powertools:latest
     steps:
@@ -21,10 +29,6 @@ jobs:
           fetch-depth: 0
       - name: Check if documentation is up-to-date
         run: generate-docs.sh && git diff --exit-code HEAD
-      - name: Update dependencies
-        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
-      - name: Generate changelogs
-        run: generate-chart-changelogs.sh
       - name: Check readme
         shell: bash
         run: |
@@ -35,3 +39,18 @@ jobs:
             echo "Documentation not up to date. Please run helm-docs and commit changes!" >&2
             exit 1
           fi
+  
+  changelog:
+    needs:
+      - pre-commit
+    runs-on: ubuntu-latest
+    container: ghcr.io/chgl/kube-powertools:latest
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Update dependencies
+        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
+      - name: Generate changelogs
+        run: generate-chart-changelogs.sh
