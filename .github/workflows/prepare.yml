@@ -28,20 +28,10 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
-      - name: Check readme
-        shell: bash
-        run: |
-          set -euo pipefail
-          docker run --rm --volume "$(pwd):/helm-docs" -u "$(id -u)" jnorwood/helm-docs:latest
-          if ! git diff --exit-code
-          then
-            echo "Documentation not up to date. Please run helm-docs and commit changes!" >&2
-            exit 1
-          fi
-      - name: Generate documentation
-        run: generate-docs.sh
+      - name: check .git content
+        run: ls -al .git
       - name: Check if documentation is up-to-date
-        run: whoami && id && git diff --exit-code HEAD
+        run: generate-docs.sh && git diff --exit-code HEAD
 
   changelog:
     needs:
