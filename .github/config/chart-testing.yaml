@@ -2,8 +2,8 @@
 remote: origin
 target-branch: main
 lint-conf: .github/config/yamllint.yaml
-chart-yaml-schema: .github/config/chart-schema.yaml
-validate-maintainers: false
+chart-yaml-schema: .github/config/yamale.yaml
+validate-maintainers: true
 validate-chart-schema: true
 validate-yaml: true
 check-version-increment: true
