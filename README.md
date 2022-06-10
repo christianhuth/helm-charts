@@ -12,7 +12,7 @@ These charts are provided as-is with no warranties.
 Once Helm is set up properly, add the repo as follows:
 
 ```shell
-helm repo add christianknell https://charts.knell.it
+helm repo add christianknell https://christianknell.github.io/helm-charts
 helm repo update
 ```
 
