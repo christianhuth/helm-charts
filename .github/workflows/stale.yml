@@ -18,8 +18,8 @@ jobs:
           close-issue-message: false
           close-pr-label: "'This PR has been automatically closed because it has not had recent activity."
           close-pr-message: false
-          days-before-stale: 28
-          days-before-close: 14
+          days-before-stale: 62
+          days-before-close: 31
           exempt-issue-labels: pinned, security
           exempt-pr-labels: pinned, security
           stale-issue-label: stale
