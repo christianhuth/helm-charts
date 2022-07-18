@@ -3,7 +3,7 @@ apiVersion: v2
 name: kube-ops-view
 description: A Helm chart for bootstrapping kube-ops-view.
 type: application
-version: 1.1.6
+version: 1.1.7
 appVersion: "20.4.0"
 home: https://github.com/christianknell/helm-charts
 icon: https://codeberg.org/repo-avatars/677-c51f6426305941cab515fdd98368f0bb
@@ -15,5 +15,5 @@ sources:
 dependencies:
   - name: redis
     repository: https://charts.bitnami.com/bitnami
-    version: ~16.13.0
+    version: ~17.0.0
     condition: redis.enabled
