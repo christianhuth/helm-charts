@@ -22,8 +22,6 @@ jobs:
 
       - name: setup helm
         uses: azure/setup-helm@v3
-        with:
-          version: 3.*
 
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
