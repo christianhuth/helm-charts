@@ -49,8 +49,6 @@ jobs:
 
       - name: Install Helm
         uses: azure/setup-helm@v3
-        with:
-          version: 3.*
 
       - name: Add Helm repository
         run: helm repo add christianknell https://charts.knell.it
