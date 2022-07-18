@@ -21,9 +21,7 @@ jobs:
           fetch-depth: 0
 
       - name: setup helm
-        uses: azure/setup-helm@v1
-        with:
-          version: 3.*
+        uses: azure/setup-helm@v3
 
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
