@@ -53,10 +53,8 @@ passbolt:
   db:
     host: passbolt-proxysql
     name: passbolt
-    existingSecret:
-      name: passbolt-mysql
-      usernameKey: username
-      passwordKey: mysql-password
+    username: passbolt
+    password: passbolt
   fullnameOverride: passbolt
   image:
     pullPolicy: Always
