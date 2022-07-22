@@ -54,7 +54,7 @@ passbolt:
     host: passbolt-proxysql
     name: passbolt
     username: passbolt
-    # password: passbolt
+    password: passbolt
     # existingSecret:
     #   name: passbolt-mysql
     #   usernameKey: username
