@@ -3,6 +3,28 @@ entries:
   kube-ops-view:
   - apiVersion: v2
     appVersion: 20.4.0
+    created: "2022-07-22T12:02:13.819351565Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ~17.0.0
+    description: A Helm chart for bootstrapping kube-ops-view.
+    digest: f09ee45906248d2655a4ed019594961d5eafb1048417daa893cba70ed0d02ca2
+    home: https://github.com/christianknell/helm-charts
+    icon: https://codeberg.org/repo-avatars/677-c51f6426305941cab515fdd98368f0bb
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kube-ops-view
+    sources:
+    - https://codeberg.org/hjacobs/kube-ops-view
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kube-ops-view-1.1.7/kube-ops-view-1.1.7.tgz
+    version: 1.1.7
+  - apiVersion: v2
+    appVersion: 20.4.0
     created: "2022-07-18T12:29:46.033417859Z"
     dependencies:
     - condition: redis.enabled
@@ -408,4 +430,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-07-18T12:42:57.965337653Z"
+generated: "2022-07-22T12:02:13.819400265Z"
