@@ -70,11 +70,9 @@ The command removes all the Kubernetes components associated with the chart and 
 | mysql.secondary.replicaCount                | int    | `2`                          |             |
 | mysql.volumePermissions.enabled             | bool   | `true`                       |             |
 | mysql.volumePermissions.image.pullPolicy    | string | `"Always"`                   |             |
-| passbolt.db.existingSecret.name             | string | `"passbolt-mysql"`           |             |
-| passbolt.db.existingSecret.passwordKey      | string | `"mysql-password"`           |             |
-| passbolt.db.existingSecret.usernameKey      | string | `"username"`                 |             |
 | passbolt.db.host                            | string | `"passbolt-proxysql"`        |             |
 | passbolt.db.name                            | string | `"passbolt"`                 |             |
+| passbolt.db.username                        | string | `"passbolt"`                 |             |
 | passbolt.fullnameOverride                   | string | `"passbolt"`                 |             |
 | passbolt.image.pullPolicy                   | string | `"Always"`                   |             |
 | passbolt.ingress.annotations                | object | `{}`                         |             |

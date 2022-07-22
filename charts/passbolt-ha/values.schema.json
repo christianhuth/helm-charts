@@ -144,24 +144,13 @@
                 "db": {
                     "type": "object",
                     "properties": {
-                        "existingSecret": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "passwordKey": {
-                                    "type": "string"
-                                },
-                                "usernameKey": {
-                                    "type": "string"
-                                }
-                            }
-                        },
                         "host": {
                             "type": "string"
                         },
                         "name": {
+                            "type": "string"
+                        },
+                        "username": {
                             "type": "string"
                         }
                     }
