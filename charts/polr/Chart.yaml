@@ -1,0 +1,18 @@
+apiVersion: v2
+name: polr
+description: Polr is a quick, modern, and open-source link shortener
+type: application
+version: 0.0.1
+appVersion: "2.3.0c"
+home: https://github.com/christianknell/helm-charts
+icon: http://docs.polrproject.org/en/latest/logo.png
+maintainers:
+  - name: christianknell
+    email: christian@knell.it
+sources:
+  - https://github.com/cydrobolt/polr
+  - https://github.com/ajanvier/docker-polr
+dependencies:
+  - name: mysql
+    repository: https://charts.bitnami.com/bitnami
+    version: 9.2.1
