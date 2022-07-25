@@ -133,6 +133,29 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/kube-ops-view-1.1.2/kube-ops-view-1.1.2.tgz
     version: 1.1.2
+  polr:
+  - apiVersion: v2
+    appVersion: 2.3.0c
+    created: "2022-07-25T08:46:51.974884174Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.2.1
+    description: Polr is a quick, modern, and open-source link shortener
+    digest: db5a48a8620c2e599785b692d1f4474805e870de5c890f56082c4e4d9f9fe9e2
+    home: https://github.com/christianknell/helm-charts
+    icon: http://docs.polrproject.org/en/latest/logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: polr
+    sources:
+    - https://github.com/cydrobolt/polr
+    - https://github.com/ajanvier/docker-polr
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/polr-0.0.1/polr-0.0.1.tgz
+    version: 0.0.1
   popeye:
   - apiVersion: v2
     appVersion: v0.10.0
@@ -430,4 +453,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-07-22T12:02:13.819400265Z"
+generated: "2022-07-25T08:46:51.975025579Z"
