@@ -1,0 +1,146 @@
+nameOverride: ""
+fullnameOverride: ""
+
+replicaCount: 1
+
+image:
+  repository: kutt/kutt
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+
+# Please see https://github.com/thedevs-network/kutt/blob/develop/.docker.env for complete list of environment variables.
+# Secret Keys and mail settings are provided through their own values `secretEnvs` and `mail`.
+env:
+  - name: ADMIN_EMAILS
+    value: ""
+  - name: CUSTOM_DOMAIN_USE_HTTPS
+    value: "false"
+  - name: DEFAULT_DOMAIN
+    value: "localhost:3000"
+  - name: DEFAULT_MAX_STATS_PER_LINK
+    value: "5000"
+  - name: DISALLOW_ANONYMOUS_LINKS
+    value: "false"
+  - name: DISALLOW_REGISTRATION
+    value: "false"
+  - name: LINK_LENGT
+    value: "6"
+  - name: NON_USER_COOLDOWN
+    value: "0"
+  - name: REPORT_EMAIL
+    value: ""
+  - name: SITE_NAME
+    value: "Kutt"
+  - name: USER_LIMIT_PER_DAY
+    value: "50"
+
+envSecrets:
+  google:
+    analytics: ""
+    analyticsUniversal: ""
+    existingSecret: ""
+    safeBrowsingKey: ""
+  jwt:
+    ## @param envSecrets.jwt.existingSecret Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`
+    ## NOTE: When it's set the envSecrets.jwt.key is ignored.
+    existingSecret: ""
+    key: ""
+  recaptcha:
+    ## @param envSecrets.recaptcha.existingSecret Use existing secret for ReCaptacha secrets. The secret has to contain the keys `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY`
+    ## NOTE: When it's set the envSecrets.recaptcha.siteKey and envSecrets.recaptcha.secretKey is ignored.
+    existingSecret: ""
+    siteKey: ""
+    secretKey: ""
+
+mail:
+  host: ""
+  port: ""
+  secure: true
+  username: ""
+  from: ""
+  password: ""
+  ## @param mail.existingSecret Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`
+  ## NOTE: When it's set the mail.password is ignored.
+  existingSecret: ""
+
+postgresql:
+  enabled: true
+  auth:
+    database: kutt
+    password: kutt
+    username: kutt
+
+redis:
+  enabled: true
+  auth:
+    enabled: true
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
