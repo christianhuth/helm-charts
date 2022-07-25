@@ -47,7 +47,8 @@ envSecrets:
     ## @param envSecrets.jwt.existingSecret Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`
     ## NOTE: When it's set the envSecrets.jwt.key is ignored.
     existingSecret: ""
-    key: ""
+    ## make sure to replace with your own secret key
+    key: "secret-jwt-key"
   recaptcha:
     ## @param envSecrets.recaptcha.existingSecret Use existing secret for ReCaptacha secrets. The secret has to contain the keys `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY`
     ## NOTE: When it's set the envSecrets.recaptcha.siteKey and envSecrets.recaptcha.secretKey is ignored.
