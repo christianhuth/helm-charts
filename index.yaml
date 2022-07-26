@@ -255,6 +255,47 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/prometheus-pve-exporter-1.0.2/prometheus-pve-exporter-1.0.2.tgz
     version: 1.0.2
+  shlink-backend:
+  - apiVersion: v2
+    appVersion: 3.1.2
+    created: "2022-07-26T15:20:32.646119861Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.1
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.2.1
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.19
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.1.16
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.0.5
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 318ca7dbc133886a30df2b717c81aebeb9293a07422f4ebe035de8927dbb861b
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-0.0.1/shlink-backend-0.0.1.tgz
+    version: 0.0.1
   shlink-web:
   - apiVersion: v2
     appVersion: 3.7.1
@@ -499,4 +540,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-07-26T09:31:49.064680644Z"
+generated: "2022-07-26T15:20:32.646164463Z"
