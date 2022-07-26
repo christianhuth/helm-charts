@@ -255,6 +255,25 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/prometheus-pve-exporter-1.0.2/prometheus-pve-exporter-1.0.2.tgz
     version: 1.0.2
+  shlink-web:
+  - apiVersion: v2
+    appVersion: 3.7.1
+    created: "2022-07-26T09:31:49.064633644Z"
+    description: A  ReactJS-based progressive web application for Shlink.
+    digest: 4b78c18beb40a6f13d7164157a16a65686de76e1d3e302e6552616b1b4b6add9
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-web
+    sources:
+    - https://github.com/shlinkio/shlink-web-client
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-web-0.0.1/shlink-web-0.0.1.tgz
+    version: 0.0.1
   skooner:
   - apiVersion: v2
     appVersion: stable
@@ -480,4 +499,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-07-25T16:15:41.784886071Z"
+generated: "2022-07-26T09:31:49.064680644Z"
