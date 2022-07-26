@@ -16,7 +16,7 @@ env:
   - name: DEFAULT_DOMAIN
     value: doma.in
   - name: IS_HTTPS_ENABLED
-    value: false
+    value: "false"
 
 serviceAccount:
   # Specifies whether a service account should be created
