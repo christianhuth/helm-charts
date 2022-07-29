@@ -29,6 +29,8 @@ jobs:
       - name: Add Helm repositories
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add cnieg https://cnieg.github.io/helm-charts/
+          help repo add flachesis https://flachesis.github.io/proxysql
 
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
