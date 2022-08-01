@@ -284,6 +284,25 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/prometheus-pve-exporter-1.0.2/prometheus-pve-exporter-1.0.2.tgz
     version: 1.0.2
+  proxysql:
+  - apiVersion: v2
+    appVersion: 2.4.2
+    created: "2022-08-01T07:55:14.655636436Z"
+    description: A proxysql Helm chart for Kubernetes. Uses ServiceMonitor to collect
+      metrics.
+    digest: 36f36c05be7117e491b81f9ccd9a70e655f29b64270890ab9db49bd6de0e0a6e
+    home: https://github.com/christianknell/helm-charts
+    icon: https://proxysql.com/wp-content/uploads/2019/11/ProxySQL-BIG-e1581368792603.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: proxysql
+    sources:
+    - https://github.com/sysown/proxysql
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/proxysql-0.0.1/proxysql-0.0.1.tgz
+    version: 0.0.1
   shlink-backend:
   - apiVersion: v2
     appVersion: 3.1.2
@@ -569,4 +588,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-07-29T11:00:00.030293174Z"
+generated: "2022-08-01T07:55:14.655683938Z"
