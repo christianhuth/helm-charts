@@ -162,6 +162,34 @@ entries:
     version: 0.0.1
   passbolt-ha:
   - apiVersion: v2
+    created: "2022-08-01T08:35:32.648618192Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.2.3
+    - name: passbolt
+      repository: https://cnieg.github.io/helm-charts
+      version: 1.1.7
+    - name: proxysql
+      repository: https://flachesis.github.io/proxysql
+      version: 1.7.0
+    description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
+    digest: 8f85ca6c41044c054f461d0dfb5370334759d1875e1033d97645cc809b35627c
+    home: https://github.com/christianknell/helm-charts
+    icon: https://avatars.githubusercontent.com/u/4386228?s=200&v=4
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: passbolt-ha
+    sources:
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    - https://github.com/cnieg/helm-charts/tree/master/charts/passbolt
+    - https://github.com/flachesis/proxysql/tree/master/charts/proxysql
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/passbolt-ha-0.0.2/passbolt-ha-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
     created: "2022-07-29T11:00:00.030258074Z"
     dependencies:
     - name: mysql
@@ -322,6 +350,46 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/proxysql-0.0.1/proxysql-0.0.1.tgz
     version: 0.0.1
   shlink-backend:
+  - apiVersion: v2
+    appVersion: 3.1.2
+    created: "2022-08-01T08:35:32.839116198Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.2
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.2.1
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.19
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.1.16
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.0.5
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: e352b6481f1b070d6bcf4a42d651939105dae272933b87ccf2e2756aa0351b9d
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-0.0.2/shlink-backend-0.0.2.tgz
+    version: 0.0.2
   - apiVersion: v2
     appVersion: 3.1.2
     created: "2022-07-26T15:20:32.646119861Z"
@@ -606,4 +674,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-08-01T08:16:25.019118502Z"
+generated: "2022-08-01T08:35:32.839158298Z"
