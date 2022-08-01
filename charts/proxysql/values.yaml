@@ -1,0 +1,133 @@
+# Default values for proxysql.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: proxysql/proxysql
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart version.
+  tag: "2.3.0"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  runAsNonRoot: true
+  fsGroup: 999
+  runAsUser: 999
+  runAsGroup: 999
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+proxysql:
+  # configmap: proxysql-configmap-name
+  web:
+    user: "sadmin"
+    password: "sadmin"
+  admin:
+    user: "admin"
+    password: "admin"
+  port: 6032
+  cluster:
+    user: "cluster"
+    password: "cluster"
+    enabled: false
+    claim:
+      enabled: true
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "default"
+      size: "1Gi"
+  mysql:
+    version: "5.7.34"
+    port: 3306
+    maxConnections: 2048
+    connectionMaxAgeMS: 0
+    queyCacheSizeMB: 256
+    queryRetriesOnFailure: 2
+    waitTimeout: 28800000
+    readWriteSplit: true
+    servers: []
+      # - isWriter: true
+      #   hostname: example.mysql.org
+      #   port: 3306
+      #   maxConnections: 1000
+      #   compression: false
+      #   weight: 1000
+    users: []
+      # - username: name
+      #   password: pwd
+      #   maxConnections: 10000
+      #   readOnly: false
+    slave:
+      enabled: false
+      checkType: "read_only"
+    galera:
+      enabled: false
+      maxWriters: 1
+      writerAsReader: true
+  monitor:
+    enabled: false
+    writerAsReader: true
+    replicationLagInterval: 10000
+    replicationLagTimeout: 1500
+    slaveLagWhenNull: 60
+    # user: "monitor"
+    # password: "monitor"
+
+metrics:
+  enabled: false
+  serviceMonitor:
+    enabled: false
+    additionalLabels: {}
+      # release: prometheus
+
+service:
+  type: ClusterIP
+  # default as proxysql.mysql.port
+  # port: 3306
+  annotations: {}
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

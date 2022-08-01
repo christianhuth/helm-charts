@@ -10,6 +10,7 @@ passbolt-ha: charts/passbolt-ha/*
 polr: charts/polr/*
 popeye: charts/popeye/*
 prometheus-pve-exporter: charts/prometheus-pve-exporter/*
+proxysql: charts/proxysql/*
 shlink-backend: charts/shlink-backend/*
 shlink-web: charts/shlink-web/*
 skooner: charts/skooner/*

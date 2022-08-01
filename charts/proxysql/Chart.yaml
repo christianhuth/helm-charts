@@ -1,0 +1,13 @@
+apiVersion: v2
+name: proxysql
+description: A proxysql Helm chart for Kubernetes. Uses ServiceMonitor to collect metrics.
+type: application
+version: 0.0.1
+appVersion: "2.4.2"
+home: https://github.com/christianknell/helm-charts
+icon: https://proxysql.com/wp-content/uploads/2019/11/ProxySQL-BIG-e1581368792603.png
+maintainers:
+  - name: christianknell
+    email: christian@knell.it
+sources:
+  - https://github.com/sysown/proxysql
