@@ -46,7 +46,12 @@
             "type": "object",
             "properties": {
                 "annotations": {
-                    "type": "object"
+                    "type": "object",
+                    "properties": {
+                        "nginx.ingress.kubernetes.io/backend-protocol": {
+                            "type": "string"
+                        }
+                    }
                 },
                 "className": {
                     "type": "string"
