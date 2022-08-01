@@ -15,6 +15,10 @@ spec:
       targetPort: mysql
       protocol: TCP
       name: mysql
+    - port: {{ .Values.proxysql.port }}
+      targetPort: proxysql
+      protocol: TCP
+      name: proxysql
     {{- if .Values.metrics.enabled }}
     - port: 6070
       targetPort: metrics
