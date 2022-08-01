@@ -7,6 +7,7 @@ kube-ops-view: charts/kube-ops-view/*
 netcup-scp-exporter: charts/netcup-scp-exporter/*
 popeye: charts/popeye/*
 prometheus-pve-exporter: charts/prometheus-pve-exporter/*
+proxysql: charts/proxysql/*
 skooner: charts/skooner/*
 talkyard: charts/talkyard/*
 typo3: charts/typo3/*
