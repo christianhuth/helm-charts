@@ -54,7 +54,7 @@ proxysql:
     enabled: false
     claim:
       enabled: true
-      accessModes: [ "ReadWriteOnce" ]
+      accessModes: ["ReadWriteOnce"]
       storageClassName: "default"
       size: "1Gi"
   mysql:
