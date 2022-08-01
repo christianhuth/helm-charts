@@ -21,5 +21,11 @@ spec:
       protocol: TCP
       name: metrics
     {{- end }}
+    {{- if .Values.proxysql.web.enabled }}
+    - port: {{ .Values.proxysql.web.port }}
+      targetPort: web
+      protocol: TCP
+      name: web
+    {{- end }}
   selector:
     {{- include "proxysql.selectorLabels" . | nindent 4 }}

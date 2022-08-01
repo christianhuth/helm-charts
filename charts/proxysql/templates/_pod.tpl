@@ -34,6 +34,11 @@ spec:
         - name: proxysql
           containerPort: {{ .Values.proxysql.port }}
           protocol: TCP
+        {{- if .Values.proxysql.web.enabled }}
+        - name: web
+          containerPort: {{ .Values.proxysql.web.port }}
+          protocol: TCP
+        {{- end }}
         {{- if .Values.metrics.enabled }}
         - name: metrics
           containerPort: 6070
