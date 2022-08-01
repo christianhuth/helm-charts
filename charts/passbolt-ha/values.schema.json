@@ -150,6 +150,9 @@
                         "name": {
                             "type": "string"
                         },
+                        "password": {
+                            "type": "string"
+                        },
                         "username": {
                             "type": "string"
                         }
