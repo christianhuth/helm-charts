@@ -17,8 +17,8 @@ data:
       stats_credentials="{{ .Values.proxysql.web.user }}:{{ .Values.proxysql.web.password }}"
       mysql_ifaces="0.0.0.0:{{ .Values.proxysql.port }}"
       restapi_enabled=true
-      web_enabled=true
-      web_port=443
+      web_enabled={{ .Values.proxysql.web.enabled }}
+      web_port={{ .Values.proxysql.web.port }}
     }
     mysql_variables=
     {

@@ -42,6 +42,8 @@ securityContext: {}
 proxysql:
   # configmap: proxysql-configmap-name
   web:
+    enabled: true
+    port: 443
     user: "sadmin"
     password: "sadmin"
   admin:
@@ -106,6 +108,23 @@ service:
   # default as proxysql.mysql.port
   # port: 3306
   annotations: {}
+
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
