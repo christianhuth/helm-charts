@@ -24,13 +24,13 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
       - name: Install Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: 3.*
+        uses: azure/setup-helm@v3
 
       - name: Add Helm repositories
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add cnieg https://cnieg.github.io/helm-charts/
+          helm repo add flachesis https://flachesis.github.io/proxysql
 
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
@@ -50,9 +50,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: 3.*
+        uses: azure/setup-helm@v3
 
       - name: Add Helm repository
         run: helm repo add christianknell https://charts.knell.it
@@ -75,11 +73,3 @@ jobs:
         env:
           HELM_REPO_USERNAME: '${{ secrets.CHARTMUSEUM_USER }}'
           HELM_REPO_PASSWORD: '${{ secrets.CHARTMUSEUM_PASSWORD }}'
-
-#      - uses: goodsmileduck/helm-push-action@v3
-#        env:
-#          CHART_FOLDER: 'charts/'
-#          FORCE: 'false'
-#          CHARTMUSEUM_URL: 'https://charts.knell.it'
-#          CHARTMUSEUM_USER: '${{ secrets.CHARTMUSEUM_USER }}'
-#          CHARTMUSEUM_PASSWORD: '${{ secrets.CHARTMUSEUM_PASSWORD }}'
