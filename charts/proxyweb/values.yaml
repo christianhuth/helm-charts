@@ -89,7 +89,7 @@ configuration:
       SEND_FILE_MAX_AGE_DEFAULT: 0
       TEMPLATES_AUTO_RELOAD: "True"
     global:
-      hide_tables: [ '' ]
+      hide_tables: ['']
       default_server: "proxysql"
       read_only: false
     misc:
