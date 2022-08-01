@@ -6,9 +6,9 @@ replicaCount: 1
 
 image:
   repository: proxysql/proxysql
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart version.
-  tag: "2.3.0"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
