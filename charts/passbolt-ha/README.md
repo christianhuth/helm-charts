@@ -2,7 +2,7 @@
 
 A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
 
-![Version: 0.0.2](https://img.shields.io/badge/Version-0.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## TL;DR;
 
@@ -72,6 +72,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | mysql.volumePermissions.image.pullPolicy    | string | `"Always"`                   |             |
 | passbolt.db.host                            | string | `"passbolt-proxysql"`        |             |
 | passbolt.db.name                            | string | `"passbolt"`                 |             |
+| passbolt.db.password                        | string | `"passbolt"`                 |             |
 | passbolt.db.username                        | string | `"passbolt"`                 |             |
 | passbolt.fullnameOverride                   | string | `"passbolt"`                 |             |
 | passbolt.image.pullPolicy                   | string | `"Always"`                   |             |
