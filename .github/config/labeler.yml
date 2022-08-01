@@ -11,6 +11,7 @@ polr: charts/polr/*
 popeye: charts/popeye/*
 prometheus-pve-exporter: charts/prometheus-pve-exporter/*
 proxysql: charts/proxysql/*
+proxyweb: charts/proxyweb/*
 shlink-backend: charts/shlink-backend/*
 shlink-web: charts/shlink-web/*
 skooner: charts/skooner/*
