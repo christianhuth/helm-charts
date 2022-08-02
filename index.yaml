@@ -558,6 +558,23 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/proxysql-0.0.1/proxysql-0.0.1.tgz
     version: 0.0.1
+  proxyweb:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2022-08-02T07:51:23.101144613Z"
+    description: A Helm chart for Kubernetes
+    digest: b550bd99d1c5d700dda88a54cbf5db2336aa4174f9ad615ed78575e72e6715c3
+    home: https://github.com/christianknell/helm-charts
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: proxyweb
+    sources:
+    - https://github.com/edmodo/proxyweb/
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/proxyweb-0.0.1/proxyweb-0.0.1.tgz
+    version: 0.0.1
   shlink-backend:
   - apiVersion: v2
     appVersion: 3.1.2
@@ -1070,4 +1087,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-08-02T07:49:01.713499079Z"
+generated: "2022-08-02T07:51:23.101338616Z"
