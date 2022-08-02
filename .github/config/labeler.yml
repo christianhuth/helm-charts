@@ -1,4 +1,5 @@
-# Explanation: Add the label 'cusdis' to a PR if any file within the 'charts/cusdis' folder are changed
+# Explanation: Add the label 'ci-cd' to a PR if any file within the '.github' folder is changed
+ci-cd: .github/*
 cusdis: charts/cusdis/*
 ipmi-exporter: charts/ipmi-exporter/*
 ipsec-exporter: charts/ipsec-exporter/*
