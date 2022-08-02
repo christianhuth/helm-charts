@@ -136,6 +136,32 @@ entries:
   kutt:
   - apiVersion: v2
     appVersion: v2.7.4
+    created: "2022-08-02T07:49:01.491699001Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.21
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.0.6
+    description: Kutt is a free modern URL shortener.
+    digest: a9c8b93c773085a721796e445afeda6afab9f5d8fb67c8e98909ce3e52be3d96
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kutt
+    sources:
+    - https://github.com/thedevs-network/kutt
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kutt-0.0.4/kutt-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
+    appVersion: v2.7.4
     created: "2022-08-01T17:19:12.916696479Z"
     dependencies:
     - condition: postgresql.enabled
@@ -533,6 +559,46 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/proxysql-0.0.1/proxysql-0.0.1.tgz
     version: 0.0.1
   shlink-backend:
+  - apiVersion: v2
+    appVersion: 3.1.2
+    created: "2022-08-02T07:49:01.713427678Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.2
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.2.3
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.21
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.1.16
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.0.6
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: bcd965505ab61dc6acd356a9998c4e9e86abd63386279bf96be2d26288bca81c
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-0.0.6/shlink-backend-0.0.6.tgz
+    version: 0.0.6
   - apiVersion: v2
     appVersion: 3.1.2
     created: "2022-08-01T17:19:13.100526591Z"
@@ -1004,4 +1070,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-08-01T17:29:16.004292557Z"
+generated: "2022-08-02T07:49:01.713499079Z"
