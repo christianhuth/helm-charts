@@ -1,13 +1,13 @@
 # Explanation: Add the label 'ci-cd' to a PR if any file within the '.github' folder is changed
 ci-cd: .github/*
 cusdis: charts/cusdis/*
+greenbone-ce: charts/greenbone-ce/*
 ipmi-exporter: charts/ipmi-exporter/*
 ipsec-exporter: charts/ipsec-exporter/*
 isso: charts/isso/*
 kube-ops-view: charts/kube-ops-view/*
 kutt: charts/kutt/*
 netcup-scp-exporter: charts/netcup-scp-exporter/*
-openvas: charts/openvas/*
 passbolt-ha: charts/passbolt-ha/*
 polr: charts/polr/*
 popeye: charts/popeye/*
