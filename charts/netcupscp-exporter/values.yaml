@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   registry: ghcr.io
   repository: mrueg/netcupscp-exporter
-  pullPolicy: Always 
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v0.1.3"
 
