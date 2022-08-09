@@ -1,6 +1,6 @@
 apiVersion: v2
 name: netcupscp-exporter
-description: Prometheus Exporter for Netcup Server Control Panel (SCP) 
+description: Prometheus Exporter for Netcup Server Control Panel (SCP)
 type: application
 version: 1.0.0
 appVersion: "v0.1.3"
