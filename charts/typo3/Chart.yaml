@@ -15,7 +15,7 @@ sources:
 dependencies:
   - name: mysql
     repository: https://charts.bitnami.com/bitnami
-    version: 9.2.3
+    version: 9.2.6
     condition: mysql.enabled
   - name: postgresql
     repository: https://charts.bitnami.com/bitnami
