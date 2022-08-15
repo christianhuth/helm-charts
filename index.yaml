@@ -266,6 +266,23 @@ entries:
     version: 0.0.1
   netcupscp-exporter:
   - apiVersion: v2
+    appVersion: v0.2.0
+    created: "2022-08-15T21:13:40.847085986Z"
+    description: Prometheus Exporter for Netcup Server Control Panel (SCP)
+    digest: bacee1158ca221e0c40a5c41bdfba304f80ebdbe25d1e0dc1dd9827db5758417
+    home: https://github.com/christianknell/helm-charts
+    icon: https://pbs.twimg.com/profile_images/1148537659637358593/rlfCvTK5_400x400.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: netcupscp-exporter
+    sources:
+    - https://github.com/mrueg/netcupscp-exporter
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/netcupscp-exporter-1.0.2/netcupscp-exporter-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
     appVersion: v0.1.4
     created: "2022-08-10T13:53:01.399036604Z"
     description: Prometheus Exporter for Netcup Server Control Panel (SCP)
@@ -1292,4 +1309,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-08-11T19:41:00.787493989Z"
+generated: "2022-08-15T21:13:40.847294685Z"
