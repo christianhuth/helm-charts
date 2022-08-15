@@ -7,7 +7,7 @@ ipsec-exporter: charts/ipsec-exporter/*
 isso: charts/isso/*
 kube-ops-view: charts/kube-ops-view/*
 kutt: charts/kutt/*
-netcup-scp-exporter: charts/netcup-scp-exporter/*
+netcupscp-exporter: charts/netcupscp-exporter/*
 passbolt-ha: charts/passbolt-ha/*
 polr: charts/polr/*
 popeye: charts/popeye/*
