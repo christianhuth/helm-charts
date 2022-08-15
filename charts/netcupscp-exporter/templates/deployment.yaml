@@ -39,8 +39,13 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
             - "/netcupscp-exporter"
-            - "--login-name={{ .Values.env.loginName }}"
-            - "--password={{ .Values.env.password }}"
+          envFrom:
+            - secretRef:
+                {{- if .Values.env.existingSecret }}
+                name: {{ .Values.env.existingSecret }}
+                {{- else }}
+                name: {{ include "netcupscp-exporter.fullname" . }}
+                {{- end }}
           ports:
             - name: http
               containerPort: 9757

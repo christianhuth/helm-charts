@@ -25,6 +25,9 @@
         "env": {
             "type": "object",
             "properties": {
+                "existingSecret": {
+                    "type": "string"
+                },
                 "loginName": {
                     "type": "string"
                 },
