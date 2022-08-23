@@ -75,9 +75,9 @@ postgresql:
     username: kutt
     # @param postgresql.auth.hostname External PostgreSQL database hostname
     hostname: ""
-    # @param postgresql.auth.hostname External PostgreSQL database port
+    # @param postgresql.auth.port External PostgreSQL database port
     port: 5432
-    # @param postgresql.auth.hostname External PostgreSQL database secrets. The secret has to contain the key `db_password`
+    # @param postgresql.auth.existingSecret External PostgreSQL database secrets. The secret has to contain the key `db_password`
     existingSecret: ""
 
 redis:
