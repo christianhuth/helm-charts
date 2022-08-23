@@ -106,7 +106,7 @@ spec:
                   key: {{ include "postgresql.userPasswordKey" .Subcharts.postgresql }}
             - name: DB_SSL
               value: "false"
-            {{- else if xx.Values.postgresql.auth.hostname }}
+            {{- else if .Values.postgresql.auth.hostname }}
             - name: DB_HOST
               value: {{ .Values.postgresql.auth.hostname }}
             - name: DB_PORT
