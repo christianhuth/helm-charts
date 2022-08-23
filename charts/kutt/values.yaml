@@ -78,6 +78,14 @@ redis:
   enabled: true
   auth:
     enabled: true
+    # @param redis.auth.hostname External Redis hostname
+    hostname: ""
+    # @param redis.auth.port External Redis port
+    port: 6379
+    # @param redis.auth.password External Redis password (if auth enabled)
+    password: ""
+    # @param redis.auth.hostname External PostgreSQL database secrets. The secret has to contain the key `db_password`
+    existingSecret: ""
 
 serviceAccount:
   # Specifies whether a service account should be created

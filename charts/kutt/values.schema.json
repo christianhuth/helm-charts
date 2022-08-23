@@ -213,6 +213,18 @@
                     "properties": {
                         "enabled": {
                             "type": "boolean"
+                        },
+                        "hostname": {
+                            "type": "string"
+                        },
+                        "port": {
+                            "type": "integer"
+                        },
+                        "password": {
+                            "type": "string"
+                        },
+                        "existingSecret": {
+                            "type": "string"
                         }
                     }
                 },

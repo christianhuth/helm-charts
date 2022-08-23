@@ -120,6 +120,21 @@ spec:
                   name: {{ include "redis.secretName" .Subcharts.redis }}
                   key: {{ include "redis.secretPasswordKey" .Subcharts.redis }}
             {{- end }}
+            {{- else if .Values.redis.auth.hostname }}
+            - name: REDIS_HOST
+              value: {{ .Values.redis.auth.hostname }}
+            - name: REDIS_PORT
+              value: {{ .Values.redis.auth.port | quote }}
+            {{- if .Values.redis.auth.existingSecret }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.redis.auth.existingSecret }}
+                  key: redis_password
+            {{- else if .Values.redis.auth.password }}
+            - name: REDIS_PASSWORD
+              value: {{ .Values.redis.auth.password }}
+            {{- end }}
             {{- end }}
           {{- with .Values.securityContext }}
           securityContext:
