@@ -106,6 +106,24 @@ spec:
                   key: {{ include "postgresql.userPasswordKey" .Subcharts.postgresql }}
             - name: DB_SSL
               value: "false"
+            {{- else }}
+            - name: DB_HOST
+              value: {{ .Values.postgresql.auth.hostname }}
+            - name: DB_PORT
+              value: {{ .Values.postgresql.auth.port | quote }}
+            - name: DB_NAME
+              value: {{ .Values.postgresql.auth.database }}
+            - name: DB_USER
+              value: {{ .Values.postgresql.auth.username }}
+            - name: DB_PASSWORD
+              {{- if .Values.postgresql.auth.existingSecret }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgresql.auth.existingSecret }}
+                  key: db_password
+              {{- else }}
+              value: {{ .Values.postgresql.auth.password }}
+              {{- end }}
             {{- end }}
             # Redis Settings
             {{- if .Values.redis.enabled }}
