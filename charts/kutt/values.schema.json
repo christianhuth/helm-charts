@@ -203,6 +203,9 @@
                         },
                         "username": {
                             "type": "string"
+                        },
+                        "existingSecret": {
+                            "type": "string"
                         }
                     }
                 },
