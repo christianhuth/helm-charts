@@ -54,8 +54,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.minReplicas                    | int    | `1`                          |                                                                        |
 | autoscaling.targetCPUUtilizationPercentage | int    | `80`                         |                                                                        |
 | env.existingSecret                         | string | `""`                         |                                                                        |
-| env.loginName                              | string | `""`                         |                                                                        |
-| env.password                               | string | `""`                         |                                                                        |
+| env.loginName                              | string | `"admin"`                    |                                                                        |
+| env.password                               | string | `"password"`                 |                                                                        |
 | fullnameOverride                           | string | `""`                         |                                                                        |
 | image.pullPolicy                           | string | `"Always"`                   |                                                                        |
 | image.registry                             | string | `"ghcr.io"`                  |                                                                        |
