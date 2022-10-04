@@ -8,14 +8,14 @@ image:
   repository: mrueg/netcupscp-exporter
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.2.0"
+  tag: "v0.2.1"
 
 imagePullSecrets: []
 
 env:
   existingSecret: ""
-  loginName: ""
-  password: ""
+  loginName: "admin"
+  password: "password"
 
 serviceAccount:
   # Specifies whether a service account should be created

@@ -2,7 +2,7 @@
 
 Prometheus Exporter for Netcup Server Control Panel (SCP)
 
-![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.2.0](https://img.shields.io/badge/AppVersion-v0.2.0-informational?style=flat-square)
+![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.2.1](https://img.shields.io/badge/AppVersion-v0.2.1-informational?style=flat-square)
 
 ## TL;DR;
 
@@ -54,13 +54,13 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.minReplicas                    | int    | `1`                          |                                                                        |
 | autoscaling.targetCPUUtilizationPercentage | int    | `80`                         |                                                                        |
 | env.existingSecret                         | string | `""`                         |                                                                        |
-| env.loginName                              | string | `""`                         |                                                                        |
-| env.password                               | string | `""`                         |                                                                        |
+| env.loginName                              | string | `"admin"`                    |                                                                        |
+| env.password                               | string | `"password"`                 |                                                                        |
 | fullnameOverride                           | string | `""`                         |                                                                        |
 | image.pullPolicy                           | string | `"Always"`                   |                                                                        |
 | image.registry                             | string | `"ghcr.io"`                  |                                                                        |
 | image.repository                           | string | `"mrueg/netcupscp-exporter"` |                                                                        |
-| image.tag                                  | string | `"v0.2.0"`                   |                                                                        |
+| image.tag                                  | string | `"v0.2.1"`                   |                                                                        |
 | imagePullSecrets                           | list   | `[]`                         |                                                                        |
 | ingress.annotations                        | object | `{}`                         |                                                                        |
 | ingress.className                          | string | `""`                         |                                                                        |
