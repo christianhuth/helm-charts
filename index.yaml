@@ -136,6 +136,32 @@ entries:
   kutt:
   - apiVersion: v2
     appVersion: v2.7.4
+    created: "2022-10-04T12:07:57.777768559Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.9.1
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.2.0
+    description: Kutt is a free modern URL shortener.
+    digest: 7a536aca89ce20189fb84afc408cea4ed04c3990074c3963705a2a0838da5da3
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kutt
+    sources:
+    - https://github.com/thedevs-network/kutt
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kutt-0.0.6/kutt-0.0.6.tgz
+    version: 0.0.6
+  - apiVersion: v2
+    appVersion: v2.7.4
     created: "2022-08-11T19:41:00.78724519Z"
     dependencies:
     - condition: postgresql.enabled
@@ -317,6 +343,34 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/netcupscp-exporter-1.0.0/netcupscp-exporter-1.0.0.tgz
     version: 1.0.0
   passbolt-ha:
+  - apiVersion: v2
+    created: "2022-10-04T12:07:58.070847733Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.3.4
+    - name: passbolt
+      repository: https://cnieg.github.io/helm-charts
+      version: 1.1.8
+    - name: proxysql
+      repository: https://christianknell.github.io/helm-charts/
+      version: 1.0.1
+    description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
+    digest: a6acc59a0cb5d7805f3dea07b570a70b24c5f5abcf39f4a6289afd667e7fdcf1
+    home: https://github.com/christianknell/helm-charts
+    icon: https://avatars.githubusercontent.com/u/4386228?s=200&v=4
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: passbolt-ha
+    sources:
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    - https://github.com/cnieg/helm-charts/tree/master/charts/passbolt
+    - https://github.com/flachesis/proxysql/tree/master/charts/proxysql
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/passbolt-ha-1.0.4/passbolt-ha-1.0.4.tgz
+    version: 1.0.4
   - apiVersion: v2
     created: "2022-08-11T19:01:30.815116932Z"
     dependencies:
@@ -1358,4 +1412,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-10-04T11:39:00.724926487Z"
+generated: "2022-10-04T12:07:58.071147634Z"
