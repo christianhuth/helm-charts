@@ -2,7 +2,7 @@
 
 A PHP-based self-hosted URL shortener that can be used to serve shortened URLs under your own domain.
 
-![Version: 0.0.7](https://img.shields.io/badge/Version-0.0.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.1.2](https://img.shields.io/badge/AppVersion-3.1.2-informational?style=flat-square)
+![Version: 0.0.8](https://img.shields.io/badge/Version-0.0.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.1.2](https://img.shields.io/badge/AppVersion-3.1.2-informational?style=flat-square)
 
 ## TL;DR;
 
@@ -46,50 +46,57 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Values
 
-| Key                                        | Type   | Default              | Description |
-| ------------------------------------------ | ------ | -------------------- | ----------- |
-| affinity                                   | object | `{}`                 |             |
-| autoscaling.enabled                        | bool   | `false`              |             |
-| autoscaling.maxReplicas                    | int    | `100`                |             |
-| autoscaling.minReplicas                    | int    | `1`                  |             |
-| autoscaling.targetCPUUtilizationPercentage | int    | `80`                 |             |
-| env[0].name                                | string | `"DEFAULT_DOMAIN"`   |             |
-| env[0].value                               | string | `"doma.in"`          |             |
-| env[1].name                                | string | `"IS_HTTPS_ENABLED"` |             |
-| env[1].value                               | bool   | `false`              |             |
-| fullnameOverride                           | string | `""`                 |             |
-| image.pullPolicy                           | string | `"Always"`           |             |
-| image.repository                           | string | `"shlinkio/shlink"`  |             |
-| image.tag                                  | string | `""`                 |             |
-| imagePullSecrets                           | list   | `[]`                 |             |
-| mariadb.auth.database                      | string | `"shlink"`           |             |
-| mariadb.auth.password                      | string | `"shlink"`           |             |
-| mariadb.auth.username                      | string | `"shlink"`           |             |
-| mariadb.enabled                            | bool   | `false`              |             |
-| mysql.auth.database                        | string | `"shlink"`           |             |
-| mysql.auth.password                        | string | `"shlink"`           |             |
-| mysql.auth.username                        | string | `"shlink"`           |             |
-| mysql.enabled                              | bool   | `false`              |             |
-| nameOverride                               | string | `""`                 |             |
-| nodeSelector                               | object | `{}`                 |             |
-| podAnnotations                             | object | `{}`                 |             |
-| podSecurityContext                         | object | `{}`                 |             |
-| postgresql.auth.database                   | string | `"shlink"`           |             |
-| postgresql.auth.password                   | string | `"shlink"`           |             |
-| postgresql.auth.username                   | string | `"shlink"`           |             |
-| postgresql.enabled                         | bool   | `false`              |             |
-| rabbitmq.enabled                           | bool   | `false`              |             |
-| redis.auth.enabled                         | bool   | `false`              |             |
-| redis.enabled                              | bool   | `false`              |             |
-| replicaCount                               | int    | `1`                  |             |
-| resources                                  | object | `{}`                 |             |
-| securityContext                            | object | `{}`                 |             |
-| service.port                               | int    | `80`                 |             |
-| service.type                               | string | `"ClusterIP"`        |             |
-| serviceAccount.annotations                 | object | `{}`                 |             |
-| serviceAccount.create                      | bool   | `true`               |             |
-| serviceAccount.name                        | string | `""`                 |             |
-| tolerations                                | list   | `[]`                 |             |
+| Key                                        | Type   | Default                    | Description |
+| ------------------------------------------ | ------ | -------------------------- | ----------- |
+| affinity                                   | object | `{}`                       |             |
+| autoscaling.enabled                        | bool   | `false`                    |             |
+| autoscaling.maxReplicas                    | int    | `100`                      |             |
+| autoscaling.minReplicas                    | int    | `1`                        |             |
+| autoscaling.targetCPUUtilizationPercentage | int    | `80`                       |             |
+| env[0].name                                | string | `"DEFAULT_DOMAIN"`         |             |
+| env[0].value                               | string | `"doma.in"`                |             |
+| env[1].name                                | string | `"IS_HTTPS_ENABLED"`       |             |
+| env[1].value                               | string | `"false"`                  |             |
+| fullnameOverride                           | string | `""`                       |             |
+| image.pullPolicy                           | string | `"Always"`                 |             |
+| image.repository                           | string | `"shlinkio/shlink"`        |             |
+| image.tag                                  | string | `""`                       |             |
+| imagePullSecrets                           | list   | `[]`                       |             |
+| ingress.annotations                        | object | `{}`                       |             |
+| ingress.className                          | string | `""`                       |             |
+| ingress.enabled                            | bool   | `false`                    |             |
+| ingress.hosts[0].host                      | string | `"chart-example.local"`    |             |
+| ingress.hosts[0].paths[0].path             | string | `"/"`                      |             |
+| ingress.hosts[0].paths[0].pathType         | string | `"ImplementationSpecific"` |             |
+| ingress.tls                                | list   | `[]`                       |             |
+| mariadb.auth.database                      | string | `"shlink"`                 |             |
+| mariadb.auth.password                      | string | `"shlink"`                 |             |
+| mariadb.auth.username                      | string | `"shlink"`                 |             |
+| mariadb.enabled                            | bool   | `false`                    |             |
+| mysql.auth.database                        | string | `"shlink"`                 |             |
+| mysql.auth.password                        | string | `"shlink"`                 |             |
+| mysql.auth.username                        | string | `"shlink"`                 |             |
+| mysql.enabled                              | bool   | `false`                    |             |
+| nameOverride                               | string | `""`                       |             |
+| nodeSelector                               | object | `{}`                       |             |
+| podAnnotations                             | object | `{}`                       |             |
+| podSecurityContext                         | object | `{}`                       |             |
+| postgresql.auth.database                   | string | `"shlink"`                 |             |
+| postgresql.auth.password                   | string | `"shlink"`                 |             |
+| postgresql.auth.username                   | string | `"shlink"`                 |             |
+| postgresql.enabled                         | bool   | `false`                    |             |
+| rabbitmq.enabled                           | bool   | `false`                    |             |
+| redis.auth.enabled                         | bool   | `false`                    |             |
+| redis.enabled                              | bool   | `false`                    |             |
+| replicaCount                               | int    | `1`                        |             |
+| resources                                  | object | `{}`                       |             |
+| securityContext                            | object | `{}`                       |             |
+| service.port                               | int    | `80`                       |             |
+| service.type                               | string | `"ClusterIP"`              |             |
+| serviceAccount.annotations                 | object | `{}`                       |             |
+| serviceAccount.create                      | bool   | `true`                     |             |
+| serviceAccount.name                        | string | `""`                       |             |
+| tolerations                                | list   | `[]`                       |             |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 
@@ -101,4 +108,4 @@ helm install my-release -f values.yaml christianknell/shlink
 
 ---
 
-Autogenerated from chart metadata using [helm-docs v1.10.0](https://github.com/norwoodj/helm-docs/releases/v1.10.0)
+Autogenerated from chart metadata using [helm-docs v1.11.0](https://github.com/norwoodj/helm-docs/releases/v1.11.0)
