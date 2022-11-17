@@ -2,7 +2,7 @@
 
 Prometheus Exporter for Netcup Server Control Panel (SCP)
 
-![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.2.1](https://img.shields.io/badge/AppVersion-v0.2.1-informational?style=flat-square)
+![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.2.5](https://img.shields.io/badge/AppVersion-v0.2.5-informational?style=flat-square)
 
 ## TL;DR;
 
@@ -30,7 +30,7 @@ helm repo update
 helm install my-release christianknell/netcupscp-exporter
 ```
 
-These commands deploy Skooner on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
+These commands deploys the Prometheus Exporter for the Netcup SCP on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
 
