@@ -36,7 +36,7 @@ jobs:
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.4.0
+        uses: helm/chart-releaser-action@v1.4.1
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
