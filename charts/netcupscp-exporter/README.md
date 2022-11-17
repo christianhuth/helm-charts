@@ -30,7 +30,7 @@ helm repo update
 helm install my-release christianknell/netcupscp-exporter
 ```
 
-These commands deploy Skooner on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
+These commands deploys the Prometheus Exporter for the Netcup SCP on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
 
