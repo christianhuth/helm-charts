@@ -14,7 +14,7 @@ sources:
 dependencies:
   - name: postgresql
     repository: https://charts.bitnami.com/bitnami
-    version: 11.9.1
+    version: 11.9.13
     condition: postgresql.enabled
   - name: redis
     repository: https://charts.bitnami.com/bitnami
