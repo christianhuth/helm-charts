@@ -16,7 +16,7 @@ sources:
 dependencies:
   - name: mysql
     repository: https://charts.bitnami.com/bitnami
-    version: 9.3.4
+    version: 9.4.4
   - name: passbolt
     repository: https://cnieg.github.io/helm-charts
     version: 1.1.14
