@@ -19,5 +19,5 @@ dependencies:
     condition: mysql.enabled
   - name: postgresql
     repository: https://charts.bitnami.com/bitnami
-    version: 11.9.1
+    version: 11.9.13
     condition: postgresql.enabled
