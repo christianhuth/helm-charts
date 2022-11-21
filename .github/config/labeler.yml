@@ -8,6 +8,7 @@ isso: charts/isso/*
 kube-ops-view: charts/kube-ops-view/*
 kutt: charts/kutt/*
 lxd-dashboard: charts/lxd-dashboard/*
+maildev: charts/maildev/*
 netcupscp-exporter: charts/netcupscp-exporter/*
 passbolt-ha: charts/passbolt-ha/*
 polr: charts/polr/*
