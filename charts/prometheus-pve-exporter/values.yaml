@@ -31,10 +31,10 @@ args: []
 env:
   # define how to authenticate against pve instances: password, token
   pveAuthType: "token"
-  pveUser: ""
-  pvePassword: ""
-  pveTokenName: "your-token"
-  pveTokenValue: ""
+  pveUser: "user"
+  pvePassword: "password"
+  pveTokenName: "tokenName"
+  pveTokenValue: "tokenValue"
   # if you provide an existing secret, no additional secret will be created. Depending on the setting in pveAuthType the secret needs to have password OR tokenName and tokenValue fields.
   pveExistingSecretName: ""
   # Optional: set to false to skip SSL/TLS verification
