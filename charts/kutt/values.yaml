@@ -74,6 +74,15 @@ postgresql:
     password: kutt
     username: kutt
 
+externalPostgresql:
+  database: kutt
+  existingSecret: ""
+  hostname: ""
+  password: kutt
+  userPasswordKey: ""
+  port: 5432
+  username: kutt
+
 redis:
   enabled: true
   auth:

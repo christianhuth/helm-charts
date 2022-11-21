@@ -90,23 +90,21 @@ spec:
               value: {{ .Values.envSecrets.jwt.key }}
               {{- end }}
             # Database Settings
-            {{- if .Values.postgresql.enabled }}
             - name: DB_HOST
-              value: {{ include "postgresql.primary.fullname" .Subcharts.postgresql }}
+              value: {{ include "kutt.postgresql.hostname" . | quote }}
             - name: DB_PORT
-              value: {{ include "postgresql.service.port" .Subcharts.postgresql | quote }}
+              value: {{ include "kutt.postgresql.port" . | quote }}
             - name: DB_NAME
-              value: {{ include "postgresql.database" .Subcharts.postgresql }}
+              value: {{ include "kutt.postgresql.database" . | quote }}
             - name: DB_USER
-              value: {{ include "postgresql.username" .Subcharts.postgresql }}
+              value: {{ include "kutt.postgresql.username" . | quote }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "postgresql.secretName" .Subcharts.postgresql }}
-                  key: {{ include "postgresql.userPasswordKey" .Subcharts.postgresql }}
+                  name: {{ include "kutt.postgresql.secretName" . | quote }}
+                  key: {{ include "kutt.postgresql.userPasswordKey" . | quote }}
             - name: DB_SSL
               value: "false"
-            {{- end }}
             # Redis Settings
             {{- if .Values.redis.enabled }}
             - name: REDIS_HOST
