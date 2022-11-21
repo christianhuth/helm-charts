@@ -10,8 +10,8 @@ autoscaling:
 image:
   repository: martinhelmich/typo3
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  # Overrides the image tag
+  tag: "11.5"
 
 imagePullSecrets: []
 nameOverride: ""
