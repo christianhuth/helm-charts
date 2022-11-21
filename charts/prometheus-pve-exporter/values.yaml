@@ -33,7 +33,7 @@ env:
   pveAuthType: "token"
   pveUser: ""
   pvePassword: ""
-  pveTokenName: ""
+  pveTokenName: "your-token"
   pveTokenValue: ""
   # if you provide an existing secret, no additional secret will be created. Depending on the setting in pveAuthType the secret needs to have password OR tokenName and tokenValue fields.
   pveExistingSecretName: ""
