@@ -68,7 +68,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride                           | string | `""`                       |             |
 | image.pullPolicy                           | string | `"Always"`                 |             |
 | image.repository                           | string | `"ajanvier/polr"`          |             |
-| image.tag                                  | string | `""`                       |             |
+| image.tag                                  | string | `"2.3.0c"`                 |             |
 | imagePullSecrets                           | list   | `[]`                       |             |
 | ingress.annotations                        | object | `{}`                       |             |
 | ingress.className                          | string | `""`                       |             |

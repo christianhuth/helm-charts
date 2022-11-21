@@ -6,8 +6,8 @@ replicaCount: 1
 image:
   repository: ajanvier/polr
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  # Overrides the image tag
+  tag: "2.3.0c"
 
 imagePullSecrets: []
 
