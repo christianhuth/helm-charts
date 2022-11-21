@@ -92,7 +92,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride                           | string | `""`                           |             |
 | image.pullPolicy                           | string | `"Always"`                     |             |
 | image.repository                           | string | `"kutt/kutt"`                  |             |
-| image.tag                                  | string | `""`                           |             |
+| image.tag                                  | string | `"v2.7.4"`                     |             |
 | imagePullSecrets                           | list   | `[]`                           |             |
 | ingress.annotations                        | object | `{}`                           |             |
 | ingress.className                          | string | `""`                           |             |
