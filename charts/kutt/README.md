@@ -82,6 +82,13 @@ The command removes all the Kubernetes components associated with the chart and 
 | env[8].value                               | string | `""`                           |             |
 | env[9].name                                | string | `"SITE_NAME"`                  |             |
 | env[9].value                               | string | `"Kutt"`                       |             |
+| externalPostgresql.database                | string | `"kutt"`                       |             |
+| externalPostgresql.existingSecret          | string | `""`                           |             |
+| externalPostgresql.hostname                | string | `""`                           |             |
+| externalPostgresql.password                | string | `"kutt"`                       |             |
+| externalPostgresql.port                    | int    | `5432`                         |             |
+| externalPostgresql.userPasswordKey         | string | `""`                           |             |
+| externalPostgresql.username                | string | `"kutt"`                       |             |
 | fullnameOverride                           | string | `""`                           |             |
 | image.pullPolicy                           | string | `"Always"`                     |             |
 | image.repository                           | string | `"kutt/kutt"`                  |             |
