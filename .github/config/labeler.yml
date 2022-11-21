@@ -1,6 +1,10 @@
 # Explanation: Add the label 'ci-cd' to a PR if any file within the '.github' folder is changed
 ci-cd: .github/*
+countly: charts/countly/*
 cusdis: charts/cusdis/*
+ecs-exporter: charts/ecs-exporter/*
+fathom: charts/fathom/*
+goaccess: charts/goaccess/*
 greenbone-ce: charts/greenbone-ce/*
 ipmi-exporter: charts/ipmi-exporter/*
 ipsec-exporter: charts/ipsec-exporter/*
@@ -22,3 +26,4 @@ skooner: charts/skooner/*
 sloop: charts/sloop/*
 talkyard: charts/talkyard/*
 typo3: charts/typo3/*
+umami: charts/umami/*
