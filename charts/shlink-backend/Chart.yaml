@@ -2,8 +2,8 @@ apiVersion: v2
 name: shlink-backend
 description: A PHP-based self-hosted URL shortener that can be used to serve shortened URLs under your own domain.
 type: application
-version: 1.0.0
-appVersion: "3.1.2"
+version: 1.1.0
+appVersion: "3.3.2"
 home: https://github.com/christianknell/helm-charts
 icon: https://shlink.io/images/shlink-logo-blue.svg
 maintainers:
