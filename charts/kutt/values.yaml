@@ -6,8 +6,8 @@ replicaCount: 1
 image:
   repository: kutt/kutt
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  # Overrides the image tag
+  tag: "v2.7.4"
 
 imagePullSecrets: []
 

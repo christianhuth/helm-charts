@@ -92,7 +92,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride                           | string | `""`                           |             |
 | image.pullPolicy                           | string | `"Always"`                     |             |
 | image.repository                           | string | `"kutt/kutt"`                  |             |
-| image.tag                                  | string | `""`                           |             |
+| image.tag                                  | string | `"v2.7.4"`                     |             |
 | imagePullSecrets                           | list   | `[]`                           |             |
 | ingress.annotations                        | object | `{}`                           |             |
 | ingress.className                          | string | `""`                           |             |
@@ -135,6 +135,12 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```console
 helm install my-release -f values.yaml christianknell/kutt
 ```
+
+## Upgrading the Chart
+
+### 1.0.0
+
+This major updates the PostgreSQL subchart to its newest major, 12.0.0. [Here](https://github.com/bitnami/charts/tree/master/bitnami/postgresql#to-1200) you can find more information about the changes introduced in that version.
 
 ---
 
