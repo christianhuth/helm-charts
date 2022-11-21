@@ -7,7 +7,7 @@ image:
   repository: ajanvier/polr
   pullPolicy: Always
   # Overrides the image tag
-  tag: "2.3.0c"
+  tag: "2.3.0"
 
 imagePullSecrets: []
 
