@@ -6,8 +6,8 @@ replicaCount: 1
 image:
   repository: shlinkio/shlink
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  # Overrides the image tag
+  tag: "3.1.2"
 
 imagePullSecrets: []
 

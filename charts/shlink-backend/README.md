@@ -7,7 +7,7 @@ A PHP-based self-hosted URL shortener that can be used to serve shortened URLs u
 ```console
 helm repo add christianknell https://christianknell.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/shlink
+helm install my-release christianknell/shlink-backend
 ```
 
 ## Introduction
@@ -25,7 +25,7 @@ To install the chart with the release name `my-release`:
 ```console
 helm repo add christianknell https://christianknell.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/shlink
+helm install my-release christianknell/shlink-backend
 ```
 
 These commands deploy Shlink on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
@@ -58,7 +58,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride                           | string | `""`                       |             |
 | image.pullPolicy                           | string | `"Always"`                 |             |
 | image.repository                           | string | `"shlinkio/shlink"`        |             |
-| image.tag                                  | string | `""`                       |             |
+| image.tag                                  | string | `"3.1.2"`                  |             |
 | imagePullSecrets                           | list   | `[]`                       |             |
 | ingress.annotations                        | object | `{}`                       |             |
 | ingress.className                          | string | `""`                       |             |
@@ -101,8 +101,16 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianknell/shlink
+helm install my-release -f values.yaml christianknell/shlink-backend
 ```
+
+## Upgrading the Chart
+
+### 1.0.0
+
+This major updates the PostgreSQL subchart to its newest major, 12.0.0. [Here](https://github.com/bitnami/charts/tree/master/bitnami/postgresql#to-1200) you can find more information about the changes introduced in that version.
+
+Additionally it updates the RabbitMQ subchart to its newest major, 11.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/rabbitmq#to-1100) you can find more information about the changes introduced in that version.
 
 ---
 
