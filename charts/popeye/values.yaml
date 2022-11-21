@@ -1,8 +1,8 @@
 image:
   repository: derailed/popeye
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  # Overrides the image tag
+  tag: "v0.10.1"
 
 imagePullSecrets: []
 nameOverride: ""
