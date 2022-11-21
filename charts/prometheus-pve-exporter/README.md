@@ -2,7 +2,7 @@
 
 A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor to collect metrics.
 
-![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.2.3](https://img.shields.io/badge/AppVersion-2.2.3-informational?style=flat-square)
+![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.2.4](https://img.shields.io/badge/AppVersion-2.2.4-informational?style=flat-square)
 
 ## TL;DR;
 
@@ -54,15 +54,15 @@ The command removes all the Kubernetes components associated with the chart and 
 | args                             | list   | `[]`                                                                                                    |                                                                                                                        |
 | env.pveAuthType                  | string | `"token"`                                                                                               |                                                                                                                        |
 | env.pveExistingSecretName        | string | `""`                                                                                                    |                                                                                                                        |
-| env.pvePassword                  | string | `""`                                                                                                    |                                                                                                                        |
-| env.pveTokenName                 | string | `""`                                                                                                    |                                                                                                                        |
-| env.pveTokenValue                | string | `""`                                                                                                    |                                                                                                                        |
-| env.pveUser                      | string | `""`                                                                                                    |                                                                                                                        |
+| env.pvePassword                  | string | `"password"`                                                                                            |                                                                                                                        |
+| env.pveTokenName                 | string | `"tokenName"`                                                                                           |                                                                                                                        |
+| env.pveTokenValue                | string | `"tokenValue"`                                                                                          |                                                                                                                        |
+| env.pveUser                      | string | `"user"`                                                                                                |                                                                                                                        |
 | env.pveVerifySsl                 | bool   | `false`                                                                                                 |                                                                                                                        |
 | fullnameOverride                 | string | `""`                                                                                                    | String to fully override `"prometheus-pve-exporter.fullname"`                                                          |
 | image.pullPolicy                 | string | `"Always"`                                                                                              | image pull policy                                                                                                      |
 | image.repository                 | string | `"prompve/prometheus-pve-exporter"`                                                                     | image repository                                                                                                       |
-| image.tag                        | string | `""`                                                                                                    |                                                                                                                        |
+| image.tag                        | string | `"2.2.4"`                                                                                               |                                                                                                                        |
 | imagePullSecrets                 | list   | `[]`                                                                                                    | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
 | nameOverride                     | string | `""`                                                                                                    | Provide a name in place of `prometheus-pve-exporter`                                                                   |
 | nodeSelector                     | object | `{}`                                                                                                    | Node labels for pod assignment                                                                                         |
@@ -95,4 +95,4 @@ helm install my-release -f values.yaml christianknell/prometheus-pve-exporter
 
 ---
 
-Autogenerated from chart metadata using [helm-docs v1.10.0](https://github.com/norwoodj/helm-docs/releases/v1.10.0)
+Autogenerated from chart metadata using [helm-docs v1.11.0](https://github.com/norwoodj/helm-docs/releases/v1.11.0)

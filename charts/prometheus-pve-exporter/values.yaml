@@ -13,9 +13,8 @@ image:
   repository: prompve/prometheus-pve-exporter
   # -- image pull policy
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  # @default -- chart.appVersion
-  tag: ""
+  # Overrides the image tag
+  tag: "2.2.4"
 
 # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
 imagePullSecrets: []
@@ -32,10 +31,10 @@ args: []
 env:
   # define how to authenticate against pve instances: password, token
   pveAuthType: "token"
-  pveUser: ""
-  pvePassword: ""
-  pveTokenName: ""
-  pveTokenValue: ""
+  pveUser: "user"
+  pvePassword: "password"
+  pveTokenName: "tokenName"
+  pveTokenValue: "tokenValue"
   # if you provide an existing secret, no additional secret will be created. Depending on the setting in pveAuthType the secret needs to have password OR tokenName and tokenValue fields.
   pveExistingSecretName: ""
   # Optional: set to false to skip SSL/TLS verification
