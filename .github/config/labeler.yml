@@ -19,5 +19,6 @@ proxyweb: charts/proxyweb/*
 shlink-backend: charts/shlink-backend/*
 shlink-web: charts/shlink-web/*
 skooner: charts/skooner/*
+sloop: charts/sloop/*
 talkyard: charts/talkyard/*
 typo3: charts/typo3/*
