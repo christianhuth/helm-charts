@@ -18,6 +18,7 @@ netcupscp-exporter: charts/netcupscp-exporter/*
 passbolt-ha: charts/passbolt-ha/*
 polr: charts/polr/*
 popeye: charts/popeye/*
+promlens: charts/promlens/*
 prometheus-pve-exporter: charts/prometheus-pve-exporter/*
 proxysql: charts/proxysql/*
 proxyweb: charts/proxyweb/*
