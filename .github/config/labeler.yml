@@ -9,6 +9,7 @@ greenbone-ce: charts/greenbone-ce/*
 ipmi-exporter: charts/ipmi-exporter/*
 ipsec-exporter: charts/ipsec-exporter/*
 isso: charts/isso/*
+kateyes: charts/kateyes/*
 kube-ops-view: charts/kube-ops-view/*
 kutt: charts/kutt/*
 lxd-dashboard: charts/lxd-dashboard/*
