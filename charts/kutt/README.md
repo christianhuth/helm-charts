@@ -122,7 +122,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | postgresql.auth.password                   | string | `"kutt"`                       |             |
 | postgresql.auth.username                   | string | `"kutt"`                       |             |
 | postgresql.enabled                         | bool   | `true`                         |             |
-| redis.architecture                         | string | `standalone`                   |             |
 | redis.auth.enabled                         | bool   | `true`                         |             |
 | redis.enabled                              | bool   | `true`                         |             |
 | replicaCount                               | int    | `1`                            |             |

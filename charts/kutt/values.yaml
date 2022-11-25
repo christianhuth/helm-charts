@@ -84,10 +84,10 @@ externalPostgresql:
   username: kutt
 
 redis:
-  architecture: standalone
   enabled: true
   auth:
     enabled: true
+    password: kutt
 
 externalRedis:
   auth:
