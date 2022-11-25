@@ -9,6 +9,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 cronJob:
+  clusterName: ""
   history:
     failedJobsHistoryLimit: 1
     successfulJobsHistoryLimit: 1

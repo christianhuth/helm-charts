@@ -47,6 +47,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | Key                                        | Type   | Default             | Description |
 | ------------------------------------------ | ------ | ------------------- | ----------- |
 | affinity                                   | object | `{}`                |             |
+| cronJob.clusterName                        | string | `""`                |             |
 | cronJob.history.failedJobsHistoryLimit     | int    | `1`                 |             |
 | cronJob.history.successfulJobsHistoryLimit | int    | `1`                 |             |
 | cronJob.outputFormat                       | string | `"standard"`        |             |

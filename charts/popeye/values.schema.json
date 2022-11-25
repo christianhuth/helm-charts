@@ -8,6 +8,9 @@
         "cronJob": {
             "type": "object",
             "properties": {
+                "clusterName": {
+                    "type": "string"
+                },
                 "history": {
                     "type": "object",
                     "properties": {
