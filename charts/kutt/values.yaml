@@ -86,11 +86,11 @@ externalPostgresql:
 redis:
   enabled: true
   auth:
-    enabled: true
+    enabled: false
 
 externalRedis:
   auth:
-    enabled: true
+    enabled: false
     existingSecret: ""
     password: ""
     userPasswordKey: ""
