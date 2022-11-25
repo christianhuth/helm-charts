@@ -1,5 +1,8 @@
 # Explanation: Add the label 'ci-cd' to a PR if any file within the '.github' folder is changed
 ci-cd: .github/*
+
+# charts
+bluespice: charts/bluespice/*
 countly: charts/countly/*
 cusdis: charts/cusdis/*
 ecs-exporter: charts/ecs-exporter/*
