@@ -5,6 +5,7 @@ ci-cd: .github/*
 bluespice: charts/bluespice/*
 countly: charts/countly/*
 cusdis: charts/cusdis/*
+docker_stats_exporter: charts/docker_stats_exporter/*
 ecs-exporter: charts/ecs-exporter/*
 fathom: charts/fathom/*
 goaccess: charts/goaccess/*
