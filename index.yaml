@@ -500,6 +500,34 @@ entries:
     version: 1.0.0
   passbolt-ha:
   - apiVersion: v2
+    created: "2022-11-25T12:17:40.085687797Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.4.4
+    - name: passbolt
+      repository: https://cnieg.github.io/helm-charts
+      version: 1.1.15
+    - name: proxysql
+      repository: https://christianknell.github.io/helm-charts/
+      version: 1.0.1
+    description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
+    digest: d1f13b3ad5c61912c642519e7c3e86e3870524b30250c9b5139f1b5bf942aa00
+    home: https://github.com/christianknell/helm-charts
+    icon: https://avatars.githubusercontent.com/u/4386228?s=200&v=4
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: passbolt-ha
+    sources:
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    - https://github.com/cnieg/helm-charts/tree/master/charts/passbolt
+    - https://github.com/flachesis/proxysql/tree/master/charts/proxysql
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/passbolt-ha-1.0.6/passbolt-ha-1.0.6.tgz
+    version: 1.0.6
+  - apiVersion: v2
     created: "2022-11-19T12:55:35.85803006Z"
     dependencies:
     - name: mysql
@@ -1973,4 +2001,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-11-24T18:21:20.255460363Z"
+generated: "2022-11-25T12:17:40.085964816Z"
