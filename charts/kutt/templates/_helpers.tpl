@@ -106,7 +106,7 @@ Return the name for the user to use
 {{- end -}}
 
 {{/*
-Get the name of the secret containing the postgresql password .
+Get the name of the secret containing the postgresql password
 */}}
 {{- define "kutt.postgresql.secretName" -}}
   {{- if .Values.postgresql.enabled -}}
@@ -114,7 +114,7 @@ Get the name of the secret containing the postgresql password .
   {{- else if .Values.externalPostgresql.existingSecret -}}
     {{- printf "%s" (tpl .Values.externalPostgresql.existingSecret $) -}}
   {{- else -}}
-      {{- printf "%s" (include "kutt.fullname" .) -}}
+      {{- printf "%s" (include "kutt.fullname" .) -}}-postgresql
   {{- end -}}
 {{- end -}}
 
@@ -126,6 +126,70 @@ Get the user-password key for the postgres password
     {{- printf "%s" (include "postgresql.userPasswordKey" .Subcharts.postgresql) -}}
   {{- else if .Values.externalPostgresql.userPasswordKey -}}
     {{- printf "%s" (tpl .Values.externalPostgresql.userPasswordKey $) -}}
+  {{- else -}}
+    {{- "password" -}}
+  {{- end -}}
+{{- end -}}
+
+
+
+
+
+
+{{/*
+Return the hostname of the redis to use
+*/}}
+{{- define "kutt.redis.hostname" -}}
+  {{- if .Values.redis.enabled -}}
+    {{- printf "%s-master" (include "common.names.fullname" .Subcharts.redis) -}}
+  {{- else -}}
+    {{- printf "%s" (tpl .Values.externalRedis.hostname $) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Return redis service port
+*/}}
+{{- define "kutt.redis.port" -}}
+  {{- if .Values.redis.enabled -}}
+    {{- printf "%s" (tpl (toString .Values.redis.master.service.ports.redis) $) -}}
+  {{- else -}}
+    {{- printf "%s" (tpl (toString .Values.externalRedis.port) $) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the user-password key for the redis password
+*/}}
+{{- define "kutt.redis.auth.enabled" -}}
+  {{- if or (and (.Values.redis.enabled) (.Values.redis.auth.enabled)) (and (not .Values.redis.enabled) (.Values.externalRedis.auth.enabled)) -}}
+    {{- printf "true" -}}
+  {{- else -}}
+    {{- printf "false" -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the name of the secret containing the redis password
+*/}}
+{{- define "kutt.redis.secretName" -}}
+  {{- if .Values.redis.enabled -}}
+    {{- printf "%s" (include "redis.secretName" .Subcharts.redis) -}}
+  {{- else if .Values.externalRedis.auth.existingSecret -}}
+    {{- printf "%s" (tpl .Values.externalRedis.auth.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "kutt.fullname" .) -}}-redis
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the user-password key for the redis password
+*/}}
+{{- define "kutt.redis.userPasswordKey" -}}
+  {{- if .Values.redis.enabled -}}
+    {{- printf "%s" (include "redis.secretPasswordKey" .Subcharts.redis) -}}
+  {{- else if .Values.externalRedis.auth.userPasswordKey -}}
+    {{- printf "%s" (tpl .Values.externalRedis.auth.userPasswordKey $) -}}
   {{- else -}}
     {{- "password" -}}
   {{- end -}}
