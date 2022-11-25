@@ -106,19 +106,17 @@ spec:
             - name: DB_SSL
               value: "false"
             # Redis Settings
-            {{- if .Values.redis.enabled }}
             - name: REDIS_HOST
-              value: {{ printf "%s-master" (include "common.names.fullname" .Subcharts.redis) }}
+              value: {{ include "kutt.redis.hostname" . | quote }}
             - name: REDIS_PORT
-              value: {{ .Values.redis.master.service.ports.redis | quote }}
-            {{- if .Values.redis.auth.enabled }}
+              value: {{ include "kutt.redis.port" . | quote }}
+            {{- if eq (include "kutt.redis.auth.enabled" .) "true" }}
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "redis.secretName" .Subcharts.redis }}
-                  key: {{ include "redis.secretPasswordKey" .Subcharts.redis }}
-            {{- end }}
-            {{- end }}
+                  name: {{ include "kutt.redis.secretName" . | quote }}
+                  key: {{ include "kutt.redis.userPasswordKey" . | quote }}
+            {{- end -}}
           {{- with .Values.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}

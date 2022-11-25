@@ -88,6 +88,15 @@ redis:
   auth:
     enabled: true
 
+externalRedis:
+  auth:
+    enabled: true
+    existingSecret: ""
+    password: ""
+    userPasswordKey: ""
+  hostname: ""
+  port: 6379
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
