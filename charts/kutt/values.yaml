@@ -87,7 +87,6 @@ redis:
   enabled: true
   auth:
     enabled: true
-    password: kutt
 
 externalRedis:
   auth:
