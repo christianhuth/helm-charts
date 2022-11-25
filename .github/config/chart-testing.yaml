@@ -9,7 +9,7 @@ validate-yaml: true
 check-version-increment: true
 chart-dirs:
   - charts
-helm-extra-args: --timeout 300s
+helm-extra-args: --timeout 600s
 upgrade: true
 skip-missing-values: true
 release-label: release
