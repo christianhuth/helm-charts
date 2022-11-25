@@ -89,7 +89,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | externalPostgresql.port                    | int    | `5432`                         |             |
 | externalPostgresql.userPasswordKey         | string | `""`                           |             |
 | externalPostgresql.username                | string | `"kutt"`                       |             |
-| externalRedis.auth.enabled                 | bool   | `false`                        |             |
+| externalRedis.auth.enabled                 | bool   | `true`                         |             |
 | externalRedis.auth.existingSecret          | string | `""`                           |             |
 | externalRedis.auth.password                | string | `""`                           |             |
 | externalRedis.auth.userPasswordKey         | string | `""`                           |             |

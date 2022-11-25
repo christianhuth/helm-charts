@@ -123,7 +123,6 @@ spec:
           {{- end }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          cmd: ["./wait-for-it.sh", "{{ include "kutt.postgresql.hostname" . }}:{{ include "kutt.postgresql.port" . }}", "--", "npm", "start"]
           ports:
             - name: http
               containerPort: 3000
