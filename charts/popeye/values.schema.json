@@ -22,6 +22,14 @@
                 "outputFormat": {
                     "type": "string"
                 },
+                "prometheus": {
+                    "type": "object",
+                    "properties": {
+                        "pushgatewayAddress": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "schedule": {
                     "type": "string"
                 },

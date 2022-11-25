@@ -50,6 +50,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | cronJob.history.failedJobsHistoryLimit     | int    | `1`                 |             |
 | cronJob.history.successfulJobsHistoryLimit | int    | `1`                 |             |
 | cronJob.outputFormat                       | string | `"standard"`        |             |
+| cronJob.prometheus.pushgatewayAddress      | string | `""`                |             |
 | cronJob.schedule                           | string | `"* */1 * * *"`     |             |
 | cronJob.spinachConfiguration               | string | `nil`               |             |
 | fullnameOverride                           | string | `""`                |             |
