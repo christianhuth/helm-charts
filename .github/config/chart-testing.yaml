@@ -10,7 +10,7 @@ check-version-increment: true
 chart-dirs:
   - charts
 helm-extra-args: --timeout 300s
-upgrade: true
+upgrade: false
 skip-missing-values: true
 release-label: release
 chart-repos:
