@@ -3,6 +3,8 @@
   "extends": ["config:base"],
   "bumpVersion": "patch",
   "additionalBranchPrefix": "{{parentDir}}-",
+  "allowPostUpgradeCommandTemplating": true,
+  "allowedPostUpgradeCommands": ["^.*",],
   "packageRules": [
     {
       "matchManagers": [
