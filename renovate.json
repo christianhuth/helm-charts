@@ -9,7 +9,7 @@
     {
       "matchManagers": [
         "helm-requirements",
-        "helm-values",
+        "helm-values"
       ],
       "postUpgradeTasks": {
         "commands": [
@@ -24,10 +24,10 @@
           `
         ],
         "fileFilters": [
-          "**/Chart.yaml",
+          "**/Chart.yaml"
         ],
-        "executionMode": "branch",
-      },
-    },
+        "executionMode": "branch"
+      }
+    }
   ]
 }
