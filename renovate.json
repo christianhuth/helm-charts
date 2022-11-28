@@ -4,7 +4,7 @@
   "bumpVersion": "patch",
   "additionalBranchPrefix": "{{parentDir}}-",
   "allowPostUpgradeCommandTemplating": true,
-  "allowedPostUpgradeCommands": ["^.*",],
+  "allowedPostUpgradeCommands": ["^.*"],
   "packageRules": [
     {
       "matchManagers": [
