@@ -3,6 +3,28 @@ entries:
   kube-ops-view:
   - apiVersion: v2
     appVersion: 20.4.0
+    created: "2022-12-01T15:29:54.184827551Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.3.13
+    description: A Helm chart for bootstrapping kube-ops-view.
+    digest: 7ab540c09211af7d2dc32989939ac97b5ecd9ae0321a8b2ffe038fb3fcc5adf7
+    home: https://github.com/christianknell/helm-charts
+    icon: https://codeberg.org/repo-avatars/677-c51f6426305941cab515fdd98368f0bb
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kube-ops-view
+    sources:
+    - https://codeberg.org/hjacobs/kube-ops-view
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kube-ops-view-1.1.10/kube-ops-view-1.1.10.tgz
+    version: 1.1.10
+  - apiVersion: v2
+    appVersion: 20.4.0
     created: "2022-11-19T10:47:05.169364289Z"
     dependencies:
     - condition: redis.enabled
@@ -178,6 +200,32 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/kube-ops-view-1.1.2/kube-ops-view-1.1.2.tgz
     version: 1.1.2
   kutt:
+  - apiVersion: v2
+    appVersion: v2.7.4
+    created: "2022-12-01T15:29:54.425868802Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.3.13
+    description: Kutt is a free modern URL shortener.
+    digest: 3ccb4635f91c550ff0458fdb29328fde55dcbaf82bdeea8ea8c4df43a9a62582
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kutt
+    sources:
+    - https://github.com/thedevs-network/kutt
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kutt-1.1.1/kutt-1.1.1.tgz
+    version: 1.1.1
   - apiVersion: v2
     appVersion: v2.7.4
     created: "2022-11-25T15:58:14.76953266Z"
@@ -2118,4 +2166,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-11-29T08:49:15.193691021Z"
+generated: "2022-12-01T15:29:54.4262474Z"
