@@ -202,6 +202,32 @@ entries:
   kutt:
   - apiVersion: v2
     appVersion: v2.7.4
+    created: "2022-12-02T06:38:53.902145712Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.3
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.3.13
+    description: Kutt is a free modern URL shortener.
+    digest: 00038e7e600932164fc15b50d737104034db4505e4d136c74cf6aeee205e4a6d
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kutt
+    sources:
+    - https://github.com/thedevs-network/kutt
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kutt-1.1.2/kutt-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
+    appVersion: v2.7.4
     created: "2022-12-01T15:29:54.425868802Z"
     dependencies:
     - condition: postgresql.enabled
@@ -1242,6 +1268,46 @@ entries:
   shlink-backend:
   - apiVersion: v2
     appVersion: 3.3.2
+    created: "2022-12-02T06:38:54.156528362Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.4.0
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.4.4
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.3
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.5
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.3.13
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: bf590f92ca395c2a46ba4752a6edb31b74328609196435759ca93dbbeaf904a1
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-1.1.4/shlink-backend-1.1.4.tgz
+    version: 1.1.4
+  - apiVersion: v2
+    appVersion: 3.3.2
     created: "2022-12-01T15:44:12.066370142Z"
     dependencies:
     - condition: mariadb.enabled
@@ -1857,6 +1923,33 @@ entries:
   typo3:
   - apiVersion: v2
     appVersion: "11.5"
+    created: "2022-12-02T06:38:54.369033967Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.4.4
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.3
+    description: TYPO3 — the Professional, Flexible Content Management System
+    digest: 38819a4616b6e894b50df35505f459b759114ebcd2d5a2622d1b9265994770f2
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.mdc.de/wp-content/uploads/2016/05/typo3_logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: typo3
+    sources:
+    - https://github.com/martin-helmich/docker-typo3
+    - https://github.com/TYPO3/typo3
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/typo3-1.0.1/typo3-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: "11.5"
     created: "2022-11-21T10:41:57.308570715Z"
     dependencies:
     - condition: mysql.enabled
@@ -2206,4 +2299,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-01T15:44:12.066701537Z"
+generated: "2022-12-02T06:38:54.369306575Z"
