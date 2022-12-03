@@ -1,0 +1,123 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/salesforce/sloop
+  pullPolicy: Always
+  # Overrides the image tag
+  tag: "sha-2ce8bbe"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+sloop:
+  config: |
+    {
+      "displayContext": "cluster",
+      "defaultNamespace": "default",
+      "defaultKind": "Pod",
+      "defaultLookback": "1h",
+      "leftBarLinks": [
+      ],
+      "resourceLinks": [
+      ]
+    }
+
+persistence:
+  enabled: false
+  annotations: {}
+  accessModes:
+    - ReadWriteOnce
+  existingClaim: ""
+  storageClass: ""
+  size: 10Gi
+
+clusterRole:
+  # List CRD apiGroups that you want to watch here
+  # Will be added with all resource types and the verbs "list" and "watch"
+  # Istio is just here as an example. Alternatively if you want to get all CRDs its possible to add '*'
+  # to apiGroups, but that would give Sloop permissions to read secrets which may not be desirable
+  additionalApiGroups: []
+    # - awx.ansible.com
+    # - authentication.istio.io
+    # - config.istio.io
+    # - networking.istio.io
+    # - rbac.istio.io
+    # - security.istio.io
+  # List CRD API groups, resource types and verbs you want to visualize in Sloop
+  # Given example adds all API groups and resource types, which also includes Secrets, be aware of this
+  additionalPermissions: []
+    # - apiGroups:
+    #     - "*"
+    #   resources:
+    #     - "*"
+    #   verbs:
+    #     - list
+    #     - watch
