@@ -1920,6 +1920,24 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/skooner-0.0.2/skooner-0.0.2.tgz
     version: 0.0.2
+  sloop:
+  - apiVersion: v2
+    appVersion: sha-2ce8bbe
+    created: "2022-12-03T13:26:15.770041976Z"
+    description: Kubernetes History Visualization
+    digest: 3e61e1bc3caa42ff091c558e36071055f4aa05ea5d6b63de58e171c6dd32778b
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: sloop
+    sources:
+    - https://github.com/salesforce/sloop
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/sloop-0.0.1/sloop-0.0.1.tgz
+    version: 0.0.1
   typo3:
   - apiVersion: v2
     appVersion: "11.5"
@@ -2299,4 +2317,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-02T06:38:54.369306575Z"
+generated: "2022-12-03T13:26:15.770206679Z"
