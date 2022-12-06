@@ -29,10 +29,38 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            # Database Settings
+            - name: SQL_HOST
+              value: {{ include "headwind-mdm.postgresql.hostname" . | quote }}
+            - name: SQL_PORT
+              value: {{ include "headwind-mdm.postgresql.port" . | quote }}
+            - name: SQL_BASE
+              value: {{ include "headwind-mdm.postgresql.database" . | quote }}
+            - name: SQL_USER
+              value: {{ include "headwind-mdm.postgresql.username" . | quote }}
+            - name: SQL_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "headwind-mdm.postgresql.secretName" . | quote }}
+                  key: {{ include "headwind-mdm.postgresql.userPasswordKey" . | quote }}
+            # Headwind Settings
+            - name: HMDM_VARIANT
+              value: os
+            - name: HTTPS_LETSENCRYPT
+              value: "false"
+            - name: PROTOCOL
+              value: http
+            {{ if .Values.headwind.baseDomain -}}
+            - name: BASE_DOMAIN
+              value: {{ .Values.headwind.baseDomain }}
+            {{ end -}}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -45,8 +73,21 @@ spec:
             httpGet:
               path: /
               port: http
+          {{- with .Values.resources }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.persistence.enabled }}
+          volumeMounts:
+            - name: headwind-mdm-data
+              mountPath: /usr/local/tomcat/work
+          {{- end }}
+      {{- if .Values.persistence.enabled }}
+      volumes:
+        - name: headwind-mdm-data
+          persistentVolumeClaim:
+            claimName: {{ include "headwind-mdm.pvcName" . }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
