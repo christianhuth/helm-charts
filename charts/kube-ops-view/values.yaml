@@ -92,7 +92,6 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-# -- Values for including the subchart Redis™ from Bitnami
 redis:
   # -- Redis™ architecture. Allowed values: standalone or replication
   architecture: standalone
