@@ -93,7 +93,6 @@ persistence:
   storageClass: ""
   size: 10Gi
 
-# -- Values for including the subchart PostgreSQL™ from Bitnami
 postgresql:
   # -- enable PostgreSQL™ subchart from Bitnami
   enabled: true
@@ -108,7 +107,6 @@ postgresql:
     # -- Name for a custom user to create
     username: mychart
 
-# -- Values for an existing PostgreSQL database
 externalPostgresql:
   ## Authentication parameters
   auth:
