@@ -8,6 +8,7 @@ cusdis: charts/cusdis/*
 docker_stats_exporter: charts/docker_stats_exporter/*
 ecs-exporter: charts/ecs-exporter/*
 fathom: charts/fathom/*
+glances: charts/glances/*
 goaccess: charts/goaccess/*
 greenbone-ce: charts/greenbone-ce/*
 ipmi-exporter: charts/ipmi-exporter/*
