@@ -2,6 +2,7 @@
 ci-cd: .github/*
 
 # charts
+baserow: charts/baserow/*
 bluespice: charts/bluespice/*
 countly: charts/countly/*
 cusdis: charts/cusdis/*
