@@ -60,3 +60,36 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Get the name of the secret containing the api token for grafana
+*/}}
+{{- define "promlens.grafana.secretName" -}}
+  {{- if .Values.config.grafana.existingSecret -}}
+    {{- printf "%s" (tpl .Values.config.grafana.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "promlens.fullname" .) -}}-grafana
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the name of the secret containing the credentials for link sharing using google cloud storage
+*/}}
+{{- define "promlens.gcs.secretName" -}}
+  {{- if .Values.config.sharedLinks.gcs.existingSecret -}}
+    {{- printf "%s" (tpl .Values.config.sharedLinks.gcs.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "promlens.fullname" .) -}}-gcs
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the name of the secret containing the dsn for link sharing using SQL
+*/}}
+{{- define "promlens.sql.secretName" -}}
+  {{- if .Values.config.sharedLinks.sql.existingSecret -}}
+    {{- printf "%s" (tpl .Values.config.sharedLinks.sql.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "promlens.fullname" .) -}}-sql
+  {{- end -}}
+{{- end -}}

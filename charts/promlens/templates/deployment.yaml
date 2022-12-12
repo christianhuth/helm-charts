@@ -29,9 +29,61 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          args:
+            {{- if.Values.config.grafana.enabled }}
+            - --grafana.api-token=$GRAFANA_API_TOKEN
+            {{- if.Values.config.grafana.defaultDatasourceId }}
+            - --grafana.default-datasource-id={{ .Values.config.grafana.defaultDatasourceId }}
+            {{- end }}
+            - --grafana.url={{ .Values.config.grafana.url }}
+            {{- end }}
+            - --log.level={{ .Values.config.log.level }}
+            - --log.format={{ .Values.config.log.format }}
+            {{- if and (.Values.config.sharedLinks.sql.enabled) (not .Values.config.sharedLinks.sql.createTables) }}
+            - --no-shared-links.sql.create-tables
+            {{- end }}
+            {{- if .Values.config.sharedLinks.gcs.enabled }}
+            - --shared-links.gcs.bucket={{ .Values.config.sharedLinks.gcs.bucket }}
+            {{- end }}
+            {{- if .Values.config.sharedLinks.sql.enabled }}
+            - --shared-links.sql.driver={{ .Values.config.sharedLinks.sql.driver }}
+            - --shared-links.sql.retention={{ .Values.config.sharedLinks.sql.retention }}
+            {{- end }}
+            {{- if.Values.config.web.defaultPrometheusUrl }}
+            - --web.default-prometheus-url={{ .Values.config.web.defaultPrometheusUrl }}
+            {{- end }}
+            {{- if.Values.config.web.externalUrl }}
+            - --web.external-url={{ .Values.config.web.externalUrl }}
+            {{- end }}
+            {{- if.Values.config.web.routePrefix }}
+            - --web.route-prefix={{ .Values.config.web.routePrefix }}
+            {{- end }}
+          {{- if or (.Values.config.grafana.enabled) (.Values.config.sharedLinks.gcs.enabled) (.Values.config.sharedLinks.sql.enabled) }}
+          env:
+            {{- if .Values.config.grafana.enabled }}
+            - name: GRAFANA_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "promlens.grafana.secretName" . }}
+                  key: api-token
+            {{- end }}
+            {{- if .Values.config.sharedLinks.gcs.enabled }}
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /var/gcs-secret/gcs-cred.json
+            {{- end }}
+            {{- if .Values.config.sharedLinks.sql.enabled }}
+            - name: PROMLENS_SHARED_LINKS_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "promlens.sql.secretName" . }}
+                  key: dsn
+            {{- end }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
@@ -45,8 +97,15 @@ spec:
             httpGet:
               path: /
               port: http
+          {{- with .Values.resources }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.config.sharedLinks.gcs.enabled }}
+          volumeMounts:
+            - mountPath: /var/gcs-secret
+              name: gcs-secret
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -58,4 +117,11 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.config.sharedLinks.gcs.enabled }}
+      volumes:
+        - name: gcs-secret
+          secret:
+            defaultMode: 420
+            secretName: {{ include "promlens.gcs.secretName" . }}
       {{- end }}
