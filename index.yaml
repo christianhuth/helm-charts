@@ -896,6 +896,28 @@ entries:
   polr:
   - apiVersion: v2
     appVersion: 2.3.0
+    created: "2022-12-12T08:30:25.088334638Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.4.5
+    description: Polr is a quick, modern, and open-source link shortener
+    digest: 6a5d708923a5dca4895da24c0b0ded1f3b8a72ef6022796276d06c60642582ca
+    home: https://github.com/christianknell/helm-charts
+    icon: http://docs.polrproject.org/en/latest/logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: polr
+    sources:
+    - https://github.com/cydrobolt/polr
+    - https://github.com/ajanvier/docker-polr
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/polr-1.0.6/polr-1.0.6.tgz
+    version: 1.0.6
+  - apiVersion: v2
+    appVersion: 2.3.0
     created: "2022-11-24T18:21:20.255063065Z"
     dependencies:
     - name: mysql
@@ -2494,4 +2516,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-12T08:26:45.822008469Z"
+generated: "2022-12-12T08:30:25.08850034Z"
