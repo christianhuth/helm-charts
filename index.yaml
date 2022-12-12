@@ -2091,6 +2091,33 @@ entries:
   typo3:
   - apiVersion: v2
     appVersion: "11.5"
+    created: "2022-12-12T08:26:45.821685661Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.4.5
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.3
+    description: TYPO3 — the Professional, Flexible Content Management System
+    digest: 2f93e8147bd07568b740bb8eb27dfa08f5a387ad0b38b31f9f6c929ac244353f
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.mdc.de/wp-content/uploads/2016/05/typo3_logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: typo3
+    sources:
+    - https://github.com/martin-helmich/docker-typo3
+    - https://github.com/TYPO3/typo3
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/typo3-1.0.2/typo3-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: "11.5"
     created: "2022-12-02T06:38:54.369033967Z"
     dependencies:
     - condition: mysql.enabled
@@ -2467,4 +2494,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-09T10:31:37.751074604Z"
+generated: "2022-12-12T08:26:45.822008469Z"
