@@ -1295,6 +1295,26 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/prometheus-pve-exporter-1.0.2/prometheus-pve-exporter-1.0.2.tgz
     version: 1.0.2
+  promlens:
+  - apiVersion: v2
+    appVersion: v0.3.0
+    created: "2022-12-12T10:09:01.366482279Z"
+    description: PromLens is a tool that makes learning and using PromQL easier and
+      more productive
+    digest: c2137d5be0c867b333b4f89e5796088fa9d092875a85ddd74fb5df7addd0bb0c
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: promlens
+    sources:
+    - https://github.com/prometheus/promlens
+    - https://hub.docker.com/r/prom/promlens
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/promlens-1.0.0/promlens-1.0.0.tgz
+    version: 1.0.0
   proxysql:
   - apiVersion: v2
     appVersion: 2.4.2
@@ -1386,6 +1406,46 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/proxyweb-0.0.1/proxyweb-0.0.1.tgz
     version: 0.0.1
   shlink-backend:
+  - apiVersion: v2
+    appVersion: 3.3.2
+    created: "2022-12-12T10:09:01.695228344Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.4.1
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.4.5
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.3
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.2.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.3.14
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: d937d8d83fff672fbb8e33181257600660a4e0deff9477e9b4d02d404100ad2c
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-1.2.0/shlink-backend-1.2.0.tgz
+    version: 1.2.0
   - apiVersion: v2
     appVersion: 3.3.2
     created: "2022-12-12T08:51:52.527533004Z"
@@ -2584,4 +2644,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-12T08:51:52.527816809Z"
+generated: "2022-12-12T10:09:01.695475251Z"
