@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "headwind-mdm.fullname" . }}
+  labels:
+    {{- include "headwind-mdm.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "headwind-mdm.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "headwind-mdm.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "headwind-mdm.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            # Database Settings
+            - name: SQL_HOST
+              value: {{ include "headwind-mdm.postgresql.hostname" . | quote }}
+            - name: SQL_PORT
+              value: {{ include "headwind-mdm.postgresql.port" . | quote }}
+            - name: SQL_BASE
+              value: {{ include "headwind-mdm.postgresql.database" . | quote }}
+            - name: SQL_USER
+              value: {{ include "headwind-mdm.postgresql.username" . | quote }}
+            - name: SQL_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "headwind-mdm.postgresql.secretName" . | quote }}
+                  key: {{ include "headwind-mdm.postgresql.userPasswordKey" . | quote }}
+            # Headwind Settings
+            {{ if .Values.headwind.adminEmail -}}
+            - name: ADMIN_EMAIL
+              value: {{ .Values.headwind.adminEmail | quote }}
+            {{ end -}}
+            {{ if .Values.headwind.baseDomain -}}
+            - name: BASE_DOMAIN
+              value: {{ .Values.headwind.baseDomain | quote }}
+            {{ end -}}
+            - name: CLIENT_VERSION
+              value: {{ .Values.headwind.clientVersion | default "5.14" | quote }}
+            - name: FORCE_RECONFIGURE
+              value: {{ .Values.headwind.forceReconfigure | default "false" | quote }}
+            - name: HMDM_URL
+              value: {{ .Values.headwind.hmdmUrl | default "https://h-mdm.com/files/hmdm-5.12.1-$HMDM_VARIANT.war" }}
+            - name: HMDM_VARIANT
+              value: {{ .Values.headwind.hmdmVariant | default "os" | quote }}
+            - name: HTTPS_LETSENCRYPT
+              value: "false"
+            - name: INSTALL_LANGUAGE
+              value: {{ .Values.headwind.installLanguage | default "en" | quote }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.persistence.enabled }}
+          volumeMounts:
+            - name: headwind-mdm-data
+              mountPath: /usr/local/tomcat/work
+          {{- end }}
+      {{- if .Values.persistence.enabled }}
+      volumes:
+        - name: headwind-mdm-data
+          persistentVolumeClaim:
+            claimName: {{ include "headwind-mdm.pvcName" . }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
