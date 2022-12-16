@@ -7,7 +7,7 @@ image:
   repository: shlinkio/shlink
   pullPolicy: Always
   # Overrides the image tag
-  tag: "3.3.2"
+  tag: "3.4.0"
 
 imagePullSecrets: []
 
