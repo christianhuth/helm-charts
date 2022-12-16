@@ -71,7 +71,16 @@
                 "downloadCredentials": {
                     "type": "boolean"
                 },
-                "hdmUrl": {
+                "forceReconfigure": {
+                    "type": "boolean"
+                },
+                "hmdmUrl": {
+                    "type": "string"
+                },
+                "hmdmVariant": {
+                    "type": "string"
+                },
+                "installLanguage": {
                     "type": "string"
                 }
             }

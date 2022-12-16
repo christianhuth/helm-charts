@@ -47,16 +47,26 @@ spec:
                   name: {{ include "headwind-mdm.postgresql.secretName" . | quote }}
                   key: {{ include "headwind-mdm.postgresql.userPasswordKey" . | quote }}
             # Headwind Settings
-            - name: HMDM_VARIANT
-              value: os
-            - name: HTTPS_LETSENCRYPT
-              value: "false"
-            - name: PROTOCOL
-              value: http
+            {{ if .Values.headwind.adminEmail -}}
+            - name: ADMIN_EMAIL
+              value: {{ .Values.headwind.adminEmail | quote }}
+            {{ end -}}
             {{ if .Values.headwind.baseDomain -}}
             - name: BASE_DOMAIN
-              value: {{ .Values.headwind.baseDomain }}
+              value: {{ .Values.headwind.baseDomain | quote }}
             {{ end -}}
+            - name: CLIENT_VERSION
+              value: {{ .Values.headwind.clientVersion | default "5.14" | quote }}
+            - name: FORCE_RECONFIGURE
+              value: {{ .Values.headwind.forceReconfigure | default "false" | quote }}
+            - name: HMDM_URL
+              value: {{ .Values.headwind.hmdmUrl | default "https://h-mdm.com/files/hmdm-5.12.1-$HMDM_VARIANT.war" }}
+            - name: HMDM_VARIANT
+              value: {{ .Values.headwind.hmdmVariant | default "os" | quote }}
+            - name: HTTPS_LETSENCRYPT
+              value: "false"
+            - name: INSTALL_LANGUAGE
+              value: {{ .Values.headwind.installLanguage | default "en" | quote }}
           {{- with .Values.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
