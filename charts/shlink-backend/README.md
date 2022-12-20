@@ -58,7 +58,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride                           | string | `""`                       |             |
 | image.pullPolicy                           | string | `"Always"`                 |             |
 | image.repository                           | string | `"shlinkio/shlink"`        |             |
-| image.tag                                  | string | `"3.3.2"`                  |             |
+| image.tag                                  | string | `"3.4.0"`                  |             |
 | imagePullSecrets                           | list   | `[]`                       |             |
 | ingress.annotations                        | object | `{}`                       |             |
 | ingress.className                          | string | `""`                       |             |
