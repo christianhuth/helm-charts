@@ -1513,6 +1513,24 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/popeye-0.0.1/popeye-0.0.1.tgz
     version: 0.0.1
+  priority-classes:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2022-12-21T09:12:10.003822619Z"
+    description: A Helm chart for creating Priority Classes. Already comes with some
+      bundled classes.
+    digest: de0c29a79bc967fb417f730b91011a1cce0eb4a02e972cafba85e9f004912ef5
+    home: https://github.com/christianknell/helm-charts
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: priority-classes
+    sources:
+    - https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/priority-classes-1.0.0/priority-classes-1.0.0.tgz
+    version: 1.0.0
   prometheus-pve-exporter:
   - apiVersion: v2
     appVersion: 2.2.4
@@ -3278,4 +3296,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-20T14:20:51.994726677Z"
+generated: "2022-12-21T09:12:10.004131899Z"
