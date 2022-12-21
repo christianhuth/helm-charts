@@ -1,0 +1,28 @@
+# -- Provide a name in place of `priority-classes`
+nameOverride: ""
+# -- String to fully override `"priority-classes.fullname"`
+fullnameOverride: ""
+
+# -- List of Priority Classes to be created
+# @default -- see [values.yaml](./values.yaml)
+priorityClasses:
+  - name: critical
+    description: "Mission critical Pods. Does preempt lower priority Pods."
+    globalDefault: false
+    preemptionPolicy: PreemptLowerPriority
+    value: 1000000
+  - name: high
+    description: "High priority Pods. Does preempt lower priority Pods."
+    globalDefault: false
+    preemptionPolicy: PreemptLowerPriority
+    value: 900000
+  - name: medium
+    description: "Default priority class for all Pods. Does preempt lower priority Pods."
+    globalDefault: true
+    preemptionPolicy: PreemptLowerPriority
+    value: 500000
+  - name: low
+    description: "Low priority Pods."
+    globalDefault: false
+    preemptionPolicy: Never
+    value: 100000
