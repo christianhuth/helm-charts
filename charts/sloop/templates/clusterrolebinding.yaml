@@ -1,0 +1,15 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "sloop.fullname" . }}
+  labels:
+    {{- include "sloop.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "sloop.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "sloop.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}

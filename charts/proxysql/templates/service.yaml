@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: {{ include "proxysql.fullname" . }}
+  labels:
+    {{- include "proxysql.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port | default .Values.proxysql.mysql.port }}
+      targetPort: mysql
+      protocol: TCP
+      name: mysql
+    - port: {{ .Values.proxysql.port }}
+      targetPort: proxysql
+      protocol: TCP
+      name: proxysql
+    {{- if .Values.metrics.enabled }}
+    - port: 6070
+      targetPort: metrics
+      protocol: TCP
+      name: metrics
+    {{- end }}
+    {{- if .Values.proxysql.web.enabled }}
+    - port: {{ .Values.proxysql.web.port }}
+      targetPort: web
+      protocol: TCP
+      name: web
+    {{- end }}
+  selector:
+    {{- include "proxysql.selectorLabels" . | nindent 4 }}

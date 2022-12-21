@@ -1,0 +1,14 @@
+apiVersion: v2
+name: promlens
+description: PromLens is a tool that makes learning and using PromQL easier and more productive
+type: application
+version: 1.0.0
+appVersion: "v0.3.0"
+home: https://github.com/christianknell/helm-charts
+icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
+maintainers:
+  - name: christianknell
+    email: christian@knell.it
+sources:
+  - https://github.com/prometheus/promlens
+  - https://hub.docker.com/r/prom/promlens

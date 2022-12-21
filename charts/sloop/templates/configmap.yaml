@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "sloop.fullname" . }}
+  labels:
+    {{- include "sloop.labels" . | nindent 4 }}
+data:
+  sloop.json: |
+{{ .Values.sloop.config | indent 4 -}}

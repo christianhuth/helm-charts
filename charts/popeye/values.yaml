@@ -1,0 +1,84 @@
+image:
+  repository: derailed/popeye
+  pullPolicy: Always
+  # Overrides the image tag
+  tag: "v0.10.1"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+cronJob:
+  clusterName: ""
+  history:
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 1
+  # Popeye can generate sanitizer reports in a variety of formats: standard, jurassic, yaml, html, json, junit, prometheus, score
+  outputFormat: standard
+  prometheus:
+    pushgatewayAddress: ""
+  schedule: "* */1 * * *"
+  spinachConfiguration:
+    # # A Popeye sample configuration file
+    # popeye:
+    #   # Checks resources against reported metrics usage.
+    #   # If over/under these thresholds a sanitization warning will be issued.
+    #   # Your cluster must run a metrics-server for these to take place!
+    #   allocations:
+    #     cpu:
+    #       underPercUtilization: 200 # Checks if cpu is under allocated by more than 200% at current load.
+    #       overPercUtilization: 50   # Checks if cpu is over allocated by more than 50% at current load.
+    #     memory:
+    #       underPercUtilization: 200 # Checks if mem is under allocated by more than 200% at current load.
+    #       overPercUtilization: 50   # Checks if mem is over allocated by more than 50% usage at current load.
+    #   # Configure node resources.
+    #   node:
+    #     # Limits set a cpu/mem threshold in % ie if cpu|mem > limit a lint warning is triggered.
+    #     limits:
+    #       # CPU checks if current CPU utilization on a node is greater than 90%.
+    #       cpu: 90
+    #       # Memory checks if current Memory utilization on a node is greater than 80%.
+    #       memory: 80
+    #   # Configure pod resources
+    #   pod:
+    #     # Restarts check the restarts count and triggers a lint warning if above threshold.
+    #     restarts:
+    #       3
+    #     # Check container resource utilization in percent.
+    #     # Issues a lint warning if about these threshold.
+    #     limits:
+    #       cpu: 80
+    #       memory: 75
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 100Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

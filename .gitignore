@@ -3,7 +3,9 @@
 
 ### Helm ###
 # Chart dependencies
-**/charts/*.tgz
+charts/**/charts/*
+charts/**/Chart.lock
+charts/**/values-dev.yaml
 
 ### VisualStudioCode ###
 .vscode/*

@@ -1,19 +1,21 @@
-name: Release Charts
+name: Release Helm Charts
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - "charts/**"
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Chart-Testing"]
+    branches: [main]
+    types: [completed]
 
 jobs:
-  release:
-    runs-on: ubuntu-20.04
-    container: ghcr.io/chgl/kube-powertools:latest
+  release2github:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout git repository
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -21,19 +23,53 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-      - name: Add bitnami repo
-        run: helm repo add bitnami https://charts.bitnami.com/bitnami
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+
+      - name: Add Helm repositories
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add christianknell https://christianknell.github.io/helm-charts/
+          helm repo add cnieg https://cnieg.github.io/helm-charts/
 
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
 
-      - name: Generate changelogs
-        run: bash .github/generate-chart-changelogs.sh
-
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.2.1
-        with:
-          config: .github/ct/ct.yaml
-          version: v1.3.0
+        uses: helm/chart-releaser-action@v1.4.1
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+  release2chartmuseum:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout Git repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+
+      - name: Add Helm repository
+        run: helm repo add christianknell https://charts.knell.it
+
+      - name: Update dependencies
+        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
+
+      - name: Install Helm plugin helm-push
+        run: helm plugin install https://github.com/chartmuseum/helm-push
+
+      - name: Push current version to Helm repository
+        run: |
+          cd charts
+          for chart in */;
+          do
+            cd $chart
+            helm cm-push --force . https://charts.knell.it
+            cd ..
+          done
+        env:
+          HELM_REPO_USERNAME: '${{ secrets.CHARTMUSEUM_USER }}'
+          HELM_REPO_PASSWORD: '${{ secrets.CHARTMUSEUM_PASSWORD }}'

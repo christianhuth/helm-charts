@@ -1,0 +1,132 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "polr.fullname" . }}
+  labels:
+    {{- include "polr.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "polr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "polr.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "polr.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          env:
+            {{- toYaml .Values.env | nindent 12 }}
+            - name: DB_CONNECTION
+              value: mysql
+            - name: APP_PROTOCOL
+            {{- if .Values.ingress.tls }}
+              value: "https://"
+            {{- else }}
+              value: "http://"
+            {{- end }}
+          {{- if .Values.mysql.enabled }}
+            - name: DB_HOST
+              value: "{{- include "mysql.primary.fullname" .Subcharts.mysql -}}"
+            - name: DB_PORT
+              value: {{ .Values.mysql.primary.service.ports.mysql | quote }}
+            - name: DB_DATABASE
+              value: {{ .Values.mysql.auth.database }}
+            - name: DB_USERNAME
+              value: {{ .Values.mysql.auth.username }}
+            - name: DB_PASSWORD
+            {{- if .Values.mysql.auth.existingSecret -}}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "mysql.secretName" .Subcharts.mysql }}
+                  key: mysql-password
+            {{- else }}
+              value: {{ .Values.mysql.auth.password }}
+            {{- end }}
+          {{- else }}
+            - name: DB_HOST
+              value: {{ .Values.externalDatabase.host }}
+            - name: DB_PORT
+              value: {{ .Values.externalDatabase.port | quote }}
+            - name: DB_DATABASE
+              value: {{ .Values.externalDatabase.database }}
+            - name: DB_USERNAME
+              value: {{ .Values.externalDatabase.username }}
+            - name: DB_PASSWORD
+            {{- if .Values.externalDatabase.existingSecret -}}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.existingSecret }}
+                  key: mysql-password
+            {{- else }}
+              value: {{ .Values.externalDatabase.password }}
+            {{- end }}
+          {{- end }}
+            - name: ADMIN_PASSWORD
+            {{- if not .Values.admin.existingSecret }}
+              value: {{ .Values.admin.password }}
+            {{- else }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.admin.existingSecret }}
+                  key: ADMIN_PASSWORD
+            {{- end }}
+            - name: ADMIN_USERNAME
+              value: {{ .Values.admin.username }}
+            {{- if .Values.admin.email }}
+            - name: ADMIN_EMAIL
+              value: {{ .Values.admin.email }}
+            {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,0 +1,72 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "popeye.fullname" . }}
+  labels:
+    {{- include "popeye.labels" . | nindent 4 }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  schedule: "{{ .Values.cronJob.schedule }}"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: {{ .Values.cronJob.history.failedJobsHistoryLimit }}
+  successfulJobsHistoryLimit: {{ .Values.cronJob.history.successfulJobsHistoryLimit }}
+  jobTemplate:
+    metadata:
+      labels:
+        {{- include "popeye.labels" . | nindent 8 }}
+    spec:
+      template:
+        spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          serviceAccountName: {{ include "popeye.serviceAccountName" . }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          restartPolicy: Never
+          containers:
+            - name: {{ .Chart.Name }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              args:
+                {{- if .Values.cronJob.spinachConfiguration }}
+                - "-f /home/spinach.yml"
+                {{- end }}
+                {{- if .Values.cronJob.clusterName }}
+                - --cluster-name={{ .Values.cronJob.clusterName }}
+                {{- end }}
+                - --out={{ .Values.cronJob.outputFormat }}
+                {{- if and (eq .Values.cronJob.outputFormat "prometheus") (.Values.cronJob.prometheus.pushgatewayAddress) }}
+                - --pushgateway-address={{ .Values.cronJob.prometheus.pushgatewayAddress }}
+                {{- end }}
+                - --force-exit-zero=true
+              {{- with .Values.resources }}
+              resources:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              {{- if .Values.cronJob.spinachConfiguration }}
+              volumeMounts:
+                - name: configuration
+                  mountPath: /home
+              {{- end }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.cronJob.spinachConfiguration }}
+          volumes:
+            - name: configuration
+              configMap:
+                name: {{ include "popeye.fullname" . }}
+          {{- end }}

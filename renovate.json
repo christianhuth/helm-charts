@@ -1,5 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", ":disableDependencyDashboard"],
-  "bumpVersion": "patch"
+  "extends": ["config:base"],
+  "bumpVersion": "patch",
+  "additionalBranchPrefix": "{{parentDir}}-",
 }

@@ -1,0 +1,114 @@
+# headwind-mdm
+
+Headwind MDM - an open source mobile device management software for Android
+
+## TL;DR;
+
+```console
+helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo update
+helm install my-release christianknell/headwind-mdm
+```
+
+## Introduction
+
+Headwind MDM is a Mobile device management (MDM) system for corporate Android devices, remote access to Android phones and tablets.
+
+This chart bootstraps the [Headwind MDM](https://github.com/h-mdm) on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+
+## Prerequisites
+
+- Kubernetes 1.19+
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo update
+helm install my-release christianknell/headwind-mdm
+```
+
+These commands deploy Headwind MDM on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
+
+> **Tip**: List all releases using `helm list`
+
+## Uninstalling the Chart
+
+To uninstall the `my-release` deployment:
+
+```console
+helm uninstall my-release
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+## Values
+
+| Key                                        | Type   | Default                    | Description                                                                                                            |
+| ------------------------------------------ | ------ | -------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| affinity                                   | object | `{}`                       | Affinity settings for pod assignment                                                                                   |
+| autoscaling.enabled                        | bool   | `false`                    |                                                                                                                        |
+| autoscaling.maxReplicas                    | int    | `100`                      |                                                                                                                        |
+| autoscaling.minReplicas                    | int    | `1`                        |                                                                                                                        |
+| autoscaling.targetCPUUtilizationPercentage | int    | `80`                       |                                                                                                                        |
+| externalPostgresql.auth.database           | string | `"mychart"`                | Name of the database to use                                                                                            |
+| externalPostgresql.auth.existingSecret     | string | `""`                       | Name of existing secret to use for PostgreSQL credentials                                                              |
+| externalPostgresql.auth.password           | string | `"mychart"`                | Password to use                                                                                                        |
+| externalPostgresql.auth.userPasswordKey    | string | `""`                       | Key in the secret containing the password                                                                              |
+| externalPostgresql.auth.username           | string | `"mychart"`                | Name of the user to use                                                                                                |
+| externalPostgresql.hostname                | string | `""`                       | Hostname of the PostgreSQL database                                                                                    |
+| externalPostgresql.port                    | int    | `5432`                     | Port used to connect to PostgreSQL database                                                                            |
+| fullnameOverride                           | string | `""`                       | String to fully override `"headwind-mdm.fullname"`                                                                     |
+| headwind.adminEmail                        | string | `""`                       | Email of admin user                                                                                                    |
+| headwind.baseDomain                        | string | `""`                       | URL under which Headwind will be available                                                                             |
+| headwind.forceReconfigure                  | bool   | `false`                    | Subsequent starts of the container skip this step, but you can force the renewal of the configuration                  |
+| headwind.installLanguage                   | string | `"en"`                     | Available values: en, ru (en by default)                                                                               |
+| image.pullPolicy                           | string | `"Always"`                 | image pull policy                                                                                                      |
+| image.repository                           | string | `"headwindmdm/hmdm"`       | image repository                                                                                                       |
+| image.tag                                  | string | `"0.1.0"`                  | Overrides the image tag                                                                                                |
+| imagePullSecrets                           | list   | `[]`                       | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
+| ingress.annotations                        | object | `{}`                       |                                                                                                                        |
+| ingress.className                          | string | `""`                       |                                                                                                                        |
+| ingress.enabled                            | bool   | `false`                    |                                                                                                                        |
+| ingress.hosts[0].host                      | string | `"chart-example.local"`    |                                                                                                                        |
+| ingress.hosts[0].paths[0].path             | string | `"/"`                      |                                                                                                                        |
+| ingress.hosts[0].paths[0].pathType         | string | `"ImplementationSpecific"` |                                                                                                                        |
+| ingress.tls                                | list   | `[]`                       |                                                                                                                        |
+| nameOverride                               | string | `""`                       | Provide a name in place of `headwind-mdm`                                                                              |
+| nodeSelector                               | object | `{}`                       | Node labels for pod assignment                                                                                         |
+| persistence.accessModes[0]                 | string | `"ReadWriteOnce"`          |                                                                                                                        |
+| persistence.annotations                    | object | `{}`                       |                                                                                                                        |
+| persistence.enabled                        | bool   | `false`                    |                                                                                                                        |
+| persistence.existingClaim                  | string | `""`                       |                                                                                                                        |
+| persistence.size                           | string | `"10Gi"`                   |                                                                                                                        |
+| persistence.storageClass                   | string | `""`                       |                                                                                                                        |
+| podAnnotations                             | object | `{}`                       | Annotations to be added to exporter pods                                                                               |
+| podSecurityContext                         | object | `{}`                       | pod-level security context                                                                                             |
+| postgresql.auth.database                   | string | `"mychart"`                | Name for a custom database to create                                                                                   |
+| postgresql.auth.existingSecret             | string | `""`                       | Name of existing secret to use for PostgreSQL credentials                                                              |
+| postgresql.auth.password                   | string | `"mychart"`                | Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided                          |
+| postgresql.auth.username                   | string | `"mychart"`                | Name for a custom user to create                                                                                       |
+| postgresql.enabled                         | bool   | `true`                     | enable PostgreSQL™ subchart from Bitnami                                                                               |
+| replicaCount                               | int    | `1`                        | Number of replicas                                                                                                     |
+| resources                                  | object | `{}`                       | Resource limits and requests for the headwind pods.                                                                    |
+| securityContext                            | object | `{}`                       | container-level security context                                                                                       |
+| service.port                               | int    | `8080`                     | Kubernetes port where service is exposed                                                                               |
+| service.type                               | string | `"ClusterIP"`              | Kubernetes service type                                                                                                |
+| serviceAccount.annotations                 | object | `{}`                       | Annotations to add to the service account                                                                              |
+| serviceAccount.create                      | bool   | `true`                     | Specifies whether a service account should be created                                                                  |
+| serviceAccount.name                        | string | `""`                       | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| tolerations                                | list   | `[]`                       | Toleration labels for pod assignment                                                                                   |
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
+
+```console
+helm install my-release -f values.yaml christianknell/headwind-mdm
+```
+
+---
+
+Autogenerated from chart metadata using [helm-docs v1.11.0](https://github.com/norwoodj/helm-docs/releases/v1.11.0)
