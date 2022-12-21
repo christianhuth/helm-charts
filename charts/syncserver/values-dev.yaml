@@ -1,0 +1,13 @@
+syncserver:
+  config:
+    secret: "bla"
+  extraEnv:
+    - name: foo
+      value: bar
+  persistence:
+    enabled: true
+    resources:
+      limits:
+        storage: 20Gi
+      requests:
+        storage: 10Gi

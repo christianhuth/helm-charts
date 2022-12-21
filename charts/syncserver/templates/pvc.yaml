@@ -1,0 +1,25 @@
+---
+{{- if and (.Values.syncserver.persistence.enabled) (not .Values.syncserver.persistence.existingClaim) }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  {{- if .Values.syncserver.persistence.annotations }}
+  annotations:
+    {{- toYaml .Values.syncserver.persistence.annotations | nindent 4 }}
+  {{- end }}
+  name: {{ include "syncserver.fullname" . }}
+  labels:
+    {{- include "syncserver.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  {{- range .Values.syncserver.persistence.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+  {{- with .Values.syncserver.persistence.resources }}
+  resources:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- if .Values.syncserver.persistence.storageClass }}
+  storageClassName: {{ .Values.syncserver.persistence.storageClass | quote }}
+  {{- end }}
+{{- end }}

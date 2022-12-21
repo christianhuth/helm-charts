@@ -25,17 +25,45 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "syncserver.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: HTTPS_METHOD
+              value: "noredirect"
+            - name: PORT
+              value: "5000"
+            - name: SYNCSERVER_ALLOW_NEW_USER
+              value: {{ .Values.syncserver.config.allowNewUser }}
+            - name: SYNCSERVER_BATCH_UPLOAD_ENABLED
+              value: {{ .Values.syncserver.config.batchUploadEnabled }}
+            - name: SYNCSERVER_DEBUG_ENABLED
+              value: {{ .Values.syncserver.config.debugEnabled }}
+            - name: SYNCSERVER_FORCE_WSGI_ENVIRON
+              value: {{ .Values.syncserver.config.forceWsgiEnviron }}
+            - name: SYNCSERVER_PUBLIC_URL
+              value: {{ .Values.syncserver.config.publicUrl }}
+            - name: SYNCSERVER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  secretName: {{ include "syncserver.secretName" . }}
+                  key: syncserver-secret
+            - name: SYNCSERVER_SQLURI
+              value: {{ .Values.syncserver.config.sqlUri }}
+            {{- range .Values.syncserver.extraEnv }}
+            {{- if and (.name) (.value) }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 5000
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -45,8 +73,19 @@ spec:
             httpGet:
               path: /
               port: http
+          {{- with .Values.resources }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.syncserver.persistence.enabled }}
+          volumeMounts:
+          - name: data
+            mountPath: /data
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -58,4 +97,10 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.syncserver.persistence.enabled }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "syncserver.pvcName" . }}
       {{- end }}
