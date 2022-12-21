@@ -4,19 +4,20 @@ fullnameOverride: ""
 replicaCount: 1
 
 image:
-  repository: shlinkio/shlink
+  repository: shlinkio/shlink-web-client
   pullPolicy: Always
-  # Overrides the image tag
-  tag: "3.4.0"
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
 imagePullSecrets: []
 
-# see https://shlink.io/documentation/environment-variables/ for a complete list
-env:
-  - name: DEFAULT_DOMAIN
-    value: doma.in
-  - name: IS_HTTPS_ENABLED
-    value: "false"
+configuration: []
+  # - name: "Local"
+  #   url: "http://localhost:8080"
+  #   apiKey: "580d0b42-4dea-419a-96bf-6c876b901451"
+  # - name: "Main server"
+  #   url: "https://doma.in"
+  #   apiKey: "09c972b7-506b-49f1-a19a-d729e22e599c"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -59,35 +60,6 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-
-mariadb:
-  enabled: false
-  auth:
-    database: shlink
-    password: shlink
-    username: shlink
-
-mysql:
-  enabled: false
-  auth:
-    database: shlink
-    password: shlink
-    username: shlink
-
-postgresql:
-  enabled: false
-  auth:
-    database: shlink
-    password: shlink
-    username: shlink
-
-rabbitmq:
-  enabled: false
-
-redis:
-  enabled: false
-  auth:
-    enabled: false
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

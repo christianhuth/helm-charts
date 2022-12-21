@@ -60,14 +60,3 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
-
-{{/*
-Get the name of the secret containing the secret to secure the syncserver
-*/}}
-{{- define "syncserver.secretName" -}}
-  {{- if .Values.syncserver.config.existingSecret -}}
-    {{- printf "%s" (tpl .Values.syncserver.config.existingSecret $) -}}
-  {{- else -}}
-      {{- printf "%s" (include "syncserver.fullname" .) -}}
-  {{- end -}}
-{{- end -}}
