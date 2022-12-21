@@ -39,15 +39,15 @@ spec:
             - name: PORT
               value: "5000"
             - name: SYNCSERVER_ALLOW_NEW_USER
-              value: {{ .Values.syncserver.config.allowNewUser }}
+              value: {{ .Values.syncserver.config.allowNewUser | quote }}
             - name: SYNCSERVER_BATCH_UPLOAD_ENABLED
-              value: {{ .Values.syncserver.config.batchUploadEnabled }}
+              value: {{ .Values.syncserver.config.batchUploadEnabled | quote }}
             - name: SYNCSERVER_DEBUG_ENABLED
-              value: {{ .Values.syncserver.config.debugEnabled }}
+              value: {{ .Values.syncserver.config.debugEnabled | quote }}
             - name: SYNCSERVER_FORCE_WSGI_ENVIRON
-              value: {{ .Values.syncserver.config.forceWsgiEnviron }}
+              value: {{ .Values.syncserver.config.forceWsgiEnviron | quote }}
             - name: SYNCSERVER_PUBLIC_URL
-              value: {{ .Values.syncserver.config.publicUrl }}
+              value: {{ .Values.syncserver.config.publicUrl | quote }}
             - name: SYNCSERVER_SECRET
               valueFrom:
                 secretKeyRef:
