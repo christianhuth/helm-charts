@@ -36,6 +36,7 @@ shlink-web: charts/shlink-web/*
 skooner: charts/skooner/*
 sloop: charts/sloop/*
 syncserver: charts/syncserver/*
+syncstorage-rs: charts/syncstorage-rs/*
 talkyard: charts/talkyard/*
 typo3: charts/typo3/*
 umami: charts/umami/*
