@@ -51,7 +51,7 @@ spec:
             - name: SYNCSERVER_SECRET
               valueFrom:
                 secretKeyRef:
-                  secretName: {{ include "syncserver.secretName" . }}
+                  name: {{ include "syncserver.secretName" . }}
                   key: syncserver-secret
             - name: SYNCSERVER_SQLURI
               value: {{ .Values.syncserver.config.sqlUri }}
