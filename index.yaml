@@ -2809,6 +2809,25 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/sloop-0.0.1/sloop-0.0.1.tgz
     version: 0.0.1
+  syncserver:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2022-12-21T13:53:19.490124813Z"
+    description: Helm chart for Firefox Syncserver
+    digest: 0824d076ae51abb3946bfe9de3cbcc5d480017c8b504b545b87f724e1ee43fd1
+    home: https://github.com/christianknell/helm-charts
+    icon: https://think.unblog.ch/wp-content/uploads/2019/05/Firefox_Sync.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: syncserver
+    sources:
+    - https://hub.docker.com/r/mozilla/syncserver/
+    - https://github.com/mozilla-services/syncserver
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/syncserver-1.0.0/syncserver-1.0.0.tgz
+    version: 1.0.0
   typo3:
   - apiVersion: v2
     appVersion: "11.5"
@@ -3296,4 +3315,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-21T09:12:10.004131899Z"
+generated: "2022-12-21T13:53:19.490465914Z"
