@@ -100,7 +100,7 @@ syncserver:
     forceWsgiEnviron: false
     publicUrl: "http://localhost:5000"
     # -- Secret to secure the syncserver
-    secret: ""
+    secret: "super-strong-secret"
     sqlUri: "sqlite:////tmp/syncserver.db"
   # -- additional environment variables to be added to the syncserver pods
   extraEnv: []
