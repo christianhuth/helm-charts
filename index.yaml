@@ -2812,6 +2812,24 @@ entries:
   syncserver:
   - apiVersion: v2
     appVersion: latest
+    created: "2022-12-21T14:08:29.077366354Z"
+    description: Helm chart for Firefox Syncserver
+    digest: 99b37a796721bb55876d05dd3b20dce4eaf7930ff809a7587d763d256af5c017
+    home: https://github.com/christianknell/helm-charts
+    icon: https://think.unblog.ch/wp-content/uploads/2019/05/Firefox_Sync.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: syncserver
+    sources:
+    - https://hub.docker.com/r/mozilla/syncserver/
+    - https://github.com/mozilla-services/syncserver
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/syncserver-1.0.1/syncserver-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: latest
     created: "2022-12-21T13:53:19.490124813Z"
     description: Helm chart for Firefox Syncserver
     digest: 0824d076ae51abb3946bfe9de3cbcc5d480017c8b504b545b87f724e1ee43fd1
@@ -3315,4 +3333,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-21T13:53:19.490465914Z"
+generated: "2022-12-21T14:08:29.078034158Z"
