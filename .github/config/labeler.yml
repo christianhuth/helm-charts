@@ -26,6 +26,7 @@ netcupscp-exporter: charts/netcupscp-exporter/*
 passbolt-ha: charts/passbolt-ha/*
 polr: charts/polr/*
 popeye: charts/popeye/*
+priority-classes: charts/priority-classes/*
 promlens: charts/promlens/*
 prometheus-pve-exporter: charts/prometheus-pve-exporter/*
 proxysql: charts/proxysql/*
