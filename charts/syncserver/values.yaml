@@ -93,11 +93,11 @@ syncserver:
   config:
     # -- controls whether the server will accept requests from previously-unseen users
     allowNewUser: false
-    batchUploadEnabled: false
+    batchUploadEnabled: true
     debugEnabled: false
     # -- Name of an existing secret containing the syncserver secret under the key syncserver-secret
     existingSecret: ""
-    forceWsgiEnviron: false
+    forceWsgiEnviron: true
     publicUrl: "http://localhost:5000"
     # -- Secret to secure the syncserver
     secret: "super-strong-secret"
