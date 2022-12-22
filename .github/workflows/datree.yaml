@@ -28,4 +28,3 @@ jobs:
           path: 'charts'
           cliArguments: '--only-k8s-files'
           isHelmChart: true
-          helmArguments: '--values values.yaml'
