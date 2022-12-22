@@ -1,0 +1,29 @@
+on:
+  pull_request:
+    branches: [main]
+    paths: ["charts/**"]
+  push:
+    branches: [main]
+    paths: ["charts/**"]
+  workflow_dispatch:
+    
+env:
+  DATREE_TOKEN: ${{ secrets.DATREE_TOKEN }} 
+
+jobs:
+  k8sPolicyCheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+        
+      - name: Run Datree Policy Check
+        uses: datreeio/action-datree@main
+        with:
+          path: 'charts'
+          cliArguments: '--only-k8s-files'
+          isHelmChart: true
+          helmArguments: '--values values.yaml'
