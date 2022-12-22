@@ -22,44 +22,37 @@ jobs:
         with:
           fetch-depth: 0
         
-      - name: Run Datree Policy Check for k8s v1.20.0
-        uses: datreeio/action-datree@main
-        with:
-          path: 'charts'
-          cliArguments: '--only-k8s-files --policy helm_charts --schema-version 1.20.0'
-          isHelmChart: true
-        
       - name: Run Datree Policy Check for k8s v1.21.0
         uses: datreeio/action-datree@main
         with:
           path: 'charts'
-          cliArguments: '--only-k8s-files --policy helm_charts --schema-version 1.21.0'
+          cliArguments: '--only-k8s-files --policy-config .github/config/datree.yaml --schema-version 1.21.0'
           isHelmChart: true
         
       - name: Run Datree Policy Check for k8s v1.22.0
         uses: datreeio/action-datree@main
         with:
           path: 'charts'
-          cliArguments: '--only-k8s-files --policy helm_charts --schema-version 1.22.0'
+          cliArguments: '--only-k8s-files --policy-config .github/config/datree.yaml --schema-version 1.22.0'
           isHelmChart: true
         
       - name: Run Datree Policy Check for k8s v1.23.0
         uses: datreeio/action-datree@main
         with:
           path: 'charts'
-          cliArguments: '--only-k8s-files --policy helm_charts --schema-version 1.23.0'
+          cliArguments: '--only-k8s-files --policy-config .github/config/datree.yaml --schema-version 1.23.0'
           isHelmChart: true
         
       - name: Run Datree Policy Check for k8s v1.24.0
         uses: datreeio/action-datree@main
         with:
           path: 'charts'
-          cliArguments: '--only-k8s-files --policy helm_charts --schema-version 1.24.0'
+          cliArguments: '--only-k8s-files --policy-config .github/config/datree.yaml --schema-version 1.24.0'
           isHelmChart: true
         
       - name: Run Datree Policy Check for k8s v1.25.0
         uses: datreeio/action-datree@main
         with:
           path: 'charts'
-          cliArguments: '--only-k8s-files --policy helm_charts --schema-version 1.25.0'
+          cliArguments: '--only-k8s-files --policy-config .github/config/datree.yaml --schema-version 1.25.0'
           isHelmChart: true
