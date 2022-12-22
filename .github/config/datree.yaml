@@ -26,8 +26,8 @@ policies:
         messageOnFailure: Missing property object `minReplicas` - the value should be within the accepted boundaries recommended by the organization
       # - identifier: HPA_MISSING_MAXREPLICAS_KEY
       #   messageOnFailure: Missing property object `maxReplicas` - the value should be within the accepted boundaries recommended by the organization
-      - identifier: WORKLOAD_INCORRECT_NAMESPACE_VALUE_DEFAULT
-        messageOnFailure: Incorrect value for key `namespace` - use an explicit namespace instead of the default one (`default`)
+      # - identifier: WORKLOAD_INCORRECT_NAMESPACE_VALUE_DEFAULT
+      #   messageOnFailure: Incorrect value for key `namespace` - use an explicit namespace instead of the default one (`default`)
       # - identifier: DEPLOYMENT_INCORRECT_REPLICAS_VALUE
       #   messageOnFailure: Incorrect value for key `replicas` - running 2 or more replicas will increase the availability of the service
       - identifier: CRONJOB_MISSING_STARTINGDEADLINESECOND_KEY
