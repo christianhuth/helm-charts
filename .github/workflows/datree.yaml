@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  DATREE_TOKEN: ${{ secrets.DATREE_TOKEN }} 
+  DATREE_TOKEN: ${{ secrets.DATREE_TOKEN }}
 
 jobs:
   k8sPolicyCheck:

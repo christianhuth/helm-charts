@@ -162,4 +162,3 @@ policies:
       #   messageOnFailure: Missing property object `requests.cpu` - value should be within the accepted boundaries recommended by the organization
       # - identifier: CONTAINERS_MISSING_CPU_LIMIT_KEY
       #   messageOnFailure: Missing property object `limits.cpu` - value should be within the accepted boundaries recommended by the organization
-

@@ -129,11 +129,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /api/v2/health
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /api/v2/health
               port: http
           {{- with .Values.resources }}
           resources:
