@@ -1,4 +1,4 @@
-name: "Check Helm charts against K8s policies with Datree"
+name: "Datree Policy Checks"
 
 on:
   pull_request:
