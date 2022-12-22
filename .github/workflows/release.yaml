@@ -3,9 +3,9 @@ name: Release Helm Charts
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Chart-Testing"]
-    branches: [main]
-    types: [completed]
+    workflows: ["Chart-Testing", "Datree Policy Checks"]
+    branches: ["main"]
+    types: ["completed"]
 
 jobs:
   release2github:
