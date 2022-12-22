@@ -1,3 +1,5 @@
+name: "Check Helm charts against K8s policies with Datree"
+
 on:
   pull_request:
     branches: [main]
