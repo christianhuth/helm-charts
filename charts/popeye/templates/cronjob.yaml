@@ -8,12 +8,14 @@ metadata:
 spec:
   schedule: "{{ .Values.cronJob.schedule }}"
   concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 30
   failedJobsHistoryLimit: {{ .Values.cronJob.history.failedJobsHistoryLimit }}
   successfulJobsHistoryLimit: {{ .Values.cronJob.history.successfulJobsHistoryLimit }}
   jobTemplate:
     metadata:
       labels:
         {{- include "popeye.labels" . | nindent 8 }}
+      namespace: {{ .Release.Namespace }}
     spec:
       template:
         spec:
