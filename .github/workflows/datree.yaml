@@ -13,7 +13,7 @@ env:
   DATREE_TOKEN: ${{ secrets.DATREE_TOKEN }}
 
 jobs:
-  k8sPolicyCheck:
+  datree:
     runs-on: ubuntu-latest
 
     steps:
