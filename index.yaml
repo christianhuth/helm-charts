@@ -3,6 +3,31 @@ entries:
   headwind-mdm:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2022-12-28T09:25:49.361931102Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.6
+    description: Headwind MDM - an open source mobile device management software for
+      Android
+    digest: bd57071b047abbe5e7f736cfc4b71c40071fb903080cfcea8a20fb0c8f1a32bd
+    home: https://github.com/christianknell/helm-charts
+    icon: https://h-mdm.com/wp-content/uploads/2019/07/neew-logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: headwind-mdm
+    sources:
+    - https://github.com/h-mdm/hmdm-docker
+    - https://github.com/h-mdm
+    - https://hub.docker.com/r/headwindmdm/hmdm
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/headwind-mdm-1.0.2/headwind-mdm-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2022-12-20T13:49:37.043000856Z"
     dependencies:
     - condition: postgresql.enabled
@@ -3552,4 +3577,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-28T09:13:17.120723272Z"
+generated: "2022-12-28T09:25:49.362131903Z"
