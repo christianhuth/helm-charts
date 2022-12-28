@@ -1810,6 +1810,24 @@ entries:
   prometheus-pve-exporter:
   - apiVersion: v2
     appVersion: 2.2.4
+    created: "2022-12-28T14:32:39.201633382Z"
+    description: A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor
+      to collect metrics.
+    digest: 0c3512e27fa75b8e65447deddcc6496b545ec4ff8ddccdbaf056ff9d1eda7a71
+    home: https://github.com/christianknell/helm-charts
+    icon: https://camo.githubusercontent.com/2df2ac41e1b8a1484be236c75e395981b31bfd670eff46b5c182ea0be9475310/68747470733a2f2f7777772e70726f786d6f782e636f6d2f696d616765732f70726f786d6f782f50726f786d6f785f73796d626f6c5f7374616e646172645f6865782e706e67
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: prometheus-pve-exporter
+    sources:
+    - https://github.com/prometheus-pve/prometheus-pve-exporter
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/prometheus-pve-exporter-1.1.0/prometheus-pve-exporter-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 2.2.4
     created: "2022-11-21T16:45:20.776186013Z"
     description: A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor
       to collect metrics.
@@ -3879,4 +3897,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-28T14:30:14.164869306Z"
+generated: "2022-12-28T14:32:39.20215219Z"
