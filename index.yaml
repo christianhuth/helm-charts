@@ -1938,6 +1938,24 @@ entries:
     version: 1.0.0
   proxysql:
   - apiVersion: v2
+    appVersion: 2.4.5
+    created: "2022-12-28T15:30:42.153732233Z"
+    description: A proxysql Helm chart for Kubernetes. Offers option to expose web
+      interface through Ingress. Uses ServiceMonitor to collect metrics.
+    digest: e295fd27ea95c6b523f020b7468a1ce0ed5d1ef89edbcac5912de5b95c7e2322
+    home: https://github.com/christianknell/helm-charts
+    icon: https://proxysql.com/wp-content/uploads/2019/11/ProxySQL-BIG-e1581368792603.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: proxysql
+    sources:
+    - https://github.com/sysown/proxysql
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/proxysql-1.0.3/proxysql-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
     appVersion: 2.4.2
     created: "2022-12-28T14:10:22.398989899Z"
     description: A proxysql Helm chart for Kubernetes. Offers option to expose web
@@ -3914,4 +3932,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-28T15:26:18.349485917Z"
+generated: "2022-12-28T15:30:42.153996637Z"
