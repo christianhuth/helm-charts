@@ -23,6 +23,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
       serviceAccountName: {{ include "kube-ops-view.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
