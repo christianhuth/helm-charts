@@ -93,6 +93,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | postgresql.enabled                         | bool   | `true`                     | enable PostgreSQL™ subchart from Bitnami                                                                               |
 | replicaCount                               | int    | `1`                        | Number of replicas                                                                                                     |
 | resources                                  | object | `{}`                       | Resource limits and requests for the headwind pods.                                                                    |
+| revisionHistoryLimit                       | int    | `10`                       | The number of old ReplicaSets to retain                                                                                |
 | securityContext                            | object | `{}`                       | container-level security context                                                                                       |
 | service.port                               | int    | `8080`                     | Kubernetes port where service is exposed                                                                               |
 | service.type                               | string | `"ClusterIP"`              | Kubernetes service type                                                                                                |

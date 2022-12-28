@@ -24,6 +24,9 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .Values.revisionHistoryLimit }}
+      revisionHistoryLimit: {{ . }}
+      {{- end }}
       serviceAccountName: {{ include "headwind-mdm.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
