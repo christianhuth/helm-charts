@@ -2,8 +2,6 @@
 
 A ReactJS-based progressive web application for Shlink.
 
-![Version: 0.0.2](https://img.shields.io/badge/Version-0.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.7.1](https://img.shields.io/badge/AppVersion-3.7.1-informational?style=flat-square)
-
 ## TL;DR;
 
 ```console
@@ -57,7 +55,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride                           | string | `""`                           | String to fully override `"shlink-web.fullname"`                                                                       |
 | image.pullPolicy                           | string | `"Always"`                     | image pull policy                                                                                                      |
 | image.repository                           | string | `"shlinkio/shlink-web-client"` | image repository                                                                                                       |
-| image.tag                                  | string | `"3.7.1"`                      | Overrides the image tag                                                                                                |
+| image.tag                                  | string | `"3.8.2"`                      | Overrides the image tag                                                                                                |
 | imagePullSecrets                           | list   | `[]`                           | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
 | ingress.annotations                        | object | `{}`                           |                                                                                                                        |
 | ingress.className                          | string | `""`                           |                                                                                                                        |

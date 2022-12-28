@@ -2,8 +2,8 @@ apiVersion: v2
 name: shlink-web
 description: A  ReactJS-based progressive web application for Shlink.
 type: application
-version: 0.0.2
-appVersion: "3.7.1"
+version: 0.1.0
+appVersion: "3.8.2"
 home: https://github.com/christianknell/helm-charts
 icon: https://shlink.io/images/shlink-logo-blue.svg
 maintainers:
