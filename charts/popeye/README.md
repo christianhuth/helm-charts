@@ -44,32 +44,35 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Values
 
-| Key                                        | Type   | Default             | Description |
-| ------------------------------------------ | ------ | ------------------- | ----------- |
-| affinity                                   | object | `{}`                |             |
-| cronJob.clusterName                        | string | `""`                |             |
-| cronJob.history.failedJobsHistoryLimit     | int    | `1`                 |             |
-| cronJob.history.successfulJobsHistoryLimit | int    | `1`                 |             |
-| cronJob.outputFormat                       | string | `"standard"`        |             |
-| cronJob.prometheus.pushgatewayAddress      | string | `""`                |             |
-| cronJob.schedule                           | string | `"* */1 * * *"`     |             |
-| cronJob.spinachConfiguration               | string | `nil`               |             |
-| fullnameOverride                           | string | `""`                |             |
-| image.pullPolicy                           | string | `"Always"`          |             |
-| image.repository                           | string | `"derailed/popeye"` |             |
-| image.tag                                  | string | `"v0.10.1"`         |             |
-| imagePullSecrets                           | list   | `[]`                |             |
-| nameOverride                               | string | `""`                |             |
-| nodeSelector                               | object | `{}`                |             |
-| podAnnotations                             | object | `{}`                |             |
-| podSecurityContext                         | object | `{}`                |             |
-| resources.limits.cpu                       | string | `"500m"`            |             |
-| resources.limits.memory                    | string | `"100Mi"`           |             |
-| securityContext                            | object | `{}`                |             |
-| serviceAccount.annotations                 | object | `{}`                |             |
-| serviceAccount.create                      | bool   | `true`              |             |
-| serviceAccount.name                        | string | `""`                |             |
-| tolerations                                | list   | `[]`                |             |
+| Key                                         | Type   | Default                                      | Description                                                                                                                     |
+| ------------------------------------------- | ------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| affinity                                    | object | `{}`                                         | Affinity settings for pod assignment                                                                                            |
+| cronJob.clusterName                         | string | `""`                                         |                                                                                                                                 |
+| cronJob.history.failedJobsHistoryLimit      | int    | `1`                                          |                                                                                                                                 |
+| cronJob.history.successfulJobsHistoryLimit  | int    | `1`                                          |                                                                                                                                 |
+| cronJob.outputFormat                        | string | `"standard"`                                 |                                                                                                                                 |
+| cronJob.prometheus.basicAuth.enabled        | bool   | `false`                                      | Use authentication against Prometheus Pushgateway                                                                               |
+| cronJob.prometheus.basicAuth.existingSecret | string | `""`                                         | Name of existing secret to use for authentication against Prometheus Pushgateway, needs to contain the key pushgateway-password |
+| cronJob.prometheus.basicAuth.password       | string | `""`                                         | Password for authentication against Prometheus Pushgateway                                                                      |
+| cronJob.prometheus.basicAuth.user           | string | `""`                                         | Username for authentication against Prometheus Pushgateway                                                                      |
+| cronJob.prometheus.pushgatewayAddress       | string | `""`                                         |                                                                                                                                 |
+| cronJob.schedule                            | string | `"* */1 * * *"`                              |                                                                                                                                 |
+| cronJob.spinachConfiguration                | string | `nil`                                        |                                                                                                                                 |
+| fullnameOverride                            | string | `""`                                         | String to fully override `"popeye.fullname"`                                                                                    |
+| image.pullPolicy                            | string | `"Always"`                                   | image pull policy                                                                                                               |
+| image.repository                            | string | `"derailed/popeye"`                          | image repository                                                                                                                |
+| image.tag                                   | string | `"v0.10.1"`                                  | Overrides the image tag                                                                                                         |
+| imagePullSecrets                            | list   | `[]`                                         | If defined, uses a Secret to pull an image from a private Docker registry or repository.                                        |
+| nameOverride                                | string | `""`                                         | Provide a name in place of `popeye`                                                                                             |
+| nodeSelector                                | object | `{}`                                         | Node labels for pod assignment                                                                                                  |
+| podAnnotations                              | object | `{}`                                         | Annotations to be added to exporter pods                                                                                        |
+| podSecurityContext                          | object | `{}`                                         | pod-level security context                                                                                                      |
+| resources                                   | object | `{"limits":{"cpu":"500m","memory":"100Mi"}}` | Resource limits and requests for the headwind pods.                                                                             |
+| securityContext                             | object | `{}`                                         | container-level security context                                                                                                |
+| serviceAccount.annotations                  | object | `{}`                                         | Annotations to add to the service account                                                                                       |
+| serviceAccount.create                       | bool   | `true`                                       | Specifies whether a service account should be created                                                                           |
+| serviceAccount.name                         | string | `""`                                         | The name of the service account to use. If not set and create is true, a name is generated using the fullname template          |
+| tolerations                                 | list   | `[]`                                         | Toleration labels for pod assignment                                                                                            |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 
