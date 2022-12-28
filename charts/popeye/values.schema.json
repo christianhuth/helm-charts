@@ -28,6 +28,23 @@
                 "prometheus": {
                     "type": "object",
                     "properties": {
+                        "basicAuth": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "existingSecret": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "user": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "pushgatewayAddress": {
                             "type": "string"
                         }

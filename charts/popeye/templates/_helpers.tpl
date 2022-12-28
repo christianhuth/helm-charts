@@ -60,3 +60,14 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Get the name of the secret containing the password for authentication against Prometheus Pushgateway
+*/}}
+{{- define "popeye.prometheus.secretName" -}}
+  {{- if .Values.cronJob.prometheus.basicAuth.existingSecret -}}
+    {{- printf "%s" (tpl .Values.cronJob.prometheus.basicAuth.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "popeye.fullname" .) -}}
+  {{- end -}}
+{{- end -}}
