@@ -44,57 +44,58 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Values
 
-| Key                                        | Type   | Default                    | Description |
-| ------------------------------------------ | ------ | -------------------------- | ----------- |
-| affinity                                   | object | `{}`                       |             |
-| autoscaling.enabled                        | bool   | `false`                    |             |
-| autoscaling.maxReplicas                    | int    | `100`                      |             |
-| autoscaling.minReplicas                    | int    | `1`                        |             |
-| autoscaling.targetCPUUtilizationPercentage | int    | `80`                       |             |
-| env[0].name                                | string | `"DEFAULT_DOMAIN"`         |             |
-| env[0].value                               | string | `"doma.in"`                |             |
-| env[1].name                                | string | `"IS_HTTPS_ENABLED"`       |             |
-| env[1].value                               | string | `"false"`                  |             |
-| fullnameOverride                           | string | `""`                       |             |
-| image.pullPolicy                           | string | `"Always"`                 |             |
-| image.repository                           | string | `"shlinkio/shlink"`        |             |
-| image.tag                                  | string | `"3.4.0"`                  |             |
-| imagePullSecrets                           | list   | `[]`                       |             |
-| ingress.annotations                        | object | `{}`                       |             |
-| ingress.className                          | string | `""`                       |             |
-| ingress.enabled                            | bool   | `false`                    |             |
-| ingress.hosts[0].host                      | string | `"chart-example.local"`    |             |
-| ingress.hosts[0].paths[0].path             | string | `"/"`                      |             |
-| ingress.hosts[0].paths[0].pathType         | string | `"ImplementationSpecific"` |             |
-| ingress.tls                                | list   | `[]`                       |             |
-| mariadb.auth.database                      | string | `"shlink"`                 |             |
-| mariadb.auth.password                      | string | `"shlink"`                 |             |
-| mariadb.auth.username                      | string | `"shlink"`                 |             |
-| mariadb.enabled                            | bool   | `false`                    |             |
-| mysql.auth.database                        | string | `"shlink"`                 |             |
-| mysql.auth.password                        | string | `"shlink"`                 |             |
-| mysql.auth.username                        | string | `"shlink"`                 |             |
-| mysql.enabled                              | bool   | `false`                    |             |
-| nameOverride                               | string | `""`                       |             |
-| nodeSelector                               | object | `{}`                       |             |
-| podAnnotations                             | object | `{}`                       |             |
-| podSecurityContext                         | object | `{}`                       |             |
-| postgresql.auth.database                   | string | `"shlink"`                 |             |
-| postgresql.auth.password                   | string | `"shlink"`                 |             |
-| postgresql.auth.username                   | string | `"shlink"`                 |             |
-| postgresql.enabled                         | bool   | `false`                    |             |
-| rabbitmq.enabled                           | bool   | `false`                    |             |
-| redis.auth.enabled                         | bool   | `false`                    |             |
-| redis.enabled                              | bool   | `false`                    |             |
-| replicaCount                               | int    | `1`                        |             |
-| resources                                  | object | `{}`                       |             |
-| securityContext                            | object | `{}`                       |             |
-| service.port                               | int    | `80`                       |             |
-| service.type                               | string | `"ClusterIP"`              |             |
-| serviceAccount.annotations                 | object | `{}`                       |             |
-| serviceAccount.create                      | bool   | `true`                     |             |
-| serviceAccount.name                        | string | `""`                       |             |
-| tolerations                                | list   | `[]`                       |             |
+| Key                                        | Type   | Default                    | Description                                                                                                            |
+| ------------------------------------------ | ------ | -------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| affinity                                   | object | `{}`                       | Affinity settings for pod assignment                                                                                   |
+| autoscaling.enabled                        | bool   | `false`                    |                                                                                                                        |
+| autoscaling.maxReplicas                    | int    | `100`                      |                                                                                                                        |
+| autoscaling.minReplicas                    | int    | `1`                        |                                                                                                                        |
+| autoscaling.targetCPUUtilizationPercentage | int    | `80`                       |                                                                                                                        |
+| env[0].name                                | string | `"DEFAULT_DOMAIN"`         |                                                                                                                        |
+| env[0].value                               | string | `"doma.in"`                |                                                                                                                        |
+| env[1].name                                | string | `"IS_HTTPS_ENABLED"`       |                                                                                                                        |
+| env[1].value                               | string | `"false"`                  |                                                                                                                        |
+| fullnameOverride                           | string | `""`                       | String to fully override `"shlink-backend.fullname"`                                                                   |
+| image.pullPolicy                           | string | `"Always"`                 | image pull policy                                                                                                      |
+| image.repository                           | string | `"shlinkio/shlink"`        | image repository                                                                                                       |
+| image.tag                                  | string | `"3.4.0"`                  | Overrides the image tag                                                                                                |
+| imagePullSecrets                           | list   | `[]`                       | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
+| ingress.annotations                        | object | `{}`                       |                                                                                                                        |
+| ingress.className                          | string | `""`                       |                                                                                                                        |
+| ingress.enabled                            | bool   | `false`                    |                                                                                                                        |
+| ingress.hosts[0].host                      | string | `"chart-example.local"`    |                                                                                                                        |
+| ingress.hosts[0].paths[0].path             | string | `"/"`                      |                                                                                                                        |
+| ingress.hosts[0].paths[0].pathType         | string | `"ImplementationSpecific"` |                                                                                                                        |
+| ingress.tls                                | list   | `[]`                       |                                                                                                                        |
+| mariadb.auth.database                      | string | `"shlink"`                 |                                                                                                                        |
+| mariadb.auth.password                      | string | `"shlink"`                 |                                                                                                                        |
+| mariadb.auth.username                      | string | `"shlink"`                 |                                                                                                                        |
+| mariadb.enabled                            | bool   | `false`                    |                                                                                                                        |
+| mysql.auth.database                        | string | `"shlink"`                 |                                                                                                                        |
+| mysql.auth.password                        | string | `"shlink"`                 |                                                                                                                        |
+| mysql.auth.username                        | string | `"shlink"`                 |                                                                                                                        |
+| mysql.enabled                              | bool   | `false`                    |                                                                                                                        |
+| nameOverride                               | string | `""`                       | Provide a name in place of `shlink-backend`                                                                            |
+| nodeSelector                               | object | `{}`                       | Node labels for pod assignment                                                                                         |
+| podAnnotations                             | object | `{}`                       | Annotations to be added to exporter pods                                                                               |
+| podSecurityContext                         | object | `{}`                       | pod-level security context                                                                                             |
+| postgresql.auth.database                   | string | `"shlink"`                 |                                                                                                                        |
+| postgresql.auth.password                   | string | `"shlink"`                 |                                                                                                                        |
+| postgresql.auth.username                   | string | `"shlink"`                 |                                                                                                                        |
+| postgresql.enabled                         | bool   | `false`                    |                                                                                                                        |
+| rabbitmq.enabled                           | bool   | `false`                    |                                                                                                                        |
+| redis.auth.enabled                         | bool   | `false`                    |                                                                                                                        |
+| redis.enabled                              | bool   | `false`                    |                                                                                                                        |
+| replicaCount                               | int    | `1`                        | Number of replicas                                                                                                     |
+| resources                                  | object | `{}`                       | Resource limits and requests for the headwind pods.                                                                    |
+| revisionHistoryLimit                       | int    | `10`                       | The number of old ReplicaSets to retain                                                                                |
+| securityContext                            | object | `{}`                       | container-level security context                                                                                       |
+| service.port                               | int    | `80`                       | Kubernetes port where service is exposed                                                                               |
+| service.type                               | string | `"ClusterIP"`              | Kubernetes service type                                                                                                |
+| serviceAccount.annotations                 | object | `{}`                       | Annotations to add to the service account                                                                              |
+| serviceAccount.create                      | bool   | `true`                     | Specifies whether a service account should be created                                                                  |
+| serviceAccount.name                        | string | `""`                       | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| tolerations                                | list   | `[]`                       | Toleration labels for pod assignment                                                                                   |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 

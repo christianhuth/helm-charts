@@ -206,6 +206,9 @@
         "resources": {
             "type": "object"
         },
+        "revisionHistoryLimit": {
+            "type": "integer"
+        },
         "securityContext": {
             "type": "object"
         },
