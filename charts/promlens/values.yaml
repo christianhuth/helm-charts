@@ -3,9 +3,6 @@ nameOverride: ""
 # -- String to fully override `"promlens.fullname"`
 fullnameOverride: ""
 
-# -- Number of replicas
-replicaCount: 1
-
 image:
   # -- image repository
   repository: prom/promlens
@@ -16,6 +13,12 @@ image:
 
 # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
 imagePullSecrets: []
+
+# -- Number of replicas
+replicaCount: 1
+
+# -- The number of old ReplicaSets to retain
+revisionHistoryLimit: 10
 
 serviceAccount:
   # -- Specifies whether a service account should be created
