@@ -2,7 +2,7 @@ apiVersion: v2
 name: sloop
 description: Kubernetes History Visualization
 type: application
-version: 0.0.1
+version: 0.0.2
 appVersion: "sha-2ce8bbe"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
