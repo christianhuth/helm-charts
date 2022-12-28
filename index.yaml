@@ -1919,6 +1919,22 @@ entries:
   proxyweb:
   - apiVersion: v2
     appVersion: latest
+    created: "2022-12-28T14:04:52.476537436Z"
+    description: A Helm chart for Kubernetes
+    digest: 53572d7f270e923edbdf5873eb33a621b35326072820f9206502cb44992f323c
+    home: https://github.com/christianknell/helm-charts
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: proxyweb
+    sources:
+    - https://github.com/edmodo/proxyweb/
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/proxyweb-0.0.2/proxyweb-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: latest
     created: "2022-08-02T07:51:23.101144613Z"
     description: A Helm chart for Kubernetes
     digest: b550bd99d1c5d700dda88a54cbf5db2336aa4174f9ad615ed78575e72e6715c3
@@ -3769,4 +3785,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-28T14:02:16.126600648Z"
+generated: "2022-12-28T14:04:52.476756544Z"
