@@ -1826,6 +1826,25 @@ entries:
   promlens:
   - apiVersion: v2
     appVersion: v0.3.0
+    created: "2022-12-28T14:16:38.416262288Z"
+    description: PromLens is a tool that makes learning and using PromQL easier and
+      more productive
+    digest: 42b54a9324589c910cd5c80deb98cb626d0fddd4fb43f669464a6b12b76ab069
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: promlens
+    sources:
+    - https://github.com/prometheus/promlens
+    - https://hub.docker.com/r/prom/promlens
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/promlens-1.0.1/promlens-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: v0.3.0
     created: "2022-12-12T10:09:01.366482279Z"
     description: PromLens is a tool that makes learning and using PromQL easier and
       more productive
@@ -3803,4 +3822,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-28T14:10:22.399414209Z"
+generated: "2022-12-28T14:16:38.416608589Z"
