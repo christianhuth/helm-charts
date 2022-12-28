@@ -27,8 +27,11 @@ args: []
 # -- Number of replicas
 replicaCount: 1
 
+# -- The number of old ReplicaSets to retain
+revisionHistoryLimit: 10
+
 # -- Annotations to be added to exporter pods
-podAnnotations: {} # +doc-gen:ignore
+podAnnotations: {}
 
 # -- container-level security context
 securityContext:
