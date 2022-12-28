@@ -24,6 +24,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
       serviceAccountName: {{ include "kutt.serviceAccountName" . }}
       {{- with .Values.podSecurityContext }}
       securityContext:
