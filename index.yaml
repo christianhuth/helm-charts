@@ -3269,6 +3269,24 @@ entries:
     version: 0.0.1
   shlink-web:
   - apiVersion: v2
+    appVersion: 3.9.1
+    created: "2023-01-01T12:35:19.74217852Z"
+    description: A  ReactJS-based progressive web application for Shlink.
+    digest: 659e67795955710f02dc51b7d4d7444892e26d50466e332646f3c76c99750487
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-web
+    sources:
+    - https://github.com/shlinkio/shlink-web-client
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-web-0.2.0/shlink-web-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     appVersion: 3.8.2
     created: "2022-12-28T23:25:27.17914246Z"
     description: A  ReactJS-based progressive web application for Shlink.
@@ -3978,4 +3996,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2022-12-28T23:25:27.179445361Z"
+generated: "2023-01-01T12:35:19.742520521Z"
