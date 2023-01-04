@@ -1,0 +1,173 @@
+# -- Provide a name in place of `umami`
+nameOverride: ""
+
+# -- String to fully override `"umami.fullname"`
+fullnameOverride: ""
+
+image:
+  # -- image registry
+  registry: ghcr.io
+  # -- image repository
+  repository: umami-software/umami
+  # -- image pull policy
+  pullPolicy: Always
+  # -- Overrides the image tag
+  tag: "postgresql-v1.39.5"
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+# -- Annotations to be added to pods
+podAnnotations: {}
+
+# -- pod-level security context
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# -- Number of replicas
+replicaCount: 1
+
+# -- Resource limits and requests for the controller pods.
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# -- container-level security context
+securityContext:
+  runAsGroup: 65533
+  runAsNonRoot: true
+  runAsUser: 1001
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+service:
+  # -- Kubernetes service type
+  type: ClusterIP
+  # -- Kubernetes port where service is exposed
+  port: 3000
+
+ingress:
+  # -- Enable ingress record generation
+  enabled: false
+  # -- IngressClass that will be be used to implement the Ingress
+  className: ""
+  # -- Additional annotations for the Ingress resource
+  annotations: {}
+    # cert-manager.io/cluster-issuer: cluster-issuer-name
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  # -- An array with hosts and paths
+  # @default -- see [values.yaml](./values.yaml)
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  # -- An array with the tls configuration
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+autoscaling:
+  # -- Enable Horizontal POD autoscaling
+  enabled: false
+  # -- Minimum number of replicas
+  minReplicas: 1
+  # -- Maximum number of replicas
+  maxReplicas: 100
+  # -- Target CPU utilization percentage
+  targetCPUUtilizationPercentage: 80
+  # -- Target Memory utilization percentage
+  targetMemoryUtilizationPercentage: 80
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Toleration labels for pod assignment
+tolerations: []
+
+# -- Affinity settings for pod assignment
+affinity: {}
+
+# -- additional environment variables to be added to the pods. See https://umami.is/docs/environment-variables for a complete list of available variables. Most variables can be set under umami as well.
+extraEnv: []
+
+umami:
+  # -- HTTP header to check for the client's IP address. This is useful when you're behind a proxy that uses non-standard headers.
+  clientIpHeader: ""
+  # -- Allows you to send metrics to a location different than the default /api/collect. This is to help you avoid some ad-blockers.
+  collectApiEndpoint: ""
+  # -- Disables the login page for the application
+  disableLogin: "1"
+  # -- Umami collects completely anonymous telemetry data in order help improve the application. You can choose to disable this if you don't want to participate.
+  disableTelemetry: "1"
+  # -- Disables the check for new versions of Umami
+  disableUpdates: "1"
+  # -- This will redirect all requests from http to https in the Umami application. Note, this does not apply to the tracking script.
+  forceSSL: "1"
+  hash:
+    # -- Name of an existing secret containing the hash salt under the key hash-salt
+    existingSecret: ""
+    # -- A random string used to generate unique values.
+    salt: ""
+  # -- hostname under which Umami will be reached
+  hostname: ""
+  # -- You can provide a comma-delimited list of IP address to exclude from data collection.
+  ignoredIpAddresses: ""
+  # -- Removes the trailing slash from all incoming urls.
+  removeTrailingSlash: "1"
+  # -- Allows you to assign a custom name to the tracker script different from the default umami. This is to help you avoid some ad-blockers.
+  trackerScriptName: "umami"
+
+postgresql:
+  # -- enable PostgreSQL™ subchart from Bitnami
+  enabled: true
+  auth:
+    # -- Name for a custom database to create
+    database: mychart
+    # -- Password for the custom user to create
+    password: mychart
+    # -- Name for a custom user to create
+    username: mychart
+
+mysql:
+  # -- enable MySQL™ subchart from Bitnami
+  enabled: false
+  auth:
+    # -- Name for a custom database to create
+    database: mychart
+    # -- Password for the custom user to create
+    password: mychart
+    # -- Name for a custom user to create
+    username: mychart
+
+externalDatabase:
+  auth:
+    # -- Name of the database to use
+    database: mychart
+    # -- Password to use
+    password: mychart
+    # -- Name of the user to use
+    username: mychart
+  # -- Hostname of the database
+  hostname: ""
+  # -- Port used to connect to database
+  port: 5432
+  # -- Type of database
+  type: postgresql
