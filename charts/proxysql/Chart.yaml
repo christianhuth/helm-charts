@@ -2,7 +2,7 @@ apiVersion: v2
 name: proxysql
 description: A proxysql Helm chart for Kubernetes. Offers option to expose web interface through Ingress. Uses ServiceMonitor to collect metrics.
 type: application
-version: 1.0.3
+version: 1.0.4
 appVersion: "2.4.5"
 home: https://github.com/christianknell/helm-charts
 icon: https://proxysql.com/wp-content/uploads/2019/11/ProxySQL-BIG-e1581368792603.png
