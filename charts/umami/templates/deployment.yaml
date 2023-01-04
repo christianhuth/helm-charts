@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "umami.fullname" . }}
+  labels:
+    {{- include "umami.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "umami.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "umami.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "umami.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            # Database Settings
+            - name: DATABASE_URL
+              value: '{{ include "umami.database.type" . }}://{{ include "umami.database.username" . }}:{{ include "umami.database.password" . }}@{{ include "umami.database.hostname" . }}:{{ include "umami.database.port" . }}/{{ include "umami.database.database" . }}'
+            # Umami Settings
+            {{- if .Values.umami.clientIpHeader }}
+            - name: CLIENT_IP_HEADER
+              value: {{ .Values.umami.clientIpHeader | quote }}
+            {{- end }}
+            {{- if .Values.umami.collectApiEndpoint }}
+            - name: COLLECT_API_ENDPOINT
+              value: {{ .Values.umami.collectApiEndpoint | quote }}
+            {{- end }}
+            - name: DISABLE_LOGIN
+              value: {{ .Values.umami.disableLogin | quote }}
+            - name: DISABLE_TELEMETRY
+              value: {{ .Values.umami.disableTelemetry | quote }}
+            - name: DISABLE_UPDATES
+              value: {{ .Values.umami.disableUpdates | quote }}
+            - name: FORCE_SSL
+              value: {{ .Values.umami.forceSSL | quote }}
+            - name: HASH_SALT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "umami.hash.secretName" . | quote }}
+                  key: hash-salt
+            {{- if .Values.umami.hostname }}
+            - name: HOSTNAME
+              value: {{ .Values.umami.hostname | quote }}
+            {{- end }}
+            {{- if .Values.umami.ignoredIpAddresses }}
+            - name: IGNORE_IP
+              value: {{ .Values.umami.ignoredIpAddresses | quote }}
+            {{- end }}
+            - name: PORT
+              value: {{ .Values.service.port | quote }}
+            - name: REMOVE_TRAILING_SLASH
+              value: {{ .Values.service.removeTrailingSlash | quote }}
+            - name: TRACKER_SCRIPT_NAME
+              value: {{ .Values.umami.trackerScriptName | quote }}
+            # Extra environment variables
+            {{- range .Values.extraEnv }}
+            {{- if and (.name) (.value) }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
