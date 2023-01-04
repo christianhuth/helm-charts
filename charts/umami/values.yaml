@@ -116,7 +116,7 @@ umami:
   # -- Disables the login page for the application
   disableLogin: "1"
   # -- Umami collects completely anonymous telemetry data in order help improve the application. You can choose to disable this if you don't want to participate.
-  disableTelemetry : "1"
+  disableTelemetry: "1"
   # -- Disables the check for new versions of Umami
   disableUpdates: "1"
   # -- This will redirect all requests from http to https in the Umami application. Note, this does not apply to the tracking script.
