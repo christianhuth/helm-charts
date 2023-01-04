@@ -3449,6 +3449,23 @@ entries:
   skooner:
   - apiVersion: v2
     appVersion: stable
+    created: "2023-01-04T17:31:16.113804415Z"
+    description: Simple Kubernetes real-time dashboard and management.
+    digest: fe51fd0b2227dc7ecaa9243d50b78ca9a36a1af396ae7c30cc9e6a1392429158
+    home: https://github.com/christianknell/helm-charts
+    icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu8eQrFBosk7yHTiDEwjnVcMRyDD5uIaNXhlZ1m0yiC4H8RP1j0PlBPtgtv0bdH0JwlOE
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: skooner
+    sources:
+    - https://github.com/skooner-k8s/skooner
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/skooner-0.0.5/skooner-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v2
+    appVersion: stable
     created: "2022-12-28T13:50:41.059767732Z"
     description: Simple Kubernetes real-time dashboard and management.
     digest: 0b4be3eb34e16054abb2c529d2878ea26b9842e2a8574f0e4f077d4f9b46baad
@@ -4102,4 +4119,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/typo3-0.0.2/typo3-0.0.2.tgz
     version: 0.0.2
-generated: "2023-01-04T17:26:33.38578503Z"
+generated: "2023-01-04T17:31:16.114232411Z"
