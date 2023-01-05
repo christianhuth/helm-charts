@@ -1,0 +1,241 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "baserow.backend.celery.fullname" . }}
+  labels:
+    {{- include "baserow.backend.celery.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.backend.celery.autoscaling.enabled }}
+  replicas: {{ .Values.backend.celery.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "baserow.backend.celery.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.backend.celery.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "baserow.backend.celery.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.backend.celery.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "baserow.backend.celery.serviceAccountName" . }}
+      {{- with .Values.backend.celery.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ include "baserow.backend.celery.name" . }}-worker
+          image: "{{ .Values.backend.celery.image.repository }}:{{ .Values.backend.celery.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.celery.image.pullPolicy }}
+          args:
+            - "celery-worker"
+          env:
+            # Baserow Backend Settings
+            - name: BASEROW_JWT_SIGNING_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: jwt-signing-key
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: secret-key
+            # Baserow Email Settings
+            {{- if .Values.backend.config.email.smtp }}
+            - name: EMAIL_SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.email.secretName" . | quote }}
+                  key: email-password
+            {{- end }}
+            # Redis Settings
+            {{- if eq (include "baserow.redis.auth.enabled" .) "true" }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.redis.secretName" . | quote }}
+                  key: {{ include "baserow.redis.userPasswordKey" . | quote }}
+            {{- end }}
+            {{- range .Values.backend.celery.extraEnv }}
+            {{- if and (.name) (.value) }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "baserow.fullname" . }}
+            - configMapRef:
+                name: {{ include "baserow.backend.fullname" . }}
+          livenessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - /baserow/backend/docker/docker-entrypoint.sh celery-worker-healthcheck
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - /baserow/backend/docker/docker-entrypoint.sh celery-worker-healthcheck
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 10
+          {{- with .Values.backend.celery.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.backend.celery.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.backend.persistence.enabled }}
+          volumeMounts:
+            - name: media
+              mountPath: {{ .Values.backend.config.media.root | quote }}
+          {{- end }}
+        - name: {{ include "baserow.backend.celery.name" . }}-export-worker
+          image: "{{ .Values.backend.celery.image.repository }}:{{ .Values.backend.celery.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.celery.image.pullPolicy }}
+          args:
+            - "celery-exportworker"
+          env:
+            # Baserow Backend Settings
+            - name: BASEROW_JWT_SIGNING_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: jwt-signing-key
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: secret-key
+            # Redis Settings
+            {{- if eq (include "baserow.redis.auth.enabled" .) "true" }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.redis.secretName" . | quote }}
+                  key: {{ include "baserow.redis.userPasswordKey" . | quote }}
+            {{- end }}
+            {{- range .Values.backend.celery.extraEnv }}
+            {{- if and (.name) (.value) }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "baserow.fullname" . }}
+            - configMapRef:
+                name: {{ include "baserow.backend.fullname" . }}
+          livenessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - /baserow/backend/docker/docker-entrypoint.sh celery-exportworker-healthcheck
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - /baserow/backend/docker/docker-entrypoint.sh celery-exportworker-healthcheck
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 10
+          {{- with .Values.backend.celery.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.backend.celery.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.backend.persistence.enabled }}
+          volumeMounts:
+            - name: media
+              mountPath: {{ .Values.backend.config.media.root | quote }}
+          {{- end }}
+        - name: {{ include "baserow.backend.celery.name" . }}-backend-beat-worker
+          image: "{{ .Values.backend.celery.image.repository }}:{{ .Values.backend.celery.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.celery.image.pullPolicy }}
+          args:
+            - "celery-beat"
+          env:
+            # Baserow Backend Settings
+            - name: BASEROW_JWT_SIGNING_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: jwt-signing-key
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: secret-key
+            # Redis Settings
+            {{- if eq (include "baserow.redis.auth.enabled" .) "true" }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.redis.secretName" . | quote }}
+                  key: {{ include "baserow.redis.userPasswordKey" . | quote }}
+            {{- end }}
+            {{- range .Values.backend.celery.extraEnv }}
+            {{- if and (.name) (.value) }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "baserow.fullname" . }}
+            - configMapRef:
+                name: {{ include "baserow.backend.fullname" . }}
+          {{- with .Values.backend.celery.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.backend.celery.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.backend.persistence.enabled }}
+          volumeMounts:
+            - name: media
+              mountPath: {{ .Values.backend.config.media.root | quote }}
+          {{- end }}
+      {{- with .Values.backend.celery.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.backend.celery.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.backend.celery.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.backend.persistence.enabled }}
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: {{ include "baserow.backend.pvcName" . }}
+      {{- end }}

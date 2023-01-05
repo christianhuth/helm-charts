@@ -1,0 +1,583 @@
+# -- Provide a name in place of `baserow`
+nameOverride: ""
+
+# -- String to fully override `"baserow.fullname"`
+fullnameOverride: ""
+
+frontend:
+
+  image:
+    # -- image repository
+    repository: baserow/web-frontend
+    # -- image pull policy
+    pullPolicy: Always
+    # -- Overrides the image tag
+    tag: "1.13.3"
+
+  # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+  imagePullSecrets: []
+
+  # -- Annotations to be added to the frontend pods
+  podAnnotations: {}
+
+  # -- pod-level security context
+  podSecurityContext:
+    fsGroup: 9999
+    runAsGroup: 9999
+    runAsUser: 9999
+
+  # -- Number of replicas
+  replicaCount: 1
+
+  # -- Resource limits and requests for the controller pods.
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  # -- container-level security context
+  securityContext:
+    runAsGroup: 9999
+    runAsNonRoot: true
+    runAsUser: 9999
+
+  serviceAccount:
+    # -- Specifies whether a service account should be created
+    create: true
+    # -- Annotations to add to the service account
+    annotations: {}
+    # -- The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+  service:
+    # -- Kubernetes service type
+    type: ClusterIP
+    # -- Kubernetes port where service is exposed
+    port: 3000
+
+  ingress:
+    # -- Enable ingress record generation for the frontend
+    enabled: false
+    # -- IngressClass that will be be used to implement the Ingress
+    className: ""
+    # -- Additional annotations for the Ingress resource
+    annotations: {}
+      # cert-manager.io/cluster-issuer: cluster-issuer-name
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    # -- The publicly reachable hostname for the frontend
+    hostname: chart-example.local
+    # -- The path under witch the frontend should be reached
+    path: "/"
+    # -- Valid values: ImplementationSpecific, Exact, Prefix
+    pathType: "Prefix"
+    # -- An array with the tls configuration
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+  autoscaling:
+    # -- Enable Horizontal POD autoscaling
+    enabled: false
+    # -- Minimum number of replicas
+    minReplicas: 1
+    # -- Maximum number of replicas
+    maxReplicas: 100
+    # -- Target CPU utilization percentage
+    targetCPUUtilizationPercentage: 80
+    # -- Target Memory utilization percentage
+    targetMemoryUtilizationPercentage: 80
+
+  # -- Node labels for pod assignment
+  nodeSelector: {}
+
+  # -- Toleration labels for pod assignment
+  tolerations: []
+
+  # -- Affinity settings for pod assignment
+  affinity: {}
+
+  # -- additional environment variables to be added to the pods
+  extraEnv: []
+
+  # configuration for the frontend
+  config:
+    # -- A list of file paths to Nuxt module.js files to load as additional Nuxt modules into Baserow on startup.
+    additionalModules: ""
+    # -- When opening the Baserow login page a check is run to ensure the PUBLIC_BACKEND_URL/BASEROW_PUBLIC_URL variables are set correctly and your browser can correctly connect to the backend. If misconfigured an error is shown. If you wish to disable this check and warning set this to any non empty value.
+    disablePublicUrlCheck: ""
+    # -- Set to `true` or `1` to disable Google docs file preview.
+    disableGoogleDocsFilePreview: ""
+    # -- Set to `1` to force download links to download files via XHR query to bypass `Content-Disposition: inline` that can’t be overridden in another way. If your files are stored under another origin, you also must add CORS headers to your server.
+    downloadFileViaXhr: "0"
+
+backend:
+
+  asgi:
+
+    image:
+      # -- image repository
+      repository: baserow/backend
+      # -- image pull policy
+      pullPolicy: Always
+      # -- Overrides the image tag
+      tag: "1.13.3"
+
+    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+    imagePullSecrets: []
+
+    # -- Annotations to be added to the frontend pods
+    podAnnotations: {}
+
+    # -- pod-level security context
+    podSecurityContext:
+      fsGroup: 9999
+      runAsGroup: 9999
+      runAsUser: 9999
+
+    # -- Number of replicas
+    replicaCount: 1
+
+    # -- Resource limits and requests for the controller pods.
+    resources: {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    # -- container-level security context
+    securityContext:
+      runAsGroup: 9999
+      runAsNonRoot: true
+      runAsUser: 9999
+
+    serviceAccount:
+      # -- Specifies whether a service account should be created
+      create: true
+      # -- Annotations to add to the service account
+      annotations: {}
+      # -- The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
+
+    service:
+      # -- Kubernetes service type
+      type: ClusterIP
+      # -- Kubernetes port where service is exposed
+      port: 8000
+
+    autoscaling:
+      # -- Enable Horizontal POD autoscaling
+      enabled: false
+      # -- Minimum number of replicas
+      minReplicas: 1
+      # -- Maximum number of replicas
+      maxReplicas: 100
+      # -- Target CPU utilization percentage
+      targetCPUUtilizationPercentage: 80
+      # -- Target Memory utilization percentage
+      targetMemoryUtilizationPercentage: 80
+
+    # -- Node labels for pod assignment
+    nodeSelector: {}
+
+    # -- Toleration labels for pod assignment
+    tolerations: []
+
+    # -- Affinity settings for pod assignment
+    affinity: {}
+
+    # -- additional environment variables to be added to the pods
+    extraEnv: []
+
+  celery:
+
+    image:
+      # -- image repository
+      repository: baserow/backend
+      # -- image pull policy
+      pullPolicy: Always
+      # -- Overrides the image tag
+      tag: "1.13.3"
+
+    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+    imagePullSecrets: []
+
+    # -- Annotations to be added to the frontend pods
+    podAnnotations: {}
+
+    # -- pod-level security context
+    podSecurityContext:
+      fsGroup: 9999
+      runAsGroup: 9999
+      runAsUser: 9999
+
+    # -- Number of replicas
+    replicaCount: 1
+
+    # -- Resource limits and requests for the controller pods.
+    resources: {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    # -- container-level security context
+    securityContext:
+      runAsGroup: 9999
+      runAsNonRoot: true
+      runAsUser: 9999
+
+    serviceAccount:
+      # -- Specifies whether a service account should be created
+      create: true
+      # -- Annotations to add to the service account
+      annotations: {}
+      # -- The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
+
+    autoscaling:
+      # -- Enable Horizontal POD autoscaling
+      enabled: false
+      # -- Minimum number of replicas
+      minReplicas: 1
+      # -- Maximum number of replicas
+      maxReplicas: 100
+      # -- Target CPU utilization percentage
+      targetCPUUtilizationPercentage: 80
+      # -- Target Memory utilization percentage
+      targetMemoryUtilizationPercentage: 80
+
+    # -- Node labels for pod assignment
+    nodeSelector: {}
+
+    # -- Toleration labels for pod assignment
+    tolerations: []
+
+    # -- Affinity settings for pod assignment
+    affinity: {}
+
+    # -- additional environment variables to be added to the pods
+    extraEnv: []
+
+  # configuration for the backend
+  config:
+    # -- The maximum amount of seconds an Airtable migration import job can run.
+    airtableImportSoftTimeLimit: "1800"
+    # -- The number of concurrent worker processes used by the Baserow backend gunicorn server to process incoming requests
+    amountOfGunicornWorkers: ""
+    aws:
+      # -- The access key for your AWS account. When set to anything other than empty will switch Baserow to use a S3 compatible bucket for storing user file uploads.
+      accessKeyId: ""
+      # -- Your Amazon Web Services storage bucket name.
+      bucketName: ""
+      # -- Name of existing secret to use for AWS credentials like backend.config.aws.accessKeyId and backend.config.aws.secretAccessKey. Keys in secret should be called `access-key-id` and `secret-access-key`.
+      existingSecret: ""
+      # -- The access secret key for your AWS account.
+      secretAccessKey: ""
+      # -- Your custom domain where the files can be downloaded from.
+      s3CustomDomain: ""
+      # -- Custom S3 URL to use when connecting to S3, including scheme.
+      s3EndpointUrl: ""
+      # -- Name of the AWS S3 region to use (eg. eu-west-1)
+      s3RegionName: ""
+    # -- Controls how many rows can be created, deleted or updated at once using the batch endpoints.
+    batchRowsSizeLimit: "200"
+    celery:
+      # -- The number of concurrent celery worker processes used to process asynchronous tasks. If not set will default to the number of available cores. Each celery process uses memory, to reduce Baserow’s memory footprint consider setting and reducing this variable.
+      amountOfWorkers: ""
+      # -- The logging level for the celery beat service.
+      beatDebugLevel: "INFO"
+      # -- The number of seconds the celery beat worker sleeps before starting up.
+      beatStartupDelay: "15"
+      # -- When BASEROW_AMOUNT_OF_WORKERS is 1 and this is set to a non empty value Baserow will not run the export-worker but instead run both the celery export and normal tasks on the normal celery worker. Set this to lower the memory usage of Baserow in expense of performance.
+      runMinimal: ""
+    # -- Baserow’s formulas have an internal version number. When upgrading Baserow if the formula language has also changed then after the database migration has run Baserow will also automatically recalculate all formulas if they have a different version. Set this to any non empty value to disable this automatic update if you would prefer to run the update_formulas management command manually yourself. Formulas might break if you forget to do so after an upgrade of Baserow until and so it is recommended to leave this empty.
+    dontUpdateFormulasAfterMigration: ""
+    email:
+      # -- Name of existing secret to use for the email password. Key in secret should be called `email-password`.
+      existingSecret: ""
+      # -- The email address Baserow will send emails from.
+      fromEmail: ""
+      # -- If set to any non empty value then Baserow will start sending emails using the configuration options below. If not set then Baserow will not send emails and just log them to the Celery worker logs instead.
+      smtp: ""
+      # -- The host of the external SMTP server that Baserow should use to send emails.
+      smtpHost: ""
+      # -- The password to authenticate to the smtp host when sending emails.
+      smtpPassword: ""
+      # -- The port used to connect to the smtp host.
+      smtpPort: ""
+      # -- The username to authenticate to the smtp host when sending emails.
+      smtpUser: ""
+      # -- If set to any non empty value then Baserow will attempt to send emails using TLS.
+      smtpUseTls: ""
+    # -- Name of existing secret to use for secret configuration values like backend.config.jwtSigningKey and backend.config.secretKey. Keys in secret should be called `jwt-signing-key` and `secret-key`.
+    existingSecret: ""
+    # -- The max file size in MB allowed to be uploaded by users into a Baserow File Field.
+    fileUploadSizeLimit: "1048576"
+    # -- The amount of rows that can be imported when creating a table. Defaults to empty which means unlimited rows.
+    initialTableDataLimit: ""
+    # -- The signing key that is used to sign the content of generated tokens. For HMAC signing, this should be a random string with at least as many bits of data as is required by the signing protocol. See https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html#signing-key for more details.
+    jwtSigningKey: ""
+    logging:
+      # -- If set to “on” then will enable the non production safe debug mode for the Baserow django backend.
+      backendDebug: "off"
+      # -- The default log level used by the backend, supports ERROR, WARNING, INFO, DEBUG, TRACE
+      backendLogLevel: "INFO"
+      # -- The default log level used for database related logs in the backend. Supports the same values as the normal log level. If you also enable BASEROW_BACKEND_DEBUG and set this to DEBUG you will be able to see all SQL queries in the backend logs.
+      databaseLogLevel: "ERROR"
+    media:
+      # -- The folder in which the backend will store user uploaded files
+      root: "/baserow/media"
+      # -- The URL at which user uploaded media files will be made available
+      url: "$PUBLIC_BACKEND_URL/media/"
+    # -- If set to “true” when the Baserow backend service starts up it will automatically apply database migrations. Set to any other value to disable. If you disable this then you must remember to manually apply the database migrations when upgrading Baserow to a new version.
+    migrateOnStartup: "true"
+    # -- When Baserow’s Backend service starts up it first checks to see if the postgres database is available.
+    postgresStartupCheckAttempts: "5"
+    # -- The maximum number of rows that can be requested at once.
+    rowPageSizeLimit: "200"
+    # -- The Secret key used by Django for cryptographic signing such as generating secure password reset links and managing sessions. See https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-SECRET_KEY for more details.
+    secretKey: ""
+    # -- Controls when snapshots expire, set in number of days. Expired snapshots will be automatically deleted.
+    snapshotExpirationTimeDays: "360"
+    # -- The number of seconds before the background sync templates job will timeout if not yet completed.
+    syncTemplatesTimeLimit: "1800"
+    tokens:
+      # -- The number of minutes which specifies how long access tokens are valid. This will be converted in a timedelta value and added to the current UTC time during token generation to obtain the token’s default “exp” claim value.
+      accessTokenLifetimeMinutes: "10"
+      # -- The number of hours which specifies how long refresh tokens are valid. This will be converted in a timedelta value and added to the current UTC time during token generation to obtain the token’s default “exp” claim value.
+      refreshTokenLifetimeHours: "168"
+    # -- If set to “true” when after a migration Baserow will automatically sync all builtin Baserow templates in the background. If you are using a postgres database which is constrained to fewer than 10000 rows then we recommend you disable this as the Baserow templates will go over that row limit. To disable this set to any other value than “true”
+    triggerSyncTemplatesAfterMigration: "true"
+    webhook:
+      # -- If set to any non empty value allows webhooks to access all addresses. Enabling this flag is a security risk as it will allow users to send webhook requests to internal addresses on your network. Instead consider using the three variables below first to allow access to only some internal network hostnames or IPs.
+      allowPrivateAddress: ""
+      # -- Disabled if backend.config.webhook.allowPrivateAddress is set. List of comma seperated IP addresses or ranges that webhooks will be denied from using after the URL has been resolved to an IP using DNS.
+      ipBlacklist: ""
+      # -- Disabled if backend.config.webhook.allowPrivateAddress is set. List of comma seperated IP addresses or ranges that webhooks will be allowed to use after the webhook URL has been resolved to an IP using DNS.
+      ipWhitelist: ""
+      # -- The maximum number of call log entries stored per webhook.
+      maxCallLogEntries: "10"
+      # -- The number of consecutive trigger failures that can occur before a webhook is disabled.
+      maxConsecutiveTriggerFailures: "8"
+      # -- The max number of webhooks per Baserow table.
+      maxPerTable: "20"
+      # -- The max number of retries per webhook call.
+      maxRetriesPerCall: "8"
+      # -- How long to wait on making the webhook request before timing out.
+      requestTimeoutSeconds: "5"
+      # -- Disabled if backend.config.webhook.allowPrivateAddress is set. How long to wait before timing out and returning an error when checking if an url can be accessed for a webhook.
+      urlCheckTimeoutSecs: "10"
+      # -- Disabled if backend.config.webhook.allowPrivateAddress is set. List of comma seperated regexes used to validate user configured webhook URLs, will show the user an error if any regexes match their webhook URL and prevent it from running.
+      urlRegexBlacklist: ""
+
+  persistence:
+    # -- use a PVC to persist file uploads
+    enabled: false
+    # -- the desired access modes the volume should have.
+    accessModes:
+      - ReadWriteOnce
+    # -- Annotations to be added to the PersistentVolumeClaim
+    annotations: {}
+    # -- provide an existing PersistentVolumeClaim
+    existingClaim: ""
+    # -- Name of the StorageClass required by the claim.
+    storageClassName: ""
+    # -- represents the minimum and maximum resources the volume should have.
+    resources: {}
+
+  wsgi:
+
+    image:
+      # -- image repository
+      repository: baserow/backend
+      # -- image pull policy
+      pullPolicy: Always
+      # -- Overrides the image tag
+      tag: "1.13.3"
+
+    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+    imagePullSecrets: []
+
+    # -- Annotations to be added to the frontend pods
+    podAnnotations: {}
+
+    # -- pod-level security context
+    podSecurityContext:
+      fsGroup: 9999
+      runAsGroup: 9999
+      runAsUser: 9999
+
+    # -- Number of replicas
+    replicaCount: 1
+
+    # -- Resource limits and requests for the controller pods.
+    resources: {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    # -- container-level security context
+    securityContext:
+      runAsGroup: 9999
+      runAsNonRoot: true
+      runAsUser: 9999
+
+    serviceAccount:
+      # -- Specifies whether a service account should be created
+      create: true
+      # -- Annotations to add to the service account
+      annotations: {}
+      # -- The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
+
+    service:
+      # -- Kubernetes service type
+      type: ClusterIP
+      # -- Kubernetes port where service is exposed
+      port: 8000
+
+    autoscaling:
+      # -- Enable Horizontal POD autoscaling
+      enabled: false
+      # -- Minimum number of replicas
+      minReplicas: 1
+      # -- Maximum number of replicas
+      maxReplicas: 100
+      # -- Target CPU utilization percentage
+      targetCPUUtilizationPercentage: 80
+      # -- Target Memory utilization percentage
+      targetMemoryUtilizationPercentage: 80
+
+    # -- Node labels for pod assignment
+    nodeSelector: {}
+
+    # -- Toleration labels for pod assignment
+    tolerations: []
+
+    # -- Affinity settings for pod assignment
+    affinity: {}
+
+    # -- additional environment variables to be added to the pods
+    extraEnv: []
+
+  ingress:
+    # -- Enable ingress record generation for the backend
+    enabled: false
+    # -- IngressClass that will be be used to implement the Ingress
+    className: ""
+    # -- Additional annotations for the Ingress resource
+    annotations: {}
+      # cert-manager.io/cluster-issuer: cluster-issuer-name
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    # -- The publicly reachable hostname for the backend
+    hostname: ""
+    paths:
+      # -- The path under witch the asgi backend should be reached
+      asgiPath: "/ws/"
+      # -- The path under witch the wsgi backend should be reached
+      wsgiPath: "/"
+    # -- An array with the tls configuration
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+# General configuration shared between the frontend and backend
+config:
+  # -- The maximum file size in mb you can import to create a new table. Default 512Mb.
+  maxImportFileSizeMb: "512"
+  # -- Controls how many application snapshots can be created per group.
+  maxSnapshotsPerGroup: "-1"
+  # -- The publicly accessible URL of the backend. Should include the port if non-standard.
+  publicBackendUrl: ""
+  # -- The publicly accessible URL of the frontend. Should include the port if non-standard.
+  publicFrontendUrl: ""
+
+postgresql:
+  # -- enable PostgreSQL™ subchart from Bitnami
+  enabled: true
+  auth:
+    # -- Name for a custom database to create
+    database: baserow
+    # -- Name of existing secret to use for PostgreSQL credentials
+    existingSecret: ""
+    # -- Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided
+    password: baserow
+    # -- Name for a custom user to create
+    username: baserow
+
+externalPostgresql:
+  auth:
+    # -- Name of the database to use
+    database: baserow
+    # -- Name of existing secret to use for PostgreSQL credentials
+    existingSecret: ""
+    # -- Password to use
+    password: baserow
+    # -- Name of the user to use
+    username: baserow
+    # -- Key in the secret containing the password
+    userPasswordKey: ""
+  # -- Hostname of the PostgreSQL database
+  hostname: ""
+  # -- Port used to connect to PostgreSQL database
+  port: 5432
+
+redis:
+  # -- enable Redis™ subchart from Bitnami
+  enabled: true
+  # -- Redis® architecture. Allowed values: standalone or replication
+  architecture: standalone
+  auth:
+    # -- Enable password authentication
+    enabled: true
+    # -- Redis™ password
+    password: baserow
+
+externalRedis:
+  auth:
+    # -- if authentication should be used with external Redis™
+    enabled: true
+    # -- Name of existing secret to use for Redis™ credentials
+    existingSecret: ""
+    # -- Password to use
+    password: ""
+    # -- Key in the secret containing the password
+    userPasswordKey: ""
+  # -- Hostname of Redis™
+  hostname: ""
+  # -- Port used to connect to Redis
+  port: 6379

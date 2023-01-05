@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "baserow.backend.asgi.fullname" . }}
+  labels:
+    {{- include "baserow.backend.asgi.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.backend.asgi.service.type }}
+  ports:
+    - port: {{ .Values.backend.asgi.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "baserow.backend.asgi.selectorLabels" . | nindent 4 }}

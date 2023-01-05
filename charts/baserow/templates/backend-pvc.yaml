@@ -1,0 +1,24 @@
+{{- if and (.Values.backend.persistence.enabled) (not .Values.backend.persistence.existingClaim) }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  {{- if .Values.backend.persistence.annotations }}
+  annotations:
+    {{- toYaml .Values.backend.persistence.annotations | nindent 4 }}
+  {{- end }}
+  name: {{ include "baserow.backend.fullname" . }}
+  labels:
+    {{- include "baserow.backend.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  {{- range .Values.backend.persistence.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+  {{- with .Values.backend.persistence.resources }}
+  resources:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- if .Values.backend.persistence.storageClassName }}
+  storageClassName: {{ .Values.backend.persistence.storageClassName | quote }}
+  {{- end }}
+{{- end }}
