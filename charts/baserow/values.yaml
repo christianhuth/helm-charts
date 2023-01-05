@@ -395,7 +395,7 @@ backend:
       urlRegexBlacklist: ""
 
   persistence:
-    # use a PVC to persist file uploads
+    # -- use a PVC to persist file uploads
     enabled: false
     # -- the desired access modes the volume should have.
     accessModes:
