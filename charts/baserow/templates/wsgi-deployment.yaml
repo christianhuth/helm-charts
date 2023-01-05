@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "baserow.backend.wsgi.fullname" . }}
+  labels:
+    {{- include "baserow.backend.wsgi.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.backend.wsgi.autoscaling.enabled }}
+  replicas: {{ .Values.backend.wsgi.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "baserow.backend.wsgi.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.backend.wsgi.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "baserow.backend.wsgi.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.backend.wsgi.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "baserow.backend.wsgi.serviceAccountName" . }}
+      {{- with .Values.backend.wsgi.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ include "baserow.backend.wsgi.name" . }}
+          image: "{{ .Values.backend.wsgi.image.repository }}:{{ .Values.backend.wsgi.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.wsgi.image.pullPolicy }}
+          workingDir: /baserow
+          args:
+            - "gunicorn-wsgi"
+            - "--timeout"
+            - "60"
+          env:
+            {{- range .Values.backend.wsgi.extraEnv }}
+            {{- if and (.name) (.value) }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.backend.wsgi.service.port }}
+              protocol: TCP
+          livenessProbe:
+            exec:
+              command:
+                - curl
+                - --fail
+                - --silent
+                - http://localhost:8000/api/_health/
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+          readinessProbe:
+            exec:
+              command:
+                - curl
+                - --fail
+                - --silent
+                - http://localhost:8000/api/_health/
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+          {{- with .Values.backend.wsgi.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.backend.wsgi.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.backend.wsgi.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.backend.wsgi.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.backend.wsgi.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

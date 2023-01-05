@@ -1,0 +1,28 @@
+{{- if .Values.backend.asgi.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "baserow.backend.asgi.fullname" . }}
+  labels:
+    {{- include "baserow.backend.asgi.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "baserow.backend.asgi.fullname" . }}
+  minReplicas: {{ .Values.backend.asgi.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.backend.asgi.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.backend.asgi.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.backend.asgi.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.backend.asgi.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.backend.asgi.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}

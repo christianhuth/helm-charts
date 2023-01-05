@@ -1,0 +1,140 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "baserow.celery.fullname" . }}
+  labels:
+    {{- include "baserow.celery.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.celery.autoscaling.enabled }}
+  replicas: {{ .Values.celery.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "baserow.celery.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.celery.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "baserow.celery.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.celery.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "baserow.celery.serviceAccountName" . }}
+      {{- with .Values.celery.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ include "baserow.celery.name" . }}-worker
+          image: "{{ .Values.celery.image.repository }}:{{ .Values.celery.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.celery.image.pullPolicy }}
+          args:
+            - "celery-worker"
+          env:
+            {{- range .Values.celery.extraEnv }}
+            {{- if and (.name) (.value) }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
+          livenessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - /baserow/backend/docker/docker-entrypoint.sh celery-worker-healthcheck
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - /baserow/backend/docker/docker-entrypoint.sh celery-worker-healthcheck
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 10
+          {{- with .Values.celery.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.celery.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+        - name: {{ include "baserow.celery.name" . }}-export-worker
+          image: "{{ .Values.celery.image.repository }}:{{ .Values.celery.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.celery.image.pullPolicy }}
+          args:
+            - "celery-exportworker"
+          env:
+            {{- range .Values.celery.extraEnv }}
+            {{- if and (.name) (.value) }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
+          livenessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - /baserow/backend/docker/docker-entrypoint.sh celery-exportworker-healthcheck
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - /baserow/backend/docker/docker-entrypoint.sh celery-exportworker-healthcheck
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 10
+          {{- with .Values.celery.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.celery.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+        - name: {{ include "baserow.celery.name" . }}-backend-beat-worker
+          image: "{{ .Values.celery.image.repository }}:{{ .Values.celery.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.celery.image.pullPolicy }}
+          args:
+            - "celery-beat"
+          env:
+            {{- range .Values.celery.extraEnv }}
+            {{- if and (.name) (.value) }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
+          {{- with .Values.celery.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.celery.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.celery.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.celery.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.celery.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

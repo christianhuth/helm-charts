@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "baserow.backend.asgi.fullname" . }}
+  labels:
+    {{- include "baserow.backend.asgi.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.backend.asgi.autoscaling.enabled }}
+  replicas: {{ .Values.backend.asgi.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "baserow.backend.asgi.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.backend.asgi.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "baserow.backend.asgi.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.backend.asgi.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "baserow.backend.asgi.serviceAccountName" . }}
+      {{- with .Values.backend.asgi.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ include "baserow.backend.asgi.name" . }}
+          image: "{{ .Values.backend.asgi.image.repository }}:{{ .Values.backend.asgi.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.asgi.image.pullPolicy }}
+          workingDir: /baserow
+          args:
+            - "gunicorn"
+          env:
+            {{- range .Values.backend.asgi.extraEnv }}
+            {{- if and (.name) (.value) }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.backend.asgi.service.port }}
+              protocol: TCP
+          livenessProbe:
+            exec:
+              command:
+                - curl
+                - --fail
+                - --silent
+                - http://localhost:{{ .Values.backend.asgi.service.port }}/api/_health/
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+          readinessProbe:
+            exec:
+              command:
+                - curl
+                - --fail
+                - --silent
+                - http://localhost:{{ .Values.backend.asgi.service.port }}/api/_health/
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+          {{- with .Values.backend.asgi.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.backend.asgi.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.backend.asgi.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.backend.asgi.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.backend.asgi.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

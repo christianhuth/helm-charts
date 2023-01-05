@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "baserow.backend.wsgi.fullname" . }}
+  labels:
+    {{- include "baserow.backend.wsgi.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.backend.wsgi.service.type }}
+  ports:
+    - port: {{ .Values.backend.wsgi.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "baserow.backend.wsgi.selectorLabels" . | nindent 4 }}

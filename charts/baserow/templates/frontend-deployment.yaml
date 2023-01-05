@@ -30,9 +30,11 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ include "baserow.frontend.name" . }}
           image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          args:
+            - nuxt
           env:
             # Baserow Settings
             {{- if .Values.frontend.config.additionalModules }}
@@ -66,14 +68,14 @@ spec:
           livenessProbe:
             httpGet:
               path: /_health
-              port: 3000
+              port: {{ .Values.frontend.service.port }}
             initialDelaySeconds: 5
             periodSeconds: 5
             successThreshold: 1
           readinessProbe:
             httpGet:
               path: /_health
-              port: 3000
+              port: {{ .Values.frontend.service.port }}
             initialDelaySeconds: 5
             periodSeconds: 5
             successThreshold: 1
