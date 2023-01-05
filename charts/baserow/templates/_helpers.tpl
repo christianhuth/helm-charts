@@ -106,7 +106,7 @@ Create the name of the service account to use for the frontend deployment
 Get the public name of the hostname for the baserow frontend
 */}}
 {{- define "baserow.frontend.publicUrl" -}}
-http{{ if .Values.frontend.ingress.tls }}s{{ end }}://{{ .Values.frontend.ingress.hostname }}{{ .Values.frontend.ingress.path }}
+  {{ .Values.config.publicFrontendUrl }}
 {{- end -}}
 
 {{/*
@@ -245,7 +245,7 @@ Get the private name for the baserow backend
 Get the public name of the hostname for the baserow backend
 */}}
 {{- define "baserow.backend.publicUrl" -}}
-  http{{ if .Values.backend.ingress.tls }}s{{ end }}://{{ .Values.backend.ingress.hostname }}
+  {{ .Values.config.publicBackendUrl }}
 {{- end -}}
 
 {{/*

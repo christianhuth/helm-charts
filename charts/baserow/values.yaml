@@ -64,6 +64,8 @@ frontend:
     port: 3000
 
   ingress:
+    # -- Enable ingress record generation for the frontend
+    enabled: false
     # -- IngressClass that will be be used to implement the Ingress
     className: ""
     # -- Additional annotations for the Ingress resource
@@ -491,6 +493,8 @@ backend:
     extraEnv: []
 
   ingress:
+    # -- Enable ingress record generation for the backend
+    enabled: false
     # -- IngressClass that will be be used to implement the Ingress
     className: ""
     # -- Additional annotations for the Ingress resource
@@ -517,6 +521,10 @@ config:
   maxImportFileSizeMb: "512"
   # -- Controls how many application snapshots can be created per group.
   maxSnapshotsPerGroup: "-1"
+  # -- The publicly accessible URL of the backend. Should include the port if non-standard.
+  publicBackendUrl: ""
+  # -- The publicly accessible URL of the frontend. Should include the port if non-standard.
+  publicFrontendUrl: ""
 
 postgresql:
   # -- enable PostgreSQL™ subchart from Bitnami
