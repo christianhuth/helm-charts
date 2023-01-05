@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "baserow.backend.fullname" . }}
+data:
+  # Baserow Backend Settings
+  BASEROW_SYNC_TEMPLATES_TIME_LIMIT: {{ .Values.backend.config.syncTemplatesTimeLimit | quote }}
+  BASEROW_TRIGGER_SYNC_TEMPLATES_AFTER_MIGRATION: {{ .Values.backend.config.triggerSyncTemplatesAfterMigration | quote }}
+  {{- if .Values.backend.config.dontUpdateFormulasAfterMigration }}
+  DONT_UPDATE_FORMULAS_AFTER_MIGRATION: {{ .Values.backend.config.dontUpdateFormulasAfterMigration | quote }}
+  {{- end }}
+  MIGRATE_ON_STARTUP: {{ .Values.backend.config.migrateOnStartup | quote }}
+  POSTGRES_STARTUP_CHECK_ATTEMPTS: {{ .Values.backend.config.postgresStartupCheckAttempts | quote }}
+  # Baserow File Upload Settings
+  MEDIA_ROOT: {{ .Values.backend.config.media.root | quote }}
+  MEDIA_URL: {{ .Values.backend.config.media.url | quote }}
+  # Database Settings
+  DATABASE_HOST: {{ include "baserow.postgresql.hostname" . | quote }}
+  DATABASE_PORT: {{ include "baserow.postgresql.port" . | quote }}
+  DATABASE_NAME: {{ include "baserow.postgresql.database" . | quote }}
+  DATABASE_USER: {{ include "baserow.postgresql.username" . | quote }}
+  # Redis Settings
+  REDIS_HOST: {{ include "baserow.redis.hostname" . | quote }}
+  REDIS_PORT: {{ include "baserow.redis.port" . | quote }}

@@ -103,6 +103,13 @@ Create the name of the service account to use for the frontend deployment
 {{- end }}
 
 {{/*
+Get the public name of the hostname for the baserow frontend
+*/}}
+{{- define "baserow.frontend.publicUrl" -}}
+http{{ if .Values.frontend.ingress.tls }}s{{ end }}://{{ .Values.frontend.ingress.hostname }}{{ .Values.frontend.ingress.path }}
+{{- end -}}
+
+{{/*
 Define a for the asgi backend components of the chart.
 */}}
 {{- define "baserow.backend.asgi.name" -}}
@@ -195,6 +202,35 @@ Create the name of the service account to use for the wsgi backend deployment
 {{- end }}
 
 {{/*
+Get the name of the persistent volume claim for the baserow backend
+*/}}
+{{- define "baserow.backend.pvcName" -}}
+  {{- if .Values.backend.persistence.existingClaim -}}
+    {{- printf "%s" (tpl .Values.backend.persistence.existingClaim $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "baserow.backend.fullname" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the public name of the hostname for the baserow backend
+*/}}
+{{- define "baserow.backend.publicUrl" -}}
+http{{ if .Values.backend.ingress.tls }}s{{ end }}://{{ .Values.backend.ingress.hostname }}
+{{- end -}}
+
+{{/*
+Get the name of the secret containing the secrets for the baserow backend
+*/}}
+{{- define "baserow.backend.secretName" -}}
+  {{- if .Values.backend.config.existingSecret -}}
+    {{- printf "%s" (tpl .Values.backend.config.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "baserow.backend.fullname" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
 Define a for the celery worker components of the chart.
 */}}
 {{- define "baserow.celery.name" -}}
@@ -202,7 +238,7 @@ Define a for the celery worker components of the chart.
 {{- end }}
 
 {{/*
-Create a fully qualified name for the celery worker  components.
+Create a fully qualified name for the celery worker components.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
 {{- define "baserow.celery.fullname" -}}

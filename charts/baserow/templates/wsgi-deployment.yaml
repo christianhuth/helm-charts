@@ -39,25 +39,24 @@ spec:
             - "--timeout"
             - "60"
           env:
+            # Baserow Backend Settings
+            - name: BASEROW_JWT_SIGNING_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: jwt-signing-key
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: secret-key
             # Database Settings
-            - name: DATABASE_HOST
-              value: {{ include "baserow.postgresql.hostname" . | quote }}
-            - name: DATABASE_PORT
-              value: {{ include "baserow.postgresql.port" . | quote }}
-            - name: DATABASE_NAME
-              value: {{ include "baserow.postgresql.database" . | quote }}
-            - name: DATABASE_USER
-              value: {{ include "baserow.postgresql.username" . | quote }}
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "baserow.postgresql.secretName" . | quote }}
                   key: {{ include "baserow.postgresql.userPasswordKey" . | quote }}
             # Redis Settings
-            - name: REDIS_HOST
-              value: {{ include "baserow.redis.hostname" . | quote }}
-            - name: REDIS_PORT
-              value: {{ include "baserow.redis.port" . | quote }}
             {{- if eq (include "baserow.redis.auth.enabled" .) "true" }}
             - name: REDIS_PASSWORD
               valueFrom:
@@ -71,6 +70,11 @@ spec:
               value: {{ .value | quote }}
             {{- end }}
             {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "baserow.fullname" . }}
+            - configMapRef:
+                name: {{ include "baserow.backend.fullname" . }}
           ports:
             - name: http
               containerPort: {{ .Values.backend.wsgi.service.port }}
@@ -105,6 +109,11 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if .Values.backend.persistence.enabled }}
+          volumeMounts:
+            - name: media
+              mountPath: {{ .Values.backend.config.media.root | quote }}
+          {{- end }}
       {{- with .Values.backend.wsgi.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -116,4 +125,10 @@ spec:
       {{- with .Values.backend.wsgi.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.backend.persistence.enabled }}
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: {{ include "baserow.backend.pvcName" . }}
       {{- end }}

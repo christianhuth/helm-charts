@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "baserow.frontend.fullname" . }}
+data:
+  # Baserow Frontend Settings
+  {{- if .Values.frontend.config.additionalModules }}
+  ADDITIONAL_MODULES: {{ .Values.frontend.config.additionalModules | quote }}
+  {{- end }}
+  {{- if .Values.frontend.config.disablePublicUrlCheck }}
+  BASEROW_DISABLE_PUBLIC_URL_CHECK: {{ .Values.frontend.config.disablePublicUrlCheck | quote }}
+  {{- end }}
+  {{- if .Values.frontend.config.disableGoogleDocsFilePreview }}
+  BASEROW_DISABLE_GOOGLE_DOCS_FILE_PREVIEW: {{ .Values.frontend.config.disableGoogleDocsFilePreview | quote }}
+  {{- end }}
+  {{- if .Values.frontend.config.maxSnapshotsPerGroup }}
+  BASEROW_MAX_SNAPSHOTS_PER_GROUP: {{ .Values.frontend.config.maxSnapshotsPerGroup | quote }}
+  {{- end }}
+  DOWNLOAD_FILE_VIA_XHR: {{ .Values.frontend.config.downloadFileViaXhr | quote }}
+  PRIVATE_BACKEND_URL: {{ include "baserow.backend.wsgi.fullname" . | quote }}

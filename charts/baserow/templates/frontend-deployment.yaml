@@ -36,33 +36,17 @@ spec:
           args:
             - nuxt
           env:
-            # Baserow Settings
-            {{- if .Values.frontend.config.additionalModules }}
-            - name: ADDITIONAL_MODULES
-              value: {{ .Values.frontend.config.additionalModules | quote }}
-            {{- end }}
-            {{- if .Values.frontend.config.disablePublicUrlCheck }}
-            - name: BASEROW_DISABLE_PUBLIC_URL_CHECK
-              value: {{ .Values.frontend.config.disablePublicUrlCheck | quote }}
-            {{- end }}
-            {{- if .Values.frontend.config.disableGoogleDocsFilePreview }}
-            - name: BASEROW_DISABLE_GOOGLE_DOCS_FILE_PREVIEW
-              value: {{ .Values.frontend.config.disableGoogleDocsFilePreview | quote }}
-            {{- end }}
-            {{- if .Values.frontend.config.maxSnapshotsPerGroup }}
-            - name: BASEROW_MAX_SNAPSHOTS_PER_GROUP
-              value: {{ .Values.frontend.config.maxSnapshotsPerGroup | quote }}
-            {{- end }}
-            - name: DOWNLOAD_FILE_VIA_XHR
-              value: {{ .Values.frontend.config.downloadFileViaXhr | quote }}
-            - name: PUBLIC_WEB_FRONTEND_URL
-              value: {{ .Values.frontend.config.publicWebFrontendUrl | quote }}
             {{- range .Values.frontend.extraEnv }}
             {{- if and (.name) (.value) }}
             - name: {{ .name | quote }}
               value: {{ .value | quote }}
             {{- end }}
             {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "baserow.fullname" . }}
+            - configMapRef:
+                name: {{ include "baserow.frontend.fullname" . }}
           ports:
             - name: http
               containerPort: {{ .Values.frontend.service.port }}

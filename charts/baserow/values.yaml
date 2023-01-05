@@ -74,13 +74,12 @@ frontend:
       # cert-manager.io/cluster-issuer: cluster-issuer-name
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
-    # -- An array with hosts and paths
-    # @default -- see [values.yaml](./values.yaml)
-    hosts:
-      - host: chart-example.local
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
+    # -- The publicly reachable hostname for the frontend
+    hostname: chart-example.local
+    # -- The path under witch the frontend should be reached
+    path: "/"
+    # -- Valid values: ImplementationSpecific, Exact, Prefix
+    pathType: "Prefix"
     # -- An array with the tls configuration
     tls: []
     #  - secretName: chart-example-tls
@@ -123,8 +122,6 @@ frontend:
     downloadFileViaXhr: "0"
     # -- Controls how many application snapshots can be created per group.
     maxSnapshotsPerGroup: "-1"
-    # -- The publicly accessible URL of the web-frontend. Should include the port if non-standard. Should match your ingress definition for the frontend.
-    publicWebFrontendUrl: ""
 
 backend:
 
@@ -211,6 +208,57 @@ backend:
 
     # -- additional environment variables to be added to the pods
     extraEnv: []
+
+  config:
+    aws:
+      # -- The access key for your AWS account. When set to anything other than empty will switch Baserow to use a S3 compatible bucket for storing user file uploads.
+      accessKeyId: ""
+      # -- Your Amazon Web Services storage bucket name.
+      bucketName: ""
+      # -- The access secret key for your AWS account.
+      secretAccessKey: ""
+      # -- Your custom domain where the files can be downloaded from.
+      s3CustomDomain: ""
+      # -- Custom S3 URL to use when connecting to S3, including scheme.
+      s3EndpointUrl: ""
+      # -- Name of the AWS S3 region to use (eg. eu-west-1)
+      s3RegionName: ""
+    # -- Baserow’s formulas have an internal version number. When upgrading Baserow if the formula language has also changed then after the database migration has run Baserow will also automatically recalculate all formulas if they have a different version. Set this to any non empty value to disable this automatic update if you would prefer to run the update_formulas management command manually yourself. Formulas might break if you forget to do so after an upgrade of Baserow until and so it is recommended to leave this empty.
+    dontUpdateFormulasAfterMigration: ""
+    # -- Name of existing secret to use for secret configuration values like backend.config.jwtSigningKey and backend.config.secretKey. Keys in secret should be called `jwt-signing-key` and `secret-key`.
+    existingSecret: ""
+    # -- The signing key that is used to sign the content of generated tokens. For HMAC signing, this should be a random string with at least as many bits of data as is required by the signing protocol. See https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html#signing-key for more details.
+    jwtSigningKey: ""
+    media:
+      # -- The folder in which the backend will store user uploaded files
+      root: "/baserow/media"
+      # -- The URL at which user uploaded media files will be made available
+      url: "$PUBLIC_BACKEND_URL/media/"
+    # -- If set to “true” when the Baserow backend service starts up it will automatically apply database migrations. Set to any other value to disable. If you disable this then you must remember to manually apply the database migrations when upgrading Baserow to a new version.
+    migrateOnStartup: "true"
+    # -- When Baserow’s Backend service starts up it first checks to see if the postgres database is available.
+    postgresStartupCheckAttempts: "5"
+    # -- The Secret key used by Django for cryptographic signing such as generating secure password reset links and managing sessions. See https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-SECRET_KEY for more details.
+    secretKey: ""
+    # -- The number of seconds before the background sync templates job will timeout if not yet completed.
+    syncTemplatesTimeLimit: "1800"
+    # -- If set to “true” when after a migration Baserow will automatically sync all builtin Baserow templates in the background. If you are using a postgres database which is constrained to fewer than 10000 rows then we recommend you disable this as the Baserow templates will go over that row limit. To disable this set to any other value than “true”
+    triggerSyncTemplatesAfterMigration: "true"
+
+  persistence:
+    # use a PVC to persist file uploads
+    enabled: false
+    # -- the desired access modes the volume should have.
+    accessModes:
+      - ReadWriteOnce
+    # -- Annotations to be added to the PersistentVolumeClaim
+    annotations: {}
+    # -- provide an existing PersistentVolumeClaim
+    existingClaim: ""
+    # -- Name of the StorageClass required by the claim.
+    storageClassName: ""
+    # -- represents the minimum and maximum resources the volume should have.
+    resources: {}
 
   wsgi:
 
@@ -306,7 +354,7 @@ backend:
       # cert-manager.io/cluster-issuer: cluster-issuer-name
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
-    # -- The publicly reachable hostname
+    # -- The publicly reachable hostname for the backend
     hostname: ""
     paths:
       # -- The path under witch the asgi backend should be reached
@@ -397,6 +445,21 @@ celery:
   # -- additional environment variables to be added to the pods
   extraEnv: []
 
+  config:
+    # -- The number of concurrent celery worker processes used to process asynchronous tasks. If not set will default to the number of available cores. Each celery process uses memory, to reduce Baserow’s memory footprint consider setting and reducing this variable.
+    amountOfWorkers: ""
+    # -- The logging level for the celery beat service.
+    beatDebugLevel: "INFO"
+    # -- The number of seconds the celery beat worker sleeps before starting up.
+    beatStartupDelay: "15"
+    # -- When BASEROW_AMOUNT_OF_WORKERS is 1 and this is set to a non empty value Baserow will not run the export-worker but instead run both the celery export and normal tasks on the normal celery worker. Set this to lower the memory usage of Baserow in expense of performance.
+    runMinimal: ""
+
+# General configuration shared between multiple components
+config:
+  # -- The maximum file size in mb you can import to create a new table. Default 512Mb.
+  maxImportFileSizeMb: "512"
+
 postgresql:
   # -- enable PostgreSQL™ subchart from Bitnami
   enabled: true
@@ -430,6 +493,8 @@ externalPostgresql:
 redis:
   # -- enable Redis™ subchart from Bitnami
   enabled: true
+  # -- Redis® architecture. Allowed values: standalone or replication
+  architecture: standalone
   auth:
     # -- Enable password authentication
     enabled: true
