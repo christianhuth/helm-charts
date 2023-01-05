@@ -465,24 +465,24 @@ postgresql:
   enabled: true
   auth:
     # -- Name for a custom database to create
-    database: mychart
+    database: baserow
     # -- Name of existing secret to use for PostgreSQL credentials
     existingSecret: ""
     # -- Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided
-    password: mychart
+    password: baserow
     # -- Name for a custom user to create
-    username: mychart
+    username: baserow
 
 externalPostgresql:
   auth:
     # -- Name of the database to use
-    database: mychart
+    database: baserow
     # -- Name of existing secret to use for PostgreSQL credentials
     existingSecret: ""
     # -- Password to use
-    password: mychart
+    password: baserow
     # -- Name of the user to use
-    username: mychart
+    username: baserow
     # -- Key in the secret containing the password
     userPasswordKey: ""
   # -- Hostname of the PostgreSQL database
@@ -499,7 +499,7 @@ redis:
     # -- Enable password authentication
     enabled: true
     # -- Redis™ password
-    password: mychart
+    password: baserow
 
 externalRedis:
   auth:
