@@ -1,0 +1,73 @@
+{{- if .Values.backend.ingress.enabled -}}
+{{- $svcNameAsgi := include "baserow.backend.asgi.fullname" . -}}
+{{- $svcPortAsgi := .Values.backend.asgi.service.port -}}
+{{- $svcNameWsgi := include "baserow.backend.wsgi.fullname" . -}}
+{{- $svcPortWsgi := .Values.backend.wsgi.service.port -}}
+{{- if and .Values.backend.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
+  {{- if not (hasKey .Values.backend.ingress.annotations "kubernetes.io/ingress.class") }}
+  {{- $_ := set .Values.backend.ingress.annotations "kubernetes.io/ingress.class" .Values.backend.ingress.className}}
+  {{- end }}
+{{- end }}
+{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1
+{{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1beta1
+{{- else -}}
+apiVersion: extensions/v1beta1
+{{- end }}
+kind: Ingress
+metadata:
+  name: {{ include "baserow.backend.fullname" . }}
+  labels:
+    {{- include "baserow.backend.labels" . | nindent 4 }}
+  {{- with .Values.backend.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if and .Values.backend.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
+  ingressClassName: {{ .Values.backend.ingress.className }}
+  {{- end }}
+  {{- if .Values.backend.ingress.tls }}
+  tls:
+    {{- range .Values.backend.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    - host: {{ .Values.backend.ingress.hostname | quote }}
+      http:
+        paths:
+          - path: {{ .Values.backend.ingress.paths.asgiPath | quote }}
+            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
+            pathType: Prefix
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $svcNameAsgi }}
+                port:
+                  number: {{ $svcPortAsgi }}
+              {{- else }}
+              serviceName: {{ $svcNameAsgi }}
+              servicePort: {{ $svcPortAsgi }}
+              {{- end }}
+          - path: {{ .Values.backend.ingress.paths.wsgiPath | quote }}
+            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
+            pathType: Prefix
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $svcNameWsgi }}
+                port:
+                  number: {{ $svcPortWsgi }}
+              {{- else }}
+              serviceName: {{ $svcNameWsgi }}
+              servicePort: {{ $svcPortWsgi }}
+              {{- end }}
+{{- end }}

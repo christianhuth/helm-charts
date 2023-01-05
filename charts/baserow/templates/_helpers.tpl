@@ -31,6 +31,32 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
+Define a for the backend components of the chart.
+*/}}
+{{- define "baserow.backend.name" -}}
+{{- include "baserow.name" . | trunc 56 | trimSuffix "-" }}-backend
+{{- end }}
+
+{{/*
+Create a fully qualified name for the backend components.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "baserow.backend.fullname" -}}
+{{- include "baserow.fullname" . | trunc 56 | trimSuffix "-" }}-backend
+{{- end }}
+
+{{/*
+Common labels for backend ingress resource
+*/}}
+{{- define "baserow.backend.labels" -}}
+helm.sh/chart: {{ include "baserow.chart" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
 Define a for the frontend components of the chart.
 */}}
 {{- define "baserow.frontend.name" -}}
@@ -213,3 +239,132 @@ Create the name of the service account to use for the celery worker deployment
 {{- default "default" .Values.celery.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Return the hostname of the postgresql to use
+*/}}
+{{- define "baserow.postgresql.hostname" -}}
+  {{- if .Values.postgresql.enabled -}}
+    {{- printf "%s" (include "postgresql.primary.fullname" .Subcharts.postgresql) -}}
+  {{- else -}}
+    {{- printf "%s" (tpl .Values.externalPostgresql.hostname $) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Return postgresql service port
+*/}}
+{{- define "baserow.postgresql.port" -}}
+  {{- if .Values.postgresql.enabled -}}
+    {{- printf "%s" (include "postgresql.service.port" .Subcharts.postgresql) -}}
+  {{- else -}}
+    {{- printf "%s" (tpl (toString .Values.externalPostgresql.port) $) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Return the name for the database to use
+*/}}
+{{- define "baserow.postgresql.database" -}}
+  {{- if .Values.postgresql.enabled -}}
+    {{- printf "%s" (include "postgresql.database" .Subcharts.postgresql) -}}
+  {{- else -}}
+    {{- printf "%s" (tpl .Values.externalPostgresql.auth.database $) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Return the name for the user to use
+*/}}
+{{- define "baserow.postgresql.username" -}}
+  {{- if .Values.postgresql.enabled -}}
+    {{- printf "%s" (include "postgresql.username" .Subcharts.postgresql) -}}
+  {{- else -}}
+    {{- printf "%s" (tpl .Values.externalPostgresql.auth.username $) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the name of the secret containing the postgresql user password
+*/}}
+{{- define "baserow.postgresql.secretName" -}}
+  {{- if .Values.postgresql.enabled -}}
+    {{- printf "%s" (include "postgresql.secretName" .Subcharts.postgresql) -}}
+  {{- else if .Values.externalPostgresql.auth.existingSecret -}}
+    {{- printf "%s" (tpl .Values.externalPostgresql.auth.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "baserow.fullname" .) -}}-postgresql
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the user-password key for the postgresql user password
+*/}}
+{{- define "baserow.postgresql.userPasswordKey" -}}
+  {{- if .Values.postgresql.enabled -}}
+    {{- printf "%s" (include "postgresql.userPasswordKey" .Subcharts.postgresql) -}}
+  {{- else if .Values.externalPostgresql.auth.userPasswordKey -}}
+    {{- printf "%s" (tpl .Values.externalPostgresql.auth.userPasswordKey $) -}}
+  {{- else -}}
+    {{- "password" -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Return the hostname of the redis to use
+*/}}
+{{- define "baserow.redis.hostname" -}}
+  {{- if .Values.redis.enabled -}}
+    {{- printf "%s-master" (include "common.names.fullname" .Subcharts.redis) -}}
+  {{- else -}}
+    {{- printf "%s" (tpl .Values.externalRedis.hostname $) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Return redis service port
+*/}}
+{{- define "baserow.redis.port" -}}
+  {{- if .Values.redis.enabled -}}
+    {{- printf "%s" (tpl (toString .Values.redis.master.service.ports.redis) $) -}}
+  {{- else -}}
+    {{- printf "%s" (tpl (toString .Values.externalRedis.port) $) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the user-password key for the redis password
+*/}}
+{{- define "baserow.redis.auth.enabled" -}}
+  {{- if or (and (.Values.redis.enabled) (.Values.redis.auth.enabled)) (and (not .Values.redis.enabled) (.Values.externalRedis.auth.enabled)) -}}
+    {{- printf "true" -}}
+  {{- else -}}
+    {{- printf "false" -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the name of the secret containing the redis password
+*/}}
+{{- define "baserow.redis.secretName" -}}
+  {{- if .Values.redis.enabled -}}
+    {{- printf "%s" (include "redis.secretName" .Subcharts.redis) -}}
+  {{- else if .Values.externalRedis.auth.existingSecret -}}
+    {{- printf "%s" (tpl .Values.externalRedis.auth.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "baserow.fullname" .) -}}-redis
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the user-password key for the redis password
+*/}}
+{{- define "baserow.redis.userPasswordKey" -}}
+  {{- if .Values.redis.enabled -}}
+    {{- printf "%s" (include "redis.secretPasswordKey" .Subcharts.redis) -}}
+  {{- else if .Values.externalRedis.auth.userPasswordKey -}}
+    {{- printf "%s" (tpl .Values.externalRedis.auth.userPasswordKey $) -}}
+  {{- else -}}
+    {{- "password" -}}
+  {{- end -}}
+{{- end -}}

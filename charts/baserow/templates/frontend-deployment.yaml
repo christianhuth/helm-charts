@@ -55,6 +55,8 @@ spec:
             {{- end }}
             - name: DOWNLOAD_FILE_VIA_XHR
               value: {{ .Values.frontend.config.downloadFileViaXhr | quote }}
+            - name: PUBLIC_WEB_FRONTEND_URL
+              value: {{ .Values.frontend.config.publicWebFrontendUrl | quote }}
             {{- range .Values.frontend.extraEnv }}
             {{- if and (.name) (.value) }}
             - name: {{ .name | quote }}

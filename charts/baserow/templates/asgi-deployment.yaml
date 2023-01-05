@@ -37,6 +37,32 @@ spec:
           args:
             - "gunicorn"
           env:
+            # Database Settings
+            - name: DATABASE_HOST
+              value: {{ include "baserow.postgresql.hostname" . | quote }}
+            - name: DATABASE_PORT
+              value: {{ include "baserow.postgresql.port" . | quote }}
+            - name: DATABASE_NAME
+              value: {{ include "baserow.postgresql.database" . | quote }}
+            - name: DATABASE_USER
+              value: {{ include "baserow.postgresql.username" . | quote }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.postgresql.secretName" . | quote }}
+                  key: {{ include "baserow.postgresql.userPasswordKey" . | quote }}
+            # Redis Settings
+            - name: REDIS_HOST
+              value: {{ include "baserow.redis.hostname" . | quote }}
+            - name: REDIS_PORT
+              value: {{ include "baserow.redis.port" . | quote }}
+            {{- if eq (include "baserow.redis.auth.enabled" .) "true" }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.redis.secretName" . | quote }}
+                  key: {{ include "baserow.redis.userPasswordKey" . | quote }}
+            {{- end -}}
             {{- range .Values.backend.asgi.extraEnv }}
             {{- if and (.name) (.value) }}
             - name: {{ .name | quote }}

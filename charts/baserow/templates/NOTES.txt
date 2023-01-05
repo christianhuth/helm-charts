@@ -21,13 +21,10 @@
   kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
 {{- end }}
 
-3. Get the wsgi backend URL by running these commands:
-{{- if .Values.backend.wsgi.ingress.enabled }}
-{{- range $host := .Values.backend.wsgi.ingress.hosts }}
-  {{- range .paths }}
-  http{{ if $.Values.backend.wsgi.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }}
-  {{- end }}
-{{- end }}
+2. Get the backend URL by running these commands:
+{{- if .Values.backend.ingress.enabled }}
+  ASGI: http{{ if $.Values.backend.ingress.tls }}s{{ end }}://{{ .Values.backend.ingress.hostname }}{{ .Values.backend.ingress.paths.asgiPath }}
+  WSGI: http{{ if $.Values.backend.ingress.tls }}s{{ end }}://{{ .Values.backend.ingress.hostname }}{{ .Values.backend.ingress.paths.wsgiPath }}
 {{- else if contains "NodePort" .Values.backend.wsgi.service.type }}
   export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "baserow.backend.wsgi.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")

@@ -123,6 +123,8 @@ frontend:
     downloadFileViaXhr: "0"
     # -- Controls how many application snapshots can be created per group.
     maxSnapshotsPerGroup: "-1"
+    # -- The publicly accessible URL of the web-frontend. Should include the port if non-standard. Should match your ingress definition for the frontend.
+    publicWebFrontendUrl: ""
 
 backend:
 
@@ -185,29 +187,6 @@ backend:
       type: ClusterIP
       # -- Kubernetes port where service is exposed
       port: 8000
-
-    ingress:
-      # -- Enable ingress record generation for the backend
-      enabled: false
-      # -- IngressClass that will be be used to implement the Ingress
-      className: ""
-      # -- Additional annotations for the Ingress resource
-      annotations: {}
-        # cert-manager.io/cluster-issuer: cluster-issuer-name
-        # kubernetes.io/ingress.class: nginx
-        # kubernetes.io/tls-acme: "true"
-      # -- An array with hosts and paths
-      # @default -- see [values.yaml](./values.yaml)
-      hosts:
-        - host: chart-example.local
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
-      # -- An array with the tls configuration
-      tls: []
-      #  - secretName: chart-example-tls
-      #    hosts:
-      #      - chart-example.local
 
     autoscaling:
       # -- Enable Horizontal POD autoscaling
@@ -293,29 +272,6 @@ backend:
       # -- Kubernetes port where service is exposed
       port: 8000
 
-    ingress:
-      # -- Enable ingress record generation for the backend
-      enabled: false
-      # -- IngressClass that will be be used to implement the Ingress
-      className: ""
-      # -- Additional annotations for the Ingress resource
-      annotations: {}
-        # cert-manager.io/cluster-issuer: cluster-issuer-name
-        # kubernetes.io/ingress.class: nginx
-        # kubernetes.io/tls-acme: "true"
-      # -- An array with hosts and paths
-      # @default -- see [values.yaml](./values.yaml)
-      hosts:
-        - host: chart-example.local
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
-      # -- An array with the tls configuration
-      tls: []
-      #  - secretName: chart-example-tls
-      #    hosts:
-      #      - chart-example.local
-
     autoscaling:
       # -- Enable Horizontal POD autoscaling
       enabled: false
@@ -339,6 +295,29 @@ backend:
 
     # -- additional environment variables to be added to the pods
     extraEnv: []
+
+  ingress:
+    # -- Enable ingress record generation for the backend
+    enabled: false
+    # -- IngressClass that will be be used to implement the Ingress
+    className: ""
+    # -- Additional annotations for the Ingress resource
+    annotations: {}
+      # cert-manager.io/cluster-issuer: cluster-issuer-name
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    # -- The publicly reachable hostname
+    hostname: ""
+    paths:
+      # -- The path under witch the asgi backend should be reached
+      asgiPath: "/ws/"
+      # -- The path under witch the wsgi backend should be reached
+      wsgiPath: "/"
+    # -- An array with the tls configuration
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
 
 celery:
 
@@ -418,31 +397,56 @@ celery:
   # -- additional environment variables to be added to the pods
   extraEnv: []
 
-ingress:
-  # -- Enable ingress record generation
-  enabled: true
-  # -- IngressClass that will be be used to implement the Ingress
-  className: ""
-  # -- Additional annotations for the Ingress resource
-  annotations: {}
-    # cert-manager.io/cluster-issuer: cluster-issuer-name
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  # -- An array with hosts and paths
-  # @default -- see [values.yaml](./values.yaml)
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  # -- An array with the tls configuration
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
 postgresql:
-  enabled: false
+  # -- enable PostgreSQL™ subchart from Bitnami
+  enabled: true
+  auth:
+    # -- Name for a custom database to create
+    database: mychart
+    # -- Name of existing secret to use for PostgreSQL credentials
+    existingSecret: ""
+    # -- Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided
+    password: mychart
+    # -- Name for a custom user to create
+    username: mychart
+
+externalPostgresql:
+  auth:
+    # -- Name of the database to use
+    database: mychart
+    # -- Name of existing secret to use for PostgreSQL credentials
+    existingSecret: ""
+    # -- Password to use
+    password: mychart
+    # -- Name of the user to use
+    username: mychart
+    # -- Key in the secret containing the password
+    userPasswordKey: ""
+  # -- Hostname of the PostgreSQL database
+  hostname: ""
+  # -- Port used to connect to PostgreSQL database
+  port: 5432
 
 redis:
-  enabled: false
+  # -- enable Redis™ subchart from Bitnami
+  enabled: true
+  auth:
+    # -- Enable password authentication
+    enabled: true
+    # -- Redis™ password
+    password: mychart
+
+externalRedis:
+  auth:
+    # -- if authentication should be used with external Redis™
+    enabled: true
+    # -- Name of existing secret to use for Redis™ credentials
+    existingSecret: ""
+    # -- Password to use
+    password: ""
+    # -- Key in the secret containing the password
+    userPasswordKey: ""
+  # -- Hostname of Redis™
+  hostname: ""
+  # -- Port used to connect to Redis
+  port: 6379
