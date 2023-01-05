@@ -88,7 +88,7 @@ frontend:
     #      - chart-example.local
 
   autoscaling:
-    # -- Enable Horizontal POD autoscaling 
+    # -- Enable Horizontal POD autoscaling
     enabled: false
     # -- Minimum number of replicas
     minReplicas: 1
@@ -210,7 +210,7 @@ backend:
       #      - chart-example.local
 
     autoscaling:
-      # -- Enable Horizontal POD autoscaling 
+      # -- Enable Horizontal POD autoscaling
       enabled: false
       # -- Minimum number of replicas
       minReplicas: 1
@@ -317,7 +317,7 @@ backend:
       #      - chart-example.local
 
     autoscaling:
-      # -- Enable Horizontal POD autoscaling 
+      # -- Enable Horizontal POD autoscaling
       enabled: false
       # -- Minimum number of replicas
       minReplicas: 1
