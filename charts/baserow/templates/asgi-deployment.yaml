@@ -48,6 +48,14 @@ spec:
                 secretKeyRef:
                   name: {{ include "baserow.backend.secretName" . | quote }}
                   key: secret-key
+            # Baserow Email Settings
+            {{- if .Values.backend.config.email.smtp }}
+            - name: EMAIL_SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.email.secretName" . | quote }}
+                  key: email-password
+            {{- end }}
             # Baserow File Upload Settings
             {{- if or .Values.backend.config.aws.accessKeyId .Values.backend.config.aws.existingSecret }}
             - name: AWS_ACCESS_KEY_ID

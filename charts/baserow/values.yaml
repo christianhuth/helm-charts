@@ -295,7 +295,6 @@ backend:
       # -- When BASEROW_AMOUNT_OF_WORKERS is 1 and this is set to a non empty value Baserow will not run the export-worker but instead run both the celery export and normal tasks on the normal celery worker. Set this to lower the memory usage of Baserow in expense of performance.
       runMinimal: ""
 
-
   config:
     # -- The maximum amount of seconds an Airtable migration import job can run.
     airtableImportSoftTimeLimit: "1800"
@@ -320,6 +319,23 @@ backend:
     batchRowsSizeLimit: "200"
     # -- Baserow’s formulas have an internal version number. When upgrading Baserow if the formula language has also changed then after the database migration has run Baserow will also automatically recalculate all formulas if they have a different version. Set this to any non empty value to disable this automatic update if you would prefer to run the update_formulas management command manually yourself. Formulas might break if you forget to do so after an upgrade of Baserow until and so it is recommended to leave this empty.
     dontUpdateFormulasAfterMigration: ""
+    email:
+      # -- Name of existing secret to use for the email password. Key in secret should be called `email-password`.
+      existingSecret: ""
+      # -- The email address Baserow will send emails from.
+      fromEmail: ""
+      # -- If set to any non empty value then Baserow will start sending emails using the configuration options below. If not set then Baserow will not send emails and just log them to the Celery worker logs instead.
+      smtp: ""
+      # -- The host of the external SMTP server that Baserow should use to send emails.
+      smtpHost: ""
+      # -- The password to authenticate to the smtp host when sending emails.
+      smtpPassword: ""
+      # -- The port used to connect to the smtp host.
+      smtpPort: ""
+      # -- The username to authenticate to the smtp host when sending emails.
+      smtpUser: ""
+      # -- If set to any non empty value then Baserow will attempt to send emails using TLS.
+      smtpUseTls: ""
     # -- Name of existing secret to use for secret configuration values like backend.config.jwtSigningKey and backend.config.secretKey. Keys in secret should be called `jwt-signing-key` and `secret-key`.
     existingSecret: ""
     # -- The max file size in MB allowed to be uploaded by users into a Baserow File Field.

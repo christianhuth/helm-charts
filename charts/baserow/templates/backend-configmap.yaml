@@ -32,6 +32,25 @@ data:
   BASEROW_CELERY_BEAT_DEBUG_LEVEL: {{ .Values.backend.celery.config.beatDebugLevel | quote }}
   BASEROW_CELERY_BEAT_STARTUP_DELAY: {{ .Values.backend.celery.config.beatStartupDelay | quote }}
   BASEROW_RUN_MINIMAL: {{ .Values.backend.celery.config.runMinimal | quote }}
+  # Baserow Email Settings
+  {{- if .Values.backend.config.email.smtp }}
+  EMAIL_SMTP: {{ .Values.backend.config.email.smtp | quote }}
+  {{- if .Values.backend.config.email.smtpUseTls }}
+  EMAIL_SMTP_USE_TLS: {{ .Values.backend.config.email.smtpUseTls | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.email.smtpHost }}
+  EMAIL_SMTP_HOST: {{ .Values.backend.config.email.smtpHost | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.email.smtpPort }}
+  EMAIL_SMTP_PORT: {{ .Values.backend.config.email.smtpPort | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.email.smtpUser }}
+  EMAIL_SMTP_USER: {{ .Values.backend.config.email.smtpUser | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.email.fromEmail }}
+  FROM_EMAIL: {{ .Values.backend.config.email.fromEmail | quote }}
+  {{- end }}
+  {{- end }}
   # Baserow File Upload Settings
   AWS_STORAGE_BUCKET_NAME: {{ .Values.backend.config.aws.bucketName | quote }}
   {{- if .Values.backend.config.aws.s3CustomDomain }}

@@ -213,6 +213,17 @@ Get the name of the secret containing the secrets for authentication against AWS
 {{- end -}}
 
 {{/*
+Get the name of the secret containing the secrets for authentication against AWS
+*/}}
+{{- define "baserow.backend.email.secretName" -}}
+  {{- if .Values.backend.config.email.existingSecret -}}
+    {{- printf "%s" (tpl .Values.backend.config.email.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "baserow.backend.fullname" .) -}}-email
+  {{- end -}}
+{{- end -}}
+
+{{/*
 Get the name of the persistent volume claim for the baserow backend
 */}}
 {{- define "baserow.backend.pvcName" -}}

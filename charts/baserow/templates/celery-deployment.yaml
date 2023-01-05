@@ -47,6 +47,14 @@ spec:
                 secretKeyRef:
                   name: {{ include "baserow.backend.secretName" . | quote }}
                   key: secret-key
+            # Baserow Email Settings
+            {{- if .Values.backend.config.email.smtp }}
+            - name: EMAIL_SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.email.secretName" . | quote }}
+                  key: email-password
+            {{- end }}
             # Redis Settings
             {{- if eq (include "baserow.redis.auth.enabled" .) "true" }}
             - name: REDIS_PASSWORD
