@@ -244,7 +244,7 @@ Get the name of the secret containing the secrets for the baserow backend
 {{/*
 Define a for the celery worker components of the chart.
 */}}
-{{- define "baserow.celery.name" -}}
+{{- define "baserow.backend.celery.name" -}}
 {{- include "baserow.name" . | trunc 56 | trimSuffix "-" }}-celery
 {{- end }}
 
@@ -252,24 +252,24 @@ Define a for the celery worker components of the chart.
 Create a fully qualified name for the celery worker components.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-{{- define "baserow.celery.fullname" -}}
+{{- define "baserow.backend.celery.fullname" -}}
 {{- include "baserow.fullname" . | trunc 56 | trimSuffix "-" }}-celery
 {{- end }}
 
 {{/*
 Selector labels for the celery workers
 */}}
-{{- define "baserow.celery.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "baserow.celery.name" . }}
+{{- define "baserow.backend.celery.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "baserow.backend.celery.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Common labels for all celery worker resources
 */}}
-{{- define "baserow.celery.labels" -}}
+{{- define "baserow.backend.celery.labels" -}}
 helm.sh/chart: {{ include "baserow.chart" . }}
-{{ include "baserow.celery.selectorLabels" . }}
+{{ include "baserow.backend.celery.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -279,11 +279,11 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Create the name of the service account to use for the celery worker deployment
 */}}
-{{- define "baserow.celery.serviceAccountName" -}}
-{{- if .Values.celery.serviceAccount.create }}
-{{- default (include "baserow.celery.fullname" .) .Values.celery.serviceAccount.name }}
+{{- define "baserow.backend.celery.serviceAccountName" -}}
+{{- if .Values.backend.celery.serviceAccount.create }}
+{{- default (include "baserow.backend.celery.fullname" .) .Values.backend.celery.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.celery.serviceAccount.name }}
+{{- default "default" .Values.backend.celery.serviceAccount.name }}
 {{- end }}
 {{- end }}
 

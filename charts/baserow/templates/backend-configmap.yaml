@@ -27,6 +27,11 @@ data:
   {{- end }}
   MIGRATE_ON_STARTUP: {{ .Values.backend.config.migrateOnStartup | quote }}
   POSTGRES_STARTUP_CHECK_ATTEMPTS: {{ .Values.backend.config.postgresStartupCheckAttempts | quote }}
+  # Baserow Celery Settings
+  BASEROW_AMOUNT_OF_WORKERS: {{ .Values.backend.celery.config.amountOfWorkers | quote }}
+  BASEROW_CELERY_BEAT_DEBUG_LEVEL: {{ .Values.backend.celery.config.beatDebugLevel | quote }}
+  BASEROW_CELERY_BEAT_STARTUP_DELAY: {{ .Values.backend.celery.config.beatStartupDelay | quote }}
+  BASEROW_RUN_MINIMAL: {{ .Values.backend.celery.config.runMinimal | quote }}
   # Baserow File Upload Settings
   AWS_STORAGE_BUCKET_NAME: {{ .Values.backend.config.aws.bucketName | quote }}
   {{- if .Values.backend.config.aws.s3CustomDomain }}

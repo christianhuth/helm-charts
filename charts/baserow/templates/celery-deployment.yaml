@@ -1,38 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "baserow.celery.fullname" . }}
+  name: {{ include "baserow.backend.celery.fullname" . }}
   labels:
-    {{- include "baserow.celery.labels" . | nindent 4 }}
+    {{- include "baserow.backend.celery.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.celery.autoscaling.enabled }}
-  replicas: {{ .Values.celery.replicaCount }}
+  {{- if not .Values.backend.celery.autoscaling.enabled }}
+  replicas: {{ .Values.backend.celery.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "baserow.celery.selectorLabels" . | nindent 6 }}
+      {{- include "baserow.backend.celery.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.celery.podAnnotations }}
+      {{- with .Values.backend.celery.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "baserow.celery.selectorLabels" . | nindent 8 }}
+        {{- include "baserow.backend.celery.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.celery.imagePullSecrets }}
+      {{- with .Values.backend.celery.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "baserow.celery.serviceAccountName" . }}
-      {{- with .Values.celery.podSecurityContext }}
+      serviceAccountName: {{ include "baserow.backend.celery.serviceAccountName" . }}
+      {{- with .Values.backend.celery.podSecurityContext }}
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        - name: {{ include "baserow.celery.name" . }}-worker
-          image: "{{ .Values.celery.image.repository }}:{{ .Values.celery.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.celery.image.pullPolicy }}
+        - name: {{ include "baserow.backend.celery.name" . }}-worker
+          image: "{{ .Values.backend.celery.image.repository }}:{{ .Values.backend.celery.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.celery.image.pullPolicy }}
           args:
             - "celery-worker"
           env:
@@ -55,7 +55,7 @@ spec:
                   name: {{ include "baserow.redis.secretName" . | quote }}
                   key: {{ include "baserow.redis.userPasswordKey" . | quote }}
             {{- end }}
-            {{- range .Values.celery.extraEnv }}
+            {{- range .Values.backend.celery.extraEnv }}
             {{- if and (.name) (.value) }}
             - name: {{ .name | quote }}
               value: {{ .value | quote }}
@@ -66,8 +66,6 @@ spec:
                 name: {{ include "baserow.fullname" . }}
             - configMapRef:
                 name: {{ include "baserow.backend.fullname" . }}
-            - configMapRef:
-                name: {{ include "baserow.celery.fullname" . }}
           livenessProbe:
             exec:
               command:
@@ -86,11 +84,11 @@ spec:
             initialDelaySeconds: 10
             timeoutSeconds: 10
             periodSeconds: 10
-          {{- with .Values.celery.resources }}
+          {{- with .Values.backend.celery.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.celery.securityContext }}
+          {{- with .Values.backend.celery.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -99,9 +97,9 @@ spec:
             - name: media
               mountPath: {{ .Values.backend.config.media.root | quote }}
           {{- end }}
-        - name: {{ include "baserow.celery.name" . }}-export-worker
-          image: "{{ .Values.celery.image.repository }}:{{ .Values.celery.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.celery.image.pullPolicy }}
+        - name: {{ include "baserow.backend.celery.name" . }}-export-worker
+          image: "{{ .Values.backend.celery.image.repository }}:{{ .Values.backend.celery.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.celery.image.pullPolicy }}
           args:
             - "celery-exportworker"
           env:
@@ -124,7 +122,7 @@ spec:
                   name: {{ include "baserow.redis.secretName" . | quote }}
                   key: {{ include "baserow.redis.userPasswordKey" . | quote }}
             {{- end }}
-            {{- range .Values.celery.extraEnv }}
+            {{- range .Values.backend.celery.extraEnv }}
             {{- if and (.name) (.value) }}
             - name: {{ .name | quote }}
               value: {{ .value | quote }}
@@ -135,8 +133,6 @@ spec:
                 name: {{ include "baserow.fullname" . }}
             - configMapRef:
                 name: {{ include "baserow.backend.fullname" . }}
-            - configMapRef:
-                name: {{ include "baserow.celery.fullname" . }}
           livenessProbe:
             exec:
               command:
@@ -155,11 +151,11 @@ spec:
             initialDelaySeconds: 10
             timeoutSeconds: 10
             periodSeconds: 10
-          {{- with .Values.celery.resources }}
+          {{- with .Values.backend.celery.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.celery.securityContext }}
+          {{- with .Values.backend.celery.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -168,9 +164,9 @@ spec:
             - name: media
               mountPath: {{ .Values.backend.config.media.root | quote }}
           {{- end }}
-        - name: {{ include "baserow.celery.name" . }}-backend-beat-worker
-          image: "{{ .Values.celery.image.repository }}:{{ .Values.celery.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.celery.image.pullPolicy }}
+        - name: {{ include "baserow.backend.celery.name" . }}-backend-beat-worker
+          image: "{{ .Values.backend.celery.image.repository }}:{{ .Values.backend.celery.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.celery.image.pullPolicy }}
           args:
             - "celery-beat"
           env:
@@ -193,7 +189,7 @@ spec:
                   name: {{ include "baserow.redis.secretName" . | quote }}
                   key: {{ include "baserow.redis.userPasswordKey" . | quote }}
             {{- end }}
-            {{- range .Values.celery.extraEnv }}
+            {{- range .Values.backend.celery.extraEnv }}
             {{- if and (.name) (.value) }}
             - name: {{ .name | quote }}
               value: {{ .value | quote }}
@@ -204,13 +200,11 @@ spec:
                 name: {{ include "baserow.fullname" . }}
             - configMapRef:
                 name: {{ include "baserow.backend.fullname" . }}
-            - configMapRef:
-                name: {{ include "baserow.celery.fullname" . }}
-          {{- with .Values.celery.resources }}
+          {{- with .Values.backend.celery.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.celery.securityContext }}
+          {{- with .Values.backend.celery.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -219,15 +213,15 @@ spec:
             - name: media
               mountPath: {{ .Values.backend.config.media.root | quote }}
           {{- end }}
-      {{- with .Values.celery.nodeSelector }}
+      {{- with .Values.backend.celery.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.celery.affinity }}
+      {{- with .Values.backend.celery.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.celery.tolerations }}
+      {{- with .Values.backend.celery.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
