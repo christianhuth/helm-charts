@@ -111,6 +111,19 @@ frontend:
   # -- additional environment variables to be added to the pods
   extraEnv: []
 
+  # -- see https://baserow.io/docs/installation%2Fconfiguration
+  config:
+    # -- A list of file paths to Nuxt module.js files to load as additional Nuxt modules into Baserow on startup.
+    additionalModules: ""
+    # -- When opening the Baserow login page a check is run to ensure the PUBLIC_BACKEND_URL/BASEROW_PUBLIC_URL variables are set correctly and your browser can correctly connect to the backend. If misconfigured an error is shown. If you wish to disable this check and warning set this to any non empty value.
+    disablePublicUrlCheck: ""
+    # -- Set to `true` or `1` to disable Google docs file preview.
+    disableGoogleDocsFilePreview: ""
+    # -- Set to `1` to force download links to download files via XHR query to bypass `Content-Disposition: inline` that can’t be overridden in another way. If your files are stored under another origin, you also must add CORS headers to your server.
+    downloadFileViaXhr: "0"
+    # -- Controls how many application snapshots can be created per group.
+    maxSnapshotsPerGroup: "-1"
+
 backend:
 
   asgi:
@@ -326,6 +339,29 @@ backend:
 
     # -- additional environment variables to be added to the pods
     extraEnv: []
+
+ingress:
+  # -- Enable ingress record generation
+  enabled: true
+  # -- IngressClass that will be be used to implement the Ingress
+  className: ""
+  # -- Additional annotations for the Ingress resource
+  annotations: {}
+    # cert-manager.io/cluster-issuer: cluster-issuer-name
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  # -- An array with hosts and paths
+  # @default -- see [values.yaml](./values.yaml)
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  # -- An array with the tls configuration
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
 
 postgresql:
   enabled: false
