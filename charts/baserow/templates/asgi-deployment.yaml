@@ -48,6 +48,19 @@ spec:
                 secretKeyRef:
                   name: {{ include "baserow.backend.secretName" . | quote }}
                   key: secret-key
+            # Baserow File Upload Settings
+            {{- if or .Values.backend.config.aws.accessKeyId .Values.backend.config.aws.existingSecret }}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.aws.secretName" . | quote }}
+                  key: access-key-id
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.aws.secretName" . | quote }}
+                  key: secret-access-key
+            {{- end }}
             # Database Settings
             - name: DATABASE_PASSWORD
               valueFrom:
@@ -61,7 +74,7 @@ spec:
                 secretKeyRef:
                   name: {{ include "baserow.redis.secretName" . | quote }}
                   key: {{ include "baserow.redis.userPasswordKey" . | quote }}
-            {{- end -}}
+            {{- end }}
             {{- range .Values.backend.asgi.extraEnv }}
             {{- if and (.name) (.value) }}
             - name: {{ .name | quote }}

@@ -36,6 +36,25 @@ spec:
           args:
             - "celery-worker"
           env:
+            # Baserow Backend Settings
+            - name: BASEROW_JWT_SIGNING_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: jwt-signing-key
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: secret-key
+            # Redis Settings
+            {{- if eq (include "baserow.redis.auth.enabled" .) "true" }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.redis.secretName" . | quote }}
+                  key: {{ include "baserow.redis.userPasswordKey" . | quote }}
+            {{- end }}
             {{- range .Values.celery.extraEnv }}
             {{- if and (.name) (.value) }}
             - name: {{ .name | quote }}
@@ -43,6 +62,10 @@ spec:
             {{- end }}
             {{- end }}
           envFrom:
+            - configMapRef:
+                name: {{ include "baserow.fullname" . }}
+            - configMapRef:
+                name: {{ include "baserow.backend.fullname" . }}
             - configMapRef:
                 name: {{ include "baserow.celery.fullname" . }}
           livenessProbe:
@@ -71,18 +94,49 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if .Values.backend.persistence.enabled }}
+          volumeMounts:
+            - name: media
+              mountPath: {{ .Values.backend.config.media.root | quote }}
+          {{- end }}
         - name: {{ include "baserow.celery.name" . }}-export-worker
           image: "{{ .Values.celery.image.repository }}:{{ .Values.celery.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.celery.image.pullPolicy }}
           args:
             - "celery-exportworker"
           env:
+            # Baserow Backend Settings
+            - name: BASEROW_JWT_SIGNING_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: jwt-signing-key
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: secret-key
+            # Redis Settings
+            {{- if eq (include "baserow.redis.auth.enabled" .) "true" }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.redis.secretName" . | quote }}
+                  key: {{ include "baserow.redis.userPasswordKey" . | quote }}
+            {{- end }}
             {{- range .Values.celery.extraEnv }}
             {{- if and (.name) (.value) }}
             - name: {{ .name | quote }}
               value: {{ .value | quote }}
             {{- end }}
             {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "baserow.fullname" . }}
+            - configMapRef:
+                name: {{ include "baserow.backend.fullname" . }}
+            - configMapRef:
+                name: {{ include "baserow.celery.fullname" . }}
           livenessProbe:
             exec:
               command:
@@ -109,18 +163,49 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if .Values.backend.persistence.enabled }}
+          volumeMounts:
+            - name: media
+              mountPath: {{ .Values.backend.config.media.root | quote }}
+          {{- end }}
         - name: {{ include "baserow.celery.name" . }}-backend-beat-worker
           image: "{{ .Values.celery.image.repository }}:{{ .Values.celery.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.celery.image.pullPolicy }}
           args:
             - "celery-beat"
           env:
+            # Baserow Backend Settings
+            - name: BASEROW_JWT_SIGNING_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: jwt-signing-key
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.backend.secretName" . | quote }}
+                  key: secret-key
+            # Redis Settings
+            {{- if eq (include "baserow.redis.auth.enabled" .) "true" }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.redis.secretName" . | quote }}
+                  key: {{ include "baserow.redis.userPasswordKey" . | quote }}
+            {{- end }}
             {{- range .Values.celery.extraEnv }}
             {{- if and (.name) (.value) }}
             - name: {{ .name | quote }}
               value: {{ .value | quote }}
             {{- end }}
             {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "baserow.fullname" . }}
+            - configMapRef:
+                name: {{ include "baserow.backend.fullname" . }}
+            - configMapRef:
+                name: {{ include "baserow.celery.fullname" . }}
           {{- with .Values.celery.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
@@ -128,6 +213,11 @@ spec:
           {{- with .Values.celery.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.backend.persistence.enabled }}
+          volumeMounts:
+            - name: media
+              mountPath: {{ .Values.backend.config.media.root | quote }}
           {{- end }}
       {{- with .Values.celery.nodeSelector }}
       nodeSelector:
@@ -140,4 +230,10 @@ spec:
       {{- with .Values.celery.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.backend.persistence.enabled }}
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: {{ include "baserow.backend.pvcName" . }}
       {{- end }}

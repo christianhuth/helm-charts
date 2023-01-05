@@ -120,8 +120,6 @@ frontend:
     disableGoogleDocsFilePreview: ""
     # -- Set to `1` to force download links to download files via XHR query to bypass `Content-Disposition: inline` that can’t be overridden in another way. If your files are stored under another origin, you also must add CORS headers to your server.
     downloadFileViaXhr: "0"
-    # -- Controls how many application snapshots can be created per group.
-    maxSnapshotsPerGroup: "-1"
 
 backend:
 
@@ -210,11 +208,17 @@ backend:
     extraEnv: []
 
   config:
+    # -- The maximum amount of seconds an Airtable migration import job can run.
+    airtableImportSoftTimeLimit: "1800"
+    # -- The number of concurrent worker processes used by the Baserow backend gunicorn server to process incoming requests
+    amountOfGunicornWorkers: ""
     aws:
       # -- The access key for your AWS account. When set to anything other than empty will switch Baserow to use a S3 compatible bucket for storing user file uploads.
       accessKeyId: ""
       # -- Your Amazon Web Services storage bucket name.
       bucketName: ""
+      # -- Name of existing secret to use for AWS credentials like backend.config.aws.accessKeyId and backend.config.aws.secretAccessKey. Keys in secret should be called `access-key-id` and `secret-access-key`.
+      existingSecret: ""
       # -- The access secret key for your AWS account.
       secretAccessKey: ""
       # -- Your custom domain where the files can be downloaded from.
@@ -223,12 +227,25 @@ backend:
       s3EndpointUrl: ""
       # -- Name of the AWS S3 region to use (eg. eu-west-1)
       s3RegionName: ""
+    # -- Controls how many rows can be created, deleted or updated at once using the batch endpoints.
+    batchRowsSizeLimit: "200"
     # -- Baserow’s formulas have an internal version number. When upgrading Baserow if the formula language has also changed then after the database migration has run Baserow will also automatically recalculate all formulas if they have a different version. Set this to any non empty value to disable this automatic update if you would prefer to run the update_formulas management command manually yourself. Formulas might break if you forget to do so after an upgrade of Baserow until and so it is recommended to leave this empty.
     dontUpdateFormulasAfterMigration: ""
     # -- Name of existing secret to use for secret configuration values like backend.config.jwtSigningKey and backend.config.secretKey. Keys in secret should be called `jwt-signing-key` and `secret-key`.
     existingSecret: ""
+    # -- The max file size in MB allowed to be uploaded by users into a Baserow File Field.
+    fileUploadSizeLimit: "1048576"
+    # -- The amount of rows that can be imported when creating a table. Defaults to empty which means unlimited rows.
+    initialTableDataLimit: ""
     # -- The signing key that is used to sign the content of generated tokens. For HMAC signing, this should be a random string with at least as many bits of data as is required by the signing protocol. See https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html#signing-key for more details.
     jwtSigningKey: ""
+    logging:
+      # -- If set to “on” then will enable the non production safe debug mode for the Baserow django backend.
+      backendDebug: "off"
+      # -- The default log level used by the backend, supports ERROR, WARNING, INFO, DEBUG, TRACE
+      backendLogLevel: "INFO"
+      # -- The default log level used for database related logs in the backend. Supports the same values as the normal log level. If you also enable BASEROW_BACKEND_DEBUG and set this to DEBUG you will be able to see all SQL queries in the backend logs.
+      databaseLogLevel: "ERROR"
     media:
       # -- The folder in which the backend will store user uploaded files
       root: "/baserow/media"
@@ -238,12 +255,42 @@ backend:
     migrateOnStartup: "true"
     # -- When Baserow’s Backend service starts up it first checks to see if the postgres database is available.
     postgresStartupCheckAttempts: "5"
+    # -- The maximum number of rows that can be requested at once.
+    rowPageSizeLimit: "200"
     # -- The Secret key used by Django for cryptographic signing such as generating secure password reset links and managing sessions. See https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-SECRET_KEY for more details.
     secretKey: ""
+    # -- Controls when snapshots expire, set in number of days. Expired snapshots will be automatically deleted.
+    snapshotExpirationTimeDays: "360"
     # -- The number of seconds before the background sync templates job will timeout if not yet completed.
     syncTemplatesTimeLimit: "1800"
+    tokens:
+      # -- The number of minutes which specifies how long access tokens are valid. This will be converted in a timedelta value and added to the current UTC time during token generation to obtain the token’s default “exp” claim value.
+      accessTokenLifetimeMinutes: "10"
+      # -- The number of hours which specifies how long refresh tokens are valid. This will be converted in a timedelta value and added to the current UTC time during token generation to obtain the token’s default “exp” claim value.
+      refreshTokenLifetimeHours: "168"
     # -- If set to “true” when after a migration Baserow will automatically sync all builtin Baserow templates in the background. If you are using a postgres database which is constrained to fewer than 10000 rows then we recommend you disable this as the Baserow templates will go over that row limit. To disable this set to any other value than “true”
     triggerSyncTemplatesAfterMigration: "true"
+    webhook:
+      # -- If set to any non empty value allows webhooks to access all addresses. Enabling this flag is a security risk as it will allow users to send webhook requests to internal addresses on your network. Instead consider using the three variables below first to allow access to only some internal network hostnames or IPs.
+      allowPrivateAddress: ""
+      # -- Disabled if backend.config.webhook.allowPrivateAddress is set. List of comma seperated IP addresses or ranges that webhooks will be denied from using after the URL has been resolved to an IP using DNS.
+      ipBlacklist: ""
+      # -- Disabled if backend.config.webhook.allowPrivateAddress is set. List of comma seperated IP addresses or ranges that webhooks will be allowed to use after the webhook URL has been resolved to an IP using DNS.
+      ipWhitelist: ""
+      # -- The maximum number of call log entries stored per webhook.
+      maxCallLogEntries: "10"
+      # -- The number of consecutive trigger failures that can occur before a webhook is disabled.
+      maxConsecutiveTriggerFailures: "8"
+      # -- The max number of webhooks per Baserow table.
+      maxPerTable: "20"
+      # -- The max number of retries per webhook call.
+      maxRetriesPerCall: "8"
+      # -- How long to wait on making the webhook request before timing out.
+      requestTimeoutSeconds: "5"
+      # -- Disabled if backend.config.webhook.allowPrivateAddress is set. How long to wait before timing out and returning an error when checking if an url can be accessed for a webhook.
+      urlCheckTimeoutSecs: "10"
+      # -- Disabled if backend.config.webhook.allowPrivateAddress is set. List of comma seperated regexes used to validate user configured webhook URLs, will show the user an error if any regexes match their webhook URL and prevent it from running.
+      urlRegexBlacklist: ""
 
   persistence:
     # use a PVC to persist file uploads
@@ -459,6 +506,8 @@ celery:
 config:
   # -- The maximum file size in mb you can import to create a new table. Default 512Mb.
   maxImportFileSizeMb: "512"
+  # -- Controls how many application snapshots can be created per group.
+  maxSnapshotsPerGroup: "-1"
 
 postgresql:
   # -- enable PostgreSQL™ subchart from Bitnami

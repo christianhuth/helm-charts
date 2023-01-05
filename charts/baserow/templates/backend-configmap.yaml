@@ -4,16 +4,61 @@ metadata:
   name: {{ include "baserow.backend.fullname" . }}
 data:
   # Baserow Backend Settings
+  BASEROW_ACCESS_TOKEN_LIFETIME_MINUTES: {{ .Values.backend.config.tokens.accessTokenLifetimeMinutes | quote }}
+  BASEROW_AIRTABLE_IMPORT_SOFT_TIME_LIMIT: {{ .Values.backend.config.airtableImportSoftTimeLimit | quote }}
+  {{- if .Values.backend.config.amountOfGunicornWorkers }}
+  BASEROW_AMOUNT_OF_GUNICORN_WORKERS: {{ .Values.backend.config.amountOfGunicornWorkers | quote }}
+  {{- end }}
+  BASEROW_BACKEND_DATABASE_LOG_LEVEL: {{ .Values.backend.config.logging.databaseLogLevel | quote }}
+  BASEROW_BACKEND_DEBUG: {{ .Values.backend.config.logging.backendDebug | quote }}
+  BASEROW_BACKEND_LOG_LEVEL: {{ .Values.backend.config.logging.backendLogLevel | quote }}
+  BASEROW_FILE_UPLOAD_SIZE_LIMIT_MB: {{ .Values.backend.config.fileUploadSizeLimit | quote }}
+  BASEROW_REFRESH_TOKEN_LIFETIME_HOURS: {{ .Values.backend.config.tokens.refreshTokenLifetimeHours | quote }}
+  BASEROW_ROW_PAGE_SIZE_LIMIT: {{ .Values.backend.config.rowPageSizeLimit | quote }}
+  BASEROW_SNAPSHOT_EXPIRATION_TIME_DAYS: {{ .Values.backend.config.snapshotExpirationTimeDays | quote }}
   BASEROW_SYNC_TEMPLATES_TIME_LIMIT: {{ .Values.backend.config.syncTemplatesTimeLimit | quote }}
   BASEROW_TRIGGER_SYNC_TEMPLATES_AFTER_MIGRATION: {{ .Values.backend.config.triggerSyncTemplatesAfterMigration | quote }}
+  BATCH_ROWS_SIZE_LIMIT: {{ .Values.backend.config.batchRowsSizeLimit | quote }}
   {{- if .Values.backend.config.dontUpdateFormulasAfterMigration }}
   DONT_UPDATE_FORMULAS_AFTER_MIGRATION: {{ .Values.backend.config.dontUpdateFormulasAfterMigration | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.initialTableDataLimit }}
+  INITIAL_TABLE_DATA_LIMIT: {{ .Values.backend.config.initialTableDataLimit | quote }}
   {{- end }}
   MIGRATE_ON_STARTUP: {{ .Values.backend.config.migrateOnStartup | quote }}
   POSTGRES_STARTUP_CHECK_ATTEMPTS: {{ .Values.backend.config.postgresStartupCheckAttempts | quote }}
   # Baserow File Upload Settings
+  AWS_STORAGE_BUCKET_NAME: {{ .Values.backend.config.aws.bucketName | quote }}
+  {{- if .Values.backend.config.aws.s3CustomDomain }}
+  AWS_S3_CUSTOM_DOMAIN: {{ .Values.backend.config.aws.s3CustomDomain | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.aws.s3EndpointUrl }}
+  AWS_S3_ENDPOINT_URL: {{ .Values.backend.config.aws.s3EndpointUrl | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.aws.s3RegionName }}
+  AWS_S3_REGION_NAME: {{ .Values.backend.config.aws.s3RegionName | quote }}
+  {{- end }}
   MEDIA_ROOT: {{ .Values.backend.config.media.root | quote }}
   MEDIA_URL: {{ .Values.backend.config.media.url | quote }}
+  # Baserow Webhook Settings
+  {{- if .Values.backend.config.webhook.allowPrivateAddress }}
+  BASEROW_WEBHOOKS_ALLOW_PRIVATE_ADDRESS: {{ .Values.backend.config.webhook.allowPrivateAddress | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.webhook.ipBlacklist }}
+  BASEROW_WEBHOOKS_IP_BLACKLIST: {{ .Values.backend.config.webhook.ipBlacklist | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.webhook.ipWhitelist }}
+  BASEROW_WEBHOOKS_IP_WHITELIST: {{ .Values.backend.config.webhook.ipWhitelist | quote }}
+  {{- end }}
+  BASEROW_WEBHOOKS_MAX_CALL_LOG_ENTRIES: {{ .Values.backend.config.webhook.maxCallLogEntries | quote }}
+  BASEROW_WEBHOOKS_MAX_CONSECUTIVE_TRIGGER_FAILURES: {{ .Values.backend.config.webhook.maxConsecutiveTriggerFailures | quote }}
+  BASEROW_WEBHOOKS_MAX_PER_TABLE: {{ .Values.backend.config.webhook.maxPerTable | quote }}
+  BASEROW_WEBHOOKS_MAX_RETRIES_PER_CALL: {{ .Values.backend.config.webhook.maxRetriesPerCall | quote }}
+  BASEROW_WEBHOOKS_REQUEST_TIMEOUT_SECONDS: {{ .Values.backend.config.webhook.requestTimeoutSeconds | quote }}
+  BASEROW_WEBHOOKS_URL_CHECK_TIMEOUT_SECS: {{ .Values.backend.config.webhook.urlCheckTimeoutSecs | quote }}
+  {{- if .Values.backend.config.webhook.urlRegexBlacklist }}
+  BASEROW_WEBHOOKS_URL_REGEX_BLACKLIST: {{ .Values.backend.config.webhook.urlRegexBlacklist | quote }}
+  {{- end }}
   # Database Settings
   DATABASE_HOST: {{ include "baserow.postgresql.hostname" . | quote }}
   DATABASE_PORT: {{ include "baserow.postgresql.port" . | quote }}

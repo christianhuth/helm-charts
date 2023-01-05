@@ -202,6 +202,17 @@ Create the name of the service account to use for the wsgi backend deployment
 {{- end }}
 
 {{/*
+Get the name of the secret containing the secrets for authentication against AWS
+*/}}
+{{- define "baserow.backend.aws.secretName" -}}
+  {{- if .Values.backend.config.aws.existingSecret -}}
+    {{- printf "%s" (tpl .Values.backend.config.aws.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "baserow.backend.fullname" .) -}}-aws
+  {{- end -}}
+{{- end -}}
+
+{{/*
 Get the name of the persistent volume claim for the baserow backend
 */}}
 {{- define "baserow.backend.pvcName" -}}
