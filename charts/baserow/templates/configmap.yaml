@@ -5,6 +5,7 @@ metadata:
 data:
   # Baserow General Settings
   BASEROW_MAX_IMPORT_FILE_SIZE_MB: {{ .Values.config.maxImportFileSizeMb | quote }}
-  BASEROW_MAX_SNAPSHOTS_PER_GROUP: {{ .Values.frontend.config.maxSnapshotsPerGroup | quote }}
+  BASEROW_MAX_SNAPSHOTS_PER_GROUP: {{ .Values.config.maxSnapshotsPerGroup | quote }}
+  PRIVATE_BACKEND_URL: {{ include "baserow.backend.privateUrl" . | quote }}
   PUBLIC_BACKEND_URL: {{ include "baserow.backend.publicUrl" . | quote }}
   PUBLIC_WEB_FRONTEND_URL: {{ include "baserow.frontend.publicUrl" . | quote }}

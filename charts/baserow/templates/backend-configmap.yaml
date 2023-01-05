@@ -12,6 +12,9 @@ data:
   BASEROW_BACKEND_DATABASE_LOG_LEVEL: {{ .Values.backend.config.logging.databaseLogLevel | quote }}
   BASEROW_BACKEND_DEBUG: {{ .Values.backend.config.logging.backendDebug | quote }}
   BASEROW_BACKEND_LOG_LEVEL: {{ .Values.backend.config.logging.backendLogLevel | quote }}
+  {{- if and (.Values.backend.ingress.enabled) (.Values.backend.ingress.hostname) }}
+  BASEROW_EXTRA_ALLOWED_HOSTS: {{ .Values.backend.ingress.hostname | quote }}
+  {{- end }}
   BASEROW_FILE_UPLOAD_SIZE_LIMIT_MB: {{ .Values.backend.config.fileUploadSizeLimit | quote }}
   BASEROW_REFRESH_TOKEN_LIFETIME_HOURS: {{ .Values.backend.config.tokens.refreshTokenLifetimeHours | quote }}
   BASEROW_ROW_PAGE_SIZE_LIMIT: {{ .Values.backend.config.rowPageSizeLimit | quote }}
@@ -28,10 +31,10 @@ data:
   MIGRATE_ON_STARTUP: {{ .Values.backend.config.migrateOnStartup | quote }}
   POSTGRES_STARTUP_CHECK_ATTEMPTS: {{ .Values.backend.config.postgresStartupCheckAttempts | quote }}
   # Baserow Celery Settings
-  BASEROW_AMOUNT_OF_WORKERS: {{ .Values.backend.celery.config.amountOfWorkers | quote }}
-  BASEROW_CELERY_BEAT_DEBUG_LEVEL: {{ .Values.backend.celery.config.beatDebugLevel | quote }}
-  BASEROW_CELERY_BEAT_STARTUP_DELAY: {{ .Values.backend.celery.config.beatStartupDelay | quote }}
-  BASEROW_RUN_MINIMAL: {{ .Values.backend.celery.config.runMinimal | quote }}
+  BASEROW_AMOUNT_OF_WORKERS: {{ .Values.backend.config.celery.amountOfWorkers | quote }}
+  BASEROW_CELERY_BEAT_DEBUG_LEVEL: {{ .Values.backend.config.celery.beatDebugLevel | quote }}
+  BASEROW_CELERY_BEAT_STARTUP_DELAY: {{ .Values.backend.config.celery.beatStartupDelay | quote }}
+  BASEROW_RUN_MINIMAL: {{ .Values.backend.config.celery.runMinimal | quote }}
   # Baserow Email Settings
   {{- if .Values.backend.config.email.smtp }}
   EMAIL_SMTP: {{ .Values.backend.config.email.smtp | quote }}

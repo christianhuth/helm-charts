@@ -21,8 +21,10 @@ frontend:
   podAnnotations: {}
 
   # -- pod-level security context
-  podSecurityContext: {}
-    # fsGroup: 2000
+  podSecurityContext:
+    fsGroup: 9999
+    runAsGroup: 9999
+    runAsUser: 9999
 
   # -- Number of replicas
   replicaCount: 1
@@ -41,13 +43,10 @@ frontend:
     #   memory: 128Mi
 
   # -- container-level security context
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+  securityContext:
+    runAsGroup: 9999
+    runAsNonRoot: true
+    runAsUser: 9999
 
   serviceAccount:
     # -- Specifies whether a service account should be created
@@ -65,8 +64,6 @@ frontend:
     port: 3000
 
   ingress:
-    # -- Enable ingress record generation
-    enabled: false
     # -- IngressClass that will be be used to implement the Ingress
     className: ""
     # -- Additional annotations for the Ingress resource
@@ -110,7 +107,7 @@ frontend:
   # -- additional environment variables to be added to the pods
   extraEnv: []
 
-  # -- see https://baserow.io/docs/installation%2Fconfiguration
+  # configuration for the frontend
   config:
     # -- A list of file paths to Nuxt module.js files to load as additional Nuxt modules into Baserow on startup.
     additionalModules: ""
@@ -140,8 +137,10 @@ backend:
     podAnnotations: {}
 
     # -- pod-level security context
-    podSecurityContext: {}
-      # fsGroup: 2000
+    podSecurityContext:
+      fsGroup: 9999
+      runAsGroup: 9999
+      runAsUser: 9999
 
     # -- Number of replicas
     replicaCount: 1
@@ -160,13 +159,10 @@ backend:
       #   memory: 128Mi
 
     # -- container-level security context
-    securityContext: {}
-      # capabilities:
-      #   drop:
-      #   - ALL
-      # readOnlyRootFilesystem: true
-      # runAsNonRoot: true
-      # runAsUser: 1000
+    securityContext:
+      runAsGroup: 9999
+      runAsNonRoot: true
+      runAsUser: 9999
 
     serviceAccount:
       # -- Specifies whether a service account should be created
@@ -224,8 +220,10 @@ backend:
     podAnnotations: {}
 
     # -- pod-level security context
-    podSecurityContext: {}
-      # fsGroup: 2000
+    podSecurityContext:
+      fsGroup: 9999
+      runAsGroup: 9999
+      runAsUser: 9999
 
     # -- Number of replicas
     replicaCount: 1
@@ -244,13 +242,10 @@ backend:
       #   memory: 128Mi
 
     # -- container-level security context
-    securityContext: {}
-      # capabilities:
-      #   drop:
-      #   - ALL
-      # readOnlyRootFilesystem: true
-      # runAsNonRoot: true
-      # runAsUser: 1000
+    securityContext:
+      runAsGroup: 9999
+      runAsNonRoot: true
+      runAsUser: 9999
 
     serviceAccount:
       # -- Specifies whether a service account should be created
@@ -285,16 +280,7 @@ backend:
     # -- additional environment variables to be added to the pods
     extraEnv: []
 
-    config:
-      # -- The number of concurrent celery worker processes used to process asynchronous tasks. If not set will default to the number of available cores. Each celery process uses memory, to reduce Baserow’s memory footprint consider setting and reducing this variable.
-      amountOfWorkers: ""
-      # -- The logging level for the celery beat service.
-      beatDebugLevel: "INFO"
-      # -- The number of seconds the celery beat worker sleeps before starting up.
-      beatStartupDelay: "15"
-      # -- When BASEROW_AMOUNT_OF_WORKERS is 1 and this is set to a non empty value Baserow will not run the export-worker but instead run both the celery export and normal tasks on the normal celery worker. Set this to lower the memory usage of Baserow in expense of performance.
-      runMinimal: ""
-
+  # configuration for the backend
   config:
     # -- The maximum amount of seconds an Airtable migration import job can run.
     airtableImportSoftTimeLimit: "1800"
@@ -317,6 +303,15 @@ backend:
       s3RegionName: ""
     # -- Controls how many rows can be created, deleted or updated at once using the batch endpoints.
     batchRowsSizeLimit: "200"
+    celery:
+      # -- The number of concurrent celery worker processes used to process asynchronous tasks. If not set will default to the number of available cores. Each celery process uses memory, to reduce Baserow’s memory footprint consider setting and reducing this variable.
+      amountOfWorkers: ""
+      # -- The logging level for the celery beat service.
+      beatDebugLevel: "INFO"
+      # -- The number of seconds the celery beat worker sleeps before starting up.
+      beatStartupDelay: "15"
+      # -- When BASEROW_AMOUNT_OF_WORKERS is 1 and this is set to a non empty value Baserow will not run the export-worker but instead run both the celery export and normal tasks on the normal celery worker. Set this to lower the memory usage of Baserow in expense of performance.
+      runMinimal: ""
     # -- Baserow’s formulas have an internal version number. When upgrading Baserow if the formula language has also changed then after the database migration has run Baserow will also automatically recalculate all formulas if they have a different version. Set this to any non empty value to disable this automatic update if you would prefer to run the update_formulas management command manually yourself. Formulas might break if you forget to do so after an upgrade of Baserow until and so it is recommended to leave this empty.
     dontUpdateFormulasAfterMigration: ""
     email:
@@ -429,8 +424,10 @@ backend:
     podAnnotations: {}
 
     # -- pod-level security context
-    podSecurityContext: {}
-      # fsGroup: 2000
+    podSecurityContext:
+      fsGroup: 9999
+      runAsGroup: 9999
+      runAsUser: 9999
 
     # -- Number of replicas
     replicaCount: 1
@@ -449,13 +446,10 @@ backend:
       #   memory: 128Mi
 
     # -- container-level security context
-    securityContext: {}
-      # capabilities:
-      #   drop:
-      #   - ALL
-      # readOnlyRootFilesystem: true
-      # runAsNonRoot: true
-      # runAsUser: 1000
+    securityContext:
+      runAsGroup: 9999
+      runAsNonRoot: true
+      runAsUser: 9999
 
     serviceAccount:
       # -- Specifies whether a service account should be created
@@ -497,8 +491,6 @@ backend:
     extraEnv: []
 
   ingress:
-    # -- Enable ingress record generation for the backend
-    enabled: false
     # -- IngressClass that will be be used to implement the Ingress
     className: ""
     # -- Additional annotations for the Ingress resource
@@ -519,7 +511,7 @@ backend:
     #    hosts:
     #      - chart-example.local
 
-# General configuration shared between multiple components
+# General configuration shared between the frontend and backend
 config:
   # -- The maximum file size in mb you can import to create a new table. Default 512Mb.
   maxImportFileSizeMb: "512"

@@ -1,4 +1,3 @@
-{{- if .Values.frontend.ingress.enabled -}}
 {{- $fullName := include "baserow.frontend.fullname" . -}}
 {{- $svcPort := .Values.frontend.service.port -}}
 {{- if and .Values.frontend.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
@@ -54,4 +53,3 @@ spec:
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
               {{- end }}
-{{- end }}

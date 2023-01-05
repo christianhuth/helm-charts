@@ -1,4 +1,3 @@
-{{- if .Values.backend.ingress.enabled -}}
 {{- $svcNameAsgi := include "baserow.backend.asgi.fullname" . -}}
 {{- $svcPortAsgi := .Values.backend.asgi.service.port -}}
 {{- $svcNameWsgi := include "baserow.backend.wsgi.fullname" . -}}
@@ -70,4 +69,3 @@ spec:
               serviceName: {{ $svcNameWsgi }}
               servicePort: {{ $svcPortWsgi }}
               {{- end }}
-{{- end }}

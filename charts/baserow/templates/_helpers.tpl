@@ -235,10 +235,17 @@ Get the name of the persistent volume claim for the baserow backend
 {{- end -}}
 
 {{/*
+Get the private name for the baserow backend
+*/}}
+{{- define "baserow.backend.privateUrl" -}}
+  http://{{ include "baserow.backend.wsgi.fullname" . }}:{{ .Values.backend.wsgi.service.port }}
+{{- end -}}
+
+{{/*
 Get the public name of the hostname for the baserow backend
 */}}
 {{- define "baserow.backend.publicUrl" -}}
-http{{ if .Values.backend.ingress.tls }}s{{ end }}://{{ .Values.backend.ingress.hostname }}
+  http{{ if .Values.backend.ingress.tls }}s{{ end }}://{{ .Values.backend.ingress.hostname }}
 {{- end -}}
 
 {{/*

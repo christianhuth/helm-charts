@@ -14,4 +14,3 @@ data:
   BASEROW_DISABLE_GOOGLE_DOCS_FILE_PREVIEW: {{ .Values.frontend.config.disableGoogleDocsFilePreview | quote }}
   {{- end }}
   DOWNLOAD_FILE_VIA_XHR: {{ .Values.frontend.config.downloadFileViaXhr | quote }}
-  PRIVATE_BACKEND_URL: http://{{ include "baserow.backend.wsgi.fullname" . }}:{{ .Values.backend.wsgi.service.port }}
