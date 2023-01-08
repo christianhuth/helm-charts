@@ -9,6 +9,7 @@ cusdis: charts/cusdis/*
 dasherr: charts/dasherr/*
 docker_stats_exporter: charts/docker_stats_exporter/*
 ecs-exporter: charts/ecs-exporter/*
+etcd-defrag: charts/etcd-defrag/*
 fathom: charts/fathom/*
 glances: charts/glances/*
 goaccess: charts/goaccess/*
