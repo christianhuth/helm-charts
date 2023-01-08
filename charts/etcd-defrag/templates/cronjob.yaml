@@ -1,0 +1,143 @@
+{{- if .Values.defrag.enabled -}}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "etcd-defrag.fullname" . }}
+  labels:
+    {{- include "etcd-defrag.labels" . | nindent 4 }}
+spec:
+  {{- if .Values.defrag.cronjob.concurrencyPolicy }}
+  concurrencyPolicy: {{ .Values.defrag.cronjob.concurrencyPolicy | quote }}
+  {{- end }}
+  {{- if .Values.defrag.cronjob.failedJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.defrag.cronjob.failedJobsHistoryLimit | int }}
+  {{- end }}
+  schedule: {{ .Values.defrag.cronjob.schedule | quote }}
+  {{- if .Values.defrag.cronjob.failedJobsHistoryLimit }}
+  successfulJobsHistoryLimit: {{ .Values.defrag.cronjob.successfulJobsHistoryLimit | int }}
+  {{- end }}
+  suspend: {{ .Values.defrag.cronjob.suspend }}
+  jobTemplate:
+    spec:
+      {{- if .Values.defrag.job.activeDeadlineSeconds }}
+      activeDeadlineSeconds: {{ .Values.defrag.job.activeDeadlineSeconds | quote }}
+      {{- end }}
+      {{- if .Values.defrag.job.backoffLimit }}
+      backoffLimit: {{ .Values.defrag.job.backoffLimit | quote }}
+      {{- end }}
+      {{- if .Values.defrag.job.completionMode }}
+      completionMode: {{ .Values.defrag.job.completionMode | quote }}
+      {{- end }}
+      {{- if .Values.defrag.job.completions }}
+      completions: {{ .Values.defrag.job.completions | quote }}
+      {{- end }}
+      {{- if .Values.defrag.job.parallelism }}
+      parallelism: {{ .Values.defrag.job.parallelism | quote }}
+      {{- end }}
+      {{- if .Values.defrag.job.podFailurePolicy }}
+      podFailurePolicy: {{ .Values.defrag.job.podFailurePolicy | quote }}
+      {{- end }}
+      {{- if .Values.defrag.job.suspend }}
+      suspend: {{ .Values.defrag.job.suspend }}
+      {{- end }}
+      {{- if .Values.defrag.job.ttlSecondsAfterFinished }}
+      ttlSecondsAfterFinished: {{ .Values.defrag.job.ttlSecondsAfterFinished | quote }}
+      {{- end }}
+      template:
+        spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          serviceAccountName: {{ include "etcd-defrag.serviceAccountName" . }}
+          {{- with .Values.podSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          containers:
+            - name: {{ include "etcd-defrag.fullname" . }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              args:
+                - /bin/sh
+                - -c
+                - {{ include "etcd-defrag.defrag.command" . }}
+              {{- if or (.Values.extraEnv) (.Values.defrag.config.auth.enabled) }}
+              env:
+                {{- if .Values.defrag.config.auth.enabled }}
+                - name: ETCD_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ include "etcd-defrag.auth.secretName" . | quote }}
+                      key: etcd-password
+                {{- end }}
+                {{- range .Values.extraEnv }}
+                {{- if and (.name) (.value) }}
+                - name: {{ .name | quote }}
+                  value: {{ .value | quote }}
+                {{- end }}
+                {{- end }}
+              {{- end }}
+              {{- with .Values.resources }}
+              resources:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              {{- with .Values.securityContext }}
+              securityContext:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              volumeMounts:
+                {{- if .Values.defrag.config.pki.hostAccess.enabled }}
+                - name: ca-file
+                  mountPath: /tmp/kubernetes/pki/etcd/ca.crt
+                - name: cert-file
+                  mountPath: /tmp/kubernetes/pki/etcd/server.crt
+                - name: key-file
+                  mountPath: /tmp/kubernetes/pki/etcd/server.key
+                {{- else }}
+                - name: {{ include "etcd-defrag.pki.secretName" . | quote }}
+                  mountPath: "/tmp/kubernetes/pki/etcd"
+                  readOnly: true
+                {{- end }}
+          {{- if .Values.defrag.pod.restartPolicy }}
+          restartPolicy: {{ .Values.defrag.pod.restartPolicy | quote }}
+          {{- end }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumes:
+          {{- if .Values.defrag.config.pki.hostAccess.enabled }}
+            - name: ca-file
+              hostPath:
+                path: {{ .Values.defrag.config.pki.hostAccess.caFilePath }}
+                type: File
+            - name: cert-file
+              hostPath:
+                path: {{ .Values.defrag.config.pki.hostAccess.certFilePath }}
+                type: File
+            - name: key-file
+              hostPath:
+                path: {{ .Values.defrag.config.pki.hostAccess.keyFilePath }}
+                type: File
+          {{- else }}
+            - name: {{ include "etcd-defrag.pki.secretName" . | quote }}
+              secret:
+                secretName: {{ include "etcd-defrag.pki.secretName" . | quote }}
+                items:
+                  - key: ca
+                    path: ca.crt
+                  - key: cert
+                    path: server.crt
+                  - key: key
+                    path: server.key
+          {{- end }}
+{{- end }}
