@@ -1,0 +1,217 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "affinity": {
+            "type": "object"
+        },
+        "defrag": {
+            "type": "object",
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "properties": {
+                        "auth": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "existingSecret": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "user": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "clusterWide": {
+                            "type": "boolean"
+                        },
+                        "commandTimeout": {
+                            "type": "string"
+                        },
+                        "debug": {
+                            "type": "boolean"
+                        },
+                        "dialTimeout": {
+                            "type": "string"
+                        },
+                        "endpoints": {
+                            "type": "array"
+                        },
+                        "insecureSkipTlsVerify": {
+                            "type": "boolean"
+                        },
+                        "insecureTransport": {
+                            "type": "boolean"
+                        },
+                        "pki": {
+                            "type": "object",
+                            "properties": {
+                                "ca": {
+                                    "type": "string"
+                                },
+                                "cert": {
+                                    "type": "string"
+                                },
+                                "existingSecret": {
+                                    "type": "string"
+                                },
+                                "hostAccess": {
+                                    "type": "object",
+                                    "properties": {
+                                        "caFilePath": {
+                                            "type": "string"
+                                        },
+                                        "certFilePath": {
+                                            "type": "string"
+                                        },
+                                        "enabled": {
+                                            "type": "boolean"
+                                        },
+                                        "keyFilePath": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "key": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "writeOut": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "cronjob": {
+                    "type": "object",
+                    "properties": {
+                        "concurrencyPolicy": {
+                            "type": "string"
+                        },
+                        "failedJobsHistoryLimit": {
+                            "type": "string"
+                        },
+                        "schedule": {
+                            "type": "string"
+                        },
+                        "startingDeadlineSeconds": {
+                            "type": "string"
+                        },
+                        "successfulJobsHistoryLimit": {
+                            "type": "string"
+                        },
+                        "suspend": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "job": {
+                    "type": "object",
+                    "properties": {
+                        "activeDeadlineSeconds": {
+                            "type": "string"
+                        },
+                        "backoffLimit": {
+                            "type": "string"
+                        },
+                        "completionMode": {
+                            "type": "string"
+                        },
+                        "completions": {
+                            "type": "string"
+                        },
+                        "parallelism": {
+                            "type": "string"
+                        },
+                        "podFailurePolicy": {
+                            "type": "string"
+                        },
+                        "suspend": {
+                            "type": "boolean"
+                        },
+                        "ttlSecondsAfterFinished": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "pod": {
+                    "type": "object",
+                    "properties": {
+                        "restartPolicy": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "extraEnv": {
+            "type": "array"
+        },
+        "fullnameOverride": {
+            "type": "string"
+        },
+        "image": {
+            "type": "object",
+            "properties": {
+                "pullPolicy": {
+                    "type": "string"
+                },
+                "repository": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "string"
+                }
+            }
+        },
+        "imagePullSecrets": {
+            "type": "array"
+        },
+        "nameOverride": {
+            "type": "string"
+        },
+        "nodeSelector": {
+            "type": "object",
+            "properties": {
+                "node-role.kubernetes.io/control-plane": {
+                    "type": "string"
+                }
+            }
+        },
+        "podSecurityContext": {
+            "type": "object"
+        },
+        "resources": {
+            "type": "object"
+        },
+        "securityContext": {
+            "type": "object"
+        },
+        "serviceAccount": {
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "type": "object"
+                },
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "tolerations": {
+            "type": "array"
+        }
+    }
+}

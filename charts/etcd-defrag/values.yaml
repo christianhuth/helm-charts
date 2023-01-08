@@ -1,0 +1,148 @@
+# -- Provide a name in place of `etcd-defrag`
+nameOverride: ""
+
+# -- String to fully override `"etcd-defrag.fullname"`
+fullnameOverride: ""
+
+image:
+  # -- image repository
+  repository: bitnami/etcd
+  # -- image pull policy
+  pullPolicy: Always
+  # -- Overrides the image tag
+  tag: "3.5.6"
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+# -- pod-level security context
+podSecurityContext: {}
+  # if you are using direct host access to the certificates you probably need to run the pod as root
+  # fsGroup: 0
+  # runAsGroup: 0
+  # runAsUser: 0
+
+# -- Resource limits and requests for the controller pods.
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# -- container-level security context
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Node labels for pod assignment
+nodeSelector:
+  node-role.kubernetes.io/control-plane: ""
+
+# -- Toleration labels for pod assignment
+tolerations: []
+
+# -- Affinity settings for pod assignment
+affinity: {}
+
+# -- additional environment variables to be added to the pods
+extraEnv: []
+
+defrag:
+  # -- create a CronJob for defragmentation
+  enabled: true
+  config:
+    auth:
+      # -- use username and password for authentication against etcd
+      enabled: false
+      # -- Name of existing secret to use for authentication credentials. Key needs to be called `etcd-password`.
+      existingSecret: ""
+      # -- password for authentication
+      password: ""
+      # -- username for authentication
+      user: ""
+    # -- Run defragment operations for all endpoints in the cluster associated with the default endpoint.
+    clusterWide: true
+    # -- timeout for short running command (excluding dial timeout)
+    commandTimeout: ""
+    # -- enable client-side debug logging
+    debug: false
+    # -- dial timeout for client connections
+    dialTimeout: ""
+    # -- gRPC endpoints
+    endpoints: []
+    # -- skip server certificate verification
+    insecureSkipTlsVerify: false
+    # -- disable transport security for client connections
+    insecureTransport: true
+    pki:
+      # -- certificate authority used for the etcd certificates
+      ca: ""
+      # -- identify secure client using this TLS certificate
+      cert: ""
+      # -- Name of existing secret with certificates. Keys needs to be called `ca`, `cert` and `key`.
+      existingSecret: ""
+      hostAccess:
+        # -- get certificates directly from host where the Pod is running
+        enabled: false
+        # -- file on host containing the certificate authority
+        caFilePath: /etc/kubernetes/pki/etcd/ca.crt
+        # -- file on host containing the server certificate
+        certFilePath: /etc/kubernetes/pki/etcd/server.crt
+        # -- file on host containing the server private key
+        keyFilePath: /etc/kubernetes/pki/etcd/server.key
+      # -- identify secure client using this TLS key
+      key: ""
+    # -- set the output format: `fields`, `json`, `protobuf`, `simple`, `table`)
+    writeOut: "table"
+  cronjob:
+    # -- Specifies how to treat concurrent executions of a Job. Valid values are: `Allow`, `Forbid` and `Replace`.
+    concurrencyPolicy: "Forbid"
+    # -- The number of failed finished jobs to retain.
+    failedJobsHistoryLimit: "1"
+    # -- The schedule in Cron format, see https://en.wikipedia.org/wiki/Cron.
+    schedule: "* */1 * * *"
+    # -- Optional deadline in seconds for starting the job if it misses scheduled time for any reason. Missed jobs executions will be counted as failed ones.
+    startingDeadlineSeconds: "30"
+    # -- The number of successful finished jobs to retain.
+    successfulJobsHistoryLimit: "3"
+    # -- This flag tells the controller to suspend subsequent executions, it does not apply to already started executions.
+    suspend: false
+  job:
+    # -- Specifies the duration in seconds relative to the startTime that the job may be continuously active before the system tries to terminate it.
+    activeDeadlineSeconds: ""
+    # -- Specifies the number of retries before marking this job failed.
+    backoffLimit: ""
+    # -- CompletionMode specifies how Pod completions are tracked. It can be: `NonIndexed` or `Indexed`.
+    completionMode: ""
+    # -- Specifies the desired number of successfully finished pods the job should be run with.
+    completions: ""
+    # -- Specifies the maximum desired number of pods the job should run at any given time.
+    parallelism: ""
+    # -- Specifies the policy of handling failed pods.
+    podFailurePolicy: ""
+    # -- Suspend specifies whether the Job controller should create Pods or not.
+    suspend: false
+    # -- limits the lifetime of a Job that has finished execution
+    ttlSecondsAfterFinished: ""
+  pod:
+    # -- Restart policy for all containers within the pod. One of `Always`, `OnFailure`, `Never`.
+    restartPolicy: "OnFailure"
