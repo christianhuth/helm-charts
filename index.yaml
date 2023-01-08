@@ -55,6 +55,25 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/baserow-1.0.0/baserow-1.0.0.tgz
     version: 1.0.0
+  etcd-defrag:
+  - apiVersion: v2
+    appVersion: 3.5.6
+    created: "2023-01-08T17:31:53.403063134Z"
+    description: A Helm chart for running a defragmentation CronJob for ETCD
+    digest: 88c02232d9d4053728d2e2e10d563af519a969ec5422aec0a8defeb59b7ad18d
+    home: https://github.com/christianknell/helm-charts
+    icon: https://cdn.worldvectorlogo.com/logos/etcd-1.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: etcd-defrag
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/etcd
+    - https://etcd.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/etcd-defrag-1.0.0/etcd-defrag-1.0.0.tgz
+    version: 1.0.0
   headwind-mdm:
   - apiVersion: v2
     appVersion: 0.1.0
@@ -4449,4 +4468,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-01-08T17:21:46.40259816Z"
+generated: "2023-01-08T17:31:53.403321538Z"
