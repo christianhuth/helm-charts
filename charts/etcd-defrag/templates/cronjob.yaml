@@ -13,6 +13,9 @@ spec:
   failedJobsHistoryLimit: {{ .Values.defrag.cronjob.failedJobsHistoryLimit | int }}
   {{- end }}
   schedule: {{ .Values.defrag.cronjob.schedule | quote }}
+  {{- if .Values.defrag.cronjob.startingDeadlineSeconds }}
+  startingDeadlineSeconds: {{ .Values.defrag.cronjob.startingDeadlineSeconds | int }}
+  {{- end }}
   {{- if .Values.defrag.cronjob.failedJobsHistoryLimit }}
   successfulJobsHistoryLimit: {{ .Values.defrag.cronjob.successfulJobsHistoryLimit | int }}
   {{- end }}
