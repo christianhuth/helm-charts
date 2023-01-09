@@ -119,7 +119,7 @@ defrag:
     # -- The number of failed finished jobs to retain.
     failedJobsHistoryLimit: "1"
     # -- The schedule in Cron format, see https://en.wikipedia.org/wiki/Cron.
-    schedule: "* */1 * * *"
+    schedule: "0 */1 * * *"
     # -- Optional deadline in seconds for starting the job if it misses scheduled time for any reason. Missed jobs executions will be counted as failed ones.
     startingDeadlineSeconds: "30"
     # -- The number of successful finished jobs to retain.
