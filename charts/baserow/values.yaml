@@ -284,6 +284,8 @@ backend:
 
   # configuration for the backend
   config:
+    # -- A comma separated list of additional django applications to add to the INSTALLED_APPS django setting
+    additionalApps: ""
     # -- The maximum amount of seconds an Airtable migration import job can run.
     airtableImportSoftTimeLimit: "1800"
     # -- The number of concurrent worker processes used by the Baserow backend gunicorn server to process incoming requests
@@ -314,6 +316,10 @@ backend:
       beatStartupDelay: "15"
       # -- When BASEROW_AMOUNT_OF_WORKERS is 1 and this is set to a non empty value Baserow will not run the export-worker but instead run both the celery export and normal tasks on the normal celery worker. Set this to lower the memory usage of Baserow in expense of performance.
       runMinimal: ""
+    # -- When sharing views publicly a websocket connection is opened to provide realtime updates to viewers of the public link. To disable this set any non empty value. When disabled publicly shared links will need to be refreshed to see any updates to the view.
+    disableAnonymousPublicViewWsConnections: ""
+    # -- When set to any non empty value the model cache used to speed up Baserow will be disabled. Useful to enable when debugging Baserow errors if they are possibly caused by the model cache itself.
+    disableModelCache: ""
     # -- Baserow’s formulas have an internal version number. When upgrading Baserow if the formula language has also changed then after the database migration has run Baserow will also automatically recalculate all formulas if they have a different version. Set this to any non empty value to disable this automatic update if you would prefer to run the update_formulas management command manually yourself. Formulas might break if you forget to do so after an upgrade of Baserow until and so it is recommended to leave this empty.
     dontUpdateFormulasAfterMigration: ""
     email:
@@ -333,12 +339,27 @@ backend:
       smtpUser: ""
       # -- If set to any non empty value then Baserow will attempt to send emails using TLS.
       smtpUseTls: ""
+    # -- Set to any non-empty value to ensure Baserow generates https:// next links provided by paginated API endpoints. Baserow will still work correctly if not enabled, this is purely for giving the correct https url for clients of the API.
+    enableSecureProxySslHeader: ""
     # -- Name of existing secret to use for secret configuration values like backend.config.jwtSigningKey and backend.config.secretKey. Keys in secret should be called `jwt-signing-key` and `secret-key`.
     existingSecret: ""
     # -- The max file size in MB allowed to be uploaded by users into a Baserow File Field.
     fileUploadSizeLimit: "1048576"
+    # -- Items from the trash will be permanently deleted after this number of hours.
+    hoursUntilTrashPermanentlyDeleted: ""
+    # -- The percentage of rows when importing that are allowed to not match the detected column type and be blanked out instead of imported when creating a table.
+    importToleratedTypeErrorThreshold: "0"
+    # -- The maximum number of rows you can import in a synchronous way
+    initialCreateSyncTableDataLimit: "5000"
     # -- The amount of rows that can be imported when creating a table. Defaults to empty which means unlimited rows.
     initialTableDataLimit: ""
+    jobs:
+      # -- How often the job cleanup task will run.
+      cleanupIntervalMinutes: "5"
+      # -- How long before a Baserow job will be kept before being cleaned up.
+      expirationTimeLimit: "43200"
+      # -- The number of seconds a Baserow job can run before being terminated.
+      softTimeLimit: "1800"
     # -- The signing key that is used to sign the content of generated tokens. For HMAC signing, this should be a random string with at least as many bits of data as is required by the signing protocol. See https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html#signing-key for more details.
     jwtSigningKey: ""
     logging:
@@ -348,6 +369,10 @@ backend:
       backendLogLevel: "INFO"
       # -- The default log level used for database related logs in the backend. Supports the same values as the normal log level. If you also enable BASEROW_BACKEND_DEBUG and set this to DEBUG you will be able to see all SQL queries in the backend logs.
       databaseLogLevel: "ERROR"
+    # -- The max number of per row errors than can occur in a file import before an overall failure is declared.
+    maxFileImportErrorCount: "30"
+    # -- The maximum row error count tolerated before a file import fails. Before this max error count the import will continue and the non failing rows will be imported and after it, no rows are imported at all.
+    maxRowReportErrorCount: "30"
     media:
       # -- The folder in which the backend will store user uploaded files
       root: "/baserow/media"
@@ -355,6 +380,8 @@ backend:
       url: "$PUBLIC_BACKEND_URL/media/"
     # -- If set to “true” when the Baserow backend service starts up it will automatically apply database migrations. Set to any other value to disable. If you disable this then you must remember to manually apply the database migrations when upgrading Baserow to a new version.
     migrateOnStartup: "true"
+    # -- How long before actions are cleaned up, actions are used to let you undo/redo so this is effectively the max length of time you can undo/redo can action.
+    minutesUntilActionCleanedUp: "120"
     # -- When Baserow’s Backend service starts up it first checks to see if the postgres database is available.
     postgresStartupCheckAttempts: "5"
     # -- The maximum number of rows that can be requested at once.
@@ -372,6 +399,8 @@ backend:
       refreshTokenLifetimeHours: "168"
     # -- If set to “true” when after a migration Baserow will automatically sync all builtin Baserow templates in the background. If you are using a postgres database which is constrained to fewer than 10000 rows then we recommend you disable this as the Baserow templates will go over that row limit. To disable this set to any other value than “true”
     triggerSyncTemplatesAfterMigration: "true"
+    # -- When updating or creating various resources in Baserow if another concurrent operation is ongoing (like a snapshot, duplication, import etc) which would be affected by your modification a 409 HTTP error will be returned. If you instead would prefer Baserow to not return a 409 and just block waiting until the operation finishes and then to perform the requested operation set this flag to any non-empty value.
+    waitInsteadOf409ConflictError: ""
     webhook:
       # -- If set to any non empty value allows webhooks to access all addresses. Enabling this flag is a security risk as it will allow users to send webhook requests to internal addresses on your network. Instead consider using the three variables below first to allow access to only some internal network hostnames or IPs.
       allowPrivateAddress: ""

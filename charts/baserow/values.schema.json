@@ -229,6 +229,9 @@
                 "config": {
                     "type": "object",
                     "properties": {
+                        "additionalApps": {
+                            "type": "string"
+                        },
                         "airtableImportSoftTimeLimit": {
                             "type": "string"
                         },
@@ -281,6 +284,12 @@
                                 }
                             }
                         },
+                        "disableAnonymousPublicViewWsConnections": {
+                            "type": "string"
+                        },
+                        "disableModelCache": {
+                            "type": "string"
+                        },
                         "dontUpdateFormulasAfterMigration": {
                             "type": "string"
                         },
@@ -313,14 +322,40 @@
                                 }
                             }
                         },
+                        "enableSecureProxySslHeader": {
+                            "type": "string"
+                        },
                         "existingSecret": {
                             "type": "string"
                         },
                         "fileUploadSizeLimit": {
                             "type": "string"
                         },
+                        "hoursUntilTrashPermanentlyDeleted": {
+                            "type": "string"
+                        },
+                        "importToleratedTypeErrorThreshold": {
+                            "type": "string"
+                        },
+                        "initialCreateSyncTableDataLimit": {
+                            "type": "string"
+                        },
                         "initialTableDataLimit": {
                             "type": "string"
+                        },
+                        "jobs": {
+                            "type": "object",
+                            "properties": {
+                                "cleanupIntervalMinutes": {
+                                    "type": "string"
+                                },
+                                "expirationTimeLimit": {
+                                    "type": "string"
+                                },
+                                "softTimeLimit": {
+                                    "type": "string"
+                                }
+                            }
                         },
                         "jwtSigningKey": {
                             "type": "string"
@@ -339,6 +374,12 @@
                                 }
                             }
                         },
+                        "maxFileImportErrorCount": {
+                            "type": "string"
+                        },
+                        "maxRowReportErrorCount": {
+                            "type": "string"
+                        },
                         "media": {
                             "type": "object",
                             "properties": {
@@ -351,6 +392,9 @@
                             }
                         },
                         "migrateOnStartup": {
+                            "type": "string"
+                        },
+                        "minutesUntilActionCleanedUp": {
                             "type": "string"
                         },
                         "postgresStartupCheckAttempts": {
@@ -380,6 +424,9 @@
                             }
                         },
                         "triggerSyncTemplatesAfterMigration": {
+                            "type": "string"
+                        },
+                        "waitInsteadOf409ConflictError": {
                             "type": "string"
                         },
                         "webhook": {
