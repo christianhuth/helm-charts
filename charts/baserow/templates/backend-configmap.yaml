@@ -30,6 +30,33 @@ data:
   {{- end }}
   MIGRATE_ON_STARTUP: {{ .Values.backend.config.migrateOnStartup | quote }}
   POSTGRES_STARTUP_CHECK_ATTEMPTS: {{ .Values.backend.config.postgresStartupCheckAttempts | quote }}
+  # Baserow Backend Misc Configuration
+  {{- if .Values.backend.config.additionalApps }}
+  ADDITIONAL_APPS: {{ .Values.backend.config.additionalApps | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.disableModelCache }}
+  BASEROW_DISABLE_MODEL_CACHE: {{ .Values.backend.config.disableModelCache | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.enableSecureProxySslHeader }}
+  BASEROW_ENABLE_SECURE_PROXY_SSL_HEADER: {{ .Values.backend.config.enableSecureProxySslHeader | quote }}
+  {{- end }}
+  BASEROW_IMPORT_TOLERATED_TYPE_ERROR_THRESHOLD: {{ .Values.backend.config.jobs.importToleratedTypeErrorThreshold | quote }}
+  BASEROW_INITIAL_CREATE_SYNC_TABLE_DATA_LIMIT: {{ .Values.backend.config.initialCreateSyncTableDataLimit | quote }}
+  BASEROW_JOB_CLEANUP_INTERVAL_MINUTES: {{ .Values.backend.config.jobs.cleanupIntervalMinutes | quote }}
+  BASEROW_JOB_EXPIRATION_TIME_LIMIT: {{ .Values.backend.config.jobs.expirationTimeLimit | quote }}
+  BASEROW_JOB_SOFT_TIME_LIMIT: {{ .Values.backend.config.jobs.softTimeLimit | quote }}
+  BASEROW_MAX_FILE_IMPORT_ERROR_COUNT: {{ .Values.backend.config.maxFileImportErrorCount | quote }}
+  BASEROW_MAX_ROW_REPORT_ERROR_COUNT: {{ .Values.backend.config.maxRowReportErrorCount | quote }}
+  {{- if .Values.backend.config.waitInsteadOf409ConflictError }}
+  BASEROW_WAIT_INSTEAD_OF_409_CONFLICT_ERROR: {{ .Values.backend.config.waitInsteadOf409ConflictError | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.disableAnonymousPublicViewWsConnections }}
+  DISABLE_ANONYMOUS_PUBLIC_VIEW_WS_CONNECTIONS: {{ .Values.backend.config.disableAnonymousPublicViewWsConnections | quote }}
+  {{- end }}
+  {{- if .Values.backend.config.hoursUntilTrashPermanentlyDeleted }}
+  HOURS_UNTIL_TRASH_PERMANENTLY_DELETED: {{ .Values.backend.config.hoursUntilTrashPermanentlyDeleted | quote }}
+  {{- end }}
+  MINUTES_UNTIL_ACTION_CLEANED_UP: {{ .Values.backend.config.minutesUntilActionCleanedUp | quote }}
   # Baserow Celery Settings
   BASEROW_AMOUNT_OF_WORKERS: {{ .Values.backend.config.celery.amountOfWorkers | quote }}
   BASEROW_CELERY_BEAT_DEBUG_LEVEL: {{ .Values.backend.config.celery.beatDebugLevel | quote }}
