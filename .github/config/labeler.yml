@@ -23,6 +23,7 @@ kube-ops-view: charts/kube-ops-view/*
 kutt: charts/kutt/*
 lxd-dashboard: charts/lxd-dashboard/*
 maildev: charts/maildev/*
+node-access: charts/node-access/*
 netcupscp-exporter: charts/netcupscp-exporter/*
 passbolt-ha: charts/passbolt-ha/*
 polr: charts/polr/*
