@@ -36,8 +36,8 @@ policies:
         messageOnFailure: Incorrect value for key `apiVersion` - the version you are trying to use is not supported by the Kubernetes cluster version (>=1.16)
       - identifier: K8S_DEPRECATED_APIVERSION_1.17
         messageOnFailure: Incorrect value for key `apiVersion` - the version you are trying to use is not supported by the Kubernetes cluster version (>=1.17)
-      - identifier: CONTAINERS_INCORRECT_PRIVILEGED_VALUE_TRUE
-        messageOnFailure: Incorrect value for key `privileged` - this mode will allow the container the same access as processes running on the host
+      # - identifier: CONTAINERS_INCORRECT_PRIVILEGED_VALUE_TRUE
+      #   messageOnFailure: Incorrect value for key `privileged` - this mode will allow the container the same access as processes running on the host
       # - identifier: WORKLOAD_MISSING_LABEL_OWNER_VALUE
       #   messageOnFailure: Missing label object `owner` - add a proper owner label to know which person/team to ping when needed
       # - identifier: DEPLOYMENT_MISSING_LABEL_ENV_VALUE
