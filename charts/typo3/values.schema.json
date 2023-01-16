@@ -22,6 +22,40 @@
                 }
             }
         },
+        "externalDatabase": {
+            "type": "object",
+            "properties": {
+                "auth": {
+                    "type": "object",
+                    "properties": {
+                        "database": {
+                            "type": "string"
+                        },
+                        "existingSecret": {
+                            "type": "string"
+                        },
+                        "password": {
+                            "type": "string"
+                        },
+                        "userPasswordKey": {
+                            "type": "string"
+                        },
+                        "username": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
         "fullnameOverride": {
             "type": "string"
         },
@@ -84,13 +118,16 @@
                 }
             }
         },
-        "mysql": {
+        "mariadb": {
             "type": "object",
             "properties": {
                 "auth": {
                     "type": "object",
                     "properties": {
                         "database": {
+                            "type": "string"
+                        },
+                        "existingSecret": {
                             "type": "string"
                         },
                         "password": {
@@ -103,14 +140,31 @@
                 },
                 "enabled": {
                     "type": "boolean"
-                },
-                "global": {
+                }
+            }
+        },
+        "mysql": {
+            "type": "object",
+            "properties": {
+                "auth": {
                     "type": "object",
                     "properties": {
-                        "storageClass": {
+                        "database": {
+                            "type": "string"
+                        },
+                        "existingSecret": {
+                            "type": "string"
+                        },
+                        "password": {
+                            "type": "string"
+                        },
+                        "username": {
                             "type": "string"
                         }
                     }
+                },
+                "enabled": {
+                    "type": "boolean"
                 },
                 "primary": {
                     "type": "object",
@@ -145,11 +199,57 @@
         "persistence": {
             "type": "object",
             "properties": {
-                "enabled": {
-                    "type": "boolean"
+                "fileadmin": {
+                    "type": "object",
+                    "properties": {
+                        "accessModes": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "annotations": {
+                            "type": "object"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "existingClaim": {
+                            "type": "string"
+                        },
+                        "resources": {
+                            "type": "object"
+                        },
+                        "storageClassName": {
+                            "type": "string"
+                        }
+                    }
                 },
-                "storageClass": {
-                    "type": "string"
+                "typo3conf": {
+                    "type": "object",
+                    "properties": {
+                        "accessModes": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "annotations": {
+                            "type": "object"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "existingClaim": {
+                            "type": "string"
+                        },
+                        "resources": {
+                            "type": "object"
+                        },
+                        "storageClassName": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         },
@@ -168,6 +268,9 @@
                         "database": {
                             "type": "string"
                         },
+                        "existingSecret": {
+                            "type": "string"
+                        },
                         "password": {
                             "type": "string"
                         },
@@ -178,14 +281,6 @@
                 },
                 "enabled": {
                     "type": "boolean"
-                },
-                "global": {
-                    "type": "object",
-                    "properties": {
-                        "storageClass": {
-                            "type": "string"
-                        }
-                    }
                 }
             }
         },

@@ -1,0 +1,24 @@
+{{- if and (.Values.persistence.fileadmin.enabled) (not .Values.persistence.fileadmin.existingClaim) }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  {{- if .Values.persistence.fileadmin.annotations }}
+  annotations:
+    {{- toYaml .Values.persistence.fileadmin.annotations | nindent 4 }}
+  {{- end }}
+  name: {{ include "typo3.pvcName.fileadmin" . }}
+  labels:
+    {{- include "typo3.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  {{- range .Values.persistence.fileadmin.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+  {{- with .Values.persistence.fileadmin.resources }}
+  resources:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- if .Values.persistence.fileadmin.storageClassName }}
+  storageClassName: {{ .Values.persistence.fileadmin.storageClassName | quote }}
+  {{- end }}
+{{- end }}
