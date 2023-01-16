@@ -1,0 +1,86 @@
+{{ template "chart.header" . }}
+{{ template "chart.description" . }}
+
+## TL;DR;
+
+```console
+helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo update
+helm install my-release christianknell/node-access
+```
+
+## Introduction
+
+This chart bootstraps one or multiple Pods to access the host system of a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+
+## Prerequisites
+
+- Kubernetes 1.19+
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo update
+helm install my-release christianknell/node-access
+```
+
+These commands deploys one or multiple Pods to access the host system of the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
+
+> **Tip**: List all releases using `helm list`
+
+## Uninstalling the Chart
+
+To uninstall the `my-release` deployment:
+
+```console
+helm uninstall my-release
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+{{ template "chart.valuesSection" . }}
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
+
+```console
+helm install my-release -f values.yaml christianknell/node-access
+```
+
+## Deploying to a specific Node
+
+If you want to deploy only to one specific Node you can simply define the `nodeName` using `--set nodeAccess.nodePlacement.nodeName=<NODE_NAME>` or through the values file:
+
+```yaml
+nodeAccess:
+  accessMode: deployment
+  nodePlacement:
+    nodeName: <NODE_NAME>
+```
+
+## Deploying to all Nodes
+
+If you want to deploy Pods to access all Nodes, the easiest way is to use a DaemonSet instead of a Deployment using `--set nodeAccess.accessMode="daemonset"` or through the values file:
+
+```yaml
+nodeAccess:
+  accessMode: daemonset
+```
+
+## Deploying to a subset of Nodes
+
+If you want to deploy Pods to a subset of Nodes you can use a DaemonSet and a NodeSelector:
+
+```yaml
+nodeAccess:
+  accessMode: daemonset
+  nodePlacement:
+    nodeSelector:
+      key: value
+```
+
+{{ template "helm-docs.versionFooter" . }}

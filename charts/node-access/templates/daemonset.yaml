@@ -1,0 +1,23 @@
+{{- if eq .Values.nodeAccess.accessMode "daemonset" }}
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "node-access.fullname" . }}
+  labels:
+    {{- include "node-access.labels" . | nindent 4 }}
+spec:
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "node-access.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "node-access.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- include "node-access.podSpec" . | nindent 6 }}
+{{- end }}

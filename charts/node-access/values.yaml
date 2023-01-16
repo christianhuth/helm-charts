@@ -1,0 +1,86 @@
+# -- Provide a name in place of `node-access`
+nameOverride: ""
+
+# -- String to fully override `"node-access.fullname"`
+fullnameOverride: ""
+
+image:
+  # -- image repository
+  repository: busybox
+  # -- image pull policy
+  pullPolicy: Always
+  # -- Overrides the image tag
+  tag: "1.36.0"
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+# -- Number of replicas. Only used if `accessNode.accessMode` equals `deployment`
+replicaCount: 1
+
+# -- The number of old ReplicaSets to retain
+revisionHistoryLimit: 10
+
+# -- Annotations to be added to the pods
+podAnnotations: {}
+
+# -- pod-level security context
+# @default -- see [values.yaml](./values.yaml)
+podSecurityContext:
+  runAsGroup: 0
+  runAsNonRoot: false
+  runAsUser: 0
+
+# -- Resource limits and requests for the controller pods.
+# @default -- see [values.yaml](./values.yaml)
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# -- container-level security context
+# @default -- see [values.yaml](./values.yaml)
+securityContext:
+  privileged: true
+  readOnlyRootFilesystem: false
+  runAsGroup: 0
+  runAsNonRoot: false
+  runAsUser: 0
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+nodeAccess:
+  # -- How to deploy the Pods to access the host system: daemonset or deployment
+  accessMode: "deployment"
+  # -- List of additional paths on the host that should be mounted into the container
+  hostPaths: []
+    # - name: dev
+    #   host: /dev
+    #   container: /node-fs/dev
+  nodePlacement:
+    # -- Request to schedule this pod onto a specific node
+    nodeName: ""
+    # -- Affinity settings for pod assignment
+    affinity: {}
+    # -- Node labels for pod assignment
+    nodeSelector: {}
+    # -- Toleration labels for pod assignment
+    tolerations: []
+    # -- how a group of pods ought to spread across topology domains
+    topologySpreadConstraints: []
+      # - maxSkew: 1
+      #   topologyKey: kubernetes.io/hostname
+      #   whenUnsatisfiable: DoNotSchedule
+      #   labelSelector:
+      #     matchLabels:
+      #       key: value
