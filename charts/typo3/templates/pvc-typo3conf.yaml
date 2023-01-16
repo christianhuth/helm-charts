@@ -1,0 +1,24 @@
+{{- if and (.Values.persistence.typo3conf.enabled) (not .Values.persistence.typo3conf.existingClaim) }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  {{- if .Values.persistence.typo3conf.annotations }}
+  annotations:
+    {{- toYaml .Values.persistence.typo3conf.annotations | nindent 4 }}
+  {{- end }}
+  name: {{ include "typo3.pvcName.typo3conf" . }}
+  labels:
+    {{- include "typo3.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  {{- range .Values.persistence.typo3conf.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+  {{- with .Values.persistence.typo3conf.resources }}
+  resources:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- if .Values.persistence.typo3conf.storageClassName }}
+  storageClassName: {{ .Values.persistence.typo3conf.storageClassName | quote }}
+  {{- end }}
+{{- end }}

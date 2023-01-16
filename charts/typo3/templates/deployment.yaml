@@ -46,6 +46,17 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if or (.Values.persistence.fileadmin.enabled) (.Values.persistence.typo3conf.enabled) }}
+          volumeMounts:
+          {{- if .Values.persistence.fileadmin.enabled }}
+            - name: fileadmin
+              mountPath: /fileadmin
+          {{- end }}
+          {{- if .Values.persistence.typo3conf.enabled }}
+            - name: typo3conf
+              mountPath: /typo3conf
+          {{- end }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -57,4 +68,17 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if or (.Values.persistence.fileadmin.enabled) (.Values.persistence.typo3conf.enabled) }}
+      volumes:
+        {{- if .Values.persistence.fileadmin.enabled }}
+        - name: fileadmin
+          persistentVolumeClaim:
+            claimName: {{ include "typo3.pvcName.fileadmin" . }}
+        {{- end }}
+        {{- if .Values.persistence.typo3conf.enabled }}
+        - name: typo3conf
+          persistentVolumeClaim:
+            claimName: {{ include "typo3.pvcName.typo3conf" . }}
+        {{- end }}
       {{- end }}

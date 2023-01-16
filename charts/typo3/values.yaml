@@ -97,17 +97,47 @@ tolerations: []
 affinity: {}
 
 persistence:
-  enabled: true
-  storageClass: ""
+  fileadmin:
+    # -- use a PVC to persist fileadmin data
+    enabled: false
+    # -- the desired access modes the volume should have.
+    accessModes:
+      - ReadWriteOnce
+    # -- Annotations to be added to the PersistentVolumeClaim
+    annotations: {}
+    # -- provide an existing PersistentVolumeClaim
+    existingClaim: ""
+    # -- Name of the StorageClass required by the claim.
+    storageClassName: ""
+    # -- represents the minimum and maximum resources the volume should have.
+    resources: {}
+  typo3conf:
+    # -- use a PVC to persist typo3conf data
+    enabled: false
+    # -- the desired access modes the volume should have.
+    accessModes:
+      - ReadWriteOnce
+    # -- Annotations to be added to the PersistentVolumeClaim
+    annotations: {}
+    # -- provide an existing PersistentVolumeClaim
+    existingClaim: ""
+    # -- Name of the StorageClass required by the claim.
+    storageClassName: ""
+    # -- represents the minimum and maximum resources the volume should have.
+    resources: {}
 
 mysql:
+  # -- enable MySQL™ subchart from Bitnami
   enabled: true
   auth:
+    # -- Name for a custom database to create
     database: typo3
+    # -- Name of existing secret to use for MySQL credentials
+    existingSecret: ""
+    # -- Password for the custom user to create. Ignored if mysql.auth.existingSecret is provided
     password: typo3
+    # -- Name for a custom user to create
     username: typo3
-  global:
-    storageClass: ""
   primary:
     configuration: |-
       [mysqld]
@@ -144,11 +174,47 @@ mysql:
       - name: TZ
         value: Europe/Berlin
 
-postgresql:
+mariadb:
+  # -- enable MariaDB™ subchart from Bitnami
   enabled: false
   auth:
+    # -- Name for a custom database to create
     database: typo3
+    # -- Name of existing secret to use for MariaDB credentials
+    existingSecret: ""
+    # -- Password for the custom user to create. Ignored if mariadb.auth.existingSecret is provided
     password: typo3
+    # -- Name for a custom user to create
     username: typo3
-  global:
-    storageClass: ""
+
+postgresql:
+  # -- enable PostgreSQL™ subchart from Bitnami
+  enabled: false
+  auth:
+    # -- Name for a custom database to create
+    database: typo3
+    # -- Name of existing secret to use for PostgreSQL credentials
+    existingSecret: ""
+    # -- Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided
+    password: typo3
+    # -- Name for a custom user to create
+    username: typo3
+
+externalDatabase:
+  auth:
+    # -- Name of the database to use
+    database: typo3
+    # -- Name of existing secret to use for database credentials
+    existingSecret: ""
+    # -- Password to use
+    password: typo3
+    # -- Name of the user to use
+    username: typo3
+    # -- Key in the secret containing the password
+    userPasswordKey: ""
+  # -- Hostname of the database
+  hostname: ""
+  # -- Port used to connect to database
+  port: 3306
+  # -- Type of database
+  type: mysql
