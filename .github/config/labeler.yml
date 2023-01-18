@@ -37,6 +37,7 @@ shlink-backend: charts/shlink-backend/*
 shlink-web: charts/shlink-web/*
 skooner: charts/skooner/*
 sloop: charts/sloop/*
+standardnotes: charts/standardnotes/*
 syncserver: charts/syncserver/*
 syncstorage-rs: charts/syncstorage-rs/*
 talkyard: charts/talkyard/*
