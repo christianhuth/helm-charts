@@ -2,6 +2,33 @@ apiVersion: v1
 entries:
   baserow:
   - apiVersion: v2
+    appVersion: 1.14.0
+    created: "2023-01-19T09:21:30.390762255Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.9
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.4.3
+    description: Baserow is an open source no-code database and Airtable alternative.
+    digest: d50e04efecc9bed72c8c0e37212d510d6b53437d222e0ba4ac006a139d091aad
+    home: https://github.com/christianknell/helm-charts
+    icon: https://baserow.io/img/favicon_192.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: baserow
+    sources:
+    - https://gitlab.com/bramw/baserow
+    - https://baserow.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/baserow-1.2.0/baserow-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     appVersion: 1.13.3
     created: "2023-01-17T08:40:15.323657856Z"
     dependencies:
@@ -5562,4 +5589,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-01-19T09:17:34.811878412Z"
+generated: "2023-01-19T09:21:30.391096553Z"
