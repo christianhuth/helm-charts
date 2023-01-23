@@ -2338,6 +2338,28 @@ entries:
   polr:
   - apiVersion: v2
     appVersion: 2.3.0
+    created: "2023-01-23T08:46:18.084094608Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.4.7
+    description: Polr is a quick, modern, and open-source link shortener
+    digest: 98f64a87a494e1fb530a610d09136afb66ffb0db3399b9a04520d70963a81a0e
+    home: https://github.com/christianknell/helm-charts
+    icon: http://docs.polrproject.org/en/latest/logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: polr
+    sources:
+    - https://github.com/cydrobolt/polr
+    - https://github.com/ajanvier/docker-polr
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/polr-1.0.9/polr-1.0.9.tgz
+    version: 1.0.9
+  - apiVersion: v2
+    appVersion: 2.3.0
     created: "2023-01-09T22:44:40.018494794Z"
     dependencies:
     - name: mysql
@@ -5963,4 +5985,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-01-23T08:38:31.988612446Z"
+generated: "2023-01-23T08:46:18.085495017Z"
