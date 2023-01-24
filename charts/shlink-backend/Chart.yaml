@@ -31,5 +31,5 @@ dependencies:
     condition: rabbitmq.enabled
   - name: redis
     repository: https://charts.bitnami.com/bitnami
-    version: 17.5.1
+    version: 17.6.0
     condition: redis.enabled
