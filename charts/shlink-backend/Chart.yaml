@@ -15,7 +15,7 @@ sources:
 dependencies:
   - name: mariadb
     repository: https://charts.bitnami.com/bitnami
-    version: 11.4.4
+    version: 11.4.5
     condition: mariadb.enabled
   - name: mysql
     repository: https://charts.bitnami.com/bitnami
