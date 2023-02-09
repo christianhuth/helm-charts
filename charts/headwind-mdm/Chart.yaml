@@ -2,7 +2,7 @@ apiVersion: v2
 name: headwind-mdm
 description: Headwind MDM - an open source mobile device management software for Android
 type: application
-version: 1.0.11
+version: 1.0.12
 appVersion: "0.1.1"
 home: https://github.com/christianknell/helm-charts
 icon: https://h-mdm.com/wp-content/uploads/2019/07/neew-logo.png
