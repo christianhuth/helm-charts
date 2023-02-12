@@ -49,6 +49,17 @@ spec:
                 {{- end }}
                 {{- end }}
                 - --force-exit-zero=true
+                {{- if .Values.cronJob.s3 }}
+                {{- if .Values.cronJob.s3.bucket }}
+                - --s3-bucket={{ .Values.cronJob.s3.bucket }}
+                {{- end }}
+                {{- if .Values.cronJob.s3.region }}
+                - --s3-region={{ .Values.cronJob.s3.region }}
+                {{- end }}
+                {{- if .Values.cronJob.s3.endpoint }}
+                - --s3-endpoint={{ .Values.cronJob.s3.endpoint }}
+                {{- end }}
+                {{- end }}
               {{- if and (eq .Values.cronJob.outputFormat "prometheus") (.Values.cronJob.prometheus.pushgatewayAddress) (.Values.cronJob.prometheus.basicAuth.enabled) }}
               env:
                 - name: PUSHGATEWAY_BASIC_AUTH_PASSWORD
