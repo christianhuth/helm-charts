@@ -62,7 +62,7 @@ cronJob:
   # Popeye can generate sanitizer reports in a variety of formats: standard, jurassic, yaml, html, json, junit, prometheus, score
   outputFormat: standard
   # -- optional:
-  s3:
+  # s3:
     # -- bucket name can be the URI and the bucket name path s3://example-bucket
     # bucket: "ss"
     # -- example region: "us-east-1"
