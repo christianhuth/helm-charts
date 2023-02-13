@@ -40,6 +40,7 @@ spec:
                 {{- if .Values.cronJob.clusterName }}
                 - --cluster-name={{ .Values.cronJob.clusterName }}
                 {{- end }}
+                - --force-exit-zero=true
                 - --out={{ .Values.cronJob.outputFormat }}
                 {{- if and (eq .Values.cronJob.outputFormat "prometheus") (.Values.cronJob.prometheus.pushgatewayAddress) }}
                 - --pushgateway-address={{ .Values.cronJob.prometheus.pushgatewayAddress }}
@@ -48,8 +49,6 @@ spec:
                 - --pushgateway-basic-auth-pass=$PUSHGATEWAY_BASIC_AUTH_PASSWORD
                 {{- end }}
                 {{- end }}
-                - --force-exit-zero=true
-                {{- if .Values.cronJob.s3 }}
                 {{- if .Values.cronJob.s3.bucket }}
                 - --s3-bucket={{ .Values.cronJob.s3.bucket }}
                 {{- end }}
@@ -58,7 +57,6 @@ spec:
                 {{- end }}
                 {{- if .Values.cronJob.s3.endpoint }}
                 - --s3-endpoint={{ .Values.cronJob.s3.endpoint }}
-                {{- end }}
                 {{- end }}
               {{- if and (eq .Values.cronJob.outputFormat "prometheus") (.Values.cronJob.prometheus.pushgatewayAddress) (.Values.cronJob.prometheus.basicAuth.enabled) }}
               env:
