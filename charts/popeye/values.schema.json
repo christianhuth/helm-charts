@@ -50,6 +50,20 @@
                         }
                     }
                 },
+                "s3": {
+                    "type": "object",
+                    "properties": {
+                        "bucket": {
+                            "type": "string"
+                        },
+                        "endpoint": {
+                            "type": "string"
+                        },
+                        "region": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "schedule": {
                     "type": "string"
                 },

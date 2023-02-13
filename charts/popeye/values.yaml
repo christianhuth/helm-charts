@@ -42,8 +42,8 @@ securityContext: {}
 # -- Resource limits and requests for the headwind pods.
 resources:
   limits:
-    cpu: 500m
-    memory: 100Mi
+    cpu: 1000m
+    memory: 1000Mi
 
 # -- Node labels for pod assignment
 nodeSelector: {}
@@ -72,6 +72,13 @@ cronJob:
       # -- Username for authentication against Prometheus Pushgateway
       user: ""
     pushgatewayAddress: ""
+  s3:
+    # -- bucket name can be the URI and the bucket name path s3://example-bucket
+    bucket: ""
+    # -- example endpoint: "https://s3.us-east-1.amazonaws.com"
+    endpoint: ""
+    # -- example region: "us-east-1"
+    region: ""
   schedule: "* */1 * * *"
   spinachConfiguration:
     # # A Popeye sample configuration file
