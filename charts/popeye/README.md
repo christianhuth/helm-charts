@@ -61,8 +61,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride                            | string | `""`                                         | String to fully override `"popeye.fullname"`                                                                                    |
 | image.pullPolicy                            | string | `"Always"`                                   | image pull policy                                                                                                               |
 | image.repository                            | string | `"derailed/popeye"`                          | image repository                                                                                                                |
-| image.tag                                   | string | `"v0.11.0
-"`                                  | Overrides the image tag                                                                                                         |
+| image.tag                                   | string | `"v0.11.0"`                                  | Overrides the image tag                                                                                                         |
 | imagePullSecrets                            | list   | `[]`                                         | If defined, uses a Secret to pull an image from a private Docker registry or repository.                                        |
 | nameOverride                                | string | `""`                                         | Provide a name in place of `popeye`                                                                                             |
 | nodeSelector                                | object | `{}`                                         | Node labels for pod assignment                                                                                                  |
