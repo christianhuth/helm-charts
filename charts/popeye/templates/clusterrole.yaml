@@ -37,7 +37,7 @@ rules:
     - pods
     - nodes
   verbs: ["get", "list"]
-- apiGroups: policy
+- apiGroups: ["policy/v1"]
   resources:
     - poddisruptionbudgets
     - podsecuritypolicies
