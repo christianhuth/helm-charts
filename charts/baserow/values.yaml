@@ -347,8 +347,6 @@ backend:
     fileUploadSizeLimit: "1048576"
     # -- Items from the trash will be permanently deleted after this number of hours.
     hoursUntilTrashPermanentlyDeleted: ""
-    # -- The percentage of rows when importing that are allowed to not match the detected column type and be blanked out instead of imported when creating a table.
-    importToleratedTypeErrorThreshold: "0"
     # -- The maximum number of rows you can import in a synchronous way
     initialCreateSyncTableDataLimit: "5000"
     # -- The amount of rows that can be imported when creating a table. Defaults to empty which means unlimited rows.
