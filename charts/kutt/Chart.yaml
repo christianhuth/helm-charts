@@ -2,7 +2,7 @@ apiVersion: v2
 name: kutt
 description: Kutt is a free modern URL shortener.
 type: application
-version: 1.5.4
+version: 1.6.0
 appVersion: "v2.7.4"
 home: https://github.com/christianknell/helm-charts
 icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
