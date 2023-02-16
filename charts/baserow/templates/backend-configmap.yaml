@@ -40,7 +40,6 @@ data:
   {{- if .Values.backend.config.enableSecureProxySslHeader }}
   BASEROW_ENABLE_SECURE_PROXY_SSL_HEADER: {{ .Values.backend.config.enableSecureProxySslHeader | quote }}
   {{- end }}
-  BASEROW_IMPORT_TOLERATED_TYPE_ERROR_THRESHOLD: {{ .Values.backend.config.jobs.importToleratedTypeErrorThreshold | quote }}
   BASEROW_INITIAL_CREATE_SYNC_TABLE_DATA_LIMIT: {{ .Values.backend.config.initialCreateSyncTableDataLimit | quote }}
   BASEROW_JOB_CLEANUP_INTERVAL_MINUTES: {{ .Values.backend.config.jobs.cleanupIntervalMinutes | quote }}
   BASEROW_JOB_EXPIRATION_TIME_LIMIT: {{ .Values.backend.config.jobs.expirationTimeLimit | quote }}

@@ -334,9 +334,6 @@
                         "hoursUntilTrashPermanentlyDeleted": {
                             "type": "string"
                         },
-                        "importToleratedTypeErrorThreshold": {
-                            "type": "string"
-                        },
                         "initialCreateSyncTableDataLimit": {
                             "type": "string"
                         },
