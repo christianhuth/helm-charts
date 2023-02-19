@@ -15,11 +15,11 @@ sources:
 dependencies:
   - name: mariadb
     repository: https://charts.bitnami.com/bitnami
-    version: 11.4.6
+    version: 11.4.7
     condition: mariadb.enabled
   - name: mysql
     repository: https://charts.bitnami.com/bitnami
-    version: 9.4.8
+    version: 9.4.9
     condition: mysql.enabled
   - name: postgresql
     repository: https://charts.bitnami.com/bitnami
@@ -27,9 +27,9 @@ dependencies:
     condition: postgresql.enabled
   - name: rabbitmq
     repository: https://charts.bitnami.com/bitnami
-    version: 11.9.2
+    version: 11.9.3
     condition: rabbitmq.enabled
   - name: redis
     repository: https://charts.bitnami.com/bitnami
-    version: 17.7.4
+    version: 17.7.5
     condition: redis.enabled
