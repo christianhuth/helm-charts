@@ -140,6 +140,36 @@ Get the type of the external database
 {{- end -}}
 
 {{/*
+Get the url for the database
+*/}}
+{{- define "umami.database.url" -}}
+  {{ include "umami.database.type" . }}://{{ include "umami.database.username" . }}:{{ include "umami.database.password" . }}@{{ include "umami.database.hostname" . }}:{{ include "umami.database.port" . }}/{{ include "umami.database.database" . }}
+{{- end -}}
+
+
+{{/*
+Get the name of the secret containing the database url
+*/}}
+{{- define "umami.database.secretName" -}}
+  {{- if .Values.database.existingSecret -}}
+    {{- printf "%s" (tpl .Values.database.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "umami.fullname" .) -}}-db
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the key for the database url
+*/}}
+{{- define "umami.database.databaseUrlKey" -}}
+  {{- if .Values.database.databaseUrlKey -}}
+    {{- printf "%s" (tpl .Values.database.databaseUrlKey $) -}}
+  {{- else -}}
+    {{- "database-url" -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
 Get the name of the secret containing the hash salt
 */}}
 {{- define "umami.hash.secretName" -}}

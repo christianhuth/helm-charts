@@ -37,7 +37,10 @@ spec:
           env:
             # Database Settings
             - name: DATABASE_URL
-              value: '{{ include "umami.database.type" . }}://{{ include "umami.database.username" . }}:{{ include "umami.database.password" . }}@{{ include "umami.database.hostname" . }}:{{ include "umami.database.port" . }}/{{ include "umami.database.database" . }}'
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "umami.database.secretName" . | quote }}
+                  key: {{ include "umami.database.databaseUrlKey" . | quote }}
             # Umami Settings
             {{- if .Values.umami.clientIpHeader }}
             - name: CLIENT_IP_HEADER
@@ -71,7 +74,7 @@ spec:
             - name: PORT
               value: {{ .Values.service.port | quote }}
             - name: REMOVE_TRAILING_SLASH
-              value: {{ .Values.service.removeTrailingSlash | quote }}
+              value: {{ .Values.umami.removeTrailingSlash | quote }}
             - name: TRACKER_SCRIPT_NAME
               value: {{ .Values.umami.trackerScriptName | quote }}
             # Extra environment variables

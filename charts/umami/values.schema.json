@@ -25,6 +25,17 @@
                 }
             }
         },
+        "database": {
+            "type": "object",
+            "properties": {
+                "databaseUrlKey": {
+                    "type": "string"
+                },
+                "existingSecret": {
+                    "type": "string"
+                }
+            }
+        },
         "externalDatabase": {
             "type": "object",
             "properties": {
