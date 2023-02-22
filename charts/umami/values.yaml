@@ -133,6 +133,8 @@ umami:
   hostname: ""
   # -- You can provide a comma-delimited list of IP address to exclude from data collection.
   ignoredIpAddresses: ""
+  # -- setting this to true removes the environment variable DISABLE_LOGIN defined in `umami.disableLogin` from the deployment as this caused errors in some setups
+  removeDisableLoginEnv: false
   # -- Removes the trailing slash from all incoming urls.
   removeTrailingSlash: "1"
   # -- Allows you to assign a custom name to the tracker script different from the default umami. This is to help you avoid some ad-blockers.
