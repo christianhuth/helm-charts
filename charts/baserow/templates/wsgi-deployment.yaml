@@ -8,6 +8,7 @@ spec:
   {{- if not .Values.backend.wsgi.autoscaling.enabled }}
   replicas: {{ .Values.backend.wsgi.replicaCount }}
   {{- end }}
+  revisionHistoryLimit: {{ .Values.backend.wsgi.revisionHistoryLimit }}
   selector:
     matchLabels:
       {{- include "baserow.backend.wsgi.selectorLabels" . | nindent 6 }}

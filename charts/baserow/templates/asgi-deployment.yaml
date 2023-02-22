@@ -8,6 +8,7 @@ spec:
   {{- if not .Values.backend.asgi.autoscaling.enabled }}
   replicas: {{ .Values.backend.asgi.replicaCount }}
   {{- end }}
+  revisionHistoryLimit: {{ .Values.backend.asgi.revisionHistoryLimit }}
   selector:
     matchLabels:
       {{- include "baserow.backend.asgi.selectorLabels" . | nindent 6 }}
