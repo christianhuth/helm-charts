@@ -148,10 +148,6 @@ postgresql:
     password: mychart
     # -- Name for a custom user to create
     username: mychart
-  primary:
-    initdb:
-      # -- ConfigMap with scripts to be run at first boot
-      scriptsConfigMap: umami-db-schema
 
 mysql:
   # -- enable MySQL™ subchart from Bitnami
