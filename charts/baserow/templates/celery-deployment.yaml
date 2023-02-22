@@ -8,6 +8,7 @@ spec:
   {{- if not .Values.backend.celery.autoscaling.enabled }}
   replicas: {{ .Values.backend.celery.replicaCount }}
   {{- end }}
+  revisionHistoryLimit: {{ .Values.backend.celery.revisionHistoryLimit }}
   selector:
     matchLabels:
       {{- include "baserow.backend.celery.selectorLabels" . | nindent 6 }}

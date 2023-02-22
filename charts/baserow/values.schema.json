@@ -77,6 +77,9 @@
                         "resources": {
                             "type": "object"
                         },
+                        "revisionHistoryLimit": {
+                            "type": "integer"
+                        },
                         "securityContext": {
                             "type": "object",
                             "properties": {
@@ -192,6 +195,9 @@
                         },
                         "resources": {
                             "type": "object"
+                        },
+                        "revisionHistoryLimit": {
+                            "type": "integer"
                         },
                         "securityContext": {
                             "type": "object",
@@ -592,6 +598,9 @@
                         "resources": {
                             "type": "object"
                         },
+                        "revisionHistoryLimit": {
+                            "type": "integer"
+                        },
                         "securityContext": {
                             "type": "object",
                             "properties": {
@@ -828,6 +837,9 @@
                 },
                 "resources": {
                     "type": "object"
+                },
+                "revisionHistoryLimit": {
+                    "type": "integer"
                 },
                 "securityContext": {
                     "type": "object",

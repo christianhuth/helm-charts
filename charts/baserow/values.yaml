@@ -29,6 +29,9 @@ frontend:
   # -- Number of replicas
   replicaCount: 1
 
+  # -- The number of old ReplicaSets to retain
+  revisionHistoryLimit: 10
+
   # -- Resource limits and requests for the controller pods.
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious
@@ -147,6 +150,9 @@ backend:
     # -- Number of replicas
     replicaCount: 1
 
+    # -- The number of old ReplicaSets to retain
+    revisionHistoryLimit: 10
+
     # -- Resource limits and requests for the controller pods.
     resources: {}
       # We usually recommend not to specify default resources and to leave this as a conscious
@@ -229,6 +235,9 @@ backend:
 
     # -- Number of replicas
     replicaCount: 1
+
+    # -- The number of old ReplicaSets to retain
+    revisionHistoryLimit: 10
 
     # -- Resource limits and requests for the controller pods.
     resources: {}
@@ -460,6 +469,9 @@ backend:
 
     # -- Number of replicas
     replicaCount: 1
+
+    # -- The number of old ReplicaSets to retain
+    revisionHistoryLimit: 10
 
     # -- Resource limits and requests for the controller pods.
     resources: {}
