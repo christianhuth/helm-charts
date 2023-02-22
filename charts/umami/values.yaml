@@ -12,7 +12,7 @@ image:
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag
-  tag: "postgresql-v1.39.5"
+  tag: "postgresql-v1.40.0"
 
 # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
 imagePullSecrets: []
@@ -148,6 +148,10 @@ postgresql:
     password: mychart
     # -- Name for a custom user to create
     username: mychart
+  primary:
+    initdb:
+      # -- ConfigMap with scripts to be run at first boot
+      scriptsConfigMap: umami-db-schema
 
 mysql:
   # -- enable MySQL™ subchart from Bitnami
