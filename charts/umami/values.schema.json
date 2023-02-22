@@ -277,6 +277,9 @@
                 "ignoredIpAddresses": {
                     "type": "string"
                 },
+                "removeDisableLoginEnv": {
+                    "type": "boolean"
+                },
                 "removeTrailingSlash": {
                     "type": "string"
                 },

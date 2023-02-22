@@ -50,8 +50,10 @@ spec:
             - name: COLLECT_API_ENDPOINT
               value: {{ .Values.umami.collectApiEndpoint | quote }}
             {{- end }}
+            {{- if not .Values.umami.removeDisableLoginEnv }}
             - name: DISABLE_LOGIN
               value: {{ .Values.umami.disableLogin | quote }}
+            {{- end }}
             - name: DISABLE_TELEMETRY
               value: {{ .Values.umami.disableTelemetry | quote }}
             - name: DISABLE_UPDATES
