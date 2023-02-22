@@ -22,8 +22,8 @@ rules:
   resources:
     - deployments
     - statefulsets
-    - daemonsets
     - replicasets
+    - daemonsets
   verbs: ["get", "list"]
 - apiGroups: ["rbac.authorization.k8s.io"]
   resources:
@@ -48,6 +48,6 @@ rules:
   verbs: ["get", "list"]
 - apiGroups: ["policy"]
   resources:
-    - podsecuritypolicies
     - poddisruptionbudgets
+    - podsecuritypolicies
   verbs: ["get", "list"]
