@@ -3921,6 +3921,23 @@ entries:
     version: 0.0.1
   popeye:
   - apiVersion: v2
+    appVersion: v0.11.1
+    created: "2023-02-22T09:57:34.697235252Z"
+    description: Popeye - A Kubernetes Cluster Sanitizer
+    digest: 6a79a9914aa2e476a9eb3e5683fabfaf026b536f1415a8186a9e0b27425a1446
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/derailed/popeye/master/assets/popeye_logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: popeye
+    sources:
+    - https://github.com/derailed/popeye
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/popeye-1.4.3/popeye-1.4.3.tgz
+    version: 1.4.3
+  - apiVersion: v2
     appVersion: v0.11.0
     created: "2023-02-16T13:35:15.07113779Z"
     description: Popeye - A Kubernetes Cluster Sanitizer
@@ -8504,4 +8521,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-02-22T09:03:37.82984205Z"
+generated: "2023-02-22T09:57:34.699562702Z"
