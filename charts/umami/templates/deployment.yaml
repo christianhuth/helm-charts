@@ -37,7 +37,10 @@ spec:
           env:
             # Database Settings
             - name: DATABASE_URL
-              value: '{{ include "umami.database.type" . }}://{{ include "umami.database.username" . }}:{{ include "umami.database.password" . }}@{{ include "umami.database.hostname" . }}:{{ include "umami.database.port" . }}/{{ include "umami.database.database" . }}'
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "umami.database.secretName" . | quote }}
+                  key: {{ include "umami.database.databaseUrlKey" . | quote }}
             # Umami Settings
             {{- if .Values.umami.clientIpHeader }}
             - name: CLIENT_IP_HEADER

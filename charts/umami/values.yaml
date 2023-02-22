@@ -12,7 +12,7 @@ image:
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag
-  tag: "postgresql-v1.39.5"
+  tag: "postgresql-v1.40.0"
 
 # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
 imagePullSecrets: []
@@ -174,3 +174,9 @@ externalDatabase:
   port: 5432
   # -- Type of database
   type: postgresql
+
+database:
+  # -- Key in the existing secret containing the database url
+  databaseUrlKey: ""
+  # -- use an existing secret containing the database url. If none given, we will generate the database url by using the other values. The password for the database has to be set using `.Values.postgresql.auth.password`, `.Values.mysql.auth.password` or `.Values.externalDatabase.auth.password`.
+  existingSecret: ""
