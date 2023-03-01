@@ -815,6 +815,31 @@ entries:
   headwind-mdm:
   - apiVersion: v2
     appVersion: 0.1.2
+    created: "2023-03-01T16:32:32.135855287Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.2.2
+    description: Headwind MDM - an open source mobile device management software for
+      Android
+    digest: 75301c1ea5545c07ebbaaee31af880f63deed110d5f33e823ee1535f1641569d
+    home: https://github.com/christianknell/helm-charts
+    icon: https://h-mdm.com/wp-content/uploads/2019/07/neew-logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: headwind-mdm
+    sources:
+    - https://github.com/h-mdm/hmdm-docker
+    - https://github.com/h-mdm
+    - https://hub.docker.com/r/headwindmdm/hmdm
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/headwind-mdm-1.1.2/headwind-mdm-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
+    appVersion: 0.1.2
     created: "2023-02-19T10:21:28.93682059Z"
     dependencies:
     - condition: postgresql.enabled
@@ -8925,4 +8950,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-03-01T16:28:33.986642532Z"
+generated: "2023-03-01T16:32:32.136560999Z"
