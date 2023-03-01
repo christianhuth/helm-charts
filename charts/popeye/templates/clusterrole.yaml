@@ -37,8 +37,17 @@ rules:
     - pods
     - nodes
   verbs: ["get", "list"]
+- apiGroups: ["networking.k8s.io"]
+  resources:
+    - networkpolicies
+    - ingresses
+  verbs: ["get", "list"]
 - apiGroups: ["policy"]
   resources:
     - poddisruptionbudgets
     - podsecuritypolicies
+  verbs: ["get", "list"]
+- apiGroups: ["autoscaling"]
+  resources:
+    - horizontalpodautoscalers
   verbs: ["get", "list"]
