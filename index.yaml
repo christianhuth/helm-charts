@@ -8564,6 +8564,33 @@ entries:
   umami:
   - apiVersion: v2
     appVersion: postgresql-v1.40.0
+    created: "2023-03-05T10:03:36.862762857Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.2.2
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.5.1
+    description: Umami is a simple, fast, privacy-focused alternative to Google Analytics.
+    digest: 914c80faf766da43f18639544471509647a9ab1b9b6910f1f25114a1dad76fd7
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/umami-software/umami/master/public/android-chrome-512x512.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: umami
+    sources:
+    - https://github.com/umami-software/umami
+    - https://umami.is/
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/umami-1.4.2/umami-1.4.2.tgz
+    version: 1.4.2
+  - apiVersion: v2
+    appVersion: postgresql-v1.40.0
     created: "2023-02-22T17:14:22.281020023Z"
     dependencies:
     - condition: postgresql.enabled
@@ -9075,4 +9102,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-03-02T19:14:24.83266063Z"
+generated: "2023-03-05T10:03:36.863764463Z"
