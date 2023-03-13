@@ -2,7 +2,7 @@ apiVersion: v2
 name: shlink-backend
 description: A PHP-based self-hosted URL shortener that can be used to serve shortened URLs under your own domain.
 type: application
-version: 1.12.4
+version: 1.13.0
 appVersion: "3.5.2"
 home: https://github.com/christianknell/helm-charts
 icon: https://shlink.io/images/shlink-logo-blue.svg
@@ -15,11 +15,11 @@ sources:
 dependencies:
   - name: mariadb
     repository: https://charts.bitnami.com/bitnami
-    version: 11.5.1
+    version: 11.5.3
     condition: mariadb.enabled
   - name: mysql
     repository: https://charts.bitnami.com/bitnami
-    version: 9.5.1
+    version: 9.6.0
     condition: mysql.enabled
   - name: postgresql
     repository: https://charts.bitnami.com/bitnami
@@ -27,9 +27,9 @@ dependencies:
     condition: postgresql.enabled
   - name: rabbitmq
     repository: https://charts.bitnami.com/bitnami
-    version: 11.10.2
+    version: 11.10.3
     condition: rabbitmq.enabled
   - name: redis
     repository: https://charts.bitnami.com/bitnami
-    version: 17.8.2
+    version: 17.8.4
     condition: redis.enabled
