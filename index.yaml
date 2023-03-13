@@ -3452,6 +3452,34 @@ entries:
     version: 1.0.0
   passbolt-ha:
   - apiVersion: v2
+    created: "2023-03-13T09:26:08.334321701Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.6.0
+    - name: passbolt
+      repository: https://cnieg.github.io/helm-charts
+      version: 1.1.15
+    - name: proxysql
+      repository: https://christianknell.github.io/helm-charts/
+      version: 1.0.8
+    description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
+    digest: d2cd77d2e1f8f6127870cd540ac9b383816d9af027b3dcf5a1c6004a2469d2c5
+    home: https://github.com/christianknell/helm-charts
+    icon: https://avatars.githubusercontent.com/u/4386228?s=200&v=4
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: passbolt-ha
+    sources:
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    - https://github.com/cnieg/helm-charts/tree/master/charts/passbolt
+    - https://github.com/flachesis/proxysql/tree/master/charts/proxysql
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/passbolt-ha-1.2.0/passbolt-ha-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     created: "2023-03-08T11:44:51.515518965Z"
     dependencies:
     - name: mysql
@@ -9470,4 +9498,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-03-13T08:01:01.795069255Z"
+generated: "2023-03-13T09:26:08.335003896Z"
