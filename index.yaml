@@ -7846,6 +7846,37 @@ entries:
   typo3:
   - apiVersion: v2
     appVersion: "11.5"
+    created: "2023-03-16T09:48:10.947309232Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.6.0
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.3
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.2.3
+    description: TYPO3 — the Professional, Flexible Content Management System
+    digest: 6ecdde0be5b3a6a2d1468b5138890e33af03ed4b66f1463eee743e31d3be69b2
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.mdc.de/wp-content/uploads/2016/05/typo3_logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: typo3
+    sources:
+    - https://github.com/martin-helmich/docker-typo3
+    - https://github.com/TYPO3/typo3
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/typo3-1.4.1/typo3-1.4.1.tgz
+    version: 1.4.1
+  - apiVersion: v2
+    appVersion: "11.5"
     created: "2023-03-13T07:28:48.018655054Z"
     dependencies:
     - condition: mysql.enabled
@@ -9614,4 +9645,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-03-16T09:41:16.800724506Z"
+generated: "2023-03-16T09:48:10.948215932Z"
