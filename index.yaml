@@ -2313,6 +2313,32 @@ entries:
   kutt:
   - apiVersion: v2
     appVersion: v2.7.4
+    created: "2023-03-24T08:40:46.819335678Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.2.6
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.9.0
+    description: Kutt is a free modern URL shortener.
+    digest: f9817468a81d36f0df4f53947659903f967128a6d62033898f7a71cbda5d8985
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kutt
+    sources:
+    - https://github.com/thedevs-network/kutt
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kutt-1.8.1/kutt-1.8.1.tgz
+    version: 1.8.1
+  - apiVersion: v2
+    appVersion: v2.7.4
     created: "2023-03-23T08:51:51.041848083Z"
     dependencies:
     - condition: postgresql.enabled
@@ -10138,4 +10164,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-03-23T08:51:51.042668902Z"
+generated: "2023-03-24T08:40:46.820155192Z"
