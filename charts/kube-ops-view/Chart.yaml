@@ -18,6 +18,7 @@ dependencies:
     version: 17.9.2
     condition: redis.enabled
 annotations:
+  artifacthub.io/category: monitoring-logging
   artifacthub.io/screenshots: |
     - title: Dashboard overview of a Kubernetes cluster
       url: https://codeberg.org/hjacobs/kube-ops-view/media/branch/main/screenshot.png
