@@ -17,3 +17,8 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     version: 17.9.2
     condition: redis.enabled
+artifacthub.io/screenshots: |
+    - title: Dashboard overview of a Kubernetes cluster
+      url: https://codeberg.org/hjacobs/kube-ops-view/media/branch/main/screenshot.png
+    - title: Dashboard showing broken Pods
+      url: https://user-images.githubusercontent.com/1127164/53682720-a2a83780-3cf8-11e9-9384-2c1df186aad4.png
