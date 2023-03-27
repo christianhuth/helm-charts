@@ -8725,6 +8725,30 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/shlink-web-0.0.1/shlink-web-0.0.1.tgz
     version: 0.0.1
   skooner:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/screenshots: |
+        - title: Overview of the workloads running inside of Kubernetes.
+          url: https://skooner.io/images/k8dash-screen.png
+        - title: Dashboard of the nodes and their resources.
+          url: https://loft.sh/images/blog/posts/skooner-ui.png
+    apiVersion: v2
+    appVersion: stable
+    created: "2023-03-27T16:20:52.773147396Z"
+    description: Simple Kubernetes real-time dashboard and management.
+    digest: 66d7062e57de1dcca0247184e9ef778c203c9a41d115c451ddf90b6ce238411e
+    home: https://github.com/christianknell/helm-charts
+    icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu8eQrFBosk7yHTiDEwjnVcMRyDD5uIaNXhlZ1m0yiC4H8RP1j0PlBPtgtv0bdH0JwlOE
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: skooner
+    sources:
+    - https://github.com/skooner-k8s/skooner
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/skooner-0.0.6/skooner-0.0.6.tgz
+    version: 0.0.6
   - apiVersion: v2
     appVersion: stable
     created: "2023-01-04T17:31:16.113804415Z"
@@ -10878,4 +10902,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-03-27T16:16:35.620640306Z"
+generated: "2023-03-27T16:20:52.774149337Z"
