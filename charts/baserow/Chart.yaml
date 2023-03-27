@@ -21,3 +21,12 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     version: 17.9.2
     condition: redis.enabled
+annotations:
+  artifacthub.io/category: database
+  artifacthub.io/screenshots: |
+    - title: Create your own online database without technical experience.
+      url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
+    - title: With Baserow you decide how you want to structure everything. Whether you’re managing customers, products, airplanes or all of them.
+      url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
+    - title: Easily create custom plugins with our boilerplate or use third party ones.
+      url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
