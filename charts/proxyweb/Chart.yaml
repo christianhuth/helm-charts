@@ -5,9 +5,6 @@ type: application
 version: 1.0.0
 appVersion: "latest"
 home: https://github.com/christianknell/helm-charts
-maintainers:
-  - name: christianknell
-    email: christian@knell.it
 sources:
   - https://github.com/edmodo/proxyweb/
 deprecated: true
