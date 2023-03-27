@@ -23,3 +23,8 @@ dependencies:
   - name: proxysql
     repository: https://christianknell.github.io/helm-charts/
     version: 1.1.0
+annotations:
+  artifacthub.io/category: security
+  artifacthub.io/screenshots: |
+    - title: Includes a dark theme that can be used in place of the black on white default theme.
+      url: https://help.passbolt.com/assets/img/help/2018/06/LU_passwords_midgar.png
