@@ -28,7 +28,7 @@ annotations:
   artifacthub.io/screenshots: |
     - title: The login screen of Passbolt
       url: https://help.passbolt.com/assets/img/help/2021/02/AN_login_v3.png
-    - title: Data in passbolt is divided into two parts: the searchable non encrypted metadata called “resource”, and the encrypted part containing, for example the password called “secret”. 
+    - title: Data in passbolt is divided into two parts: the searchable non encrypted metadata called “resource”, and the encrypted part containing, for example the password called “secret”.
       url: https://help.passbolt.com/assets/img/help/2021/02/LU_encrypted_description.png
     - title: You can organize your secrets inside of folders.
       url: https://help.passbolt.com/assets/img/help/2019/12/LU_folder_preview.png
