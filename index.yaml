@@ -8707,6 +8707,34 @@ entries:
         - title: A typical architecture in which Shlink would be integrated.
           url: https://shlink.io/images/architecture/shlink-architecture.png
     apiVersion: v2
+    appVersion: 3.10.0
+    created: "2023-03-27T16:52:11.654834823Z"
+    description: A  ReactJS-based progressive web application for Shlink.
+    digest: 7010746665c76ceac067ea40fad5ffe91b62f549e4b24f6002ca5efb0e303eb6
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-web
+    sources:
+    - https://github.com/shlinkio/shlink-web-client
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-web-0.3.0/shlink-web-0.3.0.tgz
+    version: 0.3.0
+  - annotations:
+      artifacthub.io/screenshots: |
+        - title: Add a new link that should be shortened.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/creation-form-after.png
+        - title: You can have an overview of all your shortened links.
+          url: https://shlink.io/images/shlink-web-client-placeholder.jpg
+        - title: For each link there are multiple statistical data collected and visualized.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/visits-after.png
+        - title: A typical architecture in which Shlink would be integrated.
+          url: https://shlink.io/images/architecture/shlink-architecture.png
+    apiVersion: v2
     appVersion: 3.9.1
     created: "2023-03-27T16:08:04.648195807Z"
     description: A  ReactJS-based progressive web application for Shlink.
@@ -11043,4 +11071,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-03-27T16:49:21.642607482Z"
+generated: "2023-03-27T16:52:11.655451019Z"
