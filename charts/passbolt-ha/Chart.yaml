@@ -3,7 +3,7 @@ apiVersion: v2
 name: passbolt-ha
 description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
 type: application
-version: 1.4.1
+version: 1.4.2
 home: https://github.com/christianknell/helm-charts
 icon: https://avatars.githubusercontent.com/u/4386228?s=200&v=4
 maintainers:
@@ -28,7 +28,7 @@ annotations:
   artifacthub.io/screenshots: |
     - title: The login screen of Passbolt
       url: https://help.passbolt.com/assets/img/help/2021/02/AN_login_v3.png
-    - title: There are two parts: the searchable non encrypted metadata called resource and the encrypted part containing called secret.
+    - title: There are two parts - the searchable non encrypted metadata called resource and the encrypted part containing called secret.
       url: https://help.passbolt.com/assets/img/help/2021/02/LU_encrypted_description.png
     - title: You can organize your secrets inside of folders.
       url: https://help.passbolt.com/assets/img/help/2019/12/LU_folder_preview.png
