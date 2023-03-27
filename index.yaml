@@ -4067,6 +4067,51 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/node-access-1.0.0/node-access-1.0.0.tgz
     version: 1.0.0
   passbolt-ha:
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/screenshots: |
+        - title: The login screen of Passbolt
+          url: https://help.passbolt.com/assets/img/help/2021/02/AN_login_v3.png
+        - title: Data in passbolt is divided into two parts: the searchable non encrypted metadata called “resource”, and the encrypted part containing, for example the password called “secret”.
+          url: https://help.passbolt.com/assets/img/help/2021/02/LU_encrypted_description.png
+        - title: You can organize your secrets inside of folders.
+          url: https://help.passbolt.com/assets/img/help/2019/12/LU_folder_preview.png
+        - title: You can send an url of a given resource and share it with colleagues.
+          url: https://help.passbolt.com/assets/img/help/2019/02/LU_application_urls.png
+        - title: Includes a dark theme that can be used in place of the black on white default theme.
+          url: https://help.passbolt.com/assets/img/help/2018/06/LU_passwords_midgar.png
+        - title: It is possible for an admin to enable and configure multi-factor authentication providers.
+          url: https://help.passbolt.com/assets/img/help/2018/12/AD_mfa_org_settings_yubikey.png
+        - title: Administrators can manage subscriptions directly in the backend.
+          url: https://help.passbolt.com/assets/img/help/2021/05/AD_subscription_management.png
+    apiVersion: v2
+    created: "2023-03-27T15:06:43.524350056Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.7.0
+    - name: passbolt
+      repository: https://cnieg.github.io/helm-charts
+      version: 1.1.15
+    - name: proxysql
+      repository: https://christianknell.github.io/helm-charts/
+      version: 1.1.0
+    description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
+    digest: d3af218a697ebad0a80732e98242c919338ae072779eca4c8876062a863e9fc6
+    home: https://github.com/christianknell/helm-charts
+    icon: https://avatars.githubusercontent.com/u/4386228?s=200&v=4
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: passbolt-ha
+    sources:
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    - https://github.com/cnieg/helm-charts/tree/master/charts/passbolt
+    - https://github.com/flachesis/proxysql/tree/master/charts/proxysql
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/passbolt-ha-1.4.0/passbolt-ha-1.4.0.tgz
+    version: 1.4.0
   - apiVersion: v2
     created: "2023-03-16T11:06:26.592435728Z"
     dependencies:
@@ -10513,4 +10558,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-03-27T14:55:01.200073704Z"
+generated: "2023-03-27T15:06:43.525014554Z"
