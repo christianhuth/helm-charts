@@ -5580,6 +5580,33 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/priority-classes-1.0.0/priority-classes-1.0.0.tgz
     version: 1.0.0
   prometheus-pve-exporter:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/screenshots: |
+        - title: Add an user inside of Proxmox, that will be used for the Exporter.
+          url: https://xinux.net/images/6/6e/Prometheus-proxmox-grafana-user.png
+        - title: Add permissions for this user.
+          url: https://xinux.net/images/5/5d/Prometheus-proxmox-grafana-user-permission.png
+        - title: Visualize the data collected with Grafana.
+          url: https://grafana.com/grafana/dashboards/10347-proxmox-via-prometheus/
+    apiVersion: v2
+    appVersion: 2.2.4
+    created: "2023-03-27T16:05:27.44734709Z"
+    description: A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor
+      to collect metrics.
+    digest: f4a11ce43f92d2e706f2736333e0c750c1a6394cd199f07c8dd193d14e084a0c
+    home: https://github.com/christianknell/helm-charts
+    icon: https://camo.githubusercontent.com/2df2ac41e1b8a1484be236c75e395981b31bfd670eff46b5c182ea0be9475310/68747470733a2f2f7777772e70726f786d6f782e636f6d2f696d616765732f70726f786d6f782f50726f786d6f785f73796d626f6c5f7374616e646172645f6865782e706e67
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: prometheus-pve-exporter
+    sources:
+    - https://github.com/prometheus-pve/prometheus-pve-exporter
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/prometheus-pve-exporter-1.1.1/prometheus-pve-exporter-1.1.1.tgz
+    version: 1.1.1
   - apiVersion: v2
     appVersion: 2.2.4
     created: "2022-12-28T14:32:39.201633382Z"
@@ -10809,4 +10836,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-03-27T16:02:15.8760749Z"
+generated: "2023-03-27T16:05:27.448104175Z"
