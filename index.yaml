@@ -5653,6 +5653,30 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/prometheus-pve-exporter-1.0.2/prometheus-pve-exporter-1.0.2.tgz
     version: 1.0.2
   promlens:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/screenshots: |
+        - title: Build, understand, and fix your queries much more effectively with the ultimate query builder for PromQL.
+          url: https://promlens.com/static/promlens-hero-screenshot-7d453e779cf47c6fcec1de8823049257.png
+    apiVersion: v2
+    appVersion: v0.3.0
+    created: "2023-03-27T16:02:15.875369498Z"
+    description: PromLens is a tool that makes learning and using PromQL easier and
+      more productive
+    digest: fa991f05cc55f41934df3aba3f2c8e953a63bbfb3f465346fa992fe076b62d10
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: promlens
+    sources:
+    - https://github.com/prometheus/promlens
+    - https://hub.docker.com/r/prom/promlens
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/promlens-1.0.2/promlens-1.0.2.tgz
+    version: 1.0.2
   - apiVersion: v2
     appVersion: v0.3.0
     created: "2022-12-28T14:16:38.416262288Z"
@@ -10785,4 +10809,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-03-27T16:00:08.114804774Z"
+generated: "2023-03-27T16:02:15.8760749Z"
