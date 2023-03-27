@@ -26,5 +26,15 @@ dependencies:
 annotations:
   artifacthub.io/category: security
   artifacthub.io/screenshots: |
+    - title: The login screen of Passbolt
+      url: https://help.passbolt.com/assets/img/help/2021/02/AN_login_v3.png
+    - title: You can organize your secrets inside of folders.
+      url: https://help.passbolt.com/assets/img/help/2019/12/LU_folder_preview.png
+    - title: You can send an url of a given resource and share it with colleagues.
+      url: https://help.passbolt.com/assets/img/help/2019/02/LU_application_urls.png
     - title: Includes a dark theme that can be used in place of the black on white default theme.
       url: https://help.passbolt.com/assets/img/help/2018/06/LU_passwords_midgar.png
+    - title: It is possible for an admin to enable and configure multi-factor authentication providers.
+      url: https://help.passbolt.com/assets/img/help/2018/12/AD_mfa_org_settings_yubikey.png
+    - title: Administrators can manage subscriptions directly in the backend.
+      url: https://help.passbolt.com/assets/img/help/2021/05/AD_subscription_management.png
