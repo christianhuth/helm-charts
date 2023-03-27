@@ -8818,6 +8818,30 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/skooner-0.0.2/skooner-0.0.2.tgz
     version: 0.0.2
   sloop:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/screenshots: |
+        - title: Visualize the different Events inside your Kubernetes cluster.
+          url: https://civo-com-assets.ams3.digitaloceanspaces.com/content_images/989.blog.png
+        - title: You can filter the events that should be visualized.
+          url: https://raw.githubusercontent.com/milindchawre/civo-k8s/master/blog/sloop/images/sloop1.png
+    apiVersion: v2
+    appVersion: sha-2ce8bbe
+    created: "2023-03-27T16:29:40.609359052Z"
+    description: Kubernetes History Visualization
+    digest: 692debffbc21991b9efd97f87814d078447cc88052800d64a0a050e82e41421f
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: sloop
+    sources:
+    - https://github.com/salesforce/sloop
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/sloop-0.0.3/sloop-0.0.3.tgz
+    version: 0.0.3
   - apiVersion: v2
     appVersion: sha-2ce8bbe
     created: "2022-12-28T13:44:57.538281398Z"
@@ -10902,4 +10926,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-03-27T16:20:52.774149337Z"
+generated: "2023-03-27T16:29:40.611811467Z"
