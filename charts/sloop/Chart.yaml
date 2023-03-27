@@ -2,7 +2,7 @@ apiVersion: v2
 name: sloop
 description: Kubernetes History Visualization
 type: application
-version: 0.0.2
+version: 0.0.3
 appVersion: "sha-2ce8bbe"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
@@ -11,3 +11,10 @@ maintainers:
     email: christian@knell.it
 sources:
   - https://github.com/salesforce/sloop
+annotations:
+  artifacthub.io/category: monitoring-logging
+  artifacthub.io/screenshots: |
+    - title: Visualize the different Events inside your Kubernetes cluster.
+      url: https://civo-com-assets.ams3.digitaloceanspaces.com/content_images/989.blog.png
+    - title: You can filter the events that should be visualized.
+      url: https://raw.githubusercontent.com/milindchawre/civo-k8s/master/blog/sloop/images/sloop1.png
