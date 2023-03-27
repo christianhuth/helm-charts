@@ -5962,6 +5962,20 @@ entries:
   proxyweb:
   - apiVersion: v2
     appVersion: latest
+    created: "2023-03-27T16:16:35.620012507Z"
+    deprecated: true
+    description: A Helm chart for Kubernetes
+    digest: d2009b927c2fa0a5c1316c078c4ad4617c7c03fff879cc7a74373706c63784d9
+    home: https://github.com/christianknell/helm-charts
+    name: proxyweb
+    sources:
+    - https://github.com/edmodo/proxyweb/
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/proxyweb-1.0.0/proxyweb-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: latest
     created: "2023-01-04T17:33:45.02940777Z"
     description: A Helm chart for Kubernetes
     digest: 6f04cbfe7e76a25d7d959cef7420608eb9103fd8f98b2d1b4375d83778c21c77
@@ -10864,4 +10878,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-03-27T16:08:04.64890331Z"
+generated: "2023-03-27T16:16:35.620640306Z"
