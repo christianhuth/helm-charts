@@ -11,3 +11,10 @@ maintainers:
     email: christian@knell.it
 sources:
   - https://github.com/skooner-k8s/skooner
+annotations:
+  artifacthub.io/category: monitoring-logging
+  artifacthub.io/screenshots: |
+    - title: Overview of the workloads running inside of Kubernetes.
+      url: https://skooner.io/images/k8dash-screen.png
+    - title: Dashboard of the nodes and their resources.
+      url: https://loft.sh/images/blog/posts/skooner-ui.png
