@@ -5,6 +5,7 @@ type: application
 version: 1.0.0
 appVersion: "latest"
 home: https://github.com/christianknell/helm-charts
+maintainers: []
 sources:
   - https://github.com/edmodo/proxyweb/
 deprecated: true
