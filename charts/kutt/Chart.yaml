@@ -2,7 +2,7 @@ apiVersion: v2
 name: kutt
 description: Kutt is a free modern URL shortener.
 type: application
-version: 1.8.4
+version: 1.8.5
 appVersion: "v2.7.4"
 home: https://github.com/christianknell/helm-charts
 icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
@@ -23,10 +23,10 @@ dependencies:
 annotations:
   artifacthub.io/screenshots: |
     - title: Simply shorten your link using the Web UI.
-      url: https://noted.lol/content/images/size/w1000/2022/08/kutt-self-hosted-url-shortener-generate-unauthorized.png
-    - title: Advanced options for shortening a link.
-      url: https://noted.lol/content/images/2022/08/kutt-self-hosted-url-shortener-generate.png
+      url: https://d4.alternativeto.net/v9sHosD3RiPblfBOOHZi0gwU1M0pRL6Jn53oiobJi9k/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2t1dHQtaXRfNzY3MjMzX2Z1bGwucG5n.jpg
     - title: You can see a list of the most recent created links and some statistical data about them.
-      url: https://noted.lol/content/images/size/w1000/2022/08/kutt-self-hosted-url-shortener-recent-links.png
+      url: https://docs.cloudron.io/img/kutt-admin.png
     - title: View detailed statistics about each created link.
       url: https://kutt.it/images/callout.png
+    - title: Kutt supports having more than one domain.
+      url: https://docs.cloudron.io/img/kutt-custom-domain.png
