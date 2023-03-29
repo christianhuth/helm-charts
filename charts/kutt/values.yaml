@@ -96,88 +96,119 @@ tolerations: []
 # -- Affinity settings for pod assignment
 affinity: {}
 
-# Please see https://github.com/thedevs-network/kutt/blob/develop/.docker.env for complete list of environment variables.
-# Secret Keys and mail settings are provided through their own values `secretEnvs` and `mail`.
-env:
-  - name: ADMIN_EMAILS
-    value: ""
-  - name: CUSTOM_DOMAIN_USE_HTTPS
-    value: "false"
-  - name: DEFAULT_DOMAIN
-    value: "localhost:3000"
-  - name: DEFAULT_MAX_STATS_PER_LINK
-    value: "5000"
-  - name: DISALLOW_ANONYMOUS_LINKS
-    value: "false"
-  - name: DISALLOW_REGISTRATION
-    value: "false"
-  - name: LINK_LENGT
-    value: "6"
-  - name: NON_USER_COOLDOWN
-    value: "0"
-  - name: REPORT_EMAIL
-    value: ""
-  - name: SITE_NAME
-    value: "Kutt"
-  - name: USER_LIMIT_PER_DAY
-    value: "50"
+# -- additional environment variables to be added to the pods
+extraEnv: []
+  # - name: FOO
+  #   value: BAR
 
-envSecrets:
+kutt:
+  admin:
+    # -- Comma seperated list of email addresses that can access admin actions on settings page
+    emails: ""
+  config:
+    # -- Max number of visits for each link to have detailed stats
+    defaultMaxStatsPerLink: "5000"
+    # -- Disable anonymous link creation
+    disallowAnonymousLinks: false
+    # -- Disable registration
+    disallowRegistration: false
+    # -- Generated link length
+    linkLength: 6
+    # -- Create a cooldown for non-logged in users in minutes. Set 0 to disable.
+    nonUserCooldown: 0
+    # -- The name of the site where Kutt is hosted
+    siteName: "Kutt"
+    # -- The daily limit for each user
+    userLimitPerDay: 50
+  domain:
+    # -- Use HTTPS for links with custom domain
+    customDomainUseHttps: false
+    # -- The domain that this website is on
+    defaultDomain: "localhost:3000"
+    # -- If you use an ingress to expose Kutt you can simply set this to true to use the first hostname defined in the ingress.
+    useFirstIngressHost: false
   google:
     analytics: ""
     analyticsUniversal: ""
     existingSecret: ""
     safeBrowsingKey: ""
   jwt:
-    ## @param envSecrets.jwt.existingSecret Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`
-    ## NOTE: When it's set the envSecrets.jwt.key is ignored.
+    ## -- Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`. When it's set the kutt.jwt.key is ignored.
     existingSecret: ""
-    ## make sure to replace with your own secret key
+    ## -- make sure to replace with your own secret key
     key: "secret-jwt-key"
+  mail:
+    # -- Support email to show on the app
+    contactEmail: ""
+    ## -- Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`. When it's set the `kutt.mail.password` is ignored.
+    existingSecret: ""
+    from: ""
+    host: ""
+    password: ""
+    port: ""
+    # -- The email address that will receive submitted reports.
+    reportEmail: ""
+    secure: false
+    username: ""
   recaptcha:
-    ## @param envSecrets.recaptcha.existingSecret Use existing secret for ReCaptacha secrets. The secret has to contain the keys `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY`
-    ## NOTE: When it's set the envSecrets.recaptcha.siteKey and envSecrets.recaptcha.secretKey is ignored.
+    ## @param kutt.recaptcha.existingSecret Use existing secret for ReCaptacha secrets. The secret has to contain the keys `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY`
+    ## NOTE: When it's set the kutt.recaptcha.siteKey and kutt.recaptcha.secretKey is ignored.
     existingSecret: ""
     siteKey: ""
     secretKey: ""
 
-mail:
-  host: ""
-  port: ""
-  secure: true
-  username: ""
-  from: ""
-  password: ""
-  ## @param mail.existingSecret Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`
-  ## NOTE: When it's set the mail.password is ignored.
-  existingSecret: ""
-
 postgresql:
+  # -- enable PostgreSQL™ subchart from Bitnami
   enabled: true
   auth:
+    # -- Name for a custom database to create
     database: kutt
+    # -- Name of existing secret to use for PostgreSQL credentials
+    existingSecret: ""
+    # -- Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided
     password: kutt
+    # -- Name for a custom user to create
     username: kutt
 
 externalPostgresql:
-  database: kutt
-  existingSecret: ""
+  auth:
+    # -- Name of the database to use
+    database: kutt
+    # -- Name of existing secret to use for PostgreSQL credentials
+    existingSecret: ""
+    # -- Password to use
+    password: kutt
+    # -- Name of the user to use
+    username: kutt
+    # -- Key in the secret containing the password
+    userPasswordKey: ""
+  # -- Hostname of the PostgreSQL database
   hostname: ""
-  password: kutt
-  userPasswordKey: ""
+  # -- Port used to connect to PostgreSQL database
   port: 5432
-  username: kutt
 
 redis:
+  # -- enable Redis™ subchart from Bitnami
   enabled: true
+  # -- Redis® architecture. Allowed values: standalone or replication
+  architecture: standalone
   auth:
+    # -- Enable password authentication
     enabled: true
+    # -- Redis™ password
+    password: kutt
 
 externalRedis:
   auth:
+    # -- if authentication should be used with external Redis™
     enabled: true
+    # -- Name of existing secret to use for Redis™ credentials
     existingSecret: ""
+    # -- Password to use
     password: ""
+    # -- Key in the secret containing the password
     userPasswordKey: ""
+  # -- Hostname of Redis™
   hostname: ""
+  # -- Port used to connect to Redis
   port: 6379
