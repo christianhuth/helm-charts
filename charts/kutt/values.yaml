@@ -140,19 +140,19 @@ kutt:
     # -- If you use an ingress to expose Kutt you can simply set this to true to use the first hostname defined in the ingress.
     useFirstIngressHost: false
   google:
-    analytics: ""
-    analyticsUniversal: ""
+    # -- Use existing secret for Google configuration. The secret has to contain the key `GOOGLE_SAFE_BROWSING_KEY`. When it's set the `kutt.google.safeBrowsingKey` is ignored.
     existingSecret: ""
+    # -- Google Cloud API to prevent from users from submitting malware URLs. Get it from https://developers.google.com/safe-browsing/v4/get-started.
     safeBrowsingKey: ""
   jwt:
-    ## -- Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`. When it's set the kutt.jwt.key is ignored.
+    # -- Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`. When it's set the kutt.jwt.key is ignored.
     existingSecret: ""
-    ## -- make sure to replace with your own secret key
+    # -- make sure to replace with your own secret key
     key: "secret-jwt-key"
   mail:
     # -- Support email to show on the app
     contactEmail: ""
-    ## -- Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`. When it's set the `kutt.mail.password` is ignored.
+    # -- Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`. When it's set the `kutt.mail.password` is ignored.
     existingSecret: ""
     # -- The email address Kutt will send emails from.
     from: ""
@@ -169,10 +169,11 @@ kutt:
     # -- The username to authenticate to the smtp host when sending emails.
     username: ""
   recaptcha:
-    ## @param kutt.recaptcha.existingSecret Use existing secret for ReCaptacha secrets. The secret has to contain the keys `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY`
-    ## NOTE: When it's set the kutt.recaptcha.siteKey and kutt.recaptcha.secretKey is ignored.
+    # -- Use existing secret for ReCaptacha secrets. The secret has to contain the keys `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY`. When it's set the kutt.recaptcha.siteKey and kutt.recaptcha.secretKey is ignored.
     existingSecret: ""
+    # -- Invisible reCaptcha site key. Create one in https://www.google.com/recaptcha/intro/
     siteKey: ""
+    # -- Invisible reCaptcha secret key. Create one in https://www.google.com/recaptcha/intro/
     secretKey: ""
 
 postgresql:

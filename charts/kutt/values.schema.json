@@ -200,12 +200,6 @@
                 "google": {
                     "type": "object",
                     "properties": {
-                        "analytics": {
-                            "type": "string"
-                        },
-                        "analyticsUniversal": {
-                            "type": "string"
-                        },
                         "existingSecret": {
                             "type": "string"
                         },
