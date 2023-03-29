@@ -53,21 +53,27 @@ service:
   port: 80
 
 ingress:
+  # -- Enable ingress record generation
   enabled: false
+  # -- IngressClass that will be be used to implement the Ingress
   className: ""
+  # -- Additional annotations for the Ingress resource
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
+  # -- An array with the hosts configuration
   hosts:
     - host: chart-example.local
       paths:
         - path: /
           pathType: ImplementationSpecific
+  # -- An array with the tls configuration
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
 
+# -- Resource limits and requests for the pods.
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -81,10 +87,15 @@ resources: {}
   #   memory: 128Mi
 
 autoscaling:
+  # -- Enable Horizontal POD autoscaling
   enabled: false
+  # -- Minimum number of replicas
   minReplicas: 1
+  # -- Maximum number of replicas
   maxReplicas: 100
+  # -- Target CPU utilization percentage
   targetCPUUtilizationPercentage: 80
+  # -- Target Memory utilization percentage
   # targetMemoryUtilizationPercentage: 80
 
 # -- Node labels for pod assignment
