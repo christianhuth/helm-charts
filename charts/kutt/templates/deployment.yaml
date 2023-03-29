@@ -33,62 +33,108 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           env:
-            {{- toYaml .Values.env | nindent 12 }}
+            {{- if .Values.kutt.admin.emails }}
+            # Admin Settings
+            - name: ADMIN_EMAILS
+              value: {{ .Values.kutt.admin.emails | quote }}
+            {{- end }}
+            # Configuration Settings
+            {{- if .Values.kutt.config.defaultMaxStatsPerLink }}
+            - name: DEFAULT_MAX_STATS_PER_LINK
+              value: {{ .Values.kutt.config.defaultMaxStatsPerLink | quote }}
+            {{- end }}
+            - name: DISALLOW_ANONYMOUS_LINKS
+              value: {{ .Values.kutt.config.disallowAnonymousLinks | quote }}
+            - name: DISALLOW_REGISTRATION
+              value: {{ .Values.kutt.config.disallowRegistration | quote }}
+            - name: LINK_LENGTH
+              value: {{ .Values.kutt.config.linkLength | quote }}
+            - name: NON_USER_COOLDOWN
+              value: {{ .Values.kutt.config.nonUserCooldown | quote }}
+            - name: SITE_NAME
+              value: {{ .Values.kutt.config.siteName | quote }}
+            - name: USER_LIMIT_PER_DAY
+              value: {{ .Values.kutt.config.userLimitPerDay | quote }}
+            # Domain Settings
+            - name: CUSTOM_DOMAIN_USE_HTTPS
+              value: {{ .Values.kutt.domain.customDomainUseHttps | quote }}
+            {{- if or (.Values.kutt.domain.defaultDomain) (and .Values.kutt.domain.useFirstIngressHost .Values.ingress.enabled (index .Values.ingress.hosts 0).host) }}
+            - name: DEFAULT_DOMAIN
+              {{- if and .Values.kutt.domain.useFirstIngressHost .Values.ingress.enabled (index .Values.ingress.hosts 0).host }}
+              value: {{ (index .Values.ingress.hosts 0).host | quote }}
+              {{- else }}
+              value: {{ .Values.kutt.domain.defaultDomain | quote }}
+              {{- end }}
+            {{- end }}
             # Mail Settings
+            {{- if .Values.kutt.mail.contactEmail }}
+            - name: CONTACT_EMAIL
+              value: {{ .Values.kutt.mail.reportEmail | quote }}
+            {{- end }}
+            {{- if .Values.kutt.mail.host }}
             - name: MAIL_HOST
-              value: {{ .Values.mail.host }}
+              value: {{ .Values.kutt.mail.host | quote }}
+            {{- end }}
+            {{- if .Values.kutt.mail.port }}
             - name: MAIL_PORT
-              value: {{ .Values.mail.port | quote }}
+              value: {{ .Values.kutt.mail.port | quote }}
+            {{- end }}
             - name: MAIL_SECURE
-              value: {{ .Values.mail.secure | quote }}
+              value: {{ .Values.kutt.mail.secure | quote }}
+            {{- if .Values.kutt.mail.username }}
             - name: MAIL_USER
-              value: {{ .Values.mail.username }}
+              value: {{ .Values.kutt.mail.username | quote }}
+            {{- end }}
             - name: MAIL_PASSWORD
-              {{- if .Values.mail.existingSecret }}
+              {{- if .Values.kutt.mail.existingSecret }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.mail.existingSecret }}
+                  name: {{ .Values.kutt.mail.existingSecret }}
                   key: MAIL_PASSWORD
               {{- else }}
-              value: {{ .Values.mail.password }}
+              value: {{ .Values.kutt.mail.password | quote }}
               {{- end }}
+            {{- if .Values.kutt.mail.reportEmail }}
+            - name: REPORT_EMAIL
+              value: {{ .Values.kutt.mail.reportEmail | quote }}
+            {{- end }}
             # Google Settings
             - name: GOOGLE_SAFE_BROWSING_KEY
-              {{- if .Values.envSecrets.google.existingSecret }}
+              {{- if .Values.kutt.google.existingSecret }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.envSecrets.google.existingSecret }}
+                  name: {{ .Values.kutt.google.existingSecret }}
                   key: GOOGLE_SAFE_BROWSING_KEY
               {{- else }}
-              value: {{ .Values.envSecrets.google.safeBrowsingKey }}
+              value: {{ .Values.kutt.google.safeBrowsingKey }}
               {{- end }}
             - name: GOOGLE_ANALYTICS
-              {{- if .Values.envSecrets.google.existingSecret }}
+              {{- if .Values.kutt.google.existingSecret }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.envSecrets.google.existingSecret }}
+                  name: {{ .Values.kutt.google.existingSecret }}
                   key: GOOGLE_ANALYTICS
               {{- else }}
-              value: {{ .Values.envSecrets.google.analytics }}
+              value: {{ .Values.kutt.google.analytics }}
               {{- end }}
             - name: GOOGLE_ANALYTICS_UNIVERSAL
-              {{- if .Values.envSecrets.google.existingSecret }}
+              {{- if .Values.kutt.google.existingSecret }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.envSecrets.google.existingSecret }}
+                  name: {{ .Values.kutt.google.existingSecret }}
                   key: GOOGLE_ANALYTICS_UNIVERSAL
               {{- else }}
-              value: {{ .Values.envSecrets.google.analyticsUniversal }}
+              value: {{ .Values.kutt.google.analyticsUniversal }}
               {{- end }}
             # JWT Settings
             - name: JWT_SECRET
-              {{- if .Values.envSecrets.jwt.existingSecret }}
+              {{- if .Values.kutt.jwt.existingSecret }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.envSecrets.jwt.existingSecret }}
+                  name: {{ .Values.kutt.jwt.existingSecret }}
                   key: JWT_SECRET
               {{- else }}
-              value: {{ .Values.envSecrets.jwt.key }}
+              value: {{ .Values.kutt.jwt.key }}
               {{- end }}
             # Database Settings
             - name: DB_HOST
@@ -118,6 +164,12 @@ spec:
                   name: {{ include "kutt.redis.secretName" . | quote }}
                   key: {{ include "kutt.redis.userPasswordKey" . | quote }}
             {{- end -}}
+            {{- range .Values.extraEnv }}
+            {{- if and (.name) (.value) }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
           {{- with .Values.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}

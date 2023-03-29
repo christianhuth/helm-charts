@@ -53,21 +53,28 @@ service:
   port: 80
 
 ingress:
+  # -- Enable ingress record generation
   enabled: false
+  # -- IngressClass that will be be used to implement the Ingress
   className: ""
+  # -- Additional annotations for the Ingress resource
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
+  # -- An array with the hosts configuration
+  # @default -- see [values.yaml](./values.yaml)
   hosts:
     - host: chart-example.local
       paths:
         - path: /
           pathType: ImplementationSpecific
+  # -- An array with the tls configuration
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
 
+# -- Resource limits and requests for the pods.
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -81,10 +88,15 @@ resources: {}
   #   memory: 128Mi
 
 autoscaling:
+  # -- Enable Horizontal POD autoscaling
   enabled: false
+  # -- Minimum number of replicas
   minReplicas: 1
+  # -- Maximum number of replicas
   maxReplicas: 100
+  # -- Target CPU utilization percentage
   targetCPUUtilizationPercentage: 80
+  # -- Target Memory utilization percentage
   # targetMemoryUtilizationPercentage: 80
 
 # -- Node labels for pod assignment
@@ -96,88 +108,126 @@ tolerations: []
 # -- Affinity settings for pod assignment
 affinity: {}
 
-# Please see https://github.com/thedevs-network/kutt/blob/develop/.docker.env for complete list of environment variables.
-# Secret Keys and mail settings are provided through their own values `secretEnvs` and `mail`.
-env:
-  - name: ADMIN_EMAILS
-    value: ""
-  - name: CUSTOM_DOMAIN_USE_HTTPS
-    value: "false"
-  - name: DEFAULT_DOMAIN
-    value: "localhost:3000"
-  - name: DEFAULT_MAX_STATS_PER_LINK
-    value: "5000"
-  - name: DISALLOW_ANONYMOUS_LINKS
-    value: "false"
-  - name: DISALLOW_REGISTRATION
-    value: "false"
-  - name: LINK_LENGT
-    value: "6"
-  - name: NON_USER_COOLDOWN
-    value: "0"
-  - name: REPORT_EMAIL
-    value: ""
-  - name: SITE_NAME
-    value: "Kutt"
-  - name: USER_LIMIT_PER_DAY
-    value: "50"
+# -- additional environment variables to be added to the pods
+extraEnv: []
+  # - name: FOO
+  #   value: BAR
 
-envSecrets:
+kutt:
+  admin:
+    # -- Comma seperated list of email addresses that can access admin actions on settings page
+    emails: ""
+  config:
+    # -- Max number of visits for each link to have detailed stats
+    defaultMaxStatsPerLink: "5000"
+    # -- Disable anonymous link creation
+    disallowAnonymousLinks: false
+    # -- Disable registration
+    disallowRegistration: false
+    # -- Generated link length
+    linkLength: 6
+    # -- Create a cooldown for non-logged in users in minutes. Set 0 to disable.
+    nonUserCooldown: 0
+    # -- The name of the site where Kutt is hosted
+    siteName: "Kutt"
+    # -- The daily limit for each user
+    userLimitPerDay: 50
+  domain:
+    # -- Use HTTPS for links with custom domain
+    customDomainUseHttps: false
+    # -- The domain that this website is on
+    defaultDomain: "localhost:3000"
+    # -- If you use an ingress to expose Kutt you can simply set this to true to use the first hostname defined in the ingress.
+    useFirstIngressHost: false
   google:
-    analytics: ""
-    analyticsUniversal: ""
+    # -- Use existing secret for Google configuration. The secret has to contain the key `GOOGLE_SAFE_BROWSING_KEY`. When it's set the `kutt.google.safeBrowsingKey` is ignored.
     existingSecret: ""
+    # -- Google Cloud API to prevent from users from submitting malware URLs. Get it from https://developers.google.com/safe-browsing/v4/get-started.
     safeBrowsingKey: ""
   jwt:
-    ## @param envSecrets.jwt.existingSecret Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`
-    ## NOTE: When it's set the envSecrets.jwt.key is ignored.
+    # -- Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`. When it's set the kutt.jwt.key is ignored.
     existingSecret: ""
-    ## make sure to replace with your own secret key
+    # -- make sure to replace with your own secret key
     key: "secret-jwt-key"
-  recaptcha:
-    ## @param envSecrets.recaptcha.existingSecret Use existing secret for ReCaptacha secrets. The secret has to contain the keys `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY`
-    ## NOTE: When it's set the envSecrets.recaptcha.siteKey and envSecrets.recaptcha.secretKey is ignored.
+  mail:
+    # -- Support email to show on the app
+    contactEmail: ""
+    # -- Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`. When it's set the `kutt.mail.password` is ignored.
     existingSecret: ""
+    # -- The email address Kutt will send emails from.
+    from: ""
+    # -- The host of the external SMTP server that Kutt should use to send emails.
+    host: ""
+    # -- The password to authenticate to the smtp host when sending emails.
+    password: ""
+    # -- The port used to connect to the smtp host.
+    port: ""
+    # -- The email address that will receive submitted reports.
+    reportEmail: ""
+    # -- If true the connection will use TLS when connecting to server. If false (the default) then TLS is used if server supports the STARTTLS extension. In most cases set this value to true if you are connecting to port 465. For port 587 or 25 keep it false
+    secure: false
+    # -- The username to authenticate to the smtp host when sending emails.
+    username: ""
+  recaptcha:
+    # -- Use existing secret for ReCaptacha secrets. The secret has to contain the keys `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY`. When it's set the kutt.recaptcha.siteKey and kutt.recaptcha.secretKey is ignored.
+    existingSecret: ""
+    # -- Invisible reCaptcha site key. Create one in https://www.google.com/recaptcha/intro/
     siteKey: ""
+    # -- Invisible reCaptcha secret key. Create one in https://www.google.com/recaptcha/intro/
     secretKey: ""
 
-mail:
-  host: ""
-  port: ""
-  secure: true
-  username: ""
-  from: ""
-  password: ""
-  ## @param mail.existingSecret Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`
-  ## NOTE: When it's set the mail.password is ignored.
-  existingSecret: ""
-
 postgresql:
+  # -- enable PostgreSQL™ subchart from Bitnami
   enabled: true
   auth:
+    # -- Name for a custom database to create
     database: kutt
+    # -- Name of existing secret to use for PostgreSQL credentials
+    existingSecret: ""
+    # -- Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided
     password: kutt
+    # -- Name for a custom user to create
     username: kutt
 
 externalPostgresql:
-  database: kutt
-  existingSecret: ""
+  auth:
+    # -- Name of the database to use
+    database: kutt
+    # -- Name of existing secret to use for PostgreSQL credentials
+    existingSecret: ""
+    # -- Password to use
+    password: kutt
+    # -- Name of the user to use
+    username: kutt
+    # -- Key in the secret containing the password
+    userPasswordKey: ""
+  # -- Hostname of the PostgreSQL database
   hostname: ""
-  password: kutt
-  userPasswordKey: ""
+  # -- Port used to connect to PostgreSQL database
   port: 5432
-  username: kutt
 
 redis:
+  # -- enable Redis™ subchart from Bitnami
   enabled: true
+  # -- Redis® architecture. Allowed values: standalone or replication
+  architecture: standalone
   auth:
+    # -- Enable password authentication
     enabled: true
+    # -- Redis™ password
+    password: kutt
 
 externalRedis:
   auth:
+    # -- if authentication should be used with external Redis™
     enabled: true
+    # -- Name of existing secret to use for Redis™ credentials
     existingSecret: ""
+    # -- Password to use
     password: ""
+    # -- Key in the secret containing the password
     userPasswordKey: ""
+  # -- Hostname of Redis™
   hostname: ""
+  # -- Port used to connect to Redis
   port: 6379

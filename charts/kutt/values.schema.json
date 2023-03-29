@@ -22,90 +22,34 @@
                 }
             }
         },
-        "env": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "envSecrets": {
-            "type": "object",
-            "properties": {
-                "google": {
-                    "type": "object",
-                    "properties": {
-                        "analytics": {
-                            "type": "string"
-                        },
-                        "analyticsUniversal": {
-                            "type": "string"
-                        },
-                        "existingSecret": {
-                            "type": "string"
-                        },
-                        "safeBrowsingKey": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "jwt": {
-                    "type": "object",
-                    "properties": {
-                        "existingSecret": {
-                            "type": "string"
-                        },
-                        "key": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "recaptcha": {
-                    "type": "object",
-                    "properties": {
-                        "existingSecret": {
-                            "type": "string"
-                        },
-                        "secretKey": {
-                            "type": "string"
-                        },
-                        "siteKey": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "externalPostgresql": {
             "type": "object",
             "properties": {
-                "database": {
-                    "type": "string"
-                },
-                "existingSecret": {
-                    "type": "string"
+                "auth": {
+                    "type": "object",
+                    "properties": {
+                        "database": {
+                            "type": "string"
+                        },
+                        "existingSecret": {
+                            "type": "string"
+                        },
+                        "password": {
+                            "type": "string"
+                        },
+                        "userPasswordKey": {
+                            "type": "string"
+                        },
+                        "username": {
+                            "type": "string"
+                        }
+                    }
                 },
                 "hostname": {
                     "type": "string"
                 },
-                "password": {
-                    "type": "string"
-                },
                 "port": {
                     "type": "integer"
-                },
-                "userPasswordKey": {
-                    "type": "string"
-                },
-                "username": {
-                    "type": "string"
                 }
             }
         },
@@ -136,6 +80,9 @@
                     "type": "integer"
                 }
             }
+        },
+        "extraEnv": {
+            "type": "array"
         },
         "fullnameOverride": {
             "type": "string"
@@ -199,29 +146,124 @@
                 }
             }
         },
-        "mail": {
+        "kutt": {
             "type": "object",
             "properties": {
-                "existingSecret": {
-                    "type": "string"
+                "admin": {
+                    "type": "object",
+                    "properties": {
+                        "emails": {
+                            "type": "string"
+                        }
+                    }
                 },
-                "from": {
-                    "type": "string"
+                "config": {
+                    "type": "object",
+                    "properties": {
+                        "defaultMaxStatsPerLink": {
+                            "type": "string"
+                        },
+                        "disallowAnonymousLinks": {
+                            "type": "boolean"
+                        },
+                        "disallowRegistration": {
+                            "type": "boolean"
+                        },
+                        "linkLength": {
+                            "type": "integer"
+                        },
+                        "nonUserCooldown": {
+                            "type": "integer"
+                        },
+                        "siteName": {
+                            "type": "string"
+                        },
+                        "userLimitPerDay": {
+                            "type": "integer"
+                        }
+                    }
                 },
-                "host": {
-                    "type": "string"
+                "domain": {
+                    "type": "object",
+                    "properties": {
+                        "customDomainUseHttps": {
+                            "type": "boolean"
+                        },
+                        "defaultDomain": {
+                            "type": "string"
+                        },
+                        "useFirstIngressHost": {
+                            "type": "boolean"
+                        }
+                    }
                 },
-                "password": {
-                    "type": "string"
+                "google": {
+                    "type": "object",
+                    "properties": {
+                        "existingSecret": {
+                            "type": "string"
+                        },
+                        "safeBrowsingKey": {
+                            "type": "string"
+                        }
+                    }
                 },
-                "port": {
-                    "type": "string"
+                "jwt": {
+                    "type": "object",
+                    "properties": {
+                        "existingSecret": {
+                            "type": "string"
+                        },
+                        "key": {
+                            "type": "string"
+                        }
+                    }
                 },
-                "secure": {
-                    "type": "boolean"
+                "mail": {
+                    "type": "object",
+                    "properties": {
+                        "contactEmail": {
+                            "type": "string"
+                        },
+                        "existingSecret": {
+                            "type": "string"
+                        },
+                        "from": {
+                            "type": "string"
+                        },
+                        "host": {
+                            "type": "string"
+                        },
+                        "password": {
+                            "type": "string"
+                        },
+                        "port": {
+                            "type": "string"
+                        },
+                        "reportEmail": {
+                            "type": "string"
+                        },
+                        "secure": {
+                            "type": "boolean"
+                        },
+                        "username": {
+                            "type": "string"
+                        }
+                    }
                 },
-                "username": {
-                    "type": "string"
+                "recaptcha": {
+                    "type": "object",
+                    "properties": {
+                        "existingSecret": {
+                            "type": "string"
+                        },
+                        "secretKey": {
+                            "type": "string"
+                        },
+                        "siteKey": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         },
@@ -246,6 +288,9 @@
                         "database": {
                             "type": "string"
                         },
+                        "existingSecret": {
+                            "type": "string"
+                        },
                         "password": {
                             "type": "string"
                         },
@@ -262,11 +307,17 @@
         "redis": {
             "type": "object",
             "properties": {
+                "architecture": {
+                    "type": "string"
+                },
                 "auth": {
                     "type": "object",
                     "properties": {
                         "enabled": {
                             "type": "boolean"
+                        },
+                        "password": {
+                            "type": "string"
                         }
                     }
                 },
