@@ -154,13 +154,19 @@ kutt:
     contactEmail: ""
     ## -- Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`. When it's set the `kutt.mail.password` is ignored.
     existingSecret: ""
+    # -- The email address Kutt will send emails from.
     from: ""
+    # -- The host of the external SMTP server that Kutt should use to send emails.
     host: ""
+    # -- The password to authenticate to the smtp host when sending emails.
     password: ""
+    # -- The port used to connect to the smtp host.
     port: ""
     # -- The email address that will receive submitted reports.
     reportEmail: ""
+    # -- If true the connection will use TLS when connecting to server. If false (the default) then TLS is used if server supports the STARTTLS extension. In most cases set this value to true if you are connecting to port 465. For port 587 or 25 keep it false
     secure: false
+    # -- The username to authenticate to the smtp host when sending emails.
     username: ""
   recaptcha:
     ## @param kutt.recaptcha.existingSecret Use existing secret for ReCaptacha secrets. The secret has to contain the keys `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY`
