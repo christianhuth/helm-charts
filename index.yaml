@@ -1925,6 +1925,35 @@ entries:
           url: https://user-images.githubusercontent.com/1127164/53682720-a2a83780-3cf8-11e9-9384-2c1df186aad4.png
     apiVersion: v2
     appVersion: 23.2.0
+    created: "2023-04-18T10:39:26.421406255Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.9.5
+    description: A Helm chart for bootstrapping kube-ops-view.
+    digest: e779de6c9f54d1407fffbfc7869983cbfe58b3a2126111c298a89e90e853c3d8
+    home: https://github.com/christianknell/helm-charts
+    icon: https://codeberg.org/repo-avatars/677-c51f6426305941cab515fdd98368f0bb
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kube-ops-view
+    sources:
+    - https://codeberg.org/hjacobs/kube-ops-view
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kube-ops-view-2.2.5/kube-ops-view-2.2.5.tgz
+    version: 2.2.5
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/screenshots: |
+        - title: Dashboard overview of a Kubernetes cluster
+          url: https://codeberg.org/hjacobs/kube-ops-view/media/branch/main/screenshot.png
+        - title: Dashboard showing broken Pods
+          url: https://user-images.githubusercontent.com/1127164/53682720-a2a83780-3cf8-11e9-9384-2c1df186aad4.png
+    apiVersion: v2
+    appVersion: 23.2.0
     created: "2023-04-14T14:58:05.872178815Z"
     dependencies:
     - condition: redis.enabled
@@ -12349,4 +12378,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-04-18T10:16:33.568081136Z"
+generated: "2023-04-18T10:39:26.422440434Z"
