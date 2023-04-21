@@ -1,0 +1,15 @@
+{{- if (not .Values.kubedoom.namespace) }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "kubedoom.fullname" . }}
+rules:
+  - apiGroups: [""]
+    resources:
+  {{- if eq .Values.kubedoom.mode "pods" }}
+      - pods
+  {{- else if eq .Values.kubedoom.mode "namespaces" }}
+      - namespaces
+  {{- end }}
+    verbs: ["get", "list", "delete"]
+{{- end }}
