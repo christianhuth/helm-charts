@@ -1,0 +1,14 @@
+---
+apiVersion: v2
+name: kubedoom
+description: A Helm chart for Kubedoom
+version: 1.0.0
+type: application
+appVersion: "0.6.0"
+home: https://github.com/christianknell/helm-charts
+icon: https://raw.githubusercontent.com/storax/kubedoom/master/assets/doom.jpg
+maintainers:
+  - name: christianknell
+    email: christian@knell.it
+sources:
+  - https://github.com/storax/kubedoom

@@ -1,0 +1,15 @@
+{{- if .Values.kubedoom.namespace }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "kubedoom.fullname" . }}
+  namespace: {{ .Values.kubedoom.namespace | quote }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "kubedoom.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "kubedoom.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end }}

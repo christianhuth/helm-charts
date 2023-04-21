@@ -1,0 +1,64 @@
+{{ template "chart.header" . }}
+{{ template "chart.description" . }}
+
+## TL;DR;
+
+```console
+helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo update
+helm install my-release christianknell/kubedoom
+```
+
+## Introduction
+
+<INTRODUCTION>
+
+This chart bootstraps [Kubedoom](https://github.com/storax/kubedoom) on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+
+## Prerequisites
+
+- Kubernetes 1.19+
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo update
+helm install my-release christianknell/kubedoom
+```
+
+These commands deploy Kubedoom on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
+
+> **Tip**: List all releases using `helm list`
+
+## Accessing Doom
+
+Now start a VNC viewer and connect to the URL of your Kubedoom installation. The password is `idbehold`.
+
+$ vncviewer viewer <URL_OF_KUBEDOOM>
+
+You should now see DOOM! Now if you want to get the job done quickly enter the cheat `idspispopd` and walk through the wall on your right. You should be greeted by your pods as little pink monsters. Press CTRL to fire. If the pistol is not your thing, cheat with `idkfa` and press `5` for a nice surprise. Pause the game with ESC.
+
+## Uninstalling the Chart
+
+To uninstall the `my-release` deployment:
+
+```console
+helm uninstall my-release
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+{{ template "chart.valuesSection" . }}
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
+
+```console
+helm install my-release -f values.yaml christianknell/kubedoom
+```
+
+{{ template "helm-docs.versionFooter" . }}
