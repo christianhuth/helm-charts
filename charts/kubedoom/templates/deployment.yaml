@@ -35,13 +35,12 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if eq .Values.kubedoom.mode "namespaces" }}
           args:
-            - "-mode namespaces"
-          {{- end }}
-          {{- if or (and .Values.kubedoom.namespace (not .Values.kubedoom.mode)) (.Values.extraEnv) }}
+            - "-mode"
+            - {{ .Values.kubedoom.mode | quote }}
+          {{- if or (and .Values.kubedoom.namespace (eq .Values.kubedoom.mode "pods")) (.Values.extraEnv) }}
           env:
-            {{- if and (.Values.kubedoom.namespace) (not .Values.kubedoom.mode) }}
+            {{- if and (.Values.kubedoom.namespace) (eq .Values.kubedoom.mode "pods") }}
             - name: NAMESPACE
               value: {{ .Values.kubedoom.namespace | quote }}
             {{- end }}

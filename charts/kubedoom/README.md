@@ -69,7 +69,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.repository                              | string | `"storax/kubedoom"` | image repository                                                                                                       |
 | image.tag                                     | string | `"0.6.0"`           | Overrides the image tag                                                                                                |
 | imagePullSecrets                              | list   | `[]`                | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
-| kubedoom.mode                                 | string | `""`                | You can also kill Namespaces instead of Pods. Simply set this to `namespaces`.                                         |
+| kubedoom.mode                                 | string | `"pods"`            | You can also kill Namespaces instead of Pods. Simply set this to `namespaces`. Allowed values: `pods`, `namespaces`.   |
 | kubedoom.namespace                            | string | `""`                | You can limit Kubedoom to deleting pods in a single namespace                                                          |
 | nameOverride                                  | string | `""`                | Provide a name in place of `kubedoom`                                                                                  |
 | nodeSelector                                  | object | `{}`                | Node labels for pod assignment                                                                                         |
@@ -80,7 +80,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | revisionHistoryLimit                          | int    | `10`                | The number of old ReplicaSets to retain                                                                                |
 | securityContext                               | object | `{}`                | container-level security context                                                                                       |
 | service.port                                  | int    | `5900`              | Kubernetes port where service is exposed                                                                               |
-| service.type                                  | string | `"ClusterIP"`       | Kubernetes service type                                                                                                |
+| service.type                                  | string | `"NodePort"`        | Kubernetes service type                                                                                                |
 | serviceAccount.annotations                    | object | `{}`                | Annotations to add to the service account                                                                              |
 | serviceAccount.create                         | bool   | `true`              | Specifies whether a service account should be created                                                                  |
 | serviceAccount.name                           | string | `""`                | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |

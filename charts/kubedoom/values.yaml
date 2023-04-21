@@ -63,7 +63,7 @@ serviceAccount:
 
 service:
   # -- Kubernetes service type
-  type: ClusterIP
+  type: NodePort
   # -- Kubernetes port where service is exposed
   port: 5900
 
@@ -92,7 +92,7 @@ affinity: {}
 extraEnv: []
 
 kubedoom:
-  # -- You can also kill Namespaces instead of Pods. Simply set this to `namespaces`.
-  mode: ""
+  # -- You can also kill Namespaces instead of Pods. Simply set this to `namespaces`. Allowed values: `pods`, `namespaces`.
+  mode: "pods"
   # -- You can limit Kubedoom to deleting pods in a single namespace
   namespace: ""
