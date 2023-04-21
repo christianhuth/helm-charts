@@ -12,3 +12,7 @@ maintainers:
     email: christian@knell.it
 sources:
   - https://github.com/storax/kubedoom
+annotations:
+  artifacthub.io/screenshots: |
+    - title: Kill pods inside your Kubernetes cluster by shooting them in Doom!
+      url: https://github.com/storax/kubedoom/raw/master/assets/doom.jpg
