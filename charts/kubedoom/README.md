@@ -36,9 +36,21 @@ These commands deploy Kubedoom on the Kubernetes cluster in the default configur
 
 ## Accessing Doom
 
+Once everything is up and running inside your cluster, you will need to port forward by getting the pod and running kubectl port-forward.
+
+```
+$ kubectl get pods -n kubedoom
+NAME                                       READY   STATUS    RESTARTS   AGE
+kubedoom-kubedoom-chart-676bcc5c9c-xkwpp   1/1     Running   0          2m29s
+
+$ kubectl port-forward  kubedoom-kubedoom-chart-676bcc5c9c-xkwpp 5900:5900 -n kubedoom
+Forwarding from 127.0.0.1:5900 -> 5900
+Forwarding from [::1]:5900 -> 5900
+```
+
 Now start a VNC viewer and connect to the URL of your Kubedoom installation. The password is `idbehold`.
 
-$ vncviewer viewer <URL_OF_KUBEDOOM>
+$ vncviewer viewer localhost:5900
 
 You should now see DOOM! Now if you want to get the job done quickly enter the cheat `idspispopd` and walk through the wall on your right. You should be greeted by your pods as little pink monsters. Press CTRL to fire. If the pistol is not your thing, cheat with `idkfa` and press `5` for a nice surprise. Pause the game with ESC.
 
@@ -80,7 +92,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | revisionHistoryLimit                          | int    | `10`                | The number of old ReplicaSets to retain                                                                                |
 | securityContext                               | object | `{}`                | container-level security context                                                                                       |
 | service.port                                  | int    | `5900`              | Kubernetes port where service is exposed                                                                               |
-| service.type                                  | string | `"NodePort"`        | Kubernetes service type                                                                                                |
+| service.type                                  | string | `"ClusterIP"`       | Kubernetes service type                                                                                                |
 | serviceAccount.annotations                    | object | `{}`                | Annotations to add to the service account                                                                              |
 | serviceAccount.create                         | bool   | `true`              | Specifies whether a service account should be created                                                                  |
 | serviceAccount.name                           | string | `""`                | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |

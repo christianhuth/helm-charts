@@ -63,7 +63,7 @@ serviceAccount:
 
 service:
   # -- Kubernetes service type
-  type: NodePort
+  type: ClusterIP
   # -- Kubernetes port where service is exposed
   port: 5900
 
