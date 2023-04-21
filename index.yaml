@@ -2944,6 +2944,28 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/kube-ops-view-1.1.2/kube-ops-view-1.1.2.tgz
     version: 1.1.2
+  kubedoom:
+  - annotations:
+      artifacthub.io/screenshots: |
+        - title: Kill pods inside your Kubernetes cluster by shooting them in Doom!
+          url: https://github.com/storax/kubedoom/raw/master/assets/doom.jpg
+    apiVersion: v2
+    appVersion: 0.6.0
+    created: "2023-04-21T15:02:06.344081917Z"
+    description: A Helm chart for Kubedoom
+    digest: 9e7c9b78254efef2c525f4e4842dc6ceaa1b45b7f5e89ffae1e1449d34495a23
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/storax/kubedoom/master/assets/doom.jpg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kubedoom
+    sources:
+    - https://github.com/storax/kubedoom
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kubedoom-1.0.0/kubedoom-1.0.0.tgz
+    version: 1.0.0
   kutt:
   - annotations:
       artifacthub.io/screenshots: |
@@ -12722,4 +12744,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-04-21T13:35:41.667105101Z"
+generated: "2023-04-21T15:02:06.344905128Z"
