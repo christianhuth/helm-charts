@@ -92,7 +92,7 @@ affinity: {}
 extraEnv: []
 
 kubedoom:
-  # -- You can also kill Namespaces instead of Pods. Simply set this to namespace.
+  # -- You can also kill Namespaces instead of Pods. Simply set this to `namespaces`.
   mode: ""
   # -- You can limit Kubedoom to deleting pods in a single namespace
   namespace: ""

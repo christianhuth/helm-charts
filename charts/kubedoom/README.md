@@ -69,7 +69,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.repository                              | string | `"storax/kubedoom"` | image repository                                                                                                       |
 | image.tag                                     | string | `"0.6.0"`           | Overrides the image tag                                                                                                |
 | imagePullSecrets                              | list   | `[]`                | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
-| kubedoom.mode                                 | string | `""`                | You can also kill Namespaces instead of Pods. Simply set this to namespace.                                            |
+| kubedoom.mode                                 | string | `""`                | You can also kill Namespaces instead of Pods. Simply set this to `namespaces`.                                         |
 | kubedoom.namespace                            | string | `""`                | You can limit Kubedoom to deleting pods in a single namespace                                                          |
 | nameOverride                                  | string | `""`                | Provide a name in place of `kubedoom`                                                                                  |
 | nodeSelector                                  | object | `{}`                | Node labels for pod assignment                                                                                         |
