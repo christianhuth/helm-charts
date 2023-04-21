@@ -1,4 +1,3 @@
-{{- if not .Values.kubedoom.namespace }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -8,4 +7,9 @@ rules:
     resources:
       - pods
     verbs: ["get", "list", "delete"]
-{{- end }}
+  {{- if eq .Values.kubedoom.mode "namespaces" -}}
+  - apiGroups: [""]
+    resources:
+      - namespaces
+    verbs: ["get", "list", "delete"]
+  {{- end }}
