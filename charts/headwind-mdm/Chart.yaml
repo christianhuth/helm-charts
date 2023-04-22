@@ -2,7 +2,7 @@ apiVersion: v2
 name: headwind-mdm
 description: Headwind MDM - an open source mobile device management software for Android
 type: application
-version: 1.1.8
+version: 1.1.9
 appVersion: "0.1.2"
 home: https://github.com/christianknell/helm-charts
 icon: https://h-mdm.com/wp-content/uploads/2019/07/neew-logo.png
@@ -16,7 +16,7 @@ sources:
 dependencies:
   - name: postgresql
     repository: https://charts.bitnami.com/bitnami
-    version: 12.2.8
+    version: 12.3.1
     condition: postgresql.enabled
 annotations:
   artifacthub.io/screenshots: |
