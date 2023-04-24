@@ -62,7 +62,7 @@ spec:
             {{- if.Values.config.web.routePrefix }}
             - --web.route-prefix={{ .Values.config.web.routePrefix }}
             {{- end }}
-          {{- if or (.Values.config.grafana.enabled) (.Values.config.sharedLinks.gcs.enabled) (.Values.config.sharedLinks.sql.enabled) }}
+          {{- if or (.Values.config.sharedLinks.gcs.enabled) (.Values.config.sharedLinks.sql.enabled) }}
           env:
             {{- if .Values.config.sharedLinks.gcs.enabled }}
             - name: GOOGLE_APPLICATION_CREDENTIALS
