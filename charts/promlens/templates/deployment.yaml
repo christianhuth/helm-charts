@@ -33,7 +33,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           args:
             {{- if.Values.config.grafana.enabled }}
-            - --grafana.api-token=$GRAFANA_API_TOKEN
+            - --grafana.api-token-file=/var/grafana-secret/api-token
             {{- if.Values.config.grafana.defaultDatasourceId }}
             - --grafana.default-datasource-id={{ .Values.config.grafana.defaultDatasourceId }}
             {{- end }}
@@ -62,13 +62,6 @@ spec:
             {{- end }}
           {{- if or (.Values.config.grafana.enabled) (.Values.config.sharedLinks.gcs.enabled) (.Values.config.sharedLinks.sql.enabled) }}
           env:
-            {{- if .Values.config.grafana.enabled }}
-            - name: GRAFANA_API_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "promlens.grafana.secretName" . }}
-                  key: api-token
-            {{- end }}
             {{- if .Values.config.sharedLinks.gcs.enabled }}
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/gcs-secret/gcs-cred.json
@@ -102,8 +95,10 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if .Values.config.sharedLinks.gcs.enabled }}
           volumeMounts:
+            - mountPath: /var/grafana-secret
+              name: grafana-secret
+          {{- if .Values.config.sharedLinks.gcs.enabled }}
             - mountPath: /var/gcs-secret
               name: gcs-secret
           {{- end }}
@@ -119,8 +114,12 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.config.sharedLinks.gcs.enabled }}
       volumes:
+        - name: grafana-secret
+          secret:
+            defaultMode: 420
+            secretName: {{ include "promlens.grafana.secretName" . }}
+      {{- if .Values.config.sharedLinks.gcs.enabled }}
         - name: gcs-secret
           secret:
             defaultMode: 420
