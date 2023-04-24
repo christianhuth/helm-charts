@@ -6678,6 +6678,30 @@ entries:
           url: https://promlens.com/static/promlens-hero-screenshot-7d453e779cf47c6fcec1de8823049257.png
     apiVersion: v2
     appVersion: v0.3.0
+    created: "2023-04-24T10:07:52.502584691Z"
+    description: PromLens is a tool that makes learning and using PromQL easier and
+      more productive
+    digest: 6c44b0be8bd7baf85cc741b5745cd2530a507841f8abef9f455bc0fa3b74c85c
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: promlens
+    sources:
+    - https://github.com/prometheus/promlens
+    - https://hub.docker.com/r/prom/promlens
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/promlens-1.0.3/promlens-1.0.3.tgz
+    version: 1.0.3
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/screenshots: |
+        - title: Build, understand, and fix your queries much more effectively with the ultimate query builder for PromQL.
+          url: https://promlens.com/static/promlens-hero-screenshot-7d453e779cf47c6fcec1de8823049257.png
+    apiVersion: v2
+    appVersion: v0.3.0
     created: "2023-03-27T16:02:15.875369498Z"
     description: PromLens is a tool that makes learning and using PromQL easier and
       more productive
@@ -12978,4 +13002,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-04-24T10:02:47.789925635Z"
+generated: "2023-04-24T10:07:52.503349888Z"
