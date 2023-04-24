@@ -26,15 +26,17 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "promlens.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           args:
-            {{- if.Values.config.grafana.enabled }}
-            - --grafana.api-token=$GRAFANA_API_TOKEN
-            {{- if.Values.config.grafana.defaultDatasourceId }}
+            {{- if .Values.config.grafana.enabled }}
+            - --grafana.api-token-file=/var/grafana-secret/api-token
+            {{- if .Values.config.grafana.defaultDatasourceId }}
             - --grafana.default-datasource-id={{ .Values.config.grafana.defaultDatasourceId }}
             {{- end }}
             - --grafana.url={{ .Values.config.grafana.url }}
@@ -60,15 +62,8 @@ spec:
             {{- if.Values.config.web.routePrefix }}
             - --web.route-prefix={{ .Values.config.web.routePrefix }}
             {{- end }}
-          {{- if or (.Values.config.grafana.enabled) (.Values.config.sharedLinks.gcs.enabled) (.Values.config.sharedLinks.sql.enabled) }}
+          {{- if or (.Values.config.sharedLinks.gcs.enabled) (.Values.config.sharedLinks.sql.enabled) }}
           env:
-            {{- if .Values.config.grafana.enabled }}
-            - name: GRAFANA_API_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "promlens.grafana.secretName" . }}
-                  key: api-token
-            {{- end }}
             {{- if .Values.config.sharedLinks.gcs.enabled }}
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/gcs-secret/gcs-cred.json
@@ -102,10 +97,16 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if .Values.config.sharedLinks.gcs.enabled }}
+          {{- if or (.Values.config.grafana.enabled) (.Values.config.sharedLinks.gcs.enabled) }}
           volumeMounts:
+            {{- if .Values.config.grafana.enabled }}
+            - mountPath: /var/grafana-secret
+              name: grafana-secret
+            {{- end }}
+            {{- if .Values.config.sharedLinks.gcs.enabled }}
             - mountPath: /var/gcs-secret
               name: gcs-secret
+            {{- end }}
           {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
@@ -119,10 +120,18 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.config.sharedLinks.gcs.enabled }}
+      {{- if or (.Values.config.grafana.enabled) (.Values.config.sharedLinks.gcs.enabled) }}
       volumes:
+        {{- if .Values.config.grafana.enabled }}
+        - name: grafana-secret
+          secret:
+            defaultMode: 420
+            secretName: {{ include "promlens.grafana.secretName" . }}
+        {{- end }}
+        {{- if .Values.config.sharedLinks.gcs.enabled }}
         - name: gcs-secret
           secret:
             defaultMode: 420
             secretName: {{ include "promlens.gcs.secretName" . }}
+        {{- end }}
       {{- end }}
