@@ -1,0 +1,194 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "maildev.fullname" . }}
+  labels:
+    {{- include "maildev.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "maildev.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "maildev.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "maildev.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            {{- if .Values.maildev.config.smtp.outgoing.autoRelay.enabled }}
+            {{- if .Values.maildev.config.smtp.outgoing.autoRelay.mail }}
+            - {{- printf "%s %s" "--auto-relay" .Values.maildev.config.smtp.outgoing.autoRelay.mail  }}
+            {{- else }}
+            - "--auto-relay"
+            {{- end }}
+            {{- end }}
+            {{- if .Values.maildev.config.web.disabled }}
+            - "--disable-web"
+            {{- end }}
+            {{- if .Values.maildev.config.https.enabled }}
+            - "--https"
+            {{- end }}
+            {{- if .Values.maildev.config.logMailContents }}
+            - "--log-mail-contents"
+            {{- end }}
+            {{- if .Values.maildev.config.smtp.outgoing.ssl }}
+            - "--outgoing-secure"
+            {{- end }}
+            {{- if .Values.maildev.config.modes.silent }}
+            - "--silent"
+            {{- end }}
+            {{- if .Values.maildev.config.modes.verbose }}
+            - "--verbose"
+            {{- end }}
+          env:
+            {{- if .Values.maildev.config.https.enabled }}
+            # HTTPS Settings
+            {{- if .Values.maildev.config.https.cert }}
+            - name: MAILDEV_HTTPS_CERT
+              value: {{ .Values.maildev.config.https.cert | quote }}
+            {{- end }}
+            {{- if .Values.maildev.config.https.key }}
+            - name: MAILDEV_HTTPS_KEY
+              value: {{ .Values.maildev.config.https.key | quote }}
+            {{- end }}
+            {{- end }}
+            # Maildev Settings
+            - name: MAILDEV_MAIL_DIRECTORY
+              value: {{ .Values.maildev.config.mailDirectory | quote }}
+            # SMTP Settings
+            - name: MAILDEV_SMTP_PORT
+              value: {{ .Values.services.smtp.port | quote }}
+            {{- if .Values.maildev.config.smtp.hideExtensions }}
+            - name: MAILDEV_HIDE_EXTENSIONS
+              value: {{ .Values.maildev.config.smtp.hideExtensions | quote }}
+            {{- end }}
+            {{- if .Values.maildev.config.smtp.incoming.username }}
+            - name: MAILDEV_INCOMING_USER
+              value: {{ .Values.maildev.config.smtp.incoming.username | quote }}
+            - name: MAILDEV_INCOMING_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "maildev.smtp.incoming.secretName" . }}
+                  key: smtp-incoming-password
+            {{- end }}
+            {{- if .Values.maildev.config.smtp.outgoing.host }}
+            - name: MAILDEV_OUTGOING_HOST
+              value: {{ .Values.maildev.config.smtp.outgoing.host | quote }}
+            {{- end }}
+            {{- if .Values.maildev.config.smtp.outgoing.host }}
+            - name: MAILDEV_OUTGOING_PORT
+              value: {{ .Values.maildev.config.smtp.outgoing.port | quote }}
+            {{- end }}
+            {{- if .Values.maildev.config.smtp.outgoing.host }}
+            - name: MAILDEV_OUTGOING_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "maildev.smtp.outgoing.secretName" . }}
+                  key: smtp-outgoing-password
+            {{- end }}
+            {{- if .Values.maildev.config.smtp.outgoing.username }}
+            - name: MAILDEV_OUTGOING_USER
+              value: {{ .Values.maildev.config.smtp.outgoing.username | quote }}
+            {{- end }}
+            # Web Settingss
+            {{- if .Values.maildev.config.web.username }}
+            - name: MAILDEV_WEB_USER
+              value: {{ .Values.maildev.config.web.username | quote }}
+            {{- end }}
+            {{- if or .Values.maildev.config.web.password .Values.maildev.config.web.existingSecret }}
+            - name: MAILDEV_WEB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "maildev.web.secretName" . }}
+                  key: web-password
+            {{- end }}
+            - name: MAILDEV_WEB_PORT
+              value: {{ .Values.services.web.port | quote }}
+            {{- if .Values.extraEnv }}
+            ## Additional Setings
+            {{- range .Values.extraEnv }}
+            {{- if and (.name) (.value) }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
+            {{- end }}
+          ports:
+            - name: web
+              containerPort: {{ .Values.services.web.port }}
+              protocol: TCP
+            - name: smtp
+              containerPort: {{ .Values.services.smtp.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: web
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: web
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: data
+              mountPath: {{ .Values.maildev.config.mailDirectory | quote }}
+            {{- if .Values.maildev.config.smtp.outgoing.autoRelay.enabled }}
+            - name: auto-relay-rules
+              mountPath: /etc/maildev
+              subPath: auto-relay-rules.json
+            {{- end }}
+      volumes:
+        - name: data
+          {{- if .Values.maildev.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "maildev.pvcName" . | quote }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+        {{- if .Values.maildev.config.smtp.outgoing.autoRelay.enabled }}
+        - name: auto-relay-rules
+          configMap:
+            name: {{ include "maildev.smtp.outgoing.autoRelay.configMapName" . }}
+            items:
+              - key: auto-relay-rules.json
+                path: auto-relay-rules.json
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

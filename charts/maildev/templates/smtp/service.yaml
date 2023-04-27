@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "maildev.smtp.serviceName" . }}
+  labels:
+    {{- include "maildev.labels" . | nindent 4 }}s
+spec:
+  type: {{ .Values.services.smtp.type }}
+  ports:
+    - port: {{ .Values.services.smtp.port }}
+      targetPort: smtp
+      protocol: TCP
+      name: smtp
+      {{ if and (eq .Values.services.smtp.type "NodePort")  .Values.services.smtp.nodePort }}
+      nodePort:  {{ .Values.services.smtp.nodePort }}
+      {{ end }}
+  selector:
+    {{- include "maildev.selectorLabels" . | nindent 4 }}
