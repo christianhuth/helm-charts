@@ -7209,6 +7209,46 @@ entries:
   shlink-backend:
   - apiVersion: v2
     appVersion: 3.5.5
+    created: "2023-04-27T19:53:35.319807035Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.7
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.7.2
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.4.2
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.13.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.9.5
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: c32df1041ef18b6c0c5aa6cfe5cbf9df1f0f917a7f024dbbf929235d1575531c
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-1.17.0/shlink-backend-1.17.0.tgz
+    version: 1.17.0
+  - apiVersion: v2
+    appVersion: 3.5.5
     created: "2023-04-24T09:50:56.470788571Z"
     dependencies:
     - condition: mariadb.enabled
@@ -13266,4 +13306,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-04-27T19:51:44.364726359Z"
+generated: "2023-04-27T19:53:35.320693843Z"
