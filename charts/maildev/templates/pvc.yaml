@@ -1,0 +1,24 @@
+{{- if and .Values.maildev.persistence.enabled (not .Values.maildev.persistence.existingClaim) }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  {{- if .Values.maildev.persistence.annotations }}
+  annotations:
+    {{- toYaml .Values.maildev.persistence.annotations | nindent 4 }}
+  {{- end }}
+  name: {{ include "maildev.pvcName" . }}
+  labels:
+    {{- include "maildev.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  {{- range .Values.maildev.persistence.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+  {{- with .Values.maildev.persistence.resources }}
+  resources:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- if .Values.maildev.persistence.storageClassName }}
+  storageClassName: {{ .Values.maildev.persistence.storageClassName | quote }}
+  {{- end }}
+{{- end }}

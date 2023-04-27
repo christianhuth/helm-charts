@@ -6,14 +6,21 @@
 ```console
 helm repo add christianknell https://christianknell.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/<CHARTNAME>
+helm install my-release christianknell/maildev
 ```
 
 ## Introduction
 
-<INTRODUCTION>
+This chart bootstraps [MailDev](https://maildev.github.io/maildev/) on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
-This chart bootstraps the [<APPLICATION_NAME>](<APPLICATION_LINK>) on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+MailDev is a simple way to test your project's generated emails during development with an easy-to-use web interface that runs on your machine.
+
+Its main usage is to provide you with a SMTP relay service inside Kubernetes, so other apps can rely on it to send mails externally.
+
+Inside the Namespace where it is deployed, an SMTP service is available: `RELEASE_NAME-smtp:1025`.
+To make the SMTP service available for applications running outside of Kubernetes you can set `services.smtp.type` to `NodePort`.
+
+MailDev also provides a Web interface, it can be disabled/enabled using `maildev.config.web.disabled`.
 
 ## Prerequisites
 
@@ -26,12 +33,70 @@ To install the chart with the release name `my-release`:
 ```console
 helm repo add christianknell https://christianknell.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/<CHARTNAME>
+helm install my-release christianknell/maildev
 ```
 
-These commands deploy <APPLICATION_NAME> on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
+These commands deploy MailDev on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
+
+
+## Test it
+
+Open a shell into the pod.
+
+```bash
+kubectl exec --stdin --tty $(kubectl get pod -l "app.kubernetes.io/instance=maildev" -o name) -- sh
+```
+
+Create dummy mail.txt file.
+```bash
+cat <<EOF >> mail.txt
+From: Test Maildev <test@maildev.com>
+To: Nikola Tesla Tudela <niko@tesla.com>
+Subject: Test mail from maildev
+Date: Fri, 17 Nov 2020 11:26:16
+
+Dear Joe,
+Welcome to this example email. What a lovely day.
+Cheers!!
+EOF
+```
+
+Send the mail with curl:
+
+```bash
+apk add --no-cache curl && curl smtp://maildev-smtp:1025 --mail-from test@maildev.com --mail-rcpt niko@tesla.com --upload-file ./mail.txt
+```
+
+Check the logs and see if the mail has been delivered.
+
+```bash
+kubectl logs $(kubectl get pod -l "app.kubernetes.io/instance=maildev" -o name)
+```
+
+Output should be something like:
+
+```bash
+Temporary directory created at /tmp/maildev
+Temporary directory created at /tmp/maildev/1
+MailDev outgoing SMTP Server smtp.gmail.com:465 (user:test@example.com, pass:******, secure:yes)
+Auto-Relay mode on
+MailDev webapp running at http://0.0.0.0:1080
+MailDev SMTP Server running at 0.0.0.0:1025
+Saving email: Test mail from maildev, id: 3ZhYnk5q
+MailDev outgoing SMTP Server smtp.gmail.com:465 (user:test@example.com, pass:******, secure:yes)
+Mail Delivered:  Test mail from maildev
+```
+
+Alternatively forward your local port to the pod.
+
+```bash
+kubectl port-forward $(kubectl get pod -l "app.kubernetes.io/instance=maildev" -o name) 1080
+```
+
+Check your mail inbox ;)
+
 
 ## Uninstalling the Chart
 
@@ -50,7 +115,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianknell/<CHARTNAME>
+helm install my-release -f values.yaml christianknell/maildev
 ```
 
 {{ template "helm-docs.versionFooter" . }}

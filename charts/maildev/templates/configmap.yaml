@@ -1,0 +1,10 @@
+{{- if .Values.maildev.config.smtp.autoRelay.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "maildev.smtp.autoRelay.configMapName" . }}
+  labels:
+    {{- include "maildev.labels" . | nindent 4 }}
+data:
+  auto-relay-rules.json: "[\n\t{ \"allow\": \"*\" }\n]\n"
+{{- end }}

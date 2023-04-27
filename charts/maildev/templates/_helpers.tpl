@@ -60,3 +60,54 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Get the name of the persistent volume claim
+*/}}
+{{- define "maildev.pvcName" -}}
+  {{- if .Values.maildev.persistence.existingClaim -}}
+    {{- printf "%s" (tpl .Values.maildev.persistence.existingClaim $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "maildev.fullname" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the name of the secret containing the web user password
+*/}}
+{{- define "maildev.web.secretName" -}}
+  {{- if .Values.maildev.config.web.existingSecret -}}
+    {{- printf "%s" .Values.maildev.config.web.existingSecret -}}
+  {{- else -}}
+      {{- printf "%s" (include "maildev.fullname" .) -}}-web
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the name of the secret containing the password for the incoming SMTP traffic
+*/}}
+{{- define "maildev.smtp.incoming.secretName" -}}
+  {{- if .Values.maildev.config.smtp.incoming.existingSecret -}}
+    {{- printf "%s" .Values.maildev.config.smtp.incoming.existingSecret -}}
+  {{- else -}}
+      {{- printf "%s" (include "maildev.fullname" .) -}}-smtp-incoming
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the name of the secret containing the password for the outgoing SMTP traffic
+*/}}
+{{- define "maildev.smtp.outgoing.secretName" -}}
+  {{- if .Values.maildev.config.smtp.outgoing.existingSecret -}}
+    {{- printf "%s" .Values.maildev.config.smtp.outgoing.existingSecret -}}
+  {{- else -}}
+      {{- printf "%s" (include "maildev.fullname" .) -}}-smtp-outgoing
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the name of the configmap containing the relay rules for the SMTP traffic
+*/}}
+{{- define "maildev.smtp.autoRelay.configMapName" -}}
+  {{- printf "%s" (include "maildev.fullname" .) -}}-smtp-relay-rules
+{{- end -}}

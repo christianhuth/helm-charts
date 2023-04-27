@@ -1,0 +1,43 @@
+{{- if and .Values.maildev.persistence.enabled .Values.maildev.persistence.cron.enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "maildev.fullname" . }}
+  labels:
+    {{- include "maildev.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.maildev.persistence.cron.schedule }}
+  startingDeadlineSeconds: 100
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: delete-mail
+              image: "{{ .Values.maildev.persistence.cron.image.registry }}/{{ .Values.maildev.persistence.cron.image.repository }}:{{ .Values.maildev.persistence.cron.image.tag }}"
+              imagePullPolicy: {{ .Values.maildev.persistence.cron.image.pullPolicy }}
+              args:
+                - "find"
+                - "{{ .Values.maildev.config.mailDirectory }}"
+                - "-type"
+                - "f"
+                - "-mtime"
+                - "+{{ .Values.maildev.persistence.cron.daysToKeep }}"
+                - "-exec"
+                - "rm"
+                - "-f"
+                - "{}"
+                - ";"
+              volumeMounts:
+                - name: data
+                  mountPath: {{ .Values.maildev.config.mailDirectory | quote }}
+            - name: reload-mail
+              image: "{{ .Values.maildev.persistence.cron.image.registry }}/{{ .Values.maildev.persistence.cron.image.repository }}:{{ .Values.maildev.persistence.cron.image.tag }}"
+              imagePullPolicy: {{ .Values.maildev.persistence.cron.image.pullPolicy }}
+              args: ["wget","{{ include "maildev.fullname" . }}-http:{{ .Values.services.http.port}}/reloadMailsFromDirectory"]
+          volumes:
+            - name: data
+              persistentVolumeClaim:
+                claimName: {{ include "maildev.pvcName" . | quote }}
+          restartPolicy: OnFailure
+  {{- end }}
