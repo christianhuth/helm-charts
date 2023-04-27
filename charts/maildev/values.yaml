@@ -62,17 +62,17 @@ serviceAccount:
   name: ""
 
 services:
-  http:
-    # -- Kubernetes service type
+  web:
+    # -- Kubernetes service type for the web GUI
     type: ClusterIP
-    # -- Kubernetes port where service is exposed
+    # -- Kubernetes port to use for the web GUI
     port: 1080
   smtp:
-    # -- Kubernetes service type
+    # -- Kubernetes service type for the SMTP server
     type: ClusterIP
-    # -- Kubernetes port where service is exposed
+    # -- Kubernetes port to use for the internal SMTP server
     port: 1025
-    # -- You can set the node port that should be used or leave it blank to get a random node port
+    # -- You can set the node port for the external SMTP server that should be used or leave it blank to get a random node port. Only active if `services.smtp.type == NodePort`
     nodePort:
 
 ingress:
@@ -141,11 +141,6 @@ maildev:
       # -- Run maildev in verbose mode
       verbose: false
     smtp:
-      autoRelay:
-        # -- Use auto-relay mode
-        enabled: false
-        # -- Optional relay email address
-        mail: ""
       # -- Comma separated list of SMTP extensions to NOT advertise (SMTPUTF8, PIPELINING, 8BITMIME)
       hideExtensions: ""
       incoming:
@@ -156,6 +151,20 @@ maildev:
         # -- SMTP user for incoming mail
         username: ""
       outgoing:
+        autoRelay:
+          # -- Enabling the auto relay mode will automatically send each email to it's recipient without the need to click the "Relay" button. The outgoing email options are required to enable this feature.
+          enabled: false
+          # -- Optionally define a single email address which Maildev will forward all emails to instead of the original recipient
+          mail: ""
+          # -- The additional configuration for what email addresses you would like to allow or deny.
+          rules: []
+            # [
+            #   { "allow": "*" },
+            #   { "deny": "*@test.com" },
+            #   { "allow": "ok@test.com" },
+            #   { "deny": "*@utah.com" },
+            #   { "allow": "johnny@utah.com" }
+            # ]
         # -- Name of an existing secret containing the password for the outgoing SMTP mail. If set `maildev.config.smtp.outgoing.password` will be ignored. Key needs to be `smtp-outgoing-password`.
         existingSecret: ""
         # -- SMTP host for outgoing mail
@@ -208,4 +217,6 @@ maildev:
     # -- Name of the StorageClass required by the claim.
     storageClassName: ""
     # -- Represents the minimum and maximum resources the volume should have.
-    resources: {}
+    resources:
+      requests:
+        storage: 2Gi

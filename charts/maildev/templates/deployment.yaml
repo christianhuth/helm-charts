@@ -35,9 +35,9 @@ spec:
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
-            {{- if .Values.maildev.config.smtp.autoRelay.enabled }}
-            {{- if .Values.maildev.config.smtp.autoRelay.mail }}
-            - {{- printf "%s %s" "--auto-relay" .Values.maildev.config.smtp.autoRelay.mail  }}
+            {{- if .Values.maildev.config.smtp.outgoing.autoRelay.enabled }}
+            {{- if .Values.maildev.config.smtp.outgoing.autoRelay.mail }}
+            - {{- printf "%s %s" "--auto-relay" .Values.maildev.config.smtp.outgoing.autoRelay.mail  }}
             {{- else }}
             - "--auto-relay"
             {{- end }}
@@ -47,6 +47,9 @@ spec:
             {{- end }}
             {{- if .Values.maildev.config.https.enabled }}
             - "--https"
+            {{- end }}
+            {{- if .Values.maildev.config.logMailContents }}
+            - "--log-mail-contents"
             {{- end }}
             {{- if .Values.maildev.config.smtp.outgoing.ssl }}
             - "--outgoing-secure"
@@ -69,10 +72,13 @@ spec:
               value: {{ .Values.maildev.config.https.key | quote }}
             {{- end }}
             {{- end }}
+            # Maildev Settings
+            - name: MAILDEV_MAIL_DIRECTORY
+              value: {{ .Values.maildev.config.mailDirectory | quote }}
             # SMTP Settings
             - name: MAILDEV_SMTP_PORT
               value: {{ .Values.services.smtp.port | quote }}
-            {{- if .Values.maildev.config.https.key }}
+            {{- if .Values.maildev.config.smtp.hideExtensions }}
             - name: MAILDEV_HIDE_EXTENSIONS
               value: {{ .Values.maildev.config.smtp.hideExtensions | quote }}
             {{- end }}
@@ -117,7 +123,7 @@ spec:
                   key: web-password
             {{- end }}
             - name: MAILDEV_WEB_PORT
-              value: {{ .Values.services.http.port | quote }}
+              value: {{ .Values.services.web.port | quote }}
             {{- if .Values.extraEnv }}
             ## Additional Setings
             {{- range .Values.extraEnv }}
@@ -128,8 +134,8 @@ spec:
             {{- end }}
             {{- end }}
           ports:
-            - name: http
-              containerPort: {{ .Values.services.http.port }}
+            - name: web
+              containerPort: {{ .Values.services.web.port }}
               protocol: TCP
             - name: smtp
               containerPort: {{ .Values.services.smtp.port }}
@@ -137,11 +143,11 @@ spec:
           livenessProbe:
             httpGet:
               path: /healthz
-              port: http
+              port: web
           readinessProbe:
             httpGet:
               path: /healthz
-              port: http
+              port: web
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
@@ -153,7 +159,7 @@ spec:
           volumeMounts:
             - name: data
               mountPath: {{ .Values.maildev.config.mailDirectory | quote }}
-            {{- if .Values.maildev.config.smtp.autoRelay.enabled }}
+            {{- if .Values.maildev.config.smtp.outgoing.autoRelay.enabled }}
             - name: auto-relay-rules
               mountPath: /etc/maildev
               subPath: auto-relay-rules.json
@@ -166,10 +172,10 @@ spec:
           {{- else }}
           emptyDir: {}
           {{- end }}
-        {{- if .Values.maildev.config.smtp.autoRelay.enabled }}
+        {{- if .Values.maildev.config.smtp.outgoing.autoRelay.enabled }}
         - name: auto-relay-rules
           configMap:
-            name: {{ include "maildev.smtp.autoRelay.configMapName" . }}
+            name: {{ include "maildev.smtp.outgoing.autoRelay.configMapName" . }}
             items:
               - key: auto-relay-rules.json
                 path: auto-relay-rules.json

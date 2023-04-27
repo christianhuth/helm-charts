@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "maildev.fullname" . }}-http
+  name: {{ include "maildev.web.serviceName" . }}
   labels:
     {{- include "maildev.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.services.http.type }}
+  type: {{ .Values.services.web.type }}
   ports:
-    - port: {{ .Values.services.http.port }}
-      targetPort: http
+    - port: {{ .Values.services.web.port }}
+      targetPort: web
       protocol: TCP
-      name: http
+      name: web
   selector:
     {{- include "maildev.selectorLabels" . | nindent 4 }}

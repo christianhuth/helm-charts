@@ -108,6 +108,20 @@ Get the name of the secret containing the password for the outgoing SMTP traffic
 {{/*
 Get the name of the configmap containing the relay rules for the SMTP traffic
 */}}
-{{- define "maildev.smtp.autoRelay.configMapName" -}}
+{{- define "maildev.smtp.outgoing.autoRelay.configMapName" -}}
   {{- printf "%s" (include "maildev.fullname" .) -}}-smtp-relay-rules
+{{- end -}}
+
+{{/*
+Get the name of the service for the SMTP traffic
+*/}}
+{{- define "maildev.smtp.serviceName" -}}
+  {{- printf "%s" (include "maildev.fullname" .) -}}-smtp
+{{- end -}}
+
+{{/*
+Get the name of the service for the Web GUI
+*/}}
+{{- define "maildev.web.serviceName" -}}
+  {{- printf "%s" (include "maildev.fullname" .) -}}-web
 {{- end -}}

@@ -43,10 +43,10 @@ These commands deploy MailDev on the Kubernetes cluster in the default configura
 
 ## Test it
 
-Open a shell into the pod.
+Forward your local port to the pod (this will block your terminal, open an additional one).
 
 ```bash
-kubectl exec --stdin --tty $(kubectl get pod -l "app.kubernetes.io/instance=maildev" -o name) -- sh
+kubectl port-forward $(kubectl get pod -l "app.kubernetes.io/name=maildev" -o name) 1025
 ```
 
 Create dummy mail.txt file.
@@ -54,7 +54,7 @@ Create dummy mail.txt file.
 cat <<EOF >> mail.txt
 From: Test Maildev <test@maildev.com>
 To: Nikola Tesla Tudela <niko@tesla.com>
-Subject: Test mail from maildev
+Subject: Test mail from command line
 Date: Fri, 17 Nov 2020 11:26:16
 
 Dear Joe,
@@ -66,37 +66,24 @@ EOF
 Send the mail with curl:
 
 ```bash
-apk add --no-cache curl && curl smtp://maildev-smtp:1025 --mail-from test@maildev.com --mail-rcpt niko@tesla.com --upload-file ./mail.txt
+curl smtp://localhost:1025 --mail-from test@maildev.com --mail-rcpt niko@tesla.com --upload-file ./mail.txt
 ```
 
-Check the logs and see if the mail has been delivered.
+The mail should now show up in your inbox.
+
+If you have enabled the logs for mails using `maildev.config.logMailContents=true`, you can also check the logs and see if the mail has been delivered.
 
 ```bash
-kubectl logs $(kubectl get pod -l "app.kubernetes.io/instance=maildev" -o name)
+kubectl logs $(kubectl get pod -l "app.kubernetes.io/name=maildev" -o name)
 ```
 
 Output should be something like:
 
 ```bash
-Temporary directory created at /tmp/maildev
-Temporary directory created at /tmp/maildev/1
-MailDev outgoing SMTP Server smtp.gmail.com:465 (user:test@example.com, pass:******, secure:yes)
-Auto-Relay mode on
 MailDev webapp running at http://0.0.0.0:1080
 MailDev SMTP Server running at 0.0.0.0:1025
-Saving email: Test mail from maildev, id: 3ZhYnk5q
-MailDev outgoing SMTP Server smtp.gmail.com:465 (user:test@example.com, pass:******, secure:yes)
-Mail Delivered:  Test mail from maildev
+Received the following mail contents.
 ```
-
-Alternatively forward your local port to the pod.
-
-```bash
-kubectl port-forward $(kubectl get pod -l "app.kubernetes.io/instance=maildev" -o name) 1080
-```
-
-Check your mail inbox ;)
-
 
 ## Uninstalling the Chart
 

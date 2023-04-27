@@ -133,17 +133,6 @@
                         "smtp": {
                             "type": "object",
                             "properties": {
-                                "autoRelay": {
-                                    "type": "object",
-                                    "properties": {
-                                        "enabled": {
-                                            "type": "boolean"
-                                        },
-                                        "mail": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
                                 "hideExtensions": {
                                     "type": "string"
                                 },
@@ -164,6 +153,20 @@
                                 "outgoing": {
                                     "type": "object",
                                     "properties": {
+                                        "autoRelay": {
+                                            "type": "object",
+                                            "properties": {
+                                                "enabled": {
+                                                    "type": "boolean"
+                                                },
+                                                "mail": {
+                                                    "type": "string"
+                                                },
+                                                "rules": {
+                                                    "type": "array"
+                                                }
+                                            }
+                                        },
                                         "existingSecret": {
                                             "type": "string"
                                         },
@@ -260,7 +263,17 @@
                             "type": "string"
                         },
                         "resources": {
-                            "type": "object"
+                            "type": "object",
+                            "properties": {
+                                "requests": {
+                                    "type": "object",
+                                    "properties": {
+                                        "storage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
                         },
                         "storageClassName": {
                             "type": "string"
@@ -310,9 +323,12 @@
         "services": {
             "type": "object",
             "properties": {
-                "http": {
+                "smtp": {
                     "type": "object",
                     "properties": {
+                        "nodePort": {
+                            "type": "null"
+                        },
                         "port": {
                             "type": "integer"
                         },
@@ -321,12 +337,9 @@
                         }
                     }
                 },
-                "smtp": {
+                "web": {
                     "type": "object",
                     "properties": {
-                        "nodePort": {
-                            "type": "null"
-                        },
                         "port": {
                             "type": "integer"
                         },
