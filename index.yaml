@@ -12,6 +12,42 @@ entries:
           url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
     apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-04-27T19:31:26.00588374Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.4.1
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.10.1
+    description: Baserow is an open source no-code database and Airtable alternative.
+    digest: 73a14973f7bab9c210bf6944878d0aa31c1ec1f39816bbf17ea622238e5b213a
+    home: https://github.com/christianknell/helm-charts
+    icon: https://baserow.io/img/favicon_192.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: baserow
+    sources:
+    - https://gitlab.com/bramw/baserow
+    - https://baserow.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/baserow-1.14.0/baserow-1.14.0.tgz
+    version: 1.14.0
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/screenshots: |
+        - title: Create your own online database without technical experience.
+          url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
+        - title: With Baserow you decide how you want to structure everything. Whether you’re managing customers, products, airplanes or all of them.
+          url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
+        - title: Easily create custom plugins with our boilerplate or use third party ones.
+          url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
+    apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-04-24T09:54:20.505780589Z"
     dependencies:
     - condition: postgresql.enabled
@@ -13064,4 +13100,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-04-27T19:24:46.039873645Z"
+generated: "2023-04-27T19:31:26.00705874Z"
