@@ -58,6 +58,7 @@ spec:
             - "--verbose"
             {{- end }}
           env:
+            {{- if .Values.maildev.config.https.enabled }}
             # HTTPS Settings
             {{- if .Values.maildev.config.https.cert }}
             - name: MAILDEV_HTTPS_CERT
@@ -67,6 +68,7 @@ spec:
             - name: MAILDEV_HTTPS_KEY
               value: {{ .Values.maildev.config.https.key | quote }}
             {{- end }}
+            {{- end }}
             # SMTP Settings
             - name: MAILDEV_SMTP_PORT
               value: {{ .Values.services.smtp.port | quote }}
@@ -74,21 +76,15 @@ spec:
             - name: MAILDEV_HIDE_EXTENSIONS
               value: {{ .Values.maildev.config.smtp.hideExtensions | quote }}
             {{- end }}
-            # SMTP Incoming Settings
             {{- if .Values.maildev.config.smtp.incoming.username }}
             - name: MAILDEV_INCOMING_USER
               value: {{ .Values.maildev.config.smtp.incoming.username | quote }}
             - name: MAILDEV_INCOMING_PASS
-              {{- if .Values.maildev.config.smtp.incoming.existingSecret }}
               valueFrom:
                 secretKeyRef:
                   name: {{ include "maildev.smtp.incoming.secretName" . }}
                   key: smtp-incoming-password
-              {{- else }}
-              value: {{ .Values.maildev.config.smtp.incoming.password | quote }}
-              {{- end }}
             {{- end }}
-            # SMTP Outgoing Settings
             {{- if .Values.maildev.config.smtp.outgoing.host }}
             - name: MAILDEV_OUTGOING_HOST
               value: {{ .Values.maildev.config.smtp.outgoing.host | quote }}
@@ -99,14 +95,10 @@ spec:
             {{- end }}
             {{- if .Values.maildev.config.smtp.outgoing.host }}
             - name: MAILDEV_OUTGOING_PASS
-              {{- if .Values.maildev.config.smtp.outgoing.existingSecret }}
               valueFrom:
                 secretKeyRef:
                   name: {{ include "maildev.smtp.outgoing.secretName" . }}
                   key: smtp-outgoing-password
-              {{- else }}
-              value: {{ .Values.maildev.config.smtp.outgoing.password | quote }}
-              {{- end }}
             {{- end }}
             {{- if .Values.maildev.config.smtp.outgoing.username }}
             - name: MAILDEV_OUTGOING_USER
@@ -119,22 +111,20 @@ spec:
             {{- end }}
             {{- if or .Values.maildev.config.web.password .Values.maildev.config.web.existingSecret }}
             - name: MAILDEV_WEB_PASS
-              {{- if .Values.maildev.config.web.existingSecret }}
               valueFrom:
                 secretKeyRef:
                   name: {{ include "maildev.web.secretName" . }}
                   key: web-password
-              {{- else }}
-              value: {{ .Values.maildev.config.web.password | quote }}
-              {{- end }}
             {{- end }}
             - name: MAILDEV_WEB_PORT
               value: {{ .Values.services.http.port | quote }}
+            {{- if .Values.extraEnv }}
             ## Additional Setings
             {{- range .Values.extraEnv }}
             {{- if and (.name) (.value) }}
             - name: {{ .name | quote }}
               value: {{ .value | quote }}
+            {{- end }}
             {{- end }}
             {{- end }}
           ports:
