@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  serviceName: {{ .Release.Name }}-http
+  selector:
+    matchLabels:
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: maildev
+          image: maildev/maildev
+          imagePullPolicy: Always
+          command:
+            - bin/maildev
+            - --hide-extensions
+            - STARTTLS
+          ports:
+            - name: http
+              containerPort: 1080
+              protocol: TCP
+            - name: smtp
+              containerPort: 1025
+              protocol: TCP
+          env:
+            - name: MAILDEV_WEB_PORT
+              value: '1080'
+            - name: MAILDEV_SMTP_PORT
+              value: '1025'
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+              httpHeaders:
+              - name: Host
+                value: {{ .Values.host }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+              httpHeaders:
+              - name: Host
+                value: {{ .Values.host }}

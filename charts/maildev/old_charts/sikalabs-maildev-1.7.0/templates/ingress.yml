@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    release: {{ .Release.Name }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.clusterIssuer }}
+    {{ if and (.Values.authUser) (.Values.authPassword) }}
+    nginx.ingress.kubernetes.io/auth-type: "basic"
+    nginx.ingress.kubernetes.io/auth-secret: "{{ .Release.Name }}-ingress-auth"
+    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
+    {{ end }}
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - {{ .Values.host }}
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ required ".Values.host is required" .Values.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name:  {{ .Release.Name }}-http
+                port:
+                  name: http

@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Simple maildev/maildev Kubernetes deployment
+name: maildev
+version: 1.6.1

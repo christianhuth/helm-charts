@@ -1,0 +1,2 @@
+build-package:
+	helm package .

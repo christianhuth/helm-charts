@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-smtp
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  type: {{ .Values.smtpServiceType }}
+  ports:
+    - port: 25
+      targetPort: smtp
+      protocol: TCP
+      name: smtp
+      {{ if .Values.smtpNodePort }}
+      nodePort:  {{ .Values.smtpNodePort }}
+      {{ end }}
+  selector:
+    release: {{ .Release.Name }}

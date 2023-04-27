@@ -1,0 +1,12 @@
+apiVersion: v1
+appVersion: 1.1.0
+description: A Helm chart for maildev
+home: https://github.com/maildev/maildev
+icon: https://raw.githubusercontent.com/maildev/maildev/master/app/favicon.ico
+maintainers:
+- email: maintainers@cnieg.fr
+  name: audig
+name: maildev
+sources:
+- https://github.com/maildev/maildev
+version: 1.1.1

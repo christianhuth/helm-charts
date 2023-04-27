@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "maildev.fullname" . }}-smtp
+  labels:
+{{ include "maildev.labels" . | indent 4 }}
+spec:
+  type: {{ .Values.services.smtp.type }}
+  ports:
+    - port: {{ .Values.services.smtp.port }}
+      targetPort: smtp
+      protocol: TCP
+      name: smtp
+      {{- if and (eq .Values.services.smtp.type "NodePort") .Values.services.smtp.nodePort }}
+      nodePort: {{ .Values.services.smtp.nodePort }}
+      {{- end }}
+  selector:
+    app.kubernetes.io/name: {{ include "maildev.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

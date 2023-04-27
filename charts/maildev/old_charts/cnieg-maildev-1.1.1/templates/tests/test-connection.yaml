@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "maildev.fullname" . }}-test-connection"
+  labels:
+{{ include "maildev.labels" . | indent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args:  ['{{ include "maildev.fullname" . }}-http:{{ .Values.services.http.port}}/healthz']
+  restartPolicy: Never

@@ -1,0 +1,9 @@
+# Required
+host:
+
+# Optional
+clusterIssuer: letsencrypt
+smtpServiceType: ClusterIP
+smtpNodePort:
+authUser:
+authPassword:

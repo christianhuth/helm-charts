@@ -1,0 +1,90 @@
+# Default values for maildev.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+# Update 2021-11 hisdad update api versions. update ingress.
+
+replicaCount: 1
+
+image:
+  repository: cnieg/maildev
+  tag: v1.1.9
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+services:
+  http:
+    type: ClusterIP
+    port: 80
+  smtp:
+    type: NodePort
+    port: 25
+    # nodePort can be set to specify the node port used, or leave blank to get a random node port
+    nodePort:
+
+extraArgs:
+#  - "--outgoing-host"
+#  - "smtp.yourdomaine.com"
+#  - "--outgoing-port"
+#  - "25"
+#  - "--mail-directory"
+#  - "/home/node/maildev-data"
+
+podAnnotations: {}
+
+persistence:
+  enabled: false
+  accessMode: ReadWriteMany
+  size: 512M
+  storageClass: "-"
+  existingClaim: ""
+  mountPath: /home/node/maildev-data
+
+# To clean some old mails when persistence is enabled
+cron:
+  enabled: false
+  image:
+    repository: busybox
+    tag: latest
+    pullPolicy: IfNotPresent
+  schedule: 0 1 * * *
+  daysToKeep: 15
+
+ingress:
+  enabled: false
+  spec:
+  # ingressClassName is standard for 1.19+
+  # ingressClassName: nginx
+    ingressClassName:
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx    (Obsolete)
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: maildev.yourdomain.com
+      # paths: ["/male", "/mail"]  would route on both uris
+      paths: ["/"]
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 50m
+  #   memory: 256Mi
+  #  requests:
+  #   cpu: 50m
+  #   memory: 256Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
