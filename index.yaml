@@ -4700,6 +4700,39 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/kutt-0.0.1/kutt-0.0.1.tgz
     version: 0.0.1
+  maildev:
+  - annotations:
+      artifacthub.io/screenshots: |
+        - title: SMTP server & web interface for viewing and testing emails during development.
+          url: https://maildev.github.io/maildev/assets/img/original/maildev-light.png
+        - title: Resizable viewport to test your emails at different sizes.
+          url: https://maildev.github.io/maildev/assets/img/original/responsive.png
+        - title: View email HTML, plain text, headers or raw source.
+          url: https://maildev.github.io/maildev/assets/img/original/formats.png
+        - title: Convenient search feature to quickly find any email.
+          url: https://maildev.github.io/maildev/assets/img/original/search.png
+        - title: View your emails in an eye-friendly dark interface.
+          url: https://maildev.github.io/maildev/assets/img/original/maildev-dark.png
+    apiVersion: v2
+    appVersion: 2.0.5
+    created: "2023-04-27T19:21:31.30514514Z"
+    description: MailDev is a simple way to test your emails during development with
+      an easy to use web interface.
+    digest: dc1fa75b56d8bcc86cf26e6733c2e84e97fc41a4abff68b598959f0477f0b053
+    home: https://github.com/christianknell/helm-charts
+    icon: https://avatars1.githubusercontent.com/u/26743469
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: maildev
+    sources:
+    - https://maildev.github.io/maildev
+    - https://github.com/maildev/maildev
+    - https://hub.docker.com/r/maildev/maildev
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/maildev-1.0.0/maildev-1.0.0.tgz
+    version: 1.0.0
   netcupscp-exporter:
   - annotations:
       artifacthub.io/category: monitoring-logging
@@ -13002,4 +13035,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-04-24T10:07:52.503349888Z"
+generated: "2023-04-27T19:21:31.306375852Z"
