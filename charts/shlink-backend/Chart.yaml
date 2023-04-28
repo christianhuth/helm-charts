@@ -27,9 +27,9 @@ dependencies:
     condition: postgresql.enabled
   - name: rabbitmq
     repository: https://charts.bitnami.com/bitnami
-    version: 11.13.0
+    version: 11.14.1
     condition: rabbitmq.enabled
   - name: redis
     repository: https://charts.bitnami.com/bitnami
-    version: 17.9.5
+    version: 17.10.1
     condition: redis.enabled
