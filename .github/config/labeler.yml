@@ -19,7 +19,7 @@ ipmi-exporter: charts/ipmi-exporter/*
 ipsec-exporter: charts/ipsec-exporter/*
 isso: charts/isso/*
 kateyes: charts/kateyes/*
-kirby3: charts/kirby3/*
+kirby: charts/kirby/*
 kubedoom: charts/kubedoom/*
 kube-ops-view: charts/kube-ops-view/*
 kutt: charts/kutt/*
