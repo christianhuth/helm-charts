@@ -238,7 +238,7 @@
                             "type": "string"
                         },
                         "port": {
-                            "type": "string"
+                            "type": "integer"
                         },
                         "reportEmail": {
                             "type": "string"
