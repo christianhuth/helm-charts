@@ -3576,6 +3576,42 @@ entries:
           url: https://docs.cloudron.io/img/kutt-custom-domain.png
     apiVersion: v2
     appVersion: v2.7.4
+    created: "2023-05-22T07:19:18.91087878Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.5.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.11.2
+    description: Kutt is a free modern URL shortener.
+    digest: f2d0f5d9a6ad00f27dbaa0ed851323cee167cef0877b4d887f3bef84427fbd1a
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kutt
+    sources:
+    - https://github.com/thedevs-network/kutt
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kutt-2.5.0/kutt-2.5.0.tgz
+    version: 2.5.0
+  - annotations:
+      artifacthub.io/screenshots: |
+        - title: Simply shorten your link using the Web UI.
+          url: https://d4.alternativeto.net/v9sHosD3RiPblfBOOHZi0gwU1M0pRL6Jn53oiobJi9k/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2t1dHQtaXRfNzY3MjMzX2Z1bGwucG5n.jpg
+        - title: You can see a list of the most recent created links and some statistical data about them.
+          url: https://docs.cloudron.io/img/kutt-admin.png
+        - title: View detailed statistics about each created link.
+          url: https://kutt.it/images/callout.png
+        - title: Kutt supports having more than one domain.
+          url: https://docs.cloudron.io/img/kutt-custom-domain.png
+    apiVersion: v2
+    appVersion: v2.7.4
     created: "2023-05-17T11:58:18.760906036Z"
     dependencies:
     - condition: postgresql.enabled
@@ -15117,4 +15153,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-05-17T11:58:18.761875559Z"
+generated: "2023-05-22T07:19:18.91174819Z"
