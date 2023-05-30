@@ -5989,6 +5989,22 @@ entries:
     version: 1.0.0
   node-access:
   - apiVersion: v2
+    appVersion: 1.36.1
+    created: "2023-05-30T06:36:33.073468892Z"
+    description: A Helm chart to deploy workload to gain direct access to the host
+      of the Kubernetes cluster
+    digest: fcfa15bed363b3934979429638dfaf91974bfa64eae43930f911c26e8ae0fe32
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/kubernetes/community/master/icons/png/infrastructure_components/labeled/node-256.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: node-access
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/node-access-1.0.1/node-access-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     appVersion: 1.36.0
     created: "2023-01-16T12:34:10.413546612Z"
     description: A Helm chart to deploy workload to gain direct access to the host
@@ -15734,4 +15750,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-05-30T06:31:15.330220736Z"
+generated: "2023-05-30T06:36:33.074590684Z"
