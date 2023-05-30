@@ -2,7 +2,7 @@ apiVersion: v2
 name: umami
 description: Umami is a simple, fast, privacy-focused alternative to Google Analytics.
 type: application
-version: 1.11.4
+version: 1.12.0
 appVersion: "postgresql-v1.40.0"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/umami-software/umami/master/public/android-chrome-512x512.png
