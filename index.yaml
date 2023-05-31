@@ -7317,6 +7317,36 @@ entries:
           url: https://selfhostedweb.org/wp-content/uploads/2017/02/Screenshot-2018-1-31-Shorts-1024x1024.png
     apiVersion: v2
     appVersion: 2.3.0
+    created: "2023-05-31T07:58:07.219978299Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.10.1
+    description: Polr is a quick, modern, and open-source link shortener
+    digest: 97f8af65cbb1bb529e4095690f311c57c37b65f55a75127ccfac03094fb84269
+    home: https://github.com/christianknell/helm-charts
+    icon: http://docs.polrproject.org/en/latest/logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: polr
+    sources:
+    - https://github.com/cydrobolt/polr
+    - https://github.com/ajanvier/docker-polr
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/polr-1.6.0/polr-1.6.0.tgz
+    version: 1.6.0
+  - annotations:
+      artifacthub.io/screenshots: |
+        - title: Polr converts some long links into shorter ones.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/shortit-1024x346.png
+        - title: Polr provides a dashboard overview containing all the links ever created.
+          url: https://assets.hongkiat.com/uploads/polr-url-shorterner/02-polr-links-table.jpg
+        - title: Polr provides some statistical data about the shortened link.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/Screenshot-2018-1-31-Shorts-1024x1024.png
+    apiVersion: v2
+    appVersion: 2.3.0
     created: "2023-05-11T04:45:33.153426337Z"
     dependencies:
     - name: mysql
@@ -16166,4 +16196,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-05-31T06:35:26.364435954Z"
+generated: "2023-05-31T07:58:07.223066613Z"
