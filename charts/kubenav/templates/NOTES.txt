@@ -25,7 +25,3 @@ users:
 - name: kubenav
   user:
     token: <TOKEN_FROM_SECOND_COMMAND>
-
-If you have the view-serviceaccount-kubeconfig plugin for kubectl installed you can create the kubeconfig with the following one-liner:
-
-kubectl get secret {{ include "kubenav.fullname" . }} --namespace={{ .Release.Namespace }} -o jsonpath="{.data.token}" | kubectl view-serviceaccount-kubeconfig > config-for-kubenav
