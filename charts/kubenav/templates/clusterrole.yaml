@@ -1,0 +1,17 @@
+{{- if not (eq .Values.rbac.mode "cluster-admin") }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "kubenav.fullname" . }}
+rules:
+  {{- if eq .Values.rbac.mode "custom" }}
+    {{- toYaml .Values.rbac.customPermissions | nindent 2 }}
+  {{- else }}
+  # mode equals readonly or something unsupported
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs:
+      - get
+      - list
+  {{- end }}
+{{- end }}
