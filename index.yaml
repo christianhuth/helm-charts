@@ -3837,6 +3837,27 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/kubedoom-1.0.0/kubedoom-1.0.0.tgz
     version: 1.0.0
+  kubenav:
+  - annotations:
+      artifacthub.io/screenshots: |
+        - title: kubenav is a mobile and desktop app to manage Kubernetes clusters and to get an overview of the status of your Kubernetes resources.
+          url: https://raw.githubusercontent.com/kubenav/kubenav/main/utils/images/repo/github-screenshot.png
+    apiVersion: v2
+    created: "2023-06-08T15:54:30.334612096Z"
+    description: A Helm chart for creating the required RBAC for kubenav
+    digest: e2c13413ea79eef61ddf0b982a50722db3ed3e1d690ce84934040fb8b3f96049
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/kubenav/kubenav/main/utils/images/repo/github-readme-logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kubenav
+    sources:
+    - https://github.com/kubenav/kubenav
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kubenav-1.0.0/kubenav-1.0.0.tgz
+    version: 1.0.0
   kutt:
   - annotations:
       artifacthub.io/changes: |
@@ -16650,4 +16671,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-06-08T10:07:35.876330254Z"
+generated: "2023-06-08T15:54:30.337090605Z"
