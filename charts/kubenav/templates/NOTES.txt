@@ -1,0 +1,39 @@
+Follow these steps to extract the necessary information for usage with kubenav:
+
+1. Get the CA of your kubernetes cluster:
+kubectl get secret {{ include "kubenav.fullname" . }} --namespace={{ .Release.Namespace }} -o jsonpath="{.data.ca\.crt}"
+
+2. Get the token of the service account using:
+kubectl get secret {{ include "kubenav.fullname" . }} --namespace={{ .Release.Namespace }} -o jsonpath="{.data.token}"
+
+3. Create a kubeconfig with the obtained information
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: <CA_FROM_FIRST_COMMAND>
+    server: https://<IP_OF_API_SERVER>:<PORT_OF_API_SERVER>
+  name: <NAME_OF_CLUSTER>
+contexts:
+- context:
+    cluster: <NAME_OF_CLUSTER>
+    user: kubenav
+  name: kubenav
+current-context: kubenav
+kind: Config
+preferences: {}
+users:
+- name: kubenav
+  user:
+    token: <TOKEN_FROM_SECOND_COMMAND>
+
+TIP:
+----
+If you have the view-serviceaccount-kubeconfig plugin for kubectl installed you can create the kubeconfig with this one-liner:
+
+kubectl get secret {{ include "kubenav.fullname" . }} --namespace={{ .Release.Namespace }} -o jsonpath="{.data.token}" | base64 -d | kubectl view-serviceaccount-kubeconfig > config-for-kubenav
+
+If now install it upfront:
+
+kubectl krew install view-serviceaccount-kubeconfig
+
+Get the plugin from GitHub: https://github.com/superbrothers/kubectl-view-serviceaccount-kubeconfig-plugin
