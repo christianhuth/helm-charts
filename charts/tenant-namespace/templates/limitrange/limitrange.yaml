@@ -1,0 +1,14 @@
+{{- if .Values.limitRange.enabled }}
+apiVersion: v1
+kind: LimitRange
+metadata:
+  annotations:
+    {{- include "tenant-namespace.limitRange.annotations" . | nindent 4 }}
+  labels:
+    {{- include "tenant-namespace.limitRange.labels" . | nindent 4 }}
+  name: {{ include "tenant-namespace.limitRange.name" . | quote }}
+  namespace: {{ include "tenant-namespace.namespace.name" . | quote }}
+spec:
+  limits:
+  {{- toYaml .Values.limitRange.limits | nindent 4}}
+{{- end }}

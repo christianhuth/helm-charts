@@ -1,0 +1,39 @@
+{{- if and (.Values.networkPolicies.enabled) (.Values.networkPolicies.egress.allow.dns.enabled) }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  annotations:
+    {{- include "tenant-namespace.networkPolicy.annotations" . | nindent 4 }}
+  labels:
+    {{- include "tenant-namespace.networkPolicy.labels" . | nindent 4 }}
+  name: {{ include "tenant-namespace.networkPolicy.egress.allow.dns.name" . | quote }}
+  namespace: {{ include "tenant-namespace.namespace.name" . | quote }}
+spec:
+  {{- if .Values.networkPolicies.egress.allow.dns.podSelector }}
+  podSelector:
+    {{- toYaml .Values.networkPolicies.egress.allow.dns.podSelector | nindent 4 }}
+  {{- else }}
+  podSelector: {}
+  {{- end }}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        {{- if .Values.networkPolicies.egress.allow.dns.namespace }}
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ .Values.networkPolicies.egress.allow.dns.namespace | quote }}
+        {{- else }}
+        - namespaceSelector: {}
+        {{- end }}
+          podSelector:
+            matchLabels:
+              {{- if .Values.networkPolicies.egress.allow.dns.podLabels }}
+              {{- toYaml .Values.networkPolicies.egress.allow.dns.podLabels | nindent 14 }}
+              {{- else }}
+              k8s-app: kube-dns
+              {{- end }}
+      ports:
+        - port: 53
+          protocol: UDP
+{{- end }}

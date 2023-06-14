@@ -1,0 +1,27 @@
+{{- if and .Values.resourceQuotas.enabled .Values.resourceQuotas.quotas }}
+{{- range $index, $resourceQuota := .Values.resourceQuotas.quotas }}
+{{- if $resourceQuota.hard }}
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  annotations:
+    {{- include "tenant-namespace.resourceQuotas.annotations" $ | nindent 4 }}
+  labels:
+    {{- include "tenant-namespace.resourceQuotas.labels" $ | nindent 4 }}
+  {{- if $resourceQuota.name }}
+  name: {{ $resourceQuota.name | quote }}
+  {{- else }}
+  name: {{ printf "%s-%s" (include "tenant-namespace.fullname" $) (toString $index) | quote }}
+  {{- end }}
+  namespace: {{ include "tenant-namespace.namespace.name" $ | quote }}
+spec:
+  hard:
+    {{- toYaml $resourceQuota.hard | nindent 4 }}
+  {{- if $resourceQuota.scopeSelector }}
+  scopeSelector:
+    {{- toYaml $resourceQuota.scopeSelector | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
