@@ -13339,6 +13339,25 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/syncserver-1.0.0/syncserver-1.0.0.tgz
     version: 1.0.0
+  tenant-namespace:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial Commit
+    apiVersion: v2
+    created: "2023-06-14T11:31:54.943230841Z"
+    description: A Helm Chart to bootstrap a Namespace in a Multi-Tenancy setup
+    digest: f5d1106cb3a476c661d9f08a9fbaf3484dbae689e96c8339ed45daa7644e6bfe
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/kubernetes/community/master/icons/png/resources/labeled/ns-256.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: tenant-namespace
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/tenant-namespace-1.0.0/tenant-namespace-1.0.0.tgz
+    version: 1.0.0
   typo3:
   - annotations:
       artifacthub.io/screenshots: |
@@ -16949,4 +16968,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-06-14T08:05:50.696520987Z"
+generated: "2023-06-14T11:31:54.944109053Z"
