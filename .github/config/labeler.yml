@@ -44,5 +44,6 @@ standardnotes: charts/standardnotes/*
 syncserver: charts/syncserver/*
 syncstorage-rs: charts/syncstorage-rs/*
 talkyard: charts/talkyard/*
+tenant-namespace: charts/tenant-namespace/*
 typo3: charts/typo3/*
 umami: charts/umami/*
