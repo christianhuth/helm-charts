@@ -24,8 +24,8 @@ dependencies:
 annotations:
   artifacthub.io/category: database
   artifacthub.io/changes: |
-    - kind: added
-      description: support for hpa in autoscaling v2
+    - kind: changed
+      description: bumped dependency of postgresql to chart version 12.5.8
   artifacthub.io/screenshots: |
     - title: Create your own online database without technical experience.
       url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
