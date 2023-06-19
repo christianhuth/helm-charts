@@ -33,3 +33,7 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     version: 17.11.6
     condition: redis.enabled
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: bumped dependency of redis to chart version 17.11.6
