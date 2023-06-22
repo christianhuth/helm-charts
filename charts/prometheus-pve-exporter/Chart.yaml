@@ -14,6 +14,9 @@ sources:
   - https://github.com/prometheus-pve/prometheus-pve-exporter
 annotations:
   artifacthub.io/category: monitoring-logging
+  artifacthub.io/changes: |
+    - kind: added
+      description: changed image version to 2.3.0
   artifacthub.io/screenshots: |
     - title: Add an user inside of Proxmox, that will be used for the Exporter.
       url: https://xinux.net/images/6/6e/Prometheus-proxmox-grafana-user.png
