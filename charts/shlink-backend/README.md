@@ -107,7 +107,11 @@ helm install my-release -f values.yaml christianknell/shlink-backend
 
 ## Upgrading the Chart
 
-### 1.0.0
+### To 2.0.0
+
+This major updates the RabbitMQ subchart to its newest major, 12.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/rabbitmq#upgrading) and [here](https://www.rabbitmq.com/upgrade.html) you can find more information about the changes introduced in that version.
+
+### To 1.0.0
 
 This major updates the PostgreSQL subchart to its newest major, 12.0.0. [Here](https://github.com/bitnami/charts/tree/master/bitnami/postgresql#to-1200) you can find more information about the changes introduced in that version.
 
