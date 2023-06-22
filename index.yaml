@@ -2002,6 +2002,44 @@ entries:
     version: 1.0.0
   headwind-mdm:
   - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: bumped dependency of postgresql to chart version 12.5.8
+      artifacthub.io/screenshots: |
+        - title: Headwind MDM is a powerful Open Source platform to manage your Enterprise Android Devices.
+          url: https://images.wondershare.com/drfone/article/2022/11/opensource-mdm-3.jpg
+        - title: Open the Devices section and click the QR code icon to start the enrollment of a device.
+          url: https://h-mdm.com/wp-content/uploads/check_qr_code.jpg
+        - title: After enrollment your Android device will only have the allowed applications installed.
+          url: https://h-mdm.com/wp-content/uploads/2019/08/launcher_screen_en.png
+        - title: The Enterprise version of Headwind MDM includes a powerful module for transferring images taken by mobile devices to the server.
+          url: https://h-mdm.com/wp-content/uploads/photo_plugin.jpg
+    apiVersion: v2
+    appVersion: 0.1.2
+    created: "2023-06-22T09:37:33.609689135Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.5.8
+    description: Headwind MDM - an open source mobile device management software for
+      Android
+    digest: 4926c70f47e13d6f55dc0f67c96a9c3da7df9980a652f09da42d3c4aa2c9ae8b
+    home: https://github.com/christianknell/helm-charts
+    icon: https://h-mdm.com/wp-content/uploads/2019/07/neew-logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: headwind-mdm
+    sources:
+    - https://github.com/h-mdm/hmdm-docker
+    - https://github.com/h-mdm
+    - https://hub.docker.com/r/headwindmdm/hmdm
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/headwind-mdm-1.4.6/headwind-mdm-1.4.6.tgz
+    version: 1.4.6
+  - annotations:
       artifacthub.io/screenshots: |
         - title: Headwind MDM is a powerful Open Source platform to manage your Enterprise Android Devices.
           url: https://images.wondershare.com/drfone/article/2022/11/opensource-mdm-3.jpg
@@ -17494,4 +17532,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-06-22T09:05:06.941169101Z"
+generated: "2023-06-22T09:37:33.611012919Z"
