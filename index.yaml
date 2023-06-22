@@ -9166,6 +9166,28 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/promlens-1.0.0/promlens-1.0.0.tgz
     version: 1.0.0
   proxysql:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: bumped image version to 2.5.3
+    apiVersion: v2
+    appVersion: 2.5.3
+    created: "2023-06-22T13:10:00.218094247Z"
+    description: A proxysql Helm chart for Kubernetes. Offers option to expose web
+      interface through Ingress. Uses ServiceMonitor to collect metrics.
+    digest: 09dd45fca81fd482b8820132482d5638a0bef98e5161c28dba5c942abcd043cf
+    home: https://github.com/christianknell/helm-charts
+    icon: https://proxysql.com/wp-content/uploads/2019/11/ProxySQL-BIG-e1581368792603.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: proxysql
+    sources:
+    - https://github.com/sysown/proxysql
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/proxysql-1.1.2/proxysql-1.1.2.tgz
+    version: 1.1.2
   - apiVersion: v2
     appVersion: 2.5.2
     created: "2023-05-12T08:51:45.890649952Z"
@@ -17624,4 +17646,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-06-22T11:14:57.864714528Z"
+generated: "2023-06-22T13:10:00.219155244Z"
