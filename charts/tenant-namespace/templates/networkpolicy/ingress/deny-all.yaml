@@ -1,0 +1,21 @@
+{{- if and (.Values.networkPolicies.enabled) (.Values.networkPolicies.ingress.deny.all) }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  annotations:
+    {{- include "tenant-namespace.networkPolicy.annotations" . | nindent 4 }}
+  labels:
+    {{- include "tenant-namespace.networkPolicy.labels" . | nindent 4 }}
+  name: {{ include "tenant-namespace.networkPolicy.ingress.deny.all.name" . | quote }}
+  namespace: {{ include "tenant-namespace.namespace.name" . | quote }}
+spec:
+  {{- if .Values.networkPolicies.ingress.deny.all.podSelector }}
+  podSelector:
+    {{- toYaml .Values.networkPolicies.ingress.deny.all.podSelector | nindent 4 }}
+  {{- else }}
+  podSelector: {}
+  {{- end }}
+  policyTypes:
+    - Ingress
+  ingress: []
+{{- end }}

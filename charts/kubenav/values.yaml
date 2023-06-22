@@ -1,0 +1,28 @@
+# -- Provide a name in place of `kubenav`
+nameOverride: ""
+
+# -- String to fully override `"kubenav.fullname"`
+fullnameOverride: ""
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname templatev
+  name: ""
+
+rbac:
+  # -- Decide which access mode should be granted to kubenav: `readonly`, `cluster-admin` or `custom`.
+  mode: readonly
+  # -- Define the custom permissions to be granted to kubenav
+  customPermissions: []
+    # - apiGroups: [""]
+    #   resources: ["nodes", "pods"]
+    #   verbs:
+    #     - list
+  # -- Define a list of namespaces to limit kubenav to only access these namespaces
+  namespaceLimits: []
+    # - kube-system
+    # - monitoring

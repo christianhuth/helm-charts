@@ -15,7 +15,7 @@ sources:
 dependencies:
   - name: mysql
     repository: https://charts.bitnami.com/bitnami
-    version: 9.9.1
+    version: 9.10.4
     condition: mysql.enabled
   - name: mariadb
     repository: https://charts.bitnami.com/bitnami
@@ -23,9 +23,12 @@ dependencies:
     condition: mariadb.enabled
   - name: postgresql
     repository: https://charts.bitnami.com/bitnami
-    version: 12.5.5
+    version: 12.5.8
     condition: postgresql.enabled
 annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: bumped chart version of mariadb to 12.2.4
   artifacthub.io/screenshots: |
     - title: TYPO3 is a very powerful Web Content Management System.
       url: https://docs.typo3.org/m/typo3/tutorial-getting-started/10.4/en-us/_images/BackendAboutModules.png

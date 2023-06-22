@@ -1,0 +1,133 @@
+# -- Provide a name in place of `tenant-namespace`
+nameOverride: ""
+
+# -- String to fully override `"tenant-namespace.fullname"`
+fullnameOverride: ""
+
+limitRange:
+  # --- create a LimitRange resource
+  enabled: false
+  # -- Annotations to be added to the LimitRange
+  additionalAnnotations: {}
+  # -- Labels to be added to the LimitRange
+  additionalLabels: {}
+  # -- define the list of limits
+  limits: []
+    # - default:
+    #     cpu: 500m
+    #   defaultRequest:
+    #     cpu: 500m
+    #   max:
+    #     cpu: "1"
+    #   min:
+    #     cpu: 100m
+    #   type: Container
+  # -- The name of the LimitRange to be created. If left empty will simply use the Release name.
+  name: ""
+
+namespace:
+  annotations:
+    # -- Annotations to be added to the Namespace
+    additionalAnnotations: {}
+    openShift:
+      # -- The optional description can be a more detailed description of the project and is visible in the web console.
+      description: ""
+      # -- The optional displayName is how the project is displayed in the web console (defaults to name).
+      displayName: ""
+      # -- The optional requesting user.
+      requester: ""
+    scheduler:
+      # -- This annotation requires the PodTolerationRestriction admission controller to be enabled. This annotation key allows assigning tolerations to a namespace and any new pods created in this namespace would get these tolerations added.
+      defaultTolerations: []
+        # - operator: Equal
+        #   value: value1
+        #   effect: NoSchedule
+        #   key: dedicated-node
+      # -- The PodNodeSelector uses this annotation key to assign node selectors to pods in namespaces.
+      nodeSelector: ""
+      # -- This annotation requires the PodTolerationRestriction admission controller to be enabled. The annotation value is a JSON document that defines a list of allowed tolerations for the namespace it annotates. When you create a Pod or modify its tolerations, the API server checks the tolerations to see if they are mentioned in the allow list. The pod is admitted only if the check succeeds.
+      tolerationsWhitelist: []
+        # - operator: Exists
+        #   effect: NoSchedule
+        #   key: dedicated-node
+  labels:
+    # -- Labels to be added to the Namespace
+    additionalLabels: {}
+    podSecurityAdmission:
+      audit:
+        # -- Value must be one of privileged, baseline, or restricted which correspond to Pod Security Standard levels.
+        standard: ""
+        # -- Version label that can be used to pin the policy to the version that shipped with a given Kubernetes minor version (for example v1.27).
+        version: ""
+      enforce:
+        # -- Value must be one of privileged, baseline, or restricted which correspond to Pod Security Standard levels.
+        standard: ""
+        # -- Version label that can be used to pin the policy to the version that shipped with a given Kubernetes minor version (for example v1.27).
+        version: ""
+      warning:
+        # -- Value must be one of privileged, baseline, or restricted which correspond to Pod Security Standard levels.
+        standard: ""
+        # -- Version label that can be used to pin the policy to the version that shipped with a given Kubernetes minor version (for example v1.27).
+        version: ""
+  # -- The Name of the newly created namespace. Uses the Release name be default.
+  name: ""
+
+# -- define a list of ResourceQuotas that should be created
+resourceQuotas:
+  enabled: false
+  # -- Annotations to be added to the LimitRange
+  additionalAnnotations: {}
+  # -- Labels to be added to the LimitRange
+  additionalLabels: {}
+  quotas: []
+  # - name: "" # if left empty will use the index value together with the Release name
+  #   hard: {}
+  #   scopeSelector: {}
+
+networkPolicies:
+  # --- create NetworkPolicy resources to limit the allowed traffic
+  enabled: false
+  # -- Annotations to be added to the NetworkPolicies
+  additionalAnnotations: {}
+  # -- Labels to be added to the NetworkPolicies
+  additionalLabels: {}
+  egress:
+    deny:
+      all:
+        # -- create a NetworkPolicy that denies all outgoing traffic
+        enabled: true
+        # -- define a PodSelector that should be used. Uses all Pods by default
+        podSelector: {}
+    allow:
+      dns:
+        # -- create a NetworkPolicy that allows outgoing traffic to the Kubernetes DNS
+        enabled: true
+        # -- The namespace where the Kubneretes DNS is running
+        namespace: "kube-system"
+        # -- The labels of the Kubernetes DNS
+        podLabels:
+          k8s-app: kube-dns
+        # -- define a PodSelector that should be used. Uses all Pods by default
+        podSelector: {}
+  ingress:
+    deny:
+      all:
+        # -- create a NetworkPolicy that denies all incoming traffic
+        enabled: true
+        # -- define a PodSelector that should be used. Uses all Pods by default
+        podSelector: {}
+    allow:
+      openShift:
+        ingressController:
+          # -- create a NetworkPolicy that allows incoming traffic from the OpenShift Ingress Controller
+          enabled: true
+          # -- define a PodSelector that should be used. Uses all Pods by default
+          podSelector: {}
+        monitoring:
+          # -- create a NetworkPolicy that allows incoming traffic from the OpenShift Monitoring
+          enabled: true
+          # -- define a PodSelector that should be used. Uses all Pods by default
+          podSelector: {}
+  openShift:
+    # -- enabled the creation of NetworkPolicies for OpenShift like Ingress and Monitoring
+    enabled: false

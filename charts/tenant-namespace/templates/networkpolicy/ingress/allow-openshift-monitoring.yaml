@@ -1,0 +1,25 @@
+{{- if and (.Values.networkPolicies.enabled) (.Values.networkPolicies.openShift.enabled) (.Values.networkPolicies.ingress.allow.openShift.monitoring.enabled) }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  annotations:
+    {{- include "tenant-namespace.networkPolicy.annotations" . | nindent 4 }}
+  labels:
+    {{- include "tenant-namespace.networkPolicy.labels" . | nindent 4 }}
+  name: {{ include "tenant-namespace.networkPolicy.ingress.allow.openshift.monitoring.name" . | quote }}
+  namespace: {{ include "tenant-namespace.namespace.name" . | quote }}
+spec:
+  {{- if .Values.networkPolicies.ingress.allow.openShift.monitoring.podSelector }}
+  podSelector:
+    {{- toYaml .Values.networkPolicies.ingress.allow.openShift.monitoring.podSelector | nindent 4 }}
+  {{- else }}
+  podSelector: {}
+  {{- end }}
+  policyTypes:
+    - Ingress
+  ingress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              network.openshift.io/policy-group: monitoring
+{{- end }}

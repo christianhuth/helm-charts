@@ -48,6 +48,9 @@
                         },
                         "tolerations": {
                             "type": "array"
+                        },
+                        "topologySpreadConstraints": {
+                            "type": "array"
                         }
                     }
                 }
