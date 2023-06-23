@@ -2,6 +2,7 @@
 ci-cd: .github/*
 
 # charts
+ansible-semaphore: charts/ansible-semaphore/*
 baserow: charts/baserow/*
 bluespice: charts/bluespice/*
 countly: charts/countly/*
