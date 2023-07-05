@@ -9760,6 +9760,50 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped chart version of postgresql to 12.6.2
+    apiVersion: v2
+    appVersion: 3.6.3
+    created: "2023-07-05T09:44:14.885290832Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.7
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.10.4
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.6.2
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.0.4
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.11.6
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 64cbb37c510a6ee1ba3976d8c78892cc2810482facdccc8f187e9cdd8d6d4a67
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-2.1.1/shlink-backend-2.1.1.tgz
+    version: 2.1.1
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped chart version of postgresql to 12.6.0
     apiVersion: v2
     appVersion: 3.6.3
@@ -18339,4 +18383,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-07-05T08:10:24.550605945Z"
+generated: "2023-07-05T09:44:14.88644804Z"
