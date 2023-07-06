@@ -4342,6 +4342,45 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped dependency of postgresql to chart 12.6.3
+      artifacthub.io/screenshots: |
+        - title: Simply shorten your link using the Web UI.
+          url: https://d4.alternativeto.net/v9sHosD3RiPblfBOOHZi0gwU1M0pRL6Jn53oiobJi9k/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2t1dHQtaXRfNzY3MjMzX2Z1bGwucG5n.jpg
+        - title: You can see a list of the most recent created links and some statistical data about them.
+          url: https://docs.cloudron.io/img/kutt-admin.png
+        - title: View detailed statistics about each created link.
+          url: https://kutt.it/images/callout.png
+        - title: Kutt supports having more than one domain.
+          url: https://docs.cloudron.io/img/kutt-custom-domain.png
+    apiVersion: v2
+    appVersion: v2.7.4
+    created: "2023-07-06T19:14:31.03481373Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.6.3
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.11.6
+    description: Kutt is a free modern URL shortener.
+    digest: 182efa7056262430fe17e7523ac1def2190ee99f0de3ab4fd0c735b1cc64a631
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kutt
+    sources:
+    - https://github.com/thedevs-network/kutt
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kutt-2.6.2/kutt-2.6.2.tgz
+    version: 2.6.2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped dependency of postgresql to chart 12.6.2
       artifacthub.io/screenshots: |
         - title: Simply shorten your link using the Web UI.
@@ -18600,4 +18639,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-07-06T14:45:47.164179461Z"
+generated: "2023-07-06T19:14:31.036123142Z"
