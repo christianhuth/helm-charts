@@ -9919,6 +9919,50 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped chart version of redis to 17.11.7
+    apiVersion: v2
+    appVersion: 3.6.3
+    created: "2023-07-07T07:29:26.59405532Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.7
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.10.5
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.6.3
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.0.4
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.11.7
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 12b9a6d22927dcc2291831a8bddeb2c4fef9a3669e837c6ac44e2d42fc08a4c2
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-2.1.4/shlink-backend-2.1.4.tgz
+    version: 2.1.4
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped chart version of postgresql to 12.6.3
     apiVersion: v2
     appVersion: 3.6.3
@@ -18832,4 +18876,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-07-07T07:23:10.495194794Z"
+generated: "2023-07-07T07:29:26.595421048Z"
