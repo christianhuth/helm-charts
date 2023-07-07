@@ -25,7 +25,7 @@ annotations:
   artifacthub.io/category: database
   artifacthub.io/changes: |
     - kind: changed
-      description: bumped chart version of postgresql to 12.6.3
+      description: bumped chart version of postgresql to 12.6.4
   artifacthub.io/screenshots: |
     - title: Create your own online database without technical experience.
       url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
