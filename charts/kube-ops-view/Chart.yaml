@@ -19,6 +19,9 @@ dependencies:
     condition: redis.enabled
 annotations:
   artifacthub.io/category: monitoring-logging
+  artifacthub.io/changes: |
+    - kind: changed
+      description: bumped dependency of redis to chart 17.11.7
   artifacthub.io/screenshots: |
     - title: Dashboard overview of a Kubernetes cluster
       url: https://codeberg.org/hjacobs/kube-ops-view/media/branch/main/screenshot.png
