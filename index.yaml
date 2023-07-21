@@ -2355,6 +2355,44 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped dependency of postgresql to chart version 12.6.8
+      artifacthub.io/screenshots: |
+        - title: Headwind MDM is a powerful Open Source platform to manage your Enterprise Android Devices.
+          url: https://images.wondershare.com/drfone/article/2022/11/opensource-mdm-3.jpg
+        - title: Open the Devices section and click the QR code icon to start the enrollment of a device.
+          url: https://h-mdm.com/wp-content/uploads/check_qr_code.jpg
+        - title: After enrollment your Android device will only have the allowed applications installed.
+          url: https://h-mdm.com/wp-content/uploads/2019/08/launcher_screen_en.png
+        - title: The Enterprise version of Headwind MDM includes a powerful module for transferring images taken by mobile devices to the server.
+          url: https://h-mdm.com/wp-content/uploads/photo_plugin.jpg
+    apiVersion: v2
+    appVersion: 0.1.2
+    created: "2023-07-21T10:01:18.813134018Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.6.8
+    description: Headwind MDM - an open source mobile device management software for
+      Android
+    digest: 0e511735522033a5b9fa5df50e431f1e6dac9eb786d66bff40e2ef514dfc91d4
+    home: https://github.com/christianknell/helm-charts
+    icon: https://h-mdm.com/wp-content/uploads/2019/07/neew-logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: headwind-mdm
+    sources:
+    - https://github.com/h-mdm/hmdm-docker
+    - https://github.com/h-mdm
+    - https://hub.docker.com/r/headwindmdm/hmdm
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/headwind-mdm-1.5.6/headwind-mdm-1.5.6.tgz
+    version: 1.5.6
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped dependency of postgresql to chart version 12.6.7
       artifacthub.io/screenshots: |
         - title: Headwind MDM is a powerful Open Source platform to manage your Enterprise Android Devices.
@@ -20301,4 +20339,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-07-21T08:57:37.860930333Z"
+generated: "2023-07-21T10:01:18.814251825Z"
