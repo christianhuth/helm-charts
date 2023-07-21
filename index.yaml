@@ -7617,6 +7617,41 @@ entries:
     version: 0.0.1
   maildev:
   - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: image version to 2.1.0
+      artifacthub.io/screenshots: |
+        - title: SMTP server & web interface for viewing and testing emails during development.
+          url: https://maildev.github.io/maildev/assets/img/original/maildev-light.png
+        - title: Resizable viewport to test your emails at different sizes.
+          url: https://maildev.github.io/maildev/assets/img/original/responsive.png
+        - title: View email HTML, plain text, headers or raw source.
+          url: https://maildev.github.io/maildev/assets/img/original/formats.png
+        - title: Convenient search feature to quickly find any email.
+          url: https://maildev.github.io/maildev/assets/img/original/search.png
+        - title: View your emails in an eye-friendly dark interface.
+          url: https://maildev.github.io/maildev/assets/img/original/maildev-dark.png
+    apiVersion: v2
+    appVersion: 2.1.0
+    created: "2023-07-21T12:13:50.078836219Z"
+    description: MailDev is a simple way to test your emails during development with
+      an easy to use web interface.
+    digest: 535f353dc194294102c504439c2419a2cd5f5cffe185f62a8198e421047c0159
+    home: https://github.com/christianknell/helm-charts
+    icon: https://avatars1.githubusercontent.com/u/26743469
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: maildev
+    sources:
+    - https://maildev.github.io/maildev
+    - https://github.com/maildev/maildev
+    - https://hub.docker.com/r/maildev/maildev
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/maildev-1.1.0/maildev-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
       artifacthub.io/screenshots: |
         - title: SMTP server & web interface for viewing and testing emails during development.
           url: https://maildev.github.io/maildev/assets/img/original/maildev-light.png
@@ -20470,4 +20505,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-07-21T12:09:31.984178498Z"
+generated: "2023-07-21T12:13:50.080743365Z"
