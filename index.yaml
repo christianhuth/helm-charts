@@ -15272,6 +15272,37 @@ entries:
     version: 0.0.1
   shlink-web:
   - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: bumped image version to 3.10.2
+      artifacthub.io/screenshots: |
+        - title: Add a new link that should be shortened.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/creation-form-after.png
+        - title: You can have an overview of all your shortened links.
+          url: https://shlink.io/images/shlink-web-client-placeholder.jpg
+        - title: For each link there are multiple statistical data collected and visualized.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/visits-after.png
+        - title: A typical architecture in which Shlink would be integrated.
+          url: https://shlink.io/images/architecture/shlink-architecture.png
+    apiVersion: v2
+    appVersion: 3.10.2
+    created: "2023-07-21T08:25:42.778396626Z"
+    description: A  ReactJS-based progressive web application for Shlink.
+    digest: 87ca34a79e795a4aef7c085b0c31674756a3caa0daf07a47c86f26625b00cd8d
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-web
+    sources:
+    - https://github.com/shlinkio/shlink-web-client
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-web-0.3.2/shlink-web-0.3.2.tgz
+    version: 0.3.2
+  - annotations:
       artifacthub.io/screenshots: |
         - title: Add a new link that should be shortened.
           url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/creation-form-after.png
@@ -20169,4 +20200,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-07-21T08:23:16.807966145Z"
+generated: "2023-07-21T08:25:42.779662833Z"
