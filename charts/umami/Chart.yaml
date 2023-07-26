@@ -25,7 +25,7 @@ annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
     - kind: changed
-      description: bumped chart version of postgresql to 12.6.9
+      description: bumped chart version of mysql to 9.10.9
   artifacthub.io/screenshots: |
     - title: Umami measures just the important metrics that you care about and everything is displayed on a single, easy to browse page.
       url: https://umami.is/images/feature-website-stats.png
