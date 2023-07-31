@@ -36,6 +36,4 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: bumped chart version of postgresql to 12.7.1
-    - kind: changed
-      description: bumped chart version of rabbitmq to 12.0.9
+      description: bumped chart version of redis to 17.14.3
