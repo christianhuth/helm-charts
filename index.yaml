@@ -5,6 +5,45 @@ entries:
       artifacthub.io/category: database
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped dependency of redis to chart version 17.14.2
+      artifacthub.io/screenshots: |
+        - title: Create your own online database without technical experience.
+          url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
+        - title: With Baserow you decide how you want to structure everything. Whether you’re managing customers, products, airplanes or all of them.
+          url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
+        - title: Easily create custom plugins with our boilerplate or use third party ones.
+          url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
+    apiVersion: v2
+    appVersion: 1.19.1
+    created: "2023-07-31T07:47:32.840835617Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.7.1
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.14.2
+    description: Baserow is an open source no-code database and Airtable alternative.
+    digest: f833949caa9e0f75f9d851777764a2ac264c78ceb7e7daf5bbac9bbd9c2944c7
+    home: https://github.com/christianknell/helm-charts
+    icon: https://baserow.io/img/favicon_192.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: baserow
+    sources:
+    - https://gitlab.com/bramw/baserow
+    - https://baserow.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/baserow-1.23.0/baserow-1.23.0.tgz
+    version: 1.23.0
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped dependency of postgresql to chart version 12.7.1
       artifacthub.io/screenshots: |
         - title: Create your own online database without technical experience.
@@ -21664,4 +21703,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-07-31T07:36:12.745270828Z"
+generated: "2023-07-31T07:47:32.842187041Z"
