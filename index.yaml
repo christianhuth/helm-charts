@@ -11667,6 +11667,50 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped chart version of postgresql to 12.8.0
+    apiVersion: v2
+    appVersion: 3.6.3
+    created: "2023-08-02T12:20:41.810074465Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.7
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.10.9
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.8.0
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.0.9
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.14.3
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 14db826278b733d1b8904ddba550d62bba790e905e0db849ce4cdbff1617436e
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-2.5.0/shlink-backend-2.5.0.tgz
+    version: 2.5.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped chart version of redis to 17.14.3
     apiVersion: v2
     appVersion: 3.6.3
@@ -21832,4 +21876,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-08-02T11:12:22.865625359Z"
+generated: "2023-08-02T12:20:41.811747275Z"
