@@ -11936,6 +11936,54 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped chart version of mysql to 9.10.10
+        - kind: changed
+          description: bumped chart version of rabbitmq to 12.0.10
+        - kind: changed
+          description: bumped chart version of redis to 17.4.6
+    apiVersion: v2
+    appVersion: 3.6.3
+    created: "2023-08-08T07:56:36.52603277Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.7
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.10.10
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.8.0
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.0.10
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.14.6
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 3324efb98d5fa7eacbff96d1095c3b3f7bd8bfc859ff41041a3ef94a306b5ea5
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-2.5.2/shlink-backend-2.5.2.tgz
+    version: 2.5.2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped chart version of redis to 17.4.5
     apiVersion: v2
     appVersion: 3.6.3
@@ -22338,4 +22386,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-08-08T07:50:21.54509401Z"
+generated: "2023-08-08T07:56:36.528212466Z"
