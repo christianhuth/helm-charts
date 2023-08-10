@@ -231,7 +231,7 @@
                         "queryRetriesOnFailure": {
                             "type": "integer"
                         },
-                        "queyCacheSizeMB": {
+                        "queryCacheSizeMB": {
                             "type": "integer"
                         },
                         "readWriteSplit": {

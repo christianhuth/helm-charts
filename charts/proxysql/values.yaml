@@ -126,7 +126,7 @@ proxysql:
     port: 3306
     maxConnections: 2048
     connectionMaxAgeMS: 0
-    queyCacheSizeMB: 256
+    queryCacheSizeMB: 256
     queryRetriesOnFailure: 2
     waitTimeout: 28800000
     readWriteSplit: true
