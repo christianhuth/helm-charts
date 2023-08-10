@@ -32,7 +32,7 @@ data:
       max_allowed_packet=1073741824
       max_connections={{ .Values.proxysql.mysql.maxConnections }}
       ping_timeout_server=500
-      query_cache_size_MB={{ .Values.proxysql.mysql.queyCacheSizeMB }}
+      query_cache_size_MB={{ .Values.proxysql.mysql.queryCacheSizeMB }}
       query_retries_on_failure={{ .Values.proxysql.mysql.queryRetriesOnFailure }}
       server_version="{{ .Values.proxysql.mysql.version }}"
       shun_on_failures=5
