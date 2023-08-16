@@ -1,9 +1,10 @@
 {{- define "proxysql.pod" -}}
 metadata:
-{{- with .Values.podAnnotations }}
   annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+  {{- with .Values.podAnnotations }}
     {{- toYaml . | nindent 4 }}
-{{- end }}
+  {{- end }}
   labels:
     {{- include "proxysql.selectorLabels" . | nindent 4 }}
 spec:
@@ -14,6 +15,21 @@ spec:
   serviceAccountName: {{ include "proxysql.serviceAccountName" . }}
   securityContext:
     {{- toYaml .Values.podSecurityContext | nindent 4 }}
+  initContainers:
+    - name: tcp-keepalive
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+        privileged: true
+      image: alpine:3.18
+      command: [sh, -c]
+      args:
+        - |
+          echo "10" > /proc/sys/net/ipv4/tcp_keepalive_intvl
+          echo "5" > /proc/sys/net/ipv4/tcp_keepalive_probes
+          echo "10" > /proc/sys/net/ipv4/tcp_keepalive_time
+      resources:
+        {{- toYaml .Values.resources | nindent 12 }}
   containers:
     - name: {{ .Chart.Name }}
       securityContext:
@@ -45,16 +61,30 @@ spec:
           protocol: TCP
         {{- end }}
       livenessProbe:
-        tcpSocket:
-          port: proxysql
+        exec:
+          command:
+            - /usr/local/bin/healthcheck.sh
+        initialDelaySeconds: 10
+        periodSeconds: 20
+        timeoutSeconds: 5
       readinessProbe:
-        tcpSocket:
-          port: proxysql
+        exec:
+          command:
+            - /usr/local/bin/healthcheck.sh
+        initialDelaySeconds: 10
+        periodSeconds: 20
+        timeoutSeconds: 5
       volumeMounts:
         - name: proxysql-config
           mountPath: /etc/proxysql.cnf
           subPath: proxysql.cnf
           readOnly: true
+        - name: healthcheck
+          mountPath: /usr/local/bin/healthcheck.sh
+          subPath: healthcheck.sh
+        - name: status
+          mountPath: /usr/local/bin/status.sh
+          subPath: status.sh
       {{- if and .Values.proxysql.cluster.enabled .Values.proxysql.cluster.claim.enabled }}
         - name: {{ include "proxysql.fullname" . }}-pv
           mountPath: /var/lib/proxysql
@@ -65,6 +95,20 @@ spec:
     - name: proxysql-config
       configMap:
         name: {{ .Values.proxysql.configmap | default (include "proxysql.fullname" .) }}
+    - name: healthcheck
+      configMap:
+        name: {{ .Values.proxysql.configmap | default (include "proxysql.fullname" .) }}
+        items:
+          - key: healthcheck.sh
+            path: healthcheck.sh
+            mode: 0777
+    - name: status
+      configMap:
+        name: {{ .Values.proxysql.configmap | default (include "proxysql.fullname" .) }}
+        items:
+          - key: status.sh
+            path: status.sh
+            mode: 0777
   {{- with .Values.nodeSelector }}
   nodeSelector:
     {{- toYaml . | nindent 4 }}

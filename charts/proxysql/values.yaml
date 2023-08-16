@@ -7,7 +7,7 @@ image:
   # -- image repository
   repository: proxysql/proxysql
   # -- image pull policy
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   # -- Overrides the image tag
   tag: "2.5.4"
 
@@ -22,7 +22,7 @@ revisionHistoryLimit: 10
 
 serviceAccount:
   # -- Specifies whether a service account should be created
-  create: true
+  create: false
   # -- Annotations to add to the service account
   annotations: {}
   # -- The name of the service account to use.
@@ -33,11 +33,11 @@ serviceAccount:
 podAnnotations: {}
 
 # -- pod-level security context
-podSecurityContext:
-  runAsNonRoot: true
-  fsGroup: 999
-  runAsUser: 999
-  runAsGroup: 999
+podSecurityContext: {}
+  #runAsNonRoot: true
+  #fsGroup: 999
+  #runAsUser: 999
+  #runAsGroup: 999
 
 # -- container-level security context
 securityContext: {}
@@ -124,24 +124,9 @@ proxysql:
   mysql:
     version: "5.7.34"
     port: 3306
-    maxConnections: 2048
-    connectionMaxAgeMS: 0
-    queyCacheSizeMB: 256
-    queryRetriesOnFailure: 2
     waitTimeout: 28800000
-    readWriteSplit: true
     servers: []
-      # - isWriter: true
-      #   hostname: example.mysql.org
-      #   port: 3306
-      #   maxConnections: 1000
-      #   compression: false
-      #   weight: 1000
     users: []
-      # - username: name
-      #   password: pwd
-      #   maxConnections: 10000
-      #   readOnly: false
     slave:
       enabled: false
       checkType: "read_only"
@@ -149,14 +134,17 @@ proxysql:
       enabled: false
       maxWriters: 1
       writerAsReader: true
+    tcp:
+      keepaliveTime: 30
   monitor:
     enabled: false
     writerAsReader: true
-    replicationLagInterval: 10000
-    replicationLagTimeout: 1500
-    slaveLagWhenNull: 60
     # user: "monitor"
     # password: "monitor"
+  restapi:
+    enabled: false
+    port: 6070
+    memoryMetricsInterval: 59
 
 metrics:
   enabled: false
