@@ -36,4 +36,4 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: bumped chart version of redis to 17.15.4
+      description: bumped chart version of mysql to 9.11.2
