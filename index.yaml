@@ -12505,6 +12505,52 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped chart version of mysql to 9.11.2
+        - kind: changed
+          description: bumped chart version of postgresql to 12.8.5
+    apiVersion: v2
+    appVersion: 3.6.3
+    created: "2023-08-22T11:50:37.543838488Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.7
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.11.2
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.8.5
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.0.10
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.15.4
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 25aa5fb3747fbb8205b59518ac9711fa7c31596405cc666d7262680344d03d40
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-2.7.2/shlink-backend-2.7.2.tgz
+    version: 2.7.2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped chart version of redis to 17.15.4
     apiVersion: v2
     appVersion: 3.6.3
@@ -23541,4 +23587,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-08-22T11:39:40.783471531Z"
+generated: "2023-08-22T11:50:37.545164406Z"
