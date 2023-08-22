@@ -17757,6 +17757,54 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped chart version of mysql to 9.11.2
+      artifacthub.io/screenshots: |
+        - title: TYPO3 is a very powerful Web Content Management System.
+          url: https://docs.typo3.org/m/typo3/tutorial-getting-started/10.4/en-us/_images/BackendAboutModules.png
+        - title: Easilly create and manage pages for your website.
+          url: https://typo3.org/fileadmin/t3o_common_storage/images/release_notes/v12/12.0/screenshots/backend-ux-page-tree.png
+        - title: Manage existing and add new content to your pages.
+          url: https://typo3.org/fileadmin/t3o_common_storage/images/release_notes/v12/12.0/screenshots/new-page-module.png
+        - title: Files including documents and images can be managed in the Filelist module.
+          url: https://docs.typo3.org/m/typo3/tutorial-editors/main/en-us/_images/FilelistModule.png
+        - title: Extensions can be installed and managed from the Extension Manager.
+          url: https://docs.typo3.org/m/typo3/reference-coreapi/10.4/en-us/_images/ExtensionManager76To86.png
+        - title: Create your own dashboard to visualize information inside of your TYPO3 backend.
+          url: https://typo3.org/fileadmin/t3o_common_storage/images/release_notes/v10/10.4/typo3-100400_0036_dashboard-my-dashboard.png
+    apiVersion: v2
+    appVersion: "11.5"
+    created: "2023-08-22T07:54:26.22202148Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.11.2
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.7
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.8.2
+    description: TYPO3 — the Professional, Flexible Content Management System
+    digest: 1e4ba77a01fe602484f5c9342758847b2933d0d5e7b032b3e2d68d98f988732b
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.mdc.de/wp-content/uploads/2016/05/typo3_logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: typo3
+    sources:
+    - https://github.com/martin-helmich/docker-typo3
+    - https://github.com/TYPO3/typo3
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/typo3-1.15.1/typo3-1.15.1.tgz
+    version: 1.15.1
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped chart version of mysql to 9.11.0
       artifacthub.io/screenshots: |
         - title: TYPO3 is a very powerful Web Content Management System.
@@ -23233,4 +23281,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-08-16T09:20:38.490064354Z"
+generated: "2023-08-22T07:54:26.223627405Z"
