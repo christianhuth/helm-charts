@@ -25,9 +25,6 @@ jobs:
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
 
-      - name: Activate Offline mode of Datree 
-        run: datree config set offline local
-
       - name: Run Datree Policy Check for k8s v1.24.0
         uses: datreeio/action-datree@main
         with:
