@@ -19,7 +19,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: bumped chart version of mysql to 9.12.0
+      description: bumped chart version of mysql to 9.12.1
   artifacthub.io/screenshots: |
     - title: Polr converts some long links into shorter ones.
       url: https://selfhostedweb.org/wp-content/uploads/2017/02/shortit-1024x346.png
