@@ -30,18 +30,18 @@ jobs:
         with:
           path: 'charts'
           isHelmChart: true
-          cliArguments: '--only-k8s-files --policy-config .github/config/datree.yaml --schema-version 1.24.9'
+          cliArguments: '--only-k8s-files --policy-config .github/config/datree-policies.yaml --schema-version 1.24.9'
 
       - name: Run Datree Policy Check for k8s v1.25.0
         uses: datreeio/action-datree@main
         with:
           path: 'charts'
           isHelmChart: true
-          cliArguments: '--only-k8s-files --policy-config .github/config/datree.yaml --schema-version 1.25.5'
+          cliArguments: '--only-k8s-files --policy-config .github/config/datree-policies.yaml --schema-version 1.25.5'
 
       - name: Run Datree Policy Check for k8s v1.26.0
         uses: datreeio/action-datree@main
         with:
           path: 'charts'
           isHelmChart: true
-          cliArguments: '--only-k8s-files --policy-config .github/config/datree.yaml --schema-version 1.26.0'
+          cliArguments: '--only-k8s-files --policy-config .github/config/datree-policies.yaml --schema-version 1.26.0'
