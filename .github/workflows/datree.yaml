@@ -29,6 +29,9 @@ jobs:
         run: ls -al $HOME/
 
       - name: create Datree config file
+        run: mkdir -p $HOME/.datree
+
+      - name: create Datree config file
         run: touch $HOME/.datree/config.yaml
 
       - name: set Datree to offline mode
