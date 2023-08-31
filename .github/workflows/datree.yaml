@@ -70,38 +70,3 @@ jobs:
             kyverno-policies/best-practices/require_probes/require_probes.yaml
             kyverno-policies/best-practices/disallow-empty-ingress-host/disallow_empty_ingress_host.yaml
             kyverno-policies/best-practices/require_drop_all/require_drop_all.yaml
-
-  datree:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Update dependencies
-        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
-
-      - name: set Datree to offline mode
-        run: "cat $HOME/.datree/config.yaml"
-      - name: Run Datree Policy Check for k8s v1.24.0
-        uses: datreeio/action-datree@main
-        with:
-          path: 'charts'
-          isHelmChart: true
-          cliArguments: '--only-k8s-files --policy-config .github/config/datree-policies.yaml --schema-version 1.24.9'
-
-      - name: Run Datree Policy Check for k8s v1.25.0
-        uses: datreeio/action-datree@main
-        with:
-          path: 'charts'
-          isHelmChart: true
-          cliArguments: '--only-k8s-files --policy-config .github/config/datree-policies.yaml --schema-version 1.25.5'
-
-      - name: Run Datree Policy Check for k8s v1.26.0
-        uses: datreeio/action-datree@main
-        with:
-          path: 'charts'
-          isHelmChart: true
-          cliArguments: '--only-k8s-files --policy-config .github/config/datree-policies.yaml --schema-version 1.26.0'
