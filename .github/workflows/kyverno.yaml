@@ -63,6 +63,6 @@ jobs:
         with:
           chart-dir: "${{ matrix.chart }}"
           policy-files: |
-            best-practices/require_probes/require_probes.yaml
-            best-practices/disallow-empty-ingress-host/disallow_empty_ingress_host.yaml
-            best-practices/require_drop_all/require_drop_all.yaml
+            /home/runner/work/helm-charts/helm-charts/best-practices/require_probes/require_probes.yaml
+            /home/runner/work/helm-charts/helm-charts/best-practices/disallow-empty-ingress-host/disallow_empty_ingress_host.yaml
+            /home/runner/work/helm-charts/helm-charts/best-practices/require_drop_all/require_drop_all.yaml
