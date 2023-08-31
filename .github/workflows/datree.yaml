@@ -26,6 +26,9 @@ jobs:
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
 
       - name: create Datree config file
+        run: ls -al $HOME/
+
+      - name: create Datree config file
         run: touch $HOME/.datree/config.yaml
 
       - name: set Datree to offline mode
