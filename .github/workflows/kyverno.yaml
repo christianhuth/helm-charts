@@ -1,4 +1,4 @@
-name: "K Policy Checks"
+name: "Kyverno Policy Checks"
 
 on:
   pull_request:
