@@ -28,6 +28,10 @@ jobs:
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.1.0
 
+      - name: List Helm Charts
+        run: |
+          ls charts/ | xargs -I {} echo "charts/"{}
+
       - name: List changes
         id: list-changed
         run: |
