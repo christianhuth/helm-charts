@@ -13,6 +13,64 @@ env:
   DATREE_TOKEN: ${{ secrets.DATREE_TOKEN }}
 
 jobs:
+
+  list-changed:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: "${{ steps.list-changed.outputs.changed }}"
+      charts: "${{ steps.list-changed.outputs.charts }}"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.1.0
+
+      - name: List changes
+        id: list-changed
+        run: |
+          changed=$(ct list-changed --target-branch main)
+          arr=(`echo $changed`)
+          json=$(echo "${arr[@]}" | jq -ncR 'inputs | split(" ")')
+          echo "chartsJson=$json" >> $GITHUB_OUTPUT
+          if [[ -n "$changed" ]]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+  kyverno-validate:
+    runs-on: ubuntu-latest
+    needs: [list-changed]
+    if: ${{ needs.list-changed.outputs.changed == 'true' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        chart:
+        - ${{ fromJson(needs.list-changed.outputs.charts) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/checkout@v2
+        name: Checkout kyverno-policies
+        with:
+          repository: kyverno/policies
+          ref: main
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+      - name: Test against Kyverno policies
+        uses: ckotzbauer/kyverno-test-action@v2
+        with:
+          chart-dir: charts/my-awesome-helm-chart
+          value-files: |
+            environments/prod.yaml
+          policy-files: |
+            kyverno-policies/best-practices/require_probes/require_probes.yaml
+            kyverno-policies/best-practices/disallow-empty-ingress-host/disallow_empty_ingress_host.yaml
+            kyverno-policies/best-practices/require_drop_all/require_drop_all.yaml
+
   datree:
     runs-on: ubuntu-latest
 
@@ -25,21 +83,8 @@ jobs:
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
 
-      - name: create Datree config file
-        run: ls -al $HOME/
-
-      - name: create Datree config file
-        run: mkdir -p $HOME/.datree
-
-      - name: create Datree config file
-        run: touch $HOME/.datree/config.yaml
-
-      - name: set Datree to offline mode
-        run: "echo '  offline: local' >> $HOME/.datree/config.yaml"
-
       - name: set Datree to offline mode
         run: "cat $HOME/.datree/config.yaml"
-
       - name: Run Datree Policy Check for k8s v1.24.0
         uses: datreeio/action-datree@main
         with:
