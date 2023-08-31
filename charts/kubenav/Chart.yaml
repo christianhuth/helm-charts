@@ -3,7 +3,7 @@ apiVersion: v2
 name: kubenav
 description: A Helm chart for creating the required RBAC for kubenav
 type: application
-version: 1.0.0
+version: 1.0.1
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/kubenav/kubenav/main/utils/images/repo/github-readme-logo.png
 maintainers:
