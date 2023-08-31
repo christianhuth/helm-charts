@@ -1,4 +1,4 @@
-name: "Datree Policy Checks"
+name: "K Policy Checks"
 
 on:
   pull_request:
