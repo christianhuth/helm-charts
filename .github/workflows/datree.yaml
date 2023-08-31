@@ -37,6 +37,9 @@ jobs:
       - name: set Datree to offline mode
         run: "echo 'offline: local' >> $HOME/.datree/config.yaml"
 
+      - name: set Datree to offline mode
+        run: "cat $HOME/.datree/config.yaml"
+
       - name: Run Datree Policy Check for k8s v1.24.0
         uses: datreeio/action-datree@main
         with:
