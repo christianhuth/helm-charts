@@ -4250,6 +4250,38 @@ entries:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped dependency of redis to chart 18.0.4
+      artifacthub.io/screenshots: |
+        - title: Dashboard overview of a Kubernetes cluster
+          url: https://codeberg.org/hjacobs/kube-ops-view/media/branch/main/screenshot.png
+        - title: Dashboard showing broken Pods
+          url: https://user-images.githubusercontent.com/1127164/53682720-a2a83780-3cf8-11e9-9384-2c1df186aad4.png
+    apiVersion: v2
+    appVersion: 23.5.0
+    created: "2023-09-19T14:57:44.032934203Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.0.4
+    description: A Helm chart for bootstrapping kube-ops-view.
+    digest: 040f400a440c78b37d8d2c586d28fcc77dc0eb8301af77bc108ecfd2f1123552
+    home: https://github.com/christianknell/helm-charts
+    icon: https://codeberg.org/repo-avatars/677-c51f6426305941cab515fdd98368f0bb
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kube-ops-view
+    sources:
+    - https://codeberg.org/hjacobs/kube-ops-view
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kube-ops-view-3.0.0/kube-ops-view-3.0.0.tgz
+    version: 3.0.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped dependency of redis to chart 17.17.1
       artifacthub.io/screenshots: |
         - title: Dashboard overview of a Kubernetes cluster
@@ -24561,4 +24593,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-09-19T14:53:32.330489089Z"
+generated: "2023-09-19T14:57:44.034223699Z"
