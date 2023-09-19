@@ -65,9 +65,9 @@ The command removes all the Kubernetes components associated with the chart and 
 | nameOverride                       | string | `""`                                                                                                   | Provide a name in place of `kube-ops-view`                                                                             |
 | nodeSelector                       | object | `{}`                                                                                                   | Node labels for pod assignment                                                                                         |
 | podAnnotations                     | object | `{}`                                                                                                   | Annotations to be added to exporter pods                                                                               |
-| redis.architecture                 | string | `"standalone"`                                                                                         | Redis™ architecture. Allowed values: standalone or replication                                                         |
+| redis.architecture                 | string | `"standalone"`                                                                                         | Redis™ architecture. Allowed values: standalone or replication                                                        |
 | redis.auth.enabled                 | bool   | `false`                                                                                                | Disable password authentication as the kube-ops-view container has no support for password authentication              |
-| redis.enabled                      | bool   | `false`                                                                                                | enable Redis™ subchart from Bitnami                                                                                    |
+| redis.enabled                      | bool   | `false`                                                                                                | enable Redis™ subchart from Bitnami                                                                                   |
 | replicaCount                       | int    | `1`                                                                                                    | Number of replicas                                                                                                     |
 | resources                          | object | `{}`                                                                                                   | Resource limits and requests for the controller pods.                                                                  |
 | revisionHistoryLimit               | int    | `10`                                                                                                   | The number of old ReplicaSets to retain                                                                                |
@@ -86,6 +86,12 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```console
 helm install my-release -f values.yaml christianknell/kube-ops-view
 ```
+
+## Upgrading the Chart
+
+### 3.0.0
+
+This major updates the redis subchart to its newest major, 18.0.4. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#to-1800) you can find more information about the changes introduced in that version.
 
 ---
 
