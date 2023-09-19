@@ -11183,6 +11183,39 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped chart version of mysql to 9.12.3
+      artifacthub.io/screenshots: |
+        - title: Polr converts some long links into shorter ones.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/shortit-1024x346.png
+        - title: Polr provides a dashboard overview containing all the links ever created.
+          url: https://assets.hongkiat.com/uploads/polr-url-shorterner/02-polr-links-table.jpg
+        - title: Polr provides some statistical data about the shortened link.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/Screenshot-2018-1-31-Shorts-1024x1024.png
+    apiVersion: v2
+    appVersion: 2.3.0
+    created: "2023-09-19T15:06:13.395304165Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.12.3
+    description: Polr is a quick, modern, and open-source link shortener
+    digest: 8edff74ab5c8863421e6e1f43aeedb08b0f662d62d00cd94089234bfdd5c2ad3
+    home: https://github.com/christianknell/helm-charts
+    icon: http://docs.polrproject.org/en/latest/logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: polr
+    sources:
+    - https://github.com/cydrobolt/polr
+    - https://github.com/ajanvier/docker-polr
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/polr-1.8.2/polr-1.8.2.tgz
+    version: 1.8.2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped chart version of mysql to 9.12.1
       artifacthub.io/screenshots: |
         - title: Polr converts some long links into shorter ones.
@@ -24615,4 +24648,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-09-19T15:00:57.505064878Z"
+generated: "2023-09-19T15:06:13.39666316Z"
