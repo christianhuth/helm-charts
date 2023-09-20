@@ -12530,6 +12530,36 @@ entries:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
         - kind: changed
+          description: image version to 2.3.1
+      artifacthub.io/screenshots: |
+        - title: Add an user inside of Proxmox, that will be used for the Exporter.
+          url: https://xinux.net/images/6/6e/Prometheus-proxmox-grafana-user.png
+        - title: Add permissions for this user.
+          url: https://xinux.net/images/5/5d/Prometheus-proxmox-grafana-user-permission.png
+        - title: Visualize the data collected with Grafana.
+          url: https://grafana.com/api/dashboards/10347/images/6529/image
+    apiVersion: v2
+    appVersion: 2.3.1
+    created: "2023-09-20T09:30:48.212256479Z"
+    description: A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor
+      to collect metrics.
+    digest: 455b4e83b0ce444d07ce09c3bd321e23da882d9ee6122c03e1b00f3fa67b5d1d
+    home: https://github.com/christianknell/helm-charts
+    icon: https://camo.githubusercontent.com/2df2ac41e1b8a1484be236c75e395981b31bfd670eff46b5c182ea0be9475310/68747470733a2f2f7777772e70726f786d6f782e636f6d2f696d616765732f70726f786d6f782f50726f786d6f785f73796d626f6c5f7374616e646172645f6865782e706e67
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: prometheus-pve-exporter
+    sources:
+    - https://github.com/prometheus-pve/prometheus-pve-exporter
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/prometheus-pve-exporter-1.2.1/prometheus-pve-exporter-1.2.1.tgz
+    version: 1.2.1
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: changed
           description: image version to 2.3.0
       artifacthub.io/screenshots: |
         - title: Add an user inside of Proxmox, that will be used for the Exporter.
@@ -24696,4 +24726,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-09-19T15:19:54.318375268Z"
+generated: "2023-09-20T09:30:48.213481582Z"
