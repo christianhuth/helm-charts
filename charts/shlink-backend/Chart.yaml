@@ -36,4 +36,4 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: bumped chart version of redis to 17.17.1
+      description: bumped chart version of rabbitmq to 12.1.6
