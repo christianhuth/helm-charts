@@ -36,4 +36,4 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: bumped chart version of postgresql to 12.12.4
+      description: bumped chart version of postgresql to 12.12.5
