@@ -81,18 +81,18 @@ spec:
             - name: DB_DRIVER
               value: postgres
             - name: DB_HOST
-              value: {{ include "postgresql.primary.fullname" .Subcharts.postgresql }}
+              value: {{ include "postgresql.v1.primary.fullname" .Subcharts.postgresql }}
             - name: DB_PORT
-              value: {{ include "postgresql.service.port" .Subcharts.postgresql | quote }}
+              value: {{ include "postgresql.v1.service.port" .Subcharts.postgresql | quote }}
             - name: DB_NAME
-              value: {{ include "postgresql.database" .Subcharts.postgresql }}
+              value: {{ include "postgresql.v1.database" .Subcharts.postgresql }}
             - name: DB_USER
-              value: {{ include "postgresql.username" .Subcharts.postgresql }}
+              value: {{ include "postgresql.v1.username" .Subcharts.postgresql }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "postgresql.secretName" .Subcharts.postgresql }}
-                  key: {{ template "postgresql.userPasswordKey" .Subcharts.postgresql }}
+                  name: {{ template "postgresql.v1.secretName" .Subcharts.postgresql }}
+                  key: {{ template "postgresql.v1.userPasswordKey" .Subcharts.postgresql }}
             {{- end }}
             # RabbitMQ Settings
             {{- if .Values.rabbitmq.enabled }}
