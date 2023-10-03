@@ -66,7 +66,7 @@ Return the hostname of the database to use
 */}}
 {{- define "umami.database.hostname" -}}
   {{- if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.primary.fullname" .Subcharts.postgresql) -}}
+    {{- printf "%s" (include "postgresql.v1.primary.fullname" .Subcharts.postgresql) -}}
   {{- else if .Values.mysql.enabled -}}
     {{- printf "%s" (include "mysql.primary.fullname" .Subcharts.mysql) -}}
   {{- else -}}
@@ -79,7 +79,7 @@ Return database service port
 */}}
 {{- define "umami.database.port" -}}
   {{- if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.service.port" .Subcharts.postgresql) -}}
+    {{- printf "%s" (include "postgresql.v1.service.port" .Subcharts.postgresql) -}}
   {{- else if .Values.mysql.enabled -}}
     {{- printf "%s" (tpl (toString .Values.mysql.primary.service.ports.mysql) $) -}}
   {{- else -}}
@@ -92,7 +92,7 @@ Return the name for the database to use
 */}}
 {{- define "umami.database.database" -}}
   {{- if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.database" .Subcharts.postgresql) -}}
+    {{- printf "%s" (include "postgresql.v1.database" .Subcharts.postgresql) -}}
   {{- else if .Values.mysql.enabled -}}
     {{- printf "%s" (tpl .Values.mysql.auth.database $) -}}
   {{- else -}}
@@ -105,7 +105,7 @@ Return the name for the user to use
 */}}
 {{- define "umami.database.username" -}}
   {{- if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.username" .Subcharts.postgresql) -}}
+    {{- printf "%s" (include "postgresql.v1.username" .Subcharts.postgresql) -}}
   {{- else if .Values.mysql.enabled -}}
     {{- printf "%s" (tpl .Values.mysql.auth.username $) -}}
   {{- else -}}
