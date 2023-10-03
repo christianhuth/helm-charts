@@ -13396,6 +13396,52 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped image version to 3.6.4
+        - kind: fixed
+          description: postgresql includes and templates
+    apiVersion: v2
+    appVersion: 3.6.4
+    created: "2023-10-03T16:31:35.885690615Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.7
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.12.3
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.12.10
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.6
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.17.1
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: fe8a7fc4f3b224b79fc2519eb4d2d3671269b82ac2a5b89b66d3f6557e7b1e39
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-2.12.4/shlink-backend-2.12.4.tgz
+    version: 2.12.4
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped chart version of postgresql to 12.12.10
     apiVersion: v2
     appVersion: 3.6.3
@@ -25429,4 +25475,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-10-03T16:20:38.406393045Z"
+generated: "2023-10-03T16:31:35.887806718Z"
