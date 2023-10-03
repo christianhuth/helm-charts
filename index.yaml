@@ -5,6 +5,47 @@ entries:
       artifacthub.io/category: database
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped dependency of postgresql to chart version 12.12.10
+        - kind: fixed
+          description: wrong template name for postgresql dependency
+      artifacthub.io/screenshots: |
+        - title: Create your own online database without technical experience.
+          url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
+        - title: With Baserow you decide how you want to structure everything. Whether you’re managing customers, products, airplanes or all of them.
+          url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
+        - title: Easily create custom plugins with our boilerplate or use third party ones.
+          url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
+    apiVersion: v2
+    appVersion: 1.19.1
+    created: "2023-10-03T16:04:00.375457744Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.12.10
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.14.2
+    description: Baserow is an open source no-code database and Airtable alternative.
+    digest: 25c9964bb72f7c69c9ac0e743097c7fcc7c0139445ccd8d04825994d3de21af3
+    home: https://github.com/christianknell/helm-charts
+    icon: https://baserow.io/img/favicon_192.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: baserow
+    sources:
+    - https://gitlab.com/bramw/baserow
+    - https://baserow.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/baserow-1.26.0/baserow-1.26.0.tgz
+    version: 1.26.0
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped dependency of postgresql to chart version 12.10.0
       artifacthub.io/screenshots: |
         - title: Create your own online database without technical experience.
@@ -25234,4 +25275,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-10-03T15:58:24.130810378Z"
+generated: "2023-10-03T16:04:00.37709075Z"
