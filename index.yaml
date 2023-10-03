@@ -13215,6 +13215,50 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped chart version of postgresql to 12.12.10
+    apiVersion: v2
+    appVersion: 3.6.3
+    created: "2023-10-03T15:38:15.68450422Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.7
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.12.3
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.12.10
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.6
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.17.1
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 2484ecbd5fa0183f61c3a905cba4c9e7d5f522c1a0bb70f6de8494e7cde61abe
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-2.12.3/shlink-backend-2.12.3.tgz
+    version: 2.12.3
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped chart version of postgresql to 12.12.9
     apiVersion: v2
     appVersion: 3.6.3
@@ -25149,4 +25193,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-09-29T07:06:50.388895749Z"
+generated: "2023-10-03T15:38:15.685939914Z"
