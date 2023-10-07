@@ -17,6 +17,9 @@ imagePullSecrets: []
 # -- Number of replicas
 replicaCount: 1
 
+# -- Pod labels
+podLabels: {}
+
 # -- The number of old ReplicaSets to retain
 revisionHistoryLimit: 10
 
