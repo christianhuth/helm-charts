@@ -48,6 +48,9 @@ Selector labels
 {{- define "shlink-backend.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "shlink-backend.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+{{- with .Values.podLabels }}
+{{ toYaml . }}
+{{- end }}
 {{- end }}
 
 {{/*
