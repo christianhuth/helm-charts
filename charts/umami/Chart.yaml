@@ -25,7 +25,7 @@ annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
     - kind: changed
-      description: bumped chart version of postgresql to 12.12.10
+      description: bumped chart version of mysql to 9.12.5
     - kind: changed
       description: template names of postgresql
   artifacthub.io/screenshots: |
