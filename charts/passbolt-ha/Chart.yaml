@@ -27,7 +27,7 @@ annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
     - kind: changed
-      description: bumped chart version of proxysql to 1.1.4
+      description: bumped chart version of mysql to 9.12.5
   artifacthub.io/screenshots: |
     - title: The login screen of Passbolt
       url: https://help.passbolt.com/assets/img/help/2021/02/AN_login_v3.png
