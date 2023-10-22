@@ -13742,6 +13742,50 @@ entries:
   shlink-backend:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: possibility to define labels on pods
+    apiVersion: v2
+    appVersion: 3.6.4
+    created: "2023-10-22T19:52:26.835807571Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.7
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.12.5
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.12.10
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.2.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.17.1
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 0776f1064a752672425fd93c980cc9b48bc87da9d8a32932a77952ccb034a0fc
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-2.13.2/shlink-backend-2.13.2.tgz
+    version: 2.13.2
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: bumped chart version of mysql to 9.12.5
     apiVersion: v2
@@ -19361,6 +19405,37 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-0.0.1/shlink-backend-0.0.1.tgz
     version: 0.0.1
   shlink-web:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: possibility to define labels on pods
+      artifacthub.io/screenshots: |
+        - title: Add a new link that should be shortened.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/creation-form-after.png
+        - title: You can have an overview of all your shortened links.
+          url: https://shlink.io/images/shlink-web-client-placeholder.jpg
+        - title: For each link there are multiple statistical data collected and visualized.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/visits-after.png
+        - title: A typical architecture in which Shlink would be integrated.
+          url: https://shlink.io/images/architecture/shlink-architecture.png
+    apiVersion: v2
+    appVersion: 3.10.2
+    created: "2023-10-22T19:52:26.952252144Z"
+    description: A  ReactJS-based progressive web application for Shlink.
+    digest: 7289bce56a69f5781bb5c40b0c3339b758ba5e042fc0abbb9126a5a39f9cc957
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-web
+    sources:
+    - https://github.com/shlinkio/shlink-web-client
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-web-0.3.3/shlink-web-0.3.3.tgz
+    version: 0.3.3
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
@@ -26013,4 +26088,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-10-22T19:31:39.652119492Z"
+generated: "2023-10-22T19:52:26.95389406Z"
