@@ -6027,6 +6027,45 @@ entries:
   kutt:
   - annotations:
       artifacthub.io/changes: |
+        - kind: fixed
+          description: missing .auth level in postgresql secret
+      artifacthub.io/screenshots: |
+        - title: Simply shorten your link using the Web UI.
+          url: https://d4.alternativeto.net/v9sHosD3RiPblfBOOHZi0gwU1M0pRL6Jn53oiobJi9k/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2t1dHQtaXRfNzY3MjMzX2Z1bGwucG5n.jpg
+        - title: You can see a list of the most recent created links and some statistical data about them.
+          url: https://docs.cloudron.io/img/kutt-admin.png
+        - title: View detailed statistics about each created link.
+          url: https://kutt.it/images/callout.png
+        - title: Kutt supports having more than one domain.
+          url: https://docs.cloudron.io/img/kutt-custom-domain.png
+    apiVersion: v2
+    appVersion: v2.7.4
+    created: "2023-10-22T19:23:59.430429916Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.12.10
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.1.2
+    description: Kutt is a free modern URL shortener.
+    digest: 1441e2ee74d82f47ff1f33eb9a4144485cab2f397feb56951644422ebe8d7823
+    home: https://github.com/christianknell/helm-charts
+    icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: kutt
+    sources:
+    - https://github.com/thedevs-network/kutt
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/kutt-3.2.4/kutt-3.2.4.tgz
+    version: 3.2.4
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: implementation of kutt.mail.from as MAIL_FROM env variable
       artifacthub.io/screenshots: |
@@ -25880,4 +25919,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-10-22T19:19:35.274721235Z"
+generated: "2023-10-22T19:23:59.431760035Z"
