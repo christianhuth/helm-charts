@@ -69,7 +69,7 @@ spec:
             # Mail Settings
             {{- if .Values.kutt.mail.contactEmail }}
             - name: CONTACT_EMAIL
-              value: {{ .Values.kutt.mail.reportEmail | quote }}
+              value: {{ .Values.kutt.mail.contactEmail | quote }}
             {{- end }}
             {{- if .Values.kutt.mail.host }}
             - name: MAIL_HOST
