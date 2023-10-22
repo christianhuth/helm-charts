@@ -17,9 +17,6 @@ imagePullSecrets: []
 # -- Number of replicas
 replicaCount: 1
 
-# -- Pod labels
-podLabels: {}
-
 # -- The number of old ReplicaSets to retain
 revisionHistoryLimit: 10
 
@@ -32,8 +29,11 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-# -- Annotations to be added to exporter pods
+# -- Annotations to be added to pods
 podAnnotations: {}
+
+# -- Labels to be added to pods
+podLabels: {}
 
 # -- pod-level security context
 podSecurityContext: {}
