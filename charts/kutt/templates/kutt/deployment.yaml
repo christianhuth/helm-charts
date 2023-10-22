@@ -79,6 +79,10 @@ spec:
             - name: MAIL_PORT
               value: {{ .Values.kutt.mail.port | quote }}
             {{- end }}
+            {{- if .Values.kutt.mail.from }}
+            - name: MAIL_FROM
+              value: {{ .Values.kutt.mail.from | quote }}
+            {{- end }}
             - name: MAIL_SECURE
               value: {{ .Values.kutt.mail.secure | quote }}
             {{- if .Values.kutt.mail.username }}
