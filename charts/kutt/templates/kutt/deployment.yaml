@@ -69,7 +69,7 @@ spec:
             # Mail Settings
             {{- if .Values.kutt.mail.contactEmail }}
             - name: CONTACT_EMAIL
-              value: {{ .Values.kutt.mail.reportEmail | quote }}
+              value: {{ .Values.kutt.mail.contactEmail | quote }}
             {{- end }}
             {{- if .Values.kutt.mail.host }}
             - name: MAIL_HOST
@@ -78,6 +78,10 @@ spec:
             {{- if .Values.kutt.mail.port }}
             - name: MAIL_PORT
               value: {{ .Values.kutt.mail.port | quote }}
+            {{- end }}
+            {{- if .Values.kutt.mail.from }}
+            - name: MAIL_FROM
+              value: {{ .Values.kutt.mail.from | quote }}
             {{- end }}
             - name: MAIL_SECURE
               value: {{ .Values.kutt.mail.secure | quote }}
