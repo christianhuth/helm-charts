@@ -2714,6 +2714,24 @@ entries:
     version: 1.0.0
   etcd-defrag:
   - apiVersion: v2
+    appVersion: 3.5.10
+    created: "2023-10-30T16:25:51.455979613Z"
+    description: A Helm chart for running a defragmentation CronJob for ETCD
+    digest: d6b159214c76fe4dcbe8e577c7c92418cbc765047aeeb4f88d9cf00e4e104450
+    home: https://github.com/christianknell/helm-charts
+    icon: https://cdn.worldvectorlogo.com/logos/etcd-1.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: etcd-defrag
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/etcd
+    - https://etcd.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/etcd-defrag-1.0.6/etcd-defrag-1.0.6.tgz
+    version: 1.0.6
+  - apiVersion: v2
     appVersion: 3.5.9
     created: "2023-05-12T08:54:02.079014364Z"
     description: A Helm chart for running a defragmentation CronJob for ETCD
@@ -26171,4 +26189,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-10-30T16:22:11.972628064Z"
+generated: "2023-10-30T16:25:51.457803528Z"
