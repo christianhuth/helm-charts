@@ -13781,6 +13781,50 @@ entries:
   shlink-backend:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: bumped helm dependency for rabbitmq to 12.3.0
+    apiVersion: v2
+    appVersion: 3.6.4
+    created: "2023-10-30T16:22:11.970542943Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.7
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.12.5
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.12.10
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.3.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.17.1
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 50fe2fc9861ca1a2992779ba800201b6b527cab5015ca6ea7d39c056ba655de5
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-2.14.0/shlink-backend-2.14.0.tgz
+    version: 2.14.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: possibility to define labels on pods
     apiVersion: v2
@@ -26127,4 +26171,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-10-30T16:13:06.490407209Z"
+generated: "2023-10-30T16:22:11.972628064Z"
