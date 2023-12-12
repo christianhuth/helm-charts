@@ -66,6 +66,9 @@ affinity: {}
 # -- additional environment variables to be added to the pods
 extraEnv: []
 
+# -- specify if the CronJob should run on the hostNetwork
+hostNetwork: false
+
 defrag:
   # -- create a CronJob for defragmentation
   enabled: true
