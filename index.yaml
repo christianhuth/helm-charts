@@ -2715,6 +2715,28 @@ entries:
   etcd-defrag:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: support for running the cronjob in the host network
+    apiVersion: v2
+    appVersion: 3.5.12
+    created: "2024-02-03T09:52:45.607891268Z"
+    description: A Helm chart for running a defragmentation CronJob for ETCD
+    digest: 25ea188f54be33f1698e06336579baaf8702eefd7c07da4b288a799325ebd680
+    home: https://github.com/christianknell/helm-charts
+    icon: https://cdn.worldvectorlogo.com/logos/etcd-1.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: etcd-defrag
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/etcd
+    - https://etcd.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/etcd-defrag-1.1.0/etcd-defrag-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: bumped image version to v3.5.12
     apiVersion: v2
@@ -26376,4 +26398,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-02-03T09:39:51.512879291Z"
+generated: "2024-02-03T09:52:45.608904263Z"
