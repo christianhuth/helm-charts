@@ -57,6 +57,9 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- with .Values.hostNetwork }}
+          hostNetwork: {{ . }}
+          {{- end }}
           containers:
             - name: {{ include "etcd-defrag.fullname" . }}
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
