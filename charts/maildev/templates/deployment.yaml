@@ -77,7 +77,7 @@ spec:
               value: {{ .Values.maildev.config.mailDirectory | quote }}
             # SMTP Settings
             - name: MAILDEV_SMTP_PORT
-              value: {{ .Values.services.smtp.port | quote }}
+              value: {{ .Values.services.smtp.podPort | quote }}
             {{- if .Values.maildev.config.smtp.hideExtensions }}
             - name: MAILDEV_HIDE_EXTENSIONS
               value: {{ .Values.maildev.config.smtp.hideExtensions | quote }}
@@ -123,7 +123,7 @@ spec:
                   key: web-password
             {{- end }}
             - name: MAILDEV_WEB_PORT
-              value: {{ .Values.services.web.port | quote }}
+              value: {{ .Values.services.web.podPort | quote }}
             {{- if .Values.extraEnv }}
             ## Additional Setings
             {{- range .Values.extraEnv }}
@@ -135,10 +135,10 @@ spec:
             {{- end }}
           ports:
             - name: web
-              containerPort: {{ .Values.services.web.port }}
+              containerPort: {{ .Values.services.web.podPort }}
               protocol: TCP
             - name: smtp
-              containerPort: {{ .Values.services.smtp.port }}
+              containerPort: {{ .Values.services.smtp.podPort }}
               protocol: TCP
           livenessProbe:
             httpGet:
