@@ -2,8 +2,8 @@ apiVersion: v2
 name: etcd-defrag
 description: A Helm chart for running a defragmentation CronJob for ETCD
 type: application
-version: 1.0.6
-appVersion: "3.5.10"
+version: 1.1.0
+appVersion: "3.5.12"
 home: https://github.com/christianknell/helm-charts
 icon: https://cdn.worldvectorlogo.com/logos/etcd-1.svg
 maintainers:
@@ -12,3 +12,7 @@ maintainers:
 sources:
   - https://github.com/bitnami/containers/tree/main/bitnami/etcd
   - https://etcd.io
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: support for running the cronjob in the host network
