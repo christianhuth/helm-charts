@@ -14042,6 +14042,50 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped helm dependency for mysql to 9.19.1
+    apiVersion: v2
+    appVersion: 3.6.4
+    created: "2024-02-10T11:22:01.147166538Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.5.7
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.19.1
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.12.10
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.3.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.17.1
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: f4079a38c834fe4c29aa71bf7fe54f008034d13ac8297222ebae05cb7af4323d
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-2.15.0/shlink-backend-2.15.0.tgz
+    version: 2.15.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped helm dependency for rabbitmq to 12.3.0
     apiVersion: v2
     appVersion: 3.6.4
@@ -26431,4 +26475,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-02-06T12:02:30.122704727Z"
+generated: "2024-02-10T11:22:01.148361876Z"
