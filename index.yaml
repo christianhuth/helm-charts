@@ -10026,6 +10026,54 @@ entries:
       artifacthub.io/category: security
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped chart version of mysql to 9.19.1
+      artifacthub.io/screenshots: |
+        - title: The login screen of Passbolt
+          url: https://help.passbolt.com/assets/img/help/2021/02/AN_login_v3.png
+        - title: There are two parts - the searchable non encrypted metadata called resource and the encrypted part containing called secret.
+          url: https://help.passbolt.com/assets/img/help/2021/02/LU_encrypted_description.png
+        - title: You can organize your secrets inside of folders.
+          url: https://help.passbolt.com/assets/img/help/2019/12/LU_folder_preview.png
+        - title: You can send an url of a given resource and share it with colleagues.
+          url: https://help.passbolt.com/assets/img/help/2019/02/LU_application_urls.png
+        - title: Includes a dark theme that can be used in place of the black on white default theme.
+          url: https://help.passbolt.com/assets/img/help/2018/06/LU_passwords_midgar.png
+        - title: It is possible for an admin to enable and configure multi-factor authentication providers.
+          url: https://help.passbolt.com/assets/img/help/2018/12/AD_mfa_org_settings_yubikey.png
+        - title: Administrators can manage subscriptions directly in the backend.
+          url: https://help.passbolt.com/assets/img/help/2021/05/AD_subscription_management.png
+    apiVersion: v2
+    created: "2024-02-10T11:32:26.584391955Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.19.1
+    - name: passbolt
+      repository: https://cnieg.github.io/helm-charts
+      version: 1.1.17
+    - name: proxysql
+      repository: https://christianknell.github.io/helm-charts/
+      version: 1.1.4
+    description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
+    digest: 20972ee2b0adf2639cef9efcc14e4f14ee9180235f6db76eb0fb9a3e894d8a86
+    home: https://github.com/christianknell/helm-charts
+    icon: https://avatars.githubusercontent.com/u/4386228?s=200&v=4
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: passbolt-ha
+    sources:
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    - https://github.com/cnieg/helm-charts/tree/master/charts/passbolt
+    - https://github.com/flachesis/proxysql/tree/master/charts/proxysql
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/passbolt-ha-1.11.0/passbolt-ha-1.11.0.tgz
+    version: 1.11.0
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped chart version of mysql to 9.14.1
       artifacthub.io/screenshots: |
         - title: The login screen of Passbolt
@@ -26513,4 +26561,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-02-10T11:26:55.796656808Z"
+generated: "2024-02-10T11:32:26.585394969Z"
