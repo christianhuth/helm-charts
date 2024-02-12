@@ -73,7 +73,7 @@ kutt:
 lxd-dashboard:
 - changed-files:
   - any-glob-to-any-file: charts/lxd-dashboard/*
-maildev: 
+maildev:
 - changed-files:
   - any-glob-to-any-file: charts/maildev/*
 node-access:
