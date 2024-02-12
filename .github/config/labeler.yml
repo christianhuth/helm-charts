@@ -1,15 +1,15 @@
 # Explanation: Add the label 'ci-cd' to a PR if any file within the '.github' folder is changed
 ci-cd:
 - changed-files:
-  - any-glob-to-any-file: .github/*
+  - any-glob-to-any-file: '.github/*'
 
 # charts
 ansible-semaphore:
 - changed-files:
-  - any-glob-to-any-file: charts/ansible-semaphore/*
+  - any-glob-to-any-file: 'charts/ansible-semaphore/*'
 baserow:
 - changed-files:
-  - any-glob-to-any-file: charts/baserow/*
+  - any-glob-to-any-file: 'charts/baserow/*'
 bluespice:
 - changed-files:
   - any-glob-to-any-file: charts/bluespice/*
