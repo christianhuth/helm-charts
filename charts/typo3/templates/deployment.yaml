@@ -50,11 +50,11 @@ spec:
           volumeMounts:
           {{- if .Values.persistence.fileadmin.enabled }}
             - name: fileadmin
-              mountPath: /fileadmin
+              mountPath: /var/www/html/fileadmin
           {{- end }}
           {{- if .Values.persistence.typo3conf.enabled }}
             - name: typo3conf
-              mountPath: /typo3conf
+              mountPath: /var/www/html/typo3conf
           {{- end }}
           {{- end }}
       {{- with .Values.nodeSelector }}
