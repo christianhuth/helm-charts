@@ -54,14 +54,14 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /_health
+              path: /_health/
               port: {{ .Values.frontend.service.port }}
             initialDelaySeconds: 5
             periodSeconds: 5
             successThreshold: 1
           readinessProbe:
             httpGet:
-              path: /_health
+              path: /_health/
               port: {{ .Values.frontend.service.port }}
             initialDelaySeconds: 5
             periodSeconds: 5

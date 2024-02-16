@@ -561,9 +561,9 @@ config:
   # -- Controls how many application snapshots can be created per group.
   maxSnapshotsPerGroup: "-1"
   # -- The publicly accessible URL of the backend. Should include the port if non-standard.
-  publicBackendUrl: ""
+  publicBackendUrl: "http://localhost:8000"
   # -- The publicly accessible URL of the frontend. Should include the port if non-standard.
-  publicFrontendUrl: ""
+  publicFrontendUrl: "http://localhost:3000"
 
 postgresql:
   # -- enable PostgreSQL™ subchart from Bitnami
