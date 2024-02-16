@@ -102,10 +102,9 @@ spec:
           livenessProbe:
             exec:
               command:
-                - curl
-                - --fail
-                - --silent
-                - http://localhost:{{ .Values.backend.asgi.service.port }}/api/_health/
+                - "/bin/bash"
+                - "-c"
+                - "/baserow/backend/docker/docker-entrypoint.sh backend-healthcheck"
             initialDelaySeconds: 5
             periodSeconds: 5
             timeoutSeconds: 5
@@ -113,10 +112,9 @@ spec:
           readinessProbe:
             exec:
               command:
-                - curl
-                - --fail
-                - --silent
-                - http://localhost:{{ .Values.backend.asgi.service.port }}/api/_health/
+                - "/bin/bash"
+                - "-c"
+                - "/baserow/backend/docker/docker-entrypoint.sh backend-healthcheck"
             initialDelaySeconds: 5
             periodSeconds: 5
             timeoutSeconds: 5

@@ -1,50 +1,144 @@
 # Explanation: Add the label 'ci-cd' to a PR if any file within the '.github' folder is changed
-ci-cd: .github/*
+ci-cd:
+- changed-files:
+  - any-glob-to-any-file: '.github/*'
 
 # charts
-ansible-semaphore: charts/ansible-semaphore/*
-baserow: charts/baserow/*
-bluespice: charts/bluespice/*
-countly: charts/countly/*
-cusdis: charts/cusdis/*
-dasherr: charts/dasherr/*
-docker_stats_exporter: charts/docker_stats_exporter/*
-ecs-exporter: charts/ecs-exporter/*
-etcd-defrag: charts/etcd-defrag/*
-fathom: charts/fathom/*
-glances: charts/glances/*
-goaccess: charts/goaccess/*
-greenbone-ce: charts/greenbone-ce/*
-headwind-mdm: charts/headwind-mdm/*
-ipmi-exporter: charts/ipmi-exporter/*
-ipsec-exporter: charts/ipsec-exporter/*
-isso: charts/isso/*
-kateyes: charts/kateyes/*
-kirby: charts/kirby/*
-kubedoom: charts/kubedoom/*
-kube-ops-view: charts/kube-ops-view/*
-kutt: charts/kutt/*
-lxd-dashboard: charts/lxd-dashboard/*
-maildev: charts/maildev/*
-node-access: charts/node-access/*
-netcupscp-exporter: charts/netcupscp-exporter/*
-passbolt-ha: charts/passbolt-ha/*
-polr: charts/polr/*
-popeye: charts/popeye/*
-postal: charts/postal/*
-priority-classes: charts/priority-classes/*
-promlens: charts/promlens/*
-prometheus-pve-exporter: charts/prometheus-pve-exporter/*
-proxysql: charts/proxysql/*
-proxyweb: charts/proxyweb/*
-shlink-backend: charts/shlink-backend/*
-shlink-web: charts/shlink-web/*
-skooner: charts/skooner/*
-sloop: charts/sloop/*
-standardnotes: charts/standardnotes/*
-syncserver: charts/syncserver/*
-syncstorage-rs: charts/syncstorage-rs/*
-talkyard: charts/talkyard/*
-tenant-namespace: charts/tenant-namespace/*
-typo3: charts/typo3/*
-umami: charts/umami/*
+ansible-semaphore:
+- changed-files:
+  - any-glob-to-any-file: 'charts/ansible-semaphore/*'
+baserow:
+- changed-files:
+  - any-glob-to-any-file: 'charts/baserow/*'
+bluespice:
+- changed-files:
+  - any-glob-to-any-file: charts/bluespice/*
+countly:
+- changed-files:
+  - any-glob-to-any-file: charts/countly/*
+cusdis:
+- changed-files:
+  - any-glob-to-any-file: charts/cusdis/*
+dasherr:
+- changed-files:
+  - any-glob-to-any-file: charts/dasherr/*
+docker_stats_exporter:
+- changed-files:
+  - any-glob-to-any-file: charts/docker_stats_exporter/*
+ecs-exporter:
+- changed-files:
+  - any-glob-to-any-file: charts/ecs-exporter/*
+etcd-defrag:
+- changed-files:
+  - any-glob-to-any-file: charts/etcd-defrag/*
+fathom:
+- changed-files:
+  - any-glob-to-any-file: charts/fathom/*
+glances:
+- changed-files:
+  - any-glob-to-any-file: charts/glances/*
+goaccess:
+- changed-files:
+  - any-glob-to-any-file: charts/goaccess/*
+greenbone-ce:
+- changed-files:
+  - any-glob-to-any-file: charts/greenbone-ce/*
+headwind-mdm:
+- changed-files:
+  - any-glob-to-any-file: charts/headwind-mdm/*
+ipmi-exporter:
+- changed-files:
+  - any-glob-to-any-file: charts/ipmi-exporter/*
+ipsec-exporter:
+- changed-files:
+  - any-glob-to-any-file: charts/ipsec-exporter/*
+isso:
+- changed-files:
+  - any-glob-to-any-file: charts/isso/*
+kateyes:
+- changed-files:
+  - any-glob-to-any-file: charts/kateyes/*
+kirby:
+- changed-files:
+  - any-glob-to-any-file: charts/kirby/*
+kubedoom:
+- changed-files:
+  - any-glob-to-any-file: charts/kubedoom/*
+kube-ops-view:
+- changed-files:
+  - any-glob-to-any-file: charts/kube-ops-view/*
+kutt:
+- changed-files:
+  - any-glob-to-any-file: charts/kutt/*
+lxd-dashboard:
+- changed-files:
+  - any-glob-to-any-file: charts/lxd-dashboard/*
+maildev:
+- changed-files:
+  - any-glob-to-any-file: charts/maildev/*
+node-access:
+- changed-files:
+  - any-glob-to-any-file: charts/node-access/*
+netcupscp-exporter:
+- changed-files:
+  - any-glob-to-any-file: charts/netcupscp-exporter/*
+passbolt-ha:
+- changed-files:
+  - any-glob-to-any-file: charts/passbolt-ha/*
+polr:
+- changed-files:
+  - any-glob-to-any-file: charts/polr/*
+popeye:
+- changed-files:
+  - any-glob-to-any-file: charts/popeye/*
+postal:
+- changed-files:
+  - any-glob-to-any-file: charts/postal/*
+priority-classes:
+- changed-files:
+  - any-glob-to-any-file: charts/priority-classes/*
+promlens:
+- changed-files:
+  - any-glob-to-any-file: charts/promlens/*
+prometheus-pve-exporter:
+- changed-files:
+  - any-glob-to-any-file: charts/prometheus-pve-exporter/*
+proxysql:
+- changed-files:
+  - any-glob-to-any-file: charts/proxysql/*
+proxyweb:
+- changed-files:
+  - any-glob-to-any-file: charts/proxyweb/*
+shlink-backend:
+- changed-files:
+  - any-glob-to-any-file: charts/shlink-backend/*
+shlink-web:
+- changed-files:
+  - any-glob-to-any-file: charts/shlink-web/*
+skooner:
+- changed-files:
+  - any-glob-to-any-file: charts/skooner/*
+sloop:
+- changed-files:
+  - any-glob-to-any-file: charts/sloop/*
+standardnotes:
+- changed-files:
+  - any-glob-to-any-file: charts/standardnotes/*
+syncserver:
+- changed-files:
+  - any-glob-to-any-file: charts/syncserver/*
+syncstorage-rs:
+- changed-files:
+  - any-glob-to-any-file: charts/syncstorage-rs/*
+talkyard:
+- changed-files:
+  - any-glob-to-any-file: charts/talkyard/*
+tenant-namespace:
+- changed-files:
+  - any-glob-to-any-file: charts/tenant-namespace/*
+typo3:
+- changed-files:
+  - any-glob-to-any-file: charts/typo3/*
+umami:
+- changed-files:
+  - any-glob-to-any-file: charts/umami/*
