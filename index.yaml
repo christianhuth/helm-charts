@@ -14195,6 +14195,52 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped helm dependency for mariadb to 16.0.2
+        - kind: changed
+          description: bumped helm dependency for redis to 18.13.0
+    apiVersion: v2
+    appVersion: 3.7.3
+    created: "2024-02-16T22:09:09.837586954Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.0.2
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.19.1
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.12.10
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.11.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.13.0
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: c34c773ab60df778106abea15618b0b3b05c0cbb3d4e61a8680e9dea4904b640
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-backend-3.0.0/shlink-backend-3.0.0.tgz
+    version: 3.0.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped image version to 3.7.3
         - kind: changed
           description: bumped helm dependency for rabbitmq to 12.11.0
@@ -26823,4 +26869,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-02-16T12:44:16.805548014Z"
+generated: "2024-02-16T22:09:09.839152831Z"
