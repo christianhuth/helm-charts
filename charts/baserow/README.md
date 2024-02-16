@@ -266,3 +266,11 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```console
 helm install my-release -f values.yaml christianknell/baserow
 ```
+
+## Upgrading the Chart
+
+### To 2.0.0
+
+This major updates the Redis subchart to its newest major, 18.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) and [here](https://raw.githubusercontent.com/redis/redis/7.2/00-RELEASENOTES) you can find more information about the changes introduced in that version.
+
+Additionally it updates the PostgreSQL subchart to its newest major, 14.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1400) you can find more information about the changes introduced in that version.
