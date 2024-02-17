@@ -55,7 +55,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride                           | string | `""`                           | String to fully override `"shlink-web.fullname"`                                                                       |
 | image.pullPolicy                           | string | `"Always"`                     | image pull policy                                                                                                      |
 | image.repository                           | string | `"shlinkio/shlink-web-client"` | image repository                                                                                                       |
-| image.tag                                  | string | `"3.10.2"`                     | Overrides the image tag                                                                                                |
+| image.tag                                  | string | `"4.0.1"`                      | Overrides the image tag                                                                                                |
 | imagePullSecrets                           | list   | `[]`                           | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
 | ingress.annotations                        | object | `{}`                           |                                                                                                                        |
 | ingress.className                          | string | `""`                           |                                                                                                                        |
@@ -87,3 +87,9 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```console
 helm install my-release -f values.yaml christianknell/shlink-web
 ```
+
+## Upgrading the Chart
+
+### To 1.0.0
+
+This major updates the Docker Image of the Shlink Web Client to its newest major, 4.0.0. [Here](https://github.com/shlinkio/shlink-web-client/releases/tag/v4.0.0) you can find more information about the changes introduced in that version.

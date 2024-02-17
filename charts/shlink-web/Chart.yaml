@@ -2,8 +2,8 @@ apiVersion: v2
 name: shlink-web
 description: A  ReactJS-based progressive web application for Shlink.
 type: application
-version: 0.3.3
-appVersion: "3.10.2"
+version: 1.0.0
+appVersion: "4.0.1"
 home: https://github.com/christianknell/helm-charts
 icon: https://shlink.io/images/shlink-logo-blue.svg
 maintainers:
@@ -14,8 +14,8 @@ sources:
   - https://shlink.io
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: possibility to define labels on pods
+    - kind: changed
+      description: bumped image version to 4.0.1
   artifacthub.io/screenshots: |
     - title: Add a new link that should be shortened.
       url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/creation-form-after.png
