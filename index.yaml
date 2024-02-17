@@ -20357,6 +20357,37 @@ entries:
   shlink-web:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: bumped image version to 4.0.1
+      artifacthub.io/screenshots: |
+        - title: Add a new link that should be shortened.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/creation-form-after.png
+        - title: You can have an overview of all your shortened links.
+          url: https://shlink.io/images/shlink-web-client-placeholder.jpg
+        - title: For each link there are multiple statistical data collected and visualized.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/visits-after.png
+        - title: A typical architecture in which Shlink would be integrated.
+          url: https://shlink.io/images/architecture/shlink-architecture.png
+    apiVersion: v2
+    appVersion: 4.0.1
+    created: "2024-02-17T22:12:15.830316048Z"
+    description: A  ReactJS-based progressive web application for Shlink.
+    digest: f5528d3adcd15b797c648f070f25cb81ec8d8eeb842aa499645707c64db6c46c
+    home: https://github.com/christianknell/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianknell
+    name: shlink-web
+    sources:
+    - https://github.com/shlinkio/shlink-web-client
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianknell/helm-charts/releases/download/shlink-web-1.0.0/shlink-web-1.0.0.tgz
+    version: 1.0.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: possibility to define labels on pods
       artifacthub.io/screenshots: |
@@ -27187,4 +27218,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-02-17T21:59:56.004703233Z"
+generated: "2024-02-17T22:12:15.83145842Z"
