@@ -80,34 +80,59 @@ cronJob:
     # -- example region: "us-east-1"
     region: ""
   schedule: "* */1 * * *"
-  spinachConfiguration:
+  spinachConfiguration: {}
     # # A Popeye sample configuration file
     # popeye:
-    #   # Checks resources against reported metrics usage.
-    #   # If over/under these thresholds a sanitization warning will be issued.
-    #   # Your cluster must run a metrics-server for these to take place!
     #   allocations:
     #     cpu:
-    #       underPercUtilization: 200 # Checks if cpu is under allocated by more than 200% at current load.
-    #       overPercUtilization: 50   # Checks if cpu is over allocated by more than 50% at current load.
+    #       underPercUtilization: 200
+    #       overPercUtilization: 50
     #     memory:
-    #       underPercUtilization: 200 # Checks if mem is under allocated by more than 200% at current load.
-    #       overPercUtilization: 50   # Checks if mem is over allocated by more than 50% usage at current load.
-    #   # Configure node resources.
-    #   node:
-    #     # Limits set a cpu/mem threshold in % ie if cpu|mem > limit a lint warning is triggered.
-    #     limits:
-    #       # CPU checks if current CPU utilization on a node is greater than 90%.
-    #       cpu: 90
-    #       # Memory checks if current Memory utilization on a node is greater than 80%.
-    #       memory: 80
-    #   # Configure pod resources
-    #   pod:
-    #     # Restarts check the restarts count and triggers a lint warning if above threshold.
-    #     restarts:
-    #       3
-    #     # Check container resource utilization in percent.
-    #     # Issues a lint warning if about these threshold.
-    #     limits:
-    #       cpu: 80
-    #       memory: 75
+    #       underPercUtilization: 200
+    #       overPercUtilization: 50
+    #   # [!!NEW!!] Specify global exclusions for fqn, codes, labels, annotations
+    #   excludes:
+    #     global:
+    #       # Exclude kube-system ns for all linters.
+    #       fqns: [rx:^kube-system]
+    #       # Exclude these workload labels for all linters.
+    #       labels:
+    #         app: [blee, bozo]
+    #     # [!!NEW!!] Linters exclude section
+    #     linters:
+    #       # [!!NEW!!] use the R from GVR resource specification to name the linter
+    #       statefulsets:
+    #         # [!!NEW!!] Exclude codes via regexp ie skip 101, 1000,...
+    #         codes: ["rx:^10"]
+    #         instances:
+    #           # Skip scan for a particular FQN aka namespace/res-name
+    #           - fqns: [default/prom-alertmanager]
+    #             codes: [106]
+    #       pods:
+    #         codes: ["306", "rx:^11"]
+    #         instances:
+    #           - fqns: [rx:^default/prom]
+    #           - fqns: [rx:^default/graf]
+    #           # [!!NEW!!] Skip using either labels or annotations and/or specific codes
+    #           - labels:
+    #               app: [blee, blah, zorg]
+    #             codes: [300]
+    #           - fqns: [rx:^default/pappi]
+    #             codes: [300, 102, 306]
+    #             containers: [c1]
+    #   resources:
+    #     node:
+    #       limits:
+    #         cpu: 90
+    #         memory: 80
+    #     pod:
+    #       limits:
+    #         cpu: 80
+    #         memory: 75
+    #       restarts: 3
+    #   overrides:
+    #     - code: 1502
+    #       severity: 3
+    #   registries:
+    #     - quay2.io
+    #     - docker1.io
