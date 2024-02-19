@@ -242,10 +242,33 @@
         "umami": {
             "type": "object",
             "properties": {
+                "appSecret": {
+                    "type": "object",
+                    "properties": {
+                        "existingSecret": {
+                            "type": "string"
+                        },
+                        "secret": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "clientIpHeader": {
                     "type": "string"
                 },
+                "cloudMode": {
+                    "type": "string"
+                },
                 "collectApiEndpoint": {
+                    "type": "string"
+                },
+                "corsMaxAge": {
+                    "type": "string"
+                },
+                "debug": {
+                    "type": "string"
+                },
+                "disableBotCheck": {
                     "type": "string"
                 },
                 "disableLogin": {
@@ -257,25 +280,36 @@
                 "disableUpdates": {
                     "type": "string"
                 },
-                "forceSSL": {
+                "enableTestConsole": {
                     "type": "string"
                 },
-                "hash": {
-                    "type": "object",
-                    "properties": {
-                        "existingSecret": {
-                            "type": "string"
-                        },
-                        "salt": {
-                            "type": "string"
-                        }
-                    }
+                "forceSSL": {
+                    "type": "string"
                 },
                 "hostname": {
                     "type": "string"
                 },
+                "ignoreHostname": {
+                    "type": "string"
+                },
                 "ignoredIpAddresses": {
                     "type": "string"
+                },
+                "logQuery": {
+                    "type": "string"
+                },
+                "migration": {
+                    "type": "object",
+                    "properties": {
+                        "v1v2": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
                 },
                 "removeDisableLoginEnv": {
                     "type": "boolean"

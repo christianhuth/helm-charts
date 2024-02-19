@@ -170,12 +170,12 @@ Get the key for the database url
 {{- end -}}
 
 {{/*
-Get the name of the secret containing the hash salt
+Get the name of the secret containing the app secret
 */}}
-{{- define "umami.hash.secretName" -}}
-  {{- if .Values.umami.hash.existingSecret -}}
-    {{- printf "%s" (tpl .Values.umami.hash.existingSecret $) -}}
+{{- define "umami.appSecret.secretName" -}}
+  {{- if .Values.umami.appSecret.existingSecret -}}
+    {{- printf "%s" (tpl .Values.umami.appSecret.existingSecret $) -}}
   {{- else -}}
-      {{- printf "%s" (include "umami.fullname" .) -}}-hash
+      {{- printf "%s" (include "umami.fullname" .) -}}-app-secret
   {{- end -}}
 {{- end -}}

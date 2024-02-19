@@ -12,7 +12,7 @@ image:
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag
-  tag: "postgresql-v1.40.0"
+  tag: "postgresql-v2.9.0"
 
 # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
 imagePullSecrets: []
@@ -112,27 +112,45 @@ affinity: {}
 extraEnv: []
 
 umami:
+  appSecret:
+    # -- Name of an existing secret containing the app secret under the key app-secret.
+    existingSecret: ""
+    # -- A random string used to generate unique values.
+    secret: ""
   # -- HTTP header to check for the client's IP address. This is useful when you're behind a proxy that uses non-standard headers.
   clientIpHeader: ""
-  # -- Allows you to send metrics to a location different than the default /api/collect. This is to help you avoid some ad-blockers.
+  # -- Disables users, teams, and websites settings page.
+  cloudMode: "1"
+  # -- Allows you to send metrics to a location different than the default `/api/send`. This is to help you avoid some ad-blockers.
   collectApiEndpoint: ""
+  # -- How many seconds a CORS preflight should last. Default is 24 hours.
+  corsMaxAge: "86400"
+  # -- Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`.
+  debug: ""
+  # -- By default bots are excluded from statistics. This disables checking for bots.
+  disableBotCheck: "1"
   # -- Disables the login page for the application
   disableLogin: "1"
   # -- Umami collects completely anonymous telemetry data in order help improve the application. You can choose to disable this if you don't want to participate.
   disableTelemetry: "1"
   # -- Disables the check for new versions of Umami
   disableUpdates: "1"
+  # -- Enables the internal test page, {host}/console. Admin access is required. Users can manually fire pageviews and events to their websites.
+  enableTestConsole: "1"
   # -- This will redirect all requests from http to https in the Umami application. Note, this does not apply to the tracking script.
   forceSSL: "1"
-  hash:
-    # -- Name of an existing secret containing the hash salt under the key hash-salt
-    existingSecret: ""
-    # -- A random string used to generate unique values.
-    salt: ""
   # -- hostname under which Umami will be reached
-  hostname: ""
+  hostname: "0.0.0.0"
+  # -- This will do a DNS lookup on a hostname and the resulting IP address will be ignored. This can be a comma delimited list of hostnames.
+  ignoreHostname: ""
   # -- You can provide a comma-delimited list of IP address to exclude from data collection.
   ignoredIpAddresses: ""
+  # -- If you are running in development mode, this will log database queries to the console for debugging.
+  logQuery: "1"
+  migration:
+    v1v2:
+      # -- enable a job that migrates database structure from v1 to v2
+      enabled: false
   # -- setting this to true removes the environment variable DISABLE_LOGIN defined in `umami.disableLogin` from the deployment as this caused errors in some setups
   removeDisableLoginEnv: false
   # -- Removes the trailing slash from all incoming urls.
