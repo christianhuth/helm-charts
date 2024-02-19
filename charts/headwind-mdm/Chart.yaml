@@ -21,7 +21,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: bumped helm dependency for postgresql to 14.1.1
+      description: bumped helm dependency for postgresql to 14.1.3
   artifacthub.io/screenshots: |
     - title: Headwind MDM is a powerful Open Source platform to manage your Enterprise Android Devices.
       url: https://images.wondershare.com/drfone/article/2022/11/opensource-mdm-3.jpg
