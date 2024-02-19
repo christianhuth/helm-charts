@@ -1,0 +1,32 @@
+{{- if .Values.umami.migration.v1v2.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    "helm.sh/hook": "pre-install, pre-upgrade"
+  labels:
+    {{- include "umami.labels" . | nindent 4 }}
+  name: {{ include "umami.fullname" . }}-migration-v1-to-v2
+spec:
+  template:
+    metadata:
+      labels:
+        {{- include "umami.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: migrate-v1-to-v2
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - "/bin/sh"
+            - "-c"
+            - "npx @umami/migrate-v1-v2@latest"
+          env:
+            # Database Settings
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "umami.database.secretName" . | quote }}
+                  key: {{ include "umami.database.databaseUrlKey" . | quote }}
+      restartPolicy: OnFailure
+{{- end }}
