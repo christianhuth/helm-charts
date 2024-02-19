@@ -60,11 +60,11 @@ The command removes all the Kubernetes components associated with the chart and 
 | cronJob.s3.endpoint                         | string | `""`                                           | example endpoint: "https://s3.us-east-1.amazonaws.com"                                                                          |
 | cronJob.s3.region                           | string | `""`                                           | example region: "us-east-1"                                                                                                     |
 | cronJob.schedule                            | string | `"* */1 * * *"`                                |                                                                                                                                 |
-| cronJob.spinachConfiguration                | string | `nil`                                          |                                                                                                                                 |
+| cronJob.spinachConfiguration                | string | `""`                                           |                                                                                                                                 |
 | fullnameOverride                            | string | `""`                                           | String to fully override `"popeye.fullname"`                                                                                    |
 | image.pullPolicy                            | string | `"Always"`                                     | image pull policy                                                                                                               |
 | image.repository                            | string | `"derailed/popeye"`                            | image repository                                                                                                                |
-| image.tag                                   | string | `"v0.11.3"`                                    | Overrides the image tag                                                                                                         |
+| image.tag                                   | string | `"v0.20.0"`                                    | Overrides the image tag                                                                                                         |
 | imagePullSecrets                            | list   | `[]`                                           | If defined, uses a Secret to pull an image from a private Docker registry or repository.                                        |
 | nameOverride                                | string | `""`                                           | Provide a name in place of `popeye`                                                                                             |
 | nodeSelector                                | object | `{}`                                           | Node labels for pod assignment                                                                                                  |
@@ -84,3 +84,9 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```console
 helm install my-release -f values.yaml christianknell/popeye
 ```
+
+## Upgrading the Chart
+
+### To 2.0.0
+
+This major upgrades the Docker Image to v0.20.0. This new version contains breaking changes in the SpinachYAML configuration. See [here](SpinachYAML configuration ) for more information.
