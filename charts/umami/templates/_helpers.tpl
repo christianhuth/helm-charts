@@ -48,6 +48,9 @@ Selector labels
 {{- define "umami.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "umami.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+{{- with .Values.podLabels }}
+{{ toYaml . }}
+{{- end }}
 {{- end }}
 
 {{/*
