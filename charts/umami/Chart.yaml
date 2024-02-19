@@ -28,6 +28,10 @@ annotations:
       description: bumped image version to v2.9.0
     - kind: changed
       description: environment variable HASH_SALT is now called APP_SECRET. Values have been moved to `umami.appSecret`
+    - kind: added
+      description: support for new environment variables of Umami v2
+    - kind: added
+      description: database migration job
   artifacthub.io/screenshots: |
     - title: Umami measures just the important metrics that you care about and everything is displayed on a single, easy to browse page.
       url: https://umami.is/images/feature-website-stats.png
