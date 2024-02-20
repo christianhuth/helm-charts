@@ -68,7 +68,7 @@
                     "type": "string"
                 },
                 "spinachConfiguration": {
-                    "type": "null"
+                    "type": "object"
                 }
             }
         },

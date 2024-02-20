@@ -58,7 +58,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride                           | string | `""`                       | String to fully override `"shlink-backend.fullname"`                                                                   |
 | image.pullPolicy                           | string | `"Always"`                 | image pull policy                                                                                                      |
 | image.repository                           | string | `"shlinkio/shlink"`        | image repository                                                                                                       |
-| image.tag                                  | string | `"3.6.4"`                  | Overrides the image tag                                                                                                |
+| image.tag                                  | string | `"3.7.3"`                  | Overrides the image tag                                                                                                |
 | imagePullSecrets                           | list   | `[]`                       | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
 | ingress.annotations                        | object | `{}`                       |                                                                                                                        |
 | ingress.className                          | string | `""`                       |                                                                                                                        |
@@ -77,7 +77,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | mysql.enabled                              | bool   | `false`                    |                                                                                                                        |
 | nameOverride                               | string | `""`                       | Provide a name in place of `shlink-backend`                                                                            |
 | nodeSelector                               | object | `{}`                       | Node labels for pod assignment                                                                                         |
-| podAnnotations                             | object | `{}`                       | Annotations to be added to exporter pods                                                                               |
+| podAnnotations                             | object | `{}`                       | Annotations to be added to pods                                                                                        |
+| podLabels                                  | object | `{}`                       | Labels to be added to pods                                                                                             |
 | podSecurityContext                         | object | `{}`                       | pod-level security context                                                                                             |
 | postgresql.auth.database                   | string | `"shlink"`                 |                                                                                                                        |
 | postgresql.auth.password                   | string | `"shlink"`                 |                                                                                                                        |
@@ -107,6 +108,16 @@ helm install my-release -f values.yaml christianknell/shlink-backend
 
 ## Upgrading the Chart
 
+### To 4.0.0
+
+This major updates the PostgreSQL subchart to its newest major, 14.0.0. [Here](https://github.com/bitnami/charts/tree/master/bitnami/postgresql#to-1400) you can find more information about the changes introduced in that version.
+
+### To 3.0.0
+
+This major updates the Redis subchart to its newest major, 18.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) and [here](https://raw.githubusercontent.com/redis/redis/7.2/00-RELEASENOTES) you can find more information about the changes introduced in that version.
+
+Additionally it updates the MariaDB subchart to its newest major, 16.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#to-1600) you can find more information about the changes introduced in that version.
+
 ### To 2.0.0
 
 This major updates the RabbitMQ subchart to its newest major, 12.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/rabbitmq#upgrading) and [here](https://www.rabbitmq.com/upgrade.html) you can find more information about the changes introduced in that version.
@@ -116,7 +127,3 @@ This major updates the RabbitMQ subchart to its newest major, 12.0.0. [Here](htt
 This major updates the PostgreSQL subchart to its newest major, 12.0.0. [Here](https://github.com/bitnami/charts/tree/master/bitnami/postgresql#to-1200) you can find more information about the changes introduced in that version.
 
 Additionally it updates the RabbitMQ subchart to its newest major, 11.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/rabbitmq#to-1100) you can find more information about the changes introduced in that version.
-
----
-
-Autogenerated from chart metadata using [helm-docs v1.11.0](https://github.com/norwoodj/helm-docs/releases/v1.11.0)

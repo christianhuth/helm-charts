@@ -53,6 +53,10 @@ helm install my-release -f values.yaml christianknell/kutt
 
 ## Upgrading the Chart
 
+### 4.0.0
+
+This major updates the PostgreSQL subchart to its newest major, 14.0.0. [Here](https://github.com/bitnami/charts/tree/master/bitnami/postgresql#to-1400) you can find more information about the changes introduced in that version.
+
 ### 3.0.0
 
 This major updates the redis subchart to its newest major, 18.0.4. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#to-1800) you can find more information about the changes introduced in that version.
@@ -82,5 +86,3 @@ This major updates the way you define environment variables.
 ### 1.0.0
 
 This major updates the PostgreSQL subchart to its newest major, 12.0.0. [Here](https://github.com/bitnami/charts/tree/master/bitnami/postgresql#to-1200) you can find more information about the changes introduced in that version.
-
-{{ template "helm-docs.versionFooter" . }}

@@ -51,4 +51,8 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 helm install my-release -f values.yaml christianknell/popeye
 ```
 
-{{ template "helm-docs.versionFooter" . }}
+## Upgrading the Chart
+
+### To 2.0.0
+
+This major upgrades the Docker Image to v0.20.0. This new version contains breaking changes in the SpinachYAML configuration. See [here](SpinachYAML configuration ) for more information.

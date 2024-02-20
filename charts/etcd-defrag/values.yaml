@@ -10,7 +10,7 @@ image:
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag
-  tag: "3.5.10"
+  tag: "3.5.12"
 
 # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
 imagePullSecrets: []
@@ -65,6 +65,9 @@ affinity: {}
 
 # -- additional environment variables to be added to the pods
 extraEnv: []
+
+# -- specify if the CronJob should run on the hostNetwork
+hostNetwork: false
 
 defrag:
   # -- create a CronJob for defragmentation

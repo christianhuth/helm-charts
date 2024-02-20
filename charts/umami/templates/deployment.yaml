@@ -42,13 +42,30 @@ spec:
                   name: {{ include "umami.database.secretName" . | quote }}
                   key: {{ include "umami.database.databaseUrlKey" . | quote }}
             # Umami Settings
+            - name: APP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "umami.appSecret.secretName" . | quote }}
+                  key: app-secret
             {{- if .Values.umami.clientIpHeader }}
             - name: CLIENT_IP_HEADER
               value: {{ .Values.umami.clientIpHeader | quote }}
             {{- end }}
+            {{- if .Values.umami.cloudMode }}
+            - name: CLOUD_MODE
+              value: {{ .Values.umami.cloudMode | quote }}
+            {{- end }}
             {{- if .Values.umami.collectApiEndpoint }}
             - name: COLLECT_API_ENDPOINT
               value: {{ .Values.umami.collectApiEndpoint | quote }}
+            {{- end }}
+            {{- if .Values.umami.corsMaxAge }}
+            - name: CORS_MAX_AGE
+              value: {{ .Values.umami.corsMaxAge | quote }}
+            {{- end }}
+            {{- if .Values.umami.disableBotCheck }}
+            - name: DISABLE_BOT_CHECK
+              value: {{ .Values.umami.disableBotCheck | quote }}
             {{- end }}
             {{- if not .Values.umami.removeDisableLoginEnv }}
             - name: DISABLE_LOGIN
@@ -60,18 +77,21 @@ spec:
               value: {{ .Values.umami.disableUpdates | quote }}
             - name: FORCE_SSL
               value: {{ .Values.umami.forceSSL | quote }}
-            - name: HASH_SALT
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "umami.hash.secretName" . | quote }}
-                  key: hash-salt
             {{- if .Values.umami.hostname }}
             - name: HOSTNAME
               value: {{ .Values.umami.hostname | quote }}
             {{- end }}
+            {{- if .Values.umami.ignoreHostname }}
+            - name: IGNORE_HOSTNAME
+              value: {{ .Values.umami.ignoreHostname | quote }}
+            {{- end }}
             {{- if .Values.umami.ignoredIpAddresses }}
             - name: IGNORE_IP
               value: {{ .Values.umami.ignoredIpAddresses | quote }}
+            {{- end }}
+            {{- if .Values.umami.logQuery }}
+            - name: LOG_QUERY
+              value: {{ .Values.umami.logQuery | quote }}
             {{- end }}
             - name: PORT
               value: {{ .Values.service.port | quote }}

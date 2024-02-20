@@ -65,13 +65,17 @@ services:
   web:
     # -- Kubernetes service type for the web GUI
     type: ClusterIP
-    # -- Kubernetes port to use for the web GUI
+    # -- Kubernetes service port to use for the web GUI
     port: 1080
+    # -- Pod port to use for the web GUI
+    podPort: 1080
   smtp:
     # -- Kubernetes service type for the SMTP server
     type: ClusterIP
-    # -- Kubernetes port to use for the internal SMTP server
+    # -- Kubernetes service port to use for the internal SMTP server
     port: 1025
+    # -- Pod port to use for the internal SMTP server
+    podPort: 1025
     # -- You can set the node port for the external SMTP server that should be used or leave it blank to get a random node port. Only active if `services.smtp.type == NodePort`
     nodePort:
 
