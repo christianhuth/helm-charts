@@ -5,14 +5,14 @@ This Helm Repository contains Helm Charts for deploying various applications int
 ### Add the Repository
 
 ```
-helm repo add christianknell https://christianknell.github.io/helm-charts/
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 ```
 
 ### Search the Repository
 
 ```
-helm search repo christianknell
+helm search repo christianhuth
 ```
 
 ### Install a Helm Chart
@@ -22,24 +22,24 @@ helm search repo christianknell
 #### Using the default configuration
 
 ```
-helm install $release_name -n $namespace christianknell/$chart_name
+helm install $release_name -n $namespace christianhuth/$chart_name
 ```
 
 #### Using your own configuration file
 
 ```
-helm install $release_name -n $namespace -f values.yaml christianknell/$chart_name
+helm install $release_name -n $namespace -f values.yaml christianhuth/$chart_name
 ```
 
 #### Setting values from command-line
 
 ```
-helm install $release_name -n $namespace --set $key=$value christianknell/$chart_name
+helm install $release_name -n $namespace --set $key=$value christianhuth/$chart_name
 ```
 
 ### Issues
 
-If you experience any issues using these Helm Charts please raise an issue in the [Git Repository](https://github.com/christianknell/helm-charts/issues) or write me [christian@knell.it](mailto:christian@knell.it).
+If you experience any issues using these Helm Charts please raise an issue in the [Git Repository](https://github.com/christianhuth/helm-charts/issues) or write me [christian@knell.it](mailto:christian@knell.it).
 
 # About GitHub Pages
 
