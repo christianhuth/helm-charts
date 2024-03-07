@@ -2,17 +2,13 @@ apiVersion: v2
 name: syncserver
 description: Helm chart for Firefox Syncserver
 type: application
-version: 1.0.3
+version: 1.0.2
 appVersion: "latest"
-home: https://github.com/christianhuth/helm-charts
+home: https://github.com/christianknell/helm-charts
 icon: https://think.unblog.ch/wp-content/uploads/2019/05/Firefox_Sync.png
 maintainers:
-  - name: christianhuth
+  - name: christianknell
     email: christian@knell.it
 sources:
   - https://hub.docker.com/r/mozilla/syncserver/
   - https://github.com/mozilla-services/syncserver
-annotations:
-  artifacthub.io/changes: |
-    - kind: changed
-      description: URL and name of Helm repository
