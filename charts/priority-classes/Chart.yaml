@@ -2,11 +2,15 @@ apiVersion: v2
 name: priority-classes
 description: A Helm chart for creating Priority Classes. Already comes with some bundled classes.
 type: application
-version: 1.0.0
+version: 1.0.1
 appVersion: "1.0.0"
-home: https://github.com/christianknell/helm-charts
+home: https://github.com/christianhuth/helm-charts
 maintainers:
-  - name: christianknell
+  - name: christianhuth
     email: christian@knell.it
 sources:
   - https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: URL and name of Helm repository

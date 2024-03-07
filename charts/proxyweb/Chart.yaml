@@ -2,10 +2,14 @@ apiVersion: v2
 name: proxyweb
 description: A Helm chart for Kubernetes
 type: application
-version: 1.0.0
+version: 1.0.1
 appVersion: "latest"
-home: https://github.com/christianknell/helm-charts
+home: https://github.com/christianhuth/helm-charts
 maintainers: []
 sources:
   - https://github.com/edmodo/proxyweb/
 deprecated: true
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: URL and name of Helm repository
