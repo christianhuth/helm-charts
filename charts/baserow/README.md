@@ -5,9 +5,9 @@ Baserow is an open source no-code database and Airtable alternative.
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://charts.christianhuth.de
+helm repo add christianknell https://christianknell.github.io/helm-charts
 helm repo update
-helm install my-release christianhuth/baserow
+helm install my-release christianknell/baserow
 ```
 
 ## Introduction
@@ -25,9 +25,9 @@ This chart bootstraps [Baserow](https://gitlab.com/bramw/baserow) on a [Kubernet
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://charts.christianhuth.de
+helm repo add christianknell https://christianknell.github.io/helm-charts
 helm repo update
-helm install my-release christianhuth/baserow
+helm install my-release christianknell/baserow
 ```
 
 These commands deploys Baserow on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
@@ -264,7 +264,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianhuth/baserow
+helm install my-release -f values.yaml christianknell/baserow
 ```
 
 ## Upgrading the Chart
