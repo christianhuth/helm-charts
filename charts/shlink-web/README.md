@@ -5,9 +5,9 @@ A ReactJS-based progressive web application for Shlink.
 ## TL;DR;
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://christianhuth.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/shlink-web
+helm install my-release christianhuth/shlink-web
 ```
 
 ## Introduction
@@ -23,9 +23,9 @@ This chart bootstraps the Web Client of the self-hosted URL shortener called [Sh
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://christianhuth.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/shlink-web
+helm install my-release christianhuth/shlink-web
 ```
 
 These commands deploy the Shlink Web Client on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
@@ -85,7 +85,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianknell/shlink-web
+helm install my-release -f values.yaml christianhuth/shlink-web
 ```
 
 ## Upgrading the Chart
