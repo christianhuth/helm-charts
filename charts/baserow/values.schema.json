@@ -71,6 +71,9 @@
                                 }
                             }
                         },
+                        "priorityClassName": {
+                            "type": "string"
+                        },
                         "replicaCount": {
                             "type": "integer"
                         },
@@ -189,6 +192,9 @@
                                     "type": "integer"
                                 }
                             }
+                        },
+                        "priorityClassName": {
+                            "type": "string"
                         },
                         "replicaCount": {
                             "type": "integer"
@@ -592,6 +598,9 @@
                                 }
                             }
                         },
+                        "priorityClassName": {
+                            "type": "string"
+                        },
                         "replicaCount": {
                             "type": "integer"
                         },
@@ -831,6 +840,9 @@
                             "type": "integer"
                         }
                     }
+                },
+                "priorityClassName": {
+                    "type": "string"
                 },
                 "replicaCount": {
                     "type": "integer"
