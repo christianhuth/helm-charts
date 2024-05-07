@@ -94,6 +94,9 @@
                                 }
                             }
                         },
+                        "selectorLabels": {
+                            "type": "object"
+                        },
                         "service": {
                             "type": "object",
                             "properties": {
@@ -212,6 +215,9 @@
                                     "type": "integer"
                                 }
                             }
+                        },
+                        "selectorLabels": {
+                            "type": "object"
                         },
                         "serviceAccount": {
                             "type": "object",
@@ -615,6 +621,9 @@
                                 }
                             }
                         },
+                        "selectorLabels": {
+                            "type": "object"
+                        },
                         "service": {
                             "type": "object",
                             "properties": {
@@ -854,6 +863,9 @@
                             "type": "integer"
                         }
                     }
+                },
+                "selectorLabels": {
+                    "type": "object"
                 },
                 "service": {
                     "type": "object",
