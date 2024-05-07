@@ -100,6 +100,18 @@ frontend:
     # -- Target Memory utilization percentage
     targetMemoryUtilizationPercentage: 80
 
+  # -- Configure liveness probe timeouts
+  livenessProbe:
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    successThreshold: 1
+
+  # -- Configure readiness probe timeouts
+  readinessProbe:
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    successThreshold: 1
+
   # -- Node labels for pod assignment
   nodeSelector: {}
 
@@ -199,6 +211,20 @@ backend:
       # -- Target Memory utilization percentage
       targetMemoryUtilizationPercentage: 80
 
+    # -- Configure liveness probe timeouts
+    livenessProbe:
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      timeoutSeconds: 5
+      successThreshold: 1
+
+    # -- Configure readiness probe timeouts
+    readinessProbe:
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      timeoutSeconds: 5
+      successThreshold: 1
+
     # -- Node labels for pod assignment
     nodeSelector: {}
 
@@ -278,6 +304,18 @@ backend:
       targetCPUUtilizationPercentage: 80
       # -- Target Memory utilization percentage
       targetMemoryUtilizationPercentage: 80
+
+    # -- Configure liveness probe timeouts
+    livenessProbe:
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 10
+
+    # -- Configure readiness probe timeouts
+    readinessProbe:
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 10
 
     # -- Node labels for pod assignment
     nodeSelector: {}
@@ -518,6 +556,20 @@ backend:
       targetCPUUtilizationPercentage: 80
       # -- Target Memory utilization percentage
       targetMemoryUtilizationPercentage: 80
+
+    # -- Configure liveness probe timeouts
+    livenessProbe:
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      timeoutSeconds: 5
+      successThreshold: 1
+
+    # -- Configure readiness probe timeouts
+    readinessProbe:
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      timeoutSeconds: 5
+      successThreshold: 1
 
     # -- Node labels for pod assignment
     nodeSelector: {}

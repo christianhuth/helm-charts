@@ -71,6 +71,9 @@
                                 }
                             }
                         },
+                        "priorityClassName": {
+                            "type": "string"
+                        },
                         "replicaCount": {
                             "type": "integer"
                         },
@@ -93,6 +96,9 @@
                                     "type": "integer"
                                 }
                             }
+                        },
+                        "selectorLabels": {
+                            "type": "object"
                         },
                         "service": {
                             "type": "object",
@@ -190,6 +196,9 @@
                                 }
                             }
                         },
+                        "priorityClassName": {
+                            "type": "string"
+                        },
                         "replicaCount": {
                             "type": "integer"
                         },
@@ -212,6 +221,9 @@
                                     "type": "integer"
                                 }
                             }
+                        },
+                        "selectorLabels": {
+                            "type": "object"
                         },
                         "serviceAccount": {
                             "type": "object",
@@ -592,6 +604,9 @@
                                 }
                             }
                         },
+                        "priorityClassName": {
+                            "type": "string"
+                        },
                         "replicaCount": {
                             "type": "integer"
                         },
@@ -614,6 +629,9 @@
                                     "type": "integer"
                                 }
                             }
+                        },
+                        "selectorLabels": {
+                            "type": "object"
                         },
                         "service": {
                             "type": "object",
@@ -832,6 +850,9 @@
                         }
                     }
                 },
+                "priorityClassName": {
+                    "type": "string"
+                },
                 "replicaCount": {
                     "type": "integer"
                 },
@@ -854,6 +875,9 @@
                             "type": "integer"
                         }
                     }
+                },
+                "selectorLabels": {
+                    "type": "object"
                 },
                 "service": {
                     "type": "object",

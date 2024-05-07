@@ -105,20 +105,20 @@ spec:
                 - "/bin/bash"
                 - "-c"
                 - "/baserow/backend/docker/docker-entrypoint.sh backend-healthcheck"
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 5
-            successThreshold: 1
+            initialDelaySeconds: {{ .Values.backend.asgi.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.backend.asgi.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.backend.asgi.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.backend.asgi.livenessProbe.successThreshold }}
           readinessProbe:
             exec:
               command:
                 - "/bin/bash"
                 - "-c"
                 - "/baserow/backend/docker/docker-entrypoint.sh backend-healthcheck"
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 5
-            successThreshold: 1
+            initialDelaySeconds: {{ .Values.backend.asgi.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.backend.asgi.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.backend.asgi.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.backend.asgi.readinessProbe.successThreshold }}
           {{- with .Values.backend.asgi.resources }}
           resources:
             {{- toYaml . | nindent 12 }}

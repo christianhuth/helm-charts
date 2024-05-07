@@ -100,18 +100,18 @@ spec:
                 - /bin/bash
                 - -c
                 - /baserow/backend/docker/docker-entrypoint.sh celery-worker-healthcheck
-            initialDelaySeconds: 10
-            timeoutSeconds: 10
-            periodSeconds: 10
+            initialDelaySeconds: {{ .Values.backend.celery.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.backend.celery.livenessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.backend.celery.livenessProbe.periodSeconds }}
           readinessProbe:
             exec:
               command:
                 - /bin/bash
                 - -c
                 - /baserow/backend/docker/docker-entrypoint.sh celery-worker-healthcheck
-            initialDelaySeconds: 10
-            timeoutSeconds: 10
-            periodSeconds: 10
+            initialDelaySeconds: {{ .Values.backend.celery.readinessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.backend.celery.readinessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.backend.celery.readinessProbe.periodSeconds }}
           {{- with .Values.backend.celery.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
@@ -194,18 +194,18 @@ spec:
                 - /bin/bash
                 - -c
                 - /baserow/backend/docker/docker-entrypoint.sh celery-exportworker-healthcheck
-            initialDelaySeconds: 10
-            timeoutSeconds: 10
-            periodSeconds: 10
+            initialDelaySeconds: {{ .Values.backend.celery.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.backend.celery.livenessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.backend.celery.livenessProbe.periodSeconds }}
           readinessProbe:
             exec:
               command:
                 - /bin/bash
                 - -c
                 - /baserow/backend/docker/docker-entrypoint.sh celery-exportworker-healthcheck
-            initialDelaySeconds: 10
-            timeoutSeconds: 10
-            periodSeconds: 10
+            initialDelaySeconds: {{ .Values.backend.celery.readinessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.backend.celery.readinessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.backend.celery.readinessProbe.periodSeconds }}
           {{- with .Values.backend.celery.resources }}
           resources:
             {{- toYaml . | nindent 12 }}

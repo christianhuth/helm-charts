@@ -107,20 +107,20 @@ spec:
                 - "/bin/bash"
                 - "-c"
                 - "/baserow/backend/docker/docker-entrypoint.sh backend-healthcheck"
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 5
-            successThreshold: 1
+            initialDelaySeconds: {{ .Values.backend.wsgi.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.backend.wsgi.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.backend.wsgi.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.backend.wsgi.livenessProbe.successThreshold }}
           readinessProbe:
             exec:
               command:
                 - "/bin/bash"
                 - "-c"
                 - "/baserow/backend/docker/docker-entrypoint.sh backend-healthcheck"
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 5
-            successThreshold: 1
+            initialDelaySeconds: {{ .Values.backend.wsgi.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.backend.wsgi.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.backend.wsgi.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.backend.wsgi.readinessProbe.successThreshold }}
           {{- with .Values.backend.wsgi.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
