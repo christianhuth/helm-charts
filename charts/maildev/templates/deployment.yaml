@@ -176,6 +176,9 @@ spec:
               mountPath: /etc/maildev
               subPath: auto-relay-rules.json
             {{- end }}
+            {{- if .Values.maildev.extraVolumeMounts }}
+            {{- toYaml .Values.maildev.extraVolumeMounts | nindent 12 }}
+            {{- end }}
       volumes:
         - name: data
           {{- if .Values.maildev.persistence.enabled }}
@@ -191,6 +194,9 @@ spec:
             items:
               - key: auto-relay-rules.json
                 path: auto-relay-rules.json
+        {{- end }}
+        {{- if .Values.maildev.extraVolumes }}
+        {{- toYaml .Values.maildev.extraVolumes | nindent 8 }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
