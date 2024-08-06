@@ -107,11 +107,11 @@ spec:
             - name: MAILDEV_OUTGOING_HOST
               value: {{ .Values.maildev.config.smtp.outgoing.host | quote }}
             {{- end }}
-            {{- if .Values.maildev.config.smtp.outgoing.host }}
+            {{- if .Values.maildev.config.smtp.outgoing.port }}
             - name: MAILDEV_OUTGOING_PORT
               value: {{ .Values.maildev.config.smtp.outgoing.port | quote }}
             {{- end }}
-            {{- if .Values.maildev.config.smtp.outgoing.host }}
+            {{- if .Values.maildev.config.smtp.outgoing.password }}
             - name: MAILDEV_OUTGOING_PASS
               valueFrom:
                 secretKeyRef:
