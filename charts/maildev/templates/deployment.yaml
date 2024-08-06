@@ -91,6 +91,18 @@ spec:
                   name: {{ include "maildev.smtp.incoming.secretName" . }}
                   key: smtp-incoming-password
             {{- end }}
+            {{- if .Values.maildev.config.smtp.incoming.secure }}
+            - name: MAILDEV_INCOMING_SECURE
+              value: {{ .Values.maildev.config.smtp.incoming.secure | quote }}
+            {{- end }}
+            {{- if .Values.maildev.config.smtp.incoming.cert }}
+            - name: MAILDEV_INCOMING_CERT
+              value: {{ .Values.maildev.config.smtp.incoming.cert | quote }}
+            {{- end }}
+            {{- if .Values.maildev.config.smtp.incoming.key }}
+            - name: MAILDEV_INCOMING_KEY
+              value: {{ .Values.maildev.config.smtp.incoming.key | quote }}
+            {{- end }}
             {{- if .Values.maildev.config.smtp.outgoing.host }}
             - name: MAILDEV_OUTGOING_HOST
               value: {{ .Values.maildev.config.smtp.outgoing.host | quote }}
