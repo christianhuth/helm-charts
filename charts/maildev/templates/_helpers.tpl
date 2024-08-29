@@ -95,6 +95,17 @@ Get the name of the secret containing the password for the incoming SMTP traffic
 {{- end -}}
 
 {{/*
+Get the name of the secret containing the cert and key for the incoming SMTP SSL traffic
+*/}}
+{{- define "maildev.smtp.incoming.tls.secretName" -}}
+  {{- if .Values.maildev.config.smtp.incoming.tls.existingSecret -}}
+    {{- printf "%s" .Values.maildev.config.smtp.incoming.tls.existingSecret -}}
+  {{- else -}}
+      {{- printf "%s" (include "maildev.fullname" .) -}}-smtp-incoming-tls
+  {{- end -}}
+{{- end -}}
+
+{{/*
 Get the name of the secret containing the password for the outgoing SMTP traffic
 */}}
 {{- define "maildev.smtp.outgoing.secretName" -}}
