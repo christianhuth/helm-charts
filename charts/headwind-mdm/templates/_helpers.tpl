@@ -62,6 +62,17 @@ Create the name of the service account to use
 {{- end }}
 
 {{/*
+Get the name of the secret containing the shared secret for the premium setup
+*/}}
+{{- define "headwind-mdm.sharedSecret.secretName" -}}
+  {{- if .Values.headwind.sharedSecret.existingSecret -}}
+    {{- printf "%s" (tpl .Values.headwind.sharedSecret.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "headwind-mdm.fullname" .) -}}-shared-secret
+  {{- end -}}
+{{- end -}}
+
+{{/*
 Return the hostname of the postgresql to use
 */}}
 {{- define "headwind-mdm.postgresql.hostname" -}}
