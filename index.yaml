@@ -13200,6 +13200,39 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped chart version of mysql to 9.23.0
+      artifacthub.io/screenshots: |
+        - title: Polr converts some long links into shorter ones.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/shortit-1024x346.png
+        - title: Polr provides a dashboard overview containing all the links ever created.
+          url: https://assets.hongkiat.com/uploads/polr-url-shorterner/02-polr-links-table.jpg
+        - title: Polr provides some statistical data about the shortened link.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/Screenshot-2018-1-31-Shorts-1024x1024.png
+    apiVersion: v2
+    appVersion: 2.3.0
+    created: "2024-08-29T14:07:47.768841222Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.23.0
+    description: Polr is a quick, modern, and open-source link shortener
+    digest: c46114944b88eab0f2bf0dd3cbcf489762233780baa9e9f862e5577885ba4e56
+    home: https://github.com/christianhuth/helm-charts
+    icon: http://docs.polrproject.org/en/latest/logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: polr
+    sources:
+    - https://github.com/cydrobolt/polr
+    - https://github.com/ajanvier/docker-polr
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/polr-1.12.0/polr-1.12.0.tgz
+    version: 1.12.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped chart version of mysql to 9.22.0
       artifacthub.io/screenshots: |
         - title: Polr converts some long links into shorter ones.
@@ -29223,4 +29256,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-29T14:02:35.991800282Z"
+generated: "2024-08-29T14:07:47.77004099Z"
