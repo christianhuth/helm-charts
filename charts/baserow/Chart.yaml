@@ -7,7 +7,7 @@ appVersion: "1.22.3"
 home: https://github.com/christianknell/helm-charts
 icon: https://baserow.io/img/favicon_192.png
 maintainers:
-  - name: christianknell
+  - name: christianhuth
     email: christian@knell.it
 sources:
   - https://gitlab.com/bramw/baserow
