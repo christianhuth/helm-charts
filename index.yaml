@@ -10510,6 +10510,41 @@ entries:
   maildev:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: support for incoming tls
+      artifacthub.io/screenshots: |
+        - title: SMTP server & web interface for viewing and testing emails during development.
+          url: https://maildev.github.io/maildev/assets/img/original/maildev-light.png
+        - title: Resizable viewport to test your emails at different sizes.
+          url: https://maildev.github.io/maildev/assets/img/original/responsive.png
+        - title: View email HTML, plain text, headers or raw source.
+          url: https://maildev.github.io/maildev/assets/img/original/formats.png
+        - title: Convenient search feature to quickly find any email.
+          url: https://maildev.github.io/maildev/assets/img/original/search.png
+        - title: View your emails in an eye-friendly dark interface.
+          url: https://maildev.github.io/maildev/assets/img/original/maildev-dark.png
+    apiVersion: v2
+    appVersion: 2.1.0
+    created: "2024-08-29T13:43:20.672551216Z"
+    description: MailDev is a simple way to test your emails during development with
+      an easy to use web interface.
+    digest: c8f548e59e3bc292dcf36c84407c83950f614f9c21c08f45777f12e39baf1179
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://avatars1.githubusercontent.com/u/26743469
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: maildev
+    sources:
+    - https://maildev.github.io/maildev
+    - https://github.com/maildev/maildev
+    - https://hub.docker.com/r/maildev/maildev
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/maildev-1.2.0/maildev-1.2.0.tgz
+    version: 1.2.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: URL and name of Helm repository
       artifacthub.io/screenshots: |
@@ -29132,4 +29167,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-29T13:38:42.22251427Z"
+generated: "2024-08-29T13:43:20.673665788Z"
