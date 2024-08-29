@@ -100,18 +100,18 @@ spec:
                 - /bin/bash
                 - -c
                 - /baserow/backend/docker/docker-entrypoint.sh celery-worker-healthcheck
-            initialDelaySeconds: {{ .Values.backend.celery.livenessProbe.initialDelaySeconds }}
-            timeoutSeconds: {{ .Values.backend.celery.livenessProbe.timeoutSeconds }}
-            periodSeconds: {{ .Values.backend.celery.livenessProbe.periodSeconds }}
+            initialDelaySeconds: {{ .Values.backend.celery.livenessProbe.initialDelaySeconds | quote }}
+            timeoutSeconds: {{ .Values.backend.celery.livenessProbe.timeoutSeconds | quote }}
+            periodSeconds: {{ .Values.backend.celery.livenessProbe.periodSeconds | quote }}
           readinessProbe:
             exec:
               command:
                 - /bin/bash
                 - -c
                 - /baserow/backend/docker/docker-entrypoint.sh celery-worker-healthcheck
-            initialDelaySeconds: {{ .Values.backend.celery.readinessProbe.initialDelaySeconds }}
-            timeoutSeconds: {{ .Values.backend.celery.readinessProbe.timeoutSeconds }}
-            periodSeconds: {{ .Values.backend.celery.readinessProbe.periodSeconds }}
+            initialDelaySeconds: {{ .Values.backend.celery.readinessProbe.initialDelaySeconds | quote }}
+            timeoutSeconds: {{ .Values.backend.celery.readinessProbe.timeoutSeconds | quote }}
+            periodSeconds: {{ .Values.backend.celery.readinessProbe.periodSeconds | quote }}
           {{- with .Values.backend.celery.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
