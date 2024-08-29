@@ -152,6 +152,15 @@ maildev:
         existingSecret: ""
         # -- SMTP password for incoming mail
         password: ""
+        tls:
+          # -- Use SMTP SSL for incoming emails
+          enabled: false
+          # -- Cert for incoming SSL
+          cert: ""
+          # -- Name of an existing TLS secret containing the cert and key for the incoming SMTP mail. If set `maildev.config.smtp.incoming.tls.cert` and `maildev.config.smtp.incoming.tls.key` will be ignored. Keys need to be `tls.crt` and `tls.key`.
+          existingSecret: ""
+          # -- Key for incoming SSL
+          key: ""
         # -- SMTP user for incoming mail
         username: ""
       outgoing:

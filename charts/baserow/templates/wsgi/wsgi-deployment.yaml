@@ -134,6 +134,9 @@ spec:
             - name: media
               mountPath: {{ .Values.backend.config.media.root | quote }}
           {{- end }}
+      {{- if .Values.backend.wsgi.priorityClassName }}
+      priorityClassName: {{ .Values.backend.wsgi.priorityClassName }}
+      {{- end }}
       {{- with .Values.backend.wsgi.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

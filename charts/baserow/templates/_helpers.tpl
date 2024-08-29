@@ -77,6 +77,9 @@ Selector labels for the frontend pods and deployment
 {{- define "baserow.frontend.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "baserow.frontend.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+{{- range $k, $v := .Values.frontend.selectorLabels }}
+{{ $k}}: {{ $v }}
+{{- end }}
 {{- end }}
 
 {{/*
@@ -130,6 +133,9 @@ Selector labels for the asgi backend
 {{- define "baserow.backend.asgi.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "baserow.backend.asgi.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+{{- range $k, $v := .Values.backend.asgi.selectorLabels }}
+{{ $k}}: {{ $v }}
+{{- end }}
 {{- end }}
 
 {{/*
@@ -176,6 +182,9 @@ Selector labels for the wsgi backend
 {{- define "baserow.backend.wsgi.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "baserow.backend.wsgi.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+{{- range $k, $v := .Values.backend.wsgi.selectorLabels }}
+{{ $k}}: {{ $v }}
+{{- end }}
 {{- end }}
 
 {{/*
@@ -280,6 +289,9 @@ Selector labels for the celery workers
 {{- define "baserow.backend.celery.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "baserow.backend.celery.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+{{- range $k, $v := .Values.backend.celery.selectorLabels }}
+{{ $k}}: {{ $v }}
+{{- end }}
 {{- end }}
 
 {{/*
