@@ -5,9 +5,9 @@ A Helm chart for Kubedoom
 ## TL;DR;
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
-helm install my-release christianknell/kubedoom
+helm install my-release christianhuth/kubedoom
 ```
 
 ## Introduction
@@ -25,9 +25,9 @@ This chart bootstraps [Kubedoom](https://github.com/storax/kubedoom) on a [Kuber
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
-helm install my-release christianknell/kubedoom
+helm install my-release christianhuth/kubedoom
 ```
 
 These commands deploy Kubedoom on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
@@ -103,5 +103,5 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianknell/kubedoom
+helm install my-release -f values.yaml christianhuth/kubedoom
 ```
