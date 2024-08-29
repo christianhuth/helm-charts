@@ -51,6 +51,23 @@
                         "imagePullSecrets": {
                             "type": "array"
                         },
+                        "livenessProbe": {
+                            "type": "object",
+                            "properties": {
+                                "initialDelaySeconds": {
+                                    "type": "integer"
+                                },
+                                "periodSeconds": {
+                                    "type": "integer"
+                                },
+                                "successThreshold": {
+                                    "type": "integer"
+                                },
+                                "timeoutSeconds": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
                         "nodeSelector": {
                             "type": "object"
                         },
@@ -71,8 +88,22 @@
                                 }
                             }
                         },
-                        "priorityClassName": {
-                            "type": "string"
+                        "readinessProbe": {
+                            "type": "object",
+                            "properties": {
+                                "initialDelaySeconds": {
+                                    "type": "integer"
+                                },
+                                "periodSeconds": {
+                                    "type": "integer"
+                                },
+                                "successThreshold": {
+                                    "type": "integer"
+                                },
+                                "timeoutSeconds": {
+                                    "type": "integer"
+                                }
+                            }
                         },
                         "replicaCount": {
                             "type": "integer"
@@ -96,9 +127,6 @@
                                     "type": "integer"
                                 }
                             }
-                        },
-                        "selectorLabels": {
-                            "type": "object"
                         },
                         "service": {
                             "type": "object",
@@ -176,6 +204,20 @@
                         "imagePullSecrets": {
                             "type": "array"
                         },
+                        "livenessProbe": {
+                            "type": "object",
+                            "properties": {
+                                "initialDelaySeconds": {
+                                    "type": "integer"
+                                },
+                                "periodSeconds": {
+                                    "type": "integer"
+                                },
+                                "timeoutSeconds": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
                         "nodeSelector": {
                             "type": "object"
                         },
@@ -196,8 +238,19 @@
                                 }
                             }
                         },
-                        "priorityClassName": {
-                            "type": "string"
+                        "readinessProbe": {
+                            "type": "object",
+                            "properties": {
+                                "initialDelaySeconds": {
+                                    "type": "integer"
+                                },
+                                "periodSeconds": {
+                                    "type": "integer"
+                                },
+                                "timeoutSeconds": {
+                                    "type": "integer"
+                                }
+                            }
                         },
                         "replicaCount": {
                             "type": "integer"
@@ -221,9 +274,6 @@
                                     "type": "integer"
                                 }
                             }
-                        },
-                        "selectorLabels": {
-                            "type": "object"
                         },
                         "serviceAccount": {
                             "type": "object",
@@ -584,6 +634,23 @@
                         "imagePullSecrets": {
                             "type": "array"
                         },
+                        "livenessProbe": {
+                            "type": "object",
+                            "properties": {
+                                "initialDelaySeconds": {
+                                    "type": "integer"
+                                },
+                                "periodSeconds": {
+                                    "type": "integer"
+                                },
+                                "successThreshold": {
+                                    "type": "integer"
+                                },
+                                "timeoutSeconds": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
                         "nodeSelector": {
                             "type": "object"
                         },
@@ -604,8 +671,22 @@
                                 }
                             }
                         },
-                        "priorityClassName": {
-                            "type": "string"
+                        "readinessProbe": {
+                            "type": "object",
+                            "properties": {
+                                "initialDelaySeconds": {
+                                    "type": "integer"
+                                },
+                                "periodSeconds": {
+                                    "type": "integer"
+                                },
+                                "successThreshold": {
+                                    "type": "integer"
+                                },
+                                "timeoutSeconds": {
+                                    "type": "integer"
+                                }
+                            }
                         },
                         "replicaCount": {
                             "type": "integer"
@@ -629,9 +710,6 @@
                                     "type": "integer"
                                 }
                             }
-                        },
-                        "selectorLabels": {
-                            "type": "object"
                         },
                         "service": {
                             "type": "object",
@@ -830,6 +908,20 @@
                         }
                     }
                 },
+                "livenessProbe": {
+                    "type": "object",
+                    "properties": {
+                        "initialDelaySeconds": {
+                            "type": "integer"
+                        },
+                        "periodSeconds": {
+                            "type": "integer"
+                        },
+                        "successThreshold": {
+                            "type": "integer"
+                        }
+                    }
+                },
                 "nodeSelector": {
                     "type": "object"
                 },
@@ -850,8 +942,19 @@
                         }
                     }
                 },
-                "priorityClassName": {
-                    "type": "string"
+                "readinessProbe": {
+                    "type": "object",
+                    "properties": {
+                        "initialDelaySeconds": {
+                            "type": "integer"
+                        },
+                        "periodSeconds": {
+                            "type": "integer"
+                        },
+                        "successThreshold": {
+                            "type": "integer"
+                        }
+                    }
                 },
                 "replicaCount": {
                     "type": "integer"
@@ -875,9 +978,6 @@
                             "type": "integer"
                         }
                     }
-                },
-                "selectorLabels": {
-                    "type": "object"
                 },
                 "service": {
                     "type": "object",
