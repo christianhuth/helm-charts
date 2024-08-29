@@ -2,7 +2,7 @@ apiVersion: v2
 name: maildev
 description: MailDev is a simple way to test your emails during development with an easy to use web interface.
 type: application
-version: 1.1.2
+version: 1.2.0
 appVersion: "2.1.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://avatars1.githubusercontent.com/u/26743469
@@ -15,8 +15,8 @@ sources:
   - https://hub.docker.com/r/maildev/maildev
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: URL and name of Helm repository
+    - kind: added
+      description: support for incoming tls
   artifacthub.io/screenshots: |
     - title: SMTP server & web interface for viewing and testing emails during development.
       url: https://maildev.github.io/maildev/assets/img/original/maildev-light.png

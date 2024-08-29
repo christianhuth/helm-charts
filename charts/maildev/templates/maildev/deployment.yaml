@@ -91,15 +91,27 @@ spec:
                   name: {{ include "maildev.smtp.incoming.secretName" . }}
                   key: smtp-incoming-password
             {{- end }}
+            {{- if .Values.maildev.config.smtp.incoming.tls.enabled }}
+            - name: MAILDEV_INCOMING_SECURE
+              value: {{ true | quote }}
+            {{- end }}
+            {{- if .Values.maildev.config.smtp.incoming.tls.enabled }}
+            - name: MAILDEV_INCOMING_CERT
+              value: "/etc/maildev/tls.crt"
+            {{- end }}
+            {{- if .Values.maildev.config.smtp.incoming.key }}
+            - name: MAILDEV_INCOMING_KEY
+              value: "/etc/maildev/tls.key"
+            {{- end }}
             {{- if .Values.maildev.config.smtp.outgoing.host }}
             - name: MAILDEV_OUTGOING_HOST
               value: {{ .Values.maildev.config.smtp.outgoing.host | quote }}
             {{- end }}
-            {{- if .Values.maildev.config.smtp.outgoing.host }}
+            {{- if .Values.maildev.config.smtp.outgoing.port }}
             - name: MAILDEV_OUTGOING_PORT
               value: {{ .Values.maildev.config.smtp.outgoing.port | quote }}
             {{- end }}
-            {{- if .Values.maildev.config.smtp.outgoing.host }}
+            {{- if (include "maildev.smtp.outgoing.secretName" .) }}
             - name: MAILDEV_OUTGOING_PASS
               valueFrom:
                 secretKeyRef:
@@ -110,7 +122,7 @@ spec:
             - name: MAILDEV_OUTGOING_USER
               value: {{ .Values.maildev.config.smtp.outgoing.username | quote }}
             {{- end }}
-            # Web Settingss
+            # Web Settings
             {{- if .Values.maildev.config.web.username }}
             - name: MAILDEV_WEB_USER
               value: {{ .Values.maildev.config.web.username | quote }}
@@ -164,6 +176,14 @@ spec:
               mountPath: /etc/maildev
               subPath: auto-relay-rules.json
             {{- end }}
+            {{- if .Values.maildev.config.smtp.incoming.tls.enabled }}
+            - name: incoming-tls
+              mountPath: /etc/maildev
+              subPath: tls.crt
+            - name: incoming-tls
+              mountPath: /etc/maildev
+              subPath: tls.key
+            {{- end }}
       volumes:
         - name: data
           {{- if .Values.maildev.persistence.enabled }}
@@ -179,6 +199,11 @@ spec:
             items:
               - key: auto-relay-rules.json
                 path: auto-relay-rules.json
+        {{- end }}
+        {{- if .Values.maildev.config.smtp.incoming.tls.enabled }}
+        - name: incoming-tls
+          secret:
+            name: {{ include "maildev.smtp.incoming.tls.secretName" . }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
