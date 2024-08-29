@@ -27,7 +27,7 @@ annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
     - kind: changed
-      description: bumped Helm chart version of mysql to 9.23.0
+      description: bumped Helm chart version of proxysql to 1.1.5
   artifacthub.io/screenshots: |
     - title: The login screen of Passbolt
       url: https://help.passbolt.com/assets/img/help/2021/02/AN_login_v3.png
