@@ -26,6 +26,9 @@ frontend:
     runAsGroup: 9999
     runAsUser: 9999
 
+  # -- Pod priority class name
+  priorityClassName: ""
+
   # -- Number of replicas
   replicaCount: 1
 
@@ -150,6 +153,9 @@ backend:
       runAsGroup: 9999
       runAsUser: 9999
 
+    # -- Pod priority class name
+    priorityClassName: ""
+
     # -- Number of replicas
     replicaCount: 1
 
@@ -238,6 +244,9 @@ backend:
       fsGroup: 9999
       runAsGroup: 9999
       runAsUser: 9999
+
+    # -- Pod priority class name
+    priorityClassName: ""
 
     # -- Number of replicas
     replicaCount: 1
@@ -475,6 +484,9 @@ backend:
       fsGroup: 9999
       runAsGroup: 9999
       runAsUser: 9999
+
+    # -- Pod priority class name
+    priorityClassName: ""
 
     # -- Number of replicas
     replicaCount: 1
