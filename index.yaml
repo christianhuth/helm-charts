@@ -21705,6 +21705,37 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped image version to 4.1.2
+      artifacthub.io/screenshots: |
+        - title: Add a new link that should be shortened.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/creation-form-after.png
+        - title: You can have an overview of all your shortened links.
+          url: https://shlink.io/images/shlink-web-client-placeholder.jpg
+        - title: For each link there are multiple statistical data collected and visualized.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/visits-after.png
+        - title: A typical architecture in which Shlink would be integrated.
+          url: https://shlink.io/images/architecture/shlink-architecture.png
+    apiVersion: v2
+    appVersion: 4.1.2
+    created: "2024-08-29T14:02:35.990644567Z"
+    description: A  ReactJS-based progressive web application for Shlink.
+    digest: 63d361662bfdfa63855f46374b46ef2961cc5af3c79f29205aa73aaa6de3a87e
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-web
+    sources:
+    - https://github.com/shlinkio/shlink-web-client
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-web-1.1.0/shlink-web-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: URL and name of Helm repository
       artifacthub.io/screenshots: |
         - title: Add a new link that should be shortened.
@@ -29192,4 +29223,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-29T13:53:04.332552453Z"
+generated: "2024-08-29T14:02:35.991800282Z"
