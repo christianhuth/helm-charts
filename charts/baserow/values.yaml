@@ -112,6 +112,9 @@ frontend:
   # -- Affinity settings for pod assignment
   affinity: {}
 
+  # -- Additional labels to add to the pod
+  selectorLabels: {}
+
   # -- additional environment variables to be added to the pods
   extraEnv: []
 
@@ -214,6 +217,9 @@ backend:
     # -- Affinity settings for pod assignment
     affinity: {}
 
+    # -- Additional labels to add to the pod
+    selectorLabels: {}
+
     # -- additional environment variables to be added to the pods
     extraEnv: []
 
@@ -296,6 +302,9 @@ backend:
 
     # -- Affinity settings for pod assignment
     affinity: {}
+
+    # -- Additional labels to add to the pod
+    selectorLabels: {}
 
     # -- additional environment variables to be added to the pods
     extraEnv: []
@@ -539,6 +548,9 @@ backend:
 
     # -- Affinity settings for pod assignment
     affinity: {}
+
+    # -- Additional labels to add to the pod
+    selectorLabels: {}
 
     # -- additional environment variables to be added to the pods
     extraEnv: []
