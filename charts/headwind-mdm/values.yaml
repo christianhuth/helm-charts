@@ -62,6 +62,8 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
+  # -- ip to resolve public uri behind reverse proxy
+  ip: ""
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
@@ -113,6 +115,11 @@ headwind:
   hmdmVariant: "os"
   # -- Available values: en, ru (en by default)
   installLanguage: "en"
+  sharedSecret:
+    # -- An existing secret that contains the shared secret for a premium setup. If this is provided `headwind.sharedSecret.secretValue` is ignored. Key needs to be `shared-secret``.
+    existingSecret: ""
+    # -- The shared secret for a premium setup. Ignored if `headwind.sharedSecret.existingSecret` is provided.
+    secretValue: ""
 
 persistence:
   enabled: false
