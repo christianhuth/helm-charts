@@ -5,9 +5,9 @@ A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
 ## TL;DR;
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://christianhuth.github.io/helm-charts
 helm repo update
-helm install passbolt-ha christianknell/passbolt-ha
+helm install passbolt-ha christianhuth/passbolt-ha
 ```
 
 ## Introduction
@@ -23,9 +23,9 @@ This chart bootstraps [Passbolt](https://github.com/passbolt), [MYSQL by Bitnami
 To install the chart with the release name `passbolt-ha`:
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://christianhuth.github.io/helm-charts
 helm repo update
-helm install passbolt-ha christianknell/passbolt-ha
+helm install passbolt-ha christianhuth/passbolt-ha
 ```
 
 These commands deploy Skooner on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
@@ -120,7 +120,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install passbolt-ha -f values.yaml christianknell/passbolt-ha
+helm install passbolt-ha -f values.yaml christianhuth/passbolt-ha
 ```
 
 ### Setting up the database connection

@@ -5,9 +5,9 @@ TYPO3 — the Professional, Flexible Content Management System
 ## TL;DR;
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://christianhuth.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/typo3
+helm install my-release christianhuth/typo3
 ```
 
 ## Introduction
@@ -23,9 +23,9 @@ This chart bootstraps the Content Management System [TYPO3](https://github.com/T
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://christianhuth.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/typo3
+helm install my-release christianhuth/typo3
 ```
 
 These commands deploy typo3 on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
@@ -121,7 +121,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianknell/typo3
+helm install my-release -f values.yaml christianhuth/typo3
 ```
 
 ## Upgrading the Chart

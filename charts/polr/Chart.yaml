@@ -4,10 +4,10 @@ description: Polr is a quick, modern, and open-source link shortener
 type: application
 version: 1.11.0
 appVersion: "2.3.0"
-home: https://github.com/christianknell/helm-charts
+home: https://github.com/christianhuth/helm-charts
 icon: http://docs.polrproject.org/en/latest/logo.png
 maintainers:
-  - name: christianknell
+  - name: christianhuth
     email: christian@knell.it
 sources:
   - https://github.com/cydrobolt/polr
