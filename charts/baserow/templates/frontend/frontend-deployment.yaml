@@ -56,16 +56,16 @@ spec:
             httpGet:
               path: /_health/
               port: {{ .Values.frontend.service.port }}
-            initialDelaySeconds: {{ .Values.frontend.livenessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.frontend.livenessProbe.periodSeconds }}
-            successThreshold: {{ .Values.frontend.livenessProbe.successThreshold }}
+            initialDelaySeconds: {{ .Values.frontend.livenessProbe.initialDelaySeconds | quote }}
+            periodSeconds: {{ .Values.frontend.livenessProbe.periodSeconds | quote }}
+            successThreshold: {{ .Values.frontend.livenessProbe.successThreshold | quote }}
           readinessProbe:
             httpGet:
               path: /_health/
               port: {{ .Values.frontend.service.port }}
-            initialDelaySeconds: {{ .Values.frontend.readinessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.frontend.readinessProbe.periodSeconds }}
-            successThreshold: {{ .Values.frontend.readinessProbe.successThreshold }}
+            initialDelaySeconds: {{ .Values.frontend.readinessProbe.initialDelaySeconds | quote }}
+            periodSeconds: {{ .Values.frontend.readinessProbe.periodSeconds | quote }}
+            successThreshold: {{ .Values.frontend.readinessProbe.successThreshold | quote }}
           {{- with .Values.frontend.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
