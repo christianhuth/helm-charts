@@ -15397,6 +15397,52 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: bumped helm dependency for mariadb to 16.5.0
+        - kind: changed
+          description: bumped image version to 3.7.4
+    apiVersion: v2
+    appVersion: 3.7.4
+    created: "2024-08-29T13:14:03.559921807Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.5.0
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.22.0
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.1.3
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.12.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.14.0
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: b74b690b1c2e10a92f0337ca715e02ac98682812d5ff9f0c5661ef3511423052
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-backend-4.3.0/shlink-backend-4.3.0.tgz
+    version: 4.3.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped helm dependency for mariadb to 16.4.0
         - kind: changed
           description: bumped helm dependency for mysql to 9.22.0
@@ -28951,4 +28997,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-29T12:02:39.669430594Z"
+generated: "2024-08-29T13:14:03.561140478Z"
