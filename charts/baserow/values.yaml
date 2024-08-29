@@ -26,6 +26,9 @@ frontend:
     runAsGroup: 9999
     runAsUser: 9999
 
+  # -- Pod priority class name
+  priorityClassName: ""
+
   # -- Number of replicas
   replicaCount: 1
 
@@ -109,6 +112,9 @@ frontend:
   # -- Affinity settings for pod assignment
   affinity: {}
 
+  # -- Additional labels to add to the pod
+  selectorLabels: {}
+
   # -- additional environment variables to be added to the pods
   extraEnv: []
 
@@ -146,6 +152,9 @@ backend:
       fsGroup: 9999
       runAsGroup: 9999
       runAsUser: 9999
+
+    # -- Pod priority class name
+    priorityClassName: ""
 
     # -- Number of replicas
     replicaCount: 1
@@ -208,6 +217,9 @@ backend:
     # -- Affinity settings for pod assignment
     affinity: {}
 
+    # -- Additional labels to add to the pod
+    selectorLabels: {}
+
     # -- additional environment variables to be added to the pods
     extraEnv: []
 
@@ -232,6 +244,9 @@ backend:
       fsGroup: 9999
       runAsGroup: 9999
       runAsUser: 9999
+
+    # -- Pod priority class name
+    priorityClassName: ""
 
     # -- Number of replicas
     replicaCount: 1
@@ -287,6 +302,9 @@ backend:
 
     # -- Affinity settings for pod assignment
     affinity: {}
+
+    # -- Additional labels to add to the pod
+    selectorLabels: {}
 
     # -- additional environment variables to be added to the pods
     extraEnv: []
@@ -467,6 +485,9 @@ backend:
       runAsGroup: 9999
       runAsUser: 9999
 
+    # -- Pod priority class name
+    priorityClassName: ""
+
     # -- Number of replicas
     replicaCount: 1
 
@@ -527,6 +548,9 @@ backend:
 
     # -- Affinity settings for pod assignment
     affinity: {}
+
+    # -- Additional labels to add to the pod
+    selectorLabels: {}
 
     # -- additional environment variables to be added to the pods
     extraEnv: []
