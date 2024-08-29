@@ -5,9 +5,9 @@ Simple Kubernetes real-time dashboard and management.
 ## TL;DR;
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://christianhuth.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/skooner
+helm install my-release christianhuth/skooner
 ```
 
 ## Introduction
@@ -23,9 +23,9 @@ This chart bootstraps the Simple Kubernetes real-time dashboard and management t
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://christianhuth.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/skooner
+helm install my-release christianhuth/skooner
 ```
 
 These commands deploy Skooner on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
@@ -92,5 +92,5 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianknell/skooner
+helm install my-release -f values.yaml christianhuth/skooner
 ```

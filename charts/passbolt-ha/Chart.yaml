@@ -3,11 +3,11 @@ apiVersion: v2
 name: passbolt-ha
 description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
 type: application
-version: 1.11.0
-home: https://github.com/christianknell/helm-charts
+version: 1.11.1
+home: https://github.com/christianhuth/helm-charts
 icon: https://avatars.githubusercontent.com/u/4386228?s=200&v=4
 maintainers:
-  - name: christianknell
+  - name: christianhuth
     email: christian@knell.it
 sources:
   - https://github.com/bitnami/charts/tree/master/bitnami/mysql
@@ -21,13 +21,13 @@ dependencies:
     repository: https://cnieg.github.io/helm-charts
     version: 1.1.17
   - name: proxysql
-    repository: https://christianknell.github.io/helm-charts/
+    repository: https://charts.christianhuth.de
     version: 1.1.4
 annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
     - kind: changed
-      description: bumped chart version of mysql to 9.19.1
+      description: URL and name of Helm repository
   artifacthub.io/screenshots: |
     - title: The login screen of Passbolt
       url: https://help.passbolt.com/assets/img/help/2021/02/AN_login_v3.png
