@@ -100,16 +100,20 @@ frontend:
     # -- Target Memory utilization percentage
     targetMemoryUtilizationPercentage: 80
 
-  # -- Configure liveness probe timeouts
   livenessProbe:
+    # -- Initial delay seconds for livenessProbe
     initialDelaySeconds: 5
+    # -- Period seconds for livenessProbe
     periodSeconds: 5
+    # -- Success threshold for livenessProbe
     successThreshold: 1
 
-  # -- Configure readiness probe timeouts
   readinessProbe:
+    # -- Initial delay seconds for readinessProbe
     initialDelaySeconds: 5
+    # -- Period seconds for readinessProbe
     periodSeconds: 5
+    # -- Success threshold for readinessProbe
     successThreshold: 1
 
   # -- Node labels for pod assignment
@@ -211,19 +215,25 @@ backend:
       # -- Target Memory utilization percentage
       targetMemoryUtilizationPercentage: 80
 
-    # -- Configure liveness probe timeouts
     livenessProbe:
+      # -- Initial delay seconds for livenessProbe
       initialDelaySeconds: 5
+      # -- Period seconds for livenessProbe
       periodSeconds: 5
-      timeoutSeconds: 5
+      # -- Success threshold for livenessProbe
       successThreshold: 1
+      # -- Timeout seconds for livenessProbe
+      timeoutSeconds: 5
 
-    # -- Configure readiness probe timeouts
     readinessProbe:
+      # -- Initial delay seconds for readinessProbe
       initialDelaySeconds: 5
+      # -- Period seconds for readinessProbe
       periodSeconds: 5
-      timeoutSeconds: 5
+      # -- Success threshold for readinessProbe
       successThreshold: 1
+      # -- Timeout seconds for readinessProbe
+      timeoutSeconds: 5
 
     # -- Node labels for pod assignment
     nodeSelector: {}
@@ -305,16 +315,20 @@ backend:
       # -- Target Memory utilization percentage
       targetMemoryUtilizationPercentage: 80
 
-    # -- Configure liveness probe timeouts
     livenessProbe:
+      # -- Initial delay seconds for livenessProbe
       initialDelaySeconds: 10
+      # -- Period seconds for livenessProbe
       periodSeconds: 10
+      # -- Timeout seconds for livenessProbe
       timeoutSeconds: 10
 
-    # -- Configure readiness probe timeouts
     readinessProbe:
+      # -- Initial delay seconds for readinessProbe
       initialDelaySeconds: 10
+      # -- Period seconds for readinessProbe
       periodSeconds: 10
+      # -- Timeout seconds for readinessProbe
       timeoutSeconds: 10
 
     # -- Node labels for pod assignment
@@ -557,19 +571,25 @@ backend:
       # -- Target Memory utilization percentage
       targetMemoryUtilizationPercentage: 80
 
-    # -- Configure liveness probe timeouts
     livenessProbe:
+      # -- Initial delay seconds for livenessProbe
       initialDelaySeconds: 5
+      # -- Period seconds for livenessProbe
       periodSeconds: 5
-      timeoutSeconds: 5
+      # -- Success threshold for livenessProbe
       successThreshold: 1
+      # -- Timeout seconds for livenessProbe
+      timeoutSeconds: 5
 
-    # -- Configure readiness probe timeouts
     readinessProbe:
+      # -- Initial delay seconds for readinessProbe
       initialDelaySeconds: 5
+      # -- Period seconds for readinessProbe
       periodSeconds: 5
-      timeoutSeconds: 5
+      # -- Success threshold for readinessProbe
       successThreshold: 1
+      # -- Timeout seconds for readinessProbe
+      timeoutSeconds: 5
 
     # -- Node labels for pod assignment
     nodeSelector: {}
