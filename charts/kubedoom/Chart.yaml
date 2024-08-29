@@ -2,17 +2,20 @@
 apiVersion: v2
 name: kubedoom
 description: A Helm chart for Kubedoom
-version: 1.0.0
+version: 1.0.1
 type: application
 appVersion: "0.6.0"
-home: https://github.com/christianknell/helm-charts
+home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/storax/kubedoom/master/assets/doom.jpg
 maintainers:
-  - name: christianknell
+  - name: christianhuth
     email: christian@knell.it
 sources:
   - https://github.com/storax/kubedoom
 annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: URL and name of Helm repository
   artifacthub.io/screenshots: |
     - title: Kill pods inside your Kubernetes cluster by shooting them in Doom!
       url: https://github.com/storax/kubedoom/raw/master/assets/doom.jpg
