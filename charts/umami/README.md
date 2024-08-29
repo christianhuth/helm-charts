@@ -5,9 +5,9 @@ Umami is a simple, fast, privacy-focused alternative to Google Analytics.
 ## TL;DR;
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://christianhuth.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/umami
+helm install my-release christianhuth/umami
 ```
 
 ## Introduction
@@ -25,9 +25,9 @@ This chart bootstraps [Umami](https://github.com/umami-software/umami) on a [Kub
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://christianhuth.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/umami
+helm install my-release christianhuth/umami
 ```
 
 These commands deploy Umami on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
@@ -81,6 +81,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | nameOverride                                  | string | `""`                                                        | Provide a name in place of `umami`                                                                                                                                                                                                                                                               |
 | nodeSelector                                  | object | `{}`                                                        | Node labels for pod assignment                                                                                                                                                                                                                                                                   |
 | podAnnotations                                | object | `{}`                                                        | Annotations to be added to pods                                                                                                                                                                                                                                                                  |
+| podLabels                                     | object | `{}`                                                        | Labels to be added to pods                                                                                                                                                                                                                                                                       |
 | podSecurityContext                            | object | `{}`                                                        | pod-level security context                                                                                                                                                                                                                                                                       |
 | postgresql.auth.database                      | string | `"mychart"`                                                 | Name for a custom database to create                                                                                                                                                                                                                                                             |
 | postgresql.auth.password                      | string | `"mychart"`                                                 | Password for the custom user to create                                                                                                                                                                                                                                                           |
@@ -123,7 +124,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianknell/umami
+helm install my-release -f values.yaml christianhuth/umami
 ```
 
 ## Upgrading the Chart

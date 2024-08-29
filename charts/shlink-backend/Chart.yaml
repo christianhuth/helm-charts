@@ -4,10 +4,10 @@ description: A PHP-based self-hosted URL shortener that can be used to serve sho
 type: application
 version: 4.2.0
 appVersion: "3.7.3"
-home: https://github.com/christianknell/helm-charts
+home: https://github.com/christianhuth/helm-charts
 icon: https://shlink.io/images/shlink-logo-blue.svg
 maintainers:
-  - name: christianknell
+  - name: christianhuth
     email: christian@knell.it
 sources:
   - https://github.com/shlinkio/shlink

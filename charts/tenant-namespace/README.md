@@ -5,9 +5,9 @@ A Helm Chart to bootstrap a Namespace in a Multi-Tenancy setup
 ## TL;DR;
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://christianhuth.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/tenant-namespace
+helm install my-release christianhuth/tenant-namespace
 ```
 
 ## Introduction
@@ -23,9 +23,9 @@ This chart bootstraps a Namespace in a Multi-Tenancy cluster with all the requir
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://christianhuth.github.io/helm-charts
 helm repo update
-helm install my-release christianknell/tenant-namespace
+helm install my-release christianhuth/tenant-namespace
 ```
 
 These commands deploy the Namespace for the Tenant on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
@@ -93,5 +93,5 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianknell/tenant-namespace
+helm install my-release -f values.yaml christianhuth/tenant-namespace
 ```

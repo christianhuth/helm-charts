@@ -5,9 +5,9 @@ A Helm chart for bootstrapping kube-ops-view.
 ## TL;DR;
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
-helm install my-release christianknell/kube-ops-view
+helm install my-release christianhuth/kube-ops-view
 ```
 
 ## Introduction
@@ -25,9 +25,9 @@ This chart bootstraps the [Kubernetes Operational View](https://codeberg.org/hja
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
-helm install my-release christianknell/kube-ops-view
+helm install my-release christianhuth/kube-ops-view
 ```
 
 These commands deploy kube-ops-view on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
@@ -84,7 +84,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianknell/kube-ops-view
+helm install my-release -f values.yaml christianhuth/kube-ops-view
 ```
 
 ## Upgrading the Chart
