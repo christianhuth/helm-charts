@@ -24,8 +24,8 @@ dependencies:
 annotations:
   artifacthub.io/category: database
   artifacthub.io/changes: |
-    - kind: changed
-      description: bumped image version to 1.26.1
+    - kind: added
+      description: options to define liveness and readiness probe values
   artifacthub.io/screenshots: |
     - title: Create your own online database without technical experience.
       url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png

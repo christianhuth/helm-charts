@@ -105,20 +105,20 @@ spec:
                 - "/bin/bash"
                 - "-c"
                 - "/baserow/backend/docker/docker-entrypoint.sh backend-healthcheck"
-            initialDelaySeconds: {{ .Values.backend.asgi.livenessProbe.initialDelaySeconds | quote }}
-            periodSeconds: {{ .Values.backend.asgi.livenessProbe.periodSeconds | quote }}
-            timeoutSeconds: {{ .Values.backend.asgi.livenessProbe.timeoutSeconds | quote }}
-            successThreshold: {{ .Values.backend.asgi.livenessProbe.successThreshold | quote }}
+            initialDelaySeconds: {{ .Values.backend.asgi.livenessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.backend.asgi.livenessProbe.periodSeconds | int }}
+            timeoutSeconds: {{ .Values.backend.asgi.livenessProbe.timeoutSeconds | int }}
+            successThreshold: {{ .Values.backend.asgi.livenessProbe.successThreshold | int }}
           readinessProbe:
             exec:
               command:
                 - "/bin/bash"
                 - "-c"
                 - "/baserow/backend/docker/docker-entrypoint.sh backend-healthcheck"
-            initialDelaySeconds: {{ .Values.backend.asgi.readinessProbe.initialDelaySeconds | quote }}
-            periodSeconds: {{ .Values.backend.asgi.readinessProbe.periodSeconds | quote }}
-            timeoutSeconds: {{ .Values.backend.asgi.readinessProbe.timeoutSeconds | quote }}
-            successThreshold: {{ .Values.backend.asgi.readinessProbe.successThreshold | quote }}
+            initialDelaySeconds: {{ .Values.backend.asgi.readinessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.backend.asgi.readinessProbe.periodSeconds | int }}
+            timeoutSeconds: {{ .Values.backend.asgi.readinessProbe.timeoutSeconds | int }}
+            successThreshold: {{ .Values.backend.asgi.readinessProbe.successThreshold | int }}
           {{- with .Values.backend.asgi.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
