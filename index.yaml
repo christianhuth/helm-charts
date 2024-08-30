@@ -4,6 +4,45 @@ entries:
   - annotations:
       artifacthub.io/category: database
       artifacthub.io/changes: |
+        - kind: added
+          description: options to define liveness and readiness probe values
+      artifacthub.io/screenshots: |
+        - title: Create your own online database without technical experience.
+          url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
+        - title: With Baserow you decide how you want to structure everything. Whether you’re managing customers, products, airplanes or all of them.
+          url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
+        - title: Easily create custom plugins with our boilerplate or use third party ones.
+          url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
+    apiVersion: v2
+    appVersion: 1.26.1
+    created: "2024-08-30T09:09:33.041605621Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.3.3
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.19.4
+    description: Baserow is an open source no-code database and Airtable alternative.
+    digest: aaf2a3f749bd77bd0e717c1ba93d8ea4865c42c8a4abae70d69b90b52785028c
+    home: https://github.com/christianknell/helm-charts
+    icon: https://baserow.io/img/favicon_192.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: baserow
+    sources:
+    - https://gitlab.com/bramw/baserow
+    - https://baserow.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/baserow-2.4.1/baserow-2.4.1.tgz
+    version: 2.4.1
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
         - kind: changed
           description: bumped image version to 1.26.1
       artifacthub.io/screenshots: |
@@ -29705,4 +29744,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-30T08:36:34.799931566Z"
+generated: "2024-08-30T09:09:33.042720187Z"
