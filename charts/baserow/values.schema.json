@@ -88,6 +88,9 @@
                                 }
                             }
                         },
+                        "priorityClassName": {
+                            "type": "string"
+                        },
                         "readinessProbe": {
                             "type": "object",
                             "properties": {
@@ -104,8 +107,6 @@
                                     "type": "integer"
                                 }
                             }
-                        "priorityClassName": {
-                            "type": "string"
                         },
                         "replicaCount": {
                             "type": "integer"
@@ -243,6 +244,9 @@
                                 }
                             }
                         },
+                        "priorityClassName": {
+                            "type": "string"
+                        },
                         "readinessProbe": {
                             "type": "object",
                             "properties": {
@@ -256,8 +260,6 @@
                                     "type": "integer"
                                 }
                             }
-                        "priorityClassName": {
-                            "type": "string"
                         },
                         "replicaCount": {
                             "type": "integer"
@@ -681,6 +683,9 @@
                                 }
                             }
                         },
+                        "priorityClassName": {
+                            "type": "string"
+                        },
                         "readinessProbe": {
                             "type": "object",
                             "properties": {
@@ -697,8 +702,6 @@
                                     "type": "integer"
                                 }
                             }
-                        "priorityClassName": {
-                            "type": "string"
                         },
                         "replicaCount": {
                             "type": "integer"
@@ -957,6 +960,9 @@
                         }
                     }
                 },
+                "priorityClassName": {
+                    "type": "string"
+                },
                 "readinessProbe": {
                     "type": "object",
                     "properties": {
@@ -970,8 +976,6 @@
                             "type": "integer"
                         }
                     }
-                "priorityClassName": {
-                    "type": "string"
                 },
                 "replicaCount": {
                     "type": "integer"
