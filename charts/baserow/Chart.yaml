@@ -19,13 +19,15 @@ dependencies:
     condition: postgresql.enabled
   - name: redis
     repository: https://charts.bitnami.com/bitnami
-    version: 18.14.0
+    version: 18.19.4
     condition: redis.enabled
 annotations:
   artifacthub.io/category: database
   artifacthub.io/changes: |
     - kind: changed
       description: bumped helm dependency for postgresql to 14.3.3
+    - kind: changed
+      description: bumped helm dependency for redis to 18.19.4
   artifacthub.io/screenshots: |
     - title: Create your own online database without technical experience.
       url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
