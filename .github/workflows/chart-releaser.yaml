@@ -40,7 +40,7 @@ jobs:
       - name: Import GPG key
         run: |
           echo "${{ secrets.GPG_PRIVATE_KEY_BASE64 }}" | base64 -d | gpg --dearmor --output keyring.gpg
-          echo "${{ secrets.GPG_PASSPHRASE }}" > passphrase-file.txt
+          echo "${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}" > passphrase-file.txt
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
