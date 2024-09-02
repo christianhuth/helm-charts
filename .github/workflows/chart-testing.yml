@@ -12,6 +12,19 @@ on:
 
 jobs:
 
+  artifacthub-lint:
+    runs-on: ubuntu-latest
+    container:
+      image: artifacthub/ah
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Run ah lint
+        working-directory: ./charts
+        run: ah lint
+
   helm-lint:
     runs-on: ubuntu-latest
     steps:
