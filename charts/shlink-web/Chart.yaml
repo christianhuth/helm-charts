@@ -2,7 +2,7 @@ apiVersion: v2
 name: shlink-web
 description: A  ReactJS-based progressive web application for Shlink.
 type: application
-version: 1.1.0
+version: 1.1.1
 appVersion: "4.1.2"
 home: https://github.com/christianhuth/helm-charts
 icon: https://shlink.io/images/shlink-logo-blue.svg
@@ -14,8 +14,8 @@ sources:
   - https://shlink.io
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: bumped image version to 4.1.2
+    - kind: added
+      description: signing key to Chart.yaml
   artifacthub.io/screenshots: |
     - title: Add a new link that should be shortened.
       url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/creation-form-after.png
@@ -25,3 +25,6 @@ annotations:
       url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/visits-after.png
     - title: A typical architecture in which Shlink would be integrated.
       url: https://shlink.io/images/architecture/shlink-architecture.png
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key

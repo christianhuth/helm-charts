@@ -3,7 +3,7 @@ apiVersion: v2
 name: passbolt-ha
 description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
 type: application
-version: 1.13.0
+version: 1.13.1
 home: https://github.com/christianhuth/helm-charts
 icon: https://avatars.githubusercontent.com/u/4386228?s=200&v=4
 maintainers:
@@ -26,8 +26,8 @@ dependencies:
 annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
-    - kind: changed
-      description: bumped Helm chart version of proxysql to 1.2.1
+    - kind: added
+      description: signing key to Chart.yaml
   artifacthub.io/screenshots: |
     - title: The login screen of Passbolt
       url: https://help.passbolt.com/assets/img/help/2021/02/AN_login_v3.png
@@ -43,3 +43,6 @@ annotations:
       url: https://help.passbolt.com/assets/img/help/2018/12/AD_mfa_org_settings_yubikey.png
     - title: Administrators can manage subscriptions directly in the backend.
       url: https://help.passbolt.com/assets/img/help/2021/05/AD_subscription_management.png
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key
