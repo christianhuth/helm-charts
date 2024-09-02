@@ -3149,6 +3149,28 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: updated readme
+    apiVersion: v2
+    appVersion: 3.5.15
+    created: "2024-09-02T05:47:23.894535677Z"
+    description: A Helm chart for running a defragmentation CronJob for ETCD
+    digest: f7038719649dd0824621824549dad826ab4ad37df073cd1f176efc815641917a
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://cdn.worldvectorlogo.com/logos/etcd-1.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: etcd-defrag
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/etcd
+    - https://etcd.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/etcd-defrag-1.1.3/etcd-defrag-1.1.3.tgz
+    version: 1.1.3
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: bumped image version to 3.5.15
     apiVersion: v2
     appVersion: 3.5.15
@@ -10779,6 +10801,41 @@ entries:
   maildev:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: updated readme
+      artifacthub.io/screenshots: |
+        - title: SMTP server & web interface for viewing and testing emails during development.
+          url: https://maildev.github.io/maildev/assets/img/original/maildev-light.png
+        - title: Resizable viewport to test your emails at different sizes.
+          url: https://maildev.github.io/maildev/assets/img/original/responsive.png
+        - title: View email HTML, plain text, headers or raw source.
+          url: https://maildev.github.io/maildev/assets/img/original/formats.png
+        - title: Convenient search feature to quickly find any email.
+          url: https://maildev.github.io/maildev/assets/img/original/search.png
+        - title: View your emails in an eye-friendly dark interface.
+          url: https://maildev.github.io/maildev/assets/img/original/maildev-dark.png
+    apiVersion: v2
+    appVersion: 2.1.0
+    created: "2024-09-02T05:47:24.012892379Z"
+    description: MailDev is a simple way to test your emails during development with
+      an easy to use web interface.
+    digest: fbb4c97e2df14d3ae42a8daae00d1926e7b184a0134575a117548b123fde5b39
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://avatars1.githubusercontent.com/u/26743469
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: maildev
+    sources:
+    - https://maildev.github.io/maildev
+    - https://github.com/maildev/maildev
+    - https://hub.docker.com/r/maildev/maildev
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/maildev-1.2.1/maildev-1.2.1.tgz
+    version: 1.2.1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: support for incoming tls
       artifacthub.io/screenshots: |
@@ -10950,6 +11007,33 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/maildev-1.0.0/maildev-1.0.0.tgz
     version: 1.0.0
   netcupscp-exporter:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: changed
+          description: updated readme
+      artifacthub.io/screenshots: |
+        - title: Export information about your Servers from Netcup SCP as Prometheus metrics.
+          url: https://www.netcup-wiki.de/images/SCP-Willkommen.png
+        - title: Visualize your data as Grafana dashboard.
+          url: https://raw.githubusercontent.com/mrueg/netcupscp-exporter/main/grafana/dashboard.jpg
+    apiVersion: v2
+    appVersion: v0.3.6
+    created: "2024-09-02T05:47:24.141392855Z"
+    description: Prometheus Exporter for Netcup Server Control Panel (SCP)
+    digest: a7051ad419c439988262299760194c137fc5f727643a8250c4c1fc8148dc0c76
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://pbs.twimg.com/profile_images/1148537659637358593/rlfCvTK5_400x400.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: netcupscp-exporter
+    sources:
+    - https://github.com/mrueg/netcupscp-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/netcupscp-exporter-1.1.5/netcupscp-exporter-1.1.5.tgz
+    version: 1.1.5
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
@@ -15487,6 +15571,31 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/promlens-1.0.0/promlens-1.0.0.tgz
     version: 1.0.0
   proxysql:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.6.5
+    created: "2024-09-02T05:47:24.26484523Z"
+    description: A proxysql Helm chart for Kubernetes. Offers option to expose web
+      interface through Ingress. Uses ServiceMonitor to collect metrics.
+    digest: 87741edd536c3fe1b2e6bacf5854b470c914b3f4c52731756602f97daa8a4678
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://proxysql.com/wp-content/uploads/2019/11/ProxySQL-BIG-e1581368792603.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: proxysql
+    sources:
+    - https://github.com/sysown/proxysql
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/proxysql-1.2.2/proxysql-1.2.2.tgz
+    version: 1.2.2
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
@@ -29814,4 +29923,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-30T11:57:02.876680191Z"
+generated: "2024-09-02T05:47:24.267215974Z"
