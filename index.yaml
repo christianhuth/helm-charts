@@ -5,6 +5,48 @@ entries:
       artifacthub.io/category: database
       artifacthub.io/changes: |
         - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Create your own online database without technical experience.
+          url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
+        - title: With Baserow you decide how you want to structure everything. Whether you’re managing customers, products, airplanes or all of them.
+          url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
+        - title: Easily create custom plugins with our boilerplate or use third party ones.
+          url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.26.1
+    created: "2024-09-02T10:29:21.552635092Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.3.3
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.19.4
+    description: Baserow is an open source no-code database and Airtable alternative.
+    digest: a1555a55e408e49dd03df4a2abde9a3eb9feb7adb82812884c8dd3f4bd700064
+    home: https://github.com/christianknell/helm-charts
+    icon: https://baserow.io/img/favicon_192.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: baserow
+    sources:
+    - https://gitlab.com/bramw/baserow
+    - https://baserow.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/baserow-2.4.2/baserow-2.4.2.tgz
+    version: 2.4.2
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
+        - kind: added
           description: options to define liveness and readiness probe values
       artifacthub.io/screenshots: |
         - title: Create your own online database without technical experience.
@@ -3148,6 +3190,31 @@ entries:
   etcd-defrag:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 3.5.15
+    created: "2024-09-02T10:29:21.701281579Z"
+    description: A Helm chart for running a defragmentation CronJob for ETCD
+    digest: e9e7e0b379845c1ea17eb504804fed5ffc313b41755f9a2ecdc1e062a877f97a
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://cdn.worldvectorlogo.com/logos/etcd-1.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: etcd-defrag
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/etcd
+    - https://etcd.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/etcd-defrag-1.1.4/etcd-defrag-1.1.4.tgz
+    version: 1.1.4
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: updated readme
     apiVersion: v2
@@ -3383,6 +3450,47 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/etcd-defrag-1.0.0/etcd-defrag-1.0.0.tgz
     version: 1.0.0
   headwind-mdm:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Headwind MDM is a powerful Open Source platform to manage your Enterprise Android Devices.
+          url: https://images.wondershare.com/drfone/article/2022/11/opensource-mdm-3.jpg
+        - title: Open the Devices section and click the QR code icon to start the enrollment of a device.
+          url: https://h-mdm.com/wp-content/uploads/check_qr_code.jpg
+        - title: After enrollment your Android device will only have the allowed applications installed.
+          url: https://h-mdm.com/wp-content/uploads/2019/08/launcher_screen_en.png
+        - title: The Enterprise version of Headwind MDM includes a powerful module for transferring images taken by mobile devices to the server.
+          url: https://h-mdm.com/wp-content/uploads/photo_plugin.jpg
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 0.1.4
+    created: "2024-09-02T10:29:21.869704526Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.3.3
+    description: Headwind MDM - an open source mobile device management software for
+      Android
+    digest: 43f7698aee8e336925783b2d9f2b7f500d0a1f00dc2d235d1ead9db70f3290cd
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://h-mdm.com/wp-content/uploads/2019/07/neew-logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: headwind-mdm
+    sources:
+    - https://github.com/h-mdm/hmdm-docker
+    - https://github.com/h-mdm
+    - https://hub.docker.com/r/headwindmdm/hmdm
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/headwind-mdm-2.2.1/headwind-mdm-2.2.1.tgz
+    version: 2.2.1
   - annotations:
       artifacthub.io/changes: |
         - kind: added
@@ -5157,6 +5265,41 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/headwind-mdm-1.0.0/headwind-mdm-1.0.0.tgz
     version: 1.0.0
   kube-ops-view:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Dashboard overview of a Kubernetes cluster
+          url: https://codeberg.org/hjacobs/kube-ops-view/media/branch/main/screenshot.png
+        - title: Dashboard showing broken Pods
+          url: https://user-images.githubusercontent.com/1127164/53682720-a2a83780-3cf8-11e9-9384-2c1df186aad4.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 23.5.0
+    created: "2024-09-02T10:29:22.04477843Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.19.4
+    description: A Helm chart for bootstrapping kube-ops-view.
+    digest: f7dde540976f7cd730bd01384a16626a6ecac782665f6cea4b91e159ae69c8f3
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://codeberg.org/repo-avatars/677-c51f6426305941cab515fdd98368f0bb
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: kube-ops-view
+    sources:
+    - https://codeberg.org/hjacobs/kube-ops-view
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/kube-ops-view-3.6.1/kube-ops-view-3.6.1.tgz
+    version: 3.6.1
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
@@ -6974,6 +7117,33 @@ entries:
   kubedoom:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Kill pods inside your Kubernetes cluster by shooting them in Doom!
+          url: https://github.com/storax/kubedoom/raw/master/assets/doom.jpg
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 0.6.0
+    created: "2024-09-02T10:29:22.185603349Z"
+    description: A Helm chart for Kubedoom
+    digest: 4356000193cac4bc733b0d1141791ed38e9928fe4e9c1687f98ec7ab838f3e7d
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/storax/kubedoom/master/assets/doom.jpg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: kubedoom
+    sources:
+    - https://github.com/storax/kubedoom
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/kubedoom-1.0.2/kubedoom-1.0.2.tgz
+    version: 1.0.2
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: URL and name of Helm repository
       artifacthub.io/screenshots: |
@@ -7020,6 +7190,32 @@ entries:
   kubenav:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: kubenav is a mobile and desktop app to manage Kubernetes clusters and to get an overview of the status of your Kubernetes resources.
+          url: https://raw.githubusercontent.com/kubenav/kubenav/main/utils/images/repo/github-screenshot.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    created: "2024-09-02T10:29:22.327220873Z"
+    description: A Helm chart for creating the required RBAC for kubenav
+    digest: 6145cd819232ff96ffff4c0fd43068185df6ed9cdad4ee52b8702381f2fc9234
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/kubenav/kubenav/main/utils/images/repo/github-readme-logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: kubenav
+    sources:
+    - https://github.com/kubenav/kubenav
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/kubenav-1.0.2/kubenav-1.0.2.tgz
+    version: 1.0.2
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: URL and name of Helm repository
       artifacthub.io/screenshots: |
@@ -7062,6 +7258,48 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/kubenav-1.0.0/kubenav-1.0.0.tgz
     version: 1.0.0
   kutt:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Simply shorten your link using the Web UI.
+          url: https://d4.alternativeto.net/v9sHosD3RiPblfBOOHZi0gwU1M0pRL6Jn53oiobJi9k/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2t1dHQtaXRfNzY3MjMzX2Z1bGwucG5n.jpg
+        - title: You can see a list of the most recent created links and some statistical data about them.
+          url: https://docs.cloudron.io/img/kutt-admin.png
+        - title: View detailed statistics about each created link.
+          url: https://kutt.it/images/callout.png
+        - title: Kutt supports having more than one domain.
+          url: https://docs.cloudron.io/img/kutt-custom-domain.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v2.7.4
+    created: "2024-09-02T10:29:22.498089159Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.3.3
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.19.4
+    description: Kutt is a free modern URL shortener.
+    digest: 5e849b5577bbae871fc7f22a607a3536482c6b53a08025e1e3c96e733964195e
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: kutt
+    sources:
+    - https://github.com/thedevs-network/kutt
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/kutt-4.2.1/kutt-4.2.1.tgz
+    version: 4.2.1
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
@@ -10801,6 +11039,44 @@ entries:
   maildev:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: SMTP server & web interface for viewing and testing emails during development.
+          url: https://maildev.github.io/maildev/assets/img/original/maildev-light.png
+        - title: Resizable viewport to test your emails at different sizes.
+          url: https://maildev.github.io/maildev/assets/img/original/responsive.png
+        - title: View email HTML, plain text, headers or raw source.
+          url: https://maildev.github.io/maildev/assets/img/original/formats.png
+        - title: Convenient search feature to quickly find any email.
+          url: https://maildev.github.io/maildev/assets/img/original/search.png
+        - title: View your emails in an eye-friendly dark interface.
+          url: https://maildev.github.io/maildev/assets/img/original/maildev-dark.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.1.0
+    created: "2024-09-02T10:29:22.64852005Z"
+    description: MailDev is a simple way to test your emails during development with
+      an easy to use web interface.
+    digest: b57a62a3af959e0fff15d70688aef14d5dbad2c9917d1cb690d9eb9276be719b
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://avatars1.githubusercontent.com/u/26743469
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: maildev
+    sources:
+    - https://maildev.github.io/maildev
+    - https://github.com/maildev/maildev
+    - https://hub.docker.com/r/maildev/maildev
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/maildev-1.2.2/maildev-1.2.2.tgz
+    version: 1.2.2
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: updated readme
       artifacthub.io/screenshots: |
@@ -11007,6 +11283,36 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/maildev-1.0.0/maildev-1.0.0.tgz
     version: 1.0.0
   netcupscp-exporter:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Export information about your Servers from Netcup SCP as Prometheus metrics.
+          url: https://www.netcup-wiki.de/images/SCP-Willkommen.png
+        - title: Visualize your data as Grafana dashboard.
+          url: https://raw.githubusercontent.com/mrueg/netcupscp-exporter/main/grafana/dashboard.jpg
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.3.6
+    created: "2024-09-02T10:29:22.807436924Z"
+    description: Prometheus Exporter for Netcup Server Control Panel (SCP)
+    digest: ef7c53dd3b33d5bfed3af27ae8313cf8d634d2ad3f04f9fdf63b789889d3f44f
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://pbs.twimg.com/profile_images/1148537659637358593/rlfCvTK5_400x400.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: netcupscp-exporter
+    sources:
+    - https://github.com/mrueg/netcupscp-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/netcupscp-exporter-1.1.6/netcupscp-exporter-1.1.6.tgz
+    version: 1.1.6
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
@@ -11312,6 +11618,29 @@ entries:
   node-access:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.36.1
+    created: "2024-09-02T10:29:22.97967422Z"
+    description: A Helm chart to deploy workload to gain direct access to the host
+      of the Kubernetes cluster
+    digest: 9a6ec2e5dedb0087bf30a39e888f29f78bbb0143eb82b2a6ba6eda7df90cdd69
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/kubernetes/community/master/icons/png/infrastructure_components/labeled/node-256.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: node-access
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/node-access-1.0.3/node-access-1.0.3.tgz
+    version: 1.0.3
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: URL and name of Helm repository
     apiVersion: v2
@@ -11363,6 +11692,57 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/node-access-1.0.0/node-access-1.0.0.tgz
     version: 1.0.0
   passbolt-ha:
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: The login screen of Passbolt
+          url: https://help.passbolt.com/assets/img/help/2021/02/AN_login_v3.png
+        - title: There are two parts - the searchable non encrypted metadata called resource and the encrypted part containing called secret.
+          url: https://help.passbolt.com/assets/img/help/2021/02/LU_encrypted_description.png
+        - title: You can organize your secrets inside of folders.
+          url: https://help.passbolt.com/assets/img/help/2019/12/LU_folder_preview.png
+        - title: You can send an url of a given resource and share it with colleagues.
+          url: https://help.passbolt.com/assets/img/help/2019/02/LU_application_urls.png
+        - title: Includes a dark theme that can be used in place of the black on white default theme.
+          url: https://help.passbolt.com/assets/img/help/2018/06/LU_passwords_midgar.png
+        - title: It is possible for an admin to enable and configure multi-factor authentication providers.
+          url: https://help.passbolt.com/assets/img/help/2018/12/AD_mfa_org_settings_yubikey.png
+        - title: Administrators can manage subscriptions directly in the backend.
+          url: https://help.passbolt.com/assets/img/help/2021/05/AD_subscription_management.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    created: "2024-09-02T10:29:23.150203717Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.23.0
+    - name: passbolt
+      repository: https://cnieg.github.io/helm-charts
+      version: 1.1.17
+    - name: proxysql
+      repository: https://charts.christianhuth.de
+      version: 1.2.1
+    description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
+    digest: 3f730d8ecedb86850310aca346805670486f862b54ce4098720c6f56150db901
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://avatars.githubusercontent.com/u/4386228?s=200&v=4
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: passbolt-ha
+    sources:
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    - https://github.com/cnieg/helm-charts/tree/master/charts/passbolt
+    - https://github.com/flachesis/proxysql/tree/master/charts/proxysql
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/passbolt-ha-1.13.1/passbolt-ha-1.13.1.tgz
+    version: 1.13.1
   - annotations:
       artifacthub.io/category: security
       artifacthub.io/changes: |
@@ -13555,6 +13935,42 @@ entries:
   polr:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Polr converts some long links into shorter ones.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/shortit-1024x346.png
+        - title: Polr provides a dashboard overview containing all the links ever created.
+          url: https://assets.hongkiat.com/uploads/polr-url-shorterner/02-polr-links-table.jpg
+        - title: Polr provides some statistical data about the shortened link.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/Screenshot-2018-1-31-Shorts-1024x1024.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.3.0
+    created: "2024-09-02T10:29:23.315513662Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.23.0
+    description: Polr is a quick, modern, and open-source link shortener
+    digest: 28c8bd4896af1c3e32234938d055ccf6b5f6d363ac15152a11f7902f0371f588
+    home: https://github.com/christianhuth/helm-charts
+    icon: http://docs.polrproject.org/en/latest/logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: polr
+    sources:
+    - https://github.com/cydrobolt/polr
+    - https://github.com/ajanvier/docker-polr
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/polr-1.12.1/polr-1.12.1.tgz
+    version: 1.12.1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: bumped chart version of mysql to 9.23.0
       artifacthub.io/screenshots: |
@@ -14773,6 +15189,34 @@ entries:
   - annotations:
       artifacthub.io/category: security
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Popeye is a utility that scans live Kubernetes cluster and reports potential issues with deployed resources and configurations.
+          url: https://popeyecli.io/assets/d_score.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.21.3
+    created: "2024-09-02T10:29:23.48872807Z"
+    description: Popeye - A Kubernetes Cluster Sanitizer
+    digest: 852af71298287efb8ce369c30d23e816275f006eb3aa946b7ea5c440ed5696da
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/derailed/popeye/master/assets/popeye_logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: popeye
+    sources:
+    - https://github.com/derailed/popeye
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/popeye-2.1.1/popeye-2.1.1.tgz
+    version: 2.1.1
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/changes: |
         - kind: changed
           description: bumped image version to 0.21.3
       artifacthub.io/screenshots: |
@@ -15158,6 +15602,30 @@ entries:
   priority-classes:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.0.0
+    created: "2024-09-02T10:29:23.64216626Z"
+    description: A Helm chart for creating Priority Classes. Already comes with some
+      bundled classes.
+    digest: 9a72421594e2c410f6bca2d556b04f87f8e9186d38e0eb79aa1eb84dab3a0238
+    home: https://github.com/christianhuth/helm-charts
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: priority-classes
+    sources:
+    - https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/priority-classes-1.0.2/priority-classes-1.0.2.tgz
+    version: 1.0.2
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: URL and name of Helm repository
     apiVersion: v2
@@ -15195,6 +15663,39 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/priority-classes-1.0.0/priority-classes-1.0.0.tgz
     version: 1.0.0
   prometheus-pve-exporter:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Add an user inside of Proxmox, that will be used for the Exporter.
+          url: https://xinux.net/images/6/6e/Prometheus-proxmox-grafana-user.png
+        - title: Add permissions for this user.
+          url: https://xinux.net/images/5/5d/Prometheus-proxmox-grafana-user-permission.png
+        - title: Visualize the data collected with Grafana.
+          url: https://grafana.com/api/dashboards/10347/images/6529/image
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.3.1
+    created: "2024-09-02T10:29:23.816284021Z"
+    description: A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor
+      to collect metrics.
+    digest: 7fdc8061ef8919ddc6feacc779dadb93ee5e06b43cb7d18e3d5253256e4270fd
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://camo.githubusercontent.com/2df2ac41e1b8a1484be236c75e395981b31bfd670eff46b5c182ea0be9475310/68747470733a2f2f7777772e70726f786d6f782e636f6d2f696d616765732f70726f786d6f782f50726f786d6f785f73796d626f6c5f7374616e646172645f6865782e706e67
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: prometheus-pve-exporter
+    sources:
+    - https://github.com/prometheus-pve/prometheus-pve-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/prometheus-pve-exporter-1.2.3/prometheus-pve-exporter-1.2.3.tgz
+    version: 1.2.3
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
@@ -15412,6 +15913,36 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/prometheus-pve-exporter-1.0.2/prometheus-pve-exporter-1.0.2.tgz
     version: 1.0.2
   promlens:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Build, understand, and fix your queries much more effectively with the ultimate query builder for PromQL.
+          url: https://promlens.com/static/promlens-hero-screenshot-7d453e779cf47c6fcec1de8823049257.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.3.0
+    created: "2024-09-02T10:29:23.961368272Z"
+    description: PromLens is a tool that makes learning and using PromQL easier and
+      more productive
+    digest: efba19b8d10873c71ddbf22d5c36d6599716d746d15e4e55b5c928a0c0e23bb9
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: promlens
+    sources:
+    - https://github.com/prometheus/promlens
+    - https://hub.docker.com/r/prom/promlens
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/promlens-1.0.5/promlens-1.0.5.tgz
+    version: 1.0.5
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
@@ -15920,6 +16451,27 @@ entries:
   proxyweb:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: latest
+    created: "2024-09-02T10:29:24.115095188Z"
+    deprecated: true
+    description: A Helm chart for Kubernetes
+    digest: 07a25b0211ff044d47cda47a2b7a71cc37911483e8d504d496ca5f6d270179df
+    home: https://github.com/christianhuth/helm-charts
+    name: proxyweb
+    sources:
+    - https://github.com/edmodo/proxyweb/
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/proxyweb-1.0.2/proxyweb-1.0.2.tgz
+    version: 1.0.2
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: URL and name of Helm repository
     apiVersion: v2
@@ -15999,6 +16551,53 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/proxyweb-0.0.1/proxyweb-0.0.1.tgz
     version: 0.0.1
   shlink-backend:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 3.7.4
+    created: "2024-09-02T10:29:24.317015068Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.5.0
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.23.0
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.3.3
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.15.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.19.4
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 2e87ae961fc67c1ea6d87045af4e01fb863743b9f25f9990949dcea5e608b1d2
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-backend-4.5.1/shlink-backend-4.5.1.tgz
+    version: 4.5.1
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
@@ -22254,6 +22853,40 @@ entries:
   shlink-web:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Add a new link that should be shortened.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/creation-form-after.png
+        - title: You can have an overview of all your shortened links.
+          url: https://shlink.io/images/shlink-web-client-placeholder.jpg
+        - title: For each link there are multiple statistical data collected and visualized.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/visits-after.png
+        - title: A typical architecture in which Shlink would be integrated.
+          url: https://shlink.io/images/architecture/shlink-architecture.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 4.1.2
+    created: "2024-09-02T10:29:24.474667791Z"
+    description: A  ReactJS-based progressive web application for Shlink.
+    digest: d0da72a7b052fee45f557c43a702dbc3a5343b12a52e03f59b0ddfbe08b8f84d
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-web
+    sources:
+    - https://github.com/shlinkio/shlink-web-client
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-web-1.1.1/shlink-web-1.1.1.tgz
+    version: 1.1.1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: bumped image version to 4.1.2
       artifacthub.io/screenshots: |
@@ -22567,6 +23200,36 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Overview of the workloads running inside of Kubernetes.
+          url: https://skooner.io/images/k8dash-screen.png
+        - title: Dashboard of the nodes and their resources.
+          url: https://loft.sh/images/blog/posts/skooner-ui.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: stable
+    created: "2024-09-02T10:29:24.652175477Z"
+    description: Simple Kubernetes real-time dashboard and management.
+    digest: 1e49fe562390097b351091e5a22883adf95c8101f1437630601fa9ccaee9ad3d
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu8eQrFBosk7yHTiDEwjnVcMRyDD5uIaNXhlZ1m0yiC4H8RP1j0PlBPtgtv0bdH0JwlOE
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: skooner
+    sources:
+    - https://github.com/skooner-k8s/skooner
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/skooner-0.0.8/skooner-0.0.8.tgz
+    version: 0.0.8
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: changed
           description: URL and name of Helm repository
       artifacthub.io/screenshots: |
@@ -22687,6 +23350,36 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Visualize the different Events inside your Kubernetes cluster.
+          url: https://civo-com-assets.ams3.digitaloceanspaces.com/content_images/989.blog.png
+        - title: You can filter the events that should be visualized.
+          url: https://raw.githubusercontent.com/milindchawre/civo-k8s/master/blog/sloop/images/sloop1.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: sha-2ce8bbe
+    created: "2024-09-02T10:29:24.874244539Z"
+    description: Kubernetes History Visualization
+    digest: d4632b87db92e2d929bb5cd52bb8751dab6a0e25ff857af0f7ec6d459e73340a
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: sloop
+    sources:
+    - https://github.com/salesforce/sloop
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/sloop-0.0.5/sloop-0.0.5.tgz
+    version: 0.0.5
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: changed
           description: URL and name of Helm repository
       artifacthub.io/screenshots: |
@@ -22770,6 +23463,31 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/sloop-0.0.1/sloop-0.0.1.tgz
     version: 0.0.1
   syncserver:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: latest
+    created: "2024-09-02T10:29:25.032124998Z"
+    description: Helm chart for Firefox Syncserver
+    digest: e98959cd4f7f99ad89471992d6bc94ba73285e35ecfb7c8b3e8143ad479245c5
+    home: https://github.com/christianknell/helm-charts
+    icon: https://think.unblog.ch/wp-content/uploads/2019/05/Firefox_Sync.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: syncserver
+    sources:
+    - https://hub.docker.com/r/mozilla/syncserver/
+    - https://github.com/mozilla-services/syncserver
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/syncserver-1.0.3/syncserver-1.0.3.tgz
+    version: 1.0.3
   - apiVersion: v2
     appVersion: latest
     created: "2022-12-28T14:30:14.164587405Z"
@@ -22828,6 +23546,27 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    created: "2024-09-02T10:29:25.191626786Z"
+    description: A Helm Chart to bootstrap a Namespace in a Multi-Tenancy setup
+    digest: 3daaceedac29810be1a6dbf384b7b395028e913c7a0c1b609b08e2197439e3dd
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/kubernetes/community/master/icons/png/resources/labeled/ns-256.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: tenant-namespace
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/tenant-namespace-1.0.2/tenant-namespace-1.0.2.tgz
+    version: 1.0.2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
           description: URL and name of Helm repository
     apiVersion: v2
     created: "2024-03-07T12:57:24.216776688Z"
@@ -22862,6 +23601,57 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/tenant-namespace-1.0.0/tenant-namespace-1.0.0.tgz
     version: 1.0.0
   typo3:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: TYPO3 is a very powerful Web Content Management System.
+          url: https://docs.typo3.org/m/typo3/tutorial-getting-started/10.4/en-us/_images/BackendAboutModules.png
+        - title: Easilly create and manage pages for your website.
+          url: https://typo3.org/fileadmin/t3o_common_storage/images/release_notes/v12/12.0/screenshots/backend-ux-page-tree.png
+        - title: Manage existing and add new content to your pages.
+          url: https://typo3.org/fileadmin/t3o_common_storage/images/release_notes/v12/12.0/screenshots/new-page-module.png
+        - title: Files including documents and images can be managed in the Filelist module.
+          url: https://docs.typo3.org/m/typo3/tutorial-editors/main/en-us/_images/FilelistModule.png
+        - title: Extensions can be installed and managed from the Extension Manager.
+          url: https://docs.typo3.org/m/typo3/reference-coreapi/10.4/en-us/_images/ExtensionManager76To86.png
+        - title: Create your own dashboard to visualize information inside of your TYPO3 backend.
+          url: https://typo3.org/fileadmin/t3o_common_storage/images/release_notes/v10/10.4/typo3-100400_0036_dashboard-my-dashboard.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: "12.4"
+    created: "2024-09-02T10:29:25.366630921Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.23.0
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.5.0
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.3.3
+    description: TYPO3 — the Professional, Flexible Content Management System
+    digest: 201b16e29b9d0064ac0e76ec2739796659710d3947256155c0f48aa666b47ad6
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://www.mdc.de/wp-content/uploads/2016/05/typo3_logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: typo3
+    sources:
+    - https://github.com/martin-helmich/docker-typo3
+    - https://github.com/TYPO3/typo3
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/typo3-2.3.1/typo3-2.3.1.tgz
+    version: 2.3.1
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
@@ -26468,6 +27258,62 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: added
+          description: signing key to Chart.yaml
+      artifacthub.io/screenshots: |
+        - title: Umami measures just the important metrics that you care about and everything is displayed on a single, easy to browse page.
+          url: https://umami.is/images/feature-website-stats.png
+        - title: Get detailed breakdowns about your visitors including what browser, OS and device they used.
+          url: https://umami.is/images/feature-session-stats.png
+        - title: Track more than just pageviews. Capture any event on your website like button clicks and form entries.
+          url: https://umami.is/images/feature-events.png
+        - title: Dive deeper into your data using easy to apply filters. Segment your users by any metric such as browser, OS, and country.
+          url: https://umami.is/images/feature-filters.png
+        - title: Get a realtime view of your current website traffic. See the exact pages where your visitors are landing.
+          url: https://umami.is/images/feature-realtime.png
+        - title: Umami has been translated into many different languages by the very active open source community.
+          url: https://umami.is/images/feature-languages.png
+        - title: Umami is able to track an unlimited number of websites from a single installation. You can even track subdomains and individual URLs.
+          url: https://umami.is/images/feature-websites.png
+        - title: Umami can be used to host data for friends or clients. Just create a separate account and they can start tracking their own websites on their own dashboard.
+          url: https://umami.is/images/feature-accounts.png
+        - title: The Umami interface has been optimized for mobile so you can view your stats from anywhere.
+          url: https://umami.is/images/feature-mobile.png
+        - title: Dark mode included. Choose your favorite theme for Umami.
+          url: https://umami.is/images/feature-dark-mode.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: postgresql-v2.9.0
+    created: "2024-09-02T10:29:25.553992283Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.3.3
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.23.0
+    description: Umami is a simple, fast, privacy-focused alternative to Google Analytics.
+    digest: d342c64cca7b06fc026a10bd1241667c4d837af8b930d6e9f6b5f7ebce27aaa7
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/umami-software/umami/master/public/android-chrome-512x512.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: umami
+    sources:
+    - https://github.com/umami-software/umami
+    - https://umami.is/
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/umami-3.3.1/umami-3.3.1.tgz
+    version: 3.3.1
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: changed
           description: bumped chart version of mysql to 9.23.0
         - kind: changed
@@ -29878,4 +30724,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-09-02T05:47:24.267215974Z"
+generated: "2024-09-02T10:29:25.557570662Z"
