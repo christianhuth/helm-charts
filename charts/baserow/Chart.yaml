@@ -2,7 +2,7 @@ apiVersion: v2
 name: baserow
 description: Baserow is an open source no-code database and Airtable alternative.
 type: application
-version: 2.4.1
+version: 2.4.2
 appVersion: "1.26.1"
 home: https://github.com/christianknell/helm-charts
 icon: https://baserow.io/img/favicon_192.png
@@ -25,7 +25,7 @@ annotations:
   artifacthub.io/category: database
   artifacthub.io/changes: |
     - kind: added
-      description: options to define liveness and readiness probe values
+      description: signing key to Chart.yaml
   artifacthub.io/screenshots: |
     - title: Create your own online database without technical experience.
       url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
@@ -33,3 +33,6 @@ annotations:
       url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
     - title: Easily create custom plugins with our boilerplate or use third party ones.
       url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key

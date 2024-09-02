@@ -2,7 +2,7 @@ apiVersion: v2
 name: polr
 description: Polr is a quick, modern, and open-source link shortener
 type: application
-version: 1.12.0
+version: 1.12.1
 appVersion: "2.3.0"
 home: https://github.com/christianhuth/helm-charts
 icon: http://docs.polrproject.org/en/latest/logo.png
@@ -18,8 +18,8 @@ dependencies:
     version: 9.23.0
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: bumped chart version of mysql to 9.23.0
+    - kind: added
+      description: signing key to Chart.yaml
   artifacthub.io/screenshots: |
     - title: Polr converts some long links into shorter ones.
       url: https://selfhostedweb.org/wp-content/uploads/2017/02/shortit-1024x346.png
@@ -27,3 +27,6 @@ annotations:
       url: https://assets.hongkiat.com/uploads/polr-url-shorterner/02-polr-links-table.jpg
     - title: Polr provides some statistical data about the shortened link.
       url: https://selfhostedweb.org/wp-content/uploads/2017/02/Screenshot-2018-1-31-Shorts-1024x1024.png
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key
