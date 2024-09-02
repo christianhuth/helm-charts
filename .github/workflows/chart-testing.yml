@@ -12,7 +12,7 @@ on:
 
 jobs:
 
-  lint-test:
+  helm-lint:
     runs-on: ubuntu-latest
     steps:
       - name: checkout git repository
@@ -28,6 +28,17 @@ jobs:
 
       - name: helm linting
         run : helm lint charts/*
+
+  chart-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: setup helm
+        uses: azure/setup-helm@v3
 
       - uses: actions/setup-python@v5
         with:
