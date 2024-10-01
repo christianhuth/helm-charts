@@ -2,10 +2,10 @@ apiVersion: v2
 name: cluster-api-visualizer
 description: Multicluster resource visualization tool for Cluster API.
 type: application
-version: 0.0.1
+version: 0.0.2
 appVersion: "v1.3.1"
 home: https://github.com/christianhuth/helm-charts
-icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+icon: https://github.com/cloud37/helm-charts/blob/96802f52d68cae4e81bc4d5c6b9c6867ce13aade/charts/hetznernetes/hetznernetes.png
 maintainers:
   - name: christianhuth
     email: christian@knell.it
@@ -13,8 +13,8 @@ sources:
   - https://github.com/Jont828/cluster-api-visualizer
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Initial Commit
+    - kind: changed
+      description: Chart icon
   artifacthub.io/screenshots: |
     - title: Simply shorten your link using the Web UI.
       url: https://github.com/Jont828/cluster-api-visualizer/raw/main/demo/demo.gif
