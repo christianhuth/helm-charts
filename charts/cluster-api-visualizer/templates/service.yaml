@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "cluster-api-visualizerfullname" . }}
+  name: {{ include "cluster-api-visualizer.fullname" . }}
   labels:
-    {{- include "cluster-api-visualizerlabels" . | nindent 4 }}
+    {{- include "cluster-api-visualizer.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "cluster-api-visualizerselectorLabels" . | nindent 4 }}
+    {{- include "cluster-api-visualizer.selectorLabels" . | nindent 4 }}

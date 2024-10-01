@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cluster-api-visualizerfullname" . }}
+  name: {{ include "cluster-api-visualizer.fullname" . }}
   labels:
-    {{- include "cluster-api-visualizerlabels" . | nindent 4 }}
+    {{- include "cluster-api-visualizer.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -11,7 +11,7 @@ spec:
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   selector:
     matchLabels:
-      {{- include "cluster-api-visualizerselectorLabels" . | nindent 6 }}
+      {{- include "cluster-api-visualizer.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,20 +19,20 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "cluster-api-visualizerselectorLabels" . | nindent 8 }}
+        {{- include "cluster-api-visualizer.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "cluster-api-visualizerserviceAccountName" . }}
+      serviceAccountName: {{ include "cluster-api-visualizer.serviceAccountName" . }}
       {{- with .Values.podSecurityContext }}
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          {{- if .values.extraEnv }}
+          {{- if .Values.extraEnv }}
           env:
             {{- range .Values.extraEnv }}
             {{- if and (.name) (.value) }}
