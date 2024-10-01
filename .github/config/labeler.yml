@@ -13,6 +13,9 @@ baserow:
 bluespice:
 - changed-files:
   - any-glob-to-any-file: charts/bluespice/*
+cluster-api-visualizer:
+- changed-files:
+  - any-glob-to-any-file: 'charts/cluster-api-visualizer/*'
 countly:
 - changed-files:
   - any-glob-to-any-file: charts/countly/*
