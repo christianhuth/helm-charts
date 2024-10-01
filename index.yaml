@@ -3187,6 +3187,34 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/baserow-1.0.0/baserow-1.0.0.tgz
     version: 1.0.0
+  cluster-api-visualizer:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial Commit
+      artifacthub.io/screenshots: |
+        - title: Simply shorten your link using the Web UI.
+          url: https://github.com/Jont828/cluster-api-visualizer/raw/main/demo/demo.gif
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v1.3.1
+    created: "2024-10-01T14:39:06.95774182Z"
+    description: Multicluster resource visualization tool for Cluster API.
+    digest: 6bdd9b52cee74b329b6c737e95fe1f443697b21b4a58b1e1ce76730900e5b1f9
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: cluster-api-visualizer
+    sources:
+    - https://github.com/Jont828/cluster-api-visualizer
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/cluster-api-visualizer-0.0.1/cluster-api-visualizer-0.0.1.tgz
+    version: 0.0.1
   etcd-defrag:
   - annotations:
       artifacthub.io/changes: |
@@ -30724,4 +30752,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-09-02T10:29:25.557570662Z"
+generated: "2024-10-01T14:39:06.960579112Z"
