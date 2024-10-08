@@ -1,3 +1,4 @@
+{{- if .Values.namespace.enabled }}
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -6,3 +7,4 @@ metadata:
   labels:
     {{- include "tenant-namespace.namespace.labels" . | nindent 4 }}
   name: {{ include "tenant-namespace.namespace.name" . | quote }}
+{{- end }}
