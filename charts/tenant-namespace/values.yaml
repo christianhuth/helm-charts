@@ -26,6 +26,8 @@ limitRange:
   name: ""
 
 namespace:
+  # --- create a Namespace resource
+  enabled: false
   annotations:
     # -- Annotations to be added to the Namespace
     additionalAnnotations: {}

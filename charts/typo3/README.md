@@ -5,7 +5,7 @@ TYPO3 — the Professional, Flexible Content Management System
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/typo3
 ```
@@ -23,7 +23,7 @@ This chart bootstraps the Content Management System [TYPO3](https://github.com/T
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/typo3
 ```

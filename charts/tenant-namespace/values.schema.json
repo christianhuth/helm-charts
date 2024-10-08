@@ -67,6 +67,9 @@
                         }
                     }
                 },
+                "enabled": {
+                    "type": "boolean"
+                },
                 "labels": {
                     "type": "object",
                     "properties": {

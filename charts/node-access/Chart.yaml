@@ -2,7 +2,7 @@ apiVersion: v2
 description: A Helm chart to deploy workload to gain direct access to the host of the Kubernetes cluster
 name: node-access
 type: application
-version: 1.0.3
+version: 1.0.4
 appVersion: 1.36.1
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/kubernetes/community/master/icons/png/infrastructure_components/labeled/node-256.png
@@ -11,8 +11,8 @@ maintainers:
     email: christian@knell.it
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: signing key to Chart.yaml
+    - kind: changed
+      description: URL of Helm Repository in README
   artifacthub.io/signKey: |
     fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
     url: https://charts.christianhuth.de/public.key

@@ -5,7 +5,7 @@ Polr is a quick, modern, and open-source link shortener
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/polr
 ```
@@ -23,7 +23,7 @@ This chart bootstraps a quick, modern and open-source link shortener called [Pol
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/polr
 ```

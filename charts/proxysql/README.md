@@ -5,7 +5,7 @@ A proxysql Helm chart for Kubernetes. Offers option to expose web interface thro
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/proxysql
 ```
@@ -23,7 +23,7 @@ This chart bootstraps a [ProxySQL](https://github.com/sysown/proxysql) deploymen
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/proxysql
 ```

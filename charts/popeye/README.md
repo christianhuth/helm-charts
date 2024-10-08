@@ -5,7 +5,7 @@ Popeye - A Kubernetes Cluster Sanitizer
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/popeye
 ```
@@ -23,7 +23,7 @@ This chart bootstraps the Kubernetes cluster resource sanitizer called [popeye](
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/popeye
 ```

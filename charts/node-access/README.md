@@ -5,7 +5,7 @@ A Helm chart to deploy workload to gain direct access to the host of the Kuberne
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/node-access
 ```
@@ -23,7 +23,7 @@ This chart bootstraps one or multiple Pods to access the host system of a [Kuber
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/node-access
 ```

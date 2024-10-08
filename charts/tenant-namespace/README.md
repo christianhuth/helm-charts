@@ -5,7 +5,7 @@ A Helm Chart to bootstrap a Namespace in a Multi-Tenancy setup
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/tenant-namespace
 ```
@@ -23,7 +23,7 @@ This chart bootstraps a Namespace in a Multi-Tenancy cluster with all the requir
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/tenant-namespace
 ```
@@ -60,6 +60,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | namespace.annotations.scheduler.defaultTolerations                    | list   | `[]`                                                                             | This annotation requires the PodTolerationRestriction admission controller to be enabled. This annotation key allows assigning tolerations to a namespace and any new pods created in this namespace would get these tolerations added.                                                                                                                                                             |
 | namespace.annotations.scheduler.nodeSelector                          | string | `""`                                                                             | The PodNodeSelector uses this annotation key to assign node selectors to pods in namespaces.                                                                                                                                                                                                                                                                                                        |
 | namespace.annotations.scheduler.tolerationsWhitelist                  | list   | `[]`                                                                             | This annotation requires the PodTolerationRestriction admission controller to be enabled. The annotation value is a JSON document that defines a list of allowed tolerations for the namespace it annotates. When you create a Pod or modify its tolerations, the API server checks the tolerations to see if they are mentioned in the allow list. The pod is admitted only if the check succeeds. |
+| namespace.enabled                                                     | bool   | `false`                                                                          | - create a Namespace resource                                                                                                                                                                                                                                                                                                                                                                       |
 | namespace.labels.additionalLabels                                     | object | `{}`                                                                             | Labels to be added to the Namespace                                                                                                                                                                                                                                                                                                                                                                 |
 | namespace.labels.podSecurityAdmission.audit.standard                  | string | `""`                                                                             | Value must be one of privileged, baseline, or restricted which correspond to Pod Security Standard levels.                                                                                                                                                                                                                                                                                          |
 | namespace.labels.podSecurityAdmission.audit.version                   | string | `""`                                                                             | Version label that can be used to pin the policy to the version that shipped with a given Kubernetes minor version (for example v1.27).                                                                                                                                                                                                                                                             |

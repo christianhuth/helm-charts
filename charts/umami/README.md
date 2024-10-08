@@ -5,7 +5,7 @@ Umami is a simple, fast, privacy-focused alternative to Google Analytics.
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/umami
 ```
@@ -25,7 +25,7 @@ This chart bootstraps [Umami](https://github.com/umami-software/umami) on a [Kub
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/umami
 ```

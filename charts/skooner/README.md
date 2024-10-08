@@ -5,7 +5,7 @@ Simple Kubernetes real-time dashboard and management.
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/skooner
 ```
@@ -23,7 +23,7 @@ This chart bootstraps the Simple Kubernetes real-time dashboard and management t
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/skooner
 ```
