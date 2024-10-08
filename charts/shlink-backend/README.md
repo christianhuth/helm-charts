@@ -5,7 +5,7 @@ A PHP-based self-hosted URL shortener that can be used to serve shortened URLs u
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/shlink-backend
 ```
@@ -23,7 +23,7 @@ This chart bootstraps a self-hosted URL shortener called [Shlink](https://shlink
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/shlink-backend
 ```

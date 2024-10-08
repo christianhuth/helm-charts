@@ -5,7 +5,7 @@ A Helm chart for creating Priority Classes. Already comes with some bundled clas
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/priority-classes
 ```
@@ -23,7 +23,7 @@ This chart installs [Priority Classes](https://kubernetes.io/docs/concepts/sched
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/priority-classes
 ```

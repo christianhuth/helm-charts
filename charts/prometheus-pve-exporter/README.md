@@ -5,7 +5,7 @@ A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor to collect me
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/prometheus-pve-exporter
 ```
@@ -25,7 +25,7 @@ This chart bootstraps a [PVE Exporter](https://github.com/prometheus-pve/prometh
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/prometheus-pve-exporter
 ```

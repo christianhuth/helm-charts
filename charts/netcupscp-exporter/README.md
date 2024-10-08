@@ -5,7 +5,7 @@ Prometheus Exporter for Netcup Server Control Panel (SCP)
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/netcupscp-exporter
 ```
@@ -23,7 +23,7 @@ This chart bootstraps a [Prometheus Exporter for Netcup ServerControlPanel (SCP)
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/netcupscp-exporter
 ```

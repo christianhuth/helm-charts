@@ -5,7 +5,7 @@ PromLens is a tool that makes learning and using PromQL easier and more producti
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/promlens
 ```
@@ -23,7 +23,7 @@ This chart bootstraps [Promlens](https://github.com/prometheus/promlens) - The q
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/promlens
 ```

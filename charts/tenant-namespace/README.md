@@ -5,7 +5,7 @@ A Helm Chart to bootstrap a Namespace in a Multi-Tenancy setup
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/tenant-namespace
 ```
@@ -23,7 +23,7 @@ This chart bootstraps a Namespace in a Multi-Tenancy cluster with all the requir
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/tenant-namespace
 ```

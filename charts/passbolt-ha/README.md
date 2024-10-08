@@ -5,7 +5,7 @@ A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install passbolt-ha christianhuth/passbolt-ha
 ```
@@ -23,7 +23,7 @@ This chart bootstraps [Passbolt](https://github.com/passbolt), [MYSQL by Bitnami
 To install the chart with the release name `passbolt-ha`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install passbolt-ha christianhuth/passbolt-ha
 ```

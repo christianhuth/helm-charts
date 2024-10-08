@@ -5,7 +5,7 @@ MailDev is a simple way to test your emails during development with an easy to u
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/maildev
 ```
@@ -32,7 +32,7 @@ MailDev also provides a Web interface, it can be disabled/enabled using `maildev
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/maildev
 ```

@@ -5,7 +5,7 @@ Kutt is a free modern URL shortener.
 ## TL;DR;
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/kutt
 ```
@@ -23,7 +23,7 @@ This chart bootstraps the free modern URL shortener called [Kutt](https://kutt.i
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianhuth https://christianhuth.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/kutt
 ```
