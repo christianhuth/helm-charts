@@ -59,7 +59,7 @@ service:
   # -- Kubernetes service type
   type: ClusterIP
   # -- Kubernetes port where service is exposed
-  port: 3000
+  port: 9003
 
 serviceAccount:
   # -- Specifies whether a service account should be created

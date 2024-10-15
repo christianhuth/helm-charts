@@ -1,6 +1,6 @@
 # argocd-metrics-server
 
-A Helm chart for running a defragmentation CronJob for ETCD
+A Helm chart for installing the Argo CD Metrics Server, which connects to Prometheus and displays Metrics in the Argo CD UI
 
 ## TL;DR;
 
@@ -76,7 +76,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | resources                                  | object | `{"requests":{"cpu":"100m","memory":"100Mi"}}`  | Resource limits and requests for the controller pods.                                                                  |
 | revisionHistoryLimit                       | int    | `0`                                             | The number of old ReplicaSets to retain                                                                                |
 | securityContext                            | object | `{}`                                            | container-level security context                                                                                       |
-| service.port                               | int    | `3000`                                          | Kubernetes port where service is exposed                                                                               |
+| service.port                               | int    | `9003`                                          | Kubernetes port where service is exposed                                                                               |
 | service.type                               | string | `"ClusterIP"`                                   | Kubernetes service type                                                                                                |
 | serviceAccount.annotations                 | object | `{}`                                            | Annotations to add to the service account                                                                              |
 | serviceAccount.create                      | bool   | `true`                                          | Specifies whether a service account should be created                                                                  |

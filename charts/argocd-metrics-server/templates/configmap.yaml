@@ -114,7 +114,7 @@ data:
                        "description": "",
                        "graphType": "line",
                        "metricName": "pod_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_sum {namespace=\"{{.namespace}}\", status=\"200\"} [1m])) by (pod_template_hash)"
+                       "queryExpression": "sum(rate(http_server_requests_seconds_sum {namespace=\"{{"{{"}}.namespace{{"}}"}}\", status=\"200\"} [1m])) by (pod_template_hash)"
                      }
                    ]
                  },
@@ -129,7 +129,7 @@ data:
                        "description": "",
                        "graphType": "line",
                        "metricName": "pod_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{.namespace}}\", status=\"500\"} [1m])) by (pod_template_hash)"
+                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{"}}.namespace{{"}}"}}\", status=\"500\"} [1m])) by (pod_template_hash)"
                      },
                      {
                        "name": "http_error_rate_400",
@@ -137,7 +137,7 @@ data:
                        "description": "",
                        "graphType": "line",
                        "metricName": "pod_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{.namespace}}\", status=\"404\"} [1m])) by (pod_template_hash)"
+                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{"}}.namespace{{"}}"}}\", status=\"404\"} [1m])) by (pod_template_hash)"
                      }
                    ]
                  },
@@ -152,7 +152,7 @@ data:
                        "description": "",
                        "graphType": "line",
                        "metricName": "pod_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{.namespace}}\"} [1m])) by (pod_template_hash)"
+                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{"}}.namespace{{"}}"}}\"} [1m])) by (pod_template_hash)"
                      }
                    ]
                  },
@@ -212,7 +212,7 @@ data:
                        "description": "",
                        "graphType": "line",
                        "metricName": "rollout_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_sum {namespace=\"{{.namespace}}\", status=\"200\"} [1m])) by (rollout_template_hash)"
+                       "queryExpression": "sum(rate(http_server_requests_seconds_sum {namespace=\"{{"{{"}}.namespace{{"}}"}}\", status=\"200\"} [1m])) by (rollout_template_hash)"
                      }
                    ]
                  },
@@ -227,7 +227,7 @@ data:
                        "description": "",
                        "graphType": "line",
                        "metricName": "rollout_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{.namespace}}\", status=\"500\"} [1m])) by (rollout_template_hash)"
+                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{"}}.namespace{{"}}"}}\", status=\"500\"} [1m])) by (rollout_template_hash)"
                      },
                      {
                        "name": "http_error_rate_400",
@@ -235,7 +235,7 @@ data:
                        "description": "",
                        "graphType": "line",
                        "metricName": "rollout_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{.namespace}}\", status=\"404\"} [1m])) by (rollout_template_hash)"
+                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{"}}.namespace{{"}}"}}\", status=\"404\"} [1m])) by (rollout_template_hash)"
                      }
                    ]
                  },
@@ -250,7 +250,7 @@ data:
                        "description": "",
                        "graphType": "line",
                        "metricName": "rollout_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{.namespace}}\"} [1m])) by (rollout_template_hash)"
+                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{"}}.namespace{{"}}"}}\"} [1m])) by (rollout_template_hash)"
                      }
                    ]
                  },

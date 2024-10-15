@@ -1,6 +1,6 @@
 apiVersion: v2
 name: argocd-metrics-server
-description: A Helm chart for running a defragmentation CronJob for ETCD
+description: A Helm chart for installing the Argo CD Metrics Server, which connects to Prometheus and displays Metrics in the Argo CD UI
 type: application
 version: 0.0.1
 appVersion: "v1.0.3"
