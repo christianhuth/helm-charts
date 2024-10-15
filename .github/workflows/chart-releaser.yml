@@ -50,37 +50,3 @@ jobs:
           CR_KEYRING: keyring.gpg
           CR_PASSPHRASE_FILE: passphrase-file.txt
           CR_SIGN: true
-
-  release2chartmuseum:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout Git repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Install Helm
-        uses: azure/setup-helm@v3
-
-      - name: Add Helm repository
-        run: helm repo add christianknell https://charts.knell.it
-
-      - name: Update dependencies
-        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
-
-      - name: Install Helm plugin helm-push
-        run: helm plugin install https://github.com/chartmuseum/helm-push
-
-      - name: Push current version to Helm repository
-        run: |
-          cd charts
-          for chart in */;
-          do
-            cd $chart
-            helm cm-push --force . https://charts.knell.it
-            cd ..
-          done
-        env:
-          HELM_REPO_USERNAME: '${{ secrets.CHARTMUSEUM_USER }}'
-          HELM_REPO_PASSWORD: '${{ secrets.CHARTMUSEUM_PASSWORD }}'
