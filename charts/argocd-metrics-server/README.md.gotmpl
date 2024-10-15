@@ -16,6 +16,8 @@ This chart bootstraps the [ArgoCD Metrics Server](https://github.com/argoproj-la
 ## Prerequisites
 
 - Kubernetes 1.19+
+- Argo CD version 2.6+
+- Prometheus
 
 ## Installing the Chart
 
@@ -49,4 +51,41 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 
 ```console
 helm install my-release -f values.yaml christianhuth/argocd-metrics-server
+```
+
+# Configuring Argo CD
+
+After a successful installation of the Argo CD Metrics Server you need to configure Argo CD to display Metrics in the UI.
+
+Assuming you are using the official Argo CD Helm Chart, this can be achieved with the following values:
+
+```yaml
+configs:
+  # this part configures the UI extension to use the Argo CD Metrics Server
+  # make sure to adjust the URL to your installation
+  cm:
+    extension.config: |-
+      extensions:
+        - name: metrics
+          backend:
+            services:
+              - url: http://argocd-metrics-server.argo.svc:9003
+  # this part enables the proxy extension feature of Argo CD
+  params:
+    server.enable.proxy.extension: true
+  # this part authorizes users to use the Metrics extension
+  rbac:
+    policy.csv: |
+      p, role:readonly, extensions, invoke, metrics, allow
+server:
+  # this part downloads the UI extension and integrates it into the Argo CD UI
+  extensions:
+    enabled: true
+    extensionList:
+      - name: extension-metrics
+        env:
+          - name: EXTENSION_URL
+            value: https://github.com/argoproj-labs/argocd-extension-metrics/releases/download/v1.0.3/extension.tar.gz
+          - name: EXTENSION_CHECKSUM_URL
+            value: https://github.com/argoproj-labs/argocd-extension-metrics/releases/download/v1.0.3/extension_checksums.txt
 ```

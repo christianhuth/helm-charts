@@ -90,14 +90,6 @@
                         "enabled": {
                             "type": "boolean"
                         },
-                        "namespaceSelector": {
-                            "type": "object",
-                            "properties": {
-                                "kubernetes.io/metadata.name": {
-                                    "type": "string"
-                                }
-                            }
-                        },
                         "podSelector": {
                             "type": "object",
                             "properties": {

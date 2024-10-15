@@ -108,9 +108,6 @@ networkPolicy:
   prometheus:
     # --- allow outgoing traffic to Prometheus
     enabled: true
-    # -- The labels of the namespace where Prometheus is running
-    namespaceSelector:
-      kubernetes.io/metadata.name: monitoring
     # -- The labels of the Prometheus Pods
     podSelector:
       app.kubernetes.io/name: prometheus
