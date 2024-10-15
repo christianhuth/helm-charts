@@ -7,6 +7,9 @@ ci-cd:
 ansible-semaphore:
 - changed-files:
   - any-glob-to-any-file: 'charts/ansible-semaphore/*'
+argocd-metrics-server:
+- changed-files:
+  - any-glob-to-any-file: 'charts/argocd-metrics-server/*'
 baserow:
 - changed-files:
   - any-glob-to-any-file: 'charts/baserow/*'
