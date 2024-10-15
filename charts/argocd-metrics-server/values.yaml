@@ -1,0 +1,124 @@
+# -- Provide a name in place of `argocd-extension-metrics`
+nameOverride: ""
+
+# -- String to fully override `"argocd-extension-metrics.fullname"`
+fullnameOverride: ""
+
+image:
+  # -- image registory
+  registry: quay.io
+  # -- image repository
+  repository: argoprojlabs/argocd-extension-metrics
+  # -- image pull policy
+  pullPolicy: Always
+  # -- Overrides the image tag
+  tag: "v1.0.3"
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+# -- Number of replicas
+replicaCount: 1
+
+# -- The number of old ReplicaSets to retain
+revisionHistoryLimit: 0
+
+# -- pod-level security context
+podSecurityContext: {}
+  # if you are using direct host access to the certificates you probably need to run the pod as root
+  # fsGroup: 0
+  # runAsGroup: 0
+  # runAsUser: 0
+
+# -- Resource limits and requests for the controller pods.
+resources:
+  requests:
+    cpu: 100m
+    memory: 100Mi
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# -- container-level security context
+securityContext: {}
+  # capabilities:nodeSelector:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  # -- Kubernetes service type
+  type: ClusterIP
+  # -- Kubernetes port where service is exposed
+  port: 3000
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Toleration labels for pod assignment
+tolerations: []
+
+# -- Affinity settings for pod assignment
+affinity: {}
+
+# -- additional environment variables to be added to the pods
+extraEnv: []
+
+networkPolicy:
+  # --- create a NetworkPolicy resource to limit the allowed traffic
+  enabled: false
+  # -- Annotations to be added to the NetworkPolicies
+  additionalAnnotations: {}
+  # -- Labels to be added to the NetworkPolicies
+  additionalLabels: {}
+  argocd:
+    # --- allow incoming traffic from Argo CD
+    enabled: true
+    # -- The labels of the namespace where Argo CD is running
+    namespaceSelector: {}
+    # -- The labels of the Argo CD Pods
+    podSelector: {}
+  dns:
+    # -- allow outgoing traffic to the Kubernetes DNS
+    enabled: true
+    # -- The labels of the namespace where the Kubernetes DNS is running
+    namespaceSelector:
+      kubernetes.io/metadata.name: kube-system
+    # -- The labels of the Kubernetes DNS Pods
+    podSelector:
+      k8s-app: kube-dns
+  prometheus:
+    # --- allow outgoing traffic to Prometheus
+    enabled: true
+    # -- The labels of the namespace where Prometheus is running
+    namespaceSelector:
+      kubernetes.io/metadata.name: monitoring
+    # -- The labels of the Prometheus Pods
+    podSelector:
+      app.kubernetes.io/name: prometheus
+
+prometheus:
+  # -- The namespace where Prometheus is running
+  namespace: monitoring
+  # -- The port on which the Prometheus service is listening for traffic
+  port: 9090
+  # -- The name of the Prometheus service
+  service: prometheus-operated
