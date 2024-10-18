@@ -2,7 +2,7 @@ apiVersion: v2
 name: proxyweb
 description: A Helm chart for Kubernetes
 type: application
-version: 1.0.3
+version: 1.0.4
 appVersion: "latest"
 home: https://github.com/christianhuth/helm-charts
 maintainers: []
@@ -12,7 +12,7 @@ deprecated: true
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: URL of Helm Repository in README
+      description: added support for stable autoscaling api
   artifacthub.io/signKey: |
     fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
     url: https://charts.christianhuth.de/public.key
