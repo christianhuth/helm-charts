@@ -2,7 +2,7 @@ apiVersion: v2
 name: skooner
 description: Simple Kubernetes real-time dashboard and management.
 type: application
-version: 0.0.9
+version: 0.0.10
 appVersion: "stable"
 home: https://github.com/christianhuth/helm-charts
 icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu8eQrFBosk7yHTiDEwjnVcMRyDD5uIaNXhlZ1m0yiC4H8RP1j0PlBPtgtv0bdH0JwlOE
@@ -15,7 +15,7 @@ annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
     - kind: changed
-      description: URL of Helm Repository in README
+      description: added support for stable autoscaling api
   artifacthub.io/screenshots: |
     - title: Overview of the workloads running inside of Kubernetes.
       url: https://skooner.io/images/k8dash-screen.png
