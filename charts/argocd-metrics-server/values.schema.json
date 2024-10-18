@@ -111,6 +111,9 @@
         "prometheus": {
             "type": "object",
             "properties": {
+                "dashboards": {
+                    "type": "string"
+                },
                 "namespace": {
                     "type": "string"
                 },
