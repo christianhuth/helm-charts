@@ -49,6 +49,10 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- with .Values.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
       {{- if .Values.oidc.enabled }}
           env:
             - name: OIDC_URL
@@ -75,5 +79,9 @@ spec:
       {{- end }}
       {{- with .Values.tolerations }}
       tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.volumes}}
+      volumes:
         {{- toYaml . | nindent 8 }}
       {{- end }}
