@@ -115,3 +115,9 @@ oidc:
 clusterRoleBinding:
   # -- Define which ClusterRole to bind to: cluster-admin, edit, view
   clusterRole: edit
+
+# -- Container's volume mounts
+volumeMounts: []
+
+# -- Pod's volumes
+volumes: []
