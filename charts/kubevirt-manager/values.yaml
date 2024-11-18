@@ -40,9 +40,15 @@ podSecurityContext: {}
 # -- container-level security context
 securityContext:
   allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
   readOnlyRootFilesystem: true
+  runAsNonRoot: true
   runAsUser: 10000
   runAsGroup: 30000
+  seccompProfile:
+    type: RuntimeDefault
 
 service:
   # -- Kubernetes service type
