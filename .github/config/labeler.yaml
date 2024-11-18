@@ -73,6 +73,9 @@ kubedoom:
 kube-ops-view:
 - changed-files:
   - any-glob-to-any-file: charts/kube-ops-view/*
+kubevirt-manager:
+- changed-files:
+  - any-glob-to-any-file: charts/kubevirt-manager/*
 kutt:
 - changed-files:
   - any-glob-to-any-file: charts/kutt/*
