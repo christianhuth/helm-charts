@@ -1,0 +1,14 @@
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  labels:
+    {{- include "kubevirt-manager.labels" . | nindent 4 }}
+  name: {{ include "kubevirt-manager.clusterRole.cas-management" . }}
+rules:
+  - apiGroups: ["cluster.x-k8s.io"]
+    resources: ["machinedeployments", "machinedeployments/scale", "machines", "machinesets", "machinepools"]
+    verbs: ["get", "list", "watch", "udate"]
+  - apiGroups: ["infrastructure.cluster.x-k8s.io"]
+    resources: ["kubevirtcluster", "kubevirtmachinetemplate", "kubevirtmachinetemplates"]
+    verbs: ["get", "list", "watch", "udate"]
