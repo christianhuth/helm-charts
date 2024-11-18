@@ -32,6 +32,8 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             {{- range .Values.extraEnv }}
             {{- if and (.name) (.value) }}
@@ -39,20 +41,41 @@ spec:
               value: {{ .value | quote }}
             {{- end }}
             {{- end }}
-          {{- with .Values.securityContext }}
-          securityContext:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 8080
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          volumeMounts:
+            - name: cache-volume
+              mountPath: /var/cache/nginx
+            - name: run-volume
+              mountPath: /var/run
+            {{- if .Values.ingress.basicAuth.enabled }}
+            - name: auth-config
+              mountPath: /etc/nginx/auth.d/
+            - name: auth-secret
+              mountPath: /etc/nginx/secret.d/
+            {{- end }}
+            {{- if .Values.prometheus.enabled }}
+            - name: prometheus-config
+              mountPath: /etc/nginx/location.d/
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -65,3 +88,30 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
+        - name: run-volume
+          emptyDir: {}
+        {{- if .Values.ingress.basicAuth.enabled }}
+        - name: auth-config
+          configMap:
+            name: {{ template "kubevirt-manager.fullname" . }}
+            items:
+              - key: basicauth.conf
+                path: basicauth.conf
+        - name: auth-secret
+          secret:
+            secretName: {{ include "kubevirt-manager.ingress.basicAuth.secretName" . }}
+            items:
+              - key: .htpasswd
+                path: .htpasswd
+        {{- end }}
+        {{- if .Values.prometheus.enabled }}
+        - name: prometheus-config
+          configMap:
+            name: {{ template "kubevirt-manager.fullname" . }}
+            items:
+              - key: prometheus.conf
+                path: prometheus.conf
+        {{- end }}

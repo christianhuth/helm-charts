@@ -1,12 +1,17 @@
-{{- if and .Values.prometheus.enabled }}
+{{- if or .Values.ingress.basicAuth.enabled .Values.prometheus.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
     {{- include "kubevirt-manager.labels" . | nindent 4 }}
   name: {{ template "kubevirt-manager.fullname" . }}
-  namespace: {{ .Release.Namespace }}
 data:
+  {{- if .Values.ingress.basicAuth.enabled }}
+  basicauth.conf: |
+    auth_basic "Restricted Content";
+    auth_basic_user_file /etc/nginx/secret.d/.htpasswd;
+  {{- end }}
+  {{- if .Values.prometheus.enabled }}
   prometheus.conf: |
     location /api {
         proxy_set_header X-Real-IP $remote_addr;
@@ -20,4 +25,5 @@ data:
         proxy_set_header Connection $connection_upgrade;
         proxy_pass http://{{ .Values.prometheus.service.name }}.{{ .Values.prometheus.service.namespace }}.svc:{{ .Values.prometheus.service.port }};
     }
+  {{- end }}
 {{- end }}

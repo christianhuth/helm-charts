@@ -51,6 +51,23 @@
                 "annotations": {
                     "type": "object"
                 },
+                "basicAuth": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "existingSecret": {
+                            "type": "string"
+                        },
+                        "password": {
+                            "type": "string"
+                        },
+                        "username": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "className": {
                     "type": "string"
                 },

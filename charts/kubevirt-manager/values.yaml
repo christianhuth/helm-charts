@@ -53,6 +53,15 @@ service:
 ingress:
   # -- Enable ingress record generation
   enabled: false
+  basicAuth:
+    # -- enable the configuration of basic authentication with nginx
+    enabled: false
+    # -- An existing Secret containing the username and password for basic authentication. Username and password have to be base64 encoded in the form username:password. The Secret needs to contain a key `.htpasswd` with the base64 encoded authentication information. If set `ingress.basicAuth.username` and `ingress.basicAuth.password` will be ignored.
+    existingSecret: ""
+    # -- Username for authentication
+    username: "admin"
+    # -- Password for authentication
+    password: "password"
   # -- IngressClass that will be be used to implement the Ingress
   className: ""
   # -- Additional annotations for the Ingress resource

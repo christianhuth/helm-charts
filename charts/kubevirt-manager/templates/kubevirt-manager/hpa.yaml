@@ -6,9 +6,9 @@ apiVersion: autoscaling/v2beta1
 {{- end }}
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "kubevirt-manager.fullname" . }}
   labels:
     {{- include "kubevirt-manager.labels" . | nindent 4 }}
+  name: {{ include "kubevirt-manager.fullname" . }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

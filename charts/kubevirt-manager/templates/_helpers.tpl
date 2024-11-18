@@ -81,3 +81,14 @@ Create the name of the clusterrole for the kccm
 {{- define "kubevirt-manager.clusterRole.kccm" -}}
 {{- printf "%s-%s" (include "kubevirt-manager.fullname" .) "kccm" | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
+
+{{/*
+Get the name of the secret containing the information for basic authentication
+*/}}
+{{- define "kubevirt-manager.ingress.basicAuth.secretName" -}}
+  {{- if .Values.ingress.basicAuth.existingSecret -}}
+    {{- printf "%s" (tpl .Values.ingress.basicAuth.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "kubevirt-manager.fullname" .) -}}
+  {{- end -}}
+{{- end -}}
