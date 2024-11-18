@@ -5,7 +5,7 @@ type: application
 version: 0.0.1
 appVersion: "1.4.2"
 home: https://github.com/christianhuth/helm-charts
-icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+icon: https://yt3.googleusercontent.com/oTCjudmpLXspEh3g5VraUfZ_1_PZxXXI6kgorNCI9kEqnDICrWEkNUmVGkEtA6WfRbT0GCzjeA=s160-c-k-c0x00ffffff-no-rj
 maintainers:
   - name: christianhuth
     email: christian@knell.it
