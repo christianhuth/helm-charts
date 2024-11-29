@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 0
 
       - name: setup helm
-        uses: azure/setup-helm@v3
+        uses: azure/setup-helm@v4
 
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
@@ -51,7 +51,7 @@ jobs:
           fetch-depth: 0
 
       - name: setup helm
-        uses: azure/setup-helm@v3
+        uses: azure/setup-helm@v4
 
       - uses: actions/setup-python@v5
         with:
