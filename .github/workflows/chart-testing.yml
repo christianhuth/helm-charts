@@ -43,7 +43,7 @@ jobs:
         run : helm lint charts/*
 
   chart-testing:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: checkout git repository
         uses: actions/checkout@v4
