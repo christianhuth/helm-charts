@@ -66,6 +66,12 @@ affinity: {}
 # -- additional environment variables to be added to the pods
 extraEnv: []
 
+# -- additional volumes to be added to the pods
+extraVolumes: []
+
+# -- additional volume mounts to be added to the pods
+extraVolumeMounts: []
+
 # -- specify if the CronJob should run on the hostNetwork
 hostNetwork: false
 
