@@ -36,11 +36,15 @@ jobs:
       - name: setup helm
         uses: azure/setup-helm@v3
 
-      - name: Update dependencies
-        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.7
 
-      - name: helm linting
-        run : helm lint charts/*
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.6.1
+
+      - name: helm lint on changed charts
+        run : ct list-changed --config .github/config/chart-testing.yaml | xargs -d '\n' -I {} helm dependency update {}
 
   chart-testing:
     runs-on: ubuntu-22.04
@@ -63,7 +67,7 @@ jobs:
       - name: Run chart-testing (list-changed)
         id: list-changed
         run: |
-          changed=$(ct list-changed --target-branch ${{ github.event.repository.default_branch }})
+          changed=$(ct list-changed --config .github/config/chart-testing.yaml)
           if [[ -n "$changed" ]]; then
             echo "::set-output name=changed::true"
           fi

@@ -38,12 +38,18 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "github.vscode-github-actions",
         "ms-kubernetes-tools.vscode-kubernetes-tools",
         "tim-koehler.helm-intellisense"
       ]
     }
   },
 
+  "mounts": [
+    "type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"
+  ],
+
+  // we use /home/vscode/helm-charts as development folder inside the container
   "workspaceFolder": "/home/vscode/helm-charts",
   "workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/helm-charts,type=bind"
 
