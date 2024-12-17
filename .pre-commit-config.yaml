@@ -13,3 +13,10 @@ repos:
       - id: check-yaml
         args: [--allow-multiple-documents]
         exclude: ^charts/.*/templates/
+  - repo: https://github.com/norwoodj/helm-docs
+    rev: ""
+    hooks:
+      - id: helm-docs-container
+        entry: jnorwood/helm-docs:v1.14.2
+        args:
+          - --chart-search-root=charts
