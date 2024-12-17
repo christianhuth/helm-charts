@@ -26,7 +26,7 @@ jobs:
         run: ah lint
 
   helm-lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: checkout git repository
         uses: actions/checkout@v4
@@ -43,8 +43,11 @@ jobs:
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.6.1
 
-      - name: helm lint on changed charts
+      - name: helm dependency update on changed charts
         run : ct list-changed --config .github/config/chart-testing.yaml | xargs -d '\n' -I {} helm dependency update {}
+
+      - name: helm lint on changed charts
+        run : ct list-changed --config .github/config/chart-testing.yaml | xargs -d '\n' -I {} helm lint {}
 
   chart-testing:
     runs-on: ubuntu-22.04
