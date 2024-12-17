@@ -44,87 +44,87 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Values
 
-| Key                                        | Type   | Default                          | Description                                                                                                                                                                                                                                                |
-| ------------------------------------------ | ------ | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| affinity                                   | object | `{}`                             | Affinity settings for pod assignment                                                                                                                                                                                                                       |
-| autoscaling.enabled                        | bool   | `false`                          | Enable Horizontal POD autoscaling                                                                                                                                                                                                                          |
-| autoscaling.maxReplicas                    | int    | `100`                            | Maximum number of replicas                                                                                                                                                                                                                                 |
-| autoscaling.minReplicas                    | int    | `1`                              | Minimum number of replicas                                                                                                                                                                                                                                 |
-| autoscaling.targetCPUUtilizationPercentage | int    | `80`                             | Target CPU utilization percentage                                                                                                                                                                                                                          |
-| externalPostgresql.auth.database           | string | `"kutt"`                         | Name of the database to use                                                                                                                                                                                                                                |
-| externalPostgresql.auth.existingSecret     | string | `""`                             | Name of existing secret to use for PostgreSQL credentials                                                                                                                                                                                                  |
-| externalPostgresql.auth.password           | string | `"kutt"`                         | Password to use                                                                                                                                                                                                                                            |
-| externalPostgresql.auth.userPasswordKey    | string | `""`                             | Key in the secret containing the password                                                                                                                                                                                                                  |
-| externalPostgresql.auth.username           | string | `"kutt"`                         | Name of the user to use                                                                                                                                                                                                                                    |
-| externalPostgresql.hostname                | string | `""`                             | Hostname of the PostgreSQL database                                                                                                                                                                                                                        |
-| externalPostgresql.port                    | int    | `5432`                           | Port used to connect to PostgreSQL database                                                                                                                                                                                                                |
-| externalRedis.auth.enabled                 | bool   | `true`                           | if authentication should be used with external Redis™                                                                                                                                                                                                     |
-| externalRedis.auth.existingSecret          | string | `""`                             | Name of existing secret to use for Redis™ credentials                                                                                                                                                                                                     |
-| externalRedis.auth.password                | string | `""`                             | Password to use                                                                                                                                                                                                                                            |
-| externalRedis.auth.userPasswordKey         | string | `""`                             | Key in the secret containing the password                                                                                                                                                                                                                  |
-| externalRedis.hostname                     | string | `""`                             | Hostname of Redis™                                                                                                                                                                                                                                        |
-| externalRedis.port                         | int    | `6379`                           | Port used to connect to Redis                                                                                                                                                                                                                              |
-| extraEnv                                   | list   | `[]`                             | additional environment variables to be added to the pods                                                                                                                                                                                                   |
-| fullnameOverride                           | string | `""`                             | String to fully override `"kutt.fullname"`                                                                                                                                                                                                                 |
-| image.pullPolicy                           | string | `"Always"`                       | image pull policy                                                                                                                                                                                                                                          |
-| image.repository                           | string | `"kutt/kutt"`                    | image repository                                                                                                                                                                                                                                           |
-| image.tag                                  | string | `"v2.7.4"`                       | Overrides the image tag                                                                                                                                                                                                                                    |
-| imagePullSecrets                           | list   | `[]`                             | If defined, uses a Secret to pull an image from a private Docker registry or repository.                                                                                                                                                                   |
-| ingress.annotations                        | object | `{}`                             | Additional annotations for the Ingress resource                                                                                                                                                                                                            |
-| ingress.className                          | string | `""`                             | IngressClass that will be be used to implement the Ingress                                                                                                                                                                                                 |
-| ingress.enabled                            | bool   | `false`                          | Enable ingress record generation                                                                                                                                                                                                                           |
-| ingress.hosts                              | list   | see [values.yaml](./values.yaml) | An array with the hosts configuration                                                                                                                                                                                                                      |
-| ingress.tls                                | list   | `[]`                             | An array with the tls configuration                                                                                                                                                                                                                        |
-| kutt.admin.emails                          | string | `""`                             | Comma seperated list of email addresses that can access admin actions on settings page                                                                                                                                                                     |
-| kutt.config.defaultMaxStatsPerLink         | string | `"5000"`                         | Max number of visits for each link to have detailed stats                                                                                                                                                                                                  |
-| kutt.config.disallowAnonymousLinks         | bool   | `false`                          | Disable anonymous link creation                                                                                                                                                                                                                            |
-| kutt.config.disallowRegistration           | bool   | `false`                          | Disable registration                                                                                                                                                                                                                                       |
-| kutt.config.linkLength                     | int    | `6`                              | Generated link length                                                                                                                                                                                                                                      |
-| kutt.config.nonUserCooldown                | int    | `0`                              | Create a cooldown for non-logged in users in minutes. Set 0 to disable.                                                                                                                                                                                    |
-| kutt.config.siteName                       | string | `"Kutt"`                         | The name of the site where Kutt is hosted                                                                                                                                                                                                                  |
-| kutt.config.userLimitPerDay                | int    | `50`                             | The daily limit for each user                                                                                                                                                                                                                              |
-| kutt.domain.customDomainUseHttps           | bool   | `false`                          | Use HTTPS for links with custom domain                                                                                                                                                                                                                     |
-| kutt.domain.defaultDomain                  | string | `"localhost:3000"`               | The domain that this website is on                                                                                                                                                                                                                         |
-| kutt.domain.useFirstIngressHost            | bool   | `false`                          | If you use an ingress to expose Kutt you can simply set this to true to use the first hostname defined in the ingress.                                                                                                                                     |
-| kutt.google.existingSecret                 | string | `""`                             | Use existing secret for Google configuration. The secret has to contain the key `GOOGLE_SAFE_BROWSING_KEY`. When it's set the `kutt.google.safeBrowsingKey` is ignored.                                                                                    |
-| kutt.google.safeBrowsingKey                | string | `""`                             | Google Cloud API to prevent from users from submitting malware URLs. Get it from https://developers.google.com/safe-browsing/v4/get-started.                                                                                                               |
-| kutt.jwt.existingSecret                    | string | `""`                             | Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`. When it's set the kutt.jwt.key is ignored.                                                                                                                         |
-| kutt.jwt.key                               | string | `"secret-jwt-key"`               | make sure to replace with your own secret key                                                                                                                                                                                                              |
-| kutt.mail.contactEmail                     | string | `""`                             | Support email to show on the app                                                                                                                                                                                                                           |
-| kutt.mail.existingSecret                   | string | `""`                             | Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`. When it's set the `kutt.mail.password` is ignored.                                                                                                            |
-| kutt.mail.from                             | string | `""`                             | The email address Kutt will send emails from.                                                                                                                                                                                                              |
-| kutt.mail.host                             | string | `"smtp.example.com"`             | The host of the external SMTP server that Kutt should use to send emails.                                                                                                                                                                                  |
-| kutt.mail.password                         | string | `""`                             | The password to authenticate to the smtp host when sending emails.                                                                                                                                                                                         |
-| kutt.mail.port                             | int    | `465`                            | The port used to connect to the smtp host.                                                                                                                                                                                                                 |
-| kutt.mail.reportEmail                      | string | `""`                             | The email address that will receive submitted reports.                                                                                                                                                                                                     |
-| kutt.mail.secure                           | bool   | `false`                          | If true the connection will use TLS when connecting to server. If false (the default) then TLS is used if server supports the STARTTLS extension. In most cases set this value to true if you are connecting to port 465. For port 587 or 25 keep it false |
-| kutt.mail.username                         | string | `"user@example.com"`             | The username to authenticate to the smtp host when sending emails.                                                                                                                                                                                         |
-| kutt.recaptcha.existingSecret              | string | `""`                             | Use existing secret for ReCaptacha secrets. The secret has to contain the keys `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY`. When it's set the kutt.recaptcha.siteKey and kutt.recaptcha.secretKey is ignored.                                          |
-| kutt.recaptcha.secretKey                   | string | `""`                             | Invisible reCaptcha secret key. Create one in https://www.google.com/recaptcha/intro/                                                                                                                                                                      |
-| kutt.recaptcha.siteKey                     | string | `""`                             | Invisible reCaptcha site key. Create one in https://www.google.com/recaptcha/intro/                                                                                                                                                                        |
-| nameOverride                               | string | `""`                             | Provide a name in place of `kutt`                                                                                                                                                                                                                          |
-| nodeSelector                               | object | `{}`                             | Node labels for pod assignment                                                                                                                                                                                                                             |
-| podAnnotations                             | object | `{}`                             | Annotations to be added to exporter pods                                                                                                                                                                                                                   |
-| podSecurityContext                         | object | `{}`                             | pod-level security context                                                                                                                                                                                                                                 |
-| postgresql.auth.database                   | string | `"kutt"`                         | Name for a custom database to create                                                                                                                                                                                                                       |
-| postgresql.auth.existingSecret             | string | `""`                             | Name of existing secret to use for PostgreSQL credentials                                                                                                                                                                                                  |
-| postgresql.auth.password                   | string | `"kutt"`                         | Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided                                                                                                                                                              |
-| postgresql.auth.username                   | string | `"kutt"`                         | Name for a custom user to create                                                                                                                                                                                                                           |
-| postgresql.enabled                         | bool   | `true`                           | enable PostgreSQL™ subchart from Bitnami                                                                                                                                                                                                                  |
-| redis.architecture                         | string | `"standalone"`                   | Redis® architecture. Allowed values: standalone or replication                                                                                                                                                                                            |
-| redis.auth.enabled                         | bool   | `true`                           | Enable password authentication                                                                                                                                                                                                                             |
-| redis.auth.password                        | string | `"kutt"`                         | Redis™ password                                                                                                                                                                                                                                           |
-| redis.enabled                              | bool   | `true`                           | enable Redis™ subchart from Bitnami                                                                                                                                                                                                                       |
-| replicaCount                               | int    | `1`                              | Number of replicas                                                                                                                                                                                                                                         |
-| resources                                  | object | `{}`                             | Resource limits and requests for the pods.                                                                                                                                                                                                                 |
-| revisionHistoryLimit                       | int    | `10`                             | The number of old ReplicaSets to retain                                                                                                                                                                                                                    |
-| securityContext                            | object | `{}`                             | container-level security context                                                                                                                                                                                                                           |
-| service.port                               | int    | `80`                             | Kubernetes port where service is exposed                                                                                                                                                                                                                   |
-| service.type                               | string | `"ClusterIP"`                    | Kubernetes service type                                                                                                                                                                                                                                    |
-| serviceAccount.annotations                 | object | `{}`                             | Annotations to add to the service account                                                                                                                                                                                                                  |
-| serviceAccount.create                      | bool   | `true`                           | Specifies whether a service account should be created                                                                                                                                                                                                      |
-| serviceAccount.name                        | string | `""`                             | The name of the service account to use. If not set and create is true, a name is generated using the fullname template                                                                                                                                     |
-| tolerations                                | list   | `[]`                             | Toleration labels for pod assignment                                                                                                                                                                                                                       |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| affinity | object | `{}` | Affinity settings for pod assignment |
+| autoscaling.enabled | bool | `false` | Enable Horizontal POD autoscaling |
+| autoscaling.maxReplicas | int | `100` | Maximum number of replicas |
+| autoscaling.minReplicas | int | `1` | Minimum number of replicas |
+| autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
+| externalPostgresql.auth.database | string | `"kutt"` | Name of the database to use |
+| externalPostgresql.auth.existingSecret | string | `""` | Name of existing secret to use for PostgreSQL credentials |
+| externalPostgresql.auth.password | string | `"kutt"` | Password to use |
+| externalPostgresql.auth.userPasswordKey | string | `""` | Key in the secret containing the password |
+| externalPostgresql.auth.username | string | `"kutt"` | Name of the user to use |
+| externalPostgresql.hostname | string | `""` | Hostname of the PostgreSQL database |
+| externalPostgresql.port | int | `5432` | Port used to connect to PostgreSQL database |
+| externalRedis.auth.enabled | bool | `true` | if authentication should be used with external Redis™ |
+| externalRedis.auth.existingSecret | string | `""` | Name of existing secret to use for Redis™ credentials |
+| externalRedis.auth.password | string | `""` | Password to use |
+| externalRedis.auth.userPasswordKey | string | `""` | Key in the secret containing the password |
+| externalRedis.hostname | string | `""` | Hostname of Redis™ |
+| externalRedis.port | int | `6379` | Port used to connect to Redis |
+| extraEnv | list | `[]` | additional environment variables to be added to the pods |
+| fullnameOverride | string | `""` | String to fully override `"kutt.fullname"` |
+| image.pullPolicy | string | `"Always"` | image pull policy |
+| image.repository | string | `"kutt/kutt"` | image repository |
+| image.tag | string | `"v2.7.4"` | Overrides the image tag |
+| imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
+| ingress.annotations | object | `{}` | Additional annotations for the Ingress resource |
+| ingress.className | string | `""` | IngressClass that will be be used to implement the Ingress |
+| ingress.enabled | bool | `false` | Enable ingress record generation |
+| ingress.hosts | list | see [values.yaml](./values.yaml) | An array with the hosts configuration |
+| ingress.tls | list | `[]` | An array with the tls configuration |
+| kutt.admin.emails | string | `""` | Comma seperated list of email addresses that can access admin actions on settings page |
+| kutt.config.defaultMaxStatsPerLink | string | `"5000"` | Max number of visits for each link to have detailed stats |
+| kutt.config.disallowAnonymousLinks | bool | `false` | Disable anonymous link creation |
+| kutt.config.disallowRegistration | bool | `false` | Disable registration |
+| kutt.config.linkLength | int | `6` | Generated link length |
+| kutt.config.nonUserCooldown | int | `0` | Create a cooldown for non-logged in users in minutes. Set 0 to disable. |
+| kutt.config.siteName | string | `"Kutt"` | The name of the site where Kutt is hosted |
+| kutt.config.userLimitPerDay | int | `50` | The daily limit for each user |
+| kutt.domain.customDomainUseHttps | bool | `false` | Use HTTPS for links with custom domain |
+| kutt.domain.defaultDomain | string | `"localhost:3000"` | The domain that this website is on |
+| kutt.domain.useFirstIngressHost | bool | `false` | If you use an ingress to expose Kutt you can simply set this to true to use the first hostname defined in the ingress. |
+| kutt.google.existingSecret | string | `""` | Use existing secret for Google configuration. The secret has to contain the key `GOOGLE_SAFE_BROWSING_KEY`. When it's set the `kutt.google.safeBrowsingKey` is ignored. |
+| kutt.google.safeBrowsingKey | string | `""` | Google Cloud API to prevent from users from submitting malware URLs. Get it from https://developers.google.com/safe-browsing/v4/get-started. |
+| kutt.jwt.existingSecret | string | `""` | Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`. When it's set the kutt.jwt.key is ignored. |
+| kutt.jwt.key | string | `"secret-jwt-key"` | make sure to replace with your own secret key |
+| kutt.mail.contactEmail | string | `""` | Support email to show on the app |
+| kutt.mail.existingSecret | string | `""` | Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`. When it's set the `kutt.mail.password` is ignored. |
+| kutt.mail.from | string | `""` | The email address Kutt will send emails from. |
+| kutt.mail.host | string | `"smtp.example.com"` | The host of the external SMTP server that Kutt should use to send emails. |
+| kutt.mail.password | string | `""` | The password to authenticate to the smtp host when sending emails. |
+| kutt.mail.port | int | `465` | The port used to connect to the smtp host. |
+| kutt.mail.reportEmail | string | `""` | The email address that will receive submitted reports. |
+| kutt.mail.secure | bool | `false` | If true the connection will use TLS when connecting to server. If false (the default) then TLS is used if server supports the STARTTLS extension. In most cases set this value to true if you are connecting to port 465. For port 587 or 25 keep it false |
+| kutt.mail.username | string | `"user@example.com"` | The username to authenticate to the smtp host when sending emails. |
+| kutt.recaptcha.existingSecret | string | `""` | Use existing secret for ReCaptacha secrets. The secret has to contain the keys `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY`. When it's set the kutt.recaptcha.siteKey and kutt.recaptcha.secretKey is ignored. |
+| kutt.recaptcha.secretKey | string | `""` | Invisible reCaptcha secret key. Create one in https://www.google.com/recaptcha/intro/ |
+| kutt.recaptcha.siteKey | string | `""` | Invisible reCaptcha site key. Create one in https://www.google.com/recaptcha/intro/ |
+| nameOverride | string | `""` | Provide a name in place of `kutt` |
+| nodeSelector | object | `{}` | Node labels for pod assignment |
+| podAnnotations | object | `{}` | Annotations to be added to exporter pods |
+| podSecurityContext | object | `{}` | pod-level security context |
+| postgresql.auth.database | string | `"kutt"` | Name for a custom database to create |
+| postgresql.auth.existingSecret | string | `""` | Name of existing secret to use for PostgreSQL credentials |
+| postgresql.auth.password | string | `"kutt"` | Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided |
+| postgresql.auth.username | string | `"kutt"` | Name for a custom user to create |
+| postgresql.enabled | bool | `true` | enable PostgreSQL™ subchart from Bitnami |
+| redis.architecture | string | `"standalone"` | Redis® architecture. Allowed values: standalone or replication |
+| redis.auth.enabled | bool | `true` | Enable password authentication |
+| redis.auth.password | string | `"kutt"` | Redis™ password |
+| redis.enabled | bool | `true` | enable Redis™ subchart from Bitnami |
+| replicaCount | int | `1` | Number of replicas |
+| resources | object | `{}` | Resource limits and requests for the pods. |
+| revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
+| securityContext | object | `{}` | container-level security context |
+| service.port | int | `80` | Kubernetes port where service is exposed |
+| service.type | string | `"ClusterIP"` | Kubernetes service type |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| tolerations | list | `[]` | Toleration labels for pod assignment |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 
@@ -147,25 +147,24 @@ This major updates the redis subchart to its newest major, 18.0.4. [Here](https:
 ### 2.0.0
 
 This major updates the way you define environment variables.
-
-- The section `mail` has been moved to `kutt.mail`
-- The section `envSecrets` has been merged into `kutt`:
-  - `envSecrets.google` is now `kutt.google`
-  - `envSecrets.jwt` is now `kutt.jwt`
-  - `envSecrets.recaptcha` is now `kutt.recaptcha`
-- The section `env` has been replaced with specific values:
-  - `ADMIN_EMAILS` is now `kutt.admin.emails`
-  - `CUSTOM_DOMAIN_USE_HTTPS` is now `kutt.domain.customDomainUseHttps`
-  - `DEFAULT_DOMAIN` is now `kutt.domain.defaultDomain`
-  - `DEFAULT_MAX_STATS_PER_LINK` is now `kutt.config.defaultMaxStatsPerLink`
-  - `DISALLOW_ANONYMOUS_LINKS` is now `kutt.config.disallowAnonymousLinks`
-  - `DISALLOW_REGISTRATION` is now `kutt.config.disallowRegistration`
-  - `LINK_LENGTH` is now `kutt.config.linkLength`
-  - `NON_USER_COOLDOWN` is now `kutt.config.nonUserCooldown`
-  - `REPORT_EMAIL` is now `kutt.mail.reportEmail`
-  - `SITE_NAME` is now `kutt.config.siteName`
-  - `USER_LIMIT_PER_DAY` is now `kutt.config.userLimitPerDay`
-- You can define additional environment variables using the extraEnv section.
+  - The section `mail` has been moved to `kutt.mail`
+  - The section `envSecrets` has been merged into `kutt`:
+    - `envSecrets.google` is now `kutt.google`
+    - `envSecrets.jwt` is now `kutt.jwt`
+    - `envSecrets.recaptcha` is now `kutt.recaptcha`
+  - The section `env` has been replaced with specific values:
+    - `ADMIN_EMAILS` is now `kutt.admin.emails`
+    - `CUSTOM_DOMAIN_USE_HTTPS` is now `kutt.domain.customDomainUseHttps`
+    - `DEFAULT_DOMAIN` is now `kutt.domain.defaultDomain`
+    - `DEFAULT_MAX_STATS_PER_LINK` is now `kutt.config.defaultMaxStatsPerLink`
+    - `DISALLOW_ANONYMOUS_LINKS` is now `kutt.config.disallowAnonymousLinks`
+    - `DISALLOW_REGISTRATION` is now `kutt.config.disallowRegistration`
+    - `LINK_LENGTH` is now `kutt.config.linkLength`
+    - `NON_USER_COOLDOWN` is now `kutt.config.nonUserCooldown`
+    - `REPORT_EMAIL` is now `kutt.mail.reportEmail`
+    - `SITE_NAME` is now `kutt.config.siteName`
+    - `USER_LIMIT_PER_DAY` is now `kutt.config.userLimitPerDay`
+  - You can define additional environment variables using the extraEnv section.
 
 ### 1.0.0
 

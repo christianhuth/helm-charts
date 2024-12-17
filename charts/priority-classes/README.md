@@ -44,11 +44,11 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Values
 
-| Key              | Type   | Default                          | Description                                            |
-| ---------------- | ------ | -------------------------------- | ------------------------------------------------------ |
-| fullnameOverride | string | `""`                             | String to fully override `"priority-classes.fullname"` |
-| nameOverride     | string | `""`                             | Provide a name in place of `priority-classes`          |
-| priorityClasses  | list   | see [values.yaml](./values.yaml) | List of Priority Classes to be created                 |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| fullnameOverride | string | `""` | String to fully override `"priority-classes.fullname"` |
+| nameOverride | string | `""` | Provide a name in place of `priority-classes` |
+| priorityClasses | list | see [values.yaml](./values.yaml) | List of Priority Classes to be created |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 

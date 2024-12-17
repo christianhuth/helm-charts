@@ -2,7 +2,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -13,6 +13,7 @@ repos:
       - id: check-yaml
         args: [--allow-multiple-documents]
         exclude: ^charts/.*/templates/
+
   - repo: https://github.com/norwoodj/helm-docs
     rev: ""
     hooks:
@@ -20,3 +21,8 @@ repos:
         entry: jnorwood/helm-docs:v1.14.2
         args:
           - --chart-search-root=charts
+
+  - repo: https://github.com/gruntwork-io/pre-commit
+    rev: v0.1.25
+    hooks:
+      - id: helmlint

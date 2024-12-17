@@ -44,16 +44,16 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Values
 
-| Key                        | Type   | Default      | Description                                                                                                             |
-| -------------------------- | ------ | ------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| fullnameOverride           | string | `""`         | String to fully override `"kubenav.fullname"`                                                                           |
-| nameOverride               | string | `""`         | Provide a name in place of `kubenav`                                                                                    |
-| rbac.customPermissions     | list   | `[]`         | Define the custom permissions to be granted to kubenav                                                                  |
-| rbac.mode                  | string | `"readonly"` | Decide which access mode should be granted to kubenav: `readonly`, `cluster-admin` or `custom`.                         |
-| rbac.namespaceLimits       | list   | `[]`         | Define a list of namespaces to limit kubenav to only access these namespaces                                            |
-| serviceAccount.annotations | object | `{}`         | Annotations to add to the service account                                                                               |
-| serviceAccount.create      | bool   | `true`       | Specifies whether a service account should be created                                                                   |
-| serviceAccount.name        | string | `""`         | The name of the service account to use. If not set and create is true, a name is generated using the fullname templatev |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| fullnameOverride | string | `""` | String to fully override `"kubenav.fullname"` |
+| nameOverride | string | `""` | Provide a name in place of `kubenav` |
+| rbac.customPermissions | list | `[]` | Define the custom permissions to be granted to kubenav |
+| rbac.mode | string | `"readonly"` | Decide which access mode should be granted to kubenav: `readonly`, `cluster-admin` or `custom`. |
+| rbac.namespaceLimits | list | `[]` | Define a list of namespaces to limit kubenav to only access these namespaces |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname templatev |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 

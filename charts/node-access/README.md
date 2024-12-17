@@ -44,30 +44,30 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Values
 
-| Key                                                | Type   | Default                          | Description                                                                                                            |
-| -------------------------------------------------- | ------ | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| fullnameOverride                                   | string | `""`                             | String to fully override `"node-access.fullname"`                                                                      |
-| image.pullPolicy                                   | string | `"Always"`                       | image pull policy                                                                                                      |
-| image.repository                                   | string | `"busybox"`                      | image repository                                                                                                       |
-| image.tag                                          | string | `"1.36.1"`                       | Overrides the image tag                                                                                                |
-| imagePullSecrets                                   | list   | `[]`                             | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
-| nameOverride                                       | string | `""`                             | Provide a name in place of `node-access`                                                                               |
-| nodeAccess.accessMode                              | string | `"deployment"`                   | How to deploy the Pods to access the host system: daemonset or deployment                                              |
-| nodeAccess.hostPaths                               | list   | `[]`                             | List of additional paths on the host that should be mounted into the container                                         |
-| nodeAccess.nodePlacement.affinity                  | object | `{}`                             | Affinity settings for pod assignment                                                                                   |
-| nodeAccess.nodePlacement.nodeName                  | string | `""`                             | Request to schedule this pod onto a specific node                                                                      |
-| nodeAccess.nodePlacement.nodeSelector              | object | `{}`                             | Node labels for pod assignment                                                                                         |
-| nodeAccess.nodePlacement.tolerations               | list   | `[]`                             | Toleration labels for pod assignment                                                                                   |
-| nodeAccess.nodePlacement.topologySpreadConstraints | list   | `[]`                             | how a group of pods ought to spread across topology domains                                                            |
-| podAnnotations                                     | object | `{}`                             | Annotations to be added to the pods                                                                                    |
-| podSecurityContext                                 | object | see [values.yaml](./values.yaml) | pod-level security context                                                                                             |
-| replicaCount                                       | int    | `1`                              | Number of replicas. Only used if `accessNode.accessMode` equals `deployment`                                           |
-| resources                                          | object | see [values.yaml](./values.yaml) | Resource limits and requests for the controller pods.                                                                  |
-| revisionHistoryLimit                               | int    | `10`                             | The number of old ReplicaSets to retain                                                                                |
-| securityContext                                    | object | see [values.yaml](./values.yaml) | container-level security context                                                                                       |
-| serviceAccount.annotations                         | object | `{}`                             | Annotations to add to the service account                                                                              |
-| serviceAccount.create                              | bool   | `true`                           | Specifies whether a service account should be created                                                                  |
-| serviceAccount.name                                | string | `""`                             | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| fullnameOverride | string | `""` | String to fully override `"node-access.fullname"` |
+| image.pullPolicy | string | `"Always"` | image pull policy |
+| image.repository | string | `"busybox"` | image repository |
+| image.tag | string | `"1.36.1"` | Overrides the image tag |
+| imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
+| nameOverride | string | `""` | Provide a name in place of `node-access` |
+| nodeAccess.accessMode | string | `"deployment"` | How to deploy the Pods to access the host system: daemonset or deployment |
+| nodeAccess.hostPaths | list | `[]` | List of additional paths on the host that should be mounted into the container |
+| nodeAccess.nodePlacement.affinity | object | `{}` | Affinity settings for pod assignment |
+| nodeAccess.nodePlacement.nodeName | string | `""` | Request to schedule this pod onto a specific node |
+| nodeAccess.nodePlacement.nodeSelector | object | `{}` | Node labels for pod assignment |
+| nodeAccess.nodePlacement.tolerations | list | `[]` | Toleration labels for pod assignment |
+| nodeAccess.nodePlacement.topologySpreadConstraints | list | `[]` | how a group of pods ought to spread across topology domains |
+| podAnnotations | object | `{}` | Annotations to be added to the pods |
+| podSecurityContext | object | see [values.yaml](./values.yaml) | pod-level security context |
+| replicaCount | int | `1` | Number of replicas. Only used if `accessNode.accessMode` equals `deployment` |
+| resources | object | see [values.yaml](./values.yaml) | Resource limits and requests for the controller pods. |
+| revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
+| securityContext | object | see [values.yaml](./values.yaml) | container-level security context |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 
