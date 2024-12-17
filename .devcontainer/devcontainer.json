@@ -1,25 +1,26 @@
 // For format details, see https://aka.ms/devcontainer.json
 {
-    "name": "helm-charts",
 
-    // Features to add to the dev container. More info: https://containers.dev/features.
-    "features": {
-        "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
-        "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
-        "ghcr.io/mpriscella/features/helm-chart-testing:1": {}
+  "name": "helm-charts-development",
+
+  "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "version": "latest",
+      "helm": "latest",
+      "minikube": "latest"
     },
+    "ghcr.io/dirsigler/devcontainer-features/helm-docs:1": {},
+    "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
+    "ghcr.io/mpriscella/features/helm-chart-testing:1": {}
+  },
 
-    // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    // "forwardPorts": [],
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "uname -a",
 
-    // Configure tool-specific properties.
-    // "customizations": {},
+  "remoteUser": "christianhuth"
 
-    "remoteUser": "vscode",
-    "runArgs": [
-        "--userns=keep-id"
-    ],
-    "containerEnv": {
-        "HOME": "/home/vscode"
-    }
 }
