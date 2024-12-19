@@ -44,51 +44,50 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Values
 
-| Key                                        | Type   | Default                                  | Description                                                                                                            |
-| ------------------------------------------ | ------ | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| affinity                                   | object | `{}`                                     | Affinity settings for pod assignment                                                                                   |
-| autoscaling.enabled                        | bool   | `false`                                  |                                                                                                                        |
-| autoscaling.maxReplicas                    | int    | `100`                                    |                                                                                                                        |
-| autoscaling.minReplicas                    | int    | `1`                                      |                                                                                                                        |
-| autoscaling.targetCPUUtilizationPercentage | int    | `80`                                     |                                                                                                                        |
-| clusterRoleBinding.clusterRole             | string | `"edit"`                                 | Define which ClusterRole to bind to: cluster-admin, edit, view                                                         |
-| fullnameOverride                           | string | `""`                                     | String to fully override `"skooner.fullname"`                                                                          |
-| image.pullPolicy                           | string | `"Always"`                               | image pull policy                                                                                                      |
-| image.repository                           | string | `"ghcr.io/skooner-k8s/skooner"`          | image repository                                                                                                       |
-| image.tag                                  | string | `"stable"`                               | Overrides the image tag                                                                                                |
-| imagePullSecrets                           | list   | `[]`                                     | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
-| ingress.annotations                        | object | `{}`                                     |                                                                                                                        |
-| ingress.className                          | string | `""`                                     |                                                                                                                        |
-| ingress.enabled                            | bool   | `false`                                  |                                                                                                                        |
-| ingress.hosts[0].host                      | string | `"chart-example.local"`                  |                                                                                                                        |
-| ingress.hosts[0].paths[0].path             | string | `"/"`                                    |                                                                                                                        |
-| ingress.hosts[0].paths[0].pathType         | string | `"ImplementationSpecific"`               |                                                                                                                        |
-| ingress.tls                                | list   | `[]`                                     |                                                                                                                        |
-| nameOverride                               | string | `""`                                     | Provide a name in place of `skooner`                                                                                   |
-| nodeSelector                               | object | `{"kubernetes.io/os":"linux"}`           | Node labels for pod assignment                                                                                         |
-| oidc.enabled                               | bool   | `false`                                  |                                                                                                                        |
-| oidc.provider.oidcMetadata                 | string | `""`                                     |                                                                                                                        |
-| oidc.provider.oidcScopes                   | string | `"openid email"`                         |                                                                                                                        |
-| oidc.provider.oidcUrl                      | string | `""`                                     |                                                                                                                        |
-| oidc.secret.clientId                       | string | `""`                                     |                                                                                                                        |
-| oidc.secret.clientSecret                   | string | `""`                                     |                                                                                                                        |
-| oidc.secret.name                           | string | `""`                                     |                                                                                                                        |
-| oidc.secret.useExistingSecret              | bool   | `false`                                  |                                                                                                                        |
-| podAnnotations                             | object | `{}`                                     | Annotations to be added to exporter pods                                                                               |
-| podSecurityContext                         | object | `{"fsGroup":1000}`                       | pod-level security context                                                                                             |
-| replicaCount                               | int    | `1`                                      | Number of replicas                                                                                                     |
-| resources                                  | object | `{}`                                     | Resource limits and requests for the headwind pods.                                                                    |
-| revisionHistoryLimit                       | int    | `10`                                     | The number of old ReplicaSets to retain                                                                                |
-| securityContext                            | object | `{"runAsNonRoot":true,"runAsUser":1000}` | container-level security context                                                                                       |
-| service.port                               | int    | `80`                                     | Kubernetes port where service is exposed                                                                               |
-| service.type                               | string | `"ClusterIP"`                            | Kubernetes service type                                                                                                |
-| serviceAccount.annotations                 | object | `{}`                                     | Annotations to add to the service account                                                                              |
-| serviceAccount.create                      | bool   | `true`                                   | Specifies whether a service account should be created                                                                  |
-| serviceAccount.name                        | string | `""`                                     | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
-| tolerations                                | list   | `[]`                                     | Toleration labels for pod assignment                                                                                   |
-| volumeMounts                                | list   | `[]`                                     | Container's volume mounts                                                                                   |
-| volumes                                | list   | `[]`                                     | Pod's volumes                                                                                  |
-
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| affinity | object | `{}` | Affinity settings for pod assignment |
+| autoscaling.enabled | bool | `false` |  |
+| autoscaling.maxReplicas | int | `100` |  |
+| autoscaling.minReplicas | int | `1` |  |
+| autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| clusterRoleBinding.clusterRole | string | `"edit"` | Define which ClusterRole to bind to: cluster-admin, edit, view |
+| fullnameOverride | string | `""` | String to fully override `"skooner.fullname"` |
+| image.pullPolicy | string | `"Always"` | image pull policy |
+| image.repository | string | `"ghcr.io/skooner-k8s/skooner"` | image repository |
+| image.tag | string | `"stable"` | Overrides the image tag |
+| imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
+| ingress.annotations | object | `{}` |  |
+| ingress.className | string | `""` |  |
+| ingress.enabled | bool | `false` |  |
+| ingress.hosts[0].host | string | `"chart-example.local"` |  |
+| ingress.hosts[0].paths[0].path | string | `"/"` |  |
+| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
+| ingress.tls | list | `[]` |  |
+| nameOverride | string | `""` | Provide a name in place of `skooner` |
+| nodeSelector | object | `{"kubernetes.io/os":"linux"}` | Node labels for pod assignment |
+| oidc.enabled | bool | `false` |  |
+| oidc.provider.oidcMetadata | string | `""` |  |
+| oidc.provider.oidcScopes | string | `"openid email"` |  |
+| oidc.provider.oidcUrl | string | `""` |  |
+| oidc.secret.clientId | string | `""` |  |
+| oidc.secret.clientSecret | string | `""` |  |
+| oidc.secret.name | string | `""` |  |
+| oidc.secret.useExistingSecret | bool | `false` |  |
+| podAnnotations | object | `{}` | Annotations to be added to exporter pods |
+| podSecurityContext | object | `{"fsGroup":1000}` | pod-level security context |
+| replicaCount | int | `1` | Number of replicas |
+| resources | object | `{}` | Resource limits and requests for the headwind pods. |
+| revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
+| securityContext | object | `{"runAsNonRoot":true,"runAsUser":1000}` | container-level security context |
+| service.port | int | `80` | Kubernetes port where service is exposed |
+| service.type | string | `"ClusterIP"` | Kubernetes service type |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| tolerations | list | `[]` | Toleration labels for pod assignment |
+| volumeMounts | list | `[]` | Container's volume mounts |
+| volumes | list | `[]` | Pod's volumes |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 

@@ -46,38 +46,38 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Values
 
-| Key                                | Type   | Default                                                                                                | Description                                                                                                            |
-| ---------------------------------- | ------ | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
-| affinity                           | object | `{}`                                                                                                   | Affinity settings for pod assignment                                                                                   |
-| args                               | list   | `[]`                                                                                                   |                                                                                                                        |
-| fullnameOverride                   | string | `""`                                                                                                   | String to fully override `"kube-ops-view.fullname"`                                                                    |
-| image.pullPolicy                   | string | `"Always"`                                                                                             | image pull policy                                                                                                      |
-| image.repository                   | string | `"hjacobs/kube-ops-view"`                                                                              | image repository                                                                                                       |
-| image.tag                          | string | `"23.5.0"`                                                                                             |                                                                                                                        |
-| imagePullSecrets                   | list   | `[]`                                                                                                   | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
-| ingress.annotations                | object | `{}`                                                                                                   |                                                                                                                        |
-| ingress.className                  | string | `""`                                                                                                   |                                                                                                                        |
-| ingress.enabled                    | bool   | `false`                                                                                                |                                                                                                                        |
-| ingress.hosts[0].host              | string | `"chart-example.local"`                                                                                |                                                                                                                        |
-| ingress.hosts[0].paths[0].path     | string | `"/"`                                                                                                  |                                                                                                                        |
-| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"`                                                                             |                                                                                                                        |
-| ingress.tls                        | list   | `[]`                                                                                                   |                                                                                                                        |
-| nameOverride                       | string | `""`                                                                                                   | Provide a name in place of `kube-ops-view`                                                                             |
-| nodeSelector                       | object | `{}`                                                                                                   | Node labels for pod assignment                                                                                         |
-| podAnnotations                     | object | `{}`                                                                                                   | Annotations to be added to exporter pods                                                                               |
-| redis.architecture                 | string | `"standalone"`                                                                                         | Redis™ architecture. Allowed values: standalone or replication                                                        |
-| redis.auth.enabled                 | bool   | `false`                                                                                                | Disable password authentication as the kube-ops-view container has no support for password authentication              |
-| redis.enabled                      | bool   | `false`                                                                                                | enable Redis™ subchart from Bitnami                                                                                   |
-| replicaCount                       | int    | `1`                                                                                                    | Number of replicas                                                                                                     |
-| resources                          | object | `{}`                                                                                                   | Resource limits and requests for the controller pods.                                                                  |
-| revisionHistoryLimit               | int    | `10`                                                                                                   | The number of old ReplicaSets to retain                                                                                |
-| securityContext                    | object | `{"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":1000}` | container-level security context                                                                                       |
-| service.port                       | int    | `80`                                                                                                   | Kubernetes port where service is exposed                                                                               |
-| service.type                       | string | `"ClusterIP"`                                                                                          | Kubernetes service type                                                                                                |
-| serviceAccount.annotations         | object | `{}`                                                                                                   | Annotations to add to the service account                                                                              |
-| serviceAccount.create              | bool   | `true`                                                                                                 | Specifies whether a service account should be created                                                                  |
-| serviceAccount.name                | string | `""`                                                                                                   | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
-| tolerations                        | list   | `[]`                                                                                                   | Toleration labels for pod assignment                                                                                   |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| affinity | object | `{}` | Affinity settings for pod assignment |
+| args | list | `[]` |  |
+| fullnameOverride | string | `""` | String to fully override `"kube-ops-view.fullname"` |
+| image.pullPolicy | string | `"Always"` | image pull policy |
+| image.repository | string | `"hjacobs/kube-ops-view"` | image repository |
+| image.tag | string | `"23.5.0"` |  |
+| imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
+| ingress.annotations | object | `{}` |  |
+| ingress.className | string | `""` |  |
+| ingress.enabled | bool | `false` |  |
+| ingress.hosts[0].host | string | `"chart-example.local"` |  |
+| ingress.hosts[0].paths[0].path | string | `"/"` |  |
+| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
+| ingress.tls | list | `[]` |  |
+| nameOverride | string | `""` | Provide a name in place of `kube-ops-view` |
+| nodeSelector | object | `{}` | Node labels for pod assignment |
+| podAnnotations | object | `{}` | Annotations to be added to exporter pods |
+| redis.architecture | string | `"standalone"` | Redis™ architecture. Allowed values: standalone or replication |
+| redis.auth.enabled | bool | `false` | Disable password authentication as the kube-ops-view container has no support for password authentication |
+| redis.enabled | bool | `false` | enable Redis™ subchart from Bitnami |
+| replicaCount | int | `1` | Number of replicas |
+| resources | object | `{}` | Resource limits and requests for the controller pods. |
+| revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
+| securityContext | object | `{"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":1000}` | container-level security context |
+| service.port | int | `80` | Kubernetes port where service is exposed |
+| service.type | string | `"ClusterIP"` | Kubernetes service type |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| tolerations | list | `[]` | Toleration labels for pod assignment |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 

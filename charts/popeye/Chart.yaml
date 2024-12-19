@@ -2,7 +2,7 @@ apiVersion: v2
 name: popeye
 description: Popeye - A Kubernetes Cluster Sanitizer
 type: application
-version: 2.1.2
+version: 2.1.3
 appVersion: "v0.21.3"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/derailed/popeye/master/assets/popeye_logo.png
@@ -15,7 +15,7 @@ annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
     - kind: changed
-      description: URL of Helm Repository in README
+      description: README format
   artifacthub.io/screenshots: |
     - title: Popeye is a utility that scans live Kubernetes cluster and reports potential issues with deployed resources and configurations.
       url: https://popeyecli.io/assets/d_score.png

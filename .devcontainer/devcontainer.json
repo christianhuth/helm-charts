@@ -1,0 +1,56 @@
+// For format details, see https://aka.ms/devcontainer.json
+{
+
+  "name": "helm-charts-development",
+
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+
+  "containerEnv": {
+    "HOME": "/home/vscode",
+    "SHELL": "/bin/bash"
+  },
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"enableNonRootDocker": "true",
+			"moby": "true"
+		},
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "version": "latest",
+      "helm": "latest",
+      "minikube": "latest"
+    },
+    "ghcr.io/devcontainers-extra/features/pre-commit:2": {},
+    "ghcr.io/dirsigler/devcontainer-features/helm-docs:1": {},
+    "ghcr.io/mpriscella/features/helm-chart-testing:1": {}
+  },
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "/bin/bash .devcontainer/postCreateCommand.sh",
+
+  "remoteUser": "vscode",
+
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "github.vscode-github-actions",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "tim-koehler.helm-intellisense"
+      ]
+    }
+  },
+
+  "mounts": [
+    "type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly"
+  ],
+
+  // we use /home/vscode/helm-charts as development folder inside the container
+  "workspaceFolder": "/home/vscode/helm-charts",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/helm-charts,type=bind"
+
+}

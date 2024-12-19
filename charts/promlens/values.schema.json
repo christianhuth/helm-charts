@@ -1,235 +1,557 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "type": "object",
-    "properties": {
-        "affinity": {
-            "type": "object"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "description": "Affinity settings for pod assignment",
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "autoscaling": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
         },
-        "autoscaling": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean"
-                },
-                "maxReplicas": {
-                    "type": "integer"
-                },
-                "minReplicas": {
-                    "type": "integer"
-                },
-                "targetCPUUtilizationPercentage": {
-                    "type": "integer"
-                }
-            }
+        "maxReplicas": {
+          "default": 100,
+          "required": [],
+          "title": "maxReplicas",
+          "type": "integer"
         },
-        "config": {
-            "type": "object",
-            "properties": {
-                "grafana": {
-                    "type": "object",
-                    "properties": {
-                        "apiToken": {
-                            "type": "string"
-                        },
-                        "defaultDatasourceId": {
-                            "type": "string"
-                        },
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "existingSecret": {
-                            "type": "string"
-                        },
-                        "url": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "log": {
-                    "type": "object",
-                    "properties": {
-                        "format": {
-                            "type": "string"
-                        },
-                        "level": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "sharedLinks": {
-                    "type": "object",
-                    "properties": {
-                        "gcs": {
-                            "type": "object",
-                            "properties": {
-                                "bucket": {
-                                    "type": "string"
-                                },
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "existingSecret": {
-                                    "type": "string"
-                                },
-                                "storageAccount": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "sql": {
-                            "type": "object",
-                            "properties": {
-                                "createTables": {
-                                    "type": "boolean"
-                                },
-                                "driver": {
-                                    "type": "string"
-                                },
-                                "dsn": {
-                                    "type": "string"
-                                },
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "existingSecret": {
-                                    "type": "string"
-                                },
-                                "retention": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                },
-                "web": {
-                    "type": "object",
-                    "properties": {
-                        "defaultPrometheusUrl": {
-                            "type": "string"
-                        },
-                        "externalUrl": {
-                            "type": "string"
-                        },
-                        "routePrefix": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
+        "minReplicas": {
+          "default": 1,
+          "required": [],
+          "title": "minReplicas",
+          "type": "integer"
         },
-        "fullnameOverride": {
-            "type": "string"
-        },
-        "image": {
-            "type": "object",
-            "properties": {
-                "pullPolicy": {
-                    "type": "string"
-                },
-                "repository": {
-                    "type": "string"
-                },
-                "tag": {
-                    "type": "string"
-                }
-            }
-        },
-        "imagePullSecrets": {
-            "type": "array"
-        },
-        "ingress": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "className": {
-                    "type": "string"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "hosts": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "host": {
-                                "type": "string"
-                            },
-                            "paths": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "path": {
-                                            "type": "string"
-                                        },
-                                        "pathType": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "tls": {
-                    "type": "array"
-                }
-            }
-        },
-        "nameOverride": {
-            "type": "string"
-        },
-        "nodeSelector": {
-            "type": "object"
-        },
-        "podAnnotations": {
-            "type": "object"
-        },
-        "podSecurityContext": {
-            "type": "object"
-        },
-        "replicaCount": {
-            "type": "integer"
-        },
-        "resources": {
-            "type": "object"
-        },
-        "revisionHistoryLimit": {
-            "type": "integer"
-        },
-        "securityContext": {
-            "type": "object"
-        },
-        "service": {
-            "type": "object",
-            "properties": {
-                "port": {
-                    "type": "integer"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
-        "serviceAccount": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
-        "tolerations": {
-            "type": "array"
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "required": [],
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
         }
+      },
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage"
+      ],
+      "title": "autoscaling",
+      "type": "object"
+    },
+    "config": {
+      "properties": {
+        "grafana": {
+          "properties": {
+            "apiToken": {
+              "default": "",
+              "description": "The auth token to pass to the Grafana API, see https://grafana.com/docs/grafana/latest/http_api/auth/",
+              "required": [],
+              "title": "apiToken",
+              "type": "string"
+            },
+            "defaultDatasourceId": {
+              "default": "",
+              "description": "The default Grafana datasource ID to use (overrides Grafana's own default).",
+              "required": [],
+              "title": "defaultDatasourceId",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enable integration with Grafana",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "existingSecret": {
+              "default": "",
+              "description": "An existing secret containing the auth token, key needs to be api-token",
+              "required": [],
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "url": {
+              "default": "",
+              "description": "The URL of your Grafana installation",
+              "required": [],
+              "title": "url",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "apiToken",
+            "defaultDatasourceId",
+            "existingSecret",
+            "url"
+          ],
+          "title": "grafana",
+          "type": "object"
+        },
+        "log": {
+          "properties": {
+            "format": {
+              "default": "json",
+              "description": "Output format of log messages. One of: [logfmt, json]",
+              "required": [],
+              "title": "format",
+              "type": "string"
+            },
+            "level": {
+              "default": "info",
+              "description": "Only log messages with the given severity or above. One of: [debug, info, warn, error]",
+              "required": [],
+              "title": "level",
+              "type": "string"
+            }
+          },
+          "required": [
+            "format",
+            "level"
+          ],
+          "title": "log",
+          "type": "object"
+        },
+        "sharedLinks": {
+          "properties": {
+            "gcs": {
+              "properties": {
+                "bucket": {
+                  "default": "",
+                  "description": "Name of the GCS bucket for storing shared links",
+                  "required": [],
+                  "title": "bucket",
+                  "type": "string"
+                },
+                "enabled": {
+                  "default": false,
+                  "description": "Enable Link Sharing via Google Storage Bucket",
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "existingSecret": {
+                  "default": "",
+                  "description": "An existing secret containing the credentials for the storage-account as json, key needs to be gcs-cred.json",
+                  "required": [],
+                  "title": "existingSecret",
+                  "type": "string"
+                },
+                "storageAccount": {
+                  "default": "",
+                  "description": "Google Cloud Storage Account key",
+                  "required": [],
+                  "title": "storageAccount",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "enabled",
+                "bucket",
+                "existingSecret",
+                "storageAccount"
+              ],
+              "title": "gcs",
+              "type": "object"
+            },
+            "sql": {
+              "properties": {
+                "createTables": {
+                  "default": true,
+                  "description": "Whether to automatically create the required tables when using a SQL database for shared links.",
+                  "required": [],
+                  "title": "createTables",
+                  "type": "boolean"
+                },
+                "driver": {
+                  "default": "sqlite",
+                  "description": "The SQL driver to use for storing shared links in a SQL database. Supported values: [mysql, sqlite].",
+                  "required": [],
+                  "title": "driver",
+                  "type": "string"
+                },
+                "dsn": {
+                  "default": "/tmp/promlens-links.db",
+                  "description": "SQL Data Source Name when using a SQL database to shared links (see https://github.com/go-sql-driver/mysql#dsn-data-source-name) for MySQL, https://github.com/glebarez/go-sqlite#example for SQLite)",
+                  "required": [],
+                  "title": "dsn",
+                  "type": "string"
+                },
+                "enabled": {
+                  "default": false,
+                  "description": "Enable Link Sharing via SQL database",
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "existingSecret": {
+                  "default": "",
+                  "description": "An existing secret containing the dsn for the link storage backend, key needs to be dsn",
+                  "required": [],
+                  "title": "existingSecret",
+                  "type": "string"
+                },
+                "retention": {
+                  "default": "0",
+                  "description": "The maximum retention time for shared links when using a SQL database (e.g. '10m', '12h'). Set to 0 for infinite retention.",
+                  "required": [],
+                  "title": "retention",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "enabled",
+                "createTables",
+                "driver",
+                "dsn",
+                "existingSecret",
+                "retention"
+              ],
+              "title": "sql",
+              "type": "object"
+            }
+          },
+          "required": [
+            "gcs",
+            "sql"
+          ],
+          "title": "sharedLinks",
+          "type": "object"
+        },
+        "web": {
+          "properties": {
+            "defaultPrometheusUrl": {
+              "default": "",
+              "description": "The default Prometheus URL to load PromLens with.",
+              "required": [],
+              "title": "defaultPrometheusUrl",
+              "type": "string"
+            },
+            "externalUrl": {
+              "default": "",
+              "description": "The URL under which PromLens is externally reachable (for example, if PromLens is served via a reverse proxy). Used for generating relative and absolute links back to PromLens itself. If the URL has a path portion, it will be used to prefix all HTTP endpoints served by PromLens. If omitted, relevant URL components will be derived automatically.",
+              "required": [],
+              "title": "externalUrl",
+              "type": "string"
+            },
+            "routePrefix": {
+              "default": "",
+              "description": "Prefix for the internal routes of web endpoints. Defaults to path of --web.external-url.",
+              "required": [],
+              "title": "routePrefix",
+              "type": "string"
+            }
+          },
+          "required": [
+            "defaultPrometheusUrl",
+            "externalUrl",
+            "routePrefix"
+          ],
+          "title": "web",
+          "type": "object"
+        }
+      },
+      "required": [
+        "grafana",
+        "log",
+        "sharedLinks",
+        "web"
+      ],
+      "title": "config",
+      "type": "object"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"promlens.fullname\"`",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "description": "image pull policy",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "repository": {
+          "default": "prom/promlens",
+          "description": "image repository",
+          "required": [],
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "v0.3.0",
+          "description": "Overrides the image tag",
+          "required": [],
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "ingress": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the ingress",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "description": "Ingress class name",
+          "required": [],
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enable ingress",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "description": "kubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "host": {
+                    "default": "chart-example.local",
+                    "required": [],
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "ImplementationSpecific",
+                              "required": [],
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "hosts",
+          "type": "array"
+        },
+        "tls": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `promlens`",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "description": "Node labels for pod assignment",
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to exporter pods",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "description": "Pod-level security context",
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas",
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "description": "Resource limits and requests for the pods.",
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "revisionHistoryLimit": {
+      "default": 10,
+      "description": "The number of old ReplicaSets to retain",
+      "required": [],
+      "title": "revisionHistoryLimit",
+      "type": "integer"
+    },
+    "securityContext": {
+      "description": "container-level security context",
+      "required": [],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "properties": {
+        "port": {
+          "default": 8080,
+          "description": "Kubernetes port where service is exposed",
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "description": "Kubernetes service type",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "tolerations": {
+      "description": "Toleration labels for pod assignment",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "tolerations",
+      "type": "array"
     }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "image",
+    "imagePullSecrets",
+    "replicaCount",
+    "revisionHistoryLimit",
+    "serviceAccount",
+    "podAnnotations",
+    "podSecurityContext",
+    "securityContext",
+    "service",
+    "ingress",
+    "resources",
+    "autoscaling",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "config"
+  ],
+  "type": "object"
 }

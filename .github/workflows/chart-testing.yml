@@ -9,40 +9,13 @@ on:
     branches: [main]
     paths: ["charts/**"]
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Chart-Linting"]
+    types: ["completed"]
 
 jobs:
 
-  artifacthub-lint:
-    runs-on: ubuntu-latest
-    container:
-      image: artifacthub/ah
-      options: --user 1001
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Run ah lint
-        working-directory: ./charts
-        run: ah lint
-
-  helm-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout git repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: setup helm
-        uses: azure/setup-helm@v3
-
-      - name: Update dependencies
-        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
-
-      - name: helm linting
-        run : helm lint charts/*
-
-  chart-testing:
+  installation:
     runs-on: ubuntu-22.04
     steps:
       - name: checkout git repository
@@ -63,13 +36,10 @@ jobs:
       - name: Run chart-testing (list-changed)
         id: list-changed
         run: |
-          changed=$(ct list-changed --target-branch ${{ github.event.repository.default_branch }})
+          changed=$(ct list-changed --config .github/config/chart-testing.yaml)
           if [[ -n "$changed" ]]; then
             echo "::set-output name=changed::true"
           fi
-
-      - name: Run chart-testing (lint)
-        run: ct lint --config .github/config/chart-testing.yaml
 
       - name: Create kind cluster
         uses: helm/kind-action@v1.10.0
@@ -77,3 +47,4 @@ jobs:
 
       - name: Run chart-testing (install)
         run: ct install --config .github/config/chart-testing.yaml
+        if: steps.list-changed.outputs.changed == 'true'

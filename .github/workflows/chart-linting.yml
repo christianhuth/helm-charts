@@ -1,0 +1,78 @@
+name: Chart-Linting
+
+on:
+  pull_request:
+    branches: [main]
+    paths: ["charts/**"]
+  push:
+    branches: [main]
+    paths: ["charts/**"]
+  workflow_dispatch:
+
+jobs:
+
+  artifacthub-lint:
+    runs-on: ubuntu-latest
+    container:
+      image: artifacthub/ah
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run ah lint
+        working-directory: ./charts
+        run: ah lint
+
+  ct-lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: setup helm
+        uses: azure/setup-helm@v3
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.7
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.6.1
+
+      - name: Run chart-testing (list-changed)
+        id: list-changed
+        run: |
+          changed=$(ct list-changed --config .github/config/chart-testing.yaml)
+          if [[ -n "$changed" ]]; then
+            echo "::set-output name=changed::true"
+          fi
+
+      - name: Run chart-testing (lint)
+        run: ct lint --config .github/config/chart-testing.yaml
+
+  helm-lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: setup helm
+        uses: azure/setup-helm@v3
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.7
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.6.1
+
+      - name: helm dependency update on changed charts
+        run : ct list-changed --config .github/config/chart-testing.yaml | xargs -d '\n' -I {} helm dependency update {}
+
+      - name: helm lint on changed charts
+        run : ct list-changed --config .github/config/chart-testing.yaml | xargs -d '\n' -I {} helm lint {}

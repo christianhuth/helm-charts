@@ -16,11 +16,11 @@ helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 ```
 
-You can then run `helm search repo christianhuth` to see the charts.
+You can then run `helm search repo christianhuth` to see the current list of available charts.
 
 ## License
 
-[MIT License](./LICENSE).
+[MIT License](./LICENSE)
 
 ## List of available Charts
 
@@ -55,3 +55,37 @@ You can then run `helm search repo christianhuth` to see the charts.
 | [tenant-namespace](./charts/tenant-namespace)                 | none                                                                                                                               | Bootstraps a Namespace in a Multi-Tenancy setup                                                                                                            |
 | [typo3](./charts/typo3)                                       | [martinhelmich/typo3](https://hub.docker.com/r/martinhelmich/typo3)                                                                | [TYPO3 is a Professional, Flexible Content Management System](https://typo3.org)                                                                           |
 | [umami](./charts/umami)                                       | [umami-software/umami](https://ghcr.io/umami-software/umami)                                                                       | [Umami is a simple, fast, privacy-focused alternative to Google Analytics.](https://umami.is)                                                              |
+
+## Development
+
+### Using a Dev Container
+
+The easiest way to contribute is using the provided Dev Container.
+
+### Using your local environment
+
+#### Creating the necessary prerequisites
+
+1. (Optional) Install the [pre-commit](https://pre-commit.com/) hooks
+
+  ```console
+  pip3 install pre-commit
+  pre-commit install --install-hooks
+  ```
+
+1. (Optional) Setup a minikube cluster with Nginx ingress support
+
+  ```console
+  minikube start --addons=ingress --cpus=4 --memory=8g --profile=helm-charts-development
+  minikube profile helm-charts-development
+  ```
+
+#### Development Process
+
+1. Make changes to the desired Chart
+
+1. Bump the version in the changed `Chart.yaml` according to Semantic Versioning
+
+1. Update the changes annotation in the `Chart.yaml`
+
+1. Commit your changes to the repository. The CI Pipeline will test your changes. Create a Merge Request.

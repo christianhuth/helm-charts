@@ -1,185 +1,434 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "type": "object",
-    "properties": {
-        "affinity": {
-            "type": "object"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "description": "Affinity settings for pod assignment",
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "autoscaling": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
         },
-        "autoscaling": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean"
-                },
-                "maxReplicas": {
-                    "type": "integer"
-                },
-                "minReplicas": {
-                    "type": "integer"
-                },
-                "targetCPUUtilizationPercentage": {
-                    "type": "integer"
-                }
-            }
+        "maxReplicas": {
+          "default": 100,
+          "required": [],
+          "title": "maxReplicas",
+          "type": "integer"
         },
-        "clusterRole": {
-            "type": "object",
-            "properties": {
-                "additionalApiGroups": {
-                    "type": "array"
-                },
-                "additionalPermissions": {
-                    "type": "array"
-                }
-            }
+        "minReplicas": {
+          "default": 1,
+          "required": [],
+          "title": "minReplicas",
+          "type": "integer"
         },
-        "fullnameOverride": {
-            "type": "string"
-        },
-        "image": {
-            "type": "object",
-            "properties": {
-                "pullPolicy": {
-                    "type": "string"
-                },
-                "repository": {
-                    "type": "string"
-                },
-                "tag": {
-                    "type": "string"
-                }
-            }
-        },
-        "imagePullSecrets": {
-            "type": "array"
-        },
-        "ingress": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "className": {
-                    "type": "string"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "hosts": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "host": {
-                                "type": "string"
-                            },
-                            "paths": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "path": {
-                                            "type": "string"
-                                        },
-                                        "pathType": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "tls": {
-                    "type": "array"
-                }
-            }
-        },
-        "nameOverride": {
-            "type": "string"
-        },
-        "nodeSelector": {
-            "type": "object"
-        },
-        "persistence": {
-            "type": "object",
-            "properties": {
-                "accessModes": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "annotations": {
-                    "type": "object"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "existingClaim": {
-                    "type": "string"
-                },
-                "size": {
-                    "type": "string"
-                },
-                "storageClass": {
-                    "type": "string"
-                }
-            }
-        },
-        "podAnnotations": {
-            "type": "object"
-        },
-        "podSecurityContext": {
-            "type": "object"
-        },
-        "replicaCount": {
-            "type": "integer"
-        },
-        "resources": {
-            "type": "object"
-        },
-        "revisionHistoryLimit": {
-            "type": "integer"
-        },
-        "securityContext": {
-            "type": "object"
-        },
-        "service": {
-            "type": "object",
-            "properties": {
-                "port": {
-                    "type": "integer"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
-        "serviceAccount": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
-        "sloop": {
-            "type": "object",
-            "properties": {
-                "config": {
-                    "type": "string"
-                }
-            }
-        },
-        "tolerations": {
-            "type": "array"
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "required": [],
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
         }
+      },
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage"
+      ],
+      "title": "autoscaling",
+      "type": "object"
+    },
+    "clusterRole": {
+      "properties": {
+        "additionalApiGroups": {
+          "description": "List CRD apiGroups that you want to watch here\nWill be added with all resource types and the verbs \"list\" and \"watch\"\nIstio is just here as an example. Alternatively if you want to get all CRDs its possible to add '*'\nto apiGroups, but that would give Sloop permissions to read secrets which may not be desirable",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "additionalApiGroups",
+          "type": "array"
+        },
+        "additionalPermissions": {
+          "description": "- awx.ansible.com\n- authentication.istio.io\n- config.istio.io\n- networking.istio.io\n- rbac.istio.io\n- security.istio.io\nList CRD API groups, resource types and verbs you want to visualize in Sloop\nGiven example adds all API groups and resource types, which also includes Secrets, be aware of this",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "additionalPermissions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "additionalApiGroups",
+        "additionalPermissions"
+      ],
+      "title": "clusterRole",
+      "type": "object"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"sloop.fullname\"`",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "description": "image pull policy",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "repository": {
+          "default": "ghcr.io/salesforce/sloop",
+          "description": "image repository",
+          "required": [],
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "sha-2ce8bbe",
+          "description": "Overrides the image tag",
+          "required": [],
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "ingress": {
+      "properties": {
+        "annotations": {
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "required": [],
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "description": "kubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "host": {
+                    "default": "chart-example.local",
+                    "required": [],
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "ImplementationSpecific",
+                              "required": [],
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "hosts",
+          "type": "array"
+        },
+        "tls": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `sloop`",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "description": "Node labels for pod assignment",
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "persistence": {
+      "properties": {
+        "accessModes": {
+          "items": {
+            "anyOf": [
+              {
+                "required": [],
+                "type": "string"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "accessModes",
+          "type": "array"
+        },
+        "annotations": {
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "existingClaim": {
+          "default": "",
+          "required": [],
+          "title": "existingClaim",
+          "type": "string"
+        },
+        "size": {
+          "default": "10Gi",
+          "required": [],
+          "title": "size",
+          "type": "string"
+        },
+        "storageClass": {
+          "default": "",
+          "required": [],
+          "title": "storageClass",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled",
+        "annotations",
+        "accessModes",
+        "existingClaim",
+        "storageClass",
+        "size"
+      ],
+      "title": "persistence",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to exporter pods",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "description": "pod-level security context",
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas",
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "description": "Resource limits and requests for the pods.",
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "revisionHistoryLimit": {
+      "default": 10,
+      "description": "The number of old ReplicaSets to retain",
+      "required": [],
+      "title": "revisionHistoryLimit",
+      "type": "integer"
+    },
+    "securityContext": {
+      "description": "container-level security context",
+      "required": [],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "properties": {
+        "port": {
+          "default": 80,
+          "description": "Kubernetes port where service is exposed",
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "description": "Kubernetes service type",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "sloop": {
+      "properties": {
+        "config": {
+          "default": "{\n  \"displayContext\": \"cluster\",\n  \"defaultNamespace\": \"default\",\n  \"defaultKind\": \"Pod\",\n  \"defaultLookback\": \"1h\",\n  \"leftBarLinks\": [\n  ],\n  \"resourceLinks\": [\n  ]\n}\n",
+          "required": [],
+          "title": "config",
+          "type": "string"
+        }
+      },
+      "required": [
+        "config"
+      ],
+      "title": "sloop",
+      "type": "object"
+    },
+    "tolerations": {
+      "description": "Toleration labels for pod assignment",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "tolerations",
+      "type": "array"
     }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "image",
+    "imagePullSecrets",
+    "replicaCount",
+    "revisionHistoryLimit",
+    "serviceAccount",
+    "podAnnotations",
+    "podSecurityContext",
+    "securityContext",
+    "service",
+    "ingress",
+    "resources",
+    "autoscaling",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "sloop",
+    "persistence",
+    "clusterRole"
+  ],
+  "type": "object"
 }

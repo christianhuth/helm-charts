@@ -111,6 +111,8 @@ configuration:
       default_server: "proxysql"
       read_only: false
     misc:
+      # -- List of reports that should be displayed
+      # @default -- see [values.yaml](./values.yaml)
       adhoc_report:
         - {"title": "Top 10 SELECTs by sum_time",
            "info": "Examining queries with big sum_time(number of execution * time to run) is a good place to start when optimizing queries.",
