@@ -1,164 +1,387 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "type": "object",
-    "properties": {
-        "affinity": {
-            "type": "object"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "description": "Affinity settings for pod assignment",
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "args": {
+      "description": "optional arguments to add external links for nodes and pods",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "args",
+      "type": "array"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"kube-ops-view.fullname\"`",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "description": "image pull policy",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
         },
-        "args": {
-            "type": "array"
+        "repository": {
+          "default": "hjacobs/kube-ops-view",
+          "description": "image repository",
+          "required": [],
+          "title": "repository",
+          "type": "string"
         },
-        "fullnameOverride": {
-            "type": "string"
-        },
-        "image": {
-            "type": "object",
-            "properties": {
-                "pullPolicy": {
-                    "type": "string"
-                },
-                "repository": {
-                    "type": "string"
-                },
-                "tag": {
-                    "type": "string"
-                }
-            }
-        },
-        "imagePullSecrets": {
-            "type": "array"
-        },
-        "ingress": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "className": {
-                    "type": "string"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "hosts": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "host": {
-                                "type": "string"
-                            },
-                            "paths": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "path": {
-                                            "type": "string"
-                                        },
-                                        "pathType": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "tls": {
-                    "type": "array"
-                }
-            }
-        },
-        "nameOverride": {
-            "type": "string"
-        },
-        "nodeSelector": {
-            "type": "object"
-        },
-        "podAnnotations": {
-            "type": "object"
-        },
-        "redis": {
-            "type": "object",
-            "properties": {
-                "architecture": {
-                    "type": "string"
-                },
-                "auth": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        }
-                    }
-                },
-                "enabled": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "replicaCount": {
-            "type": "integer"
-        },
-        "resources": {
-            "type": "object"
-        },
-        "revisionHistoryLimit": {
-            "type": "integer"
-        },
-        "securityContext": {
-            "type": "object",
-            "properties": {
-                "capabilities": {
-                    "type": "object",
-                    "properties": {
-                        "drop": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                },
-                "readOnlyRootFilesystem": {
-                    "type": "boolean"
-                },
-                "runAsNonRoot": {
-                    "type": "boolean"
-                },
-                "runAsUser": {
-                    "type": "integer"
-                }
-            }
-        },
-        "service": {
-            "type": "object",
-            "properties": {
-                "port": {
-                    "type": "integer"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
-        "serviceAccount": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
-        "tolerations": {
-            "type": "array"
+        "tag": {
+          "default": "23.5.0",
+          "description": "Overrides the image tag",
+          "required": [],
+          "title": "tag",
+          "type": "string"
         }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "ingress": {
+      "properties": {
+        "annotations": {
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "required": [],
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "description": "kubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "host": {
+                    "default": "chart-example.local",
+                    "required": [],
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "ImplementationSpecific",
+                              "required": [],
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "hosts",
+          "type": "array"
+        },
+        "tls": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `kube-ops-view`",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "description": "Node labels for pod assignment",
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to exporter pods",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "redis": {
+      "properties": {
+        "architecture": {
+          "default": "standalone",
+          "description": "Redis™ architecture. Allowed values: standalone or replication",
+          "required": [],
+          "title": "architecture",
+          "type": "string"
+        },
+        "auth": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "Disable password authentication as the kube-ops-view container has no support for password authentication",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "description": "enable Redis™ subchart from Bitnami",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "architecture",
+        "auth",
+        "enabled"
+      ],
+      "title": "redis",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas",
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "description": "Resource limits and requests for the controller pods.",
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "revisionHistoryLimit": {
+      "default": 10,
+      "description": "The number of old ReplicaSets to retain",
+      "required": [],
+      "title": "revisionHistoryLimit",
+      "type": "integer"
+    },
+    "securityContext": {
+      "description": "container-level security context",
+      "properties": {
+        "capabilities": {
+          "properties": {
+            "drop": {
+              "items": {
+                "anyOf": [
+                  {
+                    "required": [],
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "required": [],
+              "title": "drop",
+              "type": "array"
+            }
+          },
+          "required": [
+            "drop"
+          ],
+          "title": "capabilities",
+          "type": "object"
+        },
+        "readOnlyRootFilesystem": {
+          "default": true,
+          "required": [],
+          "title": "readOnlyRootFilesystem",
+          "type": "boolean"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "required": [],
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 1000,
+          "required": [],
+          "title": "runAsUser",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "capabilities",
+        "readOnlyRootFilesystem",
+        "runAsNonRoot",
+        "runAsUser"
+      ],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "properties": {
+        "port": {
+          "default": 80,
+          "description": "Kubernetes port where service is exposed",
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "description": "Kubernetes service type",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "tolerations": {
+      "description": "Toleration labels for pod assignment",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "tolerations",
+      "type": "array"
     }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "image",
+    "imagePullSecrets",
+    "args",
+    "replicaCount",
+    "revisionHistoryLimit",
+    "podAnnotations",
+    "securityContext",
+    "service",
+    "resources",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "serviceAccount",
+    "ingress",
+    "redis"
+  ],
+  "type": "object"
 }

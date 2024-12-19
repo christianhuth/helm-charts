@@ -1,40 +1,99 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "type": "object",
-    "properties": {
-        "fullnameOverride": {
-            "type": "string"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"kubenav.fullname\"`",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `kubenav`",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "rbac": {
+      "properties": {
+        "customPermissions": {
+          "description": "Define the custom permissions to be granted to kubenav",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "customPermissions",
+          "type": "array"
         },
-        "nameOverride": {
-            "type": "string"
+        "mode": {
+          "default": "readonly",
+          "description": "Decide which access mode should be granted to kubenav: `readonly`, `cluster-admin` or `custom`.",
+          "required": [],
+          "title": "mode",
+          "type": "string"
         },
-        "rbac": {
-            "type": "object",
-            "properties": {
-                "customPermissions": {
-                    "type": "array"
-                },
-                "mode": {
-                    "type": "string"
-                },
-                "namespaceLimits": {
-                    "type": "array"
-                }
-            }
-        },
-        "serviceAccount": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            }
+        "namespaceLimits": {
+          "description": "- apiGroups: [\"\"]\n  resources: [\"nodes\", \"pods\"]\n  verbs:\n    - list\nDefine a list of namespaces to limit kubenav to only access these namespaces",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "namespaceLimits",
+          "type": "array"
         }
+      },
+      "required": [
+        "mode",
+        "customPermissions",
+        "namespaceLimits"
+      ],
+      "title": "rbac",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname templatev",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
     }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "serviceAccount",
+    "rbac"
+  ],
+  "type": "object"
 }

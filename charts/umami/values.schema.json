@@ -1,326 +1,791 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "type": "object",
-    "properties": {
-        "affinity": {
-            "type": "object"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "description": "Affinity settings for pod assignment",
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "autoscaling": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable Horizontal POD autoscaling",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
         },
-        "autoscaling": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean"
-                },
-                "maxReplicas": {
-                    "type": "integer"
-                },
-                "minReplicas": {
-                    "type": "integer"
-                },
-                "targetCPUUtilizationPercentage": {
-                    "type": "integer"
-                },
-                "targetMemoryUtilizationPercentage": {
-                    "type": "integer"
-                }
-            }
+        "maxReplicas": {
+          "default": 100,
+          "description": "Maximum number of replicas",
+          "required": [],
+          "title": "maxReplicas",
+          "type": "integer"
         },
-        "database": {
-            "type": "object",
-            "properties": {
-                "databaseUrlKey": {
-                    "type": "string"
-                },
-                "existingSecret": {
-                    "type": "string"
-                }
-            }
+        "minReplicas": {
+          "default": 1,
+          "description": "Minimum number of replicas",
+          "required": [],
+          "title": "minReplicas",
+          "type": "integer"
         },
-        "externalDatabase": {
-            "type": "object",
-            "properties": {
-                "auth": {
-                    "type": "object",
-                    "properties": {
-                        "database": {
-                            "type": "string"
-                        },
-                        "password": {
-                            "type": "string"
-                        },
-                        "username": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "hostname": {
-                    "type": "string"
-                },
-                "port": {
-                    "type": "integer"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "description": "Target CPU utilization percentage",
+          "required": [],
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
         },
-        "extraEnv": {
-            "type": "array"
-        },
-        "fullnameOverride": {
-            "type": "string"
-        },
-        "image": {
-            "type": "object",
-            "properties": {
-                "pullPolicy": {
-                    "type": "string"
-                },
-                "registry": {
-                    "type": "string"
-                },
-                "repository": {
-                    "type": "string"
-                },
-                "tag": {
-                    "type": "string"
-                }
-            }
-        },
-        "imagePullSecrets": {
-            "type": "array"
-        },
-        "ingress": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "className": {
-                    "type": "string"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "hosts": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "host": {
-                                "type": "string"
-                            },
-                            "paths": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "path": {
-                                            "type": "string"
-                                        },
-                                        "pathType": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "tls": {
-                    "type": "array"
-                }
-            }
-        },
-        "mysql": {
-            "type": "object",
-            "properties": {
-                "auth": {
-                    "type": "object",
-                    "properties": {
-                        "database": {
-                            "type": "string"
-                        },
-                        "password": {
-                            "type": "string"
-                        },
-                        "username": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "enabled": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "nameOverride": {
-            "type": "string"
-        },
-        "nodeSelector": {
-            "type": "object"
-        },
-        "podAnnotations": {
-            "type": "object"
-        },
-        "podSecurityContext": {
-            "type": "object"
-        },
-        "postgresql": {
-            "type": "object",
-            "properties": {
-                "auth": {
-                    "type": "object",
-                    "properties": {
-                        "database": {
-                            "type": "string"
-                        },
-                        "password": {
-                            "type": "string"
-                        },
-                        "username": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "enabled": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "replicaCount": {
-            "type": "integer"
-        },
-        "resources": {
-            "type": "object"
-        },
-        "revisionHistoryLimit": {
-            "type": "integer"
-        },
-        "securityContext": {
-            "type": "object",
-            "properties": {
-                "runAsGroup": {
-                    "type": "integer"
-                },
-                "runAsNonRoot": {
-                    "type": "boolean"
-                },
-                "runAsUser": {
-                    "type": "integer"
-                }
-            }
-        },
-        "service": {
-            "type": "object",
-            "properties": {
-                "port": {
-                    "type": "integer"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
-        "serviceAccount": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
-        "tolerations": {
-            "type": "array"
-        },
-        "umami": {
-            "type": "object",
-            "properties": {
-                "appSecret": {
-                    "type": "object",
-                    "properties": {
-                        "existingSecret": {
-                            "type": "string"
-                        },
-                        "secret": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "clientIpHeader": {
-                    "type": "string"
-                },
-                "cloudMode": {
-                    "type": "string"
-                },
-                "collectApiEndpoint": {
-                    "type": "string"
-                },
-                "corsMaxAge": {
-                    "type": "string"
-                },
-                "debug": {
-                    "type": "string"
-                },
-                "disableBotCheck": {
-                    "type": "string"
-                },
-                "disableLogin": {
-                    "type": "string"
-                },
-                "disableTelemetry": {
-                    "type": "string"
-                },
-                "disableUpdates": {
-                    "type": "string"
-                },
-                "enableTestConsole": {
-                    "type": "string"
-                },
-                "forceSSL": {
-                    "type": "string"
-                },
-                "hostname": {
-                    "type": "string"
-                },
-                "ignoreHostname": {
-                    "type": "string"
-                },
-                "ignoredIpAddresses": {
-                    "type": "string"
-                },
-                "logQuery": {
-                    "type": "string"
-                },
-                "migration": {
-                    "type": "object",
-                    "properties": {
-                        "v1v2": {
-                            "type": "object",
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean"
-                                }
-                            }
-                        }
-                    }
-                },
-                "removeDisableLoginEnv": {
-                    "type": "boolean"
-                },
-                "removeTrailingSlash": {
-                    "type": "string"
-                },
-                "trackerScriptName": {
-                    "type": "string"
-                }
-            }
+        "targetMemoryUtilizationPercentage": {
+          "default": 80,
+          "description": "Target Memory utilization percentage",
+          "required": [],
+          "title": "targetMemoryUtilizationPercentage",
+          "type": "integer"
         }
+      },
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage",
+        "targetMemoryUtilizationPercentage"
+      ],
+      "title": "autoscaling",
+      "type": "object"
+    },
+    "database": {
+      "properties": {
+        "databaseUrlKey": {
+          "default": "",
+          "description": "Key in the existing secret containing the database url",
+          "required": [],
+          "title": "databaseUrlKey",
+          "type": "string"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "use an existing secret containing the database url. If none given, we will generate the database url by using the other values. The password for the database has to be set using `.Values.postgresql.auth.password`, `.Values.mysql.auth.password` or `.Values.externalDatabase.auth.password`.",
+          "required": [],
+          "title": "existingSecret",
+          "type": "string"
+        }
+      },
+      "required": [
+        "databaseUrlKey",
+        "existingSecret"
+      ],
+      "title": "database",
+      "type": "object"
+    },
+    "externalDatabase": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "mychart",
+              "description": "Name of the database to use",
+              "required": [],
+              "title": "database",
+              "type": "string"
+            },
+            "password": {
+              "default": "mychart",
+              "description": "Password to use",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "mychart",
+              "description": "Name of the user to use",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "hostname": {
+          "default": "",
+          "description": "Hostname of the database",
+          "required": [],
+          "title": "hostname",
+          "type": "string"
+        },
+        "port": {
+          "default": 5432,
+          "description": "Port used to connect to database",
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "postgresql",
+          "description": "Type of database",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "auth",
+        "hostname",
+        "port",
+        "type"
+      ],
+      "title": "externalDatabase",
+      "type": "object"
+    },
+    "extraEnv": {
+      "description": "additional environment variables to be added to the pods. See https://umami.is/docs/environment-variables for a complete list of available variables. Most variables can be set under umami as well.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "extraEnv",
+      "type": "array"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"umami.fullname\"`",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "description": "image pull policy",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "registry": {
+          "default": "ghcr.io",
+          "description": "image registry",
+          "required": [],
+          "title": "registry",
+          "type": "string"
+        },
+        "repository": {
+          "default": "umami-software/umami",
+          "description": "image repository",
+          "required": [],
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "postgresql-v2.9.0",
+          "description": "Overrides the image tag",
+          "required": [],
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "registry",
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "ingress": {
+      "properties": {
+        "annotations": {
+          "description": "Additional annotations for the Ingress resource",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "description": "IngressClass that will be be used to implement the Ingress",
+          "required": [],
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enable ingress record generation",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "description": "cert-manager.io/cluster-issuer: cluster-issuer-name\nkubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"\nAn array with hosts and paths",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "host": {
+                    "default": "chart-example.local",
+                    "required": [],
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "ImplementationSpecific",
+                              "required": [],
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "hosts",
+          "type": "array"
+        },
+        "tls": {
+          "description": "An array with the tls configuration",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "mysql": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "mychart",
+              "description": "Name for a custom database to create",
+              "required": [],
+              "title": "database",
+              "type": "string"
+            },
+            "password": {
+              "default": "mychart",
+              "description": "Password for the custom user to create",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "mychart",
+              "description": "Name for a custom user to create",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "description": "enable MySQL™ subchart from Bitnami",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth"
+      ],
+      "title": "mysql",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `umami`",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "description": "Node labels for pod assignment",
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to pods",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podLabels": {
+      "description": "Labels to be added to pods",
+      "required": [],
+      "title": "podLabels",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "description": "pod-level security context",
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "postgresql": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "mychart",
+              "description": "Name for a custom database to create",
+              "required": [],
+              "title": "database",
+              "type": "string"
+            },
+            "password": {
+              "default": "mychart",
+              "description": "Password for the custom user to create",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "mychart",
+              "description": "Name for a custom user to create",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "enable PostgreSQL™ subchart from Bitnami",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth"
+      ],
+      "title": "postgresql",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas",
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "description": "Resource limits and requests for the controller pods.",
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "revisionHistoryLimit": {
+      "default": 10,
+      "description": "The number of old ReplicaSets to retain",
+      "required": [],
+      "title": "revisionHistoryLimit",
+      "type": "integer"
+    },
+    "securityContext": {
+      "description": "container-level security context",
+      "properties": {
+        "runAsGroup": {
+          "default": 65533,
+          "required": [],
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "required": [],
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 1001,
+          "required": [],
+          "title": "runAsUser",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "runAsGroup",
+        "runAsNonRoot",
+        "runAsUser"
+      ],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "properties": {
+        "port": {
+          "default": 3000,
+          "description": "Kubernetes port where service is exposed",
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "description": "Kubernetes service type",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "tolerations": {
+      "description": "Toleration labels for pod assignment",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "tolerations",
+      "type": "array"
+    },
+    "umami": {
+      "properties": {
+        "appSecret": {
+          "properties": {
+            "existingSecret": {
+              "default": "",
+              "description": "Name of an existing secret containing the app secret under the key app-secret.",
+              "required": [],
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "secret": {
+              "default": "",
+              "description": "A random string used to generate unique values.",
+              "required": [],
+              "title": "secret",
+              "type": "string"
+            }
+          },
+          "required": [
+            "existingSecret",
+            "secret"
+          ],
+          "title": "appSecret",
+          "type": "object"
+        },
+        "clientIpHeader": {
+          "default": "",
+          "description": "HTTP header to check for the client's IP address. This is useful when you're behind a proxy that uses non-standard headers.",
+          "required": [],
+          "title": "clientIpHeader",
+          "type": "string"
+        },
+        "cloudMode": {
+          "default": "1",
+          "description": "Disables users, teams, and websites settings page.",
+          "required": [],
+          "title": "cloudMode",
+          "type": "string"
+        },
+        "collectApiEndpoint": {
+          "default": "",
+          "description": "Allows you to send metrics to a location different than the default `/api/send`. This is to help you avoid some ad-blockers.",
+          "required": [],
+          "title": "collectApiEndpoint",
+          "type": "string"
+        },
+        "corsMaxAge": {
+          "default": "86400",
+          "description": "How many seconds a CORS preflight should last. Default is 24 hours.",
+          "required": [],
+          "title": "corsMaxAge",
+          "type": "string"
+        },
+        "debug": {
+          "default": "",
+          "description": "Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`.",
+          "required": [],
+          "title": "debug",
+          "type": "string"
+        },
+        "disableBotCheck": {
+          "default": "1",
+          "description": "By default bots are excluded from statistics. This disables checking for bots.",
+          "required": [],
+          "title": "disableBotCheck",
+          "type": "string"
+        },
+        "disableLogin": {
+          "default": "1",
+          "description": "Disables the login page for the application",
+          "required": [],
+          "title": "disableLogin",
+          "type": "string"
+        },
+        "disableTelemetry": {
+          "default": "1",
+          "description": "Umami collects completely anonymous telemetry data in order help improve the application. You can choose to disable this if you don't want to participate.",
+          "required": [],
+          "title": "disableTelemetry",
+          "type": "string"
+        },
+        "disableUpdates": {
+          "default": "1",
+          "description": "Disables the check for new versions of Umami",
+          "required": [],
+          "title": "disableUpdates",
+          "type": "string"
+        },
+        "enableTestConsole": {
+          "default": "1",
+          "description": "Enables the internal test page, {host}/console. Admin access is required. Users can manually fire pageviews and events to their websites.",
+          "required": [],
+          "title": "enableTestConsole",
+          "type": "string"
+        },
+        "forceSSL": {
+          "default": "1",
+          "description": "This will redirect all requests from http to https in the Umami application. Note, this does not apply to the tracking script.",
+          "required": [],
+          "title": "forceSSL",
+          "type": "string"
+        },
+        "hostname": {
+          "default": "0.0.0.0",
+          "description": "hostname under which Umami will be reached",
+          "required": [],
+          "title": "hostname",
+          "type": "string"
+        },
+        "ignoreHostname": {
+          "default": "",
+          "description": "This will do a DNS lookup on a hostname and the resulting IP address will be ignored. This can be a comma delimited list of hostnames.",
+          "required": [],
+          "title": "ignoreHostname",
+          "type": "string"
+        },
+        "ignoredIpAddresses": {
+          "default": "",
+          "description": "You can provide a comma-delimited list of IP address to exclude from data collection.",
+          "required": [],
+          "title": "ignoredIpAddresses",
+          "type": "string"
+        },
+        "logQuery": {
+          "default": "1",
+          "description": "If you are running in development mode, this will log database queries to the console for debugging.",
+          "required": [],
+          "title": "logQuery",
+          "type": "string"
+        },
+        "migration": {
+          "properties": {
+            "v1v2": {
+              "properties": {
+                "enabled": {
+                  "default": false,
+                  "description": "enable a job that migrates database structure from v1 to v2",
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled"
+              ],
+              "title": "v1v2",
+              "type": "object"
+            }
+          },
+          "required": [
+            "v1v2"
+          ],
+          "title": "migration",
+          "type": "object"
+        },
+        "removeDisableLoginEnv": {
+          "default": true,
+          "description": "setting this to true removes the environment variable DISABLE_LOGIN defined in `umami.disableLogin` from the deployment as this caused errors in some setups",
+          "required": [],
+          "title": "removeDisableLoginEnv",
+          "type": "boolean"
+        },
+        "removeTrailingSlash": {
+          "default": "1",
+          "description": "Removes the trailing slash from all incoming urls.",
+          "required": [],
+          "title": "removeTrailingSlash",
+          "type": "string"
+        },
+        "trackerScriptName": {
+          "default": "umami",
+          "description": "Allows you to assign a custom name to the tracker script different from the default umami. This is to help you avoid some ad-blockers.",
+          "required": [],
+          "title": "trackerScriptName",
+          "type": "string"
+        }
+      },
+      "required": [
+        "appSecret",
+        "clientIpHeader",
+        "cloudMode",
+        "collectApiEndpoint",
+        "corsMaxAge",
+        "debug",
+        "disableBotCheck",
+        "disableLogin",
+        "disableTelemetry",
+        "disableUpdates",
+        "enableTestConsole",
+        "forceSSL",
+        "hostname",
+        "ignoreHostname",
+        "ignoredIpAddresses",
+        "logQuery",
+        "migration",
+        "removeDisableLoginEnv",
+        "removeTrailingSlash",
+        "trackerScriptName"
+      ],
+      "title": "umami",
+      "type": "object"
     }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "image",
+    "imagePullSecrets",
+    "podAnnotations",
+    "podLabels",
+    "podSecurityContext",
+    "replicaCount",
+    "revisionHistoryLimit",
+    "resources",
+    "securityContext",
+    "serviceAccount",
+    "service",
+    "ingress",
+    "autoscaling",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "extraEnv",
+    "umami",
+    "postgresql",
+    "mysql",
+    "externalDatabase",
+    "database"
+  ],
+  "type": "object"
 }

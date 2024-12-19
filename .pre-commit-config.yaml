@@ -22,6 +22,17 @@ repos:
         args:
           - --chart-search-root=charts
 
+  - repo: https://github.com/dadav/helm-schema
+    rev: 0.16.1
+    hooks:
+      - id: helm-schema
+        args:
+          - --add-schema-reference
+          - --append-newline
+          - --chart-search-root=charts
+          - --no-dependencies
+          - --skip-auto-generation=additionalProperties
+
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.43.0
     hooks:

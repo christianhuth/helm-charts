@@ -1,392 +1,874 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "type": "object",
-    "properties": {
-        "mysql": {
-            "type": "object",
-            "properties": {
-                "affinity": {
-                    "type": "object"
-                },
-                "architecture": {
-                    "type": "string"
-                },
-                "auth": {
-                    "type": "object",
-                    "properties": {
-                        "database": {
-                            "type": "string"
-                        },
-                        "password": {
-                            "type": "string"
-                        },
-                        "rootPassword": {
-                            "type": "string"
-                        },
-                        "username": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "fullnameOverride": {
-                    "type": "string"
-                },
-                "global": {
-                    "type": "object",
-                    "properties": {
-                        "storageClass": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "pullPolicy": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "metrics": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "pullPolicy": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "serviceMonitor": {
-                            "type": "object",
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "labels": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "rbac": {
-                    "type": "object",
-                    "properties": {
-                        "create": {
-                            "type": "boolean"
-                        }
-                    }
-                },
-                "resources": {
-                    "type": "object",
-                    "properties": {
-                        "limits": {
-                            "type": "object",
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "requests": {
-                            "type": "object",
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                },
-                "secondary": {
-                    "type": "object",
-                    "properties": {
-                        "replicaCount": {
-                            "type": "integer"
-                        }
-                    }
-                },
-                "volumePermissions": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "pullPolicy": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "mysql": {
+      "properties": {
+        "affinity": {
+          "required": [],
+          "title": "affinity",
+          "type": "object"
+        },
+        "architecture": {
+          "default": "replication",
+          "description": "podAntiAffinity:\n  requiredDuringSchedulingIgnoredDuringExecution:\n    - labelSelector:\n        matchExpressions:\n          - key: app.kubernetes.io/instance\n            operator: In\n            values:\n              - release-name\n          - key: app.kubernetes.io/name\n            operator: In\n            values:\n              - mysql\n      topologyKey: \"kubernetes.io/hostname\"",
+          "required": [],
+          "title": "architecture",
+          "type": "string"
+        },
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "passbolt",
+              "required": [],
+              "title": "database",
+              "type": "string"
+            },
+            "password": {
+              "default": "passbolt",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "rootPassword": {
+              "default": "root",
+              "required": [],
+              "title": "rootPassword",
+              "type": "string"
+            },
+            "username": {
+              "default": "passbolt",
+              "required": [],
+              "title": "username",
+              "type": "string"
             }
+          },
+          "required": [
+            "database",
+            "password",
+            "rootPassword",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "fullnameOverride": {
+          "default": "passbolt-mysql",
+          "required": [],
+          "title": "fullnameOverride",
+          "type": "string"
+        },
+        "global": {
+          "properties": {
+            "storageClass": {
+              "default": "",
+              "required": [],
+              "title": "storageClass",
+              "type": "string"
+            }
+          },
+          "required": [
+            "storageClass"
+          ],
+          "title": "global",
+          "type": "object"
+        },
+        "image": {
+          "properties": {
+            "pullPolicy": {
+              "default": "Always",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            }
+          },
+          "required": [
+            "pullPolicy"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "metrics": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "image": {
+              "properties": {
+                "pullPolicy": {
+                  "default": "Always",
+                  "required": [],
+                  "title": "pullPolicy",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pullPolicy"
+              ],
+              "title": "image",
+              "type": "object"
+            },
+            "serviceMonitor": {
+              "properties": {
+                "enabled": {
+                  "default": false,
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "labels": {
+                  "required": [],
+                  "title": "labels",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "enabled",
+                "labels"
+              ],
+              "title": "serviceMonitor",
+              "type": "object"
+            }
+          },
+          "required": [
+            "enabled",
+            "image",
+            "serviceMonitor"
+          ],
+          "title": "metrics",
+          "type": "object"
+        },
+        "rbac": {
+          "properties": {
+            "create": {
+              "default": true,
+              "required": [],
+              "title": "create",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "create"
+          ],
+          "title": "rbac",
+          "type": "object"
+        },
+        "resources": {
+          "properties": {
+            "limits": {
+              "properties": {
+                "cpu": {
+                  "default": "200m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "1024Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "properties": {
+                "cpu": {
+                  "default": "10m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "256Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "limits",
+            "requests"
+          ],
+          "title": "resources",
+          "type": "object"
+        },
+        "secondary": {
+          "properties": {
+            "replicaCount": {
+              "default": 2,
+              "required": [],
+              "title": "replicaCount",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "replicaCount"
+          ],
+          "title": "secondary",
+          "type": "object"
+        },
+        "volumePermissions": {
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "image": {
+              "properties": {
+                "pullPolicy": {
+                  "default": "Always",
+                  "required": [],
+                  "title": "pullPolicy",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pullPolicy"
+              ],
+              "title": "image",
+              "type": "object"
+            }
+          },
+          "required": [
+            "enabled",
+            "image"
+          ],
+          "title": "volumePermissions",
+          "type": "object"
+        }
+      },
+      "required": [
+        "affinity",
+        "architecture",
+        "auth",
+        "enabled",
+        "fullnameOverride",
+        "global",
+        "image",
+        "metrics",
+        "rbac",
+        "resources",
+        "secondary",
+        "volumePermissions"
+      ],
+      "title": "mysql",
+      "type": "object"
+    },
+    "passbolt": {
+      "properties": {
+        "db": {
+          "properties": {
+            "host": {
+              "default": "passbolt-proxysql",
+              "required": [],
+              "title": "host",
+              "type": "string"
+            },
+            "name": {
+              "default": "passbolt",
+              "required": [],
+              "title": "name",
+              "type": "string"
+            },
+            "password": {
+              "default": "passbolt",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "passbolt",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "host",
+            "name",
+            "username",
+            "password"
+          ],
+          "title": "db",
+          "type": "object"
+        },
+        "fullnameOverride": {
+          "default": "passbolt",
+          "required": [],
+          "title": "fullnameOverride",
+          "type": "string"
+        },
+        "image": {
+          "properties": {
+            "pullPolicy": {
+              "default": "Always",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            }
+          },
+          "required": [
+            "pullPolicy"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "ingress": {
+          "properties": {
+            "annotations": {
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "className": {
+              "default": "",
+              "required": [],
+              "title": "className",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "hosts": {
+              "description": "kubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"",
+              "items": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "host": {
+                        "default": "chart-example.local",
+                        "required": [],
+                        "title": "host",
+                        "type": "string"
+                      },
+                      "paths": {
+                        "items": {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "path": {
+                                  "default": "/",
+                                  "required": [],
+                                  "title": "path",
+                                  "type": "string"
+                                },
+                                "pathType": {
+                                  "default": "ImplementationSpecific",
+                                  "required": [],
+                                  "title": "pathType",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "path",
+                                "pathType"
+                              ],
+                              "type": "object"
+                            }
+                          ],
+                          "required": []
+                        },
+                        "required": [],
+                        "title": "paths",
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "host",
+                      "paths"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "required": []
+              },
+              "required": [],
+              "title": "hosts",
+              "type": "array"
+            },
+            "tls": {
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "tls",
+              "type": "array"
+            }
+          },
+          "required": [
+            "enabled",
+            "className",
+            "annotations",
+            "hosts",
+            "tls"
+          ],
+          "title": "ingress",
+          "type": "object"
+        },
+        "mariadb": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "title": "mariadb",
+          "type": "object"
         },
         "passbolt": {
-            "type": "object",
-            "properties": {
-                "db": {
-                    "type": "object",
-                    "properties": {
-                        "host": {
-                            "type": "string"
-                        },
-                        "name": {
-                            "type": "string"
-                        },
-                        "password": {
-                            "type": "string"
-                        },
-                        "username": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "fullnameOverride": {
-                    "type": "string"
-                },
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "pullPolicy": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "ingress": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        },
-                        "className": {
-                            "type": "string"
-                        },
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "hosts": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "host": {
-                                        "type": "string"
-                                    },
-                                    "paths": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "path": {
-                                                    "type": "string"
-                                                },
-                                                "pathType": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "tls": {
-                            "type": "array"
-                        }
-                    }
-                },
-                "mariadb": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        }
-                    }
-                },
-                "passbolt": {
-                    "type": "object",
-                    "properties": {
-                        "baseUrl": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "persistence": {
-                    "type": "object",
-                    "properties": {
-                        "accessMode": {
-                            "type": "string"
-                        },
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "size": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "resources": {
-                    "type": "object",
-                    "properties": {
-                        "limits": {
-                            "type": "object",
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "requests": {
-                            "type": "object",
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
+          "properties": {
+            "baseUrl": {
+              "default": "",
+              "required": [],
+              "title": "baseUrl",
+              "type": "string"
             }
+          },
+          "required": [
+            "baseUrl"
+          ],
+          "title": "passbolt",
+          "type": "object"
+        },
+        "persistence": {
+          "properties": {
+            "accessMode": {
+              "default": "ReadWriteOnce",
+              "required": [],
+              "title": "accessMode",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "size": {
+              "default": "512Mi",
+              "required": [],
+              "title": "size",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "accessMode",
+            "size"
+          ],
+          "title": "persistence",
+          "type": "object"
+        },
+        "resources": {
+          "properties": {
+            "limits": {
+              "properties": {
+                "cpu": {
+                  "default": "100m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "512Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "properties": {
+                "cpu": {
+                  "default": "50m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "256Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "limits",
+            "requests"
+          ],
+          "title": "resources",
+          "type": "object"
+        }
+      },
+      "required": [
+        "db",
+        "fullnameOverride",
+        "image",
+        "ingress",
+        "mariadb",
+        "passbolt",
+        "persistence",
+        "resources"
+      ],
+      "title": "passbolt",
+      "type": "object"
+    },
+    "proxysql": {
+      "properties": {
+        "affinity": {
+          "required": [],
+          "title": "affinity",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "podAntiAffinity:\n  requiredDuringSchedulingIgnoredDuringExecution:\n    - labelSelector:\n        matchExpressions:\n          - key: app.kubernetes.io/instance\n            operator: In\n            values:\n              - release-name\n          - key: app.kubernetes.io/name\n            operator: In\n            values:\n              - proxysql\n      topologyKey: \"kubernetes.io/hostname\"",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "fullnameOverride": {
+          "default": "passbolt-proxysql",
+          "required": [],
+          "title": "fullnameOverride",
+          "type": "string"
+        },
+        "image": {
+          "properties": {
+            "pullPolicy": {
+              "default": "Always",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            }
+          },
+          "required": [
+            "pullPolicy"
+          ],
+          "title": "image",
+          "type": "object"
         },
         "proxysql": {
-            "type": "object",
-            "properties": {
-                "affinity": {
-                    "type": "object"
+          "properties": {
+            "admin": {
+              "properties": {
+                "password": {
+                  "default": "admin",
+                  "required": [],
+                  "title": "password",
+                  "type": "string"
                 },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "fullnameOverride": {
-                    "type": "string"
-                },
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "pullPolicy": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "proxysql": {
-                    "type": "object",
-                    "properties": {
-                        "admin": {
-                            "type": "object",
-                            "properties": {
-                                "password": {
-                                    "type": "string"
-                                },
-                                "user": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "mysql": {
-                            "type": "object",
-                            "properties": {
-                                "servers": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "hostname": {
-                                                "type": "string"
-                                            },
-                                            "isWriter": {
-                                                "type": "boolean"
-                                            },
-                                            "port": {
-                                                "type": "integer"
-                                            }
-                                        }
-                                    }
-                                },
-                                "users": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "password": {
-                                                "type": "string"
-                                            },
-                                            "username": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
-                                },
-                                "version": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "web": {
-                            "type": "object",
-                            "properties": {
-                                "password": {
-                                    "type": "string"
-                                },
-                                "user": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                },
-                "replicaCount": {
-                    "type": "integer"
-                },
-                "resources": {
-                    "type": "object",
-                    "properties": {
-                        "limits": {
-                            "type": "object",
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "requests": {
-                            "type": "object",
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
+                "user": {
+                  "default": "admin",
+                  "required": [],
+                  "title": "user",
+                  "type": "string"
                 }
+              },
+              "required": [
+                "password",
+                "user"
+              ],
+              "title": "admin",
+              "type": "object"
+            },
+            "mysql": {
+              "properties": {
+                "servers": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "hostname": {
+                            "default": "passbolt-mysql-primary",
+                            "required": [],
+                            "title": "hostname",
+                            "type": "string"
+                          },
+                          "isWriter": {
+                            "default": true,
+                            "required": [],
+                            "title": "isWriter",
+                            "type": "boolean"
+                          },
+                          "port": {
+                            "default": 3306,
+                            "required": [],
+                            "title": "port",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "isWriter",
+                          "hostname",
+                          "port"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "properties": {
+                          "hostname": {
+                            "default": "passbolt-mysql-secondary",
+                            "required": [],
+                            "title": "hostname",
+                            "type": "string"
+                          },
+                          "isWriter": {
+                            "default": false,
+                            "required": [],
+                            "title": "isWriter",
+                            "type": "boolean"
+                          },
+                          "port": {
+                            "default": 3306,
+                            "required": [],
+                            "title": "port",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "isWriter",
+                          "hostname",
+                          "port"
+                        ],
+                        "type": "object"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "required": [],
+                  "title": "servers",
+                  "type": "array"
+                },
+                "users": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "password": {
+                            "default": "root",
+                            "required": [],
+                            "title": "password",
+                            "type": "string"
+                          },
+                          "username": {
+                            "default": "root",
+                            "required": [],
+                            "title": "username",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "username",
+                          "password"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "properties": {
+                          "password": {
+                            "default": "passbolt",
+                            "required": [],
+                            "title": "password",
+                            "type": "string"
+                          },
+                          "username": {
+                            "default": "passbolt",
+                            "required": [],
+                            "title": "username",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "username",
+                          "password"
+                        ],
+                        "type": "object"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "required": [],
+                  "title": "users",
+                  "type": "array"
+                },
+                "version": {
+                  "default": "8.0.29",
+                  "required": [],
+                  "title": "version",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "version",
+                "servers",
+                "users"
+              ],
+              "title": "mysql",
+              "type": "object"
+            },
+            "web": {
+              "properties": {
+                "password": {
+                  "default": "admin",
+                  "required": [],
+                  "title": "password",
+                  "type": "string"
+                },
+                "user": {
+                  "default": "admin",
+                  "required": [],
+                  "title": "user",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "password",
+                "user"
+              ],
+              "title": "web",
+              "type": "object"
             }
+          },
+          "required": [
+            "admin",
+            "mysql",
+            "web"
+          ],
+          "title": "proxysql",
+          "type": "object"
+        },
+        "replicaCount": {
+          "default": 3,
+          "required": [],
+          "title": "replicaCount",
+          "type": "integer"
+        },
+        "resources": {
+          "properties": {
+            "limits": {
+              "properties": {
+                "cpu": {
+                  "default": "200m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "512Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "properties": {
+                "cpu": {
+                  "default": "100m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "128Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "limits",
+            "requests"
+          ],
+          "title": "resources",
+          "type": "object"
         }
+      },
+      "required": [
+        "affinity",
+        "enabled",
+        "fullnameOverride",
+        "image",
+        "proxysql",
+        "replicaCount",
+        "resources"
+      ],
+      "title": "proxysql",
+      "type": "object"
     }
+  },
+  "required": [
+    "mysql",
+    "passbolt",
+    "proxysql"
+  ],
+  "type": "object"
 }

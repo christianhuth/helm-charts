@@ -1,248 +1,597 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "type": "object",
-    "properties": {
-        "admin": {
-            "type": "object",
-            "properties": {
-                "email": {
-                    "type": "string"
-                },
-                "existingSecret": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "username": {
-                    "type": "string"
-                }
-            }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "admin": {
+      "properties": {
+        "email": {
+          "default": "",
+          "required": [],
+          "title": "email",
+          "type": "string"
         },
-        "affinity": {
-            "type": "object"
+        "existingSecret": {
+          "default": "",
+          "description": "expected key is ADMIN_PASSWORD",
+          "required": [],
+          "title": "existingSecret",
+          "type": "string"
         },
-        "autoscaling": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean"
-                },
-                "maxReplicas": {
-                    "type": "integer"
-                },
-                "minReplicas": {
-                    "type": "integer"
-                },
-                "targetCPUUtilizationPercentage": {
-                    "type": "integer"
-                }
-            }
+        "password": {
+          "default": "admin",
+          "required": [],
+          "title": "password",
+          "type": "string"
         },
-        "env": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "externalDatabase": {
-            "type": "object",
-            "properties": {
-                "database": {
-                    "type": "string"
-                },
-                "existingSecret": {
-                    "type": "string"
-                },
-                "host": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "port": {
-                    "type": "string"
-                },
-                "username": {
-                    "type": "string"
-                }
-            }
-        },
-        "fullnameOverride": {
-            "type": "string"
-        },
-        "image": {
-            "type": "object",
-            "properties": {
-                "pullPolicy": {
-                    "type": "string"
-                },
-                "repository": {
-                    "type": "string"
-                },
-                "tag": {
-                    "type": "string"
-                }
-            }
-        },
-        "imagePullSecrets": {
-            "type": "array"
-        },
-        "ingress": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "className": {
-                    "type": "string"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "hosts": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "host": {
-                                "type": "string"
-                            },
-                            "paths": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "path": {
-                                            "type": "string"
-                                        },
-                                        "pathType": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "tls": {
-                    "type": "array"
-                }
-            }
-        },
-        "mail": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean"
-                },
-                "existingSecret": {
-                    "type": "string"
-                },
-                "fromAddress": {
-                    "type": "string"
-                },
-                "fromName": {
-                    "type": "string"
-                },
-                "host": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "port": {
-                    "type": "string"
-                },
-                "username": {
-                    "type": "string"
-                }
-            }
-        },
-        "mysql": {
-            "type": "object",
-            "properties": {
-                "auth": {
-                    "type": "object",
-                    "properties": {
-                        "database": {
-                            "type": "string"
-                        },
-                        "existingSecret": {
-                            "type": "string"
-                        },
-                        "password": {
-                            "type": "string"
-                        },
-                        "username": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "enabled": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "nameOverride": {
-            "type": "string"
-        },
-        "nodeSelector": {
-            "type": "object"
-        },
-        "podAnnotations": {
-            "type": "object"
-        },
-        "podSecurityContext": {
-            "type": "object"
-        },
-        "replicaCount": {
-            "type": "integer"
-        },
-        "resources": {
-            "type": "object"
-        },
-        "revisionHistoryLimit": {
-            "type": "integer"
-        },
-        "securityContext": {
-            "type": "object"
-        },
-        "service": {
-            "type": "object",
-            "properties": {
-                "port": {
-                    "type": "integer"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
-        "serviceAccount": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
-        "tolerations": {
-            "type": "array"
+        "username": {
+          "default": "admin",
+          "required": [],
+          "title": "username",
+          "type": "string"
         }
+      },
+      "required": [
+        "password",
+        "username",
+        "email",
+        "existingSecret"
+      ],
+      "title": "admin",
+      "type": "object"
+    },
+    "affinity": {
+      "description": "Affinity settings for pod assignment",
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "autoscaling": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "maxReplicas": {
+          "default": 100,
+          "required": [],
+          "title": "maxReplicas",
+          "type": "integer"
+        },
+        "minReplicas": {
+          "default": 1,
+          "required": [],
+          "title": "minReplicas",
+          "type": "integer"
+        },
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "required": [],
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage"
+      ],
+      "title": "autoscaling",
+      "type": "object"
+    },
+    "env": {
+      "description": "Please see https://github.com/ajanvier/docker-polr#environment-variables for complete list of environment variables.\nAdmin account and mail settings are provided through their own values.",
+      "items": {
+        "anyOf": [
+          {
+            "properties": {
+              "name": {
+                "default": "APP_ADDRESS",
+                "required": [],
+                "title": "name",
+                "type": "string"
+              },
+              "value": {
+                "default": "polr.local",
+                "required": [],
+                "title": "value",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "value"
+            ],
+            "type": "object"
+          },
+          {
+            "properties": {
+              "name": {
+                "default": "APP_NAME",
+                "required": [],
+                "title": "name",
+                "type": "string"
+              },
+              "value": {
+                "default": "Polr",
+                "required": [],
+                "title": "value",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "value"
+            ],
+            "type": "object"
+          }
+        ],
+        "required": []
+      },
+      "required": [],
+      "title": "env",
+      "type": "array"
+    },
+    "externalDatabase": {
+      "description": "will be used if mysql.enabled is false",
+      "properties": {
+        "database": {
+          "default": "polr",
+          "required": [],
+          "title": "database",
+          "type": "string"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "#\n# NOTE: When it's set the externalDatabase.password is ignored.",
+          "required": [],
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "host": {
+          "default": "polr-mysql",
+          "required": [],
+          "title": "host",
+          "type": "string"
+        },
+        "password": {
+          "default": "polr",
+          "required": [],
+          "title": "password",
+          "type": "string"
+        },
+        "port": {
+          "default": "3306",
+          "required": [],
+          "title": "port",
+          "type": "string"
+        },
+        "username": {
+          "default": "polr",
+          "required": [],
+          "title": "username",
+          "type": "string"
+        }
+      },
+      "required": [
+        "host",
+        "port",
+        "database",
+        "username",
+        "password",
+        "existingSecret"
+      ],
+      "title": "externalDatabase",
+      "type": "object"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"polr.fullname\"`",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "description": "image pull policy",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "repository": {
+          "default": "ajanvier/polr",
+          "description": "image repository",
+          "required": [],
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "2.3.0",
+          "description": "Overrides the image tag",
+          "required": [],
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "ingress": {
+      "properties": {
+        "annotations": {
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "required": [],
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "description": "kubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "host": {
+                    "default": "chart-example.local",
+                    "required": [],
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "ImplementationSpecific",
+                              "required": [],
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "hosts",
+          "type": "array"
+        },
+        "tls": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "mail": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "#\n# NOTE: When it's set the mail.password is ignored.",
+          "required": [],
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "fromAddress": {
+          "default": "",
+          "required": [],
+          "title": "fromAddress",
+          "type": "string"
+        },
+        "fromName": {
+          "default": "",
+          "required": [],
+          "title": "fromName",
+          "type": "string"
+        },
+        "host": {
+          "default": "",
+          "required": [],
+          "title": "host",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "required": [],
+          "title": "password",
+          "type": "string"
+        },
+        "port": {
+          "default": "",
+          "required": [],
+          "title": "port",
+          "type": "string"
+        },
+        "username": {
+          "default": "",
+          "required": [],
+          "title": "username",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled",
+        "host",
+        "port",
+        "username",
+        "password",
+        "fromAddress",
+        "fromName",
+        "existingSecret"
+      ],
+      "title": "mail",
+      "type": "object"
+    },
+    "mysql": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "polr",
+              "required": [],
+              "title": "database",
+              "type": "string"
+            },
+            "existingSecret": {
+              "default": "",
+              "description": "#\n# NOTE: When it's set the mysql.auth.rootPassword, mysql.auth.password, mysql.auth.replicationPassword are ignored.",
+              "required": [],
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "password": {
+              "default": "polr",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "polr",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "password",
+            "username",
+            "existingSecret"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "if disabled please provide db-attributes via externalDatabase attributes",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth"
+      ],
+      "title": "mysql",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `polr`",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "description": "Node labels for pod assignment",
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to pods",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "description": "pod-level security context",
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas",
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "description": "Resource limits and requests for the headwind pods.",
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "revisionHistoryLimit": {
+      "default": 10,
+      "description": "The number of old ReplicaSets to retain",
+      "required": [],
+      "title": "revisionHistoryLimit",
+      "type": "integer"
+    },
+    "securityContext": {
+      "description": "container-level security context",
+      "required": [],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "properties": {
+        "port": {
+          "default": 80,
+          "description": "Kubernetes port where service is exposed",
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "description": "Kubernetes service type",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "tolerations": {
+      "description": "Toleration labels for pod assignment",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "tolerations",
+      "type": "array"
     }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "image",
+    "imagePullSecrets",
+    "replicaCount",
+    "revisionHistoryLimit",
+    "serviceAccount",
+    "podAnnotations",
+    "podSecurityContext",
+    "securityContext",
+    "service",
+    "ingress",
+    "resources",
+    "autoscaling",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "env",
+    "admin",
+    "externalDatabase",
+    "mail",
+    "mysql"
+  ],
+  "type": "object"
 }
