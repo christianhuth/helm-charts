@@ -29,3 +29,6 @@ minikube profile helm-charts-development
 # configure git
 git config --global user.email "christian@knell.it"
 git config --global user.name "christianhuth"
+
+eval `ssh-agent`
+ssh-add ~/.ssh/*.openssh
