@@ -147,24 +147,25 @@ This major updates the redis subchart to its newest major, 18.0.4. [Here](https:
 ### 2.0.0
 
 This major updates the way you define environment variables.
-  - The section `mail` has been moved to `kutt.mail`
-  - The section `envSecrets` has been merged into `kutt`:
-    - `envSecrets.google` is now `kutt.google`
-    - `envSecrets.jwt` is now `kutt.jwt`
-    - `envSecrets.recaptcha` is now `kutt.recaptcha`
-  - The section `env` has been replaced with specific values:
-    - `ADMIN_EMAILS` is now `kutt.admin.emails`
-    - `CUSTOM_DOMAIN_USE_HTTPS` is now `kutt.domain.customDomainUseHttps`
-    - `DEFAULT_DOMAIN` is now `kutt.domain.defaultDomain`
-    - `DEFAULT_MAX_STATS_PER_LINK` is now `kutt.config.defaultMaxStatsPerLink`
-    - `DISALLOW_ANONYMOUS_LINKS` is now `kutt.config.disallowAnonymousLinks`
-    - `DISALLOW_REGISTRATION` is now `kutt.config.disallowRegistration`
-    - `LINK_LENGTH` is now `kutt.config.linkLength`
-    - `NON_USER_COOLDOWN` is now `kutt.config.nonUserCooldown`
-    - `REPORT_EMAIL` is now `kutt.mail.reportEmail`
-    - `SITE_NAME` is now `kutt.config.siteName`
-    - `USER_LIMIT_PER_DAY` is now `kutt.config.userLimitPerDay`
-  - You can define additional environment variables using the extraEnv section.
+
+- The section `mail` has been moved to `kutt.mail`
+- The section `envSecrets` has been merged into `kutt`:
+  - `envSecrets.google` is now `kutt.google`
+  - `envSecrets.jwt` is now `kutt.jwt`
+  - `envSecrets.recaptcha` is now `kutt.recaptcha`
+- The section `env` has been replaced with specific values:
+  - `ADMIN_EMAILS` is now `kutt.admin.emails`
+  - `CUSTOM_DOMAIN_USE_HTTPS` is now `kutt.domain.customDomainUseHttps`
+  - `DEFAULT_DOMAIN` is now `kutt.domain.defaultDomain`
+  - `DEFAULT_MAX_STATS_PER_LINK` is now `kutt.config.defaultMaxStatsPerLink`
+  - `DISALLOW_ANONYMOUS_LINKS` is now `kutt.config.disallowAnonymousLinks`
+  - `DISALLOW_REGISTRATION` is now `kutt.config.disallowRegistration`
+  - `LINK_LENGTH` is now `kutt.config.linkLength`
+  - `NON_USER_COOLDOWN` is now `kutt.config.nonUserCooldown`
+  - `REPORT_EMAIL` is now `kutt.mail.reportEmail`
+  - `SITE_NAME` is now `kutt.config.siteName`
+  - `USER_LIMIT_PER_DAY` is now `kutt.config.userLimitPerDay`
+- You can define additional environment variables using the extraEnv section.
 
 ### 1.0.0
 

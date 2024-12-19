@@ -12,8 +12,6 @@ helm install my-release christianhuth/kubedoom
 
 ## Introduction
 
-<INTRODUCTION>
-
 This chart bootstraps [Kubedoom](https://github.com/storax/kubedoom) on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
@@ -38,7 +36,7 @@ These commands deploy Kubedoom on the Kubernetes cluster in the default configur
 
 Once everything is up and running inside your cluster, you will need to port forward by getting the pod and running kubectl port-forward.
 
-```
+```console
 $ kubectl get pods -n kubedoom
 NAME                                       READY   STATUS    RESTARTS   AGE
 kubedoom-kubedoom-chart-676bcc5c9c-xkwpp   1/1     Running   0          2m29s

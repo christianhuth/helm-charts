@@ -23,7 +23,9 @@ repos:
           - --chart-search-root=charts
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.32.2
+    rev: v0.43.0
     hooks:
       - id: markdownlint
         name: Markdownlint
+        args: [--config=.github/config/markdownlint.yaml]
+        language_version: lts

@@ -45,12 +45,13 @@ These commands deploy MailDev on the Kubernetes cluster in the default configura
 
 Forward your local port to the pod (this will block your terminal, open an additional one).
 
-```bash
+```console
 kubectl port-forward $(kubectl get pod -l "app.kubernetes.io/name=maildev" -o name) 1025
 ```
 
 Create dummy mail.txt file.
-```bash
+
+```console
 cat <<EOF >> mail.txt
 From: Test Maildev <test@maildev.com>
 To: Nikola Tesla Tudela <niko@tesla.com>
@@ -65,7 +66,7 @@ EOF
 
 Send the mail with curl:
 
-```bash
+```console
 curl smtp://localhost:1025 --mail-from test@maildev.com --mail-rcpt niko@tesla.com --upload-file ./mail.txt
 ```
 
@@ -73,13 +74,13 @@ The mail should now show up in your inbox.
 
 If you have enabled the logs for mails using `maildev.config.logMailContents=true`, you can also check the logs and see if the mail has been delivered.
 
-```bash
+```console
 kubectl logs $(kubectl get pod -l "app.kubernetes.io/name=maildev" -o name)
 ```
 
 Output should be something like:
 
-```bash
+```console
 MailDev webapp running at http://0.0.0.0:1080
 MailDev SMTP Server running at 0.0.0.0:1025
 Received the following mail contents.

@@ -57,27 +57,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | configuration.config.global.default_server | string | `"proxysql"` |  |
 | configuration.config.global.hide_tables[0] | string | `""` |  |
 | configuration.config.global.read_only | bool | `false` |  |
-| configuration.config.misc.adhoc_report[0].info | string | `"Examining queries with big sum_time(number of execution * time to run) is a good place to start when optimizing queries."` |  |
-| configuration.config.misc.adhoc_report[0].sql | string | `"SELECT digest,username,schemaname, SUBSTR(digest_text,0,80),count_star,sum_time/1000/1000 as sum_time_sec FROM stats_mysql_query_digest WHERE digest_text LIKE 'SELECT%' ORDER BY sum_time DESC LIMIT 10;"` |  |
-| configuration.config.misc.adhoc_report[0].title | string | `"Top 10 SELECTs by sum_time"` |  |
-| configuration.config.misc.adhoc_report[1].info | string | `"Caching/rewriting/even removing  frequently running queries can improve the overall performance significantly. ProxySQL support all the mentioned methods. Example: it's a good idea to cache queries often issued by connectors like `^SELECT @@max_allowed_packet`"` |  |
-| configuration.config.misc.adhoc_report[1].sql | string | `"SELECT digest,username,schemaname, SUBSTR(digest_text,0,80),count_star,sum_time FROM stats_mysql_query_digest WHERE digest_text LIKE 'SELECT%' ORDER BY count_star DESC LIMIT 10;"` |  |
-| configuration.config.misc.adhoc_report[1].title | string | `"Top 10 SELECTs by count_star"` |  |
-| configuration.config.misc.adhoc_report[2].info | string | `"Caching/rewriting/even removing  frequently running queries can improve the overall performance significantly. ProxySQL support all the mentioned methods. Example: it's a good idea to cache queries often issued by connectors like `^SELECT @@max_allowed_packet`"` |  |
-| configuration.config.misc.adhoc_report[2].sql | string | `"SELECT digest,username,schemaname, SUBSTR(digest_text,0,80),count_star,sum_time, (sum_time/count_star)/1000 as avg_time_ms FROM stats_mysql_query_digest WHERE digest_text LIKE 'SELECT%' ORDER BY avg_time_ms DESC LIMIT 10;"` |  |
-| configuration.config.misc.adhoc_report[2].title | string | `"Top 10 SELECTs by avg_time"` |  |
-| configuration.config.misc.adhoc_report[3].info | string | `"This helps identify the most frequently running writes"` |  |
-| configuration.config.misc.adhoc_report[3].sql | string | `"SELECT digest,username,schemaname, SUBSTR(digest_text,0,80),count_star,sum_time FROM stats_mysql_query_digest where digest_text LIKE 'INSERT%' or digest_text like 'DELETE%' or digest_text like 'UPDATE%' order by count_star DESC LIMIT 10;"` |  |
-| configuration.config.misc.adhoc_report[3].title | string | `"Top 10 writes"` |  |
-| configuration.config.misc.adhoc_report[4].info | string | `"This helps identify the schemas getting the most writes"` |  |
-| configuration.config.misc.adhoc_report[4].sql | string | `"SELECT schemaname, sum(sum_time) as time_spent, sum(count_star) as sum_count_star   FROM stats_mysql_query_digest where digest_text LIKE 'INSERT%' or digest_text like 'DELETE%' or digest_text like 'UPDATE%' group by schemaname order by time_spent desc;"` |  |
-| configuration.config.misc.adhoc_report[4].title | string | `"Schemas with the most DMLs"` |  |
-| configuration.config.misc.adhoc_report[5].info | string | `"List of the schemas with the highest overall sum_time"` |  |
-| configuration.config.misc.adhoc_report[5].sql | string | `"SELECT schemaname, sum(sum_time) as time_spent FROM stats_mysql_query_digest group by schemaname order by time_spent desc limit 5;"` |  |
-| configuration.config.misc.adhoc_report[5].title | string | `"Top 5 schemas by sum_time"` |  |
-| configuration.config.misc.adhoc_report[6].info | string | `"Don't send  selects to the readers without checking the impact first as the app might read back the data immediately after writing it."` |  |
-| configuration.config.misc.adhoc_report[6].sql | string | `"select \"replace into mysql_query_rules (username,schemaname,destination_hostgroup,active,apply,digest) values('\" || st.username || \"','\" || st.schemaname || \"',12,1,1,'\" ||  st.digest || \"');\" from stats_mysql_query_digest st left join runtime_mysql_query_rules qr on st.digest = qr.digest where  qr.rule_id is null  and digest_text LIKE 'SELECT%' ORDER BY count_star desc limit 5;"` |  |
-| configuration.config.misc.adhoc_report[6].title | string | `"Send the top 5 SELECTS to the readers"` |  |
+| configuration.config.misc.adhoc_report | list | see [values.yaml](./values.yaml) | List of reports that should be displayed |
 | configuration.config.servers.proxysql.dsn[0].db | string | `"main"` |  |
 | configuration.config.servers.proxysql.dsn[0].host | string | `"127.0.0.1"` |  |
 | configuration.config.servers.proxysql.dsn[0].passwd | string | `"sadmin"` |  |

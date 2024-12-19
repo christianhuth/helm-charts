@@ -93,7 +93,7 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 helm install my-release -f values.yaml christianhuth/argocd-metrics-server
 ```
 
-# Configuring Argo CD
+## Configuring Argo CD
 
 After a successful installation of the Argo CD Metrics Server you need to configure Argo CD to display Metrics in the UI.
 
