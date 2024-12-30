@@ -15,8 +15,10 @@ on:
 
 jobs:
 
-  changed-charts:
+  detect-changed-charts:
     runs-on: ubuntu-22.04
+    outputs:
+      matrix: ${{ steps.get-changed-charts.outputs.matrix }}
     steps:
       - name: checkout git repository
         uses: actions/checkout@v4
@@ -36,26 +38,18 @@ jobs:
       - name: Identify changed charts
         id: get-changed-charts
         run: |
-          # Get list of modified charts (changed directories under 'charts/')
-          CHANGED_CHARTS=$(ct list-changed --config .github/config/chart-testing.yaml)
+          CHANGED_CHARTS=$(ct list-changed --config .github/config/chart-testing.yaml | jq --slurp --raw-input 'split("\n")[:-1] | map({chart: .})')
           if [[ -n "$changed-charts" ]]; then
             echo "::set-output name=changed-charts::true"
-          else
-            echo "Changed charts: $CHANGED_CHARTS"
-            echo "CHANGED_CHARTS=$CHANGED_CHARTS" >> $GITHUB_ENV
+            echo "::set-output name=matrix::$CHANGED_CHARTS"
           fi
 
-      - name: Update matrix with changed charts
-        id: update-matrix
-        run: |
-          echo "charts=${{ env.CHANGED_CHARTS }}" >> $GITHUB_ENV
-
   installation:
-    needs: changed-charts
+    needs: detect-changed-charts
     runs-on: ubuntu-22.04
     strategy:
         matrix:
-            file: ${{ fromJson(env.CHANGED_CHARTS) }}
+            file: ${{ fromJson(needs.detect-changed-charts.outputs.matrix) }}
     steps:
       - name: checkout git repository
         uses: actions/checkout@v4
