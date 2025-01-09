@@ -56,7 +56,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.repository | string | `"argoprojlabs/argocd-extension-metrics"` | image repository |
 | image.tag | string | `"v1.0.3"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
-| myDummyValue | string | `"bla"` | dummy value to test pre-commit-hook with container |
 | nameOverride | string | `""` | Provide a name in place of `argocd-extension-metrics` |
 | networkPolicy.additionalAnnotations | object | `{}` | Annotations to be added to the NetworkPolicies |
 | networkPolicy.additionalLabels | object | `{}` | Labels to be added to the NetworkPolicies |
