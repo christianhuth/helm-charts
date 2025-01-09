@@ -793,11 +793,11 @@
         "smtp": {
           "properties": {
             "nodePort": {
-              "default": "",
+              "default": 0,
               "description": "You can set the node port for the external SMTP server that should be used or leave it blank to get a random node port. Only active if `services.smtp.type == NodePort`",
               "required": [],
               "title": "nodePort",
-              "type": "null"
+              "type": "integer"
             },
             "podPort": {
               "default": 1025,

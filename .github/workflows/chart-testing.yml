@@ -18,7 +18,7 @@ jobs:
   detect-changed-charts:
     runs-on: ubuntu-22.04
     outputs:
-      charts: ${{ steps.get-changed-charts.outputs.matrix }}
+      matrix: ${{ steps.get-changed-charts.outputs.matrix }}
     steps:
       - name: checkout git repository
         uses: actions/checkout@v4
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        charts: ${{ fromJson(needs.detect-changed-charts.outputs.charts) }}
+        include: ${{ fromJson(needs.detect-changed-charts.outputs.matrix) }}
     steps:
       - name: checkout git repository
         uses: actions/checkout@v4

@@ -170,7 +170,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
-| services.smtp.nodePort | string | `nil` | You can set the node port for the external SMTP server that should be used or leave it blank to get a random node port. Only active if `services.smtp.type == NodePort` |
+| services.smtp.nodePort | int | `0` | You can set the node port for the external SMTP server that should be used or leave it blank to get a random node port. Only active if `services.smtp.type == NodePort` |
 | services.smtp.podPort | int | `1025` | Pod port to use for the internal SMTP server |
 | services.smtp.port | int | `1025` | Kubernetes service port to use for the internal SMTP server |
 | services.smtp.type | string | `"ClusterIP"` | Kubernetes service type for the SMTP server |

@@ -17,6 +17,8 @@ annotations:
   artifacthub.io/changes: |
     - kind: changed
       description: format README
+    - kind: changed
+      description: default value for services.smtp.nodePort
   artifacthub.io/screenshots: |
     - title: SMTP server & web interface for viewing and testing emails during development.
       url: https://maildev.github.io/maildev/assets/img/original/maildev-light.png
