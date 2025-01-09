@@ -27,7 +27,6 @@ repos:
     hooks:
       - id: helm-schema
         args:
-          - --add-schema-reference
           - --append-newline
           - --chart-search-root=charts
           - --no-dependencies

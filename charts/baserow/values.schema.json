@@ -1,22 +1,17 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "additionalProperties": false,
   "properties": {
     "backend": {
-      "additionalProperties": false,
       "properties": {
         "asgi": {
-          "additionalProperties": false,
           "properties": {
             "affinity": {
-              "additionalProperties": false,
               "description": "Affinity settings for pod assignment",
               "required": [],
               "title": "affinity",
               "type": "object"
             },
             "autoscaling": {
-              "additionalProperties": false,
               "properties": {
                 "enabled": {
                   "default": false,
@@ -74,7 +69,6 @@
               "type": "array"
             },
             "image": {
-              "additionalProperties": false,
               "properties": {
                 "pullPolicy": {
                   "default": "Always",
@@ -116,7 +110,6 @@
               "type": "array"
             },
             "livenessProbe": {
-              "additionalProperties": false,
               "properties": {
                 "initialDelaySeconds": {
                   "default": 5,
@@ -157,21 +150,18 @@
               "type": "object"
             },
             "nodeSelector": {
-              "additionalProperties": false,
               "description": "Node labels for pod assignment",
               "required": [],
               "title": "nodeSelector",
               "type": "object"
             },
             "podAnnotations": {
-              "additionalProperties": false,
               "description": "Annotations to be added to the frontend pods",
               "required": [],
               "title": "podAnnotations",
               "type": "object"
             },
             "podSecurityContext": {
-              "additionalProperties": false,
               "description": "pod-level security context",
               "properties": {
                 "fsGroup": {
@@ -209,7 +199,6 @@
               "type": "string"
             },
             "readinessProbe": {
-              "additionalProperties": false,
               "properties": {
                 "initialDelaySeconds": {
                   "default": 5,
@@ -257,7 +246,6 @@
               "type": "integer"
             },
             "resources": {
-              "additionalProperties": false,
               "description": "Resource limits and requests for the controller pods.",
               "required": [],
               "title": "resources",
@@ -271,7 +259,6 @@
               "type": "integer"
             },
             "securityContext": {
-              "additionalProperties": false,
               "description": "container-level security context",
               "properties": {
                 "runAsGroup": {
@@ -302,14 +289,12 @@
               "type": "object"
             },
             "selectorLabels": {
-              "additionalProperties": false,
               "description": "Additional labels to add to the pod",
               "required": [],
               "title": "selectorLabels",
               "type": "object"
             },
             "service": {
-              "additionalProperties": false,
               "properties": {
                 "port": {
                   "default": 8000,
@@ -334,10 +319,8 @@
               "type": "object"
             },
             "serviceAccount": {
-              "additionalProperties": false,
               "properties": {
                 "annotations": {
-                  "additionalProperties": false,
                   "description": "Annotations to add to the service account",
                   "required": [],
                   "title": "annotations",
@@ -401,17 +384,14 @@
           "type": "object"
         },
         "celery": {
-          "additionalProperties": false,
           "properties": {
             "affinity": {
-              "additionalProperties": false,
               "description": "Affinity settings for pod assignment",
               "required": [],
               "title": "affinity",
               "type": "object"
             },
             "autoscaling": {
-              "additionalProperties": false,
               "properties": {
                 "enabled": {
                   "default": false,
@@ -469,7 +449,6 @@
               "type": "array"
             },
             "image": {
-              "additionalProperties": false,
               "properties": {
                 "pullPolicy": {
                   "default": "Always",
@@ -511,7 +490,6 @@
               "type": "array"
             },
             "livenessProbe": {
-              "additionalProperties": false,
               "properties": {
                 "initialDelaySeconds": {
                   "default": 10,
@@ -544,21 +522,18 @@
               "type": "object"
             },
             "nodeSelector": {
-              "additionalProperties": false,
               "description": "Node labels for pod assignment",
               "required": [],
               "title": "nodeSelector",
               "type": "object"
             },
             "podAnnotations": {
-              "additionalProperties": false,
               "description": "Annotations to be added to the frontend pods",
               "required": [],
               "title": "podAnnotations",
               "type": "object"
             },
             "podSecurityContext": {
-              "additionalProperties": false,
               "description": "pod-level security context",
               "properties": {
                 "fsGroup": {
@@ -596,7 +571,6 @@
               "type": "string"
             },
             "readinessProbe": {
-              "additionalProperties": false,
               "properties": {
                 "initialDelaySeconds": {
                   "default": 10,
@@ -636,7 +610,6 @@
               "type": "integer"
             },
             "resources": {
-              "additionalProperties": false,
               "description": "Resource limits and requests for the controller pods.",
               "required": [],
               "title": "resources",
@@ -650,7 +623,6 @@
               "type": "integer"
             },
             "securityContext": {
-              "additionalProperties": false,
               "description": "container-level security context",
               "properties": {
                 "runAsGroup": {
@@ -681,17 +653,14 @@
               "type": "object"
             },
             "selectorLabels": {
-              "additionalProperties": false,
               "description": "Additional labels to add to the pod",
               "required": [],
               "title": "selectorLabels",
               "type": "object"
             },
             "serviceAccount": {
-              "additionalProperties": false,
               "properties": {
                 "annotations": {
-                  "additionalProperties": false,
                   "description": "Annotations to add to the service account",
                   "required": [],
                   "title": "annotations",
@@ -754,7 +723,6 @@
           "type": "object"
         },
         "config": {
-          "additionalProperties": false,
           "description": "configuration for the backend",
           "properties": {
             "additionalApps": {
@@ -779,7 +747,6 @@
               "type": "string"
             },
             "aws": {
-              "additionalProperties": false,
               "properties": {
                 "accessKeyId": {
                   "default": "",
@@ -851,7 +818,6 @@
               "type": "string"
             },
             "celery": {
-              "additionalProperties": false,
               "properties": {
                 "amountOfWorkers": {
                   "default": "",
@@ -913,7 +879,6 @@
               "type": "string"
             },
             "email": {
-              "additionalProperties": false,
               "properties": {
                 "existingSecret": {
                   "default": "",
@@ -1028,7 +993,6 @@
               "type": "string"
             },
             "jobs": {
-              "additionalProperties": false,
               "properties": {
                 "cleanupIntervalMinutes": {
                   "default": "5",
@@ -1068,7 +1032,6 @@
               "type": "string"
             },
             "logging": {
-              "additionalProperties": false,
               "properties": {
                 "backendDebug": {
                   "default": "off",
@@ -1115,7 +1078,6 @@
               "type": "string"
             },
             "media": {
-              "additionalProperties": false,
               "properties": {
                 "root": {
                   "default": "/baserow/media",
@@ -1189,7 +1151,6 @@
               "type": "string"
             },
             "tokens": {
-              "additionalProperties": false,
               "properties": {
                 "accessTokenLifetimeMinutes": {
                   "default": "10",
@@ -1228,7 +1189,6 @@
               "type": "string"
             },
             "webhook": {
-              "additionalProperties": false,
               "properties": {
                 "allowPrivateAddress": {
                   "default": "",
@@ -1356,10 +1316,8 @@
           "type": "object"
         },
         "ingress": {
-          "additionalProperties": false,
           "properties": {
             "annotations": {
-              "additionalProperties": false,
               "description": "Additional annotations for the Ingress resource",
               "required": [],
               "title": "annotations",
@@ -1387,7 +1345,6 @@
               "type": "string"
             },
             "paths": {
-              "additionalProperties": false,
               "properties": {
                 "asgiPath": {
                   "default": "/ws/",
@@ -1433,7 +1390,6 @@
           "type": "object"
         },
         "persistence": {
-          "additionalProperties": false,
           "properties": {
             "accessModes": {
               "description": "the desired access modes the volume should have.",
@@ -1451,7 +1407,6 @@
               "type": "array"
             },
             "annotations": {
-              "additionalProperties": false,
               "description": "Annotations to be added to the PersistentVolumeClaim",
               "required": [],
               "title": "annotations",
@@ -1472,7 +1427,6 @@
               "type": "string"
             },
             "resources": {
-              "additionalProperties": false,
               "description": "represents the minimum and maximum resources the volume should have.",
               "required": [],
               "title": "resources",
@@ -1498,17 +1452,14 @@
           "type": "object"
         },
         "wsgi": {
-          "additionalProperties": false,
           "properties": {
             "affinity": {
-              "additionalProperties": false,
               "description": "Affinity settings for pod assignment",
               "required": [],
               "title": "affinity",
               "type": "object"
             },
             "autoscaling": {
-              "additionalProperties": false,
               "properties": {
                 "enabled": {
                   "default": false,
@@ -1566,7 +1517,6 @@
               "type": "array"
             },
             "image": {
-              "additionalProperties": false,
               "properties": {
                 "pullPolicy": {
                   "default": "Always",
@@ -1608,7 +1558,6 @@
               "type": "array"
             },
             "livenessProbe": {
-              "additionalProperties": false,
               "properties": {
                 "initialDelaySeconds": {
                   "default": 5,
@@ -1649,21 +1598,18 @@
               "type": "object"
             },
             "nodeSelector": {
-              "additionalProperties": false,
               "description": "Node labels for pod assignment",
               "required": [],
               "title": "nodeSelector",
               "type": "object"
             },
             "podAnnotations": {
-              "additionalProperties": false,
               "description": "Annotations to be added to the frontend pods",
               "required": [],
               "title": "podAnnotations",
               "type": "object"
             },
             "podSecurityContext": {
-              "additionalProperties": false,
               "description": "pod-level security context",
               "properties": {
                 "fsGroup": {
@@ -1701,7 +1647,6 @@
               "type": "string"
             },
             "readinessProbe": {
-              "additionalProperties": false,
               "properties": {
                 "initialDelaySeconds": {
                   "default": 5,
@@ -1749,7 +1694,6 @@
               "type": "integer"
             },
             "resources": {
-              "additionalProperties": false,
               "description": "Resource limits and requests for the controller pods.",
               "required": [],
               "title": "resources",
@@ -1763,7 +1707,6 @@
               "type": "integer"
             },
             "securityContext": {
-              "additionalProperties": false,
               "description": "container-level security context",
               "properties": {
                 "runAsGroup": {
@@ -1794,14 +1737,12 @@
               "type": "object"
             },
             "selectorLabels": {
-              "additionalProperties": false,
               "description": "Additional labels to add to the pod",
               "required": [],
               "title": "selectorLabels",
               "type": "object"
             },
             "service": {
-              "additionalProperties": false,
               "properties": {
                 "port": {
                   "default": 8000,
@@ -1826,10 +1767,8 @@
               "type": "object"
             },
             "serviceAccount": {
-              "additionalProperties": false,
               "properties": {
                 "annotations": {
-                  "additionalProperties": false,
                   "description": "Annotations to add to the service account",
                   "required": [],
                   "title": "annotations",
@@ -1905,7 +1844,6 @@
       "type": "object"
     },
     "config": {
-      "additionalProperties": false,
       "description": "General configuration shared between the frontend and backend",
       "properties": {
         "maxImportFileSizeMb": {
@@ -1947,10 +1885,8 @@
       "type": "object"
     },
     "externalPostgresql": {
-      "additionalProperties": false,
       "properties": {
         "auth": {
-          "additionalProperties": false,
           "properties": {
             "database": {
               "default": "baserow",
@@ -2022,10 +1958,8 @@
       "type": "object"
     },
     "externalRedis": {
-      "additionalProperties": false,
       "properties": {
         "auth": {
-          "additionalProperties": false,
           "properties": {
             "enabled": {
               "default": true,
@@ -2089,17 +2023,14 @@
       "type": "object"
     },
     "frontend": {
-      "additionalProperties": false,
       "properties": {
         "affinity": {
-          "additionalProperties": false,
           "description": "Affinity settings for pod assignment",
           "required": [],
           "title": "affinity",
           "type": "object"
         },
         "autoscaling": {
-          "additionalProperties": false,
           "properties": {
             "enabled": {
               "default": false,
@@ -2148,7 +2079,6 @@
           "type": "object"
         },
         "config": {
-          "additionalProperties": false,
           "description": "configuration for the frontend",
           "properties": {
             "additionalModules": {
@@ -2199,7 +2129,6 @@
           "type": "array"
         },
         "image": {
-          "additionalProperties": false,
           "properties": {
             "pullPolicy": {
               "default": "Always",
@@ -2241,10 +2170,8 @@
           "type": "array"
         },
         "ingress": {
-          "additionalProperties": false,
           "properties": {
             "annotations": {
-              "additionalProperties": false,
               "description": "Additional annotations for the Ingress resource",
               "required": [],
               "title": "annotations",
@@ -2308,7 +2235,6 @@
           "type": "object"
         },
         "livenessProbe": {
-          "additionalProperties": false,
           "properties": {
             "initialDelaySeconds": {
               "default": 5,
@@ -2341,21 +2267,18 @@
           "type": "object"
         },
         "nodeSelector": {
-          "additionalProperties": false,
           "description": "Node labels for pod assignment",
           "required": [],
           "title": "nodeSelector",
           "type": "object"
         },
         "podAnnotations": {
-          "additionalProperties": false,
           "description": "Annotations to be added to the frontend pods",
           "required": [],
           "title": "podAnnotations",
           "type": "object"
         },
         "podSecurityContext": {
-          "additionalProperties": false,
           "description": "pod-level security context",
           "properties": {
             "fsGroup": {
@@ -2393,7 +2316,6 @@
           "type": "string"
         },
         "readinessProbe": {
-          "additionalProperties": false,
           "properties": {
             "initialDelaySeconds": {
               "default": 5,
@@ -2433,7 +2355,6 @@
           "type": "integer"
         },
         "resources": {
-          "additionalProperties": false,
           "description": "Resource limits and requests for the controller pods.",
           "required": [],
           "title": "resources",
@@ -2447,7 +2368,6 @@
           "type": "integer"
         },
         "securityContext": {
-          "additionalProperties": false,
           "description": "container-level security context",
           "properties": {
             "runAsGroup": {
@@ -2478,14 +2398,12 @@
           "type": "object"
         },
         "selectorLabels": {
-          "additionalProperties": false,
           "description": "Additional labels to add to the pod",
           "required": [],
           "title": "selectorLabels",
           "type": "object"
         },
         "service": {
-          "additionalProperties": false,
           "properties": {
             "port": {
               "default": 3000,
@@ -2510,10 +2428,8 @@
           "type": "object"
         },
         "serviceAccount": {
-          "additionalProperties": false,
           "properties": {
             "annotations": {
-              "additionalProperties": false,
               "description": "Annotations to add to the service account",
               "required": [],
               "title": "annotations",
@@ -2599,10 +2515,8 @@
       "type": "string"
     },
     "postgresql": {
-      "additionalProperties": false,
       "properties": {
         "auth": {
-          "additionalProperties": false,
           "properties": {
             "database": {
               "default": "baserow",
@@ -2658,7 +2572,6 @@
       "type": "object"
     },
     "redis": {
-      "additionalProperties": false,
       "properties": {
         "architecture": {
           "default": "standalone",
@@ -2668,7 +2581,6 @@
           "type": "string"
         },
         "auth": {
-          "additionalProperties": false,
           "properties": {
             "enabled": {
               "default": true,
