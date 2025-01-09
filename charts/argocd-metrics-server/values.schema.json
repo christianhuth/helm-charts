@@ -78,6 +78,13 @@
       "title": "imagePullSecrets",
       "type": "array"
     },
+    "myDummyValue": {
+      "default": "bla",
+      "description": "dummy value to test pre-commit-hook with container",
+      "required": [],
+      "title": "myDummyValue",
+      "type": "string"
+    },
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `argocd-extension-metrics`",
@@ -404,6 +411,7 @@
     "nameOverride",
     "fullnameOverride",
     "image",
+    "myDummyValue",
     "imagePullSecrets",
     "replicaCount",
     "revisionHistoryLimit",

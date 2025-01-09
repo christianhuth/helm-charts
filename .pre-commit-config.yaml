@@ -22,10 +22,10 @@ repos:
         args:
           - --chart-search-root=charts
 
-  - repo: https://github.com/dadav/helm-schema
-    rev: 0.16.1
+  - repo: https://github.com/christianhuth/helm-charts
+    rev: ""
     hooks:
-      - id: helm-schema
+      - id: helm-schema-container
         args:
           - --append-newline
           - --chart-search-root=charts
