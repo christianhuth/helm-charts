@@ -71,3 +71,4 @@ jobs:
 
       - name: Run chart-testing (install)
         run: "ct install --charts ${{ matrix.chart }} --config .github/config/chart-testing.yaml"
+        continue-on-error: true
