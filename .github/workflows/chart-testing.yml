@@ -1,16 +1,17 @@
 # https://github.com/marketplace/actions/helm-chart-testing
-name: Chart-Testing
+name: Testing
 
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Chart-Linting"]
+    workflows: ["Linting"]
     types: ["completed"]
 
 jobs:
 
   detect-changed-charts:
     runs-on: ubuntu-22.04
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     outputs:
       matrix: ${{ steps.get-changed-charts.outputs.matrix }}
     steps:
@@ -40,6 +41,7 @@ jobs:
 
   installation:
     needs: detect-changed-charts
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false

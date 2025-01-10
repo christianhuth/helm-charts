@@ -1,4 +1,4 @@
-name: Chart-Preparation
+name: Preparation
 
 on:
   pull_request:

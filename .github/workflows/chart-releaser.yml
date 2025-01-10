@@ -1,9 +1,9 @@
-name: Release Helm Charts
+name: Release
 
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Chart-Testing"]
+    workflows: ["Testing"]
     branches: ["main"]
     types: ["completed"]
 
