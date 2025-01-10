@@ -77,7 +77,7 @@ services:
     # -- Pod port to use for the internal SMTP server
     podPort: 1025
     # -- You can set the node port for the external SMTP server that should be used or leave it blank to get a random node port. Only active if `services.smtp.type == NodePort`
-    nodePort:
+    nodePort: 0
 
 ingress:
   # -- Enable ingress record generation

@@ -1,144 +1,339 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "type": "object",
-    "properties": {
-        "fullnameOverride": {
-            "type": "string"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"node-access.fullname\"`",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "description": "image pull policy",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
         },
-        "image": {
-            "type": "object",
-            "properties": {
-                "pullPolicy": {
-                    "type": "string"
-                },
-                "repository": {
-                    "type": "string"
-                },
-                "tag": {
-                    "type": "string"
-                }
-            }
+        "repository": {
+          "default": "busybox",
+          "description": "image repository",
+          "required": [],
+          "title": "repository",
+          "type": "string"
         },
-        "imagePullSecrets": {
-            "type": "array"
-        },
-        "nameOverride": {
-            "type": "string"
-        },
-        "nodeAccess": {
-            "type": "object",
-            "properties": {
-                "accessMode": {
-                    "type": "string"
-                },
-                "hostPaths": {
-                    "type": "array"
-                },
-                "nodePlacement": {
-                    "type": "object",
-                    "properties": {
-                        "affinity": {
-                            "type": "object"
-                        },
-                        "nodeName": {
-                            "type": "string"
-                        },
-                        "nodeSelector": {
-                            "type": "object"
-                        },
-                        "tolerations": {
-                            "type": "array"
-                        },
-                        "topologySpreadConstraints": {
-                            "type": "array"
-                        }
-                    }
-                }
-            }
-        },
-        "podAnnotations": {
-            "type": "object"
-        },
-        "podSecurityContext": {
-            "type": "object",
-            "properties": {
-                "runAsGroup": {
-                    "type": "integer"
-                },
-                "runAsNonRoot": {
-                    "type": "boolean"
-                },
-                "runAsUser": {
-                    "type": "integer"
-                }
-            }
-        },
-        "replicaCount": {
-            "type": "integer"
-        },
-        "resources": {
-            "type": "object",
-            "properties": {
-                "limits": {
-                    "type": "object",
-                    "properties": {
-                        "cpu": {
-                            "type": "string"
-                        },
-                        "memory": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "requests": {
-                    "type": "object",
-                    "properties": {
-                        "cpu": {
-                            "type": "string"
-                        },
-                        "memory": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "revisionHistoryLimit": {
-            "type": "integer"
-        },
-        "securityContext": {
-            "type": "object",
-            "properties": {
-                "privileged": {
-                    "type": "boolean"
-                },
-                "readOnlyRootFilesystem": {
-                    "type": "boolean"
-                },
-                "runAsGroup": {
-                    "type": "integer"
-                },
-                "runAsNonRoot": {
-                    "type": "boolean"
-                },
-                "runAsUser": {
-                    "type": "integer"
-                }
-            }
-        },
-        "serviceAccount": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            }
+        "tag": {
+          "default": "1.36.1",
+          "description": "Overrides the image tag",
+          "required": [],
+          "title": "tag",
+          "type": "string"
         }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `node-access`",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeAccess": {
+      "properties": {
+        "accessMode": {
+          "default": "deployment",
+          "description": "How to deploy the Pods to access the host system: daemonset or deployment",
+          "required": [],
+          "title": "accessMode",
+          "type": "string"
+        },
+        "hostPaths": {
+          "description": "List of additional paths on the host that should be mounted into the container",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "hostPaths",
+          "type": "array"
+        },
+        "nodePlacement": {
+          "description": "- name: dev\n  host: /dev\n  container: /node-fs/dev",
+          "properties": {
+            "affinity": {
+              "description": "Affinity settings for pod assignment",
+              "required": [],
+              "title": "affinity",
+              "type": "object"
+            },
+            "nodeName": {
+              "default": "",
+              "description": "Request to schedule this pod onto a specific node",
+              "required": [],
+              "title": "nodeName",
+              "type": "string"
+            },
+            "nodeSelector": {
+              "description": "Node labels for pod assignment",
+              "required": [],
+              "title": "nodeSelector",
+              "type": "object"
+            },
+            "tolerations": {
+              "description": "Toleration labels for pod assignment",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "tolerations",
+              "type": "array"
+            },
+            "topologySpreadConstraints": {
+              "description": "how a group of pods ought to spread across topology domains",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "topologySpreadConstraints",
+              "type": "array"
+            }
+          },
+          "required": [
+            "nodeName",
+            "affinity",
+            "nodeSelector",
+            "tolerations",
+            "topologySpreadConstraints"
+          ],
+          "title": "nodePlacement",
+          "type": "object"
+        }
+      },
+      "required": [
+        "accessMode",
+        "hostPaths",
+        "nodePlacement"
+      ],
+      "title": "nodeAccess",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to the pods",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "description": "pod-level security context",
+      "properties": {
+        "runAsGroup": {
+          "default": 0,
+          "required": [],
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": false,
+          "required": [],
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 0,
+          "required": [],
+          "title": "runAsUser",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "runAsGroup",
+        "runAsNonRoot",
+        "runAsUser"
+      ],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas. Only used if `accessNode.accessMode` equals `deployment`",
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "description": "Resource limits and requests for the controller pods.",
+      "properties": {
+        "limits": {
+          "properties": {
+            "cpu": {
+              "default": "200m",
+              "required": [],
+              "title": "cpu",
+              "type": "string"
+            },
+            "memory": {
+              "default": "256Mi",
+              "required": [],
+              "title": "memory",
+              "type": "string"
+            }
+          },
+          "required": [
+            "cpu",
+            "memory"
+          ],
+          "title": "limits",
+          "type": "object"
+        },
+        "requests": {
+          "properties": {
+            "cpu": {
+              "default": "100m",
+              "required": [],
+              "title": "cpu",
+              "type": "string"
+            },
+            "memory": {
+              "default": "128Mi",
+              "required": [],
+              "title": "memory",
+              "type": "string"
+            }
+          },
+          "required": [
+            "cpu",
+            "memory"
+          ],
+          "title": "requests",
+          "type": "object"
+        }
+      },
+      "required": [
+        "limits",
+        "requests"
+      ],
+      "title": "resources",
+      "type": "object"
+    },
+    "revisionHistoryLimit": {
+      "default": 10,
+      "description": "The number of old ReplicaSets to retain",
+      "required": [],
+      "title": "revisionHistoryLimit",
+      "type": "integer"
+    },
+    "securityContext": {
+      "description": "container-level security context",
+      "properties": {
+        "privileged": {
+          "default": true,
+          "required": [],
+          "title": "privileged",
+          "type": "boolean"
+        },
+        "readOnlyRootFilesystem": {
+          "default": false,
+          "required": [],
+          "title": "readOnlyRootFilesystem",
+          "type": "boolean"
+        },
+        "runAsGroup": {
+          "default": 0,
+          "required": [],
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": false,
+          "required": [],
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 0,
+          "required": [],
+          "title": "runAsUser",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "privileged",
+        "readOnlyRootFilesystem",
+        "runAsGroup",
+        "runAsNonRoot",
+        "runAsUser"
+      ],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
     }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "image",
+    "imagePullSecrets",
+    "replicaCount",
+    "revisionHistoryLimit",
+    "podAnnotations",
+    "podSecurityContext",
+    "resources",
+    "securityContext",
+    "serviceAccount",
+    "nodeAccess"
+  ],
+  "type": "object"
 }

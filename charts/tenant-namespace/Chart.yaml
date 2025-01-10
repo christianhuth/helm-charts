@@ -1,7 +1,7 @@
 apiVersion: v2
 name: tenant-namespace
 description: A Helm Chart to bootstrap a Namespace in a Multi-Tenancy setup
-version: 2.0.0
+version: 2.0.1
 type: application
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/kubernetes/community/master/icons/png/resources/labeled/ns-256.png
@@ -11,9 +11,7 @@ maintainers:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: URL of Helm Repository in README
-    - kind: added
-      description: option to disable the creation of the namespace
+      description: README format
   artifacthub.io/signKey: |
     fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
     url: https://charts.christianhuth.de/public.key

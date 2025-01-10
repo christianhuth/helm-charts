@@ -46,48 +46,48 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Values
 
-| Key                                        | Type   | Default                                                                                                 | Description                                                                                                            |
-| ------------------------------------------ | ------ | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| affinity                                   | object | `{}`                                                                                                    | Affinity settings for pod assignment                                                                                   |
-| args                                       | list   | `[]`                                                                                                    |                                                                                                                        |
-| autoscaling.enabled                        | bool   | `false`                                                                                                 |                                                                                                                        |
-| autoscaling.maxReplicas                    | int    | `100`                                                                                                   |                                                                                                                        |
-| autoscaling.minReplicas                    | int    | `1`                                                                                                     |                                                                                                                        |
-| autoscaling.targetCPUUtilizationPercentage | int    | `80`                                                                                                    |                                                                                                                        |
-| env.pveAuthType                            | string | `"token"`                                                                                               |                                                                                                                        |
-| env.pveExistingSecretName                  | string | `""`                                                                                                    |                                                                                                                        |
-| env.pvePassword                            | string | `"password"`                                                                                            |                                                                                                                        |
-| env.pveTokenName                           | string | `"tokenName"`                                                                                           |                                                                                                                        |
-| env.pveTokenValue                          | string | `"tokenValue"`                                                                                          |                                                                                                                        |
-| env.pveUser                                | string | `"user"`                                                                                                |                                                                                                                        |
-| env.pveVerifySsl                           | bool   | `false`                                                                                                 |                                                                                                                        |
-| fullnameOverride                           | string | `""`                                                                                                    | String to fully override `"prometheus-pve-exporter.fullname"`                                                          |
-| image.pullPolicy                           | string | `"Always"`                                                                                              | image pull policy                                                                                                      |
-| image.repository                           | string | `"prompve/prometheus-pve-exporter"`                                                                     | image repository                                                                                                       |
-| image.tag                                  | string | `"2.3.1"`                                                                                               | Overrides the image tag                                                                                                |
-| imagePullSecrets                           | list   | `[]`                                                                                                    | If defined, uses a Secret to pull an image from a private Docker registry or repository.                               |
-| nameOverride                               | string | `""`                                                                                                    | Provide a name in place of `prometheus-pve-exporter`                                                                   |
-| nodeSelector                               | object | `{}`                                                                                                    | Node labels for pod assignment                                                                                         |
-| podAnnotations                             | object | `{}`                                                                                                    | Annotations to be added to exporter pods                                                                               |
-| podSecurityContext                         | object | `{}`                                                                                                    | pod-level security context                                                                                             |
-| replicaCount                               | int    | `1`                                                                                                     | Number of replicas                                                                                                     |
-| resources                                  | object | `{}`                                                                                                    | Resource limits and requests for the controller pods.                                                                  |
-| revisionHistoryLimit                       | int    | `10`                                                                                                    | The number of old ReplicaSets to retain                                                                                |
-| securityContext                            | object | `{"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":65534}` | container-level security context                                                                                       |
-| service.port                               | int    | `80`                                                                                                    | Kubernetes port where service is exposed                                                                               |
-| service.type                               | string | `"ClusterIP"`                                                                                           | Kubernetes service type                                                                                                |
-| serviceAccount.annotations                 | object | `{}`                                                                                                    | Annotations to add to the service account                                                                              |
-| serviceAccount.create                      | bool   | `true`                                                                                                  | Specifies whether a service account should be created                                                                  |
-| serviceAccount.name                        | string | `""`                                                                                                    | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
-| serviceMonitor.additionalLabels            | object | `{}`                                                                                                    | Prometheus ServiceMonitor labels                                                                                       |
-| serviceMonitor.enabled                     | bool   | `false`                                                                                                 | Enable a prometheus ServiceMonitor                                                                                     |
-| serviceMonitor.interval                    | string | `"30s"`                                                                                                 | Prometheus ServiceMonitor interval                                                                                     |
-| serviceMonitor.metricRelabelings           | list   | `[]`                                                                                                    | Prometheus [MetricRelabelConfigs] to apply to samples before ingestion                                                 |
-| serviceMonitor.namespace                   | string | `""`                                                                                                    | Prometheus ServiceMonitor namespace                                                                                    |
-| serviceMonitor.pveTargets                  | list   | `[]`                                                                                                    | Prometheus                                                                                                             |
-| serviceMonitor.relabelings                 | list   | `[]`                                                                                                    | Prometheus [RelabelConfigs] to apply to samples before scraping                                                        |
-| serviceMonitor.selector                    | object | `{}`                                                                                                    | Prometheus ServiceMonitor selector                                                                                     |
-| tolerations                                | list   | `[]`                                                                                                    | Toleration labels for pod assignment                                                                                   |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| affinity | object | `{}` | Affinity settings for pod assignment |
+| args | list | `[]` |  |
+| autoscaling.enabled | bool | `false` |  |
+| autoscaling.maxReplicas | int | `100` |  |
+| autoscaling.minReplicas | int | `1` |  |
+| autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| env.pveAuthType | string | `"token"` |  |
+| env.pveExistingSecretName | string | `""` |  |
+| env.pvePassword | string | `"password"` |  |
+| env.pveTokenName | string | `"tokenName"` |  |
+| env.pveTokenValue | string | `"tokenValue"` |  |
+| env.pveUser | string | `"user"` |  |
+| env.pveVerifySsl | bool | `false` |  |
+| fullnameOverride | string | `""` | String to fully override `"prometheus-pve-exporter.fullname"` |
+| image.pullPolicy | string | `"Always"` | image pull policy |
+| image.repository | string | `"prompve/prometheus-pve-exporter"` | image repository |
+| image.tag | string | `"2.3.1"` | Overrides the image tag |
+| imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
+| nameOverride | string | `""` | Provide a name in place of `prometheus-pve-exporter` |
+| nodeSelector | object | `{}` | Node labels for pod assignment |
+| podAnnotations | object | `{}` | Annotations to be added to exporter pods |
+| podSecurityContext | object | `{}` | pod-level security context |
+| replicaCount | int | `1` | Number of replicas |
+| resources | object | `{}` | Resource limits and requests for the controller pods. |
+| revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
+| securityContext | object | `{"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":65534}` | container-level security context |
+| service.port | int | `80` | Kubernetes port where service is exposed |
+| service.type | string | `"ClusterIP"` | Kubernetes service type |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| serviceMonitor.additionalLabels | object | `{}` | Prometheus ServiceMonitor labels |
+| serviceMonitor.enabled | bool | `false` | Enable a prometheus ServiceMonitor |
+| serviceMonitor.interval | string | `"30s"` | Prometheus ServiceMonitor interval |
+| serviceMonitor.metricRelabelings | list | `[]` | Prometheus [MetricRelabelConfigs] to apply to samples before ingestion |
+| serviceMonitor.namespace | string | `""` | Prometheus ServiceMonitor namespace |
+| serviceMonitor.pveTargets | list | `[]` | Prometheus |
+| serviceMonitor.relabelings | list | `[]` | Prometheus [RelabelConfigs] to apply to samples before scraping |
+| serviceMonitor.selector | object | `{}` | Prometheus ServiceMonitor selector |
+| tolerations | list | `[]` | Toleration labels for pod assignment |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 
