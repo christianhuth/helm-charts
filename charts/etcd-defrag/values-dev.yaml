@@ -1,7 +1,0 @@
-defrag:
-  config:
-    clusterWide: false
-    endpoints:
-      - 45.136.31.189:2379
-    pki:
-      existingSecret: "etcd-certs"
