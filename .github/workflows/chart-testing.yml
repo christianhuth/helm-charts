@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        include: [{"chart": "charts/argocd-metrics-server"},{"chart": "charts/baserow"}]
+        include: ${{ fromJson(needs.detect-changed-charts.outputs.matrix) }}
     steps:
       - name: checkout git repository
         uses: actions/checkout@v4
