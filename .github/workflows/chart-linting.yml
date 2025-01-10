@@ -1,16 +1,13 @@
 name: Linting
 
 on:
+  workflow_call:
   workflow_dispatch:
-  workflow_run:
-    workflows: ["Preparation"]
-    types: ["completed"]
 
 jobs:
 
   artifacthub-lint:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     container:
       image: artifacthub/ah
       options: --user 1001
@@ -24,7 +21,6 @@ jobs:
 
   ct-lint:
     runs-on: ubuntu-22.04
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: checkout git repository
         uses: actions/checkout@v4
@@ -56,7 +52,6 @@ jobs:
 
   helm-lint:
     runs-on: ubuntu-22.04
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: checkout git repository
         uses: actions/checkout@v4

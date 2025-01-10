@@ -1,0 +1,22 @@
+name: Preparation, Linting, Testing and Releasing
+
+on:
+  pull_request:
+    branches: [main]
+    paths: ["charts/**"]
+  push:
+    branches: [main]
+    paths: ["charts/**"]
+  workflow_dispatch:
+
+jobs:
+  preparation:
+    uses: ./.github/workflows/chart-preparation.yml
+
+  linting:
+    needs: preparation
+    uses: ./.github/workflows/chart-linting.yml
+
+  testing:
+    needs: linting
+    uses: ./.github/workflows/chart-testing.yml

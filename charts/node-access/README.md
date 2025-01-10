@@ -49,7 +49,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride | string | `""` | String to fully override `"node-access.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.repository | string | `"busybox"` | image repository |
-| image.tag | string | `"1.36.1"` | Overrides the image tag |
+| image.tag | string | `"1.37.0"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | nameOverride | string | `""` | Provide a name in place of `node-access` |
 | nodeAccess.accessMode | string | `"deployment"` | How to deploy the Pods to access the host system: daemonset or deployment |
