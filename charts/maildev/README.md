@@ -111,7 +111,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"maildev/maildev"` | image repository |
-| image.tag | string | `"2.1.0"` | Overrides the image tag |
+| image.tag | string | `"2.2.1"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` | Additional annotations for the Ingress resource |
 | ingress.className | string | `""` | IngressClass that will be be used to implement the Ingress |
