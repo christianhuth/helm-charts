@@ -1,0 +1,33 @@
+frontend:
+  autoscaling:
+    enabled: true
+    maxReplicas: 3
+
+backend:
+  asgi:
+    autoscaling:
+      enabled: true
+      maxReplicas: 3
+  celery:
+    autoscaling:
+      enabled: true
+      maxReplicas: 3
+  wsgi:
+    autoscaling:
+      enabled: true
+      maxReplicas: 3
+
+postgresql:
+  enabled: false
+
+externalPostgresql:
+  auth:
+    password: xxxxxxxxxxxxxxxxxxxx
+  hostname: db.baserow
+
+redis:
+  enabled: false
+
+externalRedis:
+  auth:
+    password: xxxxxxxxxxxxxxxxxxx

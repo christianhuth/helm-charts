@@ -1,0 +1,108 @@
+namespace:
+  annotations:
+    additionalAnnotations:
+      foo: bar
+      yeaha: jo
+    openShift:
+      description: baseline
+      displayName: yeaha
+      requester: christian.knell@igs-gmbh.ch
+    scheduler:
+      defaultTolerations:
+        - operator: Equal
+          value: value1
+          effect: NoSchedule
+          key: dedicated-node
+      nodeSelector: env=production
+      tolerationsWhitelist:
+        - operator: Exists
+          effect: NoSchedule
+          key: dedicated-node
+  labels:
+    additionalLabels:
+      foo: bar
+      yeaha: jo
+    podSecurityAdmission:
+      audit:
+        standard: "aud"
+        version: "vaud"
+      enforce:
+        standard: "enf"
+        version: "venf"
+      warning:
+        standard: "warna"
+        version: "vwarn"
+  name: test
+
+global:
+  # additionalAnnotations:
+  #   yeah: kuh
+  # additionalLabels:
+  #   foo: bar
+
+
+limitRange:
+  limits:
+    - default:
+  #       cpu: 500m
+  #       memory: 256Mi
+  #     defaultRequest:
+  #       cpu: 500m
+  #       memory: 512Mi
+  #     max:
+  #       cpu: 1000m
+  #       memory: 1024Mi
+  #     min:
+  #       cpu: 100m
+  #       memory: 128Mi
+  #     type: Container
+  # name: "test-the-limit"
+
+
+resourceQuotas:
+  enabled: false
+  additionalAnnotations:
+    yeah3: kuh3
+  additionalLabels:
+    foo3: bar3
+  quotas:
+    - name: test
+      hard:
+        cpu: "1000"
+        memory: 200Gi
+        pods: "10"
+      scopeSelector:
+        matchExpressions:
+          - operator : In
+            scopeName: PriorityClass
+            values: ["high"]
+    - hard:
+        cpu: "1000"
+        memory: 200Gi
+        pods: "10"
+      scopeSelector:
+        matchExpressions:
+          - operator : In
+            scopeName: PriorityClass
+            values: ["critical"]
+
+networkPolicies:
+  enabled: true
+  additionalAnnotations:
+    yeah4: kuh4
+  additionalLabels:
+    foo4: bar4
+  egress:
+    deny:
+      all:
+        podSelector:
+          pod: nice
+          pod2: nice2
+  ingress:
+    deny:
+      all:
+        podSelector:
+          pod: nice3
+          pod2: nice4
+  openShift:
+    enabled: true

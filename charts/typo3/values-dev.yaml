@@ -1,0 +1,14 @@
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  hosts:
+    - host: web.knell.it
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: web.knell.it-tls
+      hosts:
+        - web.knell.it

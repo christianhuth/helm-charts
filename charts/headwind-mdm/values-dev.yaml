@@ -1,0 +1,23 @@
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  hosts:
+    - host: headwind.knell.it
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+   - secretName: headwind.knell.it-tls
+     hosts:
+       - headwind.knell.it
+
+headwind:
+  adminEmail: "christian@knell.it"
+  baseDomain: "headwind.knell.it"
+  downloadCredentials: false
+  installLanguage: "ru"
+
+persistence:
+  enabled: true
