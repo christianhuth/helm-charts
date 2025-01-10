@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        include: ${{ fromJson(needs.detect-changed-charts.outputs.matrix) }}
+        include: ${{ fromJson(needs.detect-changed-charts.outputs.matrix || '[]') }}
     steps:
       - name: checkout git repository
         uses: actions/checkout@v4
