@@ -40,6 +40,9 @@ etcd-defrag:
 fathom:
 - changed-files:
   - any-glob-to-any-file: charts/fathom/*
+flatcar-linux-update-operator:
+- changed-files:
+  - any-glob-to-any-file: charts/flatcar-linux-update-operator/*
 glances:
 - changed-files:
   - any-glob-to-any-file: charts/glances/*
