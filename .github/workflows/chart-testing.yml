@@ -44,7 +44,7 @@ jobs:
           fi
 
       - name: Debug matrix ouput
-        run: echo "${{ steps.changed_charts.outputs.matrix }}"
+        run: echo "${{ steps.get-changed-charts.outputs.matrix }}"
 
   installation:
     needs: detect-changed-charts
