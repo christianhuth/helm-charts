@@ -1,13 +1,10 @@
 name: Chart-Linting
 
 on:
-  pull_request:
-    branches: [main]
-    paths: ["charts/**"]
-  push:
-    branches: [main]
-    paths: ["charts/**"]
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Chart-Preparation"]
+    types: ["completed"]
 
 jobs:
 
