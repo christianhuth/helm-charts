@@ -12,6 +12,7 @@ for binary in "${BINARIES[@]}"
 do
     $binary completion bash > ${TEMP_COMPLETION_FOLDER}/$binary
     sudo mv ${TEMP_COMPLETION_FOLDER}/$binary ${COMPLETION_FOLDER}/$binary
+    source ${COMPLETION_FOLDER}/$binary
 done
 
 # start minikube
