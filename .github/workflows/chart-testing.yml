@@ -1,9 +1,7 @@
 name: Testing
 
 on:
-  workflow_run:
-    workflows: ["Linting"]
-    types: ["completed"]
+  workflow_call:
   workflow_dispatch:
 
 jobs:
