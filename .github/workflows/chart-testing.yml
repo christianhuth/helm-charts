@@ -43,12 +43,8 @@ jobs:
             echo "::set-output name=matrix::$CHANGED_CHARTS"
           fi
 
-  debug:
-    needs: detect-changed-charts
-    runs-on: ubuntu-22.05
-    steps:
-    - name: Debug matrix input
-      run: echo "${{ steps.changed_charts.outputs.matrix }}"
+      - name: Debug matrix ouput
+        run: echo "${{ steps.changed_charts.outputs.matrix }}"
 
   installation:
     needs: detect-changed-charts
