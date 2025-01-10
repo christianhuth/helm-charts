@@ -18,11 +18,6 @@ rbac:
   # Specifies whether RBAC resources should be created
   create: true
 
-psp:
-  # Specifies whether to install and use Pod Security Policies.
-  create: true
-
-
 # Default values for the operator
 operator:
   serviceAccount:
