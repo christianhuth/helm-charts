@@ -1,11 +1,10 @@
-# https://github.com/marketplace/actions/helm-chart-testing
 name: Testing
 
 on:
-  workflow_dispatch:
   workflow_run:
     workflows: ["Linting"]
     types: ["completed"]
+  workflow_dispatch:
 
 jobs:
 
