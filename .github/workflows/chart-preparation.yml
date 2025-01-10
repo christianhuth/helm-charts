@@ -1,12 +1,7 @@
 name: Preparation
 
 on:
-  pull_request:
-    branches: [main]
-    paths: ["charts/**"]
-  push:
-    branches: [main]
-    paths: ["charts/**"]
+  workflow_call:
   workflow_dispatch:
 
 jobs:
@@ -16,14 +11,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
       - uses: pre-commit/action@v3.0.1
-
-  call-linting:
-    needs: pre-commit
-    uses: ./.github/workflows/chart-linting.yml
-
-  call-testing:
-    needs: pre-commit
-    uses: ./.github/workflows/chart-testing.yml
 
   # documentation:
   #   needs:
