@@ -48,6 +48,7 @@ jobs:
     needs: detect-changed-charts
     runs-on: ubuntu-22.04
     strategy:
+      fail-fast: false
       matrix:
         include: ${{ fromJson(needs.detect-changed-charts.outputs.matrix) }}
     steps:
@@ -71,4 +72,3 @@ jobs:
 
       - name: Run chart-testing (install)
         run: "ct install --charts ${{ matrix.chart }} --config .github/config/chart-testing.yaml"
-        continue-on-error: true
