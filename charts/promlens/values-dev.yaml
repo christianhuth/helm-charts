@@ -1,0 +1,27 @@
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  hosts:
+    - host: promlens.knell.it
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: promlens.knell.it-tls
+      hosts:
+        - promlens.knell.it
+
+config:
+  grafana:
+    apiToken: "eyJrIjoicm9wTDhsd2xQM0JiQTRHSUEybVF6MGZSQWVJYk9ZdGwiLCJuIjoicHJvbWxlbnMiLCJpZCI6MX0="
+    enabled: false
+    url: https://grafana.knell.it
+  sharedLinks:
+    sql:
+      createTables: false
+      enabled: true
+  web:
+    defaultPrometheusUrl: https://prometheus.knell.it
+    externalUrl: https://promlens.knell.it

@@ -1,0 +1,20 @@
+postgresql:
+  # -- enable PostgreSQL™ subchart from Bitnami
+  enabled: false
+
+externalPostgresql:
+  auth:
+    # -- Name of the database to use
+    database: kutt
+    # -- Name of existing secret to use for PostgreSQL credentials
+    existingSecret: "postgres-kutt"
+    # -- Password to use
+    password: ""
+    # -- Name of the user to use
+    username: kutt
+    # -- Key in the secret containing the password
+    userPasswordKey: "password"
+  # -- Hostname of the PostgreSQL database
+  hostname: "<gcp-host>"
+  # -- Port used to connect to PostgreSQL database
+  port: 5432
