@@ -41,7 +41,7 @@ jobs:
 
   installation:
     needs: detect-changed-charts
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ (needs.detect-changed-charts.outputs.matrix != '[]') && (github.event.workflow_run.conclusion == 'success') }}
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
