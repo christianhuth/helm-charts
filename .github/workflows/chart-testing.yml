@@ -38,7 +38,7 @@ jobs:
       - name: Identify changed charts
         id: get-changed-charts
         run: |
-          CHANGED_CHARTS=$(ct list-changed --config .github/config/chart-testing.yaml | jq --slurp --raw-input 'split("\n")[:-1] | map({chart: .})')
+          CHANGED_CHARTS=$(ct list-changed --config .github/config/chart-testing.yaml | jq -c --slurp --raw-input 'split("\n")[:-1] | map({chart: .})')
           echo "::set-output name=matrix::$CHANGED_CHARTS"
 
       - name: Debug matrix ouput
