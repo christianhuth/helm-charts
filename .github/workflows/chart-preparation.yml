@@ -13,19 +13,28 @@ jobs:
         with:
           python-version: '3.13'
       - uses: pre-commit/action@v3.0.1
-
-  # documentation:
-  #   needs:
-  #     - pre-commit
-  #   runs-on: ubuntu-latest
-  #   container: ghcr.io/chgl/kube-powertools:latest
-  #   steps:
-  #     - name: checkout git repository
-  #       uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
-  #     - name: Check if documentation is up-to-date
-  #       run: generate-docs.sh && git diff --exit-code HEAD
+        with:
+          extra_args: --all-files || exit 0
+      - name: Check for modified files
+        id: check_files
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "Files have been modified by pre-commit."
+            echo "changes_detected=true" >> $GITHUB_ENV
+          else
+            echo "No changes detected."
+            echo "changes_detected=false" >> $GITHUB_ENV
+          fi
+      - name: Commit and push changes
+        if: env.changes_detected == 'true'
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git add .
+          git commit -m "chore: auto-fix pre-commit changes"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # changelog:
   #   needs:
