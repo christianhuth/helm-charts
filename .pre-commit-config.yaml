@@ -22,7 +22,7 @@ repos:
         args:
           - --chart-search-root=charts
 
-  - repo: https://github.com/christianhuth/helm-charts
+  - repo: https://github.com/dadav/helm-schema
     rev: ""
     hooks:
       - id: helm-schema-container
