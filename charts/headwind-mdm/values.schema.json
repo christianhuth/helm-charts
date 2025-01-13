@@ -240,7 +240,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "0.1.4",
+          "default": "0.1.5",
           "description": "Overrides the image tag",
           "required": [],
           "title": "tag",

@@ -18,6 +18,7 @@ repos:
     rev: ""
     hooks:
       - id: helm-docs-container
+        always_run: true
         entry: jnorwood/helm-docs:v1.14.2
         args:
           - --chart-search-root=charts
@@ -26,6 +27,7 @@ repos:
     rev: ""
     hooks:
       - id: helm-schema-container
+        always_run: true
         args:
           - --append-newline
           - --chart-search-root=charts
