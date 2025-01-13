@@ -105,6 +105,9 @@ spec:
                   mountPath: "/tmp/kubernetes/pki/etcd"
                   readOnly: true
                 {{- end }}
+                {{- if .Values.extraVolumeMounts }}
+                  {{- toYaml .Values.extraVolumeMounts | nindent 16 }}
+                {{- end }}
           {{- if .Values.defrag.pod.restartPolicy }}
           restartPolicy: {{ .Values.defrag.pod.restartPolicy | quote }}
           {{- end }}
@@ -145,5 +148,8 @@ spec:
                     path: server.crt
                   - key: key
                     path: server.key
+          {{- end }}
+          {{- if .Values.extraVolumes }}
+            {{- toYaml .Values.extraVolumes | nindent 12 }}
           {{- end }}
 {{- end }}
