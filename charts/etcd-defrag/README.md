@@ -88,6 +88,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | defrag.job.ttlSecondsAfterFinished | string | `""` | limits the lifetime of a Job that has finished execution |
 | defrag.pod.restartPolicy | string | `"OnFailure"` | Restart policy for all containers within the pod. One of `Always`, `OnFailure`, `Never`. |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
+| extraVolumeMounts | list | `[]` | additional volume mounts to be added to the pods |
+| extraVolumes | list | `[]` | additional volumes to be added to the pods |
 | fullnameOverride | string | `""` | String to fully override `"etcd-defrag.fullname"` |
 | hostNetwork | bool | `false` | specify if the CronJob should run on the hostNetwork |
 | image.pullPolicy | string | `"Always"` | image pull policy |

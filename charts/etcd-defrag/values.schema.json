@@ -377,6 +377,24 @@
       "title": "extraEnv",
       "type": "array"
     },
+    "extraVolumeMounts": {
+      "description": "additional volume mounts to be added to the pods",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "extraVolumeMounts",
+      "type": "array"
+    },
+    "extraVolumes": {
+      "description": "additional volumes to be added to the pods",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "extraVolumes",
+      "type": "array"
+    },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"etcd-defrag.fullname\"`",
@@ -533,6 +551,8 @@
     "tolerations",
     "affinity",
     "extraEnv",
+    "extraVolumes",
+    "extraVolumeMounts",
     "hostNetwork",
     "defrag"
   ],
