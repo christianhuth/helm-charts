@@ -1,8 +1,6 @@
 name: Chart-Pipeline
 
 on:
-  pull_request:
-    paths: ["charts/**"]
   push:
     paths: ["charts/**"]
   workflow_dispatch:
