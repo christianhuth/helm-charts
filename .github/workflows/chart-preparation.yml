@@ -30,15 +30,8 @@ jobs:
       - name: Commit and push changes
         if: env.changes_detected == 'true'
         run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            # Extract the source branch of the PR
-            branch_name="${{ github.event.pull_request.head.ref }}"
-          else
-            # Extract branch from push event
-            branch_name=$(echo "${GITHUB_REF#refs/heads/}")
-          fi
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config user.name "christianhuth"
+          git config user.email "christian@knell.it"
           git checkout ${{ github.head_ref }}
           git add .
           git commit -m "chore: auto-fix pre-commit changes"
