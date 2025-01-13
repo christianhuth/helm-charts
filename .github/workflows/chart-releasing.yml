@@ -2,6 +2,15 @@ name: Releasing
 
 on:
   workflow_call:
+    secrets:
+      GITHUB_TOKEN:
+        required: true
+      GPG_PRIVATE_KEY_BASE64:
+        required: true
+      GPG_PRIVATE_KEY_PASSPHRASE:
+        required: true
+      GPG_PRIVATE_KEY_UID:
+        required: true
   workflow_dispatch:
 
 jobs:
@@ -31,10 +40,6 @@ jobs:
           helm repo add christianhuth https://charts.christianhuth.de
           helm repo add cnieg https://cnieg.github.io/helm-charts
 
-      # - name: Update dependencies
-      #   run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
-
-      # Optional step if GPG signing is used
       - name: Import GPG key
         run: |
           echo "${{ secrets.GPG_PRIVATE_KEY_BASE64 }}" | base64 -d | gpg --dearmor --output keyring.gpg
