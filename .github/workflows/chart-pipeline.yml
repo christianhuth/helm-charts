@@ -2,10 +2,8 @@ name: Chart-Pipeline
 
 on:
   pull_request:
-    branches: [main]
     paths: ["charts/**"]
   push:
-    branches: [main]
     paths: ["charts/**"]
   workflow_dispatch:
 
