@@ -26,7 +26,6 @@ jobs:
     needs: [preparation, linting, testing]
     uses: ./.github/workflows/chart-releasing.yml
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GPG_PRIVATE_KEY_BASE64: ${{ secrets.GPG_PRIVATE_KEY_BASE64 }}
       GPG_PRIVATE_KEY_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
       GPG_PRIVATE_KEY_UID: ${{ secrets.GPG_PRIVATE_KEY_UID }}
