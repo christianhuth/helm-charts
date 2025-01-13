@@ -1,4 +1,4 @@
-name: Preparation, Linting, Testing and Releasing
+name: Chart-Pipeline
 
 on:
   pull_request:
