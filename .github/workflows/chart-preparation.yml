@@ -33,6 +33,7 @@ jobs:
           git add .
           git commit -m "chore: auto-fix pre-commit changes"
           git push
+          exit 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
