@@ -3,8 +3,6 @@ name: Chart-Releasing
 on:
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
-        required: true
       GPG_PRIVATE_KEY_BASE64:
         required: true
       GPG_PRIVATE_KEY_PASSPHRASE:
