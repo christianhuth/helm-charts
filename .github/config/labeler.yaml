@@ -1,7 +1,8 @@
 # Explanation: Add the label 'ci-cd' to a PR if any file within the '.github' folder is changed
 ci-cd:
 - changed-files:
-  - any-glob-to-any-file: '.github/*'
+  - any-glob-to-any-file: '.github/config/*'
+  - any-glob-to-any-file: '.github/workflows/*'
 
 # charts
 ansible-semaphore:
