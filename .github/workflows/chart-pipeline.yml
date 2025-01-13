@@ -20,3 +20,8 @@ jobs:
   testing:
     needs: linting
     uses: ./.github/workflows/chart-testing.yml
+
+  releasing:
+    if: github.ref == 'refs/heads/main'
+    needs: testing
+    uses: ./.github/workflows/chart-releasing.yml

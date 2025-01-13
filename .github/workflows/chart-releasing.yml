@@ -1,15 +1,11 @@
-name: Release
+name: Releasing
 
 on:
-  workflow_run:
-    workflows: [Testing]
-    branches: [main]
-    types: [completed]
+  workflow_call:
   workflow_dispatch:
 
 jobs:
   release2github:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
       contents: write
     runs-on: ubuntu-latest
