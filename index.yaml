@@ -3351,6 +3351,33 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: app version to 1.5.1
+      artifacthub.io/screenshots: |
+        - title: Simply shorten your link using the Web UI.
+          url: https://github.com/Jont828/cluster-api-visualizer/raw/main/demo/demo.gif
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v1.5.1
+    created: "2025-01-13T09:18:11.86850907Z"
+    description: Multicluster resource visualization tool for Cluster API.
+    digest: ba3731a4dc8c22146041a2e1a55417e0d97f4565dae6afb9e874a08130447a32
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://adalogics.com/img/content/capi-fuzzing-audit.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: cluster-api-visualizer
+    sources:
+    - https://github.com/Jont828/cluster-api-visualizer
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/cluster-api-visualizer-0.1.0/cluster-api-visualizer-0.1.0.tgz
+    version: 0.1.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: README format
       artifacthub.io/screenshots: |
         - title: Simply shorten your link using the Web UI.
@@ -33563,4 +33590,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-01-13T09:09:42.253887463Z"
+generated: "2025-01-13T09:18:11.870049061Z"
