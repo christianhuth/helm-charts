@@ -1,4 +1,4 @@
-name: Testing
+name: Chart-Testing
 
 on:
   workflow_call:

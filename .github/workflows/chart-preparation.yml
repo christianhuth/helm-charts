@@ -1,4 +1,4 @@
-name: Preparation
+name: Chart-Preparation
 
 on:
   workflow_call:

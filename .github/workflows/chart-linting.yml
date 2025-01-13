@@ -1,4 +1,4 @@
-name: Linting
+name: Chart-Linting
 
 on:
   workflow_call:

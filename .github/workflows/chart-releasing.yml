@@ -1,4 +1,4 @@
-name: Releasing
+name: Chart-Releasing
 
 on:
   workflow_call:
