@@ -69,7 +69,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | headwind.sharedSecret.secretValue | string | `""` | The shared secret for a premium setup. Ignored if `headwind.sharedSecret.existingSecret` is provided. |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.repository | string | `"headwindmdm/hmdm"` | image repository |
-| image.tag | string | `"0.1.4"` | Overrides the image tag |
+| image.tag | string | `"0.1.5"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
