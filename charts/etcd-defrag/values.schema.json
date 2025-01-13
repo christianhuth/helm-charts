@@ -383,8 +383,7 @@
         "required": []
       },
       "required": [],
-      "title": "extraVolumeMounts",
-      "type": "array"
+      "title": "extraVolumeMounts"
     },
     "extraVolumes": {
       "description": "additional volumes to be added to the pods",
@@ -392,8 +391,7 @@
         "required": []
       },
       "required": [],
-      "title": "extraVolumes",
-      "type": "array"
+      "title": "extraVolumes"
     },
     "fullnameOverride": {
       "default": "",
@@ -551,8 +549,6 @@
     "tolerations",
     "affinity",
     "extraEnv",
-    "extraVolumes",
-    "extraVolumeMounts",
     "hostNetwork",
     "defrag"
   ],

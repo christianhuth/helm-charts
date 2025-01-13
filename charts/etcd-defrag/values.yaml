@@ -66,9 +66,15 @@ affinity: {}
 # -- additional environment variables to be added to the pods
 extraEnv: []
 
+# @schema
+# required: false
+# @schema
 # -- additional volumes to be added to the pods
 extraVolumes: []
 
+# @schema
+# required: false
+# @schema
 # -- additional volume mounts to be added to the pods
 extraVolumeMounts: []
 
