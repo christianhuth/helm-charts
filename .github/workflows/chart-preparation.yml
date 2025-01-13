@@ -41,9 +41,8 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git checkout ${{ github.head_ref }}
           git add .
-          git commit -m "chore: auto-fix pre-commit changes"
+          git commit -m "chore: auto-upgrade schema and readme"
           git push
-          exit 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
