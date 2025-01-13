@@ -39,10 +39,10 @@ jobs:
           fi
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git checkout $branch_name
+          git checkout ${{ github.head_ref }}
           git add .
           git commit -m "chore: auto-fix pre-commit changes"
-          git push origin $branch_name
+          git push
           exit 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
