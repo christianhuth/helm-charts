@@ -21,3 +21,6 @@
 .idea/
 *.tmproj
 .vscode/
+
+# Additional Helm Values for Development or Testing
+values-*.yaml
