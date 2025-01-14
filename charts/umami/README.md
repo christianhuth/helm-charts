@@ -100,7 +100,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | umami.appSecret.existingSecret | string | `""` | Name of an existing secret containing the app secret under the key app-secret. |
 | umami.appSecret.secret | string | `""` | A random string used to generate unique values. |
 | umami.clientIpHeader | string | `""` | HTTP header to check for the client's IP address. This is useful when you're behind a proxy that uses non-standard headers. |
-| umami.cloudMode | string | `"1"` | Disables users, teams, and websites settings page. |
+| umami.cloudMode | string | `"0"` | Disables users, teams, and websites settings page. |
 | umami.collectApiEndpoint | string | `""` | Allows you to send metrics to a location different than the default `/api/send`. This is to help you avoid some ad-blockers. |
 | umami.corsMaxAge | string | `"86400"` | How many seconds a CORS preflight should last. Default is 24 hours. |
 | umami.debug | string | `""` | Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`. |
