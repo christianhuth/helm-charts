@@ -51,7 +51,7 @@ spec:
             - name: CLIENT_IP_HEADER
               value: {{ .Values.umami.clientIpHeader | quote }}
             {{- end }}
-            {{- if .Values.umami.cloudMode }}
+            {{- if (eq .Values.umami.cloudMode "1") }}
             - name: CLOUD_MODE
               value: {{ .Values.umami.cloudMode | quote }}
             {{- end }}
