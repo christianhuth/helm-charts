@@ -53,6 +53,9 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+# @schema
+# required: false
+# @schema
 # -- Node labels for pod assignment
 nodeSelector:
   node-role.kubernetes.io/control-plane: ""
