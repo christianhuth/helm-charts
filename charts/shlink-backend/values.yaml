@@ -99,7 +99,46 @@ tolerations: []
 # -- Affinity settings for pod assignment
 affinity: {}
 
-# see https://shlink.io/documentation/environment-variables/ for a complete list
+# @schema
+# type: array
+# items:
+#   type: object
+#   properties:
+#     name:
+#       type: string
+#     value:
+#       type: string
+#     valueFrom:
+#       type: object
+#       oneOf:
+#         - required: ["configMapKeyRef"]
+#         - required: ["secretKeyRef"]
+#       properties:
+#         configMapKeyRef:
+#           type: object
+#           required: ["key", "name"]
+#           properties:
+#             key:
+#               type: string
+#             name:
+#               type: string
+#             optional:
+#               type: boolean
+#         secretKeyRef:
+#           type: object
+#           required: ["key", "name"]
+#           properties:
+#             key:
+#               type: string
+#             name:
+#               type: string
+#             optional:
+#               type: boolean
+#   oneOf:
+#     - required: ["name", "value"]
+#     - required: ["name", "valueFrom"]
+# @schema
+# -- Environment variables. Supports both direct values and references to ConfigMaps/Secrets. See https://shlink.io/documentation/environment-variables/ for a complete list
 env:
   - name: DEFAULT_DOMAIN
     value: doma.in

@@ -51,10 +51,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| env[0].name | string | `"DEFAULT_DOMAIN"` |  |
-| env[0].value | string | `"doma.in"` |  |
-| env[1].name | string | `"IS_HTTPS_ENABLED"` |  |
-| env[1].value | string | `"false"` |  |
+| env | list | `[{"name":"DEFAULT_DOMAIN","value":"doma.in"},{"name":"IS_HTTPS_ENABLED","value":"false"}]` | Environment variables. Supports both direct values and references to ConfigMaps/Secrets. See https://shlink.io/documentation/environment-variables/ for a complete list |
 | fullnameOverride | string | `""` | String to fully override `"shlink-backend.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.repository | string | `"shlinkio/shlink"` | image repository |

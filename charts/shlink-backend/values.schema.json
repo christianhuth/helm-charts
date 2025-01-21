@@ -44,53 +44,94 @@
       "type": "object"
     },
     "env": {
-      "description": "see https://shlink.io/documentation/environment-variables/ for a complete list",
+      "description": "Environment variables. Supports both direct values and references to ConfigMaps/Secrets. See https://shlink.io/documentation/environment-variables/ for a complete list",
       "items": {
-        "anyOf": [
+        "oneOf": [
           {
-            "properties": {
-              "name": {
-                "default": "DEFAULT_DOMAIN",
-                "required": [],
-                "title": "name",
-                "type": "string"
-              },
-              "value": {
-                "default": "doma.in",
-                "required": [],
-                "title": "value",
-                "type": "string"
-              }
-            },
             "required": [
               "name",
               "value"
-            ],
-            "type": "object"
+            ]
           },
           {
-            "properties": {
-              "name": {
-                "default": "IS_HTTPS_ENABLED",
-                "required": [],
-                "title": "name",
-                "type": "string"
-              },
-              "value": {
-                "default": "false",
-                "required": [],
-                "title": "value",
-                "type": "string"
-              }
-            },
             "required": [
               "name",
-              "value"
-            ],
-            "type": "object"
+              "valueFrom"
+            ]
           }
         ],
-        "required": []
+        "properties": {
+          "name": {
+            "required": [],
+            "type": "string"
+          },
+          "value": {
+            "required": [],
+            "type": "string"
+          },
+          "valueFrom": {
+            "oneOf": [
+              {
+                "required": [
+                  "configMapKeyRef"
+                ]
+              },
+              {
+                "required": [
+                  "secretKeyRef"
+                ]
+              }
+            ],
+            "properties": {
+              "configMapKeyRef": {
+                "properties": {
+                  "key": {
+                    "required": [],
+                    "type": "string"
+                  },
+                  "name": {
+                    "required": [],
+                    "type": "string"
+                  },
+                  "optional": {
+                    "required": [],
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "key",
+                  "name"
+                ],
+                "type": "object"
+              },
+              "secretKeyRef": {
+                "properties": {
+                  "key": {
+                    "required": [],
+                    "type": "string"
+                  },
+                  "name": {
+                    "required": [],
+                    "type": "string"
+                  },
+                  "optional": {
+                    "required": [],
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "key",
+                  "name"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [],
+            "type": "object"
+          }
+        },
+        "required": [],
+        "type": "object"
       },
       "required": [],
       "title": "env",
@@ -567,7 +608,6 @@
     "nodeSelector",
     "tolerations",
     "affinity",
-    "env",
     "mariadb",
     "mysql",
     "postgresql",
