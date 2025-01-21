@@ -7,8 +7,7 @@
 {{- range $kind := $changes }}
 
 ### {{ $kind.key | strings.Title }}
-
-{{- range $change := $kind.value }}
+{{ range $change := $kind.value }}
 - {{ $change.description }}
 {{- end }}
 

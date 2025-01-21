@@ -2,7 +2,7 @@ apiVersion: v2
 name: baserow
 description: Baserow is an open source no-code database and Airtable alternative.
 type: application
-version: 2.5.0
+version: 2.5.1
 appVersion: "1.27.0"
 home: https://github.com/christianknell/helm-charts
 icon: https://baserow.io/img/favicon_192.png
@@ -24,8 +24,8 @@ dependencies:
 annotations:
   artifacthub.io/category: database
   artifacthub.io/changes: |
-    - kind: changed
-      description: app version to 1.27.0
+    - kind: added
+      description: Changelog
   artifacthub.io/screenshots: |
     - title: Create your own online database without technical experience.
       url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png

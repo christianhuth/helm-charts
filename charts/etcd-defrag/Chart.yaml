@@ -2,7 +2,7 @@ apiVersion: v2
 name: etcd-defrag
 description: A Helm chart for running a defragmentation CronJob for ETCD
 type: application
-version: 1.2.1
+version: 1.2.2
 appVersion: "3.5.17"
 home: https://github.com/christianhuth/helm-charts
 icon: https://cdn.worldvectorlogo.com/logos/etcd-1.svg
@@ -14,8 +14,8 @@ sources:
   - https://etcd.io
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: nodeSelector is not required anymore
+    - kind: added
+      description: Changelog
   artifacthub.io/signKey: |
     fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
     url: https://charts.christianhuth.de/public.key
