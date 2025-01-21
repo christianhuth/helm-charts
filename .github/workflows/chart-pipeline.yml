@@ -15,11 +15,11 @@ jobs:
 
   unit-testing:
     needs: [preparation, linting]
-    uses: ./.github/workflows/chart-testing.yml
+    uses: ./.github/workflows/chart-unittesting.yml
 
   testing:
     needs: [preparation, linting, unit-testing]
-    uses: ./.github/workflows/chart-unittesting.yml
+    uses: ./.github/workflows/chart-testing.yml
 
   releasing:
     if: github.ref == 'refs/heads/main'
