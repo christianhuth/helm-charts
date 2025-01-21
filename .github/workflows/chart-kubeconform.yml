@@ -57,6 +57,9 @@ jobs:
         with:
           python-version: 3.7
 
+      - name: install pyyaml
+        run: pip install pyyaml
+
       - name: setup helm
         uses: azure/setup-helm@v4
 
