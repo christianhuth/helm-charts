@@ -56,6 +56,15 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
+      - uses: tecolicom/actions-use-homebrew-tools@v1
+        with:
+          tools: yq
+      - uses: tecolicom/actions-use-homebrew-tools@v1
+        with:
+          tools: gomplate
+      - name: Install Homebrew Bundler RubyGems
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: brew install-bundler-gems
       - name: Generate changelogs
         run: bash .github/generate-chart-changelogs.sh
       - name: Check for modified files
