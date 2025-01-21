@@ -6,7 +6,7 @@ on:
 
 jobs:
 
-  helm-uninttest:
+  kubeconform:
     runs-on: ubuntu-22.04
     steps:
       - name: checkout git repository
