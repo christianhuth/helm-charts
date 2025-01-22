@@ -106,3 +106,45 @@ configuration: []
   # - name: "Main server"
   #   url: "https://doma.in"
   #   apiKey: "09c972b7-506b-49f1-a19a-d729e22e599c"
+
+# @schema
+# type: array
+# items:
+#   type: object
+#   properties:
+#     name:
+#       type: string
+#     value:
+#       type: string
+#     valueFrom:
+#       type: object
+#       oneOf:
+#         - required: ["configMapKeyRef"]
+#         - required: ["secretKeyRef"]
+#       properties:
+#         configMapKeyRef:
+#           type: object
+#           required: ["key", "name"]
+#           properties:
+#             key:
+#               type: string
+#             name:
+#               type: string
+#             optional:
+#               type: boolean
+#         secretKeyRef:
+#           type: object
+#           required: ["key", "name"]
+#           properties:
+#             key:
+#               type: string
+#             name:
+#               type: string
+#             optional:
+#               type: boolean
+#   oneOf:
+#     - required: ["name", "value"]
+#     - required: ["name", "valueFrom"]
+# @schema
+# -- Environment variables. Supports both direct values and references to ConfigMaps/Secrets. See https://shlink.io/documentation/shlink-web-client/pre-configuring-servers/ for the supported variables.
+env: []
