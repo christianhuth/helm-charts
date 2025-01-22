@@ -127,6 +127,24 @@ postgresql:
     password: shlink
     username: shlink
 
+externalDatabase:
+  # -- Driver of the external database
+  driver: postgres
+  # -- Hostname of the external database
+  host: ""
+  # -- Port of the external database
+  port: 5432
+  # -- Database name
+  database: shlink
+  # -- Database username
+  username: shlink
+  # -- Database password
+  password: shlink
+  # -- Secret name containing the database password
+  externalSecretName: ""
+  # -- Key in the secret containing the database password
+  externalSecretKey: ""
+
 rabbitmq:
   enabled: false
 

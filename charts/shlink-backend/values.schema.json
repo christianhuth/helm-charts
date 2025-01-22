@@ -96,6 +96,78 @@
       "title": "env",
       "type": "array"
     },
+    "externalDatabase": {
+      "properties": {
+        "database": {
+          "default": "shlink",
+          "description": "Database name",
+          "required": [],
+          "title": "database",
+          "type": "string"
+        },
+        "driver": {
+          "default": "postgres",
+          "description": "Driver of the external database",
+          "required": [],
+          "title": "driver",
+          "type": "string"
+        },
+        "externalSecretKey": {
+          "default": "",
+          "description": "Key in the secret containing the database password",
+          "required": [],
+          "title": "externalSecretKey",
+          "type": "string"
+        },
+        "externalSecretName": {
+          "default": "",
+          "description": "Secret name containing the database password",
+          "required": [],
+          "title": "externalSecretName",
+          "type": "string"
+        },
+        "host": {
+          "default": "",
+          "description": "Hostname of the external database",
+          "required": [],
+          "title": "host",
+          "type": "string"
+        },
+        "password": {
+          "default": "shlink",
+          "description": "Database password",
+          "required": [],
+          "title": "password",
+          "type": "string"
+        },
+        "port": {
+          "default": 5432,
+          "description": "Port of the external database",
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "username": {
+          "default": "shlink",
+          "description": "Database username",
+          "required": [],
+          "title": "username",
+          "type": "string"
+        }
+      },
+      "required": [
+        "driver",
+        "host",
+        "port",
+        "database",
+        "username",
+        "password",
+        "externalSecretName",
+        "externalSecretKey"
+      ],
+      "title": "externalDatabase",
+      "type": "object"
+    },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"shlink-backend.fullname\"`",
@@ -571,6 +643,7 @@
     "mariadb",
     "mysql",
     "postgresql",
+    "externalDatabase",
     "rabbitmq",
     "redis"
   ],

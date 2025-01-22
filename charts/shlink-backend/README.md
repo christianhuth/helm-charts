@@ -55,6 +55,14 @@ The command removes all the Kubernetes components associated with the chart and 
 | env[0].value | string | `"doma.in"` |  |
 | env[1].name | string | `"IS_HTTPS_ENABLED"` |  |
 | env[1].value | string | `"false"` |  |
+| externalDatabase.database | string | `"shlink"` | Database name |
+| externalDatabase.driver | string | `"postgres"` | Driver of the external database |
+| externalDatabase.externalSecretKey | string | `""` | Key in the secret containing the database password |
+| externalDatabase.externalSecretName | string | `""` | Secret name containing the database password |
+| externalDatabase.host | string | `""` | Hostname of the external database |
+| externalDatabase.password | string | `"shlink"` | Database password |
+| externalDatabase.port | int | `5432` | Port of the external database |
+| externalDatabase.username | string | `"shlink"` | Database username |
 | fullnameOverride | string | `""` | String to fully override `"shlink-backend.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.repository | string | `"shlinkio/shlink"` | image repository |

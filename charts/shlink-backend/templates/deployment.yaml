@@ -94,6 +94,28 @@ spec:
                   name: {{ template "postgresql.v1.secretName" .Subcharts.postgresql }}
                   key: {{ template "postgresql.v1.userPasswordKey" .Subcharts.postgresql }}
             {{- end }}
+            {{- if .Values.externalDatabase.host }}
+            - name: DB_DRIVER
+              value: {{ .Values.externalDatabase.driver }}
+            - name: DB_HOST
+              value: {{ .Values.externalDatabase.host }}
+            - name: DB_PORT
+              value: {{ .Values.externalDatabase.port | quote }}
+            - name: DB_NAME
+              value: {{ .Values.externalDatabase.database }}
+            - name: DB_USER
+              value: {{ .Values.externalDatabase.username }}
+            {{- if .Values.externalDatabase.externalSecretName }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalDatabase.externalSecretName }}
+                  key: {{ .Values.externalDatabase.externalSecretKey }}
+            {{- else }}
+            - name: DB_PASSWORD
+              value: {{ .Values.externalDatabase.password }}
+            {{- end }}
+            {{- end }}
             # RabbitMQ Settings
             {{- if .Values.rabbitmq.enabled }}
             - name: RABBITMQ_ENABLED
