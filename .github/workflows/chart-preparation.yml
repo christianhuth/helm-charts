@@ -19,7 +19,6 @@ jobs:
         with:
           extra_args: --all-files || exit 0
       - name: Check for modified files
-        id: check_files
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             echo "Files have been modified by pre-commit."
@@ -61,7 +60,6 @@ jobs:
       - name: Add an exception for dubious ownership check
         run: git config --global --add safe.directory /__w/helm-charts/helm-charts
       - name: Check for modified files
-        id: check_files
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             echo "Files have been modified by Changelog creationg."
