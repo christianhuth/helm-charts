@@ -35,7 +35,7 @@ annotations:
     - kind: removed
       description: env variable USER_LIMIT_PER_DAY (kutt.config.userLimitPerDay)
     - kind: removed
-      description: env variable GOOGLE_* (kutt.google.*)
+      description: env variable GOOGLE_*(kutt.google.*)
     - kind: added
       description: env variable DB_CLIENT (kutt.database.client)
     - kind: added

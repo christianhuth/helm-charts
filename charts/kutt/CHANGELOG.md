@@ -23,4 +23,4 @@
 - env variable DEFAULT_MAX_STATS_PER_LINK (kutt.config.defaultMaxStatsPerLink)
 - env variable NON_USER_COOLDOWN (kutt.config.nonUserCooldown)
 - env variable USER_LIMIT_PER_DAY (kutt.config.userLimitPerDay)
-- env variable GOOGLE_* (kutt.google.*)
+- env variable GOOGLE_*(kutt.google.*)
