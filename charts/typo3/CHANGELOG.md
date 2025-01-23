@@ -1,7 +1,9 @@
 # typo3
 
-## 2.3.6
+## 3.0.0
 
-### Added
+### Changed
 
-- Changelog
+- dependency to mariadb to 20.2.1
+- dependency to mysql to 12.2.2
+- dependency to postgresql to 16.4.5
