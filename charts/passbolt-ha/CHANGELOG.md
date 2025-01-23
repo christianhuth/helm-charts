@@ -2,6 +2,6 @@
 
 ## 1.14.3
 
-### Added
+### Changed
 
-- Changelog
+- dependency to proxysql to 1.3.2
