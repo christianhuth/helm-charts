@@ -64,14 +64,14 @@ jobs:
         id: check_files
         run: |
           if [[ -n $(git status --porcelain) ]]; then
-            echo "Files have been modified by pre-commit."
-            echo "changes_detected=true" >> $GITHUB_ENV
+            echo "Files have been modified by Changelog creationg."
+            echo "chartlog_changes_detected=true" >> $GITHUB_ENV
           else
             echo "No changes detected."
-            echo "changes_detected=false" >> $GITHUB_ENV
+            echo "chartlog_changes_detected=false" >> $GITHUB_ENV
           fi
       - name: Commit and push changes
-        if: env.changes_detected == 'true'
+        if: env.chartlog_changes_detected == 'true'
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             # Extract the source branch of the PR
@@ -84,7 +84,7 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git checkout ${{ github.head_ref }}
           git add .
-          git commit -m "chore: auto-upgrade schema and readme"
+          git commit -m "chore: auto-upgrade changelog"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
