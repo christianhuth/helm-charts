@@ -18,8 +18,8 @@ dependencies:
     version: 12.2.2
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Changelog
+    - kind: changed
+      description: dependency to mysql to 12.2.2
   artifacthub.io/screenshots: |
     - title: Polr converts some long links into shorter ones.
       url: https://selfhostedweb.org/wp-content/uploads/2017/02/shortit-1024x346.png
