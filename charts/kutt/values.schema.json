@@ -367,13 +367,6 @@
         },
         "config": {
           "properties": {
-            "defaultMaxStatsPerLink": {
-              "default": "5000",
-              "description": "Max number of visits for each link to have detailed stats",
-              "required": [],
-              "title": "defaultMaxStatsPerLink",
-              "type": "string"
-            },
             "disallowAnonymousLinks": {
               "default": false,
               "description": "Disable anonymous link creation",
@@ -388,18 +381,25 @@
               "title": "disallowRegistration",
               "type": "boolean"
             },
+            "enableRateLimit": {
+              "default": false,
+              "description": "Enable rate limitting for some API routes. If Redis is enabled uses Redis, otherwise, uses memory.",
+              "required": [],
+              "title": "enableRateLimit",
+              "type": "boolean"
+            },
+            "linkCustomAlphabet": {
+              "default": "",
+              "description": "Alphabet used to generate custom addresses. Default value omits o, O, 0, i, I, l, 1, and j to avoid confusion when reading the URL.",
+              "required": [],
+              "title": "linkCustomAlphabet",
+              "type": "string"
+            },
             "linkLength": {
               "default": 6,
               "description": "Generated link length",
               "required": [],
               "title": "linkLength",
-              "type": "integer"
-            },
-            "nonUserCooldown": {
-              "default": 0,
-              "description": "Create a cooldown for non-logged in users in minutes. Set 0 to disable.",
-              "required": [],
-              "title": "nonUserCooldown",
               "type": "integer"
             },
             "siteName": {
@@ -408,25 +408,58 @@
               "required": [],
               "title": "siteName",
               "type": "string"
-            },
-            "userLimitPerDay": {
-              "default": 50,
-              "description": "The daily limit for each user",
-              "required": [],
-              "title": "userLimitPerDay",
-              "type": "integer"
             }
           },
           "required": [
-            "defaultMaxStatsPerLink",
             "disallowAnonymousLinks",
             "disallowRegistration",
+            "enableRateLimit",
+            "linkCustomAlphabet",
             "linkLength",
-            "nonUserCooldown",
-            "siteName",
-            "userLimitPerDay"
+            "siteName"
           ],
           "title": "config",
+          "type": "object"
+        },
+        "database": {
+          "properties": {
+            "client": {
+              "default": "pg",
+              "description": "Which database client to use. This Chart currently only supports PostgreSQL: pg or pg-native. NOTE: pg-native is not installed by default, create your own image to use it.",
+              "required": [],
+              "title": "client",
+              "type": "string"
+            },
+            "pool": {
+              "properties": {
+                "max": {
+                  "default": 10,
+                  "description": "Maximum number of database connection pools. Only if you use Postgres or MySQL.",
+                  "required": [],
+                  "title": "max",
+                  "type": "integer"
+                },
+                "min": {
+                  "default": 0,
+                  "description": "Minimum number of database connection pools. Only if you use Postgres or MySQL.",
+                  "required": [],
+                  "title": "min",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "max",
+                "min"
+              ],
+              "title": "pool",
+              "type": "object"
+            }
+          },
+          "required": [
+            "client",
+            "pool"
+          ],
+          "title": "database",
           "type": "object"
         },
         "domain": {
@@ -461,30 +494,6 @@
           "title": "domain",
           "type": "object"
         },
-        "google": {
-          "properties": {
-            "existingSecret": {
-              "default": "",
-              "description": "Use existing secret for Google configuration. The secret has to contain the key `GOOGLE_SAFE_BROWSING_KEY`. When it's set the `kutt.google.safeBrowsingKey` is ignored.",
-              "required": [],
-              "title": "existingSecret",
-              "type": "string"
-            },
-            "safeBrowsingKey": {
-              "default": "",
-              "description": "Google Cloud API to prevent from users from submitting malware URLs. Get it from https://developers.google.com/safe-browsing/v4/get-started.",
-              "required": [],
-              "title": "safeBrowsingKey",
-              "type": "string"
-            }
-          },
-          "required": [
-            "existingSecret",
-            "safeBrowsingKey"
-          ],
-          "title": "google",
-          "type": "object"
-        },
         "jwt": {
           "properties": {
             "existingSecret": {
@@ -517,6 +526,13 @@
               "required": [],
               "title": "contactEmail",
               "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enable emails, which are used for signup, verifying or changing email address, resetting password, and sending reports. If is disabled, all these functionalities will be disabled too.",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
             },
             "existingSecret": {
               "default": "",
@@ -576,6 +592,7 @@
             }
           },
           "required": [
+            "enabled",
             "contactEmail",
             "existingSecret",
             "from",
@@ -625,8 +642,8 @@
       "required": [
         "admin",
         "config",
+        "database",
         "domain",
-        "google",
         "jwt",
         "mail",
         "recaptcha"
