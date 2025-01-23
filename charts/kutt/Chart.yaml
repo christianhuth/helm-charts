@@ -2,8 +2,8 @@ apiVersion: v2
 name: kutt
 description: Kutt is a free modern URL shortener.
 type: application
-version: 4.2.5
-appVersion: "v2.7.4"
+version: 5.0.0
+appVersion: "v3.2.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
 maintainers:
@@ -13,17 +13,43 @@ sources:
   - https://github.com/thedevs-network/kutt
 dependencies:
   - name: postgresql
-    repository: https://charts.bitnami.com/bitnami
-    version: 14.3.3
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 16.4.5
     condition: postgresql.enabled
   - name: redis
-    repository: https://charts.bitnami.com/bitnami
-    version: 18.19.4
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 20.6.3
     condition: redis.enabled
 annotations:
   artifacthub.io/changes: |
+    - kind: changed
+      description: dependency to postgresql to 16.4.5
+    - kind: changed
+      description: dependency to redis to 20.6.3
+    - kind: changed
+      description: app version to 3.2.1
+    - kind: removed
+      description: env variable DEFAULT_MAX_STATS_PER_LINK (kutt.config.defaultMaxStatsPerLink)
+    - kind: removed
+      description: env variable NON_USER_COOLDOWN (kutt.config.nonUserCooldown)
+    - kind: removed
+      description: env variable USER_LIMIT_PER_DAY (kutt.config.userLimitPerDay)
+    - kind: removed
+      description: env variable GOOGLE_* (kutt.google.*)
     - kind: added
-      description: Changelog
+      description: env variable DB_CLIENT (kutt.database.client)
+    - kind: added
+      description: env variable DB_POOL_MAX  (kutt.database.pool.max)
+    - kind: added
+      description: env variable and DB_POOL_MIN (kutt.database.pool.min)
+    - kind: added
+      description: env variable MAIL_ENABLED (kutt.mail.enabled)
+    - kind: added
+      description: env variable ENABLE_RATE_LIMIT (kutt.config.enableRateLimit)
+    - kind: added
+      description: env variable LINK_CUSTOM_ALPHABET (kutt.config.linkCustomAlphabet)
+    - kind: added
+      description: env variable REDIS_ENABLED (redis.enabled)
   artifacthub.io/screenshots: |
     - title: Simply shorten your link using the Web UI.
       url: https://d4.alternativeto.net/v9sHosD3RiPblfBOOHZi0gwU1M0pRL6Jn53oiobJi9k/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2t1dHQtaXRfNzY3MjMzX2Z1bGwucG5n.jpg

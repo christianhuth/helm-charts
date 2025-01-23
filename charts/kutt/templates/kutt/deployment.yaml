@@ -39,22 +39,18 @@ spec:
               value: {{ .Values.kutt.admin.emails | quote }}
             {{- end }}
             # Configuration Settings
-            {{- if .Values.kutt.config.defaultMaxStatsPerLink }}
-            - name: DEFAULT_MAX_STATS_PER_LINK
-              value: {{ .Values.kutt.config.defaultMaxStatsPerLink | quote }}
-            {{- end }}
             - name: DISALLOW_ANONYMOUS_LINKS
               value: {{ .Values.kutt.config.disallowAnonymousLinks | quote }}
             - name: DISALLOW_REGISTRATION
               value: {{ .Values.kutt.config.disallowRegistration | quote }}
+            - name: ENABLE_RATE_LIMIT
+              value: {{ .Values.kutt.config.enableRateLimit | quote }}
+            - name: LINK_CUSTOM_ALPHABET
+              value: {{ .Values.kutt.config.linkCustomAlphabet | quote }}
             - name: LINK_LENGTH
               value: {{ .Values.kutt.config.linkLength | quote }}
-            - name: NON_USER_COOLDOWN
-              value: {{ .Values.kutt.config.nonUserCooldown | quote }}
             - name: SITE_NAME
               value: {{ .Values.kutt.config.siteName | quote }}
-            - name: USER_LIMIT_PER_DAY
-              value: {{ .Values.kutt.config.userLimitPerDay | quote }}
             # Domain Settings
             - name: CUSTOM_DOMAIN_USE_HTTPS
               value: {{ .Values.kutt.domain.customDomainUseHttps | quote }}
@@ -70,6 +66,10 @@ spec:
             {{- if .Values.kutt.mail.contactEmail }}
             - name: CONTACT_EMAIL
               value: {{ .Values.kutt.mail.contactEmail | quote }}
+            {{- end }}
+            {{- if .Values.kutt.mail.enabled }}
+            - name: MAIL_ENABLED
+              value: {{ .Values.kutt.mail.enabled | quote }}
             {{- end }}
             {{- if .Values.kutt.mail.host }}
             - name: MAIL_HOST
@@ -102,34 +102,6 @@ spec:
             - name: REPORT_EMAIL
               value: {{ .Values.kutt.mail.reportEmail | quote }}
             {{- end }}
-            # Google Settings
-            - name: GOOGLE_SAFE_BROWSING_KEY
-              {{- if .Values.kutt.google.existingSecret }}
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.kutt.google.existingSecret }}
-                  key: GOOGLE_SAFE_BROWSING_KEY
-              {{- else }}
-              value: {{ .Values.kutt.google.safeBrowsingKey }}
-              {{- end }}
-            - name: GOOGLE_ANALYTICS
-              {{- if .Values.kutt.google.existingSecret }}
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.kutt.google.existingSecret }}
-                  key: GOOGLE_ANALYTICS
-              {{- else }}
-              value: {{ .Values.kutt.google.analytics }}
-              {{- end }}
-            - name: GOOGLE_ANALYTICS_UNIVERSAL
-              {{- if .Values.kutt.google.existingSecret }}
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.kutt.google.existingSecret }}
-                  key: GOOGLE_ANALYTICS_UNIVERSAL
-              {{- else }}
-              value: {{ .Values.kutt.google.analyticsUniversal }}
-              {{- end }}
             # JWT Settings
             - name: JWT_SECRET
               {{- if .Values.kutt.jwt.existingSecret }}
@@ -141,6 +113,8 @@ spec:
               value: {{ .Values.kutt.jwt.key }}
               {{- end }}
             # Database Settings
+            - name: DB_CLIENT
+              value: {{ include "kutt.postgresql.client" . | quote }}
             - name: DB_HOST
               value: {{ include "kutt.postgresql.hostname" . | quote }}
             - name: DB_PORT
@@ -154,9 +128,15 @@ spec:
                 secretKeyRef:
                   name: {{ include "kutt.postgresql.secretName" . | quote }}
                   key: {{ include "kutt.postgresql.userPasswordKey" . | quote }}
+            - name: DB_POOL_MAX
+              value: {{ .Values.kutt.database.pool.max | quote }}
+            - name: DB_POOL_MIN
+              value: {{ .Values.kutt.database.pool.min | quote }}
             - name: DB_SSL
               value: "false"
             # Redis Settings
+            - name: REDIS_ENABLED
+              value: {{ .Values.redis.enabled | quote }}
             - name: REDIS_HOST
               value: {{ include "kutt.redis.hostname" . | quote }}
             - name: REDIS_PORT

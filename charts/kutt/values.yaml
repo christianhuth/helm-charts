@@ -118,20 +118,26 @@ kutt:
     # -- Comma seperated list of email addresses that can access admin actions on settings page
     emails: ""
   config:
-    # -- Max number of visits for each link to have detailed stats
-    defaultMaxStatsPerLink: "5000"
     # -- Disable anonymous link creation
     disallowAnonymousLinks: false
     # -- Disable registration
     disallowRegistration: false
+    # -- Enable rate limitting for some API routes. If Redis is enabled uses Redis, otherwise, uses memory.
+    enableRateLimit: false
+    # -- Alphabet used to generate custom addresses. Default value omits o, O, 0, i, I, l, 1, and j to avoid confusion when reading the URL.
+    linkCustomAlphabet: ""
     # -- Generated link length
     linkLength: 6
-    # -- Create a cooldown for non-logged in users in minutes. Set 0 to disable.
-    nonUserCooldown: 0
     # -- The name of the site where Kutt is hosted
     siteName: "Kutt"
-    # -- The daily limit for each user
-    userLimitPerDay: 50
+  database:
+    # -- Which database client to use. This Chart currently only supports PostgreSQL: pg or pg-native. NOTE: pg-native is not installed by default, create your own image to use it.
+    client: "pg"
+    pool:
+      # -- Maximum number of database connection pools. Only if you use Postgres or MySQL.
+      max: 10
+      # -- Minimum number of database connection pools. Only if you use Postgres or MySQL.
+      min: 0
   domain:
     # -- Use HTTPS for links with custom domain
     customDomainUseHttps: false
@@ -139,17 +145,14 @@ kutt:
     defaultDomain: "localhost:3000"
     # -- If you use an ingress to expose Kutt you can simply set this to true to use the first hostname defined in the ingress.
     useFirstIngressHost: false
-  google:
-    # -- Use existing secret for Google configuration. The secret has to contain the key `GOOGLE_SAFE_BROWSING_KEY`. When it's set the `kutt.google.safeBrowsingKey` is ignored.
-    existingSecret: ""
-    # -- Google Cloud API to prevent from users from submitting malware URLs. Get it from https://developers.google.com/safe-browsing/v4/get-started.
-    safeBrowsingKey: ""
   jwt:
     # -- Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`. When it's set the kutt.jwt.key is ignored.
     existingSecret: ""
     # -- make sure to replace with your own secret key
     key: "secret-jwt-key"
   mail:
+    # -- Enable emails, which are used for signup, verifying or changing email address, resetting password, and sending reports. If is disabled, all these functionalities will be disabled too.
+    enabled: false
     # -- Support email to show on the app
     contactEmail: ""
     # -- Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`. When it's set the `kutt.mail.password` is ignored.

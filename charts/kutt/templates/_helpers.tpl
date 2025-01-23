@@ -62,6 +62,15 @@ Create the name of the service account to use
 {{- end }}
 
 {{/*
+Return the client of the postgresql to use
+*/}}
+{{- define "kutt.postgresql.client" -}}
+  {{- if .Values.kutt.database.client -}}
+    {{- printf "%s" (tpl .Values.kutt.database.client $) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
 Return the hostname of the postgresql to use
 */}}
 {{- define "kutt.postgresql.hostname" -}}
