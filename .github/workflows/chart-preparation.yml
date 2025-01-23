@@ -72,6 +72,7 @@ jobs:
           fi
       - name: Commit and push changes
         if: env.chartlog_changes_detected == 'true'
+        shell: bash
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             # Extract the source branch of the PR
