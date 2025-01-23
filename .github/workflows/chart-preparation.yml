@@ -56,10 +56,12 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
       - name: Generate changelogs
+        shell: bash
         run: .github/generate-chart-changelogs.sh
       - name: Add an exception for dubious ownership check
         run: git config --global --add safe.directory /__w/helm-charts/helm-charts
       - name: Check for modified files
+        shell: bash
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             echo "Files have been modified by Changelog creationg."
