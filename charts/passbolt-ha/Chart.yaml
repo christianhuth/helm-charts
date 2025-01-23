@@ -15,7 +15,7 @@ sources:
   - https://github.com/flachesis/proxysql/tree/master/charts/proxysql
 dependencies:
   - name: mysql
-    repository: https://charts.bitnami.com/bitnami
+    repository: oci://registry-1.docker.io/bitnamicharts
     version: 12.2.2
   - name: passbolt
     repository: https://cnieg.github.io/helm-charts
@@ -27,7 +27,7 @@ annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency to proxysql to 1.3.2
+      description: dependency to mysql to 12.2.2
   artifacthub.io/screenshots: |
     - title: The login screen of Passbolt
       url: https://help.passbolt.com/assets/img/help/2021/02/AN_login_v3.png
