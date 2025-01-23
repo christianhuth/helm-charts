@@ -13469,6 +13469,57 @@ entries:
   - annotations:
       artifacthub.io/category: security
       artifacthub.io/changes: |
+        - kind: changed
+          description: dependency to proxysql to 1.3.2
+      artifacthub.io/screenshots: |
+        - title: The login screen of Passbolt
+          url: https://help.passbolt.com/assets/img/help/2021/02/AN_login_v3.png
+        - title: There are two parts - the searchable non encrypted metadata called resource and the encrypted part containing called secret.
+          url: https://help.passbolt.com/assets/img/help/2021/02/LU_encrypted_description.png
+        - title: You can organize your secrets inside of folders.
+          url: https://help.passbolt.com/assets/img/help/2019/12/LU_folder_preview.png
+        - title: You can send an url of a given resource and share it with colleagues.
+          url: https://help.passbolt.com/assets/img/help/2019/02/LU_application_urls.png
+        - title: Includes a dark theme that can be used in place of the black on white default theme.
+          url: https://help.passbolt.com/assets/img/help/2018/06/LU_passwords_midgar.png
+        - title: It is possible for an admin to enable and configure multi-factor authentication providers.
+          url: https://help.passbolt.com/assets/img/help/2018/12/AD_mfa_org_settings_yubikey.png
+        - title: Administrators can manage subscriptions directly in the backend.
+          url: https://help.passbolt.com/assets/img/help/2021/05/AD_subscription_management.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    created: "2025-01-23T13:44:48.706638384Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.23.0
+    - name: passbolt
+      repository: https://cnieg.github.io/helm-charts
+      version: 1.1.17
+    - name: proxysql
+      repository: https://charts.christianhuth.de
+      version: 1.3.2
+    description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
+    digest: d3e20c98c9d19d2e588e9576ff8230f032ac91662d79e7f7ad050c569626f040
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://avatars.githubusercontent.com/u/4386228?s=200&v=4
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: passbolt-ha
+    sources:
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    - https://github.com/cnieg/helm-charts/tree/master/charts/passbolt
+    - https://github.com/flachesis/proxysql/tree/master/charts/proxysql
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/passbolt-ha-1.14.3/passbolt-ha-1.14.3.tgz
+    version: 1.14.3
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/changes: |
         - kind: added
           description: Changelog
       artifacthub.io/screenshots: |
@@ -15962,6 +16013,42 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/passbolt-ha-0.0.1/passbolt-ha-0.0.1.tgz
     version: 0.0.1
   polr:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: changelog
+      artifacthub.io/screenshots: |
+        - title: Polr converts some long links into shorter ones.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/shortit-1024x346.png
+        - title: Polr provides a dashboard overview containing all the links ever created.
+          url: https://assets.hongkiat.com/uploads/polr-url-shorterner/02-polr-links-table.jpg
+        - title: Polr provides some statistical data about the shortened link.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/Screenshot-2018-1-31-Shorts-1024x1024.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.3.0
+    created: "2025-01-23T13:44:48.866302813Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.2.2
+    description: Polr is a quick, modern, and open-source link shortener
+    digest: 545b08926c85fd82efb911b311b07213f3e308481ff6d1c1beed78aa850a0890
+    home: https://github.com/christianhuth/helm-charts
+    icon: http://docs.polrproject.org/en/latest/logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: polr
+    sources:
+    - https://github.com/cydrobolt/polr
+    - https://github.com/ajanvier/docker-polr
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/polr-2.0.1/polr-2.0.1.tgz
+    version: 2.0.1
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
@@ -34986,4 +35073,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-01-23T12:09:40.11922863Z"
+generated: "2025-01-23T13:44:48.867518102Z"
