@@ -58,6 +58,8 @@ jobs:
           ref: ${{ github.head_ref }}
       - name: Generate changelogs
         run: .github/generate-chart-changelogs.sh
+      - name: Add an exception for dubious ownership check
+        run: git config --global --add safe.directory /__w/helm-charts/helm-charts
       - name: Check for modified files
         id: check_files
         run: |
