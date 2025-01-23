@@ -8472,6 +8472,74 @@ entries:
   kutt:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: dependency to postgresql to 16.4.5
+        - kind: changed
+          description: dependency to redis to 20.6.3
+        - kind: changed
+          description: app version to 3.2.1
+        - kind: removed
+          description: env variable DEFAULT_MAX_STATS_PER_LINK (kutt.config.defaultMaxStatsPerLink)
+        - kind: removed
+          description: env variable NON_USER_COOLDOWN (kutt.config.nonUserCooldown)
+        - kind: removed
+          description: env variable USER_LIMIT_PER_DAY (kutt.config.userLimitPerDay)
+        - kind: removed
+          description: env variable GOOGLE_*(kutt.google.*)
+        - kind: added
+          description: env variable DB_CLIENT (kutt.database.client)
+        - kind: added
+          description: env variable DB_POOL_MAX  (kutt.database.pool.max)
+        - kind: added
+          description: env variable and DB_POOL_MIN (kutt.database.pool.min)
+        - kind: added
+          description: env variable MAIL_ENABLED (kutt.mail.enabled)
+        - kind: added
+          description: env variable ENABLE_RATE_LIMIT (kutt.config.enableRateLimit)
+        - kind: added
+          description: env variable LINK_CUSTOM_ALPHABET (kutt.config.linkCustomAlphabet)
+        - kind: added
+          description: env variable REDIS_ENABLED (redis.enabled)
+      artifacthub.io/screenshots: |
+        - title: Simply shorten your link using the Web UI.
+          url: https://d4.alternativeto.net/v9sHosD3RiPblfBOOHZi0gwU1M0pRL6Jn53oiobJi9k/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2t1dHQtaXRfNzY3MjMzX2Z1bGwucG5n.jpg
+        - title: You can see a list of the most recent created links and some statistical data about them.
+          url: https://docs.cloudron.io/img/kutt-admin.png
+        - title: View detailed statistics about each created link.
+          url: https://kutt.it/images/callout.png
+        - title: Kutt supports having more than one domain.
+          url: https://docs.cloudron.io/img/kutt-custom-domain.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v3.2.1
+    created: "2025-01-23T14:54:23.756238529Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.4.5
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.6.3
+    description: Kutt is a free modern URL shortener.
+    digest: e5514e52c45417c82c7ccc95da5e1d9856249dcccf2f985fca57f24e7c1d1627
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: kutt
+    sources:
+    - https://github.com/thedevs-network/kutt
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/kutt-5.0.0/kutt-5.0.0.tgz
+    version: 5.0.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Changelog
       artifacthub.io/screenshots: |
@@ -35129,4 +35197,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-01-23T14:04:36.832284099Z"
+generated: "2025-01-23T14:54:23.757537636Z"
