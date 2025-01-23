@@ -25,8 +25,8 @@ dependencies:
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: added
-      description: Changelog
+    - kind: changed
+      description: dependency to mysql to 12.2.2
   artifacthub.io/screenshots: |
     - title: Umami measures just the important metrics that you care about and everything is displayed on a single, easy to browse page.
       url: https://umami.is/images/feature-website-stats.png
