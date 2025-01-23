@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.0.1
+## 2.0.2
 
-### Added
+### Changed
 
-- Changelog
+- app version to 3.5.1
