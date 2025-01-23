@@ -2,6 +2,6 @@
 
 ## 4.1.2
 
-### Added
+### Changed
 
-- Changelog
+- dependency to mysql to 12.2.2
