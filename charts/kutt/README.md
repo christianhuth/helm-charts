@@ -68,7 +68,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride | string | `""` | String to fully override `"kutt.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.repository | string | `"kutt/kutt"` | image repository |
-| image.tag | string | `"v2.7.4"` | Overrides the image tag |
+| image.tag | string | `"v3.2.1"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` | Additional annotations for the Ingress resource |
 | ingress.className | string | `""` | IngressClass that will be be used to implement the Ingress |
@@ -76,21 +76,22 @@ The command removes all the Kubernetes components associated with the chart and 
 | ingress.hosts | list | see [values.yaml](./values.yaml) | An array with the hosts configuration |
 | ingress.tls | list | `[]` | An array with the tls configuration |
 | kutt.admin.emails | string | `""` | Comma seperated list of email addresses that can access admin actions on settings page |
-| kutt.config.defaultMaxStatsPerLink | string | `"5000"` | Max number of visits for each link to have detailed stats |
 | kutt.config.disallowAnonymousLinks | bool | `false` | Disable anonymous link creation |
 | kutt.config.disallowRegistration | bool | `false` | Disable registration |
+| kutt.config.enableRateLimit | bool | `false` | Enable rate limitting for some API routes. If Redis is enabled uses Redis, otherwise, uses memory. |
+| kutt.config.linkCustomAlphabet | string | `""` | Alphabet used to generate custom addresses. Default value omits o, O, 0, i, I, l, 1, and j to avoid confusion when reading the URL. |
 | kutt.config.linkLength | int | `6` | Generated link length |
-| kutt.config.nonUserCooldown | int | `0` | Create a cooldown for non-logged in users in minutes. Set 0 to disable. |
 | kutt.config.siteName | string | `"Kutt"` | The name of the site where Kutt is hosted |
-| kutt.config.userLimitPerDay | int | `50` | The daily limit for each user |
+| kutt.database.client | string | `"pg"` | Which database client to use. This Chart currently only supports PostgreSQL: pg or pg-native. NOTE: pg-native is not installed by default, create your own image to use it. |
+| kutt.database.pool.max | int | `10` | Maximum number of database connection pools. Only if you use Postgres or MySQL. |
+| kutt.database.pool.min | int | `0` | Minimum number of database connection pools. Only if you use Postgres or MySQL. |
 | kutt.domain.customDomainUseHttps | bool | `false` | Use HTTPS for links with custom domain |
 | kutt.domain.defaultDomain | string | `"localhost:3000"` | The domain that this website is on |
 | kutt.domain.useFirstIngressHost | bool | `false` | If you use an ingress to expose Kutt you can simply set this to true to use the first hostname defined in the ingress. |
-| kutt.google.existingSecret | string | `""` | Use existing secret for Google configuration. The secret has to contain the key `GOOGLE_SAFE_BROWSING_KEY`. When it's set the `kutt.google.safeBrowsingKey` is ignored. |
-| kutt.google.safeBrowsingKey | string | `""` | Google Cloud API to prevent from users from submitting malware URLs. Get it from https://developers.google.com/safe-browsing/v4/get-started. |
 | kutt.jwt.existingSecret | string | `""` | Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`. When it's set the kutt.jwt.key is ignored. |
 | kutt.jwt.key | string | `"secret-jwt-key"` | make sure to replace with your own secret key |
 | kutt.mail.contactEmail | string | `""` | Support email to show on the app |
+| kutt.mail.enabled | bool | `false` | Enable emails, which are used for signup, verifying or changing email address, resetting password, and sending reports. If is disabled, all these functionalities will be disabled too. |
 | kutt.mail.existingSecret | string | `""` | Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`. When it's set the `kutt.mail.password` is ignored. |
 | kutt.mail.from | string | `""` | The email address Kutt will send emails from. |
 | kutt.mail.host | string | `"smtp.example.com"` | The host of the external SMTP server that Kutt should use to send emails. |
@@ -135,6 +136,12 @@ helm install my-release -f values.yaml christianhuth/kutt
 ```
 
 ## Upgrading the Chart
+
+### 5.0.0
+
+This major updates the PostgreSQL subchart to its newest major, 16.4.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1630) you can find more information about the changes introduced in that version.
+
+It also updates the Redis subchart to its newest major, 20.6.4. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#to-2000) you can find more information about the changes introduced in that version.
 
 ### 4.0.0
 
