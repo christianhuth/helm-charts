@@ -1,7 +1,7 @@
 # kubevirt-manager
 
-## 0.0.5
+## 0.1.0
 
-### Added
+### Changed
 
-- Changelog
+- app version to 1.5.0
