@@ -1,0 +1,6 @@
+---
+mysql:
+  enabled: false
+
+posttgresql:
+  enabled: true

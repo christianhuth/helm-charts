@@ -474,8 +474,7 @@
       "required": [
         "node-role.kubernetes.io/control-plane"
       ],
-      "title": "nodeSelector",
-      "type": "object"
+      "title": "nodeSelector"
     },
     "podSecurityContext": {
       "description": "pod-level security context",
@@ -545,7 +544,6 @@
     "resources",
     "securityContext",
     "serviceAccount",
-    "nodeSelector",
     "tolerations",
     "affinity",
     "extraEnv",

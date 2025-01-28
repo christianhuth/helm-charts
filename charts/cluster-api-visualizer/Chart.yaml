@@ -2,7 +2,7 @@ apiVersion: v2
 name: cluster-api-visualizer
 description: Multicluster resource visualization tool for Cluster API.
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "v1.5.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://adalogics.com/img/content/capi-fuzzing-audit.png
@@ -13,8 +13,8 @@ sources:
   - https://github.com/Jont828/cluster-api-visualizer
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: app version to 1.5.1
+    - kind: added
+      description: Changelog
   artifacthub.io/screenshots: |
     - title: Simply shorten your link using the Web UI.
       url: https://github.com/Jont828/cluster-api-visualizer/raw/main/demo/demo.gif

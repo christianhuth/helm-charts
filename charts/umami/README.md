@@ -67,7 +67,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"ghcr.io"` | image registry |
 | image.repository | string | `"umami-software/umami"` | image repository |
-| image.tag | string | `"postgresql-v2.9.0"` | Overrides the image tag |
+| image.tag | string | `"postgresql-v2.15.1"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` | Additional annotations for the Ingress resource |
 | ingress.className | string | `""` | IngressClass that will be be used to implement the Ingress |
@@ -100,7 +100,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | umami.appSecret.existingSecret | string | `""` | Name of an existing secret containing the app secret under the key app-secret. |
 | umami.appSecret.secret | string | `""` | A random string used to generate unique values. |
 | umami.clientIpHeader | string | `""` | HTTP header to check for the client's IP address. This is useful when you're behind a proxy that uses non-standard headers. |
-| umami.cloudMode | string | `"1"` | Disables users, teams, and websites settings page. |
+| umami.cloudMode | string | `"0"` | Disables users, teams, and websites settings page. |
 | umami.collectApiEndpoint | string | `""` | Allows you to send metrics to a location different than the default `/api/send`. This is to help you avoid some ad-blockers. |
 | umami.corsMaxAge | string | `"86400"` | How many seconds a CORS preflight should last. Default is 24 hours. |
 | umami.debug | string | `""` | Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`. |
@@ -129,9 +129,15 @@ helm install my-release -f values.yaml christianhuth/umami
 
 ## Upgrading the Chart
 
+### To 4.0.0
+
+This major updates the PostgreSQL subchart to its newest major, 16.3.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1630) you can find more information about the changes introduced in that version.
+
+This major also updates the MySQL subchart to its newest major, 12.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mysql#to-1200) you can find more information about the changes introduced in that version.
+
 ### To 3.0.0
 
-This major updates the PostgreSQL subchart to its newest major, 14.0.0. [Here](https://github.com/bitnami/charts/tree/master/bitnami/postgresql#to-1400) you can find more information about the changes introduced in that version.
+This major updates the PostgreSQL subchart to its newest major, 14.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1400) you can find more information about the changes introduced in that version.
 
 ### To 2.0.0
 

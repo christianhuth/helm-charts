@@ -24,10 +24,10 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.7
+          python-version: '3.13'
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.6.1
+        uses: helm/chart-testing-action@v2.7.0
 
       - name: Identify changed charts
         id: get-changed-charts
@@ -58,10 +58,10 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.7
+          python-version: '3.13'
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.6.1
+        uses: helm/chart-testing-action@v2.7.0
 
       - name: Create kind cluster
         uses: helm/kind-action@v1.12.0

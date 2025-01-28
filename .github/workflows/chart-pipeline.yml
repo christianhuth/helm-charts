@@ -13,13 +13,21 @@ jobs:
     needs: [preparation]
     uses: ./.github/workflows/chart-linting.yml
 
-  testing:
+  kubeconform:
     needs: [preparation, linting]
+    uses: ./.github/workflows/chart-kubeconform.yml
+
+  unit-testing:
+    needs: [preparation, linting, kubeconform]
+    uses: ./.github/workflows/chart-unittesting.yml
+
+  testing:
+    needs: [preparation, linting, kubeconform, unit-testing]
     uses: ./.github/workflows/chart-testing.yml
 
   releasing:
     if: github.ref == 'refs/heads/main'
-    needs: [preparation, linting, testing]
+    needs: [preparation, linting, kubeconform, unit-testing, testing]
     uses: ./.github/workflows/chart-releasing.yml
     secrets:
       GPG_PRIVATE_KEY_BASE64: ${{ secrets.GPG_PRIVATE_KEY_BASE64 }}

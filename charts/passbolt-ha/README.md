@@ -155,3 +155,9 @@ proxysql:
         - username: passbolt
           password: $NEW_PASSWORD
 ```
+
+## Upgrading the Chart
+
+### 2.0.0
+
+This major updates the MySQL subchart to its newest major, 12.2.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mysql#to-1220) you can find more information about the changes introduced in that version.

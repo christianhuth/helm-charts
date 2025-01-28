@@ -70,7 +70,7 @@ Return the hostname of the database to use
   {{- else if .Values.mariadb.enabled -}}
     {{- printf "%s" (include "mariadb.primary.fullname" .Subcharts.mariadb) -}}
   {{- else if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.primary.fullname" .Subcharts.postgresql) -}}
+    {{- printf "%s" (include "postgresql.v1.primary.fullname" .Subcharts.postgresql) -}}
   {{- else -}}
     {{- printf "%s" (tpl .Values.externalDatabase.hostname $) -}}
   {{- end -}}
@@ -85,7 +85,7 @@ Return database service port
   {{- else if .Values.mariadb.enabled -}}
     {{- printf "%s" (tpl (toString .Values.mariadb.primary.service.ports.mysql) $) -}}
   {{- else if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.service.port" .Subcharts.postgresql) -}}
+    {{- printf "%s" (include "postgresql.v1.service.port" .Subcharts.postgresql) -}}
   {{- else -}}
     {{- printf "%s" (tpl (toString .Values.externalDatabase.port) $) -}}
   {{- end -}}
@@ -100,7 +100,7 @@ Return the name for the database to use
   {{- else if .Values.mariadb.enabled -}}
     {{- printf "%s" (tpl .Values.mariadb.auth.database $) -}}
   {{- else if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.database" .Subcharts.postgresql) -}}
+    {{- printf "%s" (include "postgresql.v1.database" .Subcharts.postgresql) -}}
   {{- else -}}
     {{- printf "%s" (tpl .Values.externalDatabase.auth.database $) -}}
   {{- end -}}
@@ -115,7 +115,7 @@ Return the name for the user to use
   {{- else if .Values.mariadb.enabled -}}
     {{- printf "%s" (tpl .Values.mariadb.auth.username $) -}}
   {{- else if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.username" .Subcharts.postgresql) -}}
+    {{- printf "%s" (include "postgresql.v1.username" .Subcharts.postgresql) -}}
   {{- else -}}
     {{- printf "%s" (tpl .Values.externalDatabase.auth.username $) -}}
   {{- end -}}
@@ -130,7 +130,7 @@ Get the name of the secret containing the database user password
   {{- else if .Values.mariadb.enabled -}}
     {{- printf "%s" (include "mariadb.secretName" .Subcharts.mariadb) -}}
   {{- else if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.secretName" .Subcharts.postgresql) -}}
+    {{- printf "%s" (include "postgresql.v1.secretName" .Subcharts.postgresql) -}}
   {{- else if .Values.externalDatabase.auth.existingSecret -}}
     {{- printf "%s" (tpl .Values.externalDatabase.auth.existingSecret $) -}}
   {{- else -}}
@@ -147,7 +147,7 @@ Get the user-password key for the database password
   {{- else if .Values.mariadb.enabled -}}
     {{- "mariadb-password" -}}
   {{- else if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.userPasswordKey" .Subcharts.postgresql) -}}
+    {{- printf "%s" (include "postgresql.v1.userPasswordKey" .Subcharts.postgresql) -}}
   {{- else if .Values.externalDatabase.auth.userPasswordKey -}}
     {{- printf "%s" (tpl .Values.externalDatabase.auth.userPasswordKey $) -}}
   {{- else -}}

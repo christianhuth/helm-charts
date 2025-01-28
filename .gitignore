@@ -5,7 +5,6 @@
 # Chart dependencies
 charts/**/charts/*
 charts/**/Chart.lock
-charts/**/values-*.yaml
 
 ### VisualStudioCode ###
 .vscode/*

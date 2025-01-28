@@ -81,9 +81,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | mysql.auth.password | string | `"typo3"` | Password for the custom user to create. Ignored if mysql.auth.existingSecret is provided |
 | mysql.auth.username | string | `"typo3"` | Name for a custom user to create |
 | mysql.enabled | bool | `true` | enable MySQL™ subchart from Bitnami |
-| mysql.primary.configuration | string | `"[mysqld]\ndefault_authentication_plugin=mysql_native_password\nskip-name-resolve\nexplicit_defaults_for_timestamp\nbasedir=/opt/bitnami/mysql\nplugin_dir=/opt/bitnami/mysql/lib/plugin\nport=3306\nsocket=/opt/bitnami/mysql/tmp/mysql.sock\ndatadir=/bitnami/mysql/data\ntmpdir=/opt/bitnami/mysql/tmp\nmax_allowed_packet=16M\nbind-address=0.0.0.0\npid-file=/opt/bitnami/mysql/tmp/mysqld.pid\nlog-error=/opt/bitnami/mysql/logs/mysqld.log\ncharacter-set-server=utf8mb4\ncollation-server=utf8mb4_unicode_ci\nslow_query_log=0\nslow_query_log_file=/opt/bitnami/mysql/logs/mysqld.log\nlong_query_time=10.0\n\n[client]\nport=3306\nsocket=/opt/bitnami/mysql/tmp/mysql.sock\ndefault-character-set=utf8mb4\nplugin_dir=/opt/bitnami/mysql/lib/plugin\n\n[manager]\nport=3306\nsocket=/opt/bitnami/mysql/tmp/mysql.sock\npid-file=/opt/bitnami/mysql/tmp/mysqld.pid"` |  |
-| mysql.primary.extraEnvVars[0].name | string | `"TZ"` |  |
-| mysql.primary.extraEnvVars[0].value | string | `"Europe/Berlin"` |  |
 | nameOverride | string | `""` | Provide a name in place of `typo3` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | persistence.fileadmin.accessModes | list | `["ReadWriteOnce"]` | the desired access modes the volume should have. |
@@ -125,6 +122,14 @@ helm install my-release -f values.yaml christianhuth/typo3
 ```
 
 ## Upgrading the Chart
+
+### 3.0.0
+
+This major updates the MySQL subchart to its newest major, 12.2.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mysql#to-1220) you can find more information about the changes introduced in that version.
+
+Additionaly it updates the PostgreSQL subchart to its newest major, 16.4.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1630) you can find more information about the changes introduced in that version.
+
+Additionally it updates the MariaDB subchart to its newest major, 20.2.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#to-2020) you can find more information about the changes introduced in that version.
 
 ### 2.0.0
 

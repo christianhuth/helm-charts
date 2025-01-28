@@ -1,0 +1,73 @@
+name: Chart-Kubeconform
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+
+  detect-changed-charts:
+    runs-on: ubuntu-22.04
+    outputs:
+      matrix: ${{ steps.get-changed-charts.outputs.matrix }}
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: setup helm
+        uses: azure/setup-helm@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.7.0
+
+      - name: Identify changed charts
+        id: get-changed-charts
+        run: |
+          CHANGED_CHARTS=$(ct list-changed --config .github/config/chart-testing.yaml | jq -c --slurp --raw-input 'split("\n")[:-1] | map({chart: .})')
+          echo "matrix=$CHANGED_CHARTS" >> $GITHUB_OUTPUT
+
+      - name: Debug matrix ouput
+        run: echo "${{ steps.get-changed-charts.outputs.matrix }}"
+
+  kubeconform:
+    needs: detect-changed-charts
+    runs-on: ubuntu-22.04
+    if: ${{ needs.detect-changed-charts.outputs.matrix != '[]' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(needs.detect-changed-charts.outputs.matrix) }}
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: install pyyaml
+        run: pip install pyyaml
+
+      - name: setup helm
+        uses: azure/setup-helm@v4
+
+      - name: Set up kubeconform-helm plugin
+        run: helm plugin install https://github.com/jtyr/kubeconform-helm
+
+      - name: helm dependency update on changed chart
+        run : helm dependency update ${{ matrix.chart }}
+
+      - name: helm unittest on changed charts
+        run : helm kubeconform --config .github/config/chart-kubeconform.yaml ${{ matrix.chart }}
