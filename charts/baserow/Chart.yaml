@@ -14,11 +14,11 @@ sources:
   - https://baserow.io
 dependencies:
   - name: postgresql
-    repository: https://charts.bitnami.com/bitnami
+    repository: oci://registry-1.docker.io/bitnamicharts
     version: 16.4.5
     condition: postgresql.enabled
   - name: redis
-    repository: https://charts.bitnami.com/bitnami
+    repository: oci://registry-1.docker.io/bitnamicharts
     version: 20.6.3
     condition: redis.enabled
 annotations:
