@@ -1,7 +1,7 @@
 # etcd-defrag
 
-## 1.2.2
+## 1.2.3
 
-### Added
+### Changed
 
-- Changelog
+- App version to 3.5.18
