@@ -32,9 +32,6 @@ Define the database host
 {{- else -}}
     {{- $host = .Values.config.database.host -}}
 {{- end -}}
-{{- if not $host -}}
-    {{- fail "Unable to determine the database host. Use config.database.host or activate one of the integrated databases" -}}
-{{- end -}}
 {{- $host -}}
 {{- end }}
 
