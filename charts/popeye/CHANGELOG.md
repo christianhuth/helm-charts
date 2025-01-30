@@ -1,7 +1,7 @@
 # popeye
 
-## 2.1.5
+## 2.2.0
 
-### Added
+### Changed
 
-- Changelog
+- App version to 0.22.0
