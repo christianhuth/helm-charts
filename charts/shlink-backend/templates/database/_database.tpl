@@ -32,6 +32,9 @@ Define the database host
 {{- else -}}
     {{- $host = .Values.config.database.host -}}
 {{- end -}}
+{{- if and (not $host) (not (eq (include "shlink-backend.database.driver" .) "sqlite")) -}}
+    {{- fail "Unable to determine the database host. Use config.database.host or activate one of the integrated databases" -}}
+{{- end -}}
 {{- $host -}}
 {{- end }}
 
