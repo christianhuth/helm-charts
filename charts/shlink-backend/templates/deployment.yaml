@@ -36,66 +36,136 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            {{- toYaml .Values.env | nindent 12 }}
-            # MariaDB Settings
-            {{- if and .Values.mariadb.enabled (not .Values.mysql.enabled) (not .Values.postgresql.enabled) }}
+            # Database Settings
             - name: DB_DRIVER
-              value: mariadb
+              value: {{ include "shlink-backend.database.driver" . | quote }}
             - name: DB_HOST
-              value: {{ include "mariadb.primary.fullname" .Subcharts.mariadb }}
-            - name: DB_PORT
-              value: {{ coalesce .Values.mariadb.primary.service.ports.mysql .Values.mariadb.primary.service.port | quote }}
+              value: {{ include "shlink-backend.database.host" . | quote }}
             - name: DB_NAME
-              value: {{ .Values.mariadb.auth.database | quote }}
-            - name: DB_USER
-              value: {{ .Values.mariadb.auth.username | quote }}
+              value: {{ include "shlink-backend.database.auth.database" . | quote }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "mariadb.secretName" .Subcharts.mariadb }}
-                  key: mariadb-password
-            {{- end }}
-            # MySQL Settings
-            {{- if and (not .Values.mariadb.enabled) .Values.mysql.enabled (not .Values.postgresql.enabled) }}
-            - name: DB_DRIVER
-              value: mysql
-            - name: DB_HOST
-              value: {{ include "mysql.primary.fullname" .Subcharts.mysql }}
+                  name: {{ include "shlink-backend.database.auth.secretName" . | quote }}
+                  key: {{ include "shlink-backend.database.auth.secretKey" . | quote }}
             - name: DB_PORT
-              value: {{ .Values.mysql.primary.service.ports.mysql | quote }}
-            - name: DB_NAME
-              value: {{ .Values.mysql.auth.database | quote }}
+              value: {{ include "shlink-backend.database.port" . | quote }}
+            - name: DB_USE_ENCRYPTION
+              value: {{ .Values.config.database.useEncryption | quote }}
             - name: DB_USER
-              value: {{ .Values.mysql.auth.username | quote }}
-            - name: DB_PASSWORD
+              value: {{ include "shlink-backend.database.auth.username" . | quote }}
+
+            # Docker Settings
+            - name: PORT
+              value: {{ .Values.service.port | int }}
+
+            # General Settings
+            {{- if .Values.config.general.basePath }}
+            - name: BASE_PATH
+              value: {{ .Values.config.general.basePath | quote }}
+            {{- end }}
+            {{- if .Values.config.general.cacheNamespace }}
+            - name: CACHE_NAMESPACE
+              value: {{ .Values.config.general.cacheNamespace | quote }}
+            {{- end }}
+            {{- if .Values.config.general.defaultDomain }}
+            - name: DEFAULT_DOMAIN
+              value: {{ .Values.config.general.defaultDomain | quote }}
+            {{- end }}
+            {{- if .Values.config.general.initialApiKey }}
+            - name: INITIAL_API_KEY
+              value: {{ .Values.config.general.initialApiKey | quote }}
+            {{- end }}
+            - name: IS_HTTPS_ENABLED
+              value: {{ .Values.config.general.isHttpsEnabled | quote }}
+            {{- if .Values.config.general.memoryLimit }}
+            - name: MEMORY_LIMIT
+              value: {{ .Values.config.general.memoryLimit | quote }}
+            {{- end }}
+            {{- if .Values.config.general.timezone }}
+            - name: TIMEZONE
+              value: {{ .Values.config.general.timezone | quote }}
+            {{- end }}
+            
+            # Geolite Settings
+            {{- if .Values.config.geolite.licenseKey }}
+            - name: GEOLITE_LICENSE_KEY
+              value: {{ .Values.config.geolite.licenseKey | quote }}
+            {{- end }}
+            - name: SKIP_INITIAL_GEOLITE_DOWNLOAD
+              value: {{ .Values.config.geolite.skipInitialDownload | quote }}
+
+            {{- if .Values.config.matomo.enabled }}
+            # Matomo Settings
+            - name: MATOMO_ENABLED
+              value: {{ .Values.config.matomo.enabled | quote }}
+            {{- if or (.Values.config.matomo.auth.apiToken) (.Values.config.matomo.auth.existingSecret) }}
+            - name: MATOMO_API_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "mysql.secretName" .Subcharts.mysql }}
-                  key: mysql-password
+                  name: {{ include "shlink-backend.matomo.auth.secretName" . }}
+                  key: api-token
             {{- end }}
-            # PostgreSQL Settings
-            {{- if and (not .Values.mariadb.enabled) (not .Values.mysql.enabled) .Values.postgresql.enabled }}
-            - name: DB_DRIVER
-              value: postgres
-            - name: DB_HOST
-              value: {{ include "postgresql.v1.primary.fullname" .Subcharts.postgresql }}
-            - name: DB_PORT
-              value: {{ include "postgresql.v1.service.port" .Subcharts.postgresql | quote }}
-            - name: DB_NAME
-              value: {{ include "postgresql.v1.database" .Subcharts.postgresql }}
-            - name: DB_USER
-              value: {{ include "postgresql.v1.username" .Subcharts.postgresql }}
-            - name: DB_PASSWORD
+            {{- if .Values.config.matomo.baseUrl }}
+            - name: MATOMO_BASE_URL
+              value: {{ .Values.config.matomo.baseUrl | quote }}
+            {{- end }}
+            {{- if .Values.config.matomo.siteId }}
+            - name: MATOMO_SITE_ID
+              value: {{ .Values.config.matomo.siteId | quote }}
+            {{- end }}
+            {{- end }}
+
+            {{- if .Values.config.mercure.enabled }}
+            # Mercure Hub Settings
+            {{- if .Values.config.mercure.internalHubUrl }}
+            - name: MERCURE_INTERNAL_HUB_URL
+              value: {{ .Values.config.mercure.internalHubUrl | quote }}
+            {{- end }}
+            {{- if or (.Values.config.mercure.auth.jwtSecret) (.Values.config.mercure.auth.existingSecret) }}
+            - name: MERCURE_JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "postgresql.v1.secretName" .Subcharts.postgresql }}
-                  key: {{ template "postgresql.v1.userPasswordKey" .Subcharts.postgresql }}
+                  name: {{ include "shlink-backend.mercure.auth.secretName" . }}
+                  key: jwt-secret
             {{- end }}
-            # RabbitMQ Settings
+            {{- if .Values.config.mercure.publicHubUrl }}
+            - name: MERCURE_PUBLIC_HUB_URL
+              value: {{ .Values.config.mercure.publicHubUrl | quote }}
+            {{- end }}
+            {{- end }}
+
+            # Redirects Settings
+            {{- if .Values.config.redirects.defaultBaseUrlRedirect }}
+            - name: DEFAULT_BASE_URL_REDIRECT
+              value: {{ .Values.config.redirects.defaultBaseUrlRedirect | quote }}
+            {{- end }}
+            {{- if .Values.config.redirects.defaultInvalidShortUrlRedirect }}
+            - name: DEFAULT_INVALID_SHORT_URL_REDIRECT
+              value: {{ .Values.config.redirects.defaultInvalidShortUrlRedirect | quote }}
+            {{- end }}
+            {{- if .Values.config.redirects.defaultRegular404Redirect }}
+            - name: DEFAULT_REGULAR_404_REDIRECT
+              value: {{ .Values.config.redirects.defaultRegular404Redirect | quote }}
+            {{- end }}
+            {{- if .Values.config.redirects.cacheLifetime }}
+            - name: REDIRECT_CACHE_LIFETIME
+              value: {{ .Values.config.redirects.cacheLifetime | quote }}
+            {{- end }}
+            {{- if .Values.config.redirects.extraPathMode }}
+            - name: REDIRECT_EXTRA_PATH_MODE
+              value: {{ .Values.config.redirects.extraPathMode | quote }}
+            {{- end }}
+            {{- if .Values.config.redirects.statusCode }}
+            - name: REDIRECT_STATUS_CODE
+              value: {{ .Values.config.redirects.statusCode | quote }}
+            {{- end }}
+
             {{- if .Values.rabbitmq.enabled }}
+            # RabbitMQ Settings
             - name: RABBITMQ_ENABLED
               value: "true"
             - name: RABBITMQ_HOST
@@ -114,14 +184,72 @@ spec:
                   name: {{ template "rabbitmq.secretPasswordName" .Subcharts.rabbitmq }}
                   key: rabbitmq-password
             {{- end }}
+
+            {{- if (include "shlink-backend.redis.enabled" .) }}
             # Redis Settings
-            {{- if .Values.redis.enabled }}
+            - name: REDIS_PUB_SUB_ENABLED 
+              value: {{ .Values.config.redis.pubSubEnabled | quote }}
             - name: REDIS_SERVERS
-              value: {{ printf "%s-master" (include "common.names.fullname" .Subcharts.redis) }}:{{ .Values.redis.master.service.ports.redis }}
+              value: {{ include "shlink-backend.redis.enabled" . | quote }}
+            {{- end }}
+
+            # Robot.txt Settings
+            - name: ROBOTS_ALLOW_ALL_SHORT_URLS
+              value: {{ .Values.config.robots.allowAllShortUrls | quote }}
+            {{- if .Values.config.robots.userAgents }}
+            - name: ROBOTS_USER_AGENTS
+              value: {{ .Values.config.robots.userAgents | quote }}
+            {{- end }}
+
+            # URL Shortening Settings
+            - name: AUTO_RESOLVE_TITLES
+              value: {{ .Values.config.urlShortening.autoResolveTitles | quote }}
+            {{- if .Values.config.urlShortening.defaultShortCodesLength }}
+            - name: DEFAULT_SHORT_CODES_LENGTH
+              value: {{ .Values.config.urlShortening.defaultShortCodesLength | int }}
+            {{- end }}
+            {{- if .Values.config.urlShortening.deleteShortUrlThreshold }}
+            - name: DELETE_SHORT_URL_THRESHOLD
+              value: {{ .Values.config.urlShortening.deleteShortUrlThreshold | quote }}
+            {{- end }}
+            - name: MULTI_SEGMENT_SLUGS_ENABLED
+              value: {{ .Values.config.urlShortening.multiSegmentSlugsEnabled | quote }}
+            {{- if .Values.config.urlShortening.shortUrlMode }}
+            - name: SHORT_URL_MODE
+              value: {{ .Values.config.urlShortening.shortUrlMode | quote }}
+            {{- end }}
+            - name: SHORT_URL_TRAILING_SLASH
+              value: {{ .Values.config.urlShortening.shortUrlTrailingSlash | quote }}
+            
+            # Visits Tracking Settings
+            - name: ANONYMIZE_REMOTE_ADDR
+              value: {{ .Values.config.trackingVisits.anonymizeRemoteAddr | quote }}
+            - name: DISABLE_IP_TRACKING
+              value: {{ .Values.config.trackingVisits.disableIpTracking | quote }}
+            - name: DISABLE_REFERRER_TRACKING
+              value: {{ .Values.config.trackingVisits.disableReferrerTracking | quote }}
+            - name: DISABLE_TRACKING
+              value: {{ .Values.config.trackingVisits.disabled | quote }}
+            {{- if .Values.config.trackingVisits.disableTrackingFrom }}
+            - name: DISABLE_TRACKING_FROM
+              value: {{ .Values.config.trackingVisits.disableTrackingFrom | quote }}
+            {{- end }}
+            {{- if .Values.config.trackingVisits.disableTrackingParam }}
+            - name: DISABLE_TRACK_PARAM
+              value: {{ .Values.config.trackingVisits.disableTrackingParam | quote }}
+            {{- end }}
+            - name: DISABLE_UA_TRACKING
+              value: {{ .Values.config.trackingVisits.disableUaTracking | quote }}
+            - name: TRACK_ORPHAN_VISITS
+              value: {{ .Values.config.trackingVisits.trackOrphanVisits | quote }}
+
+            {{- if .Values.extraEnv }}
+            # Extra Environment Variables
+            {{- .Values.extraEnv | toYaml | nindent 12 }}
             {{- end }}
           ports:
             - name: http
-              containerPort: 8080
+              containerPort: {{ .Values.service.port | int }}
               protocol: TCP
           livenessProbe:
             httpGet:

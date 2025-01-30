@@ -47,6 +47,12 @@ annotations:
       description: dependency to rabbitmq to 15.2.3
     - kind: changed
       description: dependency to redis to 20.6.3
+    - kind: changed
+      description: option to define additional environment variables (extraEnv)
+    - kind: added
+      description: option to define image registry (image.registry)
+    - kind: added
+      description: options to define the configuration (config.*)
   artifacthub.io/signKey: |
     fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
     url: https://charts.christianhuth.de/public.key
