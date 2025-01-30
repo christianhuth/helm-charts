@@ -208,7 +208,7 @@ config:
     # -- Tells if orphan visits should be tracked or not. See [Tracking visits](https://shlink.io/documentation/tracking-visits/) for more info.
     trackOrphanVisits: true
   urlShortening:
-    # -- Used to automatically resolve the short URL’s title based on the <title /> tag in the long URL
+    # -- Used to automatically resolve the short URL’s title based on the title-tag in the long URL
     autoResolveTitles: true
     # -- The length you want generated short codes to have. It defaults to 5 and has to be at least 4, so any value smaller than that will fall back to 4.
     defaultShortCodesLength: 5

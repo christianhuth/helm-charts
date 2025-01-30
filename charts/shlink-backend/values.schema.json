@@ -508,7 +508,7 @@
           "properties": {
             "autoResolveTitles": {
               "default": true,
-              "description": "Used to automatically resolve the short URL’s title based on the \u003ctitle /\u003e tag in the long URL",
+              "description": "Used to automatically resolve the short URL’s title based on the title-tag in the long URL",
               "required": [],
               "title": "autoResolveTitles",
               "type": "boolean"
