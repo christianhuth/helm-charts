@@ -17805,6 +17805,34 @@ entries:
       artifacthub.io/category: security
       artifacthub.io/changes: |
         - kind: changed
+          description: App version to 0.22.1
+      artifacthub.io/screenshots: |
+        - title: Popeye is a utility that scans live Kubernetes cluster and reports potential issues with deployed resources and configurations.
+          url: https://popeyecli.io/assets/d_score.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.22.1
+    created: "2025-01-30T10:18:42.854409139Z"
+    description: Popeye - A Kubernetes Cluster Sanitizer
+    digest: fb3d323df60e33095addb699ec567c3b395ae064487d7fb286c78744ffa3abf0
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/derailed/popeye/master/assets/popeye_logo.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: popeye
+    sources:
+    - https://github.com/derailed/popeye
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/popeye-2.2.1/popeye-2.2.1.tgz
+    version: 2.2.1
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/changes: |
+        - kind: changed
           description: App version to 0.22.0
       artifacthub.io/screenshots: |
         - title: Popeye is a utility that scans live Kubernetes cluster and reports potential issues with deployed resources and configurations.
@@ -35671,4 +35699,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-01-30T10:07:57.066260501Z"
+generated: "2025-01-30T10:18:42.856009154Z"
