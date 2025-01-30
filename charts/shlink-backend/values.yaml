@@ -130,7 +130,7 @@ config:
     cacheNamespace: ""
     # -- The default short domain used for this Shlink instance. For example s.test.
     defaultDomain: ""
-    # -- An API key that will be created once during container start-up, with admin permissions. 
+    # -- An API key that will be created once during container start-up, with admin permissions.
     initialApiKey: ""
     # -- Tells if Shlink is served with https or not (true or false). It’s still up to you to actually serve it with HTTPS.
     isHttpsEnabled: false
@@ -144,7 +144,7 @@ config:
     # -- If provided with value true, it will skip the initial GeoLite2 db file download, speeding-up the container start-up. As a side effect, first visits on this container will remain un-located until the file finishes downloading in background.
     skipInitialDownload: false
   matomo:
-    # -- Tells if visits should be sent to a Matomo instance. 
+    # -- Tells if visits should be sent to a Matomo instance.
     enabled: false
     auth:
       # -- The API token so that Shlink can call Matomo’s API

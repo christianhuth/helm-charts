@@ -89,7 +89,7 @@ spec:
             - name: TIMEZONE
               value: {{ .Values.config.general.timezone | quote }}
             {{- end }}
-            
+
             # Geolite Settings
             {{- if .Values.config.geolite.licenseKey }}
             - name: GEOLITE_LICENSE_KEY
@@ -187,7 +187,7 @@ spec:
 
             {{- if (include "shlink-backend.redis.enabled" .) }}
             # Redis Settings
-            - name: REDIS_PUB_SUB_ENABLED 
+            - name: REDIS_PUB_SUB_ENABLED
               value: {{ .Values.config.redis.pubSubEnabled | quote }}
             - name: REDIS_SERVERS
               value: {{ include "shlink-backend.redis.enabled" . | quote }}
@@ -220,7 +220,7 @@ spec:
             {{- end }}
             - name: SHORT_URL_TRAILING_SLASH
               value: {{ .Values.config.urlShortening.shortUrlTrailingSlash | quote }}
-            
+
             # Visits Tracking Settings
             - name: ANONYMIZE_REMOTE_ADDR
               value: {{ .Values.config.trackingVisits.anonymizeRemoteAddr | quote }}
