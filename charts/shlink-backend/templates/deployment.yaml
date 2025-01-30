@@ -60,7 +60,7 @@ spec:
 
             # Docker Settings
             - name: PORT
-              value: {{ .Values.service.port | int }}
+              value: {{ .Values.service.port | quote }}
 
             # General Settings
             {{- if .Values.config.general.basePath }}
@@ -206,7 +206,7 @@ spec:
               value: {{ .Values.config.urlShortening.autoResolveTitles | quote }}
             {{- if .Values.config.urlShortening.defaultShortCodesLength }}
             - name: DEFAULT_SHORT_CODES_LENGTH
-              value: {{ .Values.config.urlShortening.defaultShortCodesLength | int }}
+              value: {{ .Values.config.urlShortening.defaultShortCodesLength | quote }}
             {{- end }}
             {{- if .Values.config.urlShortening.deleteShortUrlThreshold }}
             - name: DELETE_SHORT_URL_THRESHOLD
