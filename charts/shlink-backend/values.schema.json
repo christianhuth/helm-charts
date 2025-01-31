@@ -818,7 +818,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "4.4.0",
+          "default": "4.4.2",
           "description": "Overrides the image tag",
           "required": [],
           "title": "tag",
