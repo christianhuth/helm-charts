@@ -1,9 +1,10 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "shlink-backend.fullname" . }}
   labels:
     {{- include "shlink-backend.labels" . | nindent 4 }}
+  name: {{ include "shlink-backend.fullname" . }}
 spec:
   type: {{ .Values.service.type }}
   ports:

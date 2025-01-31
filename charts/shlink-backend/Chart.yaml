@@ -2,8 +2,8 @@ apiVersion: v2
 name: shlink-backend
 description: A PHP-based self-hosted URL shortener that can be used to serve shortened URLs under your own domain.
 type: application
-version: 4.5.5
-appVersion: "3.7.4"
+version: 5.0.0
+appVersion: "4.4.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://shlink.io/images/shlink-logo-blue.svg
 maintainers:
@@ -14,29 +14,45 @@ sources:
   - https://shlink.io
 dependencies:
   - name: mariadb
-    repository: https://charts.bitnami.com/bitnami
-    version: 16.5.0
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 20.2.1
     condition: mariadb.enabled
   - name: mysql
-    repository: https://charts.bitnami.com/bitnami
-    version: 9.23.0
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 12.2.2
     condition: mysql.enabled
   - name: postgresql
-    repository: https://charts.bitnami.com/bitnami
-    version: 14.3.3
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 16.4.5
     condition: postgresql.enabled
   - name: rabbitmq
-    repository: https://charts.bitnami.com/bitnami
-    version: 12.15.0
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 15.2.3
     condition: rabbitmq.enabled
   - name: redis
-    repository: https://charts.bitnami.com/bitnami
-    version: 18.19.4
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 20.6.3
     condition: redis.enabled
 annotations:
   artifacthub.io/changes: |
+    - kind: changed
+      description: app version to 4.4.0
+    - kind: changed
+      description: dependency to mariadb to 20.2.1
+    - kind: changed
+      description: dependency to mysql to 12.2.2
+    - kind: changed
+      description: dependency to postgresql to 16.4.5
+    - kind: changed
+      description: dependency to rabbitmq to 15.2.3
+    - kind: changed
+      description: dependency to redis to 20.6.3
+    - kind: changed
+      description: option to define additional environment variables (extraEnv)
     - kind: added
-      description: Changelog
+      description: option to define image registry (image.registry)
+    - kind: added
+      description: options to define the configuration (config.*)
   artifacthub.io/signKey: |
     fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
     url: https://charts.christianhuth.de/public.key
