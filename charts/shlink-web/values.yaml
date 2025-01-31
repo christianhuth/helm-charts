@@ -106,3 +106,6 @@ configuration: []
   # - name: "Main server"
   #   url: "https://doma.in"
   #   apiKey: "09c972b7-506b-49f1-a19a-d729e22e599c"
+
+# -- additional environment variables to be added to the pods. See https://shlink.io/documentation/shlink-web-client/pre-configuring-servers for the supported variables.
+extraEnv: []

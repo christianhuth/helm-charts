@@ -51,6 +51,15 @@
       "title": "configuration",
       "type": "array"
     },
+    "extraEnv": {
+      "description": "additional environment variables to be added to the pods. See https://shlink.io/documentation/shlink-web-client/pre-configuring-servers for the supported variables.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "extraEnv",
+      "type": "array"
+    },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"shlink-web.fullname\"`",
@@ -341,7 +350,8 @@
     "nodeSelector",
     "tolerations",
     "affinity",
-    "configuration"
+    "configuration",
+    "extraEnv"
   ],
   "type": "object"
 }
