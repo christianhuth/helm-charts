@@ -4,10 +4,4 @@
 
 ### Added
 
-- Option to configure environment variables
-
-## 1.3.1
-
-### Added
-
-- Changelog
+- Option to add additional environment variables (extraEnv)
