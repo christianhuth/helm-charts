@@ -1,6 +1,6 @@
 # shlink-backend
 
-## 5.0.0
+## 5.0.1
 
 ### Added
 
