@@ -15,7 +15,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: Option to configure environment variables
+      description: Option to add additional environment variables (extraEnv)
   artifacthub.io/screenshots: |
     - title: Add a new link that should be shortened.
       url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/creation-form-after.png
