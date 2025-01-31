@@ -51,10 +51,10 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| config.database.auth.database | string | `"shlink"` | The database name to be used when using an external database driver. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled |
+| config.database.auth.database | string | `""` | The database name to be used when using an external database driver. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled |
 | config.database.auth.existingSecret | string | `""` | Use existing secret for password details (`config.database.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `database-password`. |
-| config.database.auth.password | string | `"shlink"` | The password credential to be used when using an external database driver. |
-| config.database.auth.username | string | `"shlink"` | The username credential to be used when using an external database driver. |
+| config.database.auth.password | string | `""` | The password credential to be used when using an external database driver. |
+| config.database.auth.username | string | `""` | The username credential to be used when using an external database driver. |
 | config.database.driver | string | `"sqlite"` | mysql, maria, postgres or sqlite. Will be set automatically when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled |
 | config.database.host | string | `""` | The host name of the database server when using an external database driver. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled |
 | config.database.port | int | `0` | The port in which the database service is running when using an external database driver. Default value is based on the value provided for DB_DRIVER. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled |
@@ -71,20 +71,39 @@ The command removes all the Kubernetes components associated with the chart and 
 | config.matomo.auth.apiToken | string | `""` | The API token so that Shlink can call Matomo’s API |
 | config.matomo.auth.existingSecret | string | `""` | Use existing secret for the API token details (`config.matomo.auth.apiToken` will be ignored and picked up from this secret). The secret has to contain the key `api-token`. |
 | config.matomo.baseUrl | string | `""` | The external Matomo server URL. |
-| config.matomo.enabled | bool | `false` | Tells if visits should be sent to a Matomo instance. |
+| config.matomo.enabled | bool | `false` | Enable the Matomo integration to sent visits |
 | config.matomo.siteId | string | `""` | The site ID to be used for Shlink visits. |
 | config.mercure.auth.existingSecret | string | `""` | Use existing secret for the JWT secret details (`config.mercure.auth.jwtSecret` will be ignored and picked up from this secret). The secret has to contain the key `jwt-secret`. |
 | config.mercure.auth.jwtSecret | string | `""` | The secret key that was provided to the mercure hub server, in order to be able to generate valid JWTs for publishing/subscribing to that server. |
 | config.mercure.enabled | bool | `false` | Enable the Mercure Hub integration. |
 | config.mercure.internalHubUrl | string | `""` | An internal URL for a mercure hub. Will be used only when publishing updates to mercure, and does not need to be public. |
 | config.mercure.publicHubUrl | string | `""` | The public URL of a mercure hub server to which Shlink will sent updates. This URL will also be served to consumers that want to subscribe to those updates. |
+| config.qrCodes.codeForDisabledShortUrls | bool | `true` | Whether generating QR codes should work for disabled short URLs. Disabled short URLs are those which reached the maximum amount of visits, have a validSince date in the future, or a validUntil date in the past. |
+| config.qrCodes.defaultColors.background | string | `"#FFFFFF"` | The QR code background color. |
+| config.qrCodes.defaultColors.foreground | string | `"#000000"` | The QR code foreground color. |
+| config.qrCodes.defaultErrorCorrection | string | `"l"` | One of L (Low), M (Medium), Q (Quartile) or H (High), to determine the default error correction of generated QR codes when the errorCorrection query param is not provided. |
+| config.qrCodes.defaultFormat | string | `"png"` | One of png or svg, to determine the default format of generated QR codes when the format query param is not provided. |
+| config.qrCodes.defaultLogoUrl | string | `""` | A URL pointing to a logo that will be placed in the middle of the QR code. This one is experimental, as some images might break the QR code. |
+| config.qrCodes.defaultMargin | int | `0` | A value greater than 0 to determine the default margin of generated QR codes when the margin query param is not provided. |
+| config.qrCodes.defaultRoundBlockSize | bool | `true` | Tells if the block size should be round on QR codes, making it more readable, but potentially adding some extra margin as a side effect. |
+| config.qrCodes.defaultSize | int | `300` | A value between 50 and 1000 to determine the default size of generated QR codes when the size query param is not provided. |
+| config.rabbitmq.auth.existingSecret | string | `""` | Use existing secret for password details (`config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`. |
+| config.rabbitmq.auth.password | string | `""` | The password credential to be used when using an external database driver. |
+| config.rabbitmq.auth.username | string | `""` | The username credential to be used when using an external database driver. |
+| config.rabbitmq.enabled | bool | `false` | enable RabbitMQ™ Integration |
+| config.rabbitmq.host | string | `""` | The RabbitMQ server host name |
+| config.rabbitmq.useSsl | bool | `false` | Whether connection is encrypted with SSL/TLS or not. |
+| config.rabbitmq.vhost | string | `"/"` | The RabbitMQ server VHost |
 | config.redirects.cacheLifetime | int | `30` | Allows to set the amount of seconds that redirects should be cached when redirect status is 301 or 308. |
 | config.redirects.defaultBaseUrlRedirect | string | `""` | If a URL is provided here, when a user tries to access Shlink’s base URL, and the visited domain does not have a redirect URL of its own, he/she will be redirected to this value. If this env var is not provided, the user will see a generic 404 - not found page. |
 | config.redirects.defaultInvalidShortUrlRedirect | string | `""` | If a URL is provided here, when a user tries to access an invalid short URL, and the visited domain does not have a redirect URL of its own, he/she will be redirected to this value. If this env var is not provided, the user will see a generic 404 - not found page. |
 | config.redirects.defaultRegular404Redirect | string | `""` | If a URL is provided here, when a user tries to access a URL not matching any supported by the router, and the visited domain does not have a redirect URL of its own, he/she will be redirected to this value. If this env var is not provided, the user will see a generic 404 - not found page. |
 | config.redirects.extraPathMode | string | `"default"` | Determines how Shlink should match short URLs when they start with a known short code. Valid values are default, append and ignore. (See [Extra path forwarding](https://shlink.io/documentation/some-features/#extra-path-forwarding) for more info). |
 | config.redirects.statusCode | int | `302` | 301, 302, 308 or 307 (last two since v3.5.0). Determines the status code that should be used on redirects from short to long URLs. Setting 308 or 307 implicitly makes requests to short URLs work regardless the HTTP method. |
+| config.redis.enabled | bool | `false` | enable Redis™ Integration |
 | config.redis.pubSubEnabled | bool | `false` | Tells if the configured redis instance/cluster should also be used to publish real-time updates via redis pub/sub. |
+| config.redis.sentinal.enabled | bool | `false` |  |
+| config.redis.sentinal.service | string | `""` | The name of the sentinel service if you want to use redis sentinel. If this value is provided, the servers provided in config.redis.servers will be considered sentinel instances. |
 | config.redis.servers | string | `""` | The comma-separated list of Redis servers when using external Redis servers. Will be ignored when you activate one of the integrated Redis subchart with redis.enabled |
 | config.robots.allowAllShortUrls | bool | `false` | Whether all short URLs should be allowed via robots.txt or not. If set to true, the crawlable option set in individual short URLs will be ignored. |
 | config.robots.userAgents | string | `"*"` | A comma-separated list of allowed user agents via robots.txt. |
@@ -134,8 +153,11 @@ The command removes all the Kubernetes components associated with the chart and 
 | postgresql.auth.username | string | `"shlink"` | The username credential to be used when using the integrated PostgreSQL database. |
 | postgresql.enabled | bool | `false` | enable integrated PostgreSQL™ subchart from Bitnami |
 | rabbitmq.enabled | bool | `false` | enable integrated RabbitMQ™ subchart from Bitnami |
+| redis.architecture | string | `"standalone"` | Redis™ architecture. Allowed values: `standalone` or `replication` |
 | redis.auth.enabled | bool | `false` | Enable password authentication |
+| redis.auth.sentinel | bool | `false` | Enable password authentication on Redis™ Sentinels |
 | redis.enabled | bool | `false` | enable integrated Redis™ subchart from Bitnami |
+| redis.sentinel.enabled | bool | `false` | Use Redis™ Sentinel on Redis™ pods |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the headwind pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |

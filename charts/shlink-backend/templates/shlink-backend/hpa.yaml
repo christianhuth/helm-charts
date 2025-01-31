@@ -6,9 +6,9 @@ apiVersion: autoscaling/v2beta1
 {{- end }}
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "shlink-backend.fullname" . }}
   labels:
     {{- include "shlink-backend.labels" . | nindent 4 }}
+  name: {{ include "shlink-backend.fullname" . }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

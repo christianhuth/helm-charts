@@ -108,13 +108,13 @@ config:
   database:
     auth:
       # -- The database name to be used when using an external database driver. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled
-      database: shlink
+      database: ""
       # -- Use existing secret for password details (`config.database.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `database-password`.
       existingSecret: ""
       # -- The password credential to be used when using an external database driver.
-      password: shlink
+      password: ""
       # -- The username credential to be used when using an external database driver.
-      username: shlink
+      username: ""
     # -- mysql, maria, postgres or sqlite. Will be set automatically when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled
     driver: sqlite
     # -- The host name of the database server when using an external database driver. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled
@@ -144,7 +144,7 @@ config:
     # -- If provided with value true, it will skip the initial GeoLite2 db file download, speeding-up the container start-up. As a side effect, first visits on this container will remain un-located until the file finishes downloading in background.
     skipInitialDownload: false
   matomo:
-    # -- Tells if visits should be sent to a Matomo instance.
+    # -- Enable the Matomo integration to sent visits
     enabled: false
     auth:
       # -- The API token so that Shlink can call Matomo’s API
@@ -167,6 +167,42 @@ config:
     publicHubUrl: ""
     # -- An internal URL for a mercure hub. Will be used only when publishing updates to mercure, and does not need to be public.
     internalHubUrl: ""
+  qrCodes:
+    # -- Whether generating QR codes should work for disabled short URLs. Disabled short URLs are those which reached the maximum amount of visits, have a validSince date in the future, or a validUntil date in the past.
+    codeForDisabledShortUrls: true
+    defaultColors:
+      # -- The QR code background color.
+      background: "#FFFFFF"
+      # -- The QR code foreground color.
+      foreground: "#000000"
+    # -- One of L (Low), M (Medium), Q (Quartile) or H (High), to determine the default error correction of generated QR codes when the errorCorrection query param is not provided.
+    defaultErrorCorrection: l
+    # -- One of png or svg, to determine the default format of generated QR codes when the format query param is not provided.
+    defaultFormat: png
+    # -- A URL pointing to a logo that will be placed in the middle of the QR code. This one is experimental, as some images might break the QR code.
+    defaultLogoUrl: ""
+    # -- A value greater than 0 to determine the default margin of generated QR codes when the margin query param is not provided.
+    defaultMargin: 0
+    # -- Tells if the block size should be round on QR codes, making it more readable, but potentially adding some extra margin as a side effect.
+    defaultRoundBlockSize: true
+    # -- A value between 50 and 1000 to determine the default size of generated QR codes when the size query param is not provided.
+    defaultSize: 300
+  rabbitmq:
+    # -- enable RabbitMQ™ Integration
+    enabled: false
+    auth:
+      # -- Use existing secret for password details (`config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.
+      existingSecret: ""
+      # -- The password credential to be used when using an external database driver.
+      password: ""
+      # -- The username credential to be used when using an external database driver.
+      username: ""
+    # -- The RabbitMQ server host name
+    host: ""
+    # -- Whether connection is encrypted with SSL/TLS or not.
+    useSsl: false
+    # -- The RabbitMQ server VHost
+    vhost: "/"
   redirects:
     # -- Allows to set the amount of seconds that redirects should be cached when redirect status is 301 or 308.
     cacheLifetime: 30
@@ -181,8 +217,14 @@ config:
     # -- 301, 302, 308 or 307 (last two since v3.5.0). Determines the status code that should be used on redirects from short to long URLs. Setting 308 or 307 implicitly makes requests to short URLs work regardless the HTTP method.
     statusCode: 302
   redis:
+    # -- enable Redis™ Integration
+    enabled: false
     # -- Tells if the configured redis instance/cluster should also be used to publish real-time updates via redis pub/sub.
     pubSubEnabled: false
+    sentinal:
+      enabled: false
+      # -- The name of the sentinel service if you want to use redis sentinel. If this value is provided, the servers provided in config.redis.servers will be considered sentinel instances.
+      service: ""
     # -- The comma-separated list of Redis servers when using external Redis servers. Will be ignored when you activate one of the integrated Redis subchart with redis.enabled
     servers: ""
   robots:
@@ -261,6 +303,13 @@ rabbitmq:
 redis:
   # -- enable integrated Redis™ subchart from Bitnami
   enabled: false
+  # -- Redis™ architecture. Allowed values: `standalone` or `replication`
+  architecture: standalone
   auth:
     # -- Enable password authentication
+    enabled: false
+    # -- Enable password authentication on Redis™ Sentinels
+    sentinel: false
+  sentinel:
+    # -- Use Redis™ Sentinel on Redis™ pods
     enabled: false

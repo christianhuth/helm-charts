@@ -50,7 +50,7 @@
             "auth": {
               "properties": {
                 "database": {
-                  "default": "shlink",
+                  "default": "",
                   "description": "The database name to be used when using an external database driver. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled",
                   "required": [],
                   "title": "database",
@@ -64,14 +64,14 @@
                   "type": "string"
                 },
                 "password": {
-                  "default": "shlink",
+                  "default": "",
                   "description": "The password credential to be used when using an external database driver.",
                   "required": [],
                   "title": "password",
                   "type": "string"
                 },
                 "username": {
-                  "default": "shlink",
+                  "default": "",
                   "description": "The username credential to be used when using an external database driver.",
                   "required": [],
                   "title": "username",
@@ -249,7 +249,7 @@
             },
             "enabled": {
               "default": false,
-              "description": "Tells if visits should be sent to a Matomo instance.",
+              "description": "Enable the Matomo integration to sent visits",
               "required": [],
               "title": "enabled",
               "type": "boolean"
@@ -328,6 +328,168 @@
           "title": "mercure",
           "type": "object"
         },
+        "qrCodes": {
+          "properties": {
+            "codeForDisabledShortUrls": {
+              "default": true,
+              "description": "Whether generating QR codes should work for disabled short URLs. Disabled short URLs are those which reached the maximum amount of visits, have a validSince date in the future, or a validUntil date in the past.",
+              "required": [],
+              "title": "codeForDisabledShortUrls",
+              "type": "boolean"
+            },
+            "defaultColors": {
+              "properties": {
+                "background": {
+                  "default": "#FFFFFF",
+                  "description": "The QR code background color.",
+                  "required": [],
+                  "title": "background",
+                  "type": "string"
+                },
+                "foreground": {
+                  "default": "#000000",
+                  "description": "The QR code foreground color.",
+                  "required": [],
+                  "title": "foreground",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "background",
+                "foreground"
+              ],
+              "title": "defaultColors",
+              "type": "object"
+            },
+            "defaultErrorCorrection": {
+              "default": "l",
+              "description": "One of L (Low), M (Medium), Q (Quartile) or H (High), to determine the default error correction of generated QR codes when the errorCorrection query param is not provided.",
+              "required": [],
+              "title": "defaultErrorCorrection",
+              "type": "string"
+            },
+            "defaultFormat": {
+              "default": "png",
+              "description": "One of png or svg, to determine the default format of generated QR codes when the format query param is not provided.",
+              "required": [],
+              "title": "defaultFormat",
+              "type": "string"
+            },
+            "defaultLogoUrl": {
+              "default": "",
+              "description": "A URL pointing to a logo that will be placed in the middle of the QR code. This one is experimental, as some images might break the QR code.",
+              "required": [],
+              "title": "defaultLogoUrl",
+              "type": "string"
+            },
+            "defaultMargin": {
+              "default": 0,
+              "description": "A value greater than 0 to determine the default margin of generated QR codes when the margin query param is not provided.",
+              "required": [],
+              "title": "defaultMargin",
+              "type": "integer"
+            },
+            "defaultRoundBlockSize": {
+              "default": true,
+              "description": "Tells if the block size should be round on QR codes, making it more readable, but potentially adding some extra margin as a side effect.",
+              "required": [],
+              "title": "defaultRoundBlockSize",
+              "type": "boolean"
+            },
+            "defaultSize": {
+              "default": 300,
+              "description": "A value between 50 and 1000 to determine the default size of generated QR codes when the size query param is not provided.",
+              "required": [],
+              "title": "defaultSize",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "codeForDisabledShortUrls",
+            "defaultColors",
+            "defaultErrorCorrection",
+            "defaultFormat",
+            "defaultLogoUrl",
+            "defaultMargin",
+            "defaultRoundBlockSize",
+            "defaultSize"
+          ],
+          "title": "qrCodes",
+          "type": "object"
+        },
+        "rabbitmq": {
+          "properties": {
+            "auth": {
+              "properties": {
+                "existingSecret": {
+                  "default": "",
+                  "description": "Use existing secret for password details (`config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.",
+                  "required": [],
+                  "title": "existingSecret",
+                  "type": "string"
+                },
+                "password": {
+                  "default": "",
+                  "description": "The password credential to be used when using an external database driver.",
+                  "required": [],
+                  "title": "password",
+                  "type": "string"
+                },
+                "username": {
+                  "default": "",
+                  "description": "The username credential to be used when using an external database driver.",
+                  "required": [],
+                  "title": "username",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "existingSecret",
+                "password",
+                "username"
+              ],
+              "title": "auth",
+              "type": "object"
+            },
+            "enabled": {
+              "default": false,
+              "description": "enable RabbitMQ™ Integration",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "host": {
+              "default": "",
+              "description": "The RabbitMQ server host name",
+              "required": [],
+              "title": "host",
+              "type": "string"
+            },
+            "useSsl": {
+              "default": false,
+              "description": "Whether connection is encrypted with SSL/TLS or not.",
+              "required": [],
+              "title": "useSsl",
+              "type": "boolean"
+            },
+            "vhost": {
+              "default": "/",
+              "description": "The RabbitMQ server VHost",
+              "required": [],
+              "title": "vhost",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "auth",
+            "host",
+            "useSsl",
+            "vhost"
+          ],
+          "title": "rabbitmq",
+          "type": "object"
+        },
         "redirects": {
           "properties": {
             "cacheLifetime": {
@@ -386,12 +548,42 @@
         },
         "redis": {
           "properties": {
+            "enabled": {
+              "default": false,
+              "description": "enable Redis™ Integration",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
             "pubSubEnabled": {
               "default": false,
               "description": "Tells if the configured redis instance/cluster should also be used to publish real-time updates via redis pub/sub.",
               "required": [],
               "title": "pubSubEnabled",
               "type": "boolean"
+            },
+            "sentinal": {
+              "properties": {
+                "enabled": {
+                  "default": false,
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "service": {
+                  "default": "",
+                  "description": "The name of the sentinel service if you want to use redis sentinel. If this value is provided, the servers provided in config.redis.servers will be considered sentinel instances.",
+                  "required": [],
+                  "title": "service",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "enabled",
+                "service"
+              ],
+              "title": "sentinal",
+              "type": "object"
             },
             "servers": {
               "default": "",
@@ -402,7 +594,9 @@
             }
           },
           "required": [
+            "enabled",
             "pubSubEnabled",
+            "sentinal",
             "servers"
           ],
           "title": "redis",
@@ -567,6 +761,8 @@
         "geolite",
         "matomo",
         "mercure",
+        "qrCodes",
+        "rabbitmq",
         "redirects",
         "redis",
         "robots",
@@ -938,6 +1134,13 @@
     },
     "redis": {
       "properties": {
+        "architecture": {
+          "default": "standalone",
+          "description": "Redis™ architecture. Allowed values: `standalone` or `replication`",
+          "required": [],
+          "title": "architecture",
+          "type": "string"
+        },
         "auth": {
           "properties": {
             "enabled": {
@@ -946,10 +1149,18 @@
               "required": [],
               "title": "enabled",
               "type": "boolean"
+            },
+            "sentinel": {
+              "default": false,
+              "description": "Enable password authentication on Redis™ Sentinels",
+              "required": [],
+              "title": "sentinel",
+              "type": "boolean"
             }
           },
           "required": [
-            "enabled"
+            "enabled",
+            "sentinel"
           ],
           "title": "auth",
           "type": "object"
@@ -960,11 +1171,29 @@
           "required": [],
           "title": "enabled",
           "type": "boolean"
+        },
+        "sentinel": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "Use Redis™ Sentinel on Redis™ pods",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "title": "sentinel",
+          "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "architecture",
+        "auth",
+        "sentinel"
       ],
       "title": "redis",
       "type": "object"
