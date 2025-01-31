@@ -51,6 +51,100 @@
       "title": "configuration",
       "type": "array"
     },
+    "env": {
+      "description": "Environment variables. Supports both direct values and references to ConfigMaps/Secrets. See https://shlink.io/documentation/shlink-web-client/pre-configuring-servers/ for the supported variables.",
+      "items": {
+        "oneOf": [
+          {
+            "required": [
+              "name",
+              "value"
+            ]
+          },
+          {
+            "required": [
+              "name",
+              "valueFrom"
+            ]
+          }
+        ],
+        "properties": {
+          "name": {
+            "required": [],
+            "type": "string"
+          },
+          "value": {
+            "required": [],
+            "type": "string"
+          },
+          "valueFrom": {
+            "oneOf": [
+              {
+                "required": [
+                  "configMapKeyRef"
+                ]
+              },
+              {
+                "required": [
+                  "secretKeyRef"
+                ]
+              }
+            ],
+            "properties": {
+              "configMapKeyRef": {
+                "properties": {
+                  "key": {
+                    "required": [],
+                    "type": "string"
+                  },
+                  "name": {
+                    "required": [],
+                    "type": "string"
+                  },
+                  "optional": {
+                    "required": [],
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "key",
+                  "name"
+                ],
+                "type": "object"
+              },
+              "secretKeyRef": {
+                "properties": {
+                  "key": {
+                    "required": [],
+                    "type": "string"
+                  },
+                  "name": {
+                    "required": [],
+                    "type": "string"
+                  },
+                  "optional": {
+                    "required": [],
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "key",
+                  "name"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [],
+            "type": "object"
+          }
+        },
+        "required": [],
+        "type": "object"
+      },
+      "required": [],
+      "title": "env",
+      "type": "array"
+    },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"shlink-web.fullname\"`",
