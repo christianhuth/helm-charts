@@ -4,4 +4,4 @@
 
 ### Changed
 
-- dependency to postgresql to 16.4.5
+- dependency to postgresql to 16.4.6
