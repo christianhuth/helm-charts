@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.3.2
+## 1.3.3
 
 ### Added
 
-- Option to add additional environment variables (extraEnv)
+- Consistently use extraEnv (instead of env)
