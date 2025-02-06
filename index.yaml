@@ -131,6 +131,52 @@ entries:
       artifacthub.io/category: database
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency to redis to 20.7.0
+        - kind: changed
+          description: default values for Liveness and Readiness Probe of ASGI and WSGI
+        - kind: added
+          description: option to define failureThreshold of Liveness and Readiness Probe of ASGI and WSGI
+      artifacthub.io/screenshots: |
+        - title: Create your own online database without technical experience.
+          url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
+        - title: With Baserow you decide how you want to structure everything. Whether you’re managing customers, products, airplanes or all of them.
+          url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
+        - title: Easily create custom plugins with our boilerplate or use third party ones.
+          url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.30.1
+    created: "2025-02-06T10:06:55.698646457Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.4.6
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.7.0
+    description: Baserow is an open source no-code database and Airtable alternative.
+    digest: 2990e359b1a0a152734449740c6c2cc8f0b5263e71e66b8fd874298af2925cbe
+    home: https://github.com/christianknell/helm-charts
+    icon: https://baserow.io/img/favicon_192.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: baserow
+    sources:
+    - https://gitlab.com/bramw/baserow
+    - https://baserow.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/baserow-3.1.0/baserow-3.1.0.tgz
+    version: 3.1.0
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency to postgresql to 16.4.6
       artifacthub.io/screenshots: |
         - title: Create your own online database without technical experience.
@@ -20220,6 +20266,57 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency to postgresql to 16.4.6
+        - kind: changed
+          description: dependency to rabbitmq to 15.2.5
+        - kind: changed
+          description: dependency to redis to 20.7.0
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 4.4.2
+    created: "2025-02-06T10:06:55.834749844Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.2.2
+    - condition: mysql.enabled
+      name: mysql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 12.2.2
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.4.6
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 15.2.5
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.7.0
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 39acc83f4a4a0cda92615976e618c9ef3d0748bfca55b0e5f6484da3874b0833
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-backend-5.1.0/shlink-backend-5.1.0.tgz
+    version: 5.1.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: app version to 4.4.2
         - kind: changed
           description: dependency to mariadb to 20.2.2
@@ -36272,4 +36369,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-02-06T08:03:40.245696783Z"
+generated: "2025-02-06T10:06:55.837694657Z"
