@@ -2,6 +2,6 @@
 
 ## 1.3.3
 
-### Added
+### Fixed
 
 - Consistently use extraEnv (instead of env)
