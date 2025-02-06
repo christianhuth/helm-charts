@@ -107,6 +107,7 @@ spec:
                 - "/bin/bash"
                 - "-c"
                 - "/baserow/backend/docker/docker-entrypoint.sh backend-healthcheck"
+            failureThreshold: {{ .Values.backend.wsgi.livenessProbe.failureThreshold | int }}
             initialDelaySeconds: {{ .Values.backend.wsgi.livenessProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.backend.wsgi.livenessProbe.periodSeconds | int }}
             timeoutSeconds: {{ .Values.backend.wsgi.livenessProbe.timeoutSeconds | int }}
@@ -117,6 +118,7 @@ spec:
                 - "/bin/bash"
                 - "-c"
                 - "/baserow/backend/docker/docker-entrypoint.sh backend-healthcheck"
+            failureThreshold: {{ .Values.backend.wsgi.readinessProbe.failureThreshold | int }}
             initialDelaySeconds: {{ .Values.backend.wsgi.readinessProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.backend.wsgi.readinessProbe.periodSeconds | int }}
             timeoutSeconds: {{ .Values.backend.wsgi.readinessProbe.timeoutSeconds | int }}

@@ -1,7 +1,12 @@
 # baserow
 
-## 3.0.1
+## 3.1.0
+
+### Added
+
+- option to define failureThreshold of Liveness and Readiness Probe of ASGI and WSGI
 
 ### Changed
 
-- dependency to postgresql to 16.4.6
+- dependency to redis to 20.7.0
+- default values for Liveness and Readiness Probe of ASGI and WSGI

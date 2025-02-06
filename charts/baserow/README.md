@@ -59,16 +59,18 @@ The command removes all the Kubernetes components associated with the chart and 
 | backend.asgi.image.repository | string | `"baserow/backend"` | image repository |
 | backend.asgi.image.tag | string | `"1.30.1"` | Overrides the image tag |
 | backend.asgi.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
-| backend.asgi.livenessProbe.initialDelaySeconds | int | `5` | Initial delay seconds for livenessProbe |
-| backend.asgi.livenessProbe.periodSeconds | int | `5` | Period seconds for livenessProbe |
+| backend.asgi.livenessProbe.failureThreshold | int | `3` | Failure threshold for livenessProbe |
+| backend.asgi.livenessProbe.initialDelaySeconds | int | `120` | Initial delay seconds for livenessProbe |
+| backend.asgi.livenessProbe.periodSeconds | int | `30` | Period seconds for livenessProbe |
 | backend.asgi.livenessProbe.successThreshold | int | `1` | Success threshold for livenessProbe |
 | backend.asgi.livenessProbe.timeoutSeconds | int | `5` | Timeout seconds for livenessProbe |
 | backend.asgi.nodeSelector | object | `{}` | Node labels for pod assignment |
 | backend.asgi.podAnnotations | object | `{}` | Annotations to be added to the frontend pods |
 | backend.asgi.podSecurityContext | object | `{"fsGroup":9999,"runAsGroup":9999,"runAsUser":9999}` | pod-level security context |
 | backend.asgi.priorityClassName | string | `""` | Pod priority class name |
-| backend.asgi.readinessProbe.initialDelaySeconds | int | `5` | Initial delay seconds for readinessProbe |
-| backend.asgi.readinessProbe.periodSeconds | int | `5` | Period seconds for readinessProbe |
+| backend.asgi.readinessProbe.failureThreshold | int | `3` | Failure threshold for readinessProbe |
+| backend.asgi.readinessProbe.initialDelaySeconds | int | `120` | Initial delay seconds for readinessProbe |
+| backend.asgi.readinessProbe.periodSeconds | int | `30` | Period seconds for readinessProbe |
 | backend.asgi.readinessProbe.successThreshold | int | `1` | Success threshold for readinessProbe |
 | backend.asgi.readinessProbe.timeoutSeconds | int | `5` | Timeout seconds for readinessProbe |
 | backend.asgi.replicaCount | int | `1` | Number of replicas |
@@ -200,16 +202,18 @@ The command removes all the Kubernetes components associated with the chart and 
 | backend.wsgi.image.repository | string | `"baserow/backend"` | image repository |
 | backend.wsgi.image.tag | string | `"1.30.1"` | Overrides the image tag |
 | backend.wsgi.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
-| backend.wsgi.livenessProbe.initialDelaySeconds | int | `5` | Initial delay seconds for livenessProbe |
-| backend.wsgi.livenessProbe.periodSeconds | int | `5` | Period seconds for livenessProbe |
+| backend.wsgi.livenessProbe.failureThreshold | int | `3` | Failure threshold for livenessProbe |
+| backend.wsgi.livenessProbe.initialDelaySeconds | int | `120` | Initial delay seconds for livenessProbe |
+| backend.wsgi.livenessProbe.periodSeconds | int | `530` | Period seconds for livenessProbe |
 | backend.wsgi.livenessProbe.successThreshold | int | `1` | Success threshold for livenessProbe |
 | backend.wsgi.livenessProbe.timeoutSeconds | int | `5` | Timeout seconds for livenessProbe |
 | backend.wsgi.nodeSelector | object | `{}` | Node labels for pod assignment |
 | backend.wsgi.podAnnotations | object | `{}` | Annotations to be added to the frontend pods |
 | backend.wsgi.podSecurityContext | object | `{"fsGroup":9999,"runAsGroup":9999,"runAsUser":9999}` | pod-level security context |
 | backend.wsgi.priorityClassName | string | `""` | Pod priority class name |
-| backend.wsgi.readinessProbe.initialDelaySeconds | int | `5` | Initial delay seconds for readinessProbe |
-| backend.wsgi.readinessProbe.periodSeconds | int | `5` | Period seconds for readinessProbe |
+| backend.wsgi.readinessProbe.failureThreshold | int | `3` | Failure threshold for readinessProbe |
+| backend.wsgi.readinessProbe.initialDelaySeconds | int | `120` | Initial delay seconds for readinessProbe |
+| backend.wsgi.readinessProbe.periodSeconds | int | `30` | Period seconds for readinessProbe |
 | backend.wsgi.readinessProbe.successThreshold | int | `1` | Success threshold for readinessProbe |
 | backend.wsgi.readinessProbe.timeoutSeconds | int | `5` | Timeout seconds for readinessProbe |
 | backend.wsgi.replicaCount | int | `1` | Number of replicas |

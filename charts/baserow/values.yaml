@@ -225,20 +225,24 @@ backend:
       targetMemoryUtilizationPercentage: 80
 
     livenessProbe:
+      # -- Failure threshold for livenessProbe
+      failureThreshold: 3
       # -- Initial delay seconds for livenessProbe
-      initialDelaySeconds: 5
+      initialDelaySeconds: 120
       # -- Period seconds for livenessProbe
-      periodSeconds: 5
+      periodSeconds: 30
       # -- Success threshold for livenessProbe
       successThreshold: 1
       # -- Timeout seconds for livenessProbe
       timeoutSeconds: 5
 
     readinessProbe:
+      # -- Failure threshold for readinessProbe
+      failureThreshold: 3
       # -- Initial delay seconds for readinessProbe
-      initialDelaySeconds: 5
+      initialDelaySeconds: 120
       # -- Period seconds for readinessProbe
-      periodSeconds: 5
+      periodSeconds: 30
       # -- Success threshold for readinessProbe
       successThreshold: 1
       # -- Timeout seconds for readinessProbe
@@ -593,20 +597,24 @@ backend:
       targetMemoryUtilizationPercentage: 80
 
     livenessProbe:
+      # -- Failure threshold for livenessProbe
+      failureThreshold: 3
       # -- Initial delay seconds for livenessProbe
-      initialDelaySeconds: 5
+      initialDelaySeconds: 120
       # -- Period seconds for livenessProbe
-      periodSeconds: 5
+      periodSeconds: 530
       # -- Success threshold for livenessProbe
       successThreshold: 1
       # -- Timeout seconds for livenessProbe
       timeoutSeconds: 5
 
     readinessProbe:
+      # -- Failure threshold for readinessProbe
+      failureThreshold: 3
       # -- Initial delay seconds for readinessProbe
-      initialDelaySeconds: 5
+      initialDelaySeconds: 120
       # -- Period seconds for readinessProbe
-      periodSeconds: 5
+      periodSeconds: 30
       # -- Success threshold for readinessProbe
       successThreshold: 1
       # -- Timeout seconds for readinessProbe
