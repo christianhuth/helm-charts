@@ -111,15 +111,22 @@
             },
             "livenessProbe": {
               "properties": {
+                "failureThreshold": {
+                  "default": 3,
+                  "description": "Failure threshold for livenessProbe",
+                  "required": [],
+                  "title": "failureThreshold",
+                  "type": "integer"
+                },
                 "initialDelaySeconds": {
-                  "default": 5,
+                  "default": 120,
                   "description": "Initial delay seconds for livenessProbe",
                   "required": [],
                   "title": "initialDelaySeconds",
                   "type": "integer"
                 },
                 "periodSeconds": {
-                  "default": 5,
+                  "default": 30,
                   "description": "Period seconds for livenessProbe",
                   "required": [],
                   "title": "periodSeconds",
@@ -141,6 +148,7 @@
                 }
               },
               "required": [
+                "failureThreshold",
                 "initialDelaySeconds",
                 "periodSeconds",
                 "successThreshold",
@@ -200,15 +208,22 @@
             },
             "readinessProbe": {
               "properties": {
+                "failureThreshold": {
+                  "default": 3,
+                  "description": "Failure threshold for readinessProbe",
+                  "required": [],
+                  "title": "failureThreshold",
+                  "type": "integer"
+                },
                 "initialDelaySeconds": {
-                  "default": 5,
+                  "default": 120,
                   "description": "Initial delay seconds for readinessProbe",
                   "required": [],
                   "title": "initialDelaySeconds",
                   "type": "integer"
                 },
                 "periodSeconds": {
-                  "default": 5,
+                  "default": 30,
                   "description": "Period seconds for readinessProbe",
                   "required": [],
                   "title": "periodSeconds",
@@ -230,6 +245,7 @@
                 }
               },
               "required": [
+                "failureThreshold",
                 "initialDelaySeconds",
                 "periodSeconds",
                 "successThreshold",
@@ -1559,15 +1575,22 @@
             },
             "livenessProbe": {
               "properties": {
+                "failureThreshold": {
+                  "default": 3,
+                  "description": "Failure threshold for livenessProbe",
+                  "required": [],
+                  "title": "failureThreshold",
+                  "type": "integer"
+                },
                 "initialDelaySeconds": {
-                  "default": 5,
+                  "default": 120,
                   "description": "Initial delay seconds for livenessProbe",
                   "required": [],
                   "title": "initialDelaySeconds",
                   "type": "integer"
                 },
                 "periodSeconds": {
-                  "default": 5,
+                  "default": 530,
                   "description": "Period seconds for livenessProbe",
                   "required": [],
                   "title": "periodSeconds",
@@ -1589,6 +1612,7 @@
                 }
               },
               "required": [
+                "failureThreshold",
                 "initialDelaySeconds",
                 "periodSeconds",
                 "successThreshold",
@@ -1648,15 +1672,22 @@
             },
             "readinessProbe": {
               "properties": {
+                "failureThreshold": {
+                  "default": 3,
+                  "description": "Failure threshold for readinessProbe",
+                  "required": [],
+                  "title": "failureThreshold",
+                  "type": "integer"
+                },
                 "initialDelaySeconds": {
-                  "default": 5,
+                  "default": 120,
                   "description": "Initial delay seconds for readinessProbe",
                   "required": [],
                   "title": "initialDelaySeconds",
                   "type": "integer"
                 },
                 "periodSeconds": {
-                  "default": 5,
+                  "default": 30,
                   "description": "Period seconds for readinessProbe",
                   "required": [],
                   "title": "periodSeconds",
@@ -1678,6 +1709,7 @@
                 }
               },
               "required": [
+                "failureThreshold",
                 "initialDelaySeconds",
                 "periodSeconds",
                 "successThreshold",
