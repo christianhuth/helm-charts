@@ -1,12 +1,7 @@
 # baserow
 
-## 3.1.0
-
-### Added
-
-- option to define failureThreshold of Liveness and Readiness Probe of ASGI and WSGI
+## 3.2.0
 
 ### Changed
 
-- dependency to redis to 20.7.0
-- default values for Liveness and Readiness Probe of ASGI and WSGI
+- App version to 1.31.0
