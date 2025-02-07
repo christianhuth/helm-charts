@@ -131,6 +131,48 @@ entries:
       artifacthub.io/category: database
       artifacthub.io/changes: |
         - kind: changed
+          description: App version to 1.31.0
+      artifacthub.io/screenshots: |
+        - title: Create your own online database without technical experience.
+          url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
+        - title: With Baserow you decide how you want to structure everything. Whether you’re managing customers, products, airplanes or all of them.
+          url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
+        - title: Easily create custom plugins with our boilerplate or use third party ones.
+          url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.31.0
+    created: "2025-02-07T07:34:13.074701743Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.4.6
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.7.0
+    description: Baserow is an open source no-code database and Airtable alternative.
+    digest: ffc1255ad8dfdd410bb86df0de914b051a6e87da871d633e459f86df277e364f
+    home: https://github.com/christianknell/helm-charts
+    icon: https://baserow.io/img/favicon_192.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: baserow
+    sources:
+    - https://gitlab.com/bramw/baserow
+    - https://baserow.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/baserow-3.2.0/baserow-3.2.0.tgz
+    version: 3.2.0
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency to redis to 20.7.0
         - kind: changed
           description: default values for Liveness and Readiness Probe of ASGI and WSGI
@@ -36411,4 +36453,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-02-06T10:16:27.855397754Z"
+generated: "2025-02-07T07:34:13.075949362Z"
