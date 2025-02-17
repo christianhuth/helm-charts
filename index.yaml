@@ -4255,6 +4255,31 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/etcd-defrag-1.0.0/etcd-defrag-1.0.0.tgz
     version: 1.0.0
+  github-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial Release
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.3.1
+    created: "2025-02-17T13:10:51.81070591Z"
+    description: A Helm Chart for the GitHub Prometheus Exporter
+    digest: 5aca0dee4653e2fbf7be566ce3be523efbe45c4d94549dec9b7e587dd229b3a5
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/github.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: github-exporter
+    sources:
+    - https://github.com/githubexporter/github-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/github-exporter-1.0.0/github-exporter-1.0.0.tgz
+    version: 1.0.0
   headwind-mdm:
   - annotations:
       artifacthub.io/changes: |
@@ -36931,4 +36956,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-02-17T11:24:41.473707626Z"
+generated: "2025-02-17T13:10:51.812647779Z"
