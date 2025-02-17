@@ -20,6 +20,7 @@ body:
         - baserow
         - cluster-api-visualizer
         - etcd-defrag
+        - github-exporter
         - headwind-mdm
         - kube-ops-view
         - kubedoom
