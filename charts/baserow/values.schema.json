@@ -2177,7 +2177,7 @@
               "type": "string"
             },
             "tag": {
-              "default": "1.31.0",
+              "default": "1.31.1",
               "description": "Overrides the image tag",
               "required": [],
               "title": "tag",
