@@ -15,7 +15,7 @@ sources:
 dependencies:
   - name: postgresql
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 16.4.7
+    version: 16.4.9
     condition: postgresql.enabled
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
@@ -27,7 +27,7 @@ annotations:
     - kind: changed
       description: App version to 1.31.1
     - kind: changed
-      description: dependency to postgresql to 16.4.7
+      description: dependency to postgresql to 16.4.9
   artifacthub.io/screenshots: |
     - title: Create your own online database without technical experience.
       url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
