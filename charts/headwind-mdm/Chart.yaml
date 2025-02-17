@@ -16,12 +16,12 @@ sources:
 dependencies:
   - name: postgresql
     repository: https://charts.bitnami.com/bitnami
-    version: 16.4.7
+    version: 16.4.9
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency to postgresql to 16.4.7
+      description: dependency to postgresql to 16.4.9
   artifacthub.io/screenshots: |
     - title: Headwind MDM is a powerful Open Source platform to manage your Enterprise Android Devices.
       url: https://images.wondershare.com/drfone/article/2022/11/opensource-mdm-3.jpg
