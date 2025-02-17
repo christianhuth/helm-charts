@@ -1,0 +1,129 @@
+name: Bug Report
+description: Create a report about a problem in one of the Helm Charts
+title: "[name of the chart e.g. baserow] Issue Title"
+labels: [bug]
+assignees:
+  - christianhuth
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please be cautious with the sensitive information/logs while filing the issue.
+ 
+  - id: chart-name
+    type: dropdown
+    attributes:
+      label: Which Helm Chart is affected?
+      description: Enter the name of the Chart where you encountered this bug.
+      options:
+        - argocd-metrics-server
+        - baserow
+        - cluster-api-visualizer
+        - etcd-defrag
+        - headwind-mdm
+        - kube-ops-view
+        - kubedoom
+        - kubenav
+        - kubevirt-manager
+        - kutt
+        - maildev
+        - netcupscp-exporter
+        - node-access
+        - passbolt-ha
+        - polr
+        - popeye
+        - priority-classes
+        - prometheus-pve-exporter
+        - promlens
+        - proxysql
+        - shlink-backend
+        - shlink-web
+        - skooner
+        - sloop
+        - syncserver
+        - tenant-namespace
+        - typo3
+        - umami
+    validations:
+      required: true
+
+  - type: input
+    id: chart-version
+    attributes:
+      label: What's the chart version?
+      description: Enter the version of the chart that you encountered this bug.
+    validations:
+      required: true
+
+  - type: textarea
+    id: desc
+    attributes:
+      label: Describe the bug a clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: input
+    id: helm-version
+    attributes:
+      label: What's your helm version?
+      description: Enter the output of `$ helm version`
+      placeholder: Copy paste the entire output of the above
+    validations:
+      required: false
+
+  - type: input
+    id: kubectl-version
+    attributes:
+      label: What's your kubectl version?
+      description: Enter the output of `$ kubectl version`
+    validations:
+      required: false
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Enter exactly what happened.
+    validations:
+      required: false
+
+  - type: textarea
+    id: what-expected
+    attributes:
+      label: What you expected to happen?
+      description: Enter what you expected to happen.
+    validations:
+      required: false
+
+  - type: textarea
+    id: how-to-reproduce
+    attributes:
+      label: How to reproduce it?
+      description: As minimally and precisely as possible.
+    validations:
+      required: false
+
+  - id: changed-values
+    type: textarea
+    attributes:
+      label: Enter the changed values of values.yaml?
+      description: Please enter only values which differ from the defaults. Enter `NONE` if nothing's changed.
+      placeholder: 'key: value'
+    validations:
+      required: false
+
+  - type: textarea
+    id: helm-command
+    attributes:
+      label: Enter the command that you execute and failing/misfunctioning.
+      description: Enter the command as-is as how you executed.
+      placeholder: helm install my-release helm-charts-template/name-of-chart --version version --values values.yaml
+    validations:
+      required: false
+
+  - id: anything-else
+    type: textarea
+    attributes:
+      label: Anything else we need to know?
+    validations:
+      required: false
