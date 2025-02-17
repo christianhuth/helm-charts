@@ -1,7 +1,7 @@
 # kube-ops-view
 
-## 4.1.0
+## 4.1.1
 
 ### Changed
 
-- dependency to redis to v20.7.0
+- dependency to redis to 20.7.1
