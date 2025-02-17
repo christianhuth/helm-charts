@@ -1,9 +1,10 @@
 # shlink-backend
 
-## 5.1.0
+## 5.2.0
 
 ### Changed
 
-- dependency to postgresql to 16.4.6
-- dependency to rabbitmq to 15.2.5
-- dependency to redis to 20.7.0
+- dependency to postgresql to 16.4.9
+- dependency to rabbitmq to 15.3.1
+- dependency to redis to 20.7.1
+- app version to 4.4.3
