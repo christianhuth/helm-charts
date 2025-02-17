@@ -1,0 +1,126 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "github-exporter.labels" . | nindent 4 }}
+  name: {{ include "github-exporter.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "github-exporter.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "github-exporter.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "github-exporter.serviceAccountName" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            {{- if or (.Values.github.auth.app.enabled) (.Values.github.auth.token.enabled) }}
+            # Authentication
+            {{- if .Values.github.auth.app.enabled }}
+            - name: GITHUB_APP
+              value: {{ .Values.github.auth.app.enabled | quote }}
+            - name: GITHUB_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "github-exporter.auth.secretName" . | quote }}
+                  key: github-app-id
+            - name: GITHUB_APP_INSTALLATION_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "github-exporter.auth.secretName" . | quote }}
+                  key: github-app-installation-id
+            - name: GITHUB_APP_KEY_PATH
+              value: /tmp/key.pem
+            {{- end }}
+            {{- if .Values.github.auth.token.enabled }}
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "github-exporter.auth.secretName" . | quote }}
+                  key: github-token
+            {{- end }}
+            {{- end }}
+            # General Configuration
+            {{- if .Values.github.config.apiUrl }}
+            - name: API_URL
+              value: {{ .Values.github.config.apiUrl | quote }}
+            {{- end }}
+            {{- if .Values.github.config.logLevel }}
+            - name: LOG_LEVEL
+              value: {{ .Values.github.config.logLevel | quote }}
+            {{- end }}
+            {{- if .Values.github.config.rateLimit }}
+            - name: GITHUB_RATE_LIMIT
+              value: {{ .Values.github.config.rateLimit | quote }}
+            {{- end }}
+            {{- if or (.Values.github.targets.organizations) (.Values.github.targets.repositories) (.Values.github.targets.users) }}
+            # Targets
+            {{- if .Values.github.targets.organizations }}
+            - name: ORGS
+              value: {{ .Values.github.targets.organizations | quote }}
+            {{- end }}
+            {{- if .Values.github.targets.repositories }}
+            - name: REPOS
+              value: {{ .Values.github.targets.repositories | quote }}
+            {{- end }}
+            {{- if .Values.github.targets.users }}
+            - name: USERS
+              value: {{ .Values.github.targets.users | quote }}
+            {{- end }}
+            {{- end }}
+          ports:
+            - containerPort: 9171
+              name: metrics
+              protocol: TCP
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.github.auth.app.enabled }}
+          volumeMounts:
+            - name: private-key
+              readOnly: true
+              mountPath: "/tmp/"
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.github.auth.app.enabled }}
+      volumes:
+        - name: private-key
+          secret:
+            secretName: {{ include "github-exporter.auth.secretName" . }}
+          items:
+            - key: github-app-private-key
+              path: key.pem
+      {{- end }}

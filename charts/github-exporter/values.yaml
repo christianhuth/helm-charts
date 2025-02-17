@@ -1,0 +1,140 @@
+# -- Provide a name in place of `github-exporter`
+nameOverride: ""
+
+# -- String to fully override `"github-exporter.fullname"`
+fullnameOverride: ""
+
+image:
+  # -- image registory
+  registry: docker.io
+  # -- image repository
+  repository: githubexporter/github-exporter
+  # -- image pull policy
+  pullPolicy: Always
+  # -- Overrides the image tag
+  tag: "1.3.1"
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+# -- Number of replicas
+replicaCount: 1
+
+# -- The number of old ReplicaSets to retain
+revisionHistoryLimit: 0
+
+# -- pod-level security context
+podSecurityContext: {}
+  # if you are using direct host access to the certificates you probably need to run the pod as root
+  # fsGroup: 0
+  # runAsGroup: 0
+  # runAsUser: 0
+
+# -- Resource limits and requests for the controller pods.
+resources:
+  requests:
+    cpu: 100m
+    memory: 100Mi
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# -- container-level security context
+securityContext: {}
+  # capabilities:nodeSelector:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  # -- Kubernetes service type
+  type: ClusterIP
+  # -- Kubernetes port where service is exposed
+  port: 9171
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Toleration labels for pod assignment
+tolerations: []
+
+# -- Affinity settings for pod assignment
+affinity: {}
+
+# -- additional environment variables to be added to the pods
+extraEnv: []
+
+github:
+  auth:
+    app:
+      # -- Enable authentication using a GitHub App.
+      enabled: false
+      # -- The APP ID of the GitHub App.
+      id: ""
+      # -- The INSTALLATION ID of the GitHub App.
+      installationId: ""
+      # --The private Key.
+      privateKey: ""
+    # -- Name of existing secret to use for authentication credentials. Keys in secret should be called `github-app-id`, `github-app-installation-id`, `github-app-private-key` or `github-token` depenending on the choosen authentication type (`github.auth.type``).
+    existingSecret: ""
+    token:
+      # -- Enable authentication with an API Token
+      enabled: false
+      # -- The Token used to authenticate against the GitHub API
+      value: ""
+  config:
+    # -- Github API URL, shouldn't need to change this.
+    apiUrl: "https://api.github.com"
+    # -- The level of logging the exporter will run with.
+    logLevel: "error"
+    # -- The rate limit that suppose to be for github app (default is 15,000). If the exporter sees the value is below this variable it generating new token for the app.
+    rateLimit: 0
+  targets:
+    # -- If supplied, the exporter will enumerate all repositories for that organization. Expected in the format "org1, org2".
+    organizations: ""
+    # -- If supplied, The repos you wish to monitor, expected in the format "user/repo1, user/repo2". Can be across different Github users/orgs.
+    repositories: ""
+    # -- If supplied, the exporter will enumerate all repositories for that users. Expected in the format "user1, user2".
+    users: ""
+
+serviceMonitor:
+   # -- Enable a Prometheus ServiceMonitor
+  enabled: false
+  # -- Prometheus ServiceMonitor labels
+  additionalLabels: {}
+    # release: prometheus
+  # -- Prometheus ServiceMonitor selector
+  selector: {}
+    # prometheus: kube-prometheus
+  # -- Prometheus ServiceMonitor interval
+  interval: 30s
+  # -- Prometheus ServiceMonitor namespace
+  namespace: ""
+  # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
+  metricRelabelings: []
+  # -- Prometheus [RelabelConfigs] to apply to samples before scraping
+  relabelings: []
+    # - source_labels: [__address__]
+    #   target_label: __param_target
+    # - source_labels: [__param_target]
+    #   target_label: instance
+    # - target_label: __address__
+    #   replacement: prometheus-pve-exporter:9221  # PVE exporter service.
