@@ -4,4 +4,5 @@
 
 ### Changed
 
-- App version to 1.31.0
+- App version to 1.31.1
+- dependency to postgresql to 16.4.7
