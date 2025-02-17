@@ -2,13 +2,8 @@
 Thank you for contributing to this repository.
 Before you submit this pull request we'd like to make sure you are aware of our technical requirements and best practices:
 
-* https://github.com/swade1987/helm-charts-template/blob/main/CONTRIBUTING.md
+* https://github.com/christianhuth/helm-charts/tree/pr-template?tab=readme-ov-file#development
 * https://helm.sh/docs/chart_best_practices/
-
-For a quick overview across what we will look at reviewing your PR, please read our review guidelines:
-
-// TODO: add a REVIEW_GUIDELINES.md in prometheus-community/helm-charts
-* https://github.com/helm/charts/blob/master/REVIEW_GUIDELINES.md
 
 Following our best practices right from the start will accelerate the review process and help get your pull request merged quicker.
 
@@ -23,8 +18,6 @@ Please make sure you test your changes before you push them.
 Once the pull request is opened, GitHub Actions will run across your changes and do some initial checks and linting.
 These checks run very quickly.
 Please check the results.
-If you are contributing to this repository for the first time, a maintainer will need to approve those checks to run.
-They are automatically requested as reviewers and will approve the workflows or ask you for changes once they get to it.
 
 We would like these checks to pass before we even continue reviewing your changes.
 -->
