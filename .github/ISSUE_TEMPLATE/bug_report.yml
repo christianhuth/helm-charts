@@ -9,7 +9,7 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report! Please be cautious with the sensitive information/logs while filing the issue.
- 
+
   - id: chart-name
     type: dropdown
     attributes:
