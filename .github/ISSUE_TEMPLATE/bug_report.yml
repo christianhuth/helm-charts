@@ -47,20 +47,37 @@ body:
     validations:
       required: true
 
-  - type: input
-    id: chart-version
+  - id: chart-version
+    type: input
     attributes:
       label: What's the chart version?
       description: Enter the version of the chart that you encountered this bug.
     validations:
       required: true
 
-  - type: textarea
-    id: desc
+  - id: chart-values
+    type: textarea
+    attributes:
+      label: Enter the changed values of values.yaml?
+      description: Please enter only values which differ from the defaults. Enter `NONE` if nothing's changed.
+      placeholder: 'key: value'
+    validations:
+      required: true
+
+  - id: bug-description
+    type: textarea
     attributes:
       label: Describe the bug a clear and concise description of what the bug is.
     validations:
       required: true
+
+  - type: textarea
+    id: bug-how-to-reproduce
+    attributes:
+      label: How to reproduce it?
+      description: As minimally and precisely as possible.
+    validations:
+      required: false
 
   - type: input
     id: helm-version
@@ -72,47 +89,6 @@ body:
       required: false
 
   - type: input
-    id: kubectl-version
-    attributes:
-      label: What's your kubectl version?
-      description: Enter the output of `$ kubectl version`
-    validations:
-      required: false
-
-  - type: textarea
-    id: what-happened
-    attributes:
-      label: What happened?
-      description: Enter exactly what happened.
-    validations:
-      required: false
-
-  - type: textarea
-    id: what-expected
-    attributes:
-      label: What you expected to happen?
-      description: Enter what you expected to happen.
-    validations:
-      required: false
-
-  - type: textarea
-    id: how-to-reproduce
-    attributes:
-      label: How to reproduce it?
-      description: As minimally and precisely as possible.
-    validations:
-      required: false
-
-  - id: changed-values
-    type: textarea
-    attributes:
-      label: Enter the changed values of values.yaml?
-      description: Please enter only values which differ from the defaults. Enter `NONE` if nothing's changed.
-      placeholder: 'key: value'
-    validations:
-      required: false
-
-  - type: textarea
     id: helm-command
     attributes:
       label: Enter the command that you execute and failing/misfunctioning.
