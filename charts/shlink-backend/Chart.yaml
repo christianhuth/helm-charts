@@ -31,7 +31,7 @@ dependencies:
     condition: rabbitmq.enabled
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 20.7.0
+    version: 20.7.1
     condition: redis.enabled
 annotations:
   artifacthub.io/changes: |
@@ -39,6 +39,8 @@ annotations:
       description: dependency to postgresql to 16.4.7
     - kind: changed
       description: dependency to rabbitmq to 15.3.1
+    - kind: changed
+      description: dependency to redis to 20.7.1
     - kind: changed
       description: app version to 4.4.3
   artifacthub.io/signKey: |
