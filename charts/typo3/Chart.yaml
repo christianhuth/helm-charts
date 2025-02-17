@@ -23,12 +23,12 @@ dependencies:
     condition: mariadb.enabled
   - name: postgresql
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 16.4.7
+    version: 16.4.9
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency to postgresql to 16.4.7
+      description: dependency to postgresql to 16.4.9
   artifacthub.io/screenshots: |
     - title: TYPO3 is a very powerful Web Content Management System.
       url: https://docs.typo3.org/m/typo3/tutorial-getting-started/10.4/en-us/_images/BackendAboutModules.png
