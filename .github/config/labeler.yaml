@@ -41,6 +41,9 @@ etcd-defrag:
 fathom:
 - changed-files:
   - any-glob-to-any-file: charts/fathom/*
+github-exporter:
+- changed-files:
+  - any-glob-to-any-file: 'charts/github-exporter/*'
 glances:
 - changed-files:
   - any-glob-to-any-file: charts/glances/*
