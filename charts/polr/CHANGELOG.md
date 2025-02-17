@@ -1,7 +1,7 @@
 # polr
 
-## 2.0.1
+## 2.0.2
 
-### Fixed
+### Changed
 
-- changelog
+- use OCI based Bitnami Helm Repositories

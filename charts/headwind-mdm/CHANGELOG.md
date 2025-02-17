@@ -1,7 +1,7 @@
 # headwind-mdm
 
-## 3.0.2
+## 3.0.3
 
 ### Changed
 
-- dependency to postgresql to 16.4.9
+- use OCI based Bitnami Helm Repositories
