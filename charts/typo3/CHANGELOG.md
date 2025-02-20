@@ -4,4 +4,4 @@
 
 ### Changed
 
-- dependency to postgresql to 16.4.9
+- dependency to mariadb to 20.2.4
