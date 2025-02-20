@@ -1,7 +1,7 @@
 # popeye
 
-## 2.2.1
+## 2.2.2
 
-### Changed
+### Fixed
 
-- App version to 0.22.1
+- wrong flags for Pushgateway
