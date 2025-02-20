@@ -4,7 +4,5 @@
 
 ### Changed
 
-- dependency to postgresql to 16.4.9
-- dependency to rabbitmq to 15.3.1
-- dependency to redis to 20.7.1
-- app version to 4.4.3
+- dependency to mariadb to 20.2.4
+- app version to 4.4.4
