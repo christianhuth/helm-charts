@@ -4,4 +4,4 @@
 
 ### Changed
 
-- dependency to mariadb to 20.2.4
+- dependency to mysql to 12.2.4
