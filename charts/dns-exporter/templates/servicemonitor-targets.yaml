@@ -1,0 +1,42 @@
+{{- if and .Values.serviceMonitor.enabled .Values.serviceMonitor.targetsMonitor.enabled .Values.serviceMonitor.targetsMonitor.targets }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "dns-exporter.fullname" . }}-for-targets
+  {{- with .Values.serviceMonitor.targetsMonitor.namespace }}
+  namespace: {{ . }}
+  {{- end }}
+  labels:
+    {{- include "dns-exporter.labels" . | nindent 4 }}
+    {{- with .Values.serviceMonitor.targetsMonitor.selector }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- with .Values.serviceMonitor.targetsMonitor.additionalLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  endpoints:
+    {{- range .Values.serviceMonitor.targetsMonitor.targets }}
+    - port: http
+      {{- with $.Values.serviceMonitor.targetsMonitor.interval }}
+      interval: {{ . }}
+      {{- end }}
+      params:
+        {{- toYaml . | nindent 8 }}
+      path: /query
+      {{- with $.Values.serviceMonitor.targetsMonitor.relabelings }}
+      relabelings:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.serviceMonitor.targetsMonitor.metricRelabelings }}
+      metricRelabelings:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- end }}
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "dns-exporter.selectorLabels" . | nindent 6 }}
+{{- end }}
