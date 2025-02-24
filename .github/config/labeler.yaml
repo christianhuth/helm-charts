@@ -29,6 +29,12 @@ cusdis:
 dasherr:
 - changed-files:
   - any-glob-to-any-file: charts/dasherr/*
+dns-exporter:
+- changed-files:
+  - any-glob-to-any-file: charts/dns-exporter/*
+dnsbl-exporter:
+- changed-files:
+  - any-glob-to-any-file: charts/dnsbl-exporter/*
 docker_stats_exporter:
 - changed-files:
   - any-glob-to-any-file: charts/docker_stats_exporter/*
