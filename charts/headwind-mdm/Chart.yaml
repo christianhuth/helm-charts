@@ -16,12 +16,12 @@ sources:
 dependencies:
   - name: postgresql
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 16.4.11
+    version: 16.4.13
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: use OCI based Bitnami Helm Repositories
+      description: dependency to postgresql to 16.4.13
   artifacthub.io/screenshots: |
     - title: Headwind MDM is a powerful Open Source platform to manage your Enterprise Android Devices.
       url: https://images.wondershare.com/drfone/article/2022/11/opensource-mdm-3.jpg
