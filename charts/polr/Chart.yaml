@@ -19,7 +19,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: use OCI based Bitnami Helm Repositories
+      description: dependency to mysql to 12.2.4
   artifacthub.io/screenshots: |
     - title: Polr converts some long links into shorter ones.
       url: https://selfhostedweb.org/wp-content/uploads/2017/02/shortit-1024x346.png
