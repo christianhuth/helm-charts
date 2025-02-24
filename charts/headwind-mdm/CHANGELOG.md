@@ -4,4 +4,4 @@
 
 ### Changed
 
-- use OCI based Bitnami Helm Repositories
+- dependency to postgresql to 16.4.13
