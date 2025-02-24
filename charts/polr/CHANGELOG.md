@@ -4,4 +4,4 @@
 
 ### Changed
 
-- use OCI based Bitnami Helm Repositories
+- dependency to mysql to 12.2.4
