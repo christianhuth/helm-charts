@@ -4,4 +4,4 @@
 
 ### Changed
 
-- dependency to proxysql to 1.3.3
+- dependency to mysql to 12.2.4
