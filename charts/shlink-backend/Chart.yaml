@@ -23,7 +23,7 @@ dependencies:
     condition: mysql.enabled
   - name: postgresql
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 16.4.13
+    version: 16.4.14
     condition: postgresql.enabled
   - name: rabbitmq
     repository: oci://registry-1.docker.io/bitnamicharts
@@ -38,7 +38,7 @@ annotations:
     - kind: changed
       description: dependency to mysql to 12.2.4
     - kind: changed
-      description: dependency to postgresql to 16.4.13
+      description: dependency to postgresql to 16.4.14
   artifacthub.io/signKey: |
     fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
     url: https://charts.christianhuth.de/public.key
