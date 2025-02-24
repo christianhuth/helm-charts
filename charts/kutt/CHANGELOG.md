@@ -4,4 +4,4 @@
 
 ### Changed
 
-- dependency to postgresql  to 16.4.14
+- dependency to redis to 20.8.0
