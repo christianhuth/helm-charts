@@ -1,0 +1,12 @@
+{{- if .Values.serviceMonitor.modules }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    {{- include "dns-exporter.labels" . | nindent 4 }}
+  name: {{ include "dns-exporter.fullname" . }}
+data:
+  dns_exporter.yml: |
+    modules:
+      {{- .Values.serviceMonitor.modules | toYaml | nindent 6 }}
+{{- end }}

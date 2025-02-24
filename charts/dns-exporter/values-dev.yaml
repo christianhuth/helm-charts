@@ -1,0 +1,23 @@
+---
+serviceMonitor:
+  enabled: true
+  selfMonitor:
+    additionalLabels:
+      release: prometheus
+  targetsMonitor:
+    additionalLabels:
+      release: prometheus
+    targets:
+      - query_name:
+          - christianhuth.de
+        family:
+          - ipv4
+        server:
+          - dns.google
+        query_type:
+          - a
+          - aaaa
+          - mx
+          - ns
+          - srv
+          - txt
