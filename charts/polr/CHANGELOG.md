@@ -1,7 +1,7 @@
 # polr
 
-## 2.0.2
+## 2.0.3
 
 ### Changed
 
-- use OCI based Bitnami Helm Repositories
+- dependency to mysql to 12.2.4
