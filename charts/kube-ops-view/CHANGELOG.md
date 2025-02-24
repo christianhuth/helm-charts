@@ -1,7 +1,7 @@
 # kube-ops-view
 
-## 4.1.2
+## 4.2.0
 
 ### Changed
 
-- use OCI based Bitnami Helm Repositories
+- dependency to redis to 20.8.0
