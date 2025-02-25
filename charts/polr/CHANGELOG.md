@@ -1,7 +1,7 @@
 # polr
 
-## 2.0.4
+## 2.1.0
 
 ### Changed
 
-- dependency to mysql to 12.2.4
+- dependency to mysql to 12.3.0
