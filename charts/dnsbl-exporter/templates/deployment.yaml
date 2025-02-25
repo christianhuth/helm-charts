@@ -1,0 +1,171 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "dnsbl-exporter.labels" . | nindent 4 }}
+  name: {{ include "dnsbl-exporter.fullname" . }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "dnsbl-exporter.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "dnsbl-exporter.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "dnsbl-exporter.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        {{- if .Values.unbound.enabled }}
+        - name: unbound
+          image: "{{ .Values.unbound.image.registry }}/{{ .Values.unbound.image.repository }}:{{ .Values.unbound.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.unbound.image.pullPolicy }}
+          ports:
+            - containerPort: 5353
+              protocol: UDP
+          {{- if .Values.unbound.livenessProbe.enabled }}
+          livenessProbe:
+            exec:
+              command:
+                - "unbound-host"
+                - "-4"
+                - "-C"
+                - "/etc/unbound/unbound.conf"
+                - "localhost"
+            failureThreshold: {{ .Values.unbound.livenessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.unbound.livenessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.unbound.livenessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.unbound.livenessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.unbound.livenessProbe.timeoutSeconds | int }}
+          {{- end }}
+          {{- if .Values.unbound.readinessProbe.enabled }}
+          readinessProbe:
+            exec:
+              command:
+                - "unbound-host"
+                - "-4"
+                - "-C"
+                - "/etc/unbound/unbound.conf"
+                - "localhost"
+            failureThreshold: {{ .Values.unbound.readinessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.unbound.readinessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.unbound.readinessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.unbound.readinessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.unbound.readinessProbe.timeoutSeconds | int }}
+          {{- end }}
+          {{- with .Values.unbound.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.unbound.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+        {{- end }}
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - "--log.format={{ .Values.dnsblConfig.log.format }}"
+            {{- if .Values.dnsblConfig.log.debug }}
+            - "--log.debug"
+            {{- end }}
+            {{- if .Values.dnsblConfig.rbl.domainBased }}
+            - "--config.domain-based"
+            {{- end }}
+          env:
+            - name: DNSBL_EXP_LISTEN
+              value: 0.0.0.0:9211
+          {{- if .Values.dnsblConfig.rbl.rbls }}
+            - name: DNSBL_EXP_RBLS
+              value: /etc/dnsbl-exporter/rbls.ini
+          {{- end }}
+          {{- if .Values.unbound.enabled }}
+            - name: DNSBL_EXP_RESOLVER
+              value: "127.0.0.1:5353"
+          {{- else }}
+            - name: DNSBL_EXP_RESOLVER
+              value: {{ .Values.dnsblConfig.resolver | quote }}
+          {{- end }}
+          {{- if .Values.dnsblConfig.targets }}
+            - name: DNSBL_EXP_TARGETS
+              value: /etc/dnsbl-exporter/targets.ini
+          {{- end }}
+          {{- if .Values.extraEnv }}
+            # Additional Settings
+            {{- .Values.extraEnv | toYaml | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 9211
+              protocol: TCP
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | int }}
+          {{- end }}
+          {{- if .Values.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | int }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if or (.Values.dnsblConfig.rbl.rbls) (.Values.dnsblConfig.targets) }}
+          volumeMounts:
+            - name: dnsbl-config
+              mountPath: /etc/dnsbl-exporter
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if or (.Values.dnsblConfig.rbl.rbls) (.Values.dnsblConfig.targets) }}
+      volumes:
+        - name: dnsbl-config
+          configMap:
+            name: {{ include "dnsbl-exporter.fullname" . }}
+      {{- end }}

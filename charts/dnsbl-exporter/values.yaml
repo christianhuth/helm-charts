@@ -1,0 +1,221 @@
+# -- Provide a name in place of `dnsbl-exporter`
+nameOverride: ""
+# -- String to fully override `"dnsbl-exporter.fullname"`
+fullnameOverride: ""
+
+image:
+  # -- image registry
+  registry: ghcr.io
+  # -- image repository
+  repository: luzilla/dnsbl_exporter
+  # -- image pull policy
+  pullPolicy: Always
+  # -- Overrides the image tag
+  tag: "v0.7.0-rc3"
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+# -- Number of replicas
+replicaCount: 1
+
+# -- The number of old ReplicaSets to retain
+revisionHistoryLimit: 0
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Annotations to be added to pods
+podAnnotations: {}
+
+# -- pod-level security context
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# -- container-level security context
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 65534
+  runAsGroup: 65534
+
+service:
+  # -- Kubernetes service type
+  type: ClusterIP
+  # -- Kubernetes port where service is exposed
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# -- Resource limits and requests for the dnsbl exporter pods.
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+livenessProbe:
+  # -- Enable the livenessProbe
+  enabled: true
+  # -- Failure threshold for livenessProbe
+  failureThreshold: 5
+  # -- Initial delay seconds for livenessProbe
+  initialDelaySeconds: 30
+  # -- Period seconds for livenessProbe
+  periodSeconds: 30
+  # -- Success threshold for livenessProbe
+  successThreshold: 1
+  # -- Timeout in seconds for livenessProbe
+  timeoutSeconds: 10
+
+readinessProbe:
+  # -- Enable the readinessProbe
+  enabled: true
+  # -- Failure threshold for readinessProbe
+  failureThreshold: 5
+  # -- Initial delay seconds for readinessProbe
+  initialDelaySeconds: 30
+  # -- Period seconds for readinessProbe
+  periodSeconds: 30
+  # -- Success threshold for readinessProbe
+  successThreshold: 1
+  # -- Timeout in seconds for readinessProbe
+  timeoutSeconds: 10
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Toleration labels for pod assignment
+tolerations: []
+
+# -- Affinity settings for pod assignment
+affinity: {}
+
+# -- Additional environment variables that will be added to the deployment
+extraEnv: []
+
+dnsblConfig:
+  log:
+    # -- Define the log format. Valid values are text or json
+    format: text
+    # -- Enable debug log level
+    debug: false
+  rbl:
+    # Enabled domain based RBLs
+    domainBased: false
+    # -- List of Relay Block Lists (RBLs) that should be checked
+    rbls: []
+  # -- The URL of the DNS resolver that should be used. If unbound is enabled (unbound.enabled) this will be ignored
+  resolver: ""
+  # -- List of Targets that should be checked for in the RBLs
+  targets: []
+
+serviceMonitor:
+  # -- Enable a prometheus ServiceMonitor
+  enabled: false
+  # -- Prometheus ServiceMonitor labels
+  additionalLabels: {}
+    # release: prometheus
+  # -- Prometheus ServiceMonitor selector
+  selector: {}
+    # prometheus: kube-prometheus
+  # -- Prometheus ServiceMonitor interval
+  interval: 60s
+  # -- Prometheus ServiceMonitor namespace
+  namespace: ""
+  # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
+  metricRelabelings: []
+  # -- Prometheus [RelabelConfigs] to apply to samples before scraping
+  relabelings: []
+  # -- How long until a scrape request times out. It cannot be greater than the scrape interval
+  scrapeTimeout: 20s
+
+unbound:
+  # -- Enable the integrated unbound DNS resolver
+  enabled: true
+  image:
+    # -- image registry for the unbound image
+    registry: ghcr.io
+    # -- image repository for the unbound image
+    repository: luzilla/unbound
+    # -- image pull policy for the unbound image
+    pullPolicy: Always
+    # -- Overrides the image tag for the unbound image
+    tag: "v0.7.0-rc3"
+  livenessProbe:
+    # -- Enable the livenessProbe of unbound
+    enabled: true
+    # -- Failure threshold for livenessProbe of unbound
+    failureThreshold: 5
+    # -- Initial delay seconds for livenessProbe of unbound
+    initialDelaySeconds: 10
+    # -- Period seconds for livenessProbe of unbound
+    periodSeconds: 30
+    # -- Success threshold for livenessProbe of unbound
+    successThreshold: 1
+    # -- Timeout in seconds for livenessProbe of unbound
+    timeoutSeconds: 2
+  readinessProbe:
+    # -- Enable the readinessProbe of unbound
+    enabled: true
+    # -- Failure threshold for readinessProbe of unbound
+    failureThreshold: 5
+    # -- Initial delay seconds for readinessProbe of unbound
+    initialDelaySeconds: 10
+    # -- Period seconds for readinessProbe of unbound
+    periodSeconds: 30
+    # -- Success threshold for readinessProbe of unbound
+    successThreshold: 1
+    # -- Timeout in seconds for readinessProbe of unbound
+    timeoutSeconds: 2
+  # -- Resource limits and requests for the unbound pods.
+  resources:
+    requests:
+      cpu: 100m
+      memory: 32Mi
+    limits:
+      cpu: 200m
+      memory: 200Mi
+  # -- container-level security context for the unbound DNS resolver
+  securityContext:
+    capabilities:
+      drop:
+        - ALL
+      add:
+        - NET_ADMIN
+    readOnlyRootFilesystem: false
+    runAsNonRoot: true
+    runAsUser: 100
+    runAsGroup: 101
