@@ -4008,6 +4008,31 @@ entries:
     urls:
     - https://github.com/christianhuth/helm-charts/releases/download/dns-exporter-1.0.0/dns-exporter-1.0.0.tgz
     version: 1.0.0
+  dnsbl-exporter:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial Release
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.7.0-rc3
+    created: "2025-02-25T08:35:56.011504546Z"
+    description: Prometheus compatible exporter to query DNSBLs/RBLs.
+    digest: 115ad43322b5631fc99e92b2ffb207655bafc7b0cde59b2659a85db8ba2ccc65
+    home: https://github.com/christianhuth/helm-charts
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: dnsbl-exporter
+    sources:
+    - https://github.com/Luzilla/dnsbl_exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/dnsbl-exporter-1.0.0/dnsbl-exporter-1.0.0.tgz
+    version: 1.0.0
   etcd-defrag:
   - annotations:
       artifacthub.io/changes: |
@@ -38019,4 +38044,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-02-25T08:32:33.23727353Z"
+generated: "2025-02-25T08:35:56.012855912Z"
