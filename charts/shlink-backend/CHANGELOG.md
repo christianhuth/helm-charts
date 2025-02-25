@@ -1,10 +1,9 @@
 # shlink-backend
 
-## 5.3.0
+## 5.4.0
 
 ### Changed
 
-- dependency to mariadb to 20.3.1
-- dependency to mysql to 12.2.4
-- dependency to postgresql to 16.4.14
-- dependency to rabbitmq to 15.3.2
+- dependency to mariadb to 20.4.0
+- dependency to mysql to 12.3.0
+- dependency to redis to 20.9.0
