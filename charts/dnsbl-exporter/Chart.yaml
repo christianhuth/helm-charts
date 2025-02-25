@@ -1,0 +1,20 @@
+apiVersion: v2
+name: dnsbl-exporter
+description: Prometheus compatible exporter to query DNSBLs/RBLs.
+type: application
+version: 1.0.0
+appVersion: "v0.7.0-rc3"
+home: https://github.com/christianhuth/helm-charts
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://github.com/Luzilla/dnsbl_exporter
+annotations:
+  artifacthub.io/category: monitoring-logging
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial Release
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key

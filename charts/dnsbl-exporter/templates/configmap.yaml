@@ -1,0 +1,23 @@
+{{- if or (.Values.dnsblConfig.rbl.rbls) (.Values.dnsblConfig.targets) }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    {{- include "dnsbl-exporter.labels" . | nindent 4 }}
+  name: {{ include "dnsbl-exporter.fullname" . }}
+data:
+  {{- if .Values.dnsblConfig.targets }}
+  targets.ini: |-
+    [targets]
+    {{- range $value := .Values.dnsblConfig.targets }}
+    server={{ $value }}
+    {{- end }}
+  {{- end }}
+  {{- if .Values.dnsblConfig.rbl.rbls }}
+  rbls.ini: |-
+    [rbl]
+    {{- range $value := .Values.dnsblConfig.rbl.rbls }}
+    server={{ $value }}
+    {{- end }}
+  {{- end }}
+{{- end }}
