@@ -1,0 +1,149 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "syncstorage-rs.labels" . | nindent 4 }}
+  name: {{ include "syncstorage-rs.fullname" . }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit | int }}
+  selector:
+    matchLabels:
+      {{- include "syncstorage-rs.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "syncstorage-rs.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "syncstorage-rs.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if (index .Values "syncstorage" "tokenserver-db-lock" "enabled") }}
+      initContainers:
+        - name: {{ .Chart.Name }}-db-lock
+          image: "{{ (index .Values "syncstorage" "tokenserver-db-lock" "image" "registry") }}/{{ (index .Values "syncstorage" "tokenserver-db-lock" "image" "repository") }}:{{ (index .Values "syncstorage" "tokenserver-db-lock" "image" "tag") | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ (index .Values "syncstorage" "tokenserver-db-lock" "image" "pullPolicy") }}
+          command:
+            - "/db_init.sh"
+          env:
+            # Database Settings
+            - name: MARIADB_SERVER
+              value: {{ include "syncstorage-rs.tokenserver-db.host" . | quote }}
+            - name: MARIADB_SERVER_PORT
+              value: {{ include "syncstorage-rs.tokenserver-db.port" . | quote }}
+            - name: MARIADB_DATABASE
+              value: {{ include "syncstorage-rs.tokenserver-db.auth.database" . | quote }}
+            - name: MARIADB_USER
+              value: {{ include "syncstorage-rs.tokenserver-db.auth.username" . | quote }}
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "syncstorage-rs.tokenserver-db.auth.secretName" . | quote }}
+                  key: database-password
+            # General Settings
+            {{- if .Values.ingress.enabled }}
+            {{- with (index .Values.ingress.hosts 0) }}
+            - name: DOMAIN
+              value: {{ .host | quote }}
+            {{- end }}
+            {{- end }}
+            - name: MAX_USERS
+              value: {{ (index .Values "syncstorage" "tokenserver-db-lock" "config" "maxUsers") | quote }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: RUST_LOG
+              value: {{ .Values.syncstorage.config.logLevel | quote }}
+            - name: SYNC_HOST
+              value: {{ .Values.syncstorage.config.host | quote }}
+            {{ if or (.Values.syncstorage.masterKey.existingSecret) (.Values.syncstorage.masterKey.value) }}
+            - name: SYNC_MASTER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "syncstorage-rs.masterKey.secretName" . }}
+                  key: master-key
+            {{- end }}
+            # Syncserver DB Settings
+            - name: SYNC_SYNCSTORAGE__DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "syncstorage-rs.syncserver-db.auth.secretName" . }}
+                  key: database-url
+            # Tokenserver DB Settings
+            - name: SYNC_TOKENSERVER__ENABLED
+              value: "true"
+            - name: SYNC_TOKENSERVER__NODE_TYPE
+              value: mysql
+            - name: SYNC_TOKENSERVER__DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "syncstorage-rs.tokenserver-db.auth.secretName" . }}
+                  key: database-url
+            - name: SYNC_TOKENSERVER__RUN_MIGRATIONS
+              value: {{ .Values.syncstorage.config.runTokenserverDbMigrations | quote }}
+            {{- if .Values.extraEnv }}
+              # Additional Settings
+              {{ .Values.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.syncstorage.config.port | int }}
+              protocol: TCP
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /__heartbeat__
+              port: http
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | int }}
+          {{- end }}
+          {{- if .Values.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /__heartbeat__
+              port: http
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | int }}
+          {{- end }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

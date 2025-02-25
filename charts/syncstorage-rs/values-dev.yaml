@@ -1,0 +1,13 @@
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  hosts:
+    - host: sync.knell.it
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: sync.knell.it-tls
+      hosts:
+        - sync.knell.it
