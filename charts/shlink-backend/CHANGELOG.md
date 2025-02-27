@@ -4,4 +4,4 @@
 
 ### Changed
 
-- dependency to mariadb to 20.4.1
+- dependency to rabbitmq to 15.3.3
