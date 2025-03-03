@@ -1,6 +1,6 @@
 # headwind-mdm
 
-## 3.0.4
+## 3.0.5
 
 ### Changed
 
