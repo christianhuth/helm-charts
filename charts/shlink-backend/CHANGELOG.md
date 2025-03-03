@@ -4,4 +4,4 @@
 
 ### Changed
 
-- app version to 4.4.5
+- dependency to redis to 20.10.1
