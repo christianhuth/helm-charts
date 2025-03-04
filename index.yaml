@@ -21749,6 +21749,53 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency to redis to 20.11.0
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 4.4.5
+    created: "2025-03-04T15:14:35.518297803Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.4.1
+    - condition: mysql.enabled
+      name: mysql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 12.3.0
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.4.16
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 15.3.3
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.11.0
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 07d83a4879edf361955274daeab53398de746e3fd353801945fccf333b61c77b
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-backend-5.6.0/shlink-backend-5.6.0.tgz
+    version: 5.6.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency to postgresql to 16.4.16
         - kind: changed
           description: dependency to redis to 20.10.1
@@ -38864,4 +38911,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-03-04T14:53:58.408593394Z"
+generated: "2025-03-04T15:14:35.51958518Z"
