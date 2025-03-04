@@ -4,4 +4,4 @@
 
 ### Changed
 
-- dependency to mysql to 12.3.0
+- dependency to postgresql to 16.4.16
