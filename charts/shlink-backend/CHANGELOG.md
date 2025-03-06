@@ -1,6 +1,6 @@
 # shlink-backend
 
-## 5.6.0
+## 5.6.1
 
 ### Changed
 
