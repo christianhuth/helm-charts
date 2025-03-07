@@ -1,7 +1,7 @@
 # umami
 
-## 4.2.1
+## 4.2.2
 
 ### Changed
 
-- dependency to postgresql to 16.4.16
+- dependency to mysql to 12.3.1
