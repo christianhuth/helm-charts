@@ -28,7 +28,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency to postgresql to 16.4.16
+      description: dependency to mysql to 12.3.1
   artifacthub.io/screenshots: |
     - title: TYPO3 is a very powerful Web Content Management System.
       url: https://docs.typo3.org/m/typo3/tutorial-getting-started/10.4/en-us/_images/BackendAboutModules.png
