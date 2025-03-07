@@ -2,8 +2,8 @@ apiVersion: v2
 name: countly
 description: Countly is a product analytics platform that helps teams track, analyze and act-on their user actions and behaviour on mobile, web and desktop applications.
 type: application
-version: 1.0.0
-appVersion: "24.05.26"
+version: 1.1.0
+appVersion: "24.10.8"
 home: https://github.com/christianknell/helm-charts
 icon: https://cdn.brandfetch.io/idHuXOJiSH/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B
 maintainers:
@@ -19,8 +19,8 @@ dependencies:
     condition: mongodb.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Initial commit
+    - kind: changed
+      description: App version to 24.10.8
   artifacthub.io/screenshots: |
     - title: From analytics to surveys, everything you need to build delightful customer experiences on mobile, web, and desktop. Your dedicated product analytics server awaits you.
       url: https://cdn.prod.website-files.com/61c1b7c3e2f3805325be4594/646ca75af762159d03f456f1_mycountlyhero.svg

@@ -58,7 +58,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | api.image.pullPolicy | string | `"Always"` | image pull policy |
 | api.image.registry | string | `"docker.io"` | image registry |
 | api.image.repository | string | `"countly/api"` | image repository |
-| api.image.tag | string | `"24.05.26"` | Overrides the image tag |
+| api.image.tag | string | `"24.10.8"` | Overrides the image tag |
 | api.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | api.livenessProbe.failureThreshold | int | `6` | Failure threshold for livenessProbe |
 | api.livenessProbe.initialDelaySeconds | int | `60` | Initial delay seconds for livenessProbe |
@@ -106,7 +106,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | frontend.image.pullPolicy | string | `"Always"` | image pull policy |
 | frontend.image.registry | string | `"docker.io"` | image registry |
 | frontend.image.repository | string | `"countly/frontend"` | image repository |
-| frontend.image.tag | string | `"24.05.26"` | Overrides the image tag |
+| frontend.image.tag | string | `"24.10.8"` | Overrides the image tag |
 | frontend.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | frontend.livenessProbe.failureThreshold | int | `6` | Failure threshold for livenessProbe |
 | frontend.livenessProbe.initialDelaySeconds | int | `60` | Initial delay seconds for livenessProbe |

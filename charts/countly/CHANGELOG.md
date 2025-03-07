@@ -1,7 +1,7 @@
 # countly
 
-## 1.0.0
+## 1.1.0
 
-### Added
+### Changed
 
-- Initial commit
+- App version to 24.10.8
