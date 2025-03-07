@@ -25,7 +25,7 @@ annotations:
   artifacthub.io/category: database
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency to redis to 20.11.1
+      description: dependency to redis to 20.11.2
   artifacthub.io/screenshots: |
     - title: Create your own online database without technical experience.
       url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
