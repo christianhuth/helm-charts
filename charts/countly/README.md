@@ -58,7 +58,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | api.image.pullPolicy | string | `"Always"` | image pull policy |
 | api.image.registry | string | `"docker.io"` | image registry |
 | api.image.repository | string | `"countly/api"` | image repository |
-| api.image.tag | string | `"24.10.8"` | Overrides the image tag |
+| api.image.tag | string | `"25.05.4"` | Overrides the image tag |
 | api.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | api.livenessProbe.failureThreshold | int | `6` | Failure threshold for livenessProbe |
 | api.livenessProbe.initialDelaySeconds | int | `60` | Initial delay seconds for livenessProbe |
