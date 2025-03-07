@@ -4149,6 +4149,41 @@ entries:
     urls:
     - https://github.com/christianhuth/helm-charts/releases/download/cluster-api-visualizer-0.0.1/cluster-api-visualizer-0.0.1.tgz
     version: 0.0.1
+  countly:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial commit
+      artifacthub.io/screenshots: |
+        - title: From analytics to surveys, everything you need to build delightful customer experiences on mobile, web, and desktop. Your dedicated product analytics server awaits you.
+          url: https://cdn.prod.website-files.com/61c1b7c3e2f3805325be4594/646ca75af762159d03f456f1_mycountlyhero.svg
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 24.05.26
+    created: "2025-03-07T14:47:39.994647897Z"
+    dependencies:
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.4.5
+    description: Countly is a product analytics platform that helps teams track, analyze
+      and act-on their user actions and behaviour on mobile, web and desktop applications.
+    digest: 4879d62df90c54640e1465df70a56c8ac76715dac1e94411f436c7d8471e9417
+    home: https://github.com/christianknell/helm-charts
+    icon: https://cdn.brandfetch.io/idHuXOJiSH/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: countly
+    sources:
+    - https://github.com/Countly/countly-server
+    - https://countly.com/
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/countly-1.0.0/countly-1.0.0.tgz
+    version: 1.0.0
   dns-exporter:
   - annotations:
       artifacthub.io/category: monitoring-logging
@@ -39417,4 +39452,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-03-07T08:53:31.756953678Z"
+generated: "2025-03-07T14:47:39.996464788Z"
