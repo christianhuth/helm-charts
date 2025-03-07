@@ -122,7 +122,7 @@ frontend:
     # -- image pull policy
     pullPolicy: Always
     # -- Overrides the image tag
-    tag: "24.05.26"
+    tag: "24.10.8"
 
   # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
   imagePullSecrets: []
