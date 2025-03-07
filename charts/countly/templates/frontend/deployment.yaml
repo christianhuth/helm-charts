@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "countly.frontend.labels" . | nindent 4 }}
+  name: {{ include "countly.frontend.fullname" . }}
+spec:
+  {{- if not .Values.frontend.autoscaling.enabled }}
+  replicas: {{ .Values.frontend.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.frontend.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "countly.frontend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.frontend.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "countly.frontend.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.frontend.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "countly.frontend.serviceAccountName" . }}
+      {{- with .Values.frontend.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ include "countly.frontend.name" . }}
+          image: "{{ .Values.frontend.image.registry }}/{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          env:
+            # Countly General Settings
+            - name: COUNTLY_PLUGINS
+              value: {{ .Values.config.plugins | quote }}
+            - name: COUNTLY_CONFIG_API_FILESTORAGE
+              value: {{ .Values.config.api.filestorage | quote }}
+            - name: COUNTLY_CONFIG_API_API_WORKERS
+              value: {{ .Values.config.api.workerCount | quote }}
+            - name: COUNTLY_CONFIG__MONGODB
+              value: {{ (include "countly.mongodb.url" .) | quote }}
+            {{- if .Values.ingress.enabled }}
+            - name: COUNTLY_CONFIG_HOSTNAME
+              value : {{ .Values.ingress.hostname | quote }}
+            {{- end }}
+            - name: NODE_OPTIONS
+              value: {{ .Values.config.nodeOptions | quote }}
+          {{- if or .Values.extraEnv .Values.api.extraEnv }}
+            # Additional Settings
+            {{- if .Values.extraEnv }}
+              {{- .Values.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+            {{- if .Values.api.extraEnv }}
+              {{- .Values.api.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 6001
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 6001
+            failureThreshold: {{ .Values.frontend.livenessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.frontend.livenessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.frontend.livenessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.frontend.livenessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.frontend.livenessProbe.timeoutSeconds | int }}
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 6001
+            failureThreshold: {{ .Values.frontend.readinessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.frontend.readinessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.frontend.readinessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.frontend.readinessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.frontend.readinessProbe.timeoutSeconds | int }}
+          {{- with .Values.frontend.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.frontend.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- if .Values.frontend.priorityClassName }}
+      priorityClassName: {{ .Values.frontend.priorityClassName }}
+      {{- end }}
+      {{- with .Values.frontend.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.frontend.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.frontend.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

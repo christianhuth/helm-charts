@@ -1,0 +1,10 @@
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  className: nginx
+  hostname: countly.christianhuth.de
+  tls:
+    - secretName: countly.christianhuth.de-tls
+      hosts:
+        - countly.christianhuth.de

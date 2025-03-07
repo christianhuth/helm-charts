@@ -1,0 +1,132 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "countly.api.labels" . | nindent 4 }}
+  name: {{ include "countly.api.fullname" . }}
+spec:
+  {{- if not .Values.api.autoscaling.enabled }}
+  replicas: {{ .Values.api.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.api.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "countly.api.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.api.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "countly.api.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.api.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "countly.api.serviceAccountName" . }}
+      {{- with .Values.api.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ include "countly.api.name" . }}
+          image: "{{ .Values.api.image.registry }}/{{ .Values.api.image.repository }}:{{ .Values.api.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.api.image.pullPolicy }}
+          env:
+            # Countly General Settings
+            - name: COUNTLY_PLUGINS
+              value: {{ .Values.config.plugins | quote }}
+            - name: COUNTLY_CONFIG_API_FILESTORAGE
+              value: {{ .Values.config.api.filestorage | quote }}
+            - name: COUNTLY_CONFIG_API_API_WORKERS
+              value: {{ .Values.config.api.workerCount | quote }}
+            - name: COUNTLY_CONFIG__MONGODB
+              value: {{ (include "countly.mongodb.url" .) | quote }}
+            {{- if .Values.ingress.enabled }}
+            - name: COUNTLY_CONFIG_HOSTNAME
+              value : {{ .Values.ingress.hostname | quote }}
+            {{- end }}
+            - name: NODE_OPTIONS
+              value: {{ .Values.config.nodeOptions | quote }}
+          {{- if .Values.config.api.mail.enabled }}
+            # Mail Settings
+            {{- if .Values.config.api.mail.host }}
+            - name: COUNTLY_CONFIG__MAIL_CONFIG_HOST
+              value: {{ .Values.config.api.mail.host | quote }}
+            {{- end }}
+            {{- if .Values.config.api.mail.port }}
+            - name: COUNTLY_CONFIG__MAIL_CONFIG_PORT
+              value: {{ .Values.config.api.mail.port | quote }}
+            {{- end }}
+            {{- if .Values.config.api.mail.auth.username }}
+            - name: COUNTLY_CONFIG__MAIL_CONFIG_AUTH_USER
+              value: {{ .Values.config.api.mail.auth.username | quote }}
+            {{- end }}
+            {{- if or .Values.config.api.mail.auth.existingSecret .Values.config.api.mail.auth.password }}
+            - name: COUNTLY_CONFIG__MAIL_CONFIG_AUTH_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "countly.api.mail.secretName" . | quote }}
+                  key: mail-password
+            {{- end }}
+            {{- if .Values.config.api.mail.from }}
+            - name: COUNTLY_CONFIG__MAIL_STRINGS_FROM
+              value: {{ .Values.config.api.mail.from | quote }}
+            {{- end }}
+          {{- end }}
+          {{- if or .Values.extraEnv .Values.api.extraEnv }}
+            # Additional Settings
+            {{- if .Values.extraEnv }}
+              {{- .Values.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+            {{- if .Values.api.extraEnv }}
+              {{- .Values.api.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 3001
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /o/ping
+              port: 3001
+            failureThreshold: {{ .Values.api.livenessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.api.livenessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.api.livenessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.api.livenessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.api.livenessProbe.timeoutSeconds | int }}
+          readinessProbe:
+            httpGet:
+              path: /o/ping
+              port: 3001
+            failureThreshold: {{ .Values.api.readinessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.api.readinessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.api.readinessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.api.readinessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.api.readinessProbe.timeoutSeconds | int }}
+          {{- with .Values.api.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.api.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- if .Values.api.priorityClassName }}
+      priorityClassName: {{ .Values.api.priorityClassName }}
+      {{- end }}
+      {{- with .Values.api.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.api.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.api.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

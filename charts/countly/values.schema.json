@@ -1,0 +1,1123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "api": {
+      "properties": {
+        "affinity": {
+          "description": "Affinity settings for pod assignment",
+          "required": [],
+          "title": "affinity",
+          "type": "object"
+        },
+        "autoscaling": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "Enable Horizontal POD autoscaling",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "maxReplicas": {
+              "default": 100,
+              "description": "Maximum number of replicas",
+              "required": [],
+              "title": "maxReplicas",
+              "type": "integer"
+            },
+            "minReplicas": {
+              "default": 1,
+              "description": "Minimum number of replicas",
+              "required": [],
+              "title": "minReplicas",
+              "type": "integer"
+            },
+            "targetCPUUtilizationPercentage": {
+              "default": 80,
+              "description": "Target CPU utilization percentage",
+              "required": [],
+              "title": "targetCPUUtilizationPercentage",
+              "type": "integer"
+            },
+            "targetMemoryUtilizationPercentage": {
+              "default": 80,
+              "description": "Target Memory utilization percentage",
+              "required": [],
+              "title": "targetMemoryUtilizationPercentage",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "minReplicas",
+            "maxReplicas",
+            "targetCPUUtilizationPercentage",
+            "targetMemoryUtilizationPercentage"
+          ],
+          "title": "autoscaling",
+          "type": "object"
+        },
+        "extraEnv": {
+          "description": "additional environment variables to be added to the api pods",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "extraEnv",
+          "type": "array"
+        },
+        "image": {
+          "properties": {
+            "pullPolicy": {
+              "default": "Always",
+              "description": "image pull policy",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "registry": {
+              "default": "docker.io",
+              "description": "image registry",
+              "required": [],
+              "title": "registry",
+              "type": "string"
+            },
+            "repository": {
+              "default": "countly/api",
+              "description": "image repository",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "24.05.26",
+              "description": "Overrides the image tag",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "registry",
+            "repository",
+            "pullPolicy",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "imagePullSecrets": {
+          "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "imagePullSecrets",
+          "type": "array"
+        },
+        "livenessProbe": {
+          "properties": {
+            "failureThreshold": {
+              "default": 6,
+              "description": "Failure threshold for livenessProbe",
+              "required": [],
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "initialDelaySeconds": {
+              "default": 60,
+              "description": "Initial delay seconds for livenessProbe",
+              "required": [],
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 30,
+              "description": "Period seconds for livenessProbe",
+              "required": [],
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "description": "Success threshold for livenessProbe",
+              "required": [],
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 2,
+              "description": "Timeout in seconds for livenessProbe",
+              "required": [],
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "failureThreshold",
+            "initialDelaySeconds",
+            "periodSeconds",
+            "successThreshold",
+            "timeoutSeconds"
+          ],
+          "title": "livenessProbe",
+          "type": "object"
+        },
+        "nodeSelector": {
+          "description": "Node labels for pod assignment",
+          "required": [],
+          "title": "nodeSelector",
+          "type": "object"
+        },
+        "podAnnotations": {
+          "description": "Annotations to be added to the frontend pods",
+          "required": [],
+          "title": "podAnnotations",
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "pod-level security context",
+          "required": [],
+          "title": "podSecurityContext",
+          "type": "object"
+        },
+        "priorityClassName": {
+          "default": "",
+          "description": "Pod priority class name",
+          "required": [],
+          "title": "priorityClassName",
+          "type": "string"
+        },
+        "readinessProbe": {
+          "properties": {
+            "failureThreshold": {
+              "default": 6,
+              "description": "Failure threshold for readinessProbe",
+              "required": [],
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "initialDelaySeconds": {
+              "default": 60,
+              "description": "Initial delay seconds for readinessProbe",
+              "required": [],
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 30,
+              "description": "Period seconds for readinessProbe",
+              "required": [],
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "description": "Success threshold for readinessProbe",
+              "required": [],
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 2,
+              "description": "Timeout in seconds for readinessProbe",
+              "required": [],
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "failureThreshold",
+            "initialDelaySeconds",
+            "periodSeconds",
+            "successThreshold",
+            "timeoutSeconds"
+          ],
+          "title": "readinessProbe",
+          "type": "object"
+        },
+        "replicaCount": {
+          "default": 1,
+          "description": "Number of replicas",
+          "required": [],
+          "title": "replicaCount",
+          "type": "integer"
+        },
+        "resources": {
+          "description": "Resource limits and requests for the controller pods.",
+          "properties": {
+            "limits": {
+              "properties": {
+                "memory": {
+                  "default": "2Gi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "memory"
+              ],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "properties": {
+                "cpu": {
+                  "default": "200m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "400Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "limits",
+            "requests"
+          ],
+          "title": "resources",
+          "type": "object"
+        },
+        "revisionHistoryLimit": {
+          "default": 10,
+          "description": "The number of old ReplicaSets to retain",
+          "required": [],
+          "title": "revisionHistoryLimit",
+          "type": "integer"
+        },
+        "securityContext": {
+          "description": "container-level security context",
+          "required": [],
+          "title": "securityContext",
+          "type": "object"
+        },
+        "selectorLabels": {
+          "description": "Additional labels to add to the pod",
+          "required": [],
+          "title": "selectorLabels",
+          "type": "object"
+        },
+        "service": {
+          "properties": {
+            "port": {
+              "default": 3000,
+              "description": "Kubernetes port where service is exposed",
+              "required": [],
+              "title": "port",
+              "type": "integer"
+            },
+            "type": {
+              "default": "ClusterIP",
+              "description": "Kubernetes service type",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "port"
+          ],
+          "title": "service",
+          "type": "object"
+        },
+        "serviceAccount": {
+          "properties": {
+            "annotations": {
+              "description": "Annotations to add to the service account",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "create": {
+              "default": true,
+              "description": "Specifies whether a service account should be created",
+              "required": [],
+              "title": "create",
+              "type": "boolean"
+            },
+            "name": {
+              "default": "",
+              "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+              "required": [],
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "create",
+            "annotations",
+            "name"
+          ],
+          "title": "serviceAccount",
+          "type": "object"
+        },
+        "tolerations": {
+          "description": "Toleration labels for pod assignment",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tolerations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "image",
+        "imagePullSecrets",
+        "podAnnotations",
+        "podSecurityContext",
+        "priorityClassName",
+        "replicaCount",
+        "revisionHistoryLimit",
+        "resources",
+        "securityContext",
+        "serviceAccount",
+        "service",
+        "autoscaling",
+        "livenessProbe",
+        "readinessProbe",
+        "nodeSelector",
+        "tolerations",
+        "affinity",
+        "selectorLabels",
+        "extraEnv"
+      ],
+      "title": "api",
+      "type": "object"
+    },
+    "config": {
+      "description": "General configuration shared between the frontend and api",
+      "properties": {
+        "api": {
+          "properties": {
+            "filestorage": {
+              "default": "gridfs",
+              "required": [],
+              "title": "filestorage",
+              "type": "string"
+            },
+            "mail": {
+              "properties": {
+                "auth": {
+                  "properties": {
+                    "existingSecret": {
+                      "default": "",
+                      "description": "Use existing secret for password details. The secret has to contain the key `mail-password`. When it's set the `config.api.mail.auth.password` is ignored.",
+                      "required": [],
+                      "title": "existingSecret",
+                      "type": "string"
+                    },
+                    "password": {
+                      "default": "",
+                      "description": "The password to authenticate to the smtp host when sending emails.",
+                      "required": [],
+                      "title": "password",
+                      "type": "string"
+                    },
+                    "username": {
+                      "default": "",
+                      "description": "The username to authenticate to the smtp host when sending emails.",
+                      "required": [],
+                      "title": "username",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "existingSecret",
+                    "password",
+                    "username"
+                  ],
+                  "title": "auth",
+                  "type": "object"
+                },
+                "enabled": {
+                  "default": false,
+                  "description": "Enable sending of emails",
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "from": {
+                  "default": "",
+                  "description": "The email address Countly will send emails from.",
+                  "required": [],
+                  "title": "from",
+                  "type": "string"
+                },
+                "host": {
+                  "default": "",
+                  "description": "The host of the external SMTP server that Countly should use to send emails.",
+                  "required": [],
+                  "title": "host",
+                  "type": "string"
+                },
+                "port": {
+                  "default": 0,
+                  "description": "The port used to connect to the smtp host.",
+                  "required": [],
+                  "title": "port",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "enabled",
+                "auth",
+                "from",
+                "host",
+                "port"
+              ],
+              "title": "mail",
+              "type": "object"
+            },
+            "workerCount": {
+              "default": "1",
+              "required": [],
+              "title": "workerCount",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filestorage",
+            "mail",
+            "workerCount"
+          ],
+          "title": "api",
+          "type": "object"
+        },
+        "nodeOptions": {
+          "default": "--max-old-space-size=2048",
+          "required": [],
+          "title": "nodeOptions",
+          "type": "string"
+        },
+        "plugins": {
+          "default": "mobile,web,desktop,plugins,density,locale,browser,sources,views,logger,systemlogs,populator,reports,crashes,push,star-rating,slipping-away-users,compare,server-stats,dbviewer,times-of-day,compliance-hub,alerts,onboarding,consolidate,remote-config,hooks,dashboards,sdk,data-manager,guides",
+          "required": [],
+          "title": "plugins",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api",
+        "nodeOptions",
+        "plugins"
+      ],
+      "title": "config",
+      "type": "object"
+    },
+    "externalMongodb": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "countly",
+              "description": "Name for a custom database to use",
+              "required": [],
+              "title": "database",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "hostname": {
+          "default": "",
+          "description": "Hostname of the MongoDB database",
+          "required": [],
+          "title": "hostname",
+          "type": "string"
+        },
+        "port": {
+          "default": 27017,
+          "description": "Port used to connect to MongoDB database",
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "auth",
+        "hostname",
+        "port"
+      ],
+      "title": "externalMongodb",
+      "type": "object"
+    },
+    "extraEnv": {
+      "description": "additional environment variables to be added to both api and frontend pods",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "extraEnv",
+      "type": "array"
+    },
+    "frontend": {
+      "properties": {
+        "affinity": {
+          "description": "Affinity settings for pod assignment",
+          "required": [],
+          "title": "affinity",
+          "type": "object"
+        },
+        "autoscaling": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "Enable Horizontal POD autoscaling",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "maxReplicas": {
+              "default": 100,
+              "description": "Maximum number of replicas",
+              "required": [],
+              "title": "maxReplicas",
+              "type": "integer"
+            },
+            "minReplicas": {
+              "default": 1,
+              "description": "Minimum number of replicas",
+              "required": [],
+              "title": "minReplicas",
+              "type": "integer"
+            },
+            "targetCPUUtilizationPercentage": {
+              "default": 80,
+              "description": "Target CPU utilization percentage",
+              "required": [],
+              "title": "targetCPUUtilizationPercentage",
+              "type": "integer"
+            },
+            "targetMemoryUtilizationPercentage": {
+              "default": 80,
+              "description": "Target Memory utilization percentage",
+              "required": [],
+              "title": "targetMemoryUtilizationPercentage",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "minReplicas",
+            "maxReplicas",
+            "targetCPUUtilizationPercentage",
+            "targetMemoryUtilizationPercentage"
+          ],
+          "title": "autoscaling",
+          "type": "object"
+        },
+        "extraEnv": {
+          "description": "additional environment variables to be added to the frontend pods",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "extraEnv",
+          "type": "array"
+        },
+        "image": {
+          "properties": {
+            "pullPolicy": {
+              "default": "Always",
+              "description": "image pull policy",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "registry": {
+              "default": "docker.io",
+              "description": "image registry",
+              "required": [],
+              "title": "registry",
+              "type": "string"
+            },
+            "repository": {
+              "default": "countly/frontend",
+              "description": "image repository",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "24.05.26",
+              "description": "Overrides the image tag",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "registry",
+            "repository",
+            "pullPolicy",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "imagePullSecrets": {
+          "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "imagePullSecrets",
+          "type": "array"
+        },
+        "livenessProbe": {
+          "properties": {
+            "failureThreshold": {
+              "default": 6,
+              "description": "Failure threshold for livenessProbe",
+              "required": [],
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "initialDelaySeconds": {
+              "default": 60,
+              "description": "Initial delay seconds for livenessProbe",
+              "required": [],
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 30,
+              "description": "Period seconds for livenessProbe",
+              "required": [],
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "description": "Success threshold for livenessProbe",
+              "required": [],
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 2,
+              "description": "Timeout in seconds for livenessProbe",
+              "required": [],
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "failureThreshold",
+            "initialDelaySeconds",
+            "periodSeconds",
+            "successThreshold",
+            "timeoutSeconds"
+          ],
+          "title": "livenessProbe",
+          "type": "object"
+        },
+        "nodeSelector": {
+          "description": "Node labels for pod assignment",
+          "required": [],
+          "title": "nodeSelector",
+          "type": "object"
+        },
+        "podAnnotations": {
+          "description": "Annotations to be added to the frontend pods",
+          "required": [],
+          "title": "podAnnotations",
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "description": "pod-level security context",
+          "required": [],
+          "title": "podSecurityContext",
+          "type": "object"
+        },
+        "priorityClassName": {
+          "default": "",
+          "description": "Pod priority class name",
+          "required": [],
+          "title": "priorityClassName",
+          "type": "string"
+        },
+        "readinessProbe": {
+          "properties": {
+            "failureThreshold": {
+              "default": 6,
+              "description": "Failure threshold for readinessProbe",
+              "required": [],
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "initialDelaySeconds": {
+              "default": 60,
+              "description": "Initial delay seconds for readinessProbe",
+              "required": [],
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 30,
+              "description": "Period seconds for readinessProbe",
+              "required": [],
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "description": "Success threshold for readinessProbe",
+              "required": [],
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 2,
+              "description": "Timeout in seconds for readinessProbe",
+              "required": [],
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "failureThreshold",
+            "initialDelaySeconds",
+            "periodSeconds",
+            "successThreshold",
+            "timeoutSeconds"
+          ],
+          "title": "readinessProbe",
+          "type": "object"
+        },
+        "replicaCount": {
+          "default": 1,
+          "description": "Number of replicas",
+          "required": [],
+          "title": "replicaCount",
+          "type": "integer"
+        },
+        "resources": {
+          "description": "Resource limits and requests for the controller pods.",
+          "properties": {
+            "limits": {
+              "properties": {
+                "cpu": {
+                  "default": "500m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "500Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "properties": {
+                "cpu": {
+                  "default": "100m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "100Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "limits",
+            "requests"
+          ],
+          "title": "resources",
+          "type": "object"
+        },
+        "revisionHistoryLimit": {
+          "default": 10,
+          "description": "The number of old ReplicaSets to retain",
+          "required": [],
+          "title": "revisionHistoryLimit",
+          "type": "integer"
+        },
+        "securityContext": {
+          "description": "container-level security context",
+          "required": [],
+          "title": "securityContext",
+          "type": "object"
+        },
+        "selectorLabels": {
+          "description": "Additional labels to add to the pod",
+          "required": [],
+          "title": "selectorLabels",
+          "type": "object"
+        },
+        "service": {
+          "properties": {
+            "port": {
+              "default": 3000,
+              "description": "Kubernetes port where service is exposed",
+              "required": [],
+              "title": "port",
+              "type": "integer"
+            },
+            "type": {
+              "default": "ClusterIP",
+              "description": "Kubernetes service type",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "port"
+          ],
+          "title": "service",
+          "type": "object"
+        },
+        "serviceAccount": {
+          "properties": {
+            "annotations": {
+              "description": "Annotations to add to the service account",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "create": {
+              "default": true,
+              "description": "Specifies whether a service account should be created",
+              "required": [],
+              "title": "create",
+              "type": "boolean"
+            },
+            "name": {
+              "default": "",
+              "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+              "required": [],
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "create",
+            "annotations",
+            "name"
+          ],
+          "title": "serviceAccount",
+          "type": "object"
+        },
+        "tolerations": {
+          "description": "Toleration labels for pod assignment",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tolerations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "image",
+        "imagePullSecrets",
+        "podAnnotations",
+        "podSecurityContext",
+        "priorityClassName",
+        "replicaCount",
+        "revisionHistoryLimit",
+        "resources",
+        "securityContext",
+        "serviceAccount",
+        "service",
+        "autoscaling",
+        "livenessProbe",
+        "readinessProbe",
+        "nodeSelector",
+        "tolerations",
+        "affinity",
+        "selectorLabels",
+        "extraEnv"
+      ],
+      "title": "frontend",
+      "type": "object"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"baserow.fullname\"`",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "ingress": {
+      "properties": {
+        "annotations": {
+          "description": "Additional annotations for the Ingress resource",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "description": "IngressClass that will be be used to implement the Ingress",
+          "required": [],
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enable ingress record generation",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hostname": {
+          "default": "",
+          "description": "cert-manager.io/cluster-issuer: cluster-issuer-name\nkubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"\nThe publicly reachable hostname",
+          "required": [],
+          "title": "hostname",
+          "type": "string"
+        },
+        "pathType": {
+          "default": "Prefix",
+          "description": "Valid values: ImplementationSpecific, Exact, Prefix",
+          "required": [],
+          "title": "pathType",
+          "type": "string"
+        },
+        "tls": {
+          "description": "An array with the tls configuration",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hostname",
+        "pathType",
+        "tls"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "mongodb": {
+      "properties": {
+        "architecture": {
+          "default": "standalone",
+          "description": "MongoDB™ architecture. Currently only standalone is supported by this Chart.",
+          "required": [],
+          "title": "architecture",
+          "type": "string"
+        },
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "countly",
+              "description": "Name for a custom database to create",
+              "required": [],
+              "title": "database",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enable authentication",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "username": {
+              "default": "countly",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "database",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "enable MongoDB™ subchart from Bitnami",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "architecture",
+        "auth"
+      ],
+      "title": "mongodb",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `baserow`",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "api",
+    "frontend",
+    "extraEnv",
+    "config",
+    "ingress",
+    "mongodb",
+    "externalMongodb"
+  ],
+  "type": "object"
+}
