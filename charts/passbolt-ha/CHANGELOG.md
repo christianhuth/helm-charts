@@ -4,4 +4,4 @@
 
 ### Changed
 
-- dependency to mysql to 12.3.0
+- dependency to mysql to 12.3.1
