@@ -1,0 +1,68 @@
+{{ template "chart.header" . }}
+{{ template "chart.description" . }}
+
+## TL;DR;
+
+```console
+helm repo add christianhuth https://charts.christianhuth.de
+helm repo update
+helm install my-release christianhuth/baserow
+```
+
+## Introduction
+
+Baserow is an open source no-code database and Airtable alternative.
+
+This chart bootstraps [Baserow](https://gitlab.com/bramw/baserow) on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+
+## Prerequisites
+
+- Kubernetes 1.19+
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+helm repo add christianhuth https://charts.christianhuth.de
+helm repo update
+helm install my-release christianhuth/baserow
+```
+
+These commands deploys Baserow on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
+
+> **Tip**: List all releases using `helm list`
+
+## Uninstalling the Chart
+
+To uninstall the `my-release` deployment:
+
+```console
+helm uninstall my-release
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+{{ template "chart.valuesSection" . }}
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
+
+```console
+helm install my-release -f values.yaml christianhuth/baserow
+```
+
+## Upgrading the Chart
+
+### To 3.0.0
+
+This major updates the Redis subchart to its newest major, 20.6.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#to-2050) you can find more information about the changes introduced in that version.
+
+Additionally it updates the PostgreSQL subchart to its newest major, 16.4.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1630) you can find more information about the changes introduced in that version.
+
+### To 2.0.0
+
+This major updates the Redis subchart to its newest major, 18.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) and [here](https://raw.githubusercontent.com/redis/redis/7.2/00-RELEASENOTES) you can find more information about the changes introduced in that version.
+
+Additionally it updates the PostgreSQL subchart to its newest major, 14.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1400) you can find more information about the changes introduced in that version.

@@ -1,0 +1,29 @@
+apiVersion: v2
+name: countly
+description: Countly is a product analytics platform that helps teams track, analyze and act-on their user actions and behaviour on mobile, web and desktop applications.
+type: application
+version: 1.0.0
+appVersion: "24.05.26"
+home: https://github.com/christianknell/helm-charts
+icon: https://cdn.brandfetch.io/idHuXOJiSH/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://github.com/Countly/countly-server
+  - https://countly.com/
+dependencies:
+  - name: mongodb
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 16.4.5
+    condition: mongodb.enabled
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial commit
+  artifacthub.io/screenshots: |
+    - title: From analytics to surveys, everything you need to build delightful customer experiences on mobile, web, and desktop. Your dedicated product analytics server awaits you.
+      url: https://cdn.prod.website-files.com/61c1b7c3e2f3805325be4594/646ca75af762159d03f456f1_mycountlyhero.svg
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key
