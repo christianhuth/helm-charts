@@ -21,7 +21,7 @@ annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency to redis to 20.11.1
+      description: dependency to redis to 20.11.2
   artifacthub.io/screenshots: |
     - title: Dashboard overview of a Kubernetes cluster
       url: https://codeberg.org/hjacobs/kube-ops-view/media/branch/main/screenshot.png
