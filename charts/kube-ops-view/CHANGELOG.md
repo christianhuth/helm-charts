@@ -4,4 +4,4 @@
 
 ### Changed
 
-- dependency to redis to 20.11.0
+- dependency to redis to 20.11.1
