@@ -3,7 +3,7 @@ apiVersion: v2
 name: kube-ops-view
 description: A Helm chart for bootstrapping kube-ops-view.
 type: application
-version: 4.5.3
+version: 4.5.4
 appVersion: "23.5.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://codeberg.org/repo-avatars/677-c51f6426305941cab515fdd98368f0bb
@@ -21,7 +21,7 @@ annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency to redis to 20.11.2
+      description: dependency to redis to 20.11.3
   artifacthub.io/screenshots: |
     - title: Dashboard overview of a Kubernetes cluster
       url: https://codeberg.org/hjacobs/kube-ops-view/media/branch/main/screenshot.png
