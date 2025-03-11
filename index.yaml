@@ -131,6 +131,50 @@ entries:
       artifacthub.io/category: database
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency to postgresql to 16.5.0
+        - kind: changed
+          description: dependency to redis to 20.11.3
+      artifacthub.io/screenshots: |
+        - title: Create your own online database without technical experience.
+          url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
+        - title: With Baserow you decide how you want to structure everything. Whether you’re managing customers, products, airplanes or all of them.
+          url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
+        - title: Easily create custom plugins with our boilerplate or use third party ones.
+          url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.31.1
+    created: "2025-03-11T07:27:17.668210925Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.5.0
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.11.3
+    description: Baserow is an open source no-code database and Airtable alternative.
+    digest: 3d0833024bf45ba6c22fd716599576af1d70f6661ad0f87fb4719b9fd35493df
+    home: https://github.com/christianknell/helm-charts
+    icon: https://baserow.io/img/favicon_192.png
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: baserow
+    sources:
+    - https://gitlab.com/bramw/baserow
+    - https://baserow.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/baserow-3.7.0/baserow-3.7.0.tgz
+    version: 3.7.0
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency to redis to 20.11.2
       artifacthub.io/screenshots: |
         - title: Create your own online database without technical experience.
@@ -39631,4 +39675,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-03-11T07:19:06.798356175Z"
+generated: "2025-03-11T07:27:17.670700216Z"
