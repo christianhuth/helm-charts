@@ -20,9 +20,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: App version to 25.05.4
-    - kind: changed
-      description: dependency to mongodb to 16.4.6
+      description: dependency to mongodb to 16.4.7
   artifacthub.io/screenshots: |
     - title: From analytics to surveys, everything you need to build delightful customer experiences on mobile, web, and desktop. Your dedicated product analytics server awaits you.
       url: https://cdn.prod.website-files.com/61c1b7c3e2f3805325be4594/646ca75af762159d03f456f1_mycountlyhero.svg
