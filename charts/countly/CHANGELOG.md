@@ -4,5 +4,4 @@
 
 ### Changed
 
-- App version to 25.05.4
-- dependency to mongodb to 16.4.6
+- dependency to mongodb to 16.4.7
