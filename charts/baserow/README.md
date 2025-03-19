@@ -257,7 +257,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | frontend.extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | frontend.image.pullPolicy | string | `"Always"` | image pull policy |
 | frontend.image.repository | string | `"baserow/web-frontend"` | image repository |
-| frontend.image.tag | string | `"1.31.1"` | Overrides the image tag |
+| frontend.image.tag | string | `"1.32.0"` | Overrides the image tag |
 | frontend.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | frontend.ingress.annotations | object | `{}` | Additional annotations for the Ingress resource |
 | frontend.ingress.className | string | `""` | IngressClass that will be be used to implement the Ingress |
