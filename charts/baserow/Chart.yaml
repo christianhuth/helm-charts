@@ -27,7 +27,7 @@ annotations:
     - kind: changed
       description: dependency to postgresql to 16.5.2
     - kind: changed
-      description: App verison to 1.32.0
+      description: App version to 1.32.0
   artifacthub.io/screenshots: |
     - title: Create your own online database without technical experience.
       url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
