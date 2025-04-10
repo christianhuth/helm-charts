@@ -430,7 +430,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "3.5.19",
+          "default": "3.5.21",
           "description": "Overrides the image tag",
           "required": [],
           "title": "tag",
