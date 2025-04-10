@@ -1,4 +1,4 @@
-name: renovate-config-validator
+name: Renovate Configuration Validator
 
 on:
   push:
