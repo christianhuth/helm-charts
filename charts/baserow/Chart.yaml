@@ -19,13 +19,15 @@ dependencies:
     condition: postgresql.enabled
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 20.11.3
+    version: 20.11.5
     condition: redis.enabled
 annotations:
   artifacthub.io/category: database
   artifacthub.io/changes: |
     - kind: changed
       description: dependency to postgresql to 16.6.3
+    - kind: changed
+      description: dependency to redis to 20.11.5
     - kind: changed
       description: App version to 1.32.1
   artifacthub.io/screenshots: |
