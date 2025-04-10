@@ -155,7 +155,7 @@ backend:
       # -- image pull policy
       pullPolicy: Always
       # -- Overrides the image tag
-      tag: "1.32.0"
+      tag: "1.32.5"
 
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
     imagePullSecrets: []
@@ -271,7 +271,7 @@ backend:
       # -- image pull policy
       pullPolicy: Always
       # -- Overrides the image tag
-      tag: "1.32.0"
+      tag: "1.32.5"
 
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
     imagePullSecrets: []
@@ -527,7 +527,7 @@ backend:
       # -- image pull policy
       pullPolicy: Always
       # -- Overrides the image tag
-      tag: "1.32.0"
+      tag: "1.32.5"
 
     # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
     imagePullSecrets: []
