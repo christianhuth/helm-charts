@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run --rm -v "$(pwd):/usr/src/app" renovate/renovate renovate-config-validator
+docker run --rm -v "$(pwd):/usr/src/app" renovate/renovate renovate-config-validator --strict
