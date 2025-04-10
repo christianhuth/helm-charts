@@ -3,6 +3,7 @@
   "extends": [
     "config:recommended"
   ],
+  "assignees": ["christianhuth"],
   "bumpVersion": "patch",
   "additionalBranchPrefix": "{{parentDir}}-"
 }
