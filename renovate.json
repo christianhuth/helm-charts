@@ -6,5 +6,6 @@
   "assignees": ["christianhuth"],
   "bumpVersion": "patch",
   "additionalBranchPrefix": "{{parentDir}}-",
-  "prHourlyLimit": 10
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0
 }
