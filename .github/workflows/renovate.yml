@@ -14,6 +14,8 @@ jobs:
           ref: ${{ github.head_ref }}
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v41.0.18
+        env:
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
         with:
           configurationFile: renovate.json
           token: ${{ secrets.RENOVATE_TOKEN }}
