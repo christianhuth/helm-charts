@@ -4,24 +4,24 @@
     "config:recommended",
     ":disableDependencyDashboard"
   ],
+  "additionalBranchPrefix": "{{parentDir}}-",
   "assignees": ["christianhuth"],
   "bumpVersion": "patch",
-  "additionalBranchPrefix": "{{parentDir}}-",
+  "labels": ["renovate"],
   "packageRules": [
     {
       "matchFileNames": ["charts/(?<chartName>[^/]+)/**"],
       "groupName": "Updates for chart ${chartName}"
     },
     {
-      "matchManagers": ["custom.regex", "helm-values"],
+      "matchManagers": ["custom.regex", "helm-values", "helmv3"],
       "postUpgradeTasks": {
-        "commands": ["./renovate_update_chart.sh '{{{parentDir}}}' '{{{updateType}}}'"],
+        "commands": ["./renovate_update_chart.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{depName}}}' '{{{newVersion}}}'"],
         "fileFilters": ["**/Chart.yaml"]
       }
     }
   ],
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
-  "labels": ["renovate"],
   "timezone": "Europe/Berlin"
 }
