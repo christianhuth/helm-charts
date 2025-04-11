@@ -15,7 +15,8 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v41.0.18
         env:
+          LOG_LEVEL: DEBUG  # or INFO, WARN, ERROR, FATAL
           RENOVATE_REPOSITORIES: ${{ github.repository }}
         with:
-          configurationFile: renovate.json
+          configurationFile: .github/config/renovate.js
           token: ${{ secrets.RENOVATE_TOKEN }}
