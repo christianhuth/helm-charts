@@ -8,5 +8,7 @@
   "bumpVersion": "patch",
   "additionalBranchPrefix": "{{parentDir}}-",
   "prHourlyLimit": 0,
-  "prConcurrentLimit": 0
+  "prConcurrentLimit": 0,
+  "labels": ["renovate"],
+  "timezone": "Europe/Berlin"
 }
