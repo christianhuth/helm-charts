@@ -35,3 +35,6 @@ echo "New version is ${newversion}"
 
 # change version in Chart.yaml
 sed -i "s/^version:.*/version: ${newversion}/g" "charts/${CHART}/Chart.yaml"
+
+# change version in CHANGELOG.md
+sed -i "0,/^## [0-9]\+\(\.[0-9]\+\)*$/s/^## [0-9]\+\(\.[0-9]\+\)*$/## $newVersion/" "charts/${CHART}/CHANGELOG.md"
