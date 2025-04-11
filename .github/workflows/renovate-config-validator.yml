@@ -15,8 +15,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.head_ref }}
           persist-credentials: false
+          ref: ${{ github.head_ref }}
 
       - name: Validate configuration file for Renovate
         uses: suzuki-shunsuke/github-action-renovate-config-validator@v1.1.1
