@@ -7,7 +7,7 @@ on:
 jobs:
 
   detect-changed-charts:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       matrix: ${{ steps.get-changed-charts.outputs.matrix }}
     steps:
@@ -40,7 +40,7 @@ jobs:
 
   kubeconform:
     needs: detect-changed-charts
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     if: ${{ needs.detect-changed-charts.outputs.matrix != '[]' }}
     strategy:
       fail-fast: false
