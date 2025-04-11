@@ -11,13 +11,10 @@
   "packageRules": [
     {
       "matchFileNames": ["charts/(?<chartName>[^/]+)/**"],
-      "groupName": "Updates for chart ${chartName}"
-    },
-    {
-      "matchManagers": ["custom.regex", "helm-values", "helmv3"],
+      "groupName": "Updates for chart ${chartName}",
       "postUpgradeTasks": {
-        "commands": ["./renovate-update-chart.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{depName}}}' '{{{newVersion}}}'"],
-        "fileFilters": ["**/Chart.yaml"]
+        "commands": ["./renovate-update-chart.sh ${chartName} {{updateType}} {{depName}} {{newValue}}"],
+        "fileFilters": ["charts/${chartName}/Chart.yaml"]
       }
     }
   ],
