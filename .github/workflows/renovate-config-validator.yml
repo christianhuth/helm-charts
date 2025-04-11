@@ -5,6 +5,8 @@ on:
     paths: ["renovate.json"]
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -14,6 +16,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
+          persist-credentials: false
 
       - name: Validate configuration file for Renovate
         uses: suzuki-shunsuke/github-action-renovate-config-validator@v1.1.1
