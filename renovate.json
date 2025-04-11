@@ -10,11 +10,11 @@
   "labels": ["renovate"],
   "packageRules": [
     {
-      "matchFileNames": ["charts/(?<chartName>[^/]+)/**"],
-      "groupName": "Updates for chart ${chartName}",
+      "matchFileNames": ["charts/passbolt-ha/Chart.yaml"],
+      "groupName": "Updates for chart passbolt-ha",
       "postUpgradeTasks": {
-        "commands": ["./renovate-update-chart.sh ${chartName} {{updateType}} {{depName}} {{newValue}}"],
-        "fileFilters": ["charts/${chartName}/Chart.yaml"]
+        "commands": ["./renovate-update-chart.sh 'passbolt-ha' {{updateType}} {{depName}} {{newValue}}"],
+        "executionMode": "branch"
       }
     }
   ],
