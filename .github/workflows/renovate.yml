@@ -11,7 +11,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
           ref: ${{ github.head_ref }}
+
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v41.0.18
         env:
