@@ -16,7 +16,7 @@
     {
       "matchManagers": ["custom.regex", "helm-values", "helmv3"],
       "postUpgradeTasks": {
-        "commands": ["./renovate_update_chart.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{depName}}}' '{{{newVersion}}}'"],
+        "commands": ["./renovate-update-chart.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{depName}}}' '{{{newVersion}}}'"],
         "fileFilters": ["**/Chart.yaml"]
       }
     }
