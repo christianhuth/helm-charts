@@ -2,13 +2,15 @@
 
 set -o pipefail
 
-[[ "${#}" == "2" ]] || {
-    echo "Please give the chart name and the update type as only arguments"
+[[ "${#}" == "4" ]] || {
+    echo "Please give the chart name, the update type, dependency name and the new version of the dependency as only arguments"
     exit 3
 }
 
 CHART="$1"
 UPDATE_TYPE="$2"
+DEP_NAME="$3"
+DEP_VERSION_NEW="$4"
 
 version="$(awk '/^version:/ {print $2}' "charts/${CHART}/Chart.yaml")"
 echo "Old version is ${version}"
