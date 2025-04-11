@@ -7,6 +7,12 @@
   "assignees": ["christianhuth"],
   "bumpVersion": "patch",
   "additionalBranchPrefix": "{{parentDir}}-",
+  "packageRules": [
+    {
+      "matchPaths": ["charts/(?<chartName>[^/]+)/**"],
+      "groupName": "Updates for chart ${chartName}"
+    }
+  ],
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
   "labels": ["renovate"],
