@@ -9,7 +9,7 @@
   "additionalBranchPrefix": "{{parentDir}}-",
   "packageRules": [
     {
-      "matchPaths": ["charts/(?<chartName>[^/]+)/**"],
+      "matchFileNames": ["charts/(?<chartName>[^/]+)/**"],
       "groupName": "Updates for chart ${chartName}"
     }
   ],
