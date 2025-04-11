@@ -32,11 +32,11 @@ else
   patch="$(( patch + 1 ))"
 fi
 
-newversion="${major}.${minor}.${patch}"
-echo "New version is ${newversion}"
+newVersion="${major}.${minor}.${patch}"
+echo "New version is ${newVersion}"
 
 # change version in Chart.yaml
-sed -i "s/^version:.*/version: ${newversion}/g" "charts/${CHART}/Chart.yaml"
+sed -i "s/^version:.*/version: ${newVersion}/g" "charts/${CHART}/Chart.yaml"
 
 # change version in CHANGELOG.md
-sed -i "0,/^## [0-9]\+\(\.[0-9]\+\)*$/s/^## [0-9]\+\(\.[0-9]\+\)*$/## $newVersion/" "charts/${CHART}/CHANGELOG.md"
+sed -i -E "0,/^## [0-9]+(\.[0-9]+)*$/s/^## [0-9]+(\.[0-9]+)*$/## ${newVersion}/" "charts/${CHART}/CHANGELOG.md"
