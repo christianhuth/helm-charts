@@ -11,9 +11,8 @@
   "packageRules": [
     {
       "matchFileNames": ["charts/passbolt-ha/Chart.yaml"],
-      "groupName": "Updates for chart passbolt-ha",
       "postUpgradeTasks": {
-        "commands": ["./renovate-update-chart.sh 'passbolt-ha' {{updateType}} {{depName}} {{newValue}}"],
+        "commands": ["bash ./renovate-update-chart.sh 'passbolt-ha' '{{{updateType}}}' '{{{depName}}}' '{{{newValue}}}'"],
         "executionMode": "branch"
       }
     }
