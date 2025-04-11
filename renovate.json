@@ -10,7 +10,7 @@
   "labels": ["renovate"],
   "packageRules": [
     {
-      "matchFileNames": ["charts/[^/]+/.+/Chart.yaml"],
+      "matchFileNames": ["charts/[^/]+/Chart.yaml"],
       "postUpgradeTasks": {
         "commands": ["bash ./renovate-update-chart.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{depName}}}' '{{{newValue}}}'"],
         "executionMode": "branch"
