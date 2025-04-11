@@ -3,5 +3,5 @@ module.exports = {
   "gitAuthor": "Renovate Bot <renovate@christianhuth.de>",
   "onboarding": false,
   "allowPostUpgradeCommandTemplating": true,
-  "allowedPostUpgradeCommands": ["^.*",],
+  "allowedPostUpgradeCommands": ["^.*",]
 };
