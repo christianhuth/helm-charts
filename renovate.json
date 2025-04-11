@@ -11,6 +11,13 @@
     {
       "matchFileNames": ["charts/(?<chartName>[^/]+)/**"],
       "groupName": "Updates for chart ${chartName}"
+    },
+    {
+      "matchManagers": ["custom.regex", "helm-values"],
+      "postUpgradeTasks": {
+        "commands": ["./renovate_update_chart.sh '{{{parentDir}}}' '{{{updateType}}}'"],
+        "fileFilters": ["**/Chart.yaml"]
+      }
     }
   ],
   "prHourlyLimit": 0,
