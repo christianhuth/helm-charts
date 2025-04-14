@@ -23,6 +23,4 @@ jobs:
           configurationFile: .github/config/renovate.js
           docker-cmd-file: ./renovate-action-entrypoint.sh
           docker-user: root
-          docker-volumes: |
-            ./github/generate-chart-changelogs.sh:/generate-chart-changelogs.sh
           token: ${{ secrets.RENOVATE_TOKEN }}
