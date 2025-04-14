@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Install wget
+sudo apt update && sudo apt install -y wget
+
 # Install yq
 YQ_VERSION="v4.43.1"
 wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 -O /usr/local/bin/yq
