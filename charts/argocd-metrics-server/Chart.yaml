@@ -13,8 +13,8 @@ sources:
   - https://github.com/argoproj-labs/argocd-extension-metrics
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Changelog
+    - kind: changed
+      description: dependency of mysql to 12.3.3
   artifacthub.io/signKey: |
     fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
     url: https://charts.christianhuth.de/public.key
