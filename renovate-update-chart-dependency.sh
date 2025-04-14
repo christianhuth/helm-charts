@@ -28,8 +28,8 @@ then
   minor="$(( minor + 1 ))"
   patch=0
 else
-  # this means updates of type patch or pinDigest
-  patch="$(( patch + 1 ))"
+  # We do not need to bump the patch version as this happened already beforehand by Renovate
+  patch="$(( patch ))"
 fi
 
 NEW_VERSION="${major}.${minor}.${patch}"
