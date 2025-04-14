@@ -51,7 +51,7 @@ echo "Chart: ${CHART_VERSION_NEW}"
 echo "Image: ${IMAGE_VERSION_NEW}"
 
 # change appVersion in Chart.yaml
-sed -i "s/^appVersion:.*/appVersion: ${IMAGE_VERSION_NEW}/g" "charts/${CHART}/Chart.yaml"
+sed -i "s/^appVersion:.*/appVersion: \"${IMAGE_VERSION_NEW}\"/g" "charts/${CHART}/Chart.yaml"
 
 # replace changes annotation for artifacthub in Chart.yaml
 changes=$"- kind: changed\n  description: appVersion to ${IMAGE_VERSION_NEW}\n"
