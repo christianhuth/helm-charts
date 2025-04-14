@@ -14,15 +14,6 @@ jobs:
           persist-credentials: false
           ref: ${{ github.head_ref }}
 
-      - name: Install yq
-        run: |
-          YQ_VERSION="v4.43.1"
-          wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 -O /usr/local/bin/yq
-          chmod +x /usr/local/bin/yq
-
-      - name: Test yq
-        run: yq --version
-
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v41.0.18
         env:
