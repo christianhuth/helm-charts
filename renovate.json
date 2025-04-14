@@ -10,9 +10,16 @@
   "labels": ["renovate"],
   "packageRules": [
     {
-      "matchManagers": ["helmv3", "helm-values"],
+      "matchManagers": ["helmv3"],
       "postUpgradeTasks": {
-        "commands": ["bash ./renovate-update-chart.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{depName}}}' '{{{newValue}}}'"],
+        "commands": ["bash ./renovate-update-chart-dependency.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{depName}}}' '{{{newValue}}}'"],
+        "executionMode": "branch"
+      }
+    },
+    {
+      "matchManagers": ["helm-values"],
+      "postUpgradeTasks": {
+        "commands": ["bash ./renovate-update-chart-values.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{newValue}}}'"],
         "executionMode": "branch"
       }
     }
