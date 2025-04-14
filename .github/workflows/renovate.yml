@@ -22,12 +22,6 @@ jobs:
           which yq
           yq --version
 
-      - name: Install gomplate
-        uses: jason-dour/action-setup-gomplate@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: gomplate --version
-
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v41.0.18
         env:
