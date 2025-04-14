@@ -17,11 +17,6 @@ jobs:
       - name: Install yq
         uses: dcarbone/install-yq-action@v1
 
-      - name: 'Check yq'
-        run: |
-          which yq
-          yq --version
-
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v41.0.18
         env:
