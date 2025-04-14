@@ -32,11 +32,11 @@ else
   patch="$(( patch + 1 ))"
 fi
 
-newVersion="${major}.${minor}.${patch}"
-echo "New version is ${newVersion}"
+NEW_VERSION="${major}.${minor}.${patch}"
+echo "New version is ${NEW_VERSION}"
 
 # change version in Chart.yaml
-sed -i "s/^version:.*/version: ${newVersion}/g" "charts/${CHART}/Chart.yaml"
+sed -i "s/^version:.*/version: ${NEW_VERSION}/g" "charts/${CHART}/Chart.yaml"
 
 # replace changes annotation for artifacthub in Chart.yaml
 changes=$"- kind: changed\n  description: dependency of ${DEP_NAME} to ${DEP_VERSION_NEW}\n"
@@ -44,7 +44,6 @@ yq eval ".annotations.\"artifacthub.io/changes\" = \"${changes}\"" -i charts/${C
 
 # update CHANGELOG.md
 cat > charts/${CHART}/CHANGELOG.md <<EOL
-
 # ${CHART}
 
 ## ${NEW_VERSION}
