@@ -17,18 +17,6 @@ jobs:
       - name: Install yq
         uses: dcarbone/install-yq-action@v1
 
-      - name: Install gomplate
-        uses: jason-dour/action-setup-gomplate@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          gomplate-version: v4.3.1
-
-      - name: Test gomplate
-        run: |
-          which gomplate
-          gomplate --version
-
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v41.0.18
         env:
