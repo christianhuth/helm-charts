@@ -51,5 +51,7 @@ cat > charts/${CHART}/CHANGELOG.md <<EOL
 ### Changed
 
 - dependency to ${DEP_NAME} to ${DEP_VERSION_NEW}
-
 EOL
+
+# Ensure the file ends with a single newline
+echo >> charts/${CHART}/CHANGELOG.md
