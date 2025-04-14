@@ -2,8 +2,8 @@ apiVersion: v2
 name: shlink-backend
 description: A PHP-based self-hosted URL shortener that can be used to serve shortened URLs under your own domain.
 type: application
-version: 5.8.0
-appVersion: "4.4.5"
+version: 5.8.1
+appVersion: "4.4.6"
 home: https://github.com/christianhuth/helm-charts
 icon: https://shlink.io/images/shlink-logo-blue.svg
 maintainers:
@@ -36,15 +36,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency to mariadb to 20.4.2
-    - kind: changed
-      description: dependency to mysql to 12.3.3
-    - kind: changed
-      description: dependency to postgresql to 16.6.3
-    - kind: changed
-      description: dependency to rabbitmq to 15.5.1
-    - kind: changed
-      description: dependency to redis to 20.11.5
+      description: App Version to 4.4.6
   artifacthub.io/signKey: |
     fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
     url: https://charts.christianhuth.de/public.key
