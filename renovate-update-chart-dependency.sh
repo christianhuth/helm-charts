@@ -42,4 +42,5 @@ sed -i "s/^version:.*/version: ${newVersion}/g" "charts/${CHART}/Chart.yaml"
 sed -i -E "0,/^## [0-9]+(\.[0-9]+)*$/s/^## [0-9]+(\.[0-9]+)*$/## ${newVersion}/" "charts/${CHART}/CHANGELOG.md"
 
 # replace changes annotation for artifacthub
-yq eval ".annotations.\"artifacthub.io/changes\" = [{\"kind\": \"changed\", \"description\": \"dependency to ${DEP_NAME} to ${DEP_VERSION_NEW}\"}]" -i "charts/${CHART}/Chart.yaml"
+changes=$"- kind: changed\n  description: dependency of ${DEP_NAME} to ${DEP_VERSION_NEW}\n"
+yq eval ".annotations.\"artifacthub.io/changes\" = \"${changes}\"" -i charts/argocd-metrics-server/Chart.yaml
