@@ -19,7 +19,7 @@
     {
       "matchManagers": ["helm-values"],
       "postUpgradeTasks": {
-        "commands": ["bash ./renovate-update-chart-values.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{newValue}}}'"],
+        "commands": ["bash ./renovate-update-chart-values.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{currentValue}}}' '{{{newValue}}}'"],
         "executionMode": "branch"
       }
     }
