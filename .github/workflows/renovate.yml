@@ -29,8 +29,6 @@ jobs:
           RENOVATE_REPOSITORIES: ${{ github.repository }}
         with:
           configurationFile: .github/config/renovate.js
-          docker-cmd-file: ./renovate-action-entrypoint.sh
-          docker-user: root
           docker-volumes: |
             /usr/bin/gomplate:/usr/local/bin/gomplate ;
             /usr/bin/yq:/usr/local/bin/yq ;
