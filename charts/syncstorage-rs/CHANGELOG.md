@@ -4,4 +4,4 @@
 
 ### Changed
 
-- dependency of mariadb mariadb to 20.4.2
+- dependency of mariadb to 20.4.2
