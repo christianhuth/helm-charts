@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install wget
-sudo apt update && sudo apt install -y wget
+apt update && apt install -y wget
 
 # Install yq
 YQ_VERSION="v4.43.1"
