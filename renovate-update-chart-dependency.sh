@@ -43,6 +43,4 @@ changes=$"- kind: changed\n  description: dependency of ${DEP_NAME} to ${DEP_VER
 yq eval ".annotations.\"artifacthub.io/changes\" = \"${changes}\"" -i charts/${CHART}/Chart.yaml
 
 # update CHANGELOG.md
-ls -al
-ls -al .github
 .github/generate-chart-changelogs.sh
