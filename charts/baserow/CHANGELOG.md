@@ -4,5 +4,6 @@
 
 ### Changed
 
-- dependency to postgresql to 16.5.2
-- App version to 1.32.0
+- dependency to postgresql to 16.6.3
+- dependency to redis to 20.11.5
+- App version to 1.32.1
