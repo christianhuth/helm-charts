@@ -38,9 +38,19 @@ echo "New version is ${newVersion}"
 # change version in Chart.yaml
 sed -i "s/^version:.*/version: ${newVersion}/g" "charts/${CHART}/Chart.yaml"
 
-# change version in CHANGELOG.md
-sed -i -E "0,/^## [0-9]+(\.[0-9]+)*$/s/^## [0-9]+(\.[0-9]+)*$/## ${newVersion}/" "charts/${CHART}/CHANGELOG.md"
-
-# replace changes annotation for artifacthub
+# replace changes annotation for artifacthub in Chart.yaml
 changes=$"- kind: changed\n  description: dependency of ${DEP_NAME} to ${DEP_VERSION_NEW}\n"
 yq eval ".annotations.\"artifacthub.io/changes\" = \"${changes}\"" -i charts/${CHART}/Chart.yaml
+
+# update CHANGELOG.md
+cat >> charts/${CHART}/CHANGELOG.md <<EOL
+
+# ${CHART}
+
+## ${NEW_VERSION}
+
+### Changed
+
+- dependency to ${DEP_NAME} to ${DEP_VERSION_NEW}
+
+EOL
