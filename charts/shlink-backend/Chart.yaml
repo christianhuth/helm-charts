@@ -2,7 +2,7 @@ apiVersion: v2
 name: shlink-backend
 description: A PHP-based self-hosted URL shortener that can be used to serve shortened URLs under your own domain.
 type: application
-version: 5.7.1
+version: 5.8.0
 appVersion: "4.4.5"
 home: https://github.com/christianhuth/helm-charts
 icon: https://shlink.io/images/shlink-logo-blue.svg
@@ -15,28 +15,36 @@ sources:
 dependencies:
   - name: mariadb
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 20.4.1
+    version: 20.4.2
     condition: mariadb.enabled
   - name: mysql
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 12.3.1
+    version: 12.3.3
     condition: mysql.enabled
   - name: postgresql
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 16.5.2
+    version: 16.6.3
     condition: postgresql.enabled
   - name: rabbitmq
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 15.3.3
+    version: 15.5.1
     condition: rabbitmq.enabled
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 20.11.3
+    version: 20.11.5
     condition: redis.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency to postgresql to 16.5.2
+      description: dependency to mariadb to 20.4.2
+    - kind: changed
+      description: dependency to mysql to 12.3.3
+    - kind: changed
+      description: dependency to postgresql to 16.6.3
+    - kind: changed
+      description: dependency to rabbitmq to 15.5.1
+    - kind: changed
+      description: dependency to redis to 20.11.5
   artifacthub.io/signKey: |
     fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
     url: https://charts.christianhuth.de/public.key
