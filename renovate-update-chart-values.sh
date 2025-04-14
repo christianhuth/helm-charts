@@ -40,5 +40,14 @@ sed -i "s/^appVersion:.*/appVersion: ${NEW_VERSION}/g" "charts/${CHART}/Chart.ya
 changes=$"- kind: changed\n  description: appVersion to ${DEP_VERSION_NEW}\n"
 yq eval ".annotations.\"artifacthub.io/changes\" = \"${changes}\"" -i charts/${CHART}/Chart.yaml
 
+# change image tag in values.yaml
+sed -i "s/${DEP_VERSION_OLD}/${DEP_VERSION_NEW}/g" "charts/${CHART}/values.yaml"
+
+# change image tag in values.schema.json
+sed -i "s/${DEP_VERSION_OLD}/${DEP_VERSION_NEW}/g" "charts/${CHART}/values.schema.json"
+
+# change image tag in README.md
+sed -i "s/${DEP_VERSION_OLD}/${DEP_VERSION_NEW}/g" "charts/${CHART}/README.md"
+
 # update CHANGELOG.md
 .github/generate-chart-changelogs.sh
