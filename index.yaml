@@ -22828,6 +22828,61 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency to mariadb to 20.4.2
+        - kind: changed
+          description: dependency to mysql to 12.3.3
+        - kind: changed
+          description: dependency to postgresql to 16.6.3
+        - kind: changed
+          description: dependency to rabbitmq to 15.5.1
+        - kind: changed
+          description: dependency to redis to 20.11.5
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 4.4.5
+    created: "2025-04-14T13:51:55.289417191Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.4.2
+    - condition: mysql.enabled
+      name: mysql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 12.3.3
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.6.3
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 15.5.1
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.11.5
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: ce39ae246e5f0df82224d642ba307b6d41e3fd3c7e1342d9ad5610ca56e720e8
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-backend-5.8.0/shlink-backend-5.8.0.tgz
+    version: 5.8.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency to postgresql to 16.5.2
       artifacthub.io/signKey: |
         fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
@@ -40565,4 +40620,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-04-14T13:39:11.324331953Z"
+generated: "2025-04-14T13:51:55.291076994Z"
