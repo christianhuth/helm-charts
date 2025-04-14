@@ -3,5 +3,5 @@ module.exports = {
   "gitAuthor": "Renovate Bot <renovate@christianhuth.de>",
   "onboarding": false,
   "allowPostUpgradeCommandTemplating": true,
-  "allowedPostUpgradeCommands": ["./renovate-update-chart.sh"]
+  "allowedPostUpgradeCommands": ["./renovate-update-chart-dependency.sh"]
 };
