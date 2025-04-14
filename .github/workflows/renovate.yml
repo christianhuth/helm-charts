@@ -17,7 +17,7 @@ jobs:
       - name: Install yq
         uses: dcarbone/install-yq-action@v1
 
-      - name: Install homplate
+      - name: Install gomplate
         run: |
           curl -o /usr/local/bin/gomplate -sSL https://github.com/hairyhenderson/gomplate/releases/download/v4.3.0/gomplate_linux-am64
           chmod 755 /usr/local/bin/gomplate
