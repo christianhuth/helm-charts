@@ -30,4 +30,6 @@ jobs:
           RENOVATE_REPOSITORIES: ${{ github.repository }}
         with:
           configurationFile: .github/config/renovate.js
+          docker-cmd-file: ./renovate-action-entrypoint.sh
+          docker-user: root
           token: ${{ secrets.RENOVATE_TOKEN }}
