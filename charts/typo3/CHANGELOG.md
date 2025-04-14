@@ -1,7 +1,8 @@
 # typo3
 
-## 3.2.1
+## 3.2.3
 
 ### Changed
 
-- dependency to postgresql to 16.5.2
+- dependency to mysql to 12.3.3
+
