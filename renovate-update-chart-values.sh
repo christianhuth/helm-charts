@@ -50,6 +50,9 @@ echo "New versions are:"
 echo "Chart: ${CHART_VERSION_NEW}"
 echo "Image: ${IMAGE_VERSION_NEW}"
 
+# change version in Chart.yaml
+sed -i "s/^version:.*/version: ${CHART_VERSION_NEW}/g" "charts/${CHART}/Chart.yaml"
+
 # change appVersion in Chart.yaml
 sed -i "s/^appVersion:.*/appVersion: \"${IMAGE_VERSION_NEW}\"/g" "charts/${CHART}/Chart.yaml"
 
