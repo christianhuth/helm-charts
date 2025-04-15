@@ -24,7 +24,6 @@
       }
     },
     {
-      "matchManagers": ["helmv3", "helm-values"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
       "automergeType": "pr",
