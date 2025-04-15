@@ -70,11 +70,3 @@ jobs:
 
       - name: Run chart-testing (install)
         run: "ct install --charts ${{ matrix.chart }} --config .github/config/chart-testing.yaml"
-
-  check-all-tests:
-    name: ✅ All Tests Passed
-    runs-on: ubuntu-latest
-    needs: installation  # Waits for all matrix jobs to finish
-    if: success()  # Only runs if all test jobs succeed
-    steps:
-      - run: echo "🎉 All matrix jobs passed!"
