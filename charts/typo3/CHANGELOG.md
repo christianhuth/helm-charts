@@ -1,7 +1,7 @@
 # typo3
 
-## 3.4.1
+## 3.4.2
 
 ### Changed
 
-- dependency of mysql to 12.3.3
+- dependency of mysql to 12.3.4
