@@ -22,6 +22,12 @@
         "commands": ["bash ./renovate-update-chart-values.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{currentValue}}}' '{{{newValue}}}'"],
         "executionMode": "branch"
       }
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
     }
   ],
   "prHourlyLimit": 0,
