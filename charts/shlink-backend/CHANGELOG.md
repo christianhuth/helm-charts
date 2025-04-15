@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 5.8.2
+## 5.8.3
 
 ### Changed
 
-- dependency of rabbitmq to 15.5.2
+- dependency of rabbitmq to 15.5.3
