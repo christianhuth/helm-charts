@@ -2,7 +2,7 @@ apiVersion: v2
 name: typo3
 description: TYPO3 — the Professional, Flexible Content Management System
 type: application
-version: 3.4.1
+version: 3.4.2
 appVersion: "12.4"
 home: https://github.com/christianhuth/helm-charts
 icon: https://www.mdc.de/wp-content/uploads/2016/05/typo3_logo.png
@@ -15,7 +15,7 @@ sources:
 dependencies:
   - name: mysql
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 12.3.3
+    version: 12.3.4
     condition: mysql.enabled
   - name: mariadb
     repository: oci://registry-1.docker.io/bitnamicharts
@@ -28,7 +28,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of mysql to 12.3.3
+      description: dependency of mysql to 12.3.4
   artifacthub.io/screenshots: |
     - title: TYPO3 is a very powerful Web Content Management System.
       url: https://docs.typo3.org/m/typo3/tutorial-getting-started/10.4/en-us/_images/BackendAboutModules.png
