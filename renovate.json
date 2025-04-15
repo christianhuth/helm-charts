@@ -25,9 +25,10 @@
     },
     {
       "matchPaths": ["charts/**"],
+      "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
       "automergeType": "pr",
-      "requiredStatusChecks": ["check-all-tests"]
+      "platformAutomerge": true
     }
   ],
   "prHourlyLimit": 0,
