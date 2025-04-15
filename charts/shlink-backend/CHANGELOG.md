@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 5.9.0
+## 5.9.1
 
 ### Changed
 
-- dependency of redis to 20.12.0
+- dependency of mysql to 12.3.4
