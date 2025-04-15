@@ -128,6 +128,15 @@ umami:
   collectApiEndpoint: ""
   # -- How many seconds a CORS preflight should last. Default is 24 hours.
   corsMaxAge: "86400"
+  customScript:
+    # -- Create and mount a ConfigMap with a custom script
+    enabled: false
+    # -- The custom script
+    data: ""
+    # -- Key in the ConfigMap
+    key: "script.js"
+    # -- The path to mount the custom script to
+    mountPath: "/app/public/script.js"
   # -- Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`.
   debug: ""
   # -- By default bots are excluded from statistics. This disables checking for bots.
