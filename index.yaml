@@ -7350,6 +7350,41 @@ entries:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of redis to 20.12.0
+      artifacthub.io/screenshots: |
+        - title: Dashboard overview of a Kubernetes cluster
+          url: https://codeberg.org/hjacobs/kube-ops-view/media/branch/main/screenshot.png
+        - title: Dashboard showing broken Pods
+          url: https://user-images.githubusercontent.com/1127164/53682720-a2a83780-3cf8-11e9-9384-2c1df186aad4.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 23.5.0
+    created: "2025-04-15T12:53:16.839086122Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.12.0
+    description: A Helm chart for bootstrapping kube-ops-view.
+    digest: 132ae4eda33f8e9f252581baaf4f1bfdee5f8ba1f8bf7acae4a891b1c75286d7
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://codeberg.org/repo-avatars/677-c51f6426305941cab515fdd98368f0bb
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: kube-ops-view
+    sources:
+    - https://codeberg.org/hjacobs/kube-ops-view
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/kube-ops-view-4.6.0/kube-ops-view-4.6.0.tgz
+    version: 4.6.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of redis to 20.11.5
       artifacthub.io/screenshots: |
         - title: Dashboard overview of a Kubernetes cluster
@@ -40978,4 +41013,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-04-15T12:52:59.69673839Z"
+generated: "2025-04-15T12:53:16.841173983Z"
