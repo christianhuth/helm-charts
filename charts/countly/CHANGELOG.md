@@ -1,8 +1,7 @@
 # countly
 
-## 2.0.0
+## 2.1.0
 
 ### Changed
 
-- App version to 25.05.4
-- dependency to mongodb to 16.4.6
+- dependency of mongodb to 16.5.1
