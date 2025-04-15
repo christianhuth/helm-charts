@@ -611,6 +611,46 @@
           "title": "corsMaxAge",
           "type": "string"
         },
+        "customScript": {
+          "properties": {
+            "data": {
+              "default": "",
+              "description": "The custom script",
+              "required": [],
+              "title": "data",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Create and mount a ConfigMap with a custom script",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "key": {
+              "default": "script.js",
+              "description": "Key in the ConfigMap",
+              "required": [],
+              "title": "key",
+              "type": "string"
+            },
+            "mountPath": {
+              "default": "/app/public/script.js",
+              "description": "The path to mount the custom script to",
+              "required": [],
+              "title": "mountPath",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "data",
+            "key",
+            "mountPath"
+          ],
+          "title": "customScript",
+          "type": "object"
+        },
         "debug": {
           "default": "",
           "description": "Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`.",
@@ -741,6 +781,7 @@
         "cloudMode",
         "collectApiEndpoint",
         "corsMaxAge",
+        "customScript",
         "debug",
         "disableBotCheck",
         "disableLogin",
