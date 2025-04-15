@@ -1,8 +1,7 @@
 # umami
 
-## 4.4.0
+## 4.5.0
 
-### Changed
+### Added
 
-- dependency to mysql to 12.3.3
-- dependency to postgresql to 16.6.3
+- option to define a custom Umami script
