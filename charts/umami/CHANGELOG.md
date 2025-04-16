@@ -1,7 +1,7 @@
 # umami
 
-## 4.4.1
+## 4.5.0
 
-### Changed
+### Added
 
-- dependency of mysql to 12.3.4
+- option to define a custom Umami script
