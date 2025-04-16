@@ -1,0 +1,4 @@
+cronJob:
+  extraArgs:
+    - --all-namespaces
+    - --some-other-flag

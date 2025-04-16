@@ -47,9 +47,10 @@ The command removes all the Kubernetes components associated with the chart and 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity settings for pod assignment |
-| cronJob.clusterName | string | `""` |  |
-| cronJob.history.failedJobsHistoryLimit | int | `1` |  |
-| cronJob.history.successfulJobsHistoryLimit | int | `1` |  |
+| cronJob.clusterName | string | `""` | Specify a cluster name when running popeye in cluster |
+| cronJob.extraArgs | list | `[]` | List of additional arguments that will be added to the Container |
+| cronJob.history.failedJobsHistoryLimit | int | `1` | The number of failed finished jobs to retain. Value must be non-negative integer |
+| cronJob.history.successfulJobsHistoryLimit | int | `1` | The number of successful finished jobs to retain. Value must be non-negative integer |
 | cronJob.outputFormat | string | `"standard"` |  |
 | cronJob.prometheus.basicAuth.enabled | bool | `false` | Use authentication against Prometheus Pushgateway |
 | cronJob.prometheus.basicAuth.existingSecret | string | `""` | Name of existing secret to use for authentication against Prometheus Pushgateway, needs to contain the key pushgateway-password |
@@ -59,7 +60,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | cronJob.s3.bucket | string | `""` | bucket name can be the URI and the bucket name path s3://example-bucket |
 | cronJob.s3.endpoint | string | `""` | example endpoint: "https://s3.us-east-1.amazonaws.com" |
 | cronJob.s3.region | string | `""` | example region: "us-east-1" |
-| cronJob.schedule | string | `"* */1 * * *"` |  |
+| cronJob.schedule | string | `"* */1 * * *"` | The schedule in Cron format |
 | cronJob.spinachConfiguration | object | `{}` |  |
 | fullnameOverride | string | `""` | String to fully override `"popeye.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
