@@ -103,6 +103,10 @@ The command removes all the Kubernetes components associated with the chart and 
 | umami.cloudMode | string | `"0"` | Disables users, teams, and websites settings page. |
 | umami.collectApiEndpoint | string | `""` | Allows you to send metrics to a location different than the default `/api/send`. This is to help you avoid some ad-blockers. |
 | umami.corsMaxAge | string | `"86400"` | How many seconds a CORS preflight should last. Default is 24 hours. |
+| umami.customScript.data | string | `""` | The custom script |
+| umami.customScript.enabled | bool | `false` | Create and mount a ConfigMap with a custom script |
+| umami.customScript.key | string | `"script.js"` | Key in the ConfigMap |
+| umami.customScript.mountPath | string | `"/app/public/script.js"` | The path to mount the custom script to |
 | umami.debug | string | `""` | Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`. |
 | umami.disableBotCheck | string | `"1"` | By default bots are excluded from statistics. This disables checking for bots. |
 | umami.disableLogin | string | `"1"` | Disables the login page for the application |
