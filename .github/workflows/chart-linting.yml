@@ -7,7 +7,7 @@ on:
 jobs:
 
   artifacthub-lint:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     container:
       image: artifacthub/ah
       options: --user 1001
@@ -24,7 +24,7 @@ jobs:
         run: ah lint
 
   ct-lint:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: checkout git repository
         uses: actions/checkout@v4
@@ -49,7 +49,7 @@ jobs:
         run: ct lint --config .github/config/chart-testing.yaml
 
   helm-lint:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: checkout git repository
         uses: actions/checkout@v4
