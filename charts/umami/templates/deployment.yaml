@@ -126,6 +126,12 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if .Values.umami.customScript.enabled }}
+          volumeMounts:
+            - name: custom-script
+              mountPath: {{ .Values.umami.customScript.mountPath | quote }}
+              subPath: {{ .Values.umami.customScript.key | quote }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -137,4 +143,10 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.umami.customScript.enabled }}
+      volumes:
+        - name: custom-script
+          configMap:
+            name: {{ include "umami.fullname" . }}
       {{- end }}
