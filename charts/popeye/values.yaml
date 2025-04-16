@@ -55,9 +55,14 @@ tolerations: []
 affinity: {}
 
 cronJob:
+  # -- Specify a cluster name when running popeye in cluster
   clusterName: ""
+  # -- List of additional arguments that will be added to the Container
+  extraArgs: []
   history:
+    # -- The number of failed finished jobs to retain. Value must be non-negative integer
     failedJobsHistoryLimit: 1
+    # -- The number of successful finished jobs to retain. Value must be non-negative integer
     successfulJobsHistoryLimit: 1
   # Popeye can generate sanitizer reports in a variety of formats: standard, jurassic, yaml, html, json, junit, prometheus, score
   outputFormat: standard
@@ -79,6 +84,7 @@ cronJob:
     endpoint: ""
     # -- example region: "us-east-1"
     region: ""
+  # -- The schedule in Cron format
   schedule: "* */1 * * *"
   spinachConfiguration: {}
     # # A Popeye sample configuration file

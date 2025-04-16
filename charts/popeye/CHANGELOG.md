@@ -1,7 +1,7 @@
 # popeye
 
-## 2.2.2
+## 2.3.0
 
-### Fixed
+### Added
 
-- wrong flags for Pushgateway
+- option to define extraArgs

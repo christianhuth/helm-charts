@@ -11,20 +11,32 @@
       "properties": {
         "clusterName": {
           "default": "",
+          "description": "Specify a cluster name when running popeye in cluster",
           "required": [],
           "title": "clusterName",
           "type": "string"
+        },
+        "extraArgs": {
+          "description": "List of additional arguments that will be added to the Container",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "extraArgs",
+          "type": "array"
         },
         "history": {
           "properties": {
             "failedJobsHistoryLimit": {
               "default": 1,
+              "description": "The number of failed finished jobs to retain. Value must be non-negative integer",
               "required": [],
               "title": "failedJobsHistoryLimit",
               "type": "integer"
             },
             "successfulJobsHistoryLimit": {
               "default": 1,
+              "description": "The number of successful finished jobs to retain. Value must be non-negative integer",
               "required": [],
               "title": "successfulJobsHistoryLimit",
               "type": "integer"
@@ -134,6 +146,7 @@
         },
         "schedule": {
           "default": "* */1 * * *",
+          "description": "The schedule in Cron format",
           "required": [],
           "title": "schedule",
           "type": "string"
@@ -146,6 +159,7 @@
       },
       "required": [
         "clusterName",
+        "extraArgs",
         "history",
         "outputFormat",
         "prometheus",

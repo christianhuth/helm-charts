@@ -58,6 +58,9 @@ spec:
                 {{- if .Values.cronJob.s3.endpoint }}
                 - --s3-endpoint={{ .Values.cronJob.s3.endpoint }}
                 {{- end }}
+                {{- if .Values.cronJob.extraArgs }}
+                  {{- .Values.cronJob.extraArgs | toYaml | nindent 16 }}
+                {{- end }}
               {{- if and (eq .Values.cronJob.outputFormat "prometheus") (.Values.cronJob.prometheus.pushgatewayAddress) (.Values.cronJob.prometheus.basicAuth.enabled) }}
               env:
                 - name: PUSHGATEWAY_BASIC_AUTH_PASSWORD
