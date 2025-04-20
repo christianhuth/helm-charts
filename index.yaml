@@ -30930,6 +30930,40 @@ entries:
   shlink-web:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to 4.4.0
+      artifacthub.io/screenshots: |
+        - title: Add a new link that should be shortened.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/creation-form-after.png
+        - title: You can have an overview of all your shortened links.
+          url: https://shlink.io/images/shlink-web-client-placeholder.jpg
+        - title: For each link there are multiple statistical data collected and visualized.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/visits-after.png
+        - title: A typical architecture in which Shlink would be integrated.
+          url: https://shlink.io/images/architecture/shlink-architecture.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 4.4.0
+    created: "2025-04-20T16:08:54.151262939Z"
+    description: A  ReactJS-based progressive web application for Shlink.
+    digest: 0ac2501c83e28c3d7a3198aec7667c3af3b1e59d6635ba2135ebbe68ffdda4c5
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://shlink.io/images/shlink-logo-blue.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-web
+    sources:
+    - https://github.com/shlinkio/shlink-web-client
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-web-1.4.0/shlink-web-1.4.0.tgz
+    version: 1.4.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: Consistently use extraEnv (instead of env)
       artifacthub.io/screenshots: |
@@ -41626,4 +41660,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-04-17T11:37:26.660869573Z"
+generated: "2025-04-20T16:08:54.152650812Z"
