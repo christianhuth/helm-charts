@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.3.3
+## 1.4.0
 
-### Fixed
+### Changed
 
-- Consistently use extraEnv (instead of env)
+- App Version to 4.4.0
