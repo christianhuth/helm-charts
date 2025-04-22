@@ -1,7 +1,7 @@
 # kutt
 
-## 5.7.2
+## 5.8.0
 
 ### Changed
 
-- dependency of redis to 20.12.2
+- dependency of redis to 20.13.0
