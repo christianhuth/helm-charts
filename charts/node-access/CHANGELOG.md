@@ -1,7 +1,7 @@
 # node-access
 
-## 1.1.1
+## 1.1.2
 
 ### Added
 
-- Changelog
+- support link

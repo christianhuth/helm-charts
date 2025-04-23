@@ -3,7 +3,7 @@ apiVersion: v2
 name: syncstorage-rs
 description: A Helm chart for deploying Mozilla's Firefox Sync Storage server to Kubernetes
 type: application
-version: 1.0.3
+version: 1.0.4
 appVersion: "syncstorage-rs-mysql-0.18.2"
 home: https://github.com/christianknell/helm-charts
 icon: https://avatars.githubusercontent.com/u/1066228?s=256
@@ -27,8 +27,11 @@ dependencies:
     condition: tokenserver-db.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: dependency of mariadb mariadb to 20.4.3
+    - kind: added
+      description: support link
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
   artifacthub.io/signKey: |
     fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
     url: https://charts.christianhuth.de/public.key

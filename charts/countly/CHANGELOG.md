@@ -1,7 +1,7 @@
 # countly
 
-## 2.1.0
+## 2.1.1
 
-### Changed
+### Added
 
-- dependency of mongodb to 16.5.1
+- support link

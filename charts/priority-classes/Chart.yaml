@@ -2,7 +2,7 @@ apiVersion: v2
 name: priority-classes
 description: A Helm chart for creating Priority Classes. Already comes with some bundled classes.
 type: application
-version: 1.0.5
+version: 1.0.6
 appVersion: "1.0.0"
 home: https://github.com/christianhuth/helm-charts
 maintainers:
@@ -13,7 +13,10 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: Changelog
+      description: support link
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
   artifacthub.io/signKey: |
     fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
     url: https://charts.christianhuth.de/public.key

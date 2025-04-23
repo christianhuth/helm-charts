@@ -1,7 +1,7 @@
 # sloop
 
-## 0.0.9
+## 0.0.10
 
 ### Added
 
-- Changelog
+- support link

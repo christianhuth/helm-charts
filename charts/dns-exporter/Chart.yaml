@@ -2,7 +2,7 @@ apiVersion: v2
 name: dns-exporter
 description: A multi-target Prometheus exporter with an exclusive focus on DNS monitoring
 type: application
-version: 1.0.0
+version: 1.0.1
 appVersion: "v1.1.0"
 home: https://github.com/christianhuth/helm-charts
 maintainers:
@@ -14,7 +14,10 @@ annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
     - kind: added
-      description: Changelog
+      description: support link
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
   artifacthub.io/screenshots: |
     - title: Display DNS exporter results using Grafana
       url: https://grafana.com/api/dashboards/20617/images/15803/image

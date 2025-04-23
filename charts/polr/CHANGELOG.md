@@ -1,7 +1,7 @@
 # polr
 
-## 2.1.3
+## 2.1.4
 
-### Changed
+### Added
 
-- dependency of mysql to 12.3.4
+- support link

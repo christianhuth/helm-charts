@@ -1,7 +1,7 @@
 # popeye
 
-## 2.3.0
+## 2.3.1
 
 ### Added
 
-- option to define extraArgs
+- support link

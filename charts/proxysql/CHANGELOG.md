@@ -1,7 +1,7 @@
 # proxysql
 
-## 1.3.4
+## 1.3.5
 
-### Changed
+### Added
 
-- App version to 2.7.3
+- support link

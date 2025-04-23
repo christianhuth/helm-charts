@@ -1,7 +1,7 @@
 # etcd-defrag
 
-## 1.2.5
+## 1.2.6
 
-### Changed
+### Added
 
-- App version to 3.5.21
+- support link
