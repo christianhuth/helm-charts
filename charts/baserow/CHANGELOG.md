@@ -1,7 +1,7 @@
 # baserow
 
-## 3.11.2
+## 3.11.3
 
-### Added
+### Changed
 
-- support link
+- dependency of postgresql to 16.6.4
