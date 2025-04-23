@@ -2,7 +2,7 @@ apiVersion: v2
 name: promlens
 description: PromLens is a tool that makes learning and using PromQL easier and more productive
 type: application
-version: 1.0.9
+version: 1.0.10
 appVersion: "v0.3.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
@@ -16,7 +16,10 @@ annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
     - kind: added
-      description: Changelog
+      description: support link
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
   artifacthub.io/screenshots: |
     - title: Build, understand, and fix your queries much more effectively with the ultimate query builder for PromQL.
       url: https://promlens.com/static/promlens-hero-screenshot-7d453e779cf47c6fcec1de8823049257.png

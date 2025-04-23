@@ -1,7 +1,7 @@
 # promlens
 
-## 1.0.9
+## 1.0.10
 
 ### Added
 
-- Changelog
+- support link

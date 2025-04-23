@@ -1,7 +1,7 @@
 # umami
 
-## 4.6.0
+## 4.6.1
 
 ### Added
 
-- option to define an init container
+- support link

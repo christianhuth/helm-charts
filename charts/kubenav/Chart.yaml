@@ -3,7 +3,7 @@ apiVersion: v2
 name: kubenav
 description: A Helm chart for creating the required RBAC for kubenav
 type: application
-version: 1.0.4
+version: 1.0.5
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/kubenav/kubenav/main/utils/images/repo/github-readme-logo.png
 maintainers:
@@ -14,7 +14,10 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: Changelog
+      description: support link
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
   artifacthub.io/screenshots: |
     - title: kubenav is a mobile and desktop app to manage Kubernetes clusters and to get an overview of the status of your Kubernetes resources.
       url: https://raw.githubusercontent.com/kubenav/kubenav/main/utils/images/repo/github-screenshot.png

@@ -1,7 +1,7 @@
 # github-exporter
 
-## 1.0.0
+## 1.0.1
 
 ### Added
 
-- Initial Release
+- support link

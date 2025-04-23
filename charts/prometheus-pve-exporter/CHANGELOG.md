@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.0.4
+## 2.0.5
 
-### Changed
+### Added
 
-- App Version to 3.5.3
+- support link

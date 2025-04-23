@@ -1,7 +1,7 @@
 # dns-exporter
 
-## 1.0.0
+## 1.0.1
 
 ### Added
 
-- Changelog
+- support link

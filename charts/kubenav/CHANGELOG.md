@@ -1,7 +1,7 @@
 # kubenav
 
-## 1.0.4
+## 1.0.5
 
 ### Added
 
-- Changelog
+- support link

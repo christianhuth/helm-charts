@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.4.0
+## 1.4.1
 
-### Changed
+### Added
 
-- App Version to 4.4.0
+- support link

@@ -2,6 +2,6 @@
 
 ## 3.11.0
 
-### Changed
+### Added
 
-- dependency of redis to 20.13.0
+- support link
