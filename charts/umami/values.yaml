@@ -114,6 +114,9 @@ affinity: {}
 # -- additional environment variables to be added to the pods. See https://umami.is/docs/environment-variables for a complete list of available variables. Most variables can be set under umami as well.
 extraEnv: []
 
+# -- define additional init containers
+initContainers: {}
+
 umami:
   appSecret:
     # -- Name of an existing secret containing the app secret under the key app-secret.

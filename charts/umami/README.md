@@ -74,6 +74,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | ingress.enabled | bool | `false` | Enable ingress record generation |
 | ingress.hosts | list | see [values.yaml](./values.yaml) | An array with hosts and paths |
 | ingress.tls | list | `[]` | An array with the tls configuration |
+| initContainers | object | `{}` | define additional init containers |
 | mysql.auth.database | string | `"mychart"` | Name for a custom database to create |
 | mysql.auth.password | string | `"mychart"` | Password for the custom user to create |
 | mysql.auth.username | string | `"mychart"` | Name for a custom user to create |

@@ -314,6 +314,12 @@
       "title": "ingress",
       "type": "object"
     },
+    "initContainers": {
+      "description": "define additional init containers",
+      "required": [],
+      "title": "initContainers",
+      "type": "object"
+    },
     "mysql": {
       "properties": {
         "auth": {
@@ -822,6 +828,7 @@
     "tolerations",
     "affinity",
     "extraEnv",
+    "initContainers",
     "umami",
     "postgresql",
     "mysql",
