@@ -1,7 +1,7 @@
 # umami
 
-## 4.6.1
+## 4.6.2
 
-### Added
+### Changed
 
-- support link
+- dependency of postgresql to 16.6.4
