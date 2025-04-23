@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 5.10.0
+## 5.10.1
 
 ### Changed
 
-- dependency of redis to 20.13.0
+- dependency of redis to 20.13.1
