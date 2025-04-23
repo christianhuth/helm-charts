@@ -1,7 +1,7 @@
 # typo3
 
-## 3.4.4
+## 3.4.5
 
-### Added
+### Changed
 
-- support link
+- dependency of postgresql to 16.6.4
