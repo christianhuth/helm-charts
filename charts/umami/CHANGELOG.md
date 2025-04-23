@@ -1,7 +1,7 @@
 # umami
 
-## 4.5.0
+## 4.6.0
 
 ### Added
 
-- option to define a custom Umami script
+- option to define an init container
