@@ -1,0 +1,118 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "freshrss.fullname" . }}
+  labels:
+    {{- include "freshrss.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "freshrss.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "freshrss.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "freshrss.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ (include "freshrss.image" .) | quote }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            # FreshRSS Settings
+            {{- if (include "freshrss.baseUrl" .) }}
+            - name: BASE_URL
+              value: {{ (include "freshrss.baseUrl" .) | quote }}
+            {{- end }}
+            {{- if and (eq .Values.freshrss.cronjob.type "internal") .Values.freshrss.cronjob.minutes }}
+            - name: CRON_MIN
+              value: {{ .Values.freshrss.cronjob.minutes | quote }}
+            {{- end }}
+            {{- if .Values.freshrss.environment }}
+            - name: FRESHRSS_ENV
+              value: {{ .Values.freshrss.environment | quote }}
+            {{- end }}
+            {{- if .Values.freshrss.initialization.enabled }}
+            - name: FRESHRSS_INSTALL
+              value: {{ (include "freshrss.initialization.installParameters" .) }}
+            - name: FRESHRSS_USER
+              value: {{ (include "freshrss.initialization.adminParameters" .) }}
+            {{- end }}
+            {{- if .Values.service.port }}
+            - name: LISTEN
+              value: {{ .Values.service.port | quote }}
+            {{- end }}
+            {{- if .Values.freshrss.timezone }}
+            - name: TZ
+              value: {{ .Values.freshrss.timezone | quote }}
+            {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if (and .Values.freshrss.persistence.enabled (or .Values.freshrss.persistence.data.enabled .Values.freshrss.persistence.extensions.enabled)) }}
+          volumeMounts:
+            {{- if .Values.freshrss.persistence.data.enabled }}
+            - name: freshrss-data
+              mountPath: /var/www/FreshRSS/data
+            {{- end }}
+            {{- if .Values.freshrss.persistence.extensions.enabled }}
+            - name: freshrss-extensions
+              mountPath: /var/www/FreshRSS/extensions
+            {{- end }}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if (and .Values.freshrss.persistence.enabled (or .Values.freshrss.persistence.data.enabled .Values.freshrss.persistence.extensions.enabled)) }}
+      volumes:
+        {{- if .Values.freshrss.persistence.data.enabled }}
+        - name: freshrss-data
+          persistentVolumeClaim:
+            claimName: {{ include "freshrss.persistence.data.pvcName" . }}
+        {{- end }}
+        {{- if .Values.freshrss.persistence.extensions.enabled }}
+        - name: freshrss-extensions
+          persistentVolumeClaim:
+            claimName: {{ include "freshrss.persistence.extensions.pvcName" . }}
+        {{- end }}
+      {{- end }}

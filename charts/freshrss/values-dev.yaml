@@ -1,0 +1,7 @@
+ingress:
+  enabled: true
+  hosts:
+    - host: freshrss.127.0.0.1.nip.io
+      paths:
+        - path: "/"
+          pathType: ImplementationSpecific
