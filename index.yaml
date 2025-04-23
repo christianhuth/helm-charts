@@ -5414,6 +5414,44 @@ entries:
   freshrss:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: dependency of postgresql to 16.6.4
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: FreshRSS is a self-hosted RSS and Atom feed aggregator.
+          url: https://freshrss.org/images/screenshot.webp
+        - title: FreshRSS natively supports basic Web scraping, based on XPath, for Web sites not providing any RSS / Atom feed. Also supports JSON documents.
+          url: https://raw.githubusercontent.com/FreshRSS/FreshRSS/edge/docs/img/FreshRSS-screenshot.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.26.1
+    created: "2025-04-23T19:40:29.482032388Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.6.4
+    description: FreshRSS is a free, self-hostable feed aggregator
+    digest: fca59624ad80d2a6e3f9883c3ea41dab8f6d54212315aaf842bdeb893da5e7b8
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://avatars.githubusercontent.com/u/9414285
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: freshrss
+    sources:
+    - https://github.com/FreshRSS/FreshRSS
+    - https://freshrss.org/
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/freshrss-1.0.1/freshrss-1.0.1.tgz
+    version: 1.0.1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: initial version
       artifacthub.io/links: |
@@ -43694,4 +43732,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-04-23T19:11:15.354783766Z"
+generated: "2025-04-23T19:40:29.484696093Z"
