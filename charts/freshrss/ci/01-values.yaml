@@ -1,0 +1,15 @@
+---
+freshrss:
+  database:
+    type: postgresql
+  initialization:
+    admin:
+      apiPassword: test1234
+      password: test1234
+
+postgresql:
+  enabled: true
+  auth:
+    database: freshrss
+    password: freshrss
+    username: freshrss

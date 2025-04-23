@@ -1,0 +1,34 @@
+apiVersion: v2
+name: freshrss
+description: FreshRSS is a free, self-hostable feed aggregator
+type: application
+version: 1.0.0
+appVersion: "1.26.1"
+home: https://github.com/christianhuth/helm-charts
+icon: https://avatars.githubusercontent.com/u/9414285
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://github.com/FreshRSS/FreshRSS
+  - https://freshrss.org/
+dependencies:
+  - name: postgresql
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 16.6.3
+    condition: postgresql.enabled
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: initial version
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+  artifacthub.io/screenshots: |
+    - title: FreshRSS is a self-hosted RSS and Atom feed aggregator.
+      url: https://freshrss.org/images/screenshot.webp
+    - title: FreshRSS natively supports basic Web scraping, based on XPath, for Web sites not providing any RSS / Atom feed. Also supports JSON documents.
+      url: https://raw.githubusercontent.com/FreshRSS/FreshRSS/edge/docs/img/FreshRSS-screenshot.png
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key

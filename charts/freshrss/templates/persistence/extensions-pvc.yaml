@@ -1,0 +1,26 @@
+{{- if and (.Values.freshrss.persistence.enabled) (.Values.freshrss.persistence.extensions.enabled) (not .Values.freshrss.persistence.extensions.existingClaim) }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  {{- if (or .Values.freshrss.persistence.annotations .Values.freshrss.persistence.extensions.annotations) }}
+  annotations:
+    {{- toYaml .Values.freshrss.persistence.annotations | nindent 4 }}
+    {{- toYaml .Values.freshrss.persistence.extensions.annotations | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "freshrss.labels" . | nindent 4 }}
+  name: {{ include "freshrss.persistence.extensions.pvcName" . }}
+spec:
+  accessModes:
+  {{- range .Values.freshrss.persistence.extensions.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.freshrss.persistence.extensions.size | quote }}
+  {{- if .Values.freshrss.persistence.extensions.storageClass }}
+  storageClassName: {{ .Values.freshrss.persistence.extensions.storageClass | quote }}
+  {{- else if .Values.freshrss.persistence.storageClass }}
+  storageClassName: {{ .Values.freshrss.persistence.storageClass | quote }}
+  {{- end }}
+{{- end }}
