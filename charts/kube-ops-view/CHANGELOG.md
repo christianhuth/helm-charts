@@ -1,6 +1,6 @@
 # kube-ops-view
 
-## 4.7.1
+## 4.7.2
 
 ### Added
 
