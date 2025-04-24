@@ -2,7 +2,7 @@ apiVersion: v2
 name: freshrss
 description: FreshRSS is a free, self-hostable feed aggregator
 type: application
-version: 1.0.1
+version: 1.0.2
 appVersion: "1.26.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://avatars.githubusercontent.com/u/9414285
@@ -15,12 +15,12 @@ sources:
 dependencies:
   - name: postgresql
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 16.6.4
+    version: 16.6.5
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of postgresql to 16.6.4
+      description: dependency of postgresql to 16.6.5
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
