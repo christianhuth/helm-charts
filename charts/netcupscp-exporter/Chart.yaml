@@ -2,8 +2,8 @@ apiVersion: v2
 name: netcupscp-exporter
 description: Prometheus Exporter for Netcup Server Control Panel (SCP)
 type: application
-version: 1.2.2
-appVersion: "v0.4.1"
+version: 1.2.3
+appVersion: "v0.4.3"
 home: https://github.com/christianhuth/helm-charts
 icon: https://pbs.twimg.com/profile_images/1148537659637358593/rlfCvTK5_400x400.png
 maintainers:
@@ -14,8 +14,8 @@ sources:
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: added
-      description: support link
+    - kind: changed
+      description: App Version to v0.4.3
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

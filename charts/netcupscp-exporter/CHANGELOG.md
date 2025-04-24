@@ -1,7 +1,7 @@
 # netcupscp-exporter
 
-## 1.2.2
+## 1.2.3
 
-### Added
+### Changed
 
-- support link
+- App Version to v0.4.3
