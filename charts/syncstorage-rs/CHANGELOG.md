@@ -1,7 +1,7 @@
 # syncstorage-rs
 
-## 1.0.4
+## 1.1.0
 
-### Added
+### Changed
 
-- support link
+- dependency of mariadb mariadb to 20.5.3
