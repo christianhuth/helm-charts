@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 5.10.5
+## 5.11.0
 
 ### Changed
 
-- dependency of postgresql to 16.6.5
+- dependency of mariadb to 20.5.3
