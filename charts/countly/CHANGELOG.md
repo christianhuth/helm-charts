@@ -1,11 +1,7 @@
 # countly
 
-## 2.1.2
-
-### Added
-
-- Icon to GitHub
+## 2.1.3
 
 ### Changed
 
-- content of .helmignore
+- url for Icon

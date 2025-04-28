@@ -1,11 +1,7 @@
 # etcd-defrag
 
-## 1.2.7
-
-### Added
-
-- Icon to GitHub
+## 1.2.8
 
 ### Changed
 
-- content of .helmignore
+- url for Icon

@@ -1,11 +1,7 @@
 # baserow
 
-## 3.11.8
-
-### Added
-
-- Icon to GitHub
+## 3.11.9
 
 ### Changed
 
-- content of .helmignore
+- url for Icon

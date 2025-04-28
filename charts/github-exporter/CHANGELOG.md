@@ -1,11 +1,7 @@
 # github-exporter
 
-## 1.0.2
-
-### Added
-
-- Icon to GitHub
+## 1.0.3
 
 ### Changed
 
-- content of .helmignore
+- url for Icon

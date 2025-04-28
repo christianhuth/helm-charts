@@ -2,10 +2,10 @@ apiVersion: v2
 name: etcd-defrag
 description: A Helm chart for running a defragmentation CronJob for ETCD
 type: application
-version: 1.2.7
+version: 1.2.8
 appVersion: "3.5.21"
 home: https://github.com/christianhuth/helm-charts
-icon: https://cdn.worldvectorlogo.com/logos/etcd-1.svg
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/etcd-defrag/icon.svg
 maintainers:
   - name: christianhuth
     email: christian@knell.it
@@ -14,10 +14,8 @@ sources:
   - https://etcd.io
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Icon to GitHub
     - kind: changed
-      description: content of .helmignore
+      description: url for Icon
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
