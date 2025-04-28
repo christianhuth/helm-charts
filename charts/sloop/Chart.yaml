@@ -2,7 +2,7 @@ apiVersion: v2
 name: sloop
 description: Kubernetes History Visualization
 type: application
-version: 0.0.10
+version: 0.0.11
 appVersion: "sha-2ce8bbe"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/salesforce/sloop/master/other/sloop_logo_color_small_notext.png
@@ -15,7 +15,9 @@ annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
     - kind: added
-      description: support link
+      description: Icon to GitHub
+    - kind: changed
+      description: content of .helmignore
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

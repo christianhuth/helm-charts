@@ -2,7 +2,7 @@ apiVersion: v2
 name: argocd-metrics-server
 description: A Helm chart for installing the Argo CD Metrics Server, which connects to Prometheus and can be used to display Metrics in the Argo CD UI
 type: application
-version: 1.0.5
+version: 1.0.6
 appVersion: "v1.0.3"
 home: https://github.com/christianhuth/helm-charts
 icon: https://icon.icepanel.io/Technology/svg/Argo-CD.svg
@@ -14,7 +14,9 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: support link
+      description: Icon to GitHub
+    - kind: changed
+      description: content of .helmignore
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

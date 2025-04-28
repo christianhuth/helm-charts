@@ -2,7 +2,7 @@ apiVersion: v2
 name: syncserver
 description: Helm chart for Firefox Syncserver
 type: application
-version: 1.0.6
+version: 1.0.7
 appVersion: "latest"
 home: https://github.com/christianknell/helm-charts
 icon: https://think.unblog.ch/wp-content/uploads/2019/05/Firefox_Sync.png
@@ -15,7 +15,9 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: support link
+      description: Icon to GitHub
+    - kind: changed
+      description: content of .helmignore
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

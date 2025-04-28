@@ -2,7 +2,7 @@ apiVersion: v2
 name: popeye
 description: Popeye - A Kubernetes Cluster Sanitizer
 type: application
-version: 2.3.1
+version: 2.3.2
 appVersion: "v0.22.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/derailed/popeye/master/assets/popeye_logo.png
@@ -15,7 +15,9 @@ annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
     - kind: added
-      description: support link
+      description: Icon to GitHub
+    - kind: changed
+      description: content of .helmignore
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

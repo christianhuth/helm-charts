@@ -2,7 +2,7 @@ apiVersion: v2
 name: baserow
 description: Baserow is an open source no-code database and Airtable alternative.
 type: application
-version: 3.11.6
+version: 3.11.7
 appVersion: "1.32.5"
 home: https://github.com/christianknell/helm-charts
 icon: https://baserow.io/img/favicon_192.png
@@ -24,8 +24,10 @@ dependencies:
 annotations:
   artifacthub.io/category: database
   artifacthub.io/changes: |
+    - kind: added
+      description: Icon to GitHub
     - kind: changed
-      description: dependency of postgresql to 16.6.6
+      description: content of .helmignore
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

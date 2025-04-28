@@ -21,3 +21,12 @@
 .idea/
 *.tmproj
 .vscode/
+
+# Chart-Testing Files
+ci/
+
+# Additional Helm Values for Development or Testing
+values-*.yaml
+
+# Icon
+icon.*
