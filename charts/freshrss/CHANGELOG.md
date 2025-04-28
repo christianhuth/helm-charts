@@ -1,11 +1,7 @@
 # freshrss
 
-## 1.0.4
-
-### Added
-
-- Icon to GitHub
+## 1.0.5
 
 ### Changed
 
-- content of .helmignore
+- url for Icon

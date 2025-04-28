@@ -2,10 +2,10 @@ apiVersion: v2
 name: freshrss
 description: FreshRSS is a free, self-hostable feed aggregator
 type: application
-version: 1.0.4
+version: 1.0.5
 appVersion: "1.26.1"
 home: https://github.com/christianhuth/helm-charts
-icon: https://avatars.githubusercontent.com/u/9414285
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/freshrss/icon.svg
 maintainers:
   - name: christianhuth
     email: christian@knell.it
@@ -19,10 +19,8 @@ dependencies:
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Icon to GitHub
     - kind: changed
-      description: content of .helmignore
+      description: url for Icon
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
