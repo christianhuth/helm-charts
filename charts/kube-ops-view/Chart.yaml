@@ -15,7 +15,7 @@ sources:
 dependencies:
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 20.13.2
+    version: 20.13.3
     condition: redis.enabled
 annotations:
   artifacthub.io/category: monitoring-logging
