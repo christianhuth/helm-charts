@@ -1,11 +1,7 @@
 # kutt
 
-## 5.8.7
-
-### Added
-
-- Icon to GitHub
+## 5.8.8
 
 ### Changed
 
-- content of .helmignore
+- dependency of redis to 20.13.3
