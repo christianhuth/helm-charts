@@ -1,11 +1,7 @@
 # shlink-backend
 
-## 6.0.1
-
-### Added
-
-- Icon to GitHub
+## 6.0.2
 
 ### Changed
 
-- content of .helmignore
+- dependency of redis to 20.13.3
