@@ -1,7 +1,11 @@
 # baserow
 
-## 3.11.7
+## 3.11.8
+
+### Added
+
+- Icon to GitHub
 
 ### Changed
 
-- dependency of redis to 20.13.3
+- content of .helmignore

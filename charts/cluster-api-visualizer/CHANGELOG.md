@@ -1,7 +1,11 @@
 # cluster-api-visualizer
 
-## 0.1.2
+## 0.1.3
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore

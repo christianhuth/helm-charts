@@ -1,7 +1,11 @@
 # umami
 
-## 4.6.4
+## 4.6.5
+
+### Added
+
+- Icon to GitHub
 
 ### Changed
 
-- dependency of postgresql to 16.6.6
+- content of .helmignore

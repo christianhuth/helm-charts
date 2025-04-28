@@ -1,7 +1,11 @@
 # kubevirt-manager
 
-## 0.1.1
+## 0.1.2
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore

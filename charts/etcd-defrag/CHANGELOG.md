@@ -1,7 +1,11 @@
 # etcd-defrag
 
-## 1.2.6
+## 1.2.7
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore

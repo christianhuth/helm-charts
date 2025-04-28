@@ -1,7 +1,11 @@
 # shlink-backend
 
-## 6.0.0
+## 6.0.1
+
+### Added
+
+- Icon to GitHub
 
 ### Changed
 
-- dependency of rabbitmq to 16.0.0
+- content of .helmignore

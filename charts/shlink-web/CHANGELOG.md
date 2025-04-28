@@ -1,7 +1,11 @@
 # shlink-web
 
-## 1.4.1
+## 1.4.2
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore

@@ -27,3 +27,6 @@ ci/
 
 # Additional Helm Values for Development or Testing
 values-*.yaml
+
+# Icon
+icon.*

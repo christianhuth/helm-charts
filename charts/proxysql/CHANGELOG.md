@@ -1,7 +1,11 @@
 # proxysql
 
-## 1.3.5
+## 1.3.6
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore

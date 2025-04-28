@@ -1,7 +1,11 @@
 # syncserver
 
-## 1.0.6
+## 1.0.7
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore

@@ -1,7 +1,11 @@
 # headwind-mdm
 
-## 3.2.4
+## 3.2.5
+
+### Added
+
+- Icon to GitHub
 
 ### Changed
 
-- dependency of postgresql to 16.6.6
+- content of .helmignore

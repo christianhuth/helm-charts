@@ -1,7 +1,11 @@
 # kube-ops-view
 
-## 4.7.4
+## 4.7.5
+
+### Added
+
+- Icon to GitHub
 
 ### Changed
 
-- dependency of redis to 20.13.3
+- content of .helmignore

@@ -1,7 +1,11 @@
 # typo3
 
-## 3.5.1
+## 3.5.2
+
+### Added
+
+- Icon to GitHub
 
 ### Changed
 
-- dependency of postgresql to 16.6.6
+- content of .helmignore

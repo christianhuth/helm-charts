@@ -1,7 +1,11 @@
 # kutt
 
-## 5.8.6
+## 5.8.7
+
+### Added
+
+- Icon to GitHub
 
 ### Changed
 
-- dependency of postgresql to 16.6.6
+- content of .helmignore

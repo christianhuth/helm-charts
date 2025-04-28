@@ -1,7 +1,11 @@
 # sloop
 
-## 0.0.10
+## 0.0.11
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore

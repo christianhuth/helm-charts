@@ -1,7 +1,11 @@
 # promlens
 
-## 1.0.10
+## 1.0.11
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore

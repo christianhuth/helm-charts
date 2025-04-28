@@ -2,7 +2,7 @@ apiVersion: v2
 name: cluster-api-visualizer
 description: Multicluster resource visualization tool for Cluster API.
 type: application
-version: 0.1.2
+version: 0.1.3
 appVersion: "v1.5.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://adalogics.com/img/content/capi-fuzzing-audit.png
@@ -14,7 +14,9 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: support link
+      description: Icon to GitHub
+    - kind: changed
+      description: content of .helmignore
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

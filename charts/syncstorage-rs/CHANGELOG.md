@@ -1,7 +1,11 @@
 # syncstorage-rs
 
-## 1.1.0
+## 1.1.1
+
+### Added
+
+- Icon to GitHub
 
 ### Changed
 
-- dependency of mariadb mariadb to 20.5.3
+- content of .helmignore
