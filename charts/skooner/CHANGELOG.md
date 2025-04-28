@@ -1,7 +1,11 @@
 # skooner
 
-## 0.0.14
+## 0.0.15
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore

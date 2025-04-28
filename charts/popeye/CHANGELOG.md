@@ -1,7 +1,11 @@
 # popeye
 
-## 2.3.1
+## 2.3.2
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore

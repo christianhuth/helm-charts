@@ -1,7 +1,11 @@
 # countly
 
-## 2.1.1
+## 2.1.2
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore

@@ -1,7 +1,11 @@
 # freshrss
 
-## 1.0.3
+## 1.0.4
+
+### Added
+
+- Icon to GitHub
 
 ### Changed
 
-- dependency of postgresql to 16.6.6
+- content of .helmignore

@@ -1,7 +1,7 @@
 # priority-classes
 
-## 1.0.6
+## 1.0.7
 
-### Added
+### Changed
 
-- support link
+- content of .helmignore

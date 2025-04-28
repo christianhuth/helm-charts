@@ -1,7 +1,11 @@
 # node-access
 
-## 1.1.2
+## 1.1.3
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore

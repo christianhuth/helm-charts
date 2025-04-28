@@ -1,7 +1,11 @@
 # polr
 
-## 2.1.4
+## 2.1.5
 
 ### Added
 
-- support link
+- Icon to GitHub
+
+### Changed
+
+- content of .helmignore
