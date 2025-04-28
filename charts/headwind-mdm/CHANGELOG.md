@@ -1,11 +1,7 @@
 # headwind-mdm
 
-## 3.2.5
-
-### Added
-
-- Icon to GitHub
+## 3.2.6
 
 ### Changed
 
-- content of .helmignore
+- url for Icon
