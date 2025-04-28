@@ -1,11 +1,7 @@
 # passbolt-ha
 
-## 2.1.7
-
-### Added
-
-- Icon to GitHub
+## 2.1.8
 
 ### Changed
 
-- content of .helmignore
+- dependency of proxysql to 1.3.6
