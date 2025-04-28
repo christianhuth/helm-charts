@@ -3,6 +3,34 @@ entries:
   argocd-metrics-server:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: url for Icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v1.0.3
+    created: "2025-04-28T14:29:36.793465695Z"
+    description: A Helm chart for installing the Argo CD Metrics Server, which connects
+      to Prometheus and can be used to display Metrics in the Argo CD UI
+    digest: 20f4f186ab865261befdf48049260b937d7a1ea79360f561fcf16b9e2ea1a36b
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/argocd-metrics-server/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: argocd-metrics-server
+    sources:
+    - https://github.com/argoproj-labs/argocd-extension-metrics
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/argocd-metrics-server-1.0.7/argocd-metrics-server-1.0.7.tgz
+    version: 1.0.7
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Icon to GitHub
         - kind: changed
@@ -185,6 +213,51 @@ entries:
     - https://github.com/christianhuth/helm-charts/releases/download/argocd-metrics-server-1.0.0/argocd-metrics-server-1.0.0.tgz
     version: 1.0.0
   baserow:
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
+        - kind: changed
+          description: url for Icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Create your own online database without technical experience.
+          url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
+        - title: With Baserow you decide how you want to structure everything. Whether you’re managing customers, products, airplanes or all of them.
+          url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
+        - title: Easily create custom plugins with our boilerplate or use third party ones.
+          url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.32.5
+    created: "2025-04-28T14:29:36.936654427Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.6.6
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.13.3
+    description: Baserow is an open source no-code database and Airtable alternative.
+    digest: 60fada7de4ed28cf90dab5b70bfa72107ab5fa0ca997827553da3581f1148c26
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/baserow/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: baserow
+    sources:
+    - https://gitlab.com/bramw/baserow
+    - https://baserow.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/baserow-3.11.9/baserow-3.11.9.tgz
+    version: 3.11.9
   - annotations:
       artifacthub.io/category: database
       artifacthub.io/changes: |
@@ -4723,6 +4796,36 @@ entries:
   cluster-api-visualizer:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: url for Icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Simply shorten your link using the Web UI.
+          url: https://github.com/Jont828/cluster-api-visualizer/raw/main/demo/demo.gif
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v1.5.1
+    created: "2025-04-28T14:29:37.200168104Z"
+    description: Multicluster resource visualization tool for Cluster API.
+    digest: dc7af70b400072b9108249cbb1267c35502e0a8f6aae5ccdd93509a5801a07a8
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/cluster-api-visualizer/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: cluster-api-visualizer
+    sources:
+    - https://github.com/Jont828/cluster-api-visualizer
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/cluster-api-visualizer-0.1.4/cluster-api-visualizer-0.1.4.tgz
+    version: 0.1.4
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Icon to GitHub
         - kind: changed
@@ -4973,6 +5076,43 @@ entries:
     - https://github.com/christianhuth/helm-charts/releases/download/cluster-api-visualizer-0.0.1/cluster-api-visualizer-0.0.1.tgz
     version: 0.0.1
   countly:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: url for Icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: From analytics to surveys, everything you need to build delightful customer experiences on mobile, web, and desktop. Your dedicated product analytics server awaits you.
+          url: https://cdn.prod.website-files.com/61c1b7c3e2f3805325be4594/646ca75af762159d03f456f1_mycountlyhero.svg
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 25.05.4
+    created: "2025-04-28T14:29:37.339357469Z"
+    dependencies:
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.5.1
+    description: Countly is a product analytics platform that helps teams track, analyze
+      and act-on their user actions and behaviour on mobile, web and desktop applications.
+    digest: 7ce74031fde71ac01c61f6055b2ee4a492d5c0dd93162630944f30c64b0f34ef
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/countly/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: countly
+    sources:
+    - https://github.com/Countly/countly-server
+    - https://countly.com/
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/countly-2.1.3/countly-2.1.3.tgz
+    version: 2.1.3
   - annotations:
       artifacthub.io/changes: |
         - kind: added
@@ -5358,6 +5498,34 @@ entries:
     - https://github.com/christianhuth/helm-charts/releases/download/dnsbl-exporter-1.0.0/dnsbl-exporter-1.0.0.tgz
     version: 1.0.0
   etcd-defrag:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: url for Icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 3.5.21
+    created: "2025-04-28T14:29:37.461003876Z"
+    description: A Helm chart for running a defragmentation CronJob for ETCD
+    digest: a978b4f6fae14e7644433f4b3758a0543930436633e43288387501b9fbb80ce7
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/etcd-defrag/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: etcd-defrag
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/etcd
+    - https://etcd.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/etcd-defrag-1.2.8/etcd-defrag-1.2.8.tgz
+    version: 1.2.8
   - annotations:
       artifacthub.io/changes: |
         - kind: added
@@ -5830,6 +5998,44 @@ entries:
   freshrss:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: url for Icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: FreshRSS is a self-hosted RSS and Atom feed aggregator.
+          url: https://freshrss.org/images/screenshot.webp
+        - title: FreshRSS natively supports basic Web scraping, based on XPath, for Web sites not providing any RSS / Atom feed. Also supports JSON documents.
+          url: https://raw.githubusercontent.com/FreshRSS/FreshRSS/edge/docs/img/FreshRSS-screenshot.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.26.1
+    created: "2025-04-28T14:29:37.576262519Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.6.6
+    description: FreshRSS is a free, self-hostable feed aggregator
+    digest: fee495b93ac7ac29e84bd01bcc9f078799c406720484a26e2b66a1a3f12865d2
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/freshrss/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: freshrss
+    sources:
+    - https://github.com/FreshRSS/FreshRSS
+    - https://freshrss.org/
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/freshrss-1.0.5/freshrss-1.0.5.tgz
+    version: 1.0.5
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Icon to GitHub
         - kind: changed
@@ -6021,6 +6227,33 @@ entries:
     - https://github.com/christianhuth/helm-charts/releases/download/freshrss-1.0.0/freshrss-1.0.0.tgz
     version: 1.0.0
   github-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: url for Icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.3.1
+    created: "2025-04-28T14:29:37.674497649Z"
+    description: A Helm Chart for the GitHub Prometheus Exporter
+    digest: 08d7af96d36508d76cecff34c70c0ec8d853c3a1be63ff51bb0d2bc8657f1ba2
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/github-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: github-exporter
+    sources:
+    - https://github.com/githubexporter/github-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/github-exporter-1.0.3/github-exporter-1.0.3.tgz
+    version: 1.0.3
   - annotations:
       artifacthub.io/changes: |
         - kind: added
@@ -46449,4 +46682,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-04-28T14:10:14.364643661Z"
+generated: "2025-04-28T14:29:37.676210293Z"
