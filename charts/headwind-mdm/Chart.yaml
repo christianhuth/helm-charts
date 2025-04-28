@@ -2,10 +2,10 @@ apiVersion: v2
 name: headwind-mdm
 description: Headwind MDM - an open source mobile device management software for Android
 type: application
-version: 3.2.5
+version: 3.2.6
 appVersion: "0.1.5"
 home: https://github.com/christianhuth/helm-charts
-icon: https://h-mdm.com/wp-content/uploads/2019/07/neew-logo.png
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/headwind-mdm/icon.svg
 maintainers:
   - name: christianhuth
     email: christian@knell.it
@@ -20,10 +20,8 @@ dependencies:
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Icon to GitHub
     - kind: changed
-      description: content of .helmignore
+      description: url for Icon
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
