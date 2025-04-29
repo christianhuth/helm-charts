@@ -1,7 +1,7 @@
 # etcd-defrag
 
-## 1.2.8
+## 1.3.0
 
-### Changed
+### Added
 
-- url for Icon
+- option to define the image registry

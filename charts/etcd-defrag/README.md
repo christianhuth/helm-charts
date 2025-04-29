@@ -93,6 +93,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride | string | `""` | String to fully override `"etcd-defrag.fullname"` |
 | hostNetwork | bool | `false` | specify if the CronJob should run on the hostNetwork |
 | image.pullPolicy | string | `"Always"` | image pull policy |
+| image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"bitnami/etcd"` | image repository |
 | image.tag | string | `"3.5.21"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
