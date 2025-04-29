@@ -1,11 +1,7 @@
 # shlink-web
 
-## 1.4.2
-
-### Added
-
-- Icon to GitHub
+## 1.4.3
 
 ### Changed
 
-- content of .helmignore
+- url of icon

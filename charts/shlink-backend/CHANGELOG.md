@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 6.0.2
+## 6.0.3
 
 ### Changed
 
-- dependency of redis to 20.13.3
+- url of icon
