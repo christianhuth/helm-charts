@@ -64,6 +64,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | cronJob.spinachConfiguration | object | `{}` |  |
 | fullnameOverride | string | `""` | String to fully override `"popeye.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
+| image.registry | string | `"docker.io"` | image registory |
 | image.repository | string | `"derailed/popeye"` | image repository |
 | image.tag | string | `"v0.22.1"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
