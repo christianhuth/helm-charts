@@ -1,7 +1,7 @@
 # passbolt-ha
 
-## 2.1.8
+## 2.1.9
 
 ### Changed
 
-- dependency of proxysql to 1.3.6
+- url of icon
