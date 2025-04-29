@@ -1,7 +1,7 @@
 # popeye
 
-## 2.3.3
+## 2.4.0
 
-### Changed
+### Added
 
-- url of icon
+- option to define the image registry
