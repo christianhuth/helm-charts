@@ -11984,6 +11984,35 @@ entries:
   kubenav:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: url of icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: kubenav is a mobile and desktop app to manage Kubernetes clusters and to get an overview of the status of your Kubernetes resources.
+          url: https://raw.githubusercontent.com/kubenav/kubenav/main/utils/images/repo/github-screenshot.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    created: "2025-04-29T10:21:03.766667155Z"
+    description: A Helm chart for creating the required RBAC for kubenav
+    digest: afd179efe03e2217e384003ebbd1fb6ae3346fb5a7af2ee8f172465cfae6f74e
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kubenav/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: kubenav
+    sources:
+    - https://github.com/kubenav/kubenav
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/kubenav-1.0.7/kubenav-1.0.7.tgz
+    version: 1.0.7
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Icon to GitHub
         - kind: changed
@@ -47348,4 +47377,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-04-29T10:19:02.502056407Z"
+generated: "2025-04-29T10:21:03.76920754Z"
