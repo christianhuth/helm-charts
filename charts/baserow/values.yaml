@@ -7,6 +7,8 @@ fullnameOverride: ""
 frontend:
 
   image:
+    # -- image registory
+    registry: docker.io
     # -- image repository
     repository: baserow/web-frontend
     # -- image pull policy
@@ -150,6 +152,8 @@ backend:
   asgi:
 
     image:
+      # -- image registory
+      registry: docker.io
       # -- image repository
       repository: baserow/backend
       # -- image pull policy
@@ -266,6 +270,8 @@ backend:
   celery:
 
     image:
+      # -- image registory
+      registry: docker.io
       # -- image repository
       repository: baserow/backend
       # -- image pull policy
@@ -522,6 +528,8 @@ backend:
   wsgi:
 
     image:
+      # -- image registory
+      registry: docker.io
       # -- image repository
       repository: baserow/backend
       # -- image pull policy
