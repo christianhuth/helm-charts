@@ -3,9 +3,9 @@ apiVersion: v2
 name: kubenav
 description: A Helm chart for creating the required RBAC for kubenav
 type: application
-version: 1.0.6
+version: 1.0.7
 home: https://github.com/christianhuth/helm-charts
-icon: https://raw.githubusercontent.com/kubenav/kubenav/main/utils/images/repo/github-readme-logo.png
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kubenav/icon.svg
 maintainers:
   - name: christianhuth
     email: christian@knell.it
@@ -13,10 +13,8 @@ sources:
   - https://github.com/kubenav/kubenav
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Icon to GitHub
     - kind: changed
-      description: content of .helmignore
+      description: url of icon
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
