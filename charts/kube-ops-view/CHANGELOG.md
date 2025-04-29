@@ -1,11 +1,7 @@
 # kube-ops-view
 
-## 4.7.5
-
-### Added
-
-- Icon to GitHub
+## 4.7.6
 
 ### Changed
 
-- content of .helmignore
+- url of Icon
