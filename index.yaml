@@ -37104,6 +37104,34 @@ entries:
   syncserver:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: url of icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: latest
+    created: "2025-04-29T11:39:22.821197593Z"
+    description: Helm chart for Firefox Syncserver
+    digest: 56b12aba71b30b00dd3964ad5e5ff6b9a8e5847f41e5ed1afd99571e9ccdb036
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncserver/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: syncserver
+    sources:
+    - https://hub.docker.com/r/mozilla/syncserver/
+    - https://github.com/mozilla-services/syncserver
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/syncserver-1.0.8/syncserver-1.0.8.tgz
+    version: 1.0.8
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Icon to GitHub
         - kind: changed
@@ -47825,4 +47853,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-04-29T11:39:04.435126434Z"
+generated: "2025-04-29T11:39:22.823669083Z"
