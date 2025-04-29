@@ -2,11 +2,11 @@
 apiVersion: v2
 name: kubedoom
 description: A Helm chart for Kubedoom
-version: 1.0.7
+version: 1.0.8
 type: application
 appVersion: "0.6.0"
 home: https://github.com/christianhuth/helm-charts
-icon: https://raw.githubusercontent.com/storax/kubedoom/master/assets/doom.jpg
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kubedoom/icon.svg
 maintainers:
   - name: christianhuth
     email: christian@knell.it
@@ -14,10 +14,8 @@ sources:
   - https://github.com/storax/kubedoom
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Icon to GitHub
     - kind: changed
-      description: content of .helmignore
+      description: url of Icon
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
