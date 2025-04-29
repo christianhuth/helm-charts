@@ -2,10 +2,10 @@ apiVersion: v2
 name: polr
 description: Polr is a quick, modern, and open-source link shortener
 type: application
-version: 2.1.5
+version: 2.1.6
 appVersion: "2.3.0"
 home: https://github.com/christianhuth/helm-charts
-icon: http://docs.polrproject.org/en/latest/logo.png
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/polr/icon.svg
 maintainers:
   - name: christianhuth
     email: christian@knell.it
@@ -18,10 +18,8 @@ dependencies:
     version: 12.3.4
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Icon to GitHub
     - kind: changed
-      description: content of .helmignore
+      description: url of icon
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
