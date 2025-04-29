@@ -1,11 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.0.6
-
-### Added
-
-- Icon to GitHub
+## 2.0.7
 
 ### Changed
 
-- content of .helmignore
+- url of icon
