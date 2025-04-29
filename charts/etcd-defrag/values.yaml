@@ -5,6 +5,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
+  # -- image registry
+  registry: docker.io
   # -- image repository
   repository: bitnami/etcd
   # -- image pull policy
