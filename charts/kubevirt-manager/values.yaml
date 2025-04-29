@@ -5,6 +5,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
+  # -- image registory
+  registry: docker.io
   # -- image repository
   repository: kubevirtmanager/kubevirt-manager
   # -- image pull policy

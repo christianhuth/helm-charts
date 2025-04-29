@@ -54,6 +54,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | fullnameOverride | string | `""` | String to fully override `"kubevirt-manager.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
+| image.registry | string | `"docker.io"` | image registory |
 | image.repository | string | `"kubevirtmanager/kubevirt-manager"` | image repository |
 | image.tag | string | `"1.5.0"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
