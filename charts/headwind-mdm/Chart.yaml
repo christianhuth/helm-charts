@@ -2,7 +2,7 @@ apiVersion: v2
 name: headwind-mdm
 description: Headwind MDM - an open source mobile device management software for Android
 type: application
-version: 3.2.6
+version: 3.3.0
 appVersion: "0.1.5"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/headwind-mdm/icon.svg
@@ -20,8 +20,8 @@ dependencies:
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: url for Icon
+    - kind: added
+      description: option to define the image registry
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

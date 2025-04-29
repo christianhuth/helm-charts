@@ -1,7 +1,7 @@
 # headwind-mdm
 
-## 3.2.6
+## 3.3.0
 
-### Changed
+### Added
 
-- url for Icon
+- option to define the image registry

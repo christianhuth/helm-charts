@@ -68,6 +68,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | headwind.sharedSecret.existingSecret | string | `""` | An existing secret that contains the shared secret for a premium setup. If this is provided `headwind.sharedSecret.secretValue` is ignored. Key needs to be `shared-secret``. |
 | headwind.sharedSecret.secretValue | string | `""` | The shared secret for a premium setup. Ignored if `headwind.sharedSecret.existingSecret` is provided. |
 | image.pullPolicy | string | `"Always"` | image pull policy |
+| image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"headwindmdm/hmdm"` | image repository |
 | image.tag | string | `"0.1.5"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
