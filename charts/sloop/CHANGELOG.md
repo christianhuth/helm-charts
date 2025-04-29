@@ -1,11 +1,7 @@
 # sloop
 
-## 0.0.11
-
-### Added
-
-- Icon to GitHub
+## 0.0.12
 
 ### Changed
 
-- content of .helmignore
+- url of icon
