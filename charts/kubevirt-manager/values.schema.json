@@ -78,6 +78,13 @@
           "title": "pullPolicy",
           "type": "string"
         },
+        "registry": {
+          "default": "docker.io",
+          "description": "image registory",
+          "required": [],
+          "title": "registry",
+          "type": "string"
+        },
         "repository": {
           "default": "kubevirtmanager/kubevirt-manager",
           "description": "image repository",
@@ -94,6 +101,7 @@
         }
       },
       "required": [
+        "registry",
         "repository",
         "pullPolicy",
         "tag"

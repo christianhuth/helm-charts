@@ -1,7 +1,7 @@
 # kubevirt-manager
 
-## 0.1.3
+## 0.2.0
 
-### Changed
+### Added
 
-- url of icon
+- option to define the image registry
