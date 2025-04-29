@@ -1,11 +1,7 @@
 # tenant-namespace
 
-## 2.0.4
-
-### Added
-
-- Icon to GitHub
+## 2.0.5
 
 ### Changed
 
-- content of .helmignore
+- url of icon
