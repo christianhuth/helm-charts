@@ -1,7 +1,7 @@
 # kutt
 
-## 5.8.9
+## 5.8.10
 
 ### Changed
 
-- url of icon
+- icon
