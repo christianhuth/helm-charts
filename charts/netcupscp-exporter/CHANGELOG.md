@@ -1,11 +1,7 @@
 # netcupscp-exporter
 
-## 1.2.4
-
-### Added
-
-- Icon to GitHub
+## 1.2.5
 
 ### Changed
 
-- content of .helmignore
+- url of icon
