@@ -32,6 +32,8 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry }}{{ .Values.image.repository }}/:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             {{- toYaml .Values.env | nindent 12 }}
             - name: DB_CONNECTION
@@ -96,11 +98,6 @@ spec:
             {{- end }}
           {{- with .Values.securityContext }}
           securityContext:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          {{- with .Values.imagePullSecrets }}
-          imagePullSecrets:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           ports:

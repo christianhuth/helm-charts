@@ -1,7 +1,7 @@
 # polr
 
-## 2.1.6
+## 2.2.0
 
-### Changed
+### Added
 
-- url of icon
+- option to define the image registry
