@@ -4,6 +4,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
+  # -- image registry
+  registry: docker.io
   # -- image repository
   repository: shlinkio/shlink-web-client
   # -- image pull policy

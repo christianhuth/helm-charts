@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.4.3
+## 1.5.0
 
-### Changed
+### Added
 
-- url of icon
+- option to define the image registry
