@@ -1,11 +1,7 @@
 # promlens
 
-## 1.0.11
-
-### Added
-
-- Icon to GitHub
+## 1.0.12
 
 ### Changed
 
-- content of .helmignore
+- url of icon
