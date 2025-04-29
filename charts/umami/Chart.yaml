@@ -3,10 +3,10 @@ apiVersion: v2
 name: umami
 description: Umami is a simple, fast, privacy-focused alternative to Google Analytics.
 type: application
-version: 4.6.5
+version: 4.6.6
 appVersion: "v2.15.1"
 home: https://github.com/christianhuth/helm-charts
-icon: https://raw.githubusercontent.com/umami-software/umami/master/public/android-chrome-512x512.png
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/umami/icon.svg
 maintainers:
   - name: christianhuth
     email: christian@knell.it
@@ -25,10 +25,8 @@ dependencies:
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: added
-      description: Icon to GitHub
     - kind: changed
-      description: content of .helmignore
+      description: url of icon
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
