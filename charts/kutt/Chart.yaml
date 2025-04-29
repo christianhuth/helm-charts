@@ -2,10 +2,10 @@ apiVersion: v2
 name: kutt
 description: Kutt is a free modern URL shortener.
 type: application
-version: 5.8.8
+version: 5.8.9
 appVersion: "v3.2.3"
 home: https://github.com/christianhuth/helm-charts
-icon: https://www.saashub.com/images/app/service_logos/15/d634f2359578/large.png
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.png
 maintainers:
   - name: christianhuth
     email: christian@knell.it
@@ -23,7 +23,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of redis to 20.13.3
+      description: url of icon
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
