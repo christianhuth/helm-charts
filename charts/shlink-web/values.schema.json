@@ -82,6 +82,13 @@
           "title": "pullPolicy",
           "type": "string"
         },
+        "registry": {
+          "default": "docker.io",
+          "description": "image registry",
+          "required": [],
+          "title": "registry",
+          "type": "string"
+        },
         "repository": {
           "default": "shlinkio/shlink-web-client",
           "description": "image repository",
@@ -98,6 +105,7 @@
         }
       },
       "required": [
+        "registry",
         "repository",
         "pullPolicy",
         "tag"
