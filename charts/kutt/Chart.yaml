@@ -5,7 +5,7 @@ type: application
 version: 5.8.10
 appVersion: "v3.2.3"
 home: https://github.com/christianhuth/helm-charts
-icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.png
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon-new.png
 maintainers:
   - name: christianhuth
     email: christian@knell.it
