@@ -1,11 +1,7 @@
 # typo3
 
-## 3.5.2
-
-### Added
-
-- Icon to GitHub
+## 3.5.3
 
 ### Changed
 
-- content of .helmignore
+- url of icon
