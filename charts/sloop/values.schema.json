@@ -93,8 +93,15 @@
           "title": "pullPolicy",
           "type": "string"
         },
+        "registry": {
+          "default": "ghcr.io",
+          "description": "image registory",
+          "required": [],
+          "title": "registry",
+          "type": "string"
+        },
         "repository": {
-          "default": "ghcr.io/salesforce/sloop",
+          "default": "salesforce/sloop",
           "description": "image repository",
           "required": [],
           "title": "repository",
@@ -109,6 +116,7 @@
         }
       },
       "required": [
+        "registry",
         "repository",
         "pullPolicy",
         "tag"

@@ -4,8 +4,10 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
+  # -- image registory
+  registry: ghcr.io
   # -- image repository
-  repository: ghcr.io/salesforce/sloop
+  repository: salesforce/sloop
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag
