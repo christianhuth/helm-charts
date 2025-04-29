@@ -2,7 +2,7 @@ apiVersion: v2
 name: kutt
 description: Kutt is a free modern URL shortener.
 type: application
-version: 5.8.9
+version: 5.8.10
 appVersion: "v3.2.3"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.png
@@ -23,7 +23,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: url of icon
+      description: icon
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
