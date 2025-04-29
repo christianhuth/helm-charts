@@ -1,7 +1,7 @@
 # kutt
 
-## 5.8.11
+## 5.9.0
 
-### Changed
+### Added
 
-- icon
+- option to define the image registry

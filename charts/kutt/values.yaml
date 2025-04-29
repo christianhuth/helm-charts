@@ -5,6 +5,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
+  # -- image registory
+  registry: docker.io
   # -- image repository
   repository: kutt/kutt
   # -- image pull policy

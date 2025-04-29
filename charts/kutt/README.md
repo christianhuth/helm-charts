@@ -67,6 +67,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | fullnameOverride | string | `""` | String to fully override `"kutt.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
+| image.registry | string | `"docker.io"` | image registory |
 | image.repository | string | `"kutt/kutt"` | image repository |
 | image.tag | string | `"v3.2.3"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
