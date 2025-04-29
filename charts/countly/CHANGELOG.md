@@ -1,7 +1,7 @@
 # countly
 
-## 2.1.3
+## 2.1.4
 
 ### Changed
 
-- url for Icon
+- dependency of mongodb to 16.5.3
