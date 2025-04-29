@@ -1,7 +1,7 @@
 # kube-ops-view
 
-## 4.7.6
+## 4.8.0
 
-### Changed
+### Added
 
-- url of Icon
+- option to define the image registry
