@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 6.0.3
+## 6.0.4
 
 ### Changed
 
-- url of icon
+- dependency of rabbitmq to 16.0.1
