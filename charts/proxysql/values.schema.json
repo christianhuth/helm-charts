@@ -65,6 +65,13 @@
           "title": "pullPolicy",
           "type": "string"
         },
+        "registry": {
+          "default": "docker.io",
+          "description": "image registory",
+          "required": [],
+          "title": "registry",
+          "type": "string"
+        },
         "repository": {
           "default": "proxysql/proxysql",
           "description": "image repository",
@@ -81,6 +88,7 @@
         }
       },
       "required": [
+        "registry",
         "repository",
         "pullPolicy",
         "tag"

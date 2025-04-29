@@ -1,7 +1,7 @@
 # proxysql
 
-## 1.3.7
+## 1.4.0
 
-### Changed
+### Added
 
-- url of icon
+- option to define the image registry
