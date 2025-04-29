@@ -1,7 +1,7 @@
 # skooner
 
-## 0.0.16
+## 0.1.0
 
-### Changed
+### Added
 
-- url of icon
+- option to define the image registry
