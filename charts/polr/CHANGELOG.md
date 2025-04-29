@@ -1,11 +1,7 @@
 # polr
 
-## 2.1.5
-
-### Added
-
-- Icon to GitHub
+## 2.1.6
 
 ### Changed
 
-- content of .helmignore
+- url of icon
