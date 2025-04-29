@@ -73,6 +73,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | config.web.routePrefix | string | `""` |  |
 | fullnameOverride | string | `""` | String to fully override `"promlens.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
+| image.registry | string | `"docker.io"` | image registory |
 | image.repository | string | `"prom/promlens"` | image repository |
 | image.tag | string | `"v0.3.0"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |

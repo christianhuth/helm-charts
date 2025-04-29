@@ -4,6 +4,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
+  # -- image registory
+  registry: docker.io
   # -- image repository
   repository: prom/promlens
   # -- image pull policy
