@@ -16,10 +16,10 @@ spec:
     {{- toYaml .Values.podSecurityContext | nindent 4 }}
   containers:
     - name: {{ .Chart.Name }}
+      image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+      imagePullPolicy: {{ .Values.image.pullPolicy }}
       securityContext:
         {{- toYaml .Values.securityContext | nindent 8 }}
-      image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-      imagePullPolicy: {{ .Values.image.pullPolicy }}
       command:
         - proxysql
         - "-f"

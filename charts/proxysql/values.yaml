@@ -4,6 +4,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
+  # -- image registory
+  registry: docker.io
   # -- image repository
   repository: proxysql/proxysql
   # -- image pull policy
