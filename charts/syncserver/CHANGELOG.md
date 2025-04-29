@@ -1,7 +1,7 @@
 # syncserver
 
-## 1.0.8
+## 1.1.0
 
-### Changed
+### Added
 
-- url of icon
+- option to define the image registry

@@ -65,6 +65,13 @@
           "title": "pullPolicy",
           "type": "string"
         },
+        "registry": {
+          "default": "docker.io",
+          "description": "image registry",
+          "required": [],
+          "title": "registry",
+          "type": "string"
+        },
         "repository": {
           "default": "mozilla/syncserver",
           "description": "image repository",
@@ -81,6 +88,7 @@
         }
       },
       "required": [
+        "registry",
         "repository",
         "pullPolicy",
         "tag"

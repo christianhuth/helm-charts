@@ -11,6 +11,8 @@ replicaCount: 1
 revisionHistoryLimit: 10
 
 image:
+  # -- image registry
+  registry: docker.io
   # -- image repository
   repository: mozilla/syncserver
   # -- image pull policy
