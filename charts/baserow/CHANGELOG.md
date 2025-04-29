@@ -1,7 +1,7 @@
 # baserow
 
-## 3.11.10
+## 3.12.0
 
-### Changed
+### Added
 
-- Icon
+- option to define the image registry

@@ -32,7 +32,7 @@ spec:
       {{- end }}
       containers:
         - name: {{ include "baserow.backend.celery.name" . }}-worker
-          image: "{{ .Values.backend.celery.image.repository }}:{{ .Values.backend.celery.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.backend.celery.image.registry }}/{{ .Values.backend.celery.image.repository }}:{{ .Values.backend.celery.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.backend.celery.image.pullPolicy }}
           args:
             - "celery-worker"
@@ -126,7 +126,7 @@ spec:
               mountPath: {{ .Values.backend.config.media.root | quote }}
           {{- end }}
         - name: {{ include "baserow.backend.celery.name" . }}-export-worker
-          image: "{{ .Values.backend.celery.image.repository }}:{{ .Values.backend.celery.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.backend.celery.image.registry }}/{{ .Values.backend.celery.image.repository }}:{{ .Values.backend.celery.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.backend.celery.image.pullPolicy }}
           args:
             - "celery-exportworker"
@@ -220,7 +220,7 @@ spec:
               mountPath: {{ .Values.backend.config.media.root | quote }}
           {{- end }}
         - name: {{ include "baserow.backend.celery.name" . }}-backend-beat-worker
-          image: "{{ .Values.backend.celery.image.repository }}:{{ .Values.backend.celery.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.backend.celery.image.registry }}/{{ .Values.backend.celery.image.repository }}:{{ .Values.backend.celery.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.backend.celery.image.pullPolicy }}
           args:
             - "celery-beat"

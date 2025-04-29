@@ -32,7 +32,7 @@ spec:
       {{- end }}
       containers:
         - name: {{ include "baserow.backend.asgi.name" . }}
-          image: "{{ .Values.backend.asgi.image.repository }}:{{ .Values.backend.asgi.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.backend.asgi.image.registry }}/{{ .Values.backend.asgi.image.repository }}:{{ .Values.backend.asgi.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.backend.asgi.image.pullPolicy }}
           workingDir: /baserow
           args:

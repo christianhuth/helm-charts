@@ -56,6 +56,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | backend.asgi.autoscaling.targetMemoryUtilizationPercentage | int | `80` | Target Memory utilization percentage |
 | backend.asgi.extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | backend.asgi.image.pullPolicy | string | `"Always"` | image pull policy |
+| backend.asgi.image.registry | string | `"docker.io"` | image registory |
 | backend.asgi.image.repository | string | `"baserow/backend"` | image repository |
 | backend.asgi.image.tag | string | `"1.32.5"` | Overrides the image tag |
 | backend.asgi.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
@@ -92,6 +93,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | backend.celery.autoscaling.targetMemoryUtilizationPercentage | int | `80` | Target Memory utilization percentage |
 | backend.celery.extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | backend.celery.image.pullPolicy | string | `"Always"` | image pull policy |
+| backend.celery.image.registry | string | `"docker.io"` | image registory |
 | backend.celery.image.repository | string | `"baserow/backend"` | image repository |
 | backend.celery.image.tag | string | `"1.32.5"` | Overrides the image tag |
 | backend.celery.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
@@ -199,6 +201,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | backend.wsgi.autoscaling.targetMemoryUtilizationPercentage | int | `80` | Target Memory utilization percentage |
 | backend.wsgi.extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | backend.wsgi.image.pullPolicy | string | `"Always"` | image pull policy |
+| backend.wsgi.image.registry | string | `"docker.io"` | image registory |
 | backend.wsgi.image.repository | string | `"baserow/backend"` | image repository |
 | backend.wsgi.image.tag | string | `"1.32.5"` | Overrides the image tag |
 | backend.wsgi.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
@@ -256,6 +259,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | frontend.config.downloadFileViaXhr | string | `"0"` | Set to `1` to force download links to download files via XHR query to bypass `Content-Disposition: inline` that can’t be overridden in another way. If your files are stored under another origin, you also must add CORS headers to your server. |
 | frontend.extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | frontend.image.pullPolicy | string | `"Always"` | image pull policy |
+| frontend.image.registry | string | `"docker.io"` | image registory |
 | frontend.image.repository | string | `"baserow/web-frontend"` | image repository |
 | frontend.image.tag | string | `"1.32.5"` | Overrides the image tag |
 | frontend.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
