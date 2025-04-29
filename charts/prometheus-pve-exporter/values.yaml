@@ -4,6 +4,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
+  # -- image registory
+  registry: docker.io
   # -- image repository
   repository: prompve/prometheus-pve-exporter
   # -- image pull policy

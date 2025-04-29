@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.0.7
+## 2.1.0
 
-### Changed
+### Added
 
-- url of icon
+- option to define the image registry
