@@ -1,11 +1,7 @@
 # kubenav
 
-## 1.0.6
-
-### Added
-
-- Icon to GitHub
+## 1.0.7
 
 ### Changed
 
-- content of .helmignore
+- url of icon
