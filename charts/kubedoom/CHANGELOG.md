@@ -1,11 +1,7 @@
 # kubedoom
 
-## 1.0.7
-
-### Added
-
-- Icon to GitHub
+## 1.0.8
 
 ### Changed
 
-- content of .helmignore
+- url of Icon
