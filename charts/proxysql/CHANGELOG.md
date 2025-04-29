@@ -1,11 +1,7 @@
 # proxysql
 
-## 1.3.6
-
-### Added
-
-- Icon to GitHub
+## 1.3.7
 
 ### Changed
 
-- content of .helmignore
+- url of icon
