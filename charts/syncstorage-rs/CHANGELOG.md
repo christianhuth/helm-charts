@@ -1,11 +1,7 @@
 # syncstorage-rs
 
-## 1.1.1
-
-### Added
-
-- Icon to GitHub
+## 1.1.2
 
 ### Changed
 
-- content of .helmignore
+- url of icon
