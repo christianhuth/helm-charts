@@ -81,8 +81,15 @@
           "title": "pullPolicy",
           "type": "string"
         },
+        "registry": {
+          "default": "ghcr.io",
+          "description": "image registory",
+          "required": [],
+          "title": "registry",
+          "type": "string"
+        },
         "repository": {
-          "default": "ghcr.io/skooner-k8s/skooner",
+          "default": "skooner-k8s/skooner",
           "description": "image repository",
           "required": [],
           "title": "repository",
@@ -97,6 +104,7 @@
         }
       },
       "required": [
+        "registry",
         "repository",
         "pullPolicy",
         "tag"

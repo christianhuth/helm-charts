@@ -4,8 +4,10 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
+  # -- image registory
+  registry: ghcr.io
   # -- image repository
-  repository: ghcr.io/skooner-k8s/skooner
+  repository: skooner-k8s/skooner
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag

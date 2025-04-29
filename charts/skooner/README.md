@@ -54,7 +54,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | clusterRoleBinding.clusterRole | string | `"edit"` | Define which ClusterRole to bind to: cluster-admin, edit, view |
 | fullnameOverride | string | `""` | String to fully override `"skooner.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
-| image.repository | string | `"ghcr.io/skooner-k8s/skooner"` | image repository |
+| image.registry | string | `"ghcr.io"` | image registory |
+| image.repository | string | `"skooner-k8s/skooner"` | image repository |
 | image.tag | string | `"stable"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
