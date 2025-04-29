@@ -61,6 +61,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | externalDatabase.type | string | `"mysql"` | Type of database |
 | fullnameOverride | string | `""` | String to fully override `"typo3.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
+| image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"martinhelmich/typo3"` | image repository |
 | image.tag | string | `"12.4"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |

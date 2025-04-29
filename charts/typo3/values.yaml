@@ -4,6 +4,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
+  # -- image registry
+  registry: docker.io
   # -- image repository
   repository: martinhelmich/typo3
   # -- image pull policy

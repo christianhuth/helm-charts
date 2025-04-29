@@ -1,7 +1,7 @@
 # typo3
 
-## 3.5.3
+## 3.6.0
 
-### Changed
+### Added
 
-- url of icon
+- option to define the image registry
