@@ -83,6 +83,9 @@ kirby:
 kubedoom:
 - changed-files:
   - any-glob-to-any-file: charts/kubedoom/*
+kubenav:
+- changed-files:
+  - any-glob-to-any-file: charts/kubenav/*
 kube-ops-view:
 - changed-files:
   - any-glob-to-any-file: charts/kube-ops-view/*
