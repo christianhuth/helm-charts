@@ -1,11 +1,7 @@
 # umami
 
-## 4.6.5
-
-### Added
-
-- Icon to GitHub
+## 4.6.6
 
 ### Changed
 
-- content of .helmignore
+- url of icon
