@@ -2,10 +2,10 @@ apiVersion: v2
 name: skooner
 description: Simple Kubernetes real-time dashboard and management.
 type: application
-version: 0.0.15
+version: 0.0.16
 appVersion: "stable"
 home: https://github.com/christianhuth/helm-charts
-icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu8eQrFBosk7yHTiDEwjnVcMRyDD5uIaNXhlZ1m0yiC4H8RP1j0PlBPtgtv0bdH0JwlOE
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/skooner/icon.svg
 maintainers:
   - name: christianhuth
     email: christian@knell.it
@@ -14,10 +14,8 @@ sources:
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: added
-      description: Icon to GitHub
     - kind: changed
-      description: content of .helmignore
+      description: url of icon
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

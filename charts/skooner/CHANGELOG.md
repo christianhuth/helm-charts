@@ -1,11 +1,7 @@
 # skooner
 
-## 0.0.15
-
-### Added
-
-- Icon to GitHub
+## 0.0.16
 
 ### Changed
 
-- content of .helmignore
+- url of icon
