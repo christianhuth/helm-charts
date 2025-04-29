@@ -19129,6 +19129,32 @@ entries:
   node-access:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: url of icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.37.0
+    created: "2025-04-29T10:14:31.792498791Z"
+    description: A Helm chart to deploy workload to gain direct access to the host
+      of the Kubernetes cluster
+    digest: ed9a233d63d9a1037e98eef42b9f2a85649ce34505d90b6edf5e58d4f0c997d2
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/node-access/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: node-access
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/node-access-1.1.4/node-access-1.1.4.tgz
+    version: 1.1.4
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Icon to GitHub
         - kind: changed
@@ -47235,4 +47261,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-04-29T09:01:49.637167882Z"
+generated: "2025-04-29T10:14:31.79433878Z"
