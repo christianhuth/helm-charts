@@ -3,10 +3,10 @@ apiVersion: v2
 name: kube-ops-view
 description: A Helm chart for bootstrapping kube-ops-view.
 type: application
-version: 4.7.5
+version: 4.7.6
 appVersion: "23.5.0"
 home: https://github.com/christianhuth/helm-charts
-icon: https://codeberg.org/repo-avatars/677-c51f6426305941cab515fdd98368f0bb
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kube-ops-view/icon.svg
 maintainers:
   - name: christianhuth
     email: christian@knell.it
@@ -20,10 +20,8 @@ dependencies:
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: added
-      description: Icon to GitHub
     - kind: changed
-      description: content of .helmignore
+      description: url of Icon
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
