@@ -1,11 +1,7 @@
 # node-access
 
-## 1.1.3
-
-### Added
-
-- Icon to GitHub
+## 1.1.4
 
 ### Changed
 
-- content of .helmignore
+- url of icon
