@@ -1,11 +1,7 @@
 # kubevirt-manager
 
-## 0.1.2
-
-### Added
-
-- Icon to GitHub
+## 0.1.3
 
 ### Changed
 
-- content of .helmignore
+- url of icon
