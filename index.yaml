@@ -25303,6 +25303,43 @@ entries:
     version: 1.0.0
   prometheus-pve-exporter:
   - annotations:
+      artifacthub.io/alternativeName: pve-exporter
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: changed
+          description: url of icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Add an user inside of Proxmox, that will be used for the Exporter.
+          url: https://xinux.net/images/6/6e/Prometheus-proxmox-grafana-user.png
+        - title: Add permissions for this user.
+          url: https://xinux.net/images/5/5d/Prometheus-proxmox-grafana-user-permission.png
+        - title: Visualize the data collected with Grafana.
+          url: https://grafana.com/api/dashboards/10347/images/6529/image
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 3.5.3
+    created: "2025-04-29T09:01:49.633391411Z"
+    description: A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor
+      to collect metrics.
+    digest: f9a608455bd491b88db13e15206b03361433097ab58d93e1e3eebd071cfd9b54
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/prometheus-pve-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: prometheus-pve-exporter
+    sources:
+    - https://github.com/prometheus-pve/prometheus-pve-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/prometheus-pve-exporter-2.0.7/prometheus-pve-exporter-2.0.7.tgz
+    version: 2.0.7
+  - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
         - kind: added
@@ -47198,4 +47235,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-04-29T08:37:13.555724863Z"
+generated: "2025-04-29T09:01:49.637167882Z"
