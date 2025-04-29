@@ -1,7 +1,7 @@
 # baserow
 
-## 3.11.9
+## 3.11.10
 
 ### Changed
 
-- url for Icon
+- Icon
