@@ -36624,6 +36624,39 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: changed
+          description: url of icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Visualize the different Events inside your Kubernetes cluster.
+          url: https://civo-com-assets.ams3.digitaloceanspaces.com/content_images/989.blog.png
+        - title: You can filter the events that should be visualized.
+          url: https://raw.githubusercontent.com/milindchawre/civo-k8s/master/blog/sloop/images/sloop1.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: sha-2ce8bbe
+    created: "2025-04-29T11:05:54.371414967Z"
+    description: Kubernetes History Visualization
+    digest: e8181d1128b289dc334a90356605fd53090b14ce64a120876fae3ffa131d409d
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/sloop/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: sloop
+    sources:
+    - https://github.com/salesforce/sloop
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/sloop-0.0.12/sloop-0.0.12.tgz
+    version: 0.0.12
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: added
           description: Icon to GitHub
         - kind: changed
@@ -47648,4 +47681,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-04-29T11:00:31.916148699Z"
+generated: "2025-04-29T11:05:54.37423574Z"
