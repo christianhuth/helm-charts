@@ -1,7 +1,7 @@
 # node-access
 
-## 1.1.4
+## 1.2.0
 
-### Changed
+### Added
 
-- url of icon
+- option to define the image registry

@@ -79,7 +79,7 @@ securityContext:
 {{- end }}
 containers:
   - name: {{ .Chart.Name }}
-    image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+    image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
     imagePullPolicy: {{ .Values.image.pullPolicy }}
     command:
       - tail
