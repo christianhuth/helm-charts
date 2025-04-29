@@ -1,11 +1,7 @@
 # popeye
 
-## 2.3.2
-
-### Added
-
-- Icon to GitHub
+## 2.3.3
 
 ### Changed
 
-- content of .helmignore
+- url of icon
