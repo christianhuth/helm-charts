@@ -16,4 +16,4 @@ chart-repos:
   - bitnami=https://charts.bitnami.com/bitnami
   - cnieg=https://cnieg.github.io/helm-charts
   - christianhuth=https://charts.christianhuth.de
-helm-extra-args: "--reset-then-reuse-values --timeout 600s"
+helm-extra-args: "--timeout 600s"
