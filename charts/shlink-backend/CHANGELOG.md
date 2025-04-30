@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 6.0.4
+## 6.0.5
 
 ### Changed
 
-- dependency of rabbitmq to 16.0.1
+- dependency of redis to 20.13.4
