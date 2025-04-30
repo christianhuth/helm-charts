@@ -1,7 +1,7 @@
 # kutt
 
-## 5.9.0
+## 5.9.1
 
-### Added
+### Changed
 
-- option to define the image registry
+- dependency of redis to 20.13.4
