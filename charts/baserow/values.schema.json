@@ -92,7 +92,7 @@
                   "type": "string"
                 },
                 "tag": {
-                  "default": "1.32.5",
+                  "default": "1.33.0",
                   "description": "Overrides the image tag",
                   "required": [],
                   "title": "tag",
@@ -496,7 +496,7 @@
                   "type": "string"
                 },
                 "tag": {
-                  "default": "1.32.5",
+                  "default": "1.33.0",
                   "description": "Overrides the image tag",
                   "required": [],
                   "title": "tag",
@@ -1572,7 +1572,7 @@
                   "type": "string"
                 },
                 "tag": {
-                  "default": "1.32.5",
+                  "default": "1.33.0",
                   "description": "Overrides the image tag",
                   "required": [],
                   "title": "tag",
@@ -2208,7 +2208,7 @@
               "type": "string"
             },
             "tag": {
-              "default": "1.32.5",
+              "default": "1.33.0",
               "description": "Overrides the image tag",
               "required": [],
               "title": "tag",
