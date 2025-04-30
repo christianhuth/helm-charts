@@ -1,7 +1,7 @@
 # kube-ops-view
 
-## 4.8.0
+## 4.8.1
 
-### Added
+### Changed
 
-- option to define the image registry
+- dependency of redis to 20.13.4
