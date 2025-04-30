@@ -1,7 +1,7 @@
 # baserow
 
-## 3.12.0
+## 3.13.0
 
-### Added
+### Changed
 
-- option to define the image registry
+- App Version to 1.33.0
