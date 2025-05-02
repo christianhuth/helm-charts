@@ -1,7 +1,7 @@
 # polr
 
-## 2.2.0
+## 2.2.1
 
-### Added
+### Fixed
 
-- option to define the image registry
+- error in image definition of deployment
