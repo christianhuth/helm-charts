@@ -3,8 +3,8 @@ apiVersion: v2
 name: prometheus-pve-exporter
 description: A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor to collect metrics.
 type: application
-version: 2.1.0
-appVersion: "3.5.3"
+version: 2.1.1
+appVersion: "3.5.4"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/prometheus-pve-exporter/icon.svg
 maintainers:
@@ -16,8 +16,8 @@ annotations:
   artifacthub.io/alternativeName: "pve-exporter"
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: added
-      description: option to define the image registry
+    - kind: changed
+      description: App Version to 3.5.4
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

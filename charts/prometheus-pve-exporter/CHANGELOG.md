@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.1.0
+## 2.1.1
 
-### Added
+### Changed
 
-- option to define the image registry
+- App Version to 3.5.4
