@@ -1,7 +1,7 @@
 # freshrss
 
-## 1.0.5
+## 1.0.6
 
 ### Changed
 
-- url for Icon
+- App Version to 1.26.2
