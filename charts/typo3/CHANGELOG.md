@@ -1,7 +1,7 @@
 # typo3
 
-## 3.6.0
+## 3.6.1
 
-### Added
+### Changed
 
-- option to define the image registry
+- dependency of mysql to 12.3.5
