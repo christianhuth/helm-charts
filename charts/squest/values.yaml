@@ -390,22 +390,22 @@ mariadb:
   enabled: true
   auth:
     # -- The database name to be used when using the integrated MariaDB database.
-    database: ""
+    database: squest
     # -- The password credential to be used when using the integrated MariaDB database.
-    password: ""
+    password: squest
     # -- The root password credential to be used when using the integrated MariaDB database.
-    rootPassword: ""
+    rootPassword: squest
     # -- The username credential to be used when using the integrated MariaDB database.
-    username: ""
+    username: squest
 
 rabbitmq:
   # -- enable integrated RabbitMQ™ subchart from Bitnami
   enabled: true
   auth:
     # -- The password credential to be used when using the integrated RabbitMQ.
-    password: ""
+    password: squest
     # -- The username credential to be used when using the integrated RabbitMQ.
-    username: ""
+    username: squest
 
 redis:
   # -- enable integrated Redis™ subchart from Bitnami
@@ -416,6 +416,6 @@ redis:
     # -- Enable password authentication
     enabled: true
     # -- The password credential to be used when using the integrated Redis.
-    password: ""
+    password: squest
     # -- The username credential to be used when using the integrated Redis.
-    username: ""
+    username: squest
