@@ -146,6 +146,9 @@ skooner:
 sloop:
 - changed-files:
   - any-glob-to-any-file: charts/sloop/*
+squest:
+- changed-files:
+  - any-glob-to-any-file: charts/squest/*
 standardnotes:
 - changed-files:
   - any-glob-to-any-file: charts/standardnotes/*
