@@ -1,0 +1,421 @@
+# -- Provide a name in place of `squest`
+nameOverride: ""
+
+# -- String to fully override `"squest.fullname"`
+fullnameOverride: ""
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+squest:
+
+  image:
+    # -- image registry
+    registry: quay.io
+    # -- image repository
+    repository: hewlettpackardenterprise/squest
+    # -- image pull policy
+    pullPolicy: Always
+    # -- Overrides the image tag
+    tag: "2.7.1"
+
+  # -- Number of replicas
+  replicaCount: 1
+
+  # -- The number of old ReplicaSets to retain
+  revisionHistoryLimit: 10
+
+  serviceAccount:
+    # -- Specifies whether a service account should be created
+    create: true
+    # -- Annotations to add to the service account
+    annotations: {}
+    # -- The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+  # -- Annotations to be added to pods
+  podAnnotations: {}
+
+  # -- Labels to be added to pods
+  podLabels: {}
+
+  # -- pod-level security context
+  podSecurityContext:
+    fsGroup: 999
+
+  # -- container-level security context
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  service:
+    # -- Kubernetes service type
+    type: ClusterIP
+    # -- Kubernetes port where service is exposed
+    port: 8080
+
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+  # -- Resource limits and requests for the pods.
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  # -- Node labels for pod assignment
+  nodeSelector: {}
+
+  # -- Toleration labels for pod assignment
+  tolerations: []
+
+  # -- Affinity settings for pod assignment
+  affinity: {}
+
+  # -- additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.
+  extraEnv: []
+
+  config:
+    database:
+      auth:
+        # -- The database name to be used when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.
+        database: ""
+        # -- Use existing secret for password details (`squest.config.database.auth.password` and `squest.config.database.auth.rootPassword` will be ignored and picked up from this secret). The secret has to contain the keys `mariadb-password` and `mariadb-root-password`.
+        existingSecret: ""
+        # -- The password credential to be used when using an external MariaDB database.
+        password: ""
+        # -- The root password credential to be used when using an external MariaDB database.
+        rootPassword: ""
+        # -- The username credential to be used when using an external MariaDB database.
+        username: ""
+      # -- The host name of the database server when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.
+      host: ""
+      # -- The port in which the database service is running when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.
+      port: 3306
+    django:
+      # -- Django DEBUG mode.
+      debug: false
+      # -- Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently
+      gunicornWorkers: 4
+    localization:
+      # -- Change the format of all date in Squest UI. Based on Python strftime. See https://strftime.org for a strftime cheatsheet.
+      dateFormat: "%d %b, %Y %H:%M"
+      # -- Django language. See https://docs.djangoproject.com/en/4.2/ref/settings/#language-code for details.
+      language: en-us
+      # -- Time zone of the server that host Squest service. See https://docs.djangoproject.com/en/4.2/ref/settings/#std:setting-TIME_ZONE for details.
+      timezone: Europe/Berlin
+    plugins:
+      # -- Path to form field validation modules. It is deprecated. Please use squest.config.plugins.surveyValidatorPath instead.
+      fieldValidatorPath: ""
+      # -- Path to SurveyValidator modules.
+      surveyValidatorPath: "plugins/survey_validators"
+    rabbitmq:
+      auth:
+        # -- Use existing secret for password details (`squest.config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.
+        existingSecret: ""
+        # -- The password credential to be used when using an external database driver.
+        password: ""
+        # -- The username credential to be used when using an external database driver.
+        username: ""
+      # -- The RabbitMQ server host name
+      host: ""
+      # -- The RabbitMQ server VHost
+      vhost: ""
+    redis:
+      auth:
+        # -- Use existing secret for password details (`squest.config.redis.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `redis-password`.
+        existingSecret: ""
+        # -- The password credential to be used when using an external redis server.
+        password: ""
+        # -- The username credential to be used when using an external redis server.
+        username: ""
+    smtp:
+      auth:
+        # -- Use existing secret for password details (`squest.config.smtp.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `smtp-password`.
+        existingSecret: ""
+        # -- The password credential to be used when using an external SMTP host.
+        password: ""
+        # -- The username credential to be used when using an external SMTP host.
+        username: ""
+      # -- Domain name used as email sender.
+      from: "squest@squest.domain.local"
+      # -- The SMTP host to use for sending email.
+      host: "localhost"
+      # -- Port to use for the SMTP server defined in squest.config.email.host.
+      port: 25
+      # -- Whether to use an implicit TLS (secure) connection when talking to the SMTP server defined in squest.config.smtp.host.
+      useSsl: false
+    squest:
+      # -- A list of all the email who get code error notifications when squest.config.django.debug=false
+      admins: ""
+      # -- Set to True to enable email notifications. The default is based on the squest.config.django.debug value.
+      emailNotificationEnabled: ""
+      # -- Address of the Squest portal instance. Used in email templates and in metadata sent to Red Hat Ansible Automation Platform/AWX job templates.
+      host: "http://squest.domain.local"
+      # -- Set to True to change the navbar and footer color to visually identify a testing instance of Squest.
+      isDevServer: false
+      # -- When enabled, only administrators can access squest UI and API. This can be used for example to block new requests by end users from the service catalog. So an administrator can perform operations against the API like migrating instance specs.
+      maintenanceModeEnabled: false
+
+  nginx:
+
+    image:
+      # -- image registry
+      registry: docker.io
+      # -- image repository
+      repository: nginx
+      # -- image pull policy
+      pullPolicy: Always
+      # -- Overrides the image tag
+      tag: "1.23.4-alpine"
+
+celery:
+
+  beat:
+
+    image:
+      # -- image registry
+      registry: quay.io
+      # -- image repository
+      repository: hewlettpackardenterprise/squest
+      # -- image pull policy
+      pullPolicy: Always
+      # -- Overrides the image tag
+      tag: "2.7.1"
+
+    # -- Number of replicas
+    replicaCount: 1
+
+    # -- The number of old ReplicaSets to retain
+    revisionHistoryLimit: 10
+
+    serviceAccount:
+      # -- Specifies whether a service account should be created
+      create: true
+      # -- Annotations to add to the service account
+      annotations: {}
+      # -- The name of the service account to use
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
+
+    # -- Annotations to be added to pods
+    podAnnotations: {}
+
+    # -- Labels to be added to pods
+    podLabels: {}
+
+    # -- pod-level security context
+    podSecurityContext: {}
+      # fsGroup: 2000
+
+    # -- container-level security context
+    securityContext: {}
+      # capabilities:
+      #   drop:
+      #   - ALL
+      # readOnlyRootFilesystem: true
+      # runAsNonRoot: true
+      # runAsUser: 1000
+
+    service:
+      # -- Kubernetes service type
+      type: ClusterIP
+      # -- Kubernetes port where service is exposed
+      port: 8080
+
+    # -- Resource limits and requests for the pods.
+    resources: {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
+
+    # -- Node labels for pod assignment
+    nodeSelector: {}
+
+    # -- Toleration labels for pod assignment
+    tolerations: []
+
+    # -- Affinity settings for pod assignment
+    affinity: {}
+
+    # -- additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.
+    extraEnv: []
+
+    config:
+      django:
+        # -- Django DEBUG mode.
+        debug: false
+        # -- Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently
+        gunicornWorkers: 4
+
+  worker:
+
+    image:
+      # -- image registry
+      registry: quay.io
+      # -- image repository
+      repository: hewlettpackardenterprise/squest
+      # -- image pull policy
+      pullPolicy: Always
+      # -- Overrides the image tag
+      tag: "2.7.1"
+
+    # -- Number of replicas
+    replicaCount: 1
+
+    # -- The number of old ReplicaSets to retain
+    revisionHistoryLimit: 10
+
+    serviceAccount:
+      # -- Specifies whether a service account should be created
+      create: true
+      # -- Annotations to add to the service account
+      annotations: {}
+      # -- The name of the service account to use
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
+
+    # -- Annotations to be added to pods
+    podAnnotations: {}
+
+    # -- Labels to be added to pods
+    podLabels: {}
+
+    # -- pod-level security context
+    podSecurityContext: {}
+      # fsGroup: 2000
+
+    # -- container-level security context
+    securityContext: {}
+      # capabilities:
+      #   drop:
+      #   - ALL
+      # readOnlyRootFilesystem: true
+      # runAsNonRoot: true
+      # runAsUser: 1000
+
+    service:
+      # -- Kubernetes service type
+      type: ClusterIP
+      # -- Kubernetes port where service is exposed
+      port: 8080
+
+    # -- Resource limits and requests for the pods.
+    resources: {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
+
+    # -- Node labels for pod assignment
+    nodeSelector: {}
+
+    # -- Toleration labels for pod assignment
+    tolerations: []
+
+    # -- Affinity settings for pod assignment
+    affinity: {}
+
+    # -- additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.
+    extraEnv: []
+
+    config:
+      django:
+        # -- Django DEBUG mode.
+        debug: false
+        # -- Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently
+        gunicornWorkers: 4
+
+mariadb:
+  # -- enable integrated MariaDB™ subchart from Bitnami
+  enabled: true
+  auth:
+    # -- The database name to be used when using the integrated MariaDB database.
+    database: squest
+    # -- The password credential to be used when using the integrated MariaDB database.
+    password: squest
+    # -- The root password credential to be used when using the integrated MariaDB database.
+    rootPassword: squest
+    # -- The username credential to be used when using the integrated MariaDB database.
+    username: squest
+
+rabbitmq:
+  # -- enable integrated RabbitMQ™ subchart from Bitnami
+  enabled: true
+  auth:
+    # -- The password credential to be used when using the integrated RabbitMQ.
+    password: squest
+    # -- The username credential to be used when using the integrated RabbitMQ.
+    username: squest
+
+redis:
+  # -- enable integrated Redis™ subchart from Bitnami
+  enabled: true
+  # -- Redis™ architecture. Allowed values: `standalone` or `replication`
+  architecture: standalone
+  auth:
+    # -- Enable password authentication
+    enabled: true
+    # -- The password credential to be used when using the integrated Redis.
+    password: squest
+    # -- The username credential to be used when using the integrated Redis.
+    username: squest

@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    {{- include "squest.squest.labels" . | nindent 4 }}
+  name: {{ include "squest.squest.fullname" . }}
+spec:
+  type: {{ .Values.squest.service.type }}
+  ports:
+    - port: {{ .Values.squest.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "squest.squest.selectorLabels" . | nindent 4 }}
