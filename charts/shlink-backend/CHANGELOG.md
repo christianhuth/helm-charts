@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 6.0.6
+## 6.0.7
 
 ### Changed
 
-- dependency of mysql to 12.3.5
+- dependency of rabbitmq to 16.0.2
