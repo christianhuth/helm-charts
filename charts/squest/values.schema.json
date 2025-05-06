@@ -1,0 +1,1320 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "description": "Affinity settings for pod assignment",
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "autoscaling": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "maxReplicas": {
+          "default": 100,
+          "required": [],
+          "title": "maxReplicas",
+          "type": "integer"
+        },
+        "minReplicas": {
+          "default": 1,
+          "required": [],
+          "title": "minReplicas",
+          "type": "integer"
+        },
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "required": [],
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage"
+      ],
+      "title": "autoscaling",
+      "type": "object"
+    },
+    "config": {
+      "properties": {
+        "database": {
+          "properties": {
+            "auth": {
+              "properties": {
+                "database": {
+                  "default": "",
+                  "description": "The database name to be used when using an external database driver. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled",
+                  "required": [],
+                  "title": "database",
+                  "type": "string"
+                },
+                "existingSecret": {
+                  "default": "",
+                  "description": "Use existing secret for password details (`config.database.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `database-password`.",
+                  "required": [],
+                  "title": "existingSecret",
+                  "type": "string"
+                },
+                "password": {
+                  "default": "",
+                  "description": "The password credential to be used when using an external database driver.",
+                  "required": [],
+                  "title": "password",
+                  "type": "string"
+                },
+                "username": {
+                  "default": "",
+                  "description": "The username credential to be used when using an external database driver.",
+                  "required": [],
+                  "title": "username",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "database",
+                "existingSecret",
+                "password",
+                "username"
+              ],
+              "title": "auth",
+              "type": "object"
+            },
+            "driver": {
+              "default": "sqlite",
+              "description": "mysql, maria, postgres or sqlite. Will be set automatically when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled",
+              "required": [],
+              "title": "driver",
+              "type": "string"
+            },
+            "host": {
+              "default": "",
+              "description": "The host name of the database server when using an external database driver. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled",
+              "required": [],
+              "title": "host",
+              "type": "string"
+            },
+            "port": {
+              "default": 0,
+              "description": "The port in which the database service is running when using an external database driver. Default value is based on the value provided for DB_DRIVER. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled",
+              "required": [],
+              "title": "port",
+              "type": "integer"
+            },
+            "useEncryption": {
+              "default": false,
+              "description": "Whether it is desired to use an encrypted connection with the database or not",
+              "required": [],
+              "title": "useEncryption",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "auth",
+            "driver",
+            "host",
+            "port",
+            "useEncryption"
+          ],
+          "title": "database",
+          "type": "object"
+        },
+        "general": {
+          "properties": {
+            "basePath": {
+              "default": "",
+              "description": "The base path from which you plan to serve Shlink, in case you don’t want to serve it from the root of the domain. It has to start with a bar, like /shlink. Defaults to ''.",
+              "required": [],
+              "title": "basePath",
+              "type": "string"
+            },
+            "cacheNamespace": {
+              "default": "",
+              "description": "A prefix used for all cache keys generated by Shlink. It’s important to set a unique value here if you have multiple Shlink instances sharing the same cache store (same server when not using redis, or same redis cluster), otherwise there could be collisions. Defaults to Shlink.",
+              "required": [],
+              "title": "cacheNamespace",
+              "type": "string"
+            },
+            "defaultDomain": {
+              "default": "",
+              "description": "The default short domain used for this Shlink instance. For example s.test.",
+              "required": [],
+              "title": "defaultDomain",
+              "type": "string"
+            },
+            "initialApiKey": {
+              "default": "",
+              "description": "An API key that will be created once during container start-up, with admin permissions.",
+              "required": [],
+              "title": "initialApiKey",
+              "type": "string"
+            },
+            "isHttpsEnabled": {
+              "default": false,
+              "description": "Tells if Shlink is served with https or not (true or false). It’s still up to you to actually serve it with HTTPS.",
+              "required": [],
+              "title": "isHttpsEnabled",
+              "type": "boolean"
+            },
+            "memoryLimit": {
+              "default": "",
+              "description": "The maximum amount of memory that every Shlink process can use. You can provide a number, which will be the amount of memory in bytes, or a number followed by K for kilobytes, M for megabytes or G for gigabytes. You can also provide -1 to set no memory limit. Defaults to 512M.",
+              "required": [],
+              "title": "memoryLimit",
+              "type": "string"
+            },
+            "timezone": {
+              "default": "",
+              "description": "A timezone code as defined [in this list](https://www.php.net/manual/en/timezones.php). All dates stored by Shlink (visits, short URL creation, etc) will be considered to be on this timezone. By default, the default timezone set in PHP config will be used, which is UTC in the case of the docker image.",
+              "required": [],
+              "title": "timezone",
+              "type": "string"
+            }
+          },
+          "required": [
+            "basePath",
+            "cacheNamespace",
+            "defaultDomain",
+            "initialApiKey",
+            "isHttpsEnabled",
+            "memoryLimit",
+            "timezone"
+          ],
+          "title": "general",
+          "type": "object"
+        },
+        "geolite": {
+          "properties": {
+            "licenseKey": {
+              "default": "",
+              "description": "The license key used to download new GeoLite2 database files. Go to GeoLite2 license key to know how to generate it. Not providing a license key will completely disable visits geolocation.",
+              "required": [],
+              "title": "licenseKey",
+              "type": "string"
+            },
+            "skipInitialDownload": {
+              "default": false,
+              "description": "If provided with value true, it will skip the initial GeoLite2 db file download, speeding-up the container start-up. As a side effect, first visits on this container will remain un-located until the file finishes downloading in background.",
+              "required": [],
+              "title": "skipInitialDownload",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "licenseKey",
+            "skipInitialDownload"
+          ],
+          "title": "geolite",
+          "type": "object"
+        },
+        "matomo": {
+          "properties": {
+            "auth": {
+              "properties": {
+                "apiToken": {
+                  "default": "",
+                  "description": "The API token so that Shlink can call Matomo’s API",
+                  "required": [],
+                  "title": "apiToken",
+                  "type": "string"
+                },
+                "existingSecret": {
+                  "default": "",
+                  "description": "Use existing secret for the API token details (`config.matomo.auth.apiToken` will be ignored and picked up from this secret). The secret has to contain the key `api-token`.",
+                  "required": [],
+                  "title": "existingSecret",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "apiToken",
+                "existingSecret"
+              ],
+              "title": "auth",
+              "type": "object"
+            },
+            "baseUrl": {
+              "default": "",
+              "description": "The external Matomo server URL.",
+              "required": [],
+              "title": "baseUrl",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enable the Matomo integration to sent visits",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "siteId": {
+              "default": "",
+              "description": "The site ID to be used for Shlink visits.",
+              "required": [],
+              "title": "siteId",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "auth",
+            "baseUrl",
+            "siteId"
+          ],
+          "title": "matomo",
+          "type": "object"
+        },
+        "mercure": {
+          "properties": {
+            "auth": {
+              "properties": {
+                "existingSecret": {
+                  "default": "",
+                  "description": "Use existing secret for the JWT secret details (`config.mercure.auth.jwtSecret` will be ignored and picked up from this secret). The secret has to contain the key `jwt-secret`.",
+                  "required": [],
+                  "title": "existingSecret",
+                  "type": "string"
+                },
+                "jwtSecret": {
+                  "default": "",
+                  "description": "The secret key that was provided to the mercure hub server, in order to be able to generate valid JWTs for publishing/subscribing to that server.",
+                  "required": [],
+                  "title": "jwtSecret",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "jwtSecret",
+                "existingSecret"
+              ],
+              "title": "auth",
+              "type": "object"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enable the Mercure Hub integration.",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "internalHubUrl": {
+              "default": "",
+              "description": "An internal URL for a mercure hub. Will be used only when publishing updates to mercure, and does not need to be public.",
+              "required": [],
+              "title": "internalHubUrl",
+              "type": "string"
+            },
+            "publicHubUrl": {
+              "default": "",
+              "description": "The public URL of a mercure hub server to which Shlink will sent updates. This URL will also be served to consumers that want to subscribe to those updates.",
+              "required": [],
+              "title": "publicHubUrl",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "auth",
+            "publicHubUrl",
+            "internalHubUrl"
+          ],
+          "title": "mercure",
+          "type": "object"
+        },
+        "qrCodes": {
+          "properties": {
+            "codeForDisabledShortUrls": {
+              "default": true,
+              "description": "Whether generating QR codes should work for disabled short URLs. Disabled short URLs are those which reached the maximum amount of visits, have a validSince date in the future, or a validUntil date in the past.",
+              "required": [],
+              "title": "codeForDisabledShortUrls",
+              "type": "boolean"
+            },
+            "defaultColors": {
+              "properties": {
+                "background": {
+                  "default": "#FFFFFF",
+                  "description": "The QR code background color.",
+                  "required": [],
+                  "title": "background",
+                  "type": "string"
+                },
+                "foreground": {
+                  "default": "#000000",
+                  "description": "The QR code foreground color.",
+                  "required": [],
+                  "title": "foreground",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "background",
+                "foreground"
+              ],
+              "title": "defaultColors",
+              "type": "object"
+            },
+            "defaultErrorCorrection": {
+              "default": "l",
+              "description": "One of L (Low), M (Medium), Q (Quartile) or H (High), to determine the default error correction of generated QR codes when the errorCorrection query param is not provided.",
+              "required": [],
+              "title": "defaultErrorCorrection",
+              "type": "string"
+            },
+            "defaultFormat": {
+              "default": "png",
+              "description": "One of png or svg, to determine the default format of generated QR codes when the format query param is not provided.",
+              "required": [],
+              "title": "defaultFormat",
+              "type": "string"
+            },
+            "defaultLogoUrl": {
+              "default": "",
+              "description": "A URL pointing to a logo that will be placed in the middle of the QR code. This one is experimental, as some images might break the QR code.",
+              "required": [],
+              "title": "defaultLogoUrl",
+              "type": "string"
+            },
+            "defaultMargin": {
+              "default": 0,
+              "description": "A value greater than 0 to determine the default margin of generated QR codes when the margin query param is not provided.",
+              "required": [],
+              "title": "defaultMargin",
+              "type": "integer"
+            },
+            "defaultRoundBlockSize": {
+              "default": true,
+              "description": "Tells if the block size should be round on QR codes, making it more readable, but potentially adding some extra margin as a side effect.",
+              "required": [],
+              "title": "defaultRoundBlockSize",
+              "type": "boolean"
+            },
+            "defaultSize": {
+              "default": 300,
+              "description": "A value between 50 and 1000 to determine the default size of generated QR codes when the size query param is not provided.",
+              "required": [],
+              "title": "defaultSize",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "codeForDisabledShortUrls",
+            "defaultColors",
+            "defaultErrorCorrection",
+            "defaultFormat",
+            "defaultLogoUrl",
+            "defaultMargin",
+            "defaultRoundBlockSize",
+            "defaultSize"
+          ],
+          "title": "qrCodes",
+          "type": "object"
+        },
+        "rabbitmq": {
+          "properties": {
+            "auth": {
+              "properties": {
+                "existingSecret": {
+                  "default": "",
+                  "description": "Use existing secret for password details (`config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.",
+                  "required": [],
+                  "title": "existingSecret",
+                  "type": "string"
+                },
+                "password": {
+                  "default": "",
+                  "description": "The password credential to be used when using an external database driver.",
+                  "required": [],
+                  "title": "password",
+                  "type": "string"
+                },
+                "username": {
+                  "default": "",
+                  "description": "The username credential to be used when using an external database driver.",
+                  "required": [],
+                  "title": "username",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "existingSecret",
+                "password",
+                "username"
+              ],
+              "title": "auth",
+              "type": "object"
+            },
+            "enabled": {
+              "default": false,
+              "description": "enable RabbitMQ™ Integration",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "host": {
+              "default": "",
+              "description": "The RabbitMQ server host name",
+              "required": [],
+              "title": "host",
+              "type": "string"
+            },
+            "useSsl": {
+              "default": false,
+              "description": "Whether connection is encrypted with SSL/TLS or not.",
+              "required": [],
+              "title": "useSsl",
+              "type": "boolean"
+            },
+            "vhost": {
+              "default": "/",
+              "description": "The RabbitMQ server VHost",
+              "required": [],
+              "title": "vhost",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "auth",
+            "host",
+            "useSsl",
+            "vhost"
+          ],
+          "title": "rabbitmq",
+          "type": "object"
+        },
+        "redirects": {
+          "properties": {
+            "cacheLifetime": {
+              "default": 30,
+              "description": "Allows to set the amount of seconds that redirects should be cached when redirect status is 301 or 308.",
+              "required": [],
+              "title": "cacheLifetime",
+              "type": "integer"
+            },
+            "defaultBaseUrlRedirect": {
+              "default": "",
+              "description": "If a URL is provided here, when a user tries to access Shlink’s base URL, and the visited domain does not have a redirect URL of its own, he/she will be redirected to this value. If this env var is not provided, the user will see a generic 404 - not found page.",
+              "required": [],
+              "title": "defaultBaseUrlRedirect",
+              "type": "string"
+            },
+            "defaultInvalidShortUrlRedirect": {
+              "default": "",
+              "description": "If a URL is provided here, when a user tries to access an invalid short URL, and the visited domain does not have a redirect URL of its own, he/she will be redirected to this value. If this env var is not provided, the user will see a generic 404 - not found page.",
+              "required": [],
+              "title": "defaultInvalidShortUrlRedirect",
+              "type": "string"
+            },
+            "defaultRegular404Redirect": {
+              "default": "",
+              "description": "If a URL is provided here, when a user tries to access a URL not matching any supported by the router, and the visited domain does not have a redirect URL of its own, he/she will be redirected to this value. If this env var is not provided, the user will see a generic 404 - not found page.",
+              "required": [],
+              "title": "defaultRegular404Redirect",
+              "type": "string"
+            },
+            "extraPathMode": {
+              "default": "default",
+              "description": "Determines how Shlink should match short URLs when they start with a known short code. Valid values are default, append and ignore. (See [Extra path forwarding](https://shlink.io/documentation/some-features/#extra-path-forwarding) for more info).",
+              "required": [],
+              "title": "extraPathMode",
+              "type": "string"
+            },
+            "statusCode": {
+              "default": 302,
+              "description": "301, 302, 308 or 307 (last two since v3.5.0). Determines the status code that should be used on redirects from short to long URLs. Setting 308 or 307 implicitly makes requests to short URLs work regardless the HTTP method.",
+              "required": [],
+              "title": "statusCode",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "cacheLifetime",
+            "defaultBaseUrlRedirect",
+            "defaultInvalidShortUrlRedirect",
+            "defaultRegular404Redirect",
+            "extraPathMode",
+            "statusCode"
+          ],
+          "title": "redirects",
+          "type": "object"
+        },
+        "redis": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "enable Redis™ Integration",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "pubSubEnabled": {
+              "default": false,
+              "description": "Tells if the configured redis instance/cluster should also be used to publish real-time updates via redis pub/sub.",
+              "required": [],
+              "title": "pubSubEnabled",
+              "type": "boolean"
+            },
+            "sentinal": {
+              "properties": {
+                "enabled": {
+                  "default": false,
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "service": {
+                  "default": "",
+                  "description": "The name of the sentinel service if you want to use redis sentinel. If this value is provided, the servers provided in config.redis.servers will be considered sentinel instances.",
+                  "required": [],
+                  "title": "service",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "enabled",
+                "service"
+              ],
+              "title": "sentinal",
+              "type": "object"
+            },
+            "servers": {
+              "default": "",
+              "description": "The comma-separated list of Redis servers when using external Redis servers. Will be ignored when you activate one of the integrated Redis subchart with redis.enabled",
+              "required": [],
+              "title": "servers",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "pubSubEnabled",
+            "sentinal",
+            "servers"
+          ],
+          "title": "redis",
+          "type": "object"
+        },
+        "robots": {
+          "properties": {
+            "allowAllShortUrls": {
+              "default": false,
+              "description": "Whether all short URLs should be allowed via robots.txt or not. If set to true, the crawlable option set in individual short URLs will be ignored.",
+              "required": [],
+              "title": "allowAllShortUrls",
+              "type": "boolean"
+            },
+            "userAgents": {
+              "default": "*",
+              "description": "A comma-separated list of allowed user agents via robots.txt.",
+              "required": [],
+              "title": "userAgents",
+              "type": "string"
+            }
+          },
+          "required": [
+            "allowAllShortUrls",
+            "userAgents"
+          ],
+          "title": "robots",
+          "type": "object"
+        },
+        "trackingVisits": {
+          "properties": {
+            "anonymizeRemoteAddr": {
+              "default": true,
+              "description": "Tells if IP addresses from visitors should be obfuscated before storing them in the database. See [Tracking visits](https://shlink.io/documentation/tracking-visits/) for more info.",
+              "required": [],
+              "title": "anonymizeRemoteAddr",
+              "type": "boolean"
+            },
+            "disable": {
+              "default": false,
+              "description": "Tells if visits tracking should be completely disabled. See [Tracking visits](https://shlink.io/documentation/tracking-visits/) for more info.",
+              "required": [],
+              "title": "disable",
+              "type": "boolean"
+            },
+            "disableIpTracking": {
+              "default": false,
+              "description": "Tells if tracking of the IP address (and therefore visitors location) should be disabled. See [Tracking visits](https://shlink.io/documentation/tracking-visits/) for more info.",
+              "required": [],
+              "title": "disableIpTracking",
+              "type": "boolean"
+            },
+            "disableReferrerTracking": {
+              "default": false,
+              "description": "Tells if tracking of the referrer should be disabled. See [Tracking visits](https://shlink.io/documentation/tracking-visits/) for more info.",
+              "required": [],
+              "title": "disableReferrerTracking",
+              "type": "boolean"
+            },
+            "disableTrackingFrom": {
+              "default": "",
+              "description": "A comma-separated list of IP address patterns from which all tracking should be disabled. It allows providing fixed IP addresses (100.200.80.40), CIDR blocks (192.168.10.0/24) or wildcard patterns (11.22.*.*)",
+              "required": [],
+              "title": "disableTrackingFrom",
+              "type": "string"
+            },
+            "disableTrackingParam": {
+              "default": "",
+              "description": "The name of a query param that can be used to visit short URLs avoiding the visit to be tracked. This feature won’t be available if no value is provided. See [Tracking visits](https://shlink.io/documentation/tracking-visits/) for more info.",
+              "required": [],
+              "title": "disableTrackingParam",
+              "type": "string"
+            },
+            "disableUaTracking": {
+              "default": false,
+              "description": "Tells if tracking of the user agent should be disabled. See [Tracking visits](https://shlink.io/documentation/tracking-visits/) for more info.",
+              "required": [],
+              "title": "disableUaTracking",
+              "type": "boolean"
+            },
+            "trackOrphanVisits": {
+              "default": true,
+              "description": "Tells if orphan visits should be tracked or not. See [Tracking visits](https://shlink.io/documentation/tracking-visits/) for more info.",
+              "required": [],
+              "title": "trackOrphanVisits",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "anonymizeRemoteAddr",
+            "disable",
+            "disableIpTracking",
+            "disableReferrerTracking",
+            "disableTrackingParam",
+            "disableTrackingFrom",
+            "disableUaTracking",
+            "trackOrphanVisits"
+          ],
+          "title": "trackingVisits",
+          "type": "object"
+        },
+        "urlShortening": {
+          "properties": {
+            "autoResolveTitles": {
+              "default": true,
+              "description": "Used to automatically resolve the short URL’s title based on the title-tag in the long URL",
+              "required": [],
+              "title": "autoResolveTitles",
+              "type": "boolean"
+            },
+            "defaultShortCodesLength": {
+              "default": 5,
+              "description": "The length you want generated short codes to have. It defaults to 5 and has to be at least 4, so any value smaller than that will fall back to 4.",
+              "required": [],
+              "title": "defaultShortCodesLength",
+              "type": "integer"
+            },
+            "deleteShortUrlThreshold": {
+              "default": "",
+              "description": "The amount of visits on short URLs which will not allow them to be deleted. If not provided, this restriction will be disabled.",
+              "required": [],
+              "title": "deleteShortUrlThreshold",
+              "type": "string"
+            },
+            "multiSegmentSlugsEnabled": {
+              "default": false,
+              "description": "Allows to create and handle multi-segment custom slugs when true is provided. See [multi-segment custom slugs](https://shlink.io/documentation/some-features/#multi-segment-custom-slugs) for more information.",
+              "required": [],
+              "title": "multiSegmentSlugsEnabled",
+              "type": "boolean"
+            },
+            "shortUrlMode": {
+              "default": "strict",
+              "description": "Determines how to match short URLs. Valid values are strict or loose. See [short URLs mode](https://shlink.io/documentation/some-features/#short-urls-mode) for more information.",
+              "required": [],
+              "title": "shortUrlMode",
+              "type": "string"
+            },
+            "shortUrlTrailingSlash": {
+              "default": false,
+              "description": "Allows to enable support for trailing slashes in short URLs when true is provided. See [short URLs trailing slash](https://shlink.io/documentation/some-features/#short-urls-trailing-slash) for more information.",
+              "required": [],
+              "title": "shortUrlTrailingSlash",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "autoResolveTitles",
+            "defaultShortCodesLength",
+            "deleteShortUrlThreshold",
+            "multiSegmentSlugsEnabled",
+            "shortUrlMode",
+            "shortUrlTrailingSlash"
+          ],
+          "title": "urlShortening",
+          "type": "object"
+        }
+      },
+      "required": [
+        "database",
+        "general",
+        "geolite",
+        "matomo",
+        "mercure",
+        "qrCodes",
+        "rabbitmq",
+        "redirects",
+        "redis",
+        "robots",
+        "trackingVisits",
+        "urlShortening"
+      ],
+      "title": "config",
+      "type": "object"
+    },
+    "extraEnv": {
+      "description": "additional environment variables to be added to the pods. See https://shlink.io/documentation/environment-variables for a complete list.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "extraEnv",
+      "type": "array"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"shlink-backend.fullname\"`",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "description": "image pull policy",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "registry": {
+          "default": "docker.io",
+          "description": "image registry",
+          "required": [],
+          "title": "registry",
+          "type": "string"
+        },
+        "repository": {
+          "default": "shlinkio/shlink",
+          "description": "image repository",
+          "required": [],
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "4.4.6",
+          "description": "Overrides the image tag",
+          "required": [],
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "registry",
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "ingress": {
+      "properties": {
+        "annotations": {
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "required": [],
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "description": "kubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "host": {
+                    "default": "chart-example.local",
+                    "required": [],
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "ImplementationSpecific",
+                              "required": [],
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "hosts",
+          "type": "array"
+        },
+        "tls": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "mariadb": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "shlink",
+              "description": "The database name to be used when using the integrated MariaDB database.",
+              "required": [],
+              "title": "database",
+              "type": "string"
+            },
+            "password": {
+              "default": "shlink",
+              "description": "The password credential to be used when using the integrated MariaDB database.",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "shlink",
+              "description": "The username credential to be used when using the integrated MariaDB database.",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "description": "enable integrated MariaDB™ subchart from Bitnami",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth"
+      ],
+      "title": "mariadb",
+      "type": "object"
+    },
+    "mysql": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "shlink",
+              "description": "The database name to be used when using the integrated MySQL database.",
+              "required": [],
+              "title": "database",
+              "type": "string"
+            },
+            "password": {
+              "default": "shlink",
+              "description": "The password credential to be used when using the integrated MySQL database.",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "shlink",
+              "description": "The username credential to be used when using the integrated MySQL database.",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "description": "enable integrated MySQL™ subchart from Bitnami",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth"
+      ],
+      "title": "mysql",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `shlink-backend`",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "description": "Node labels for pod assignment",
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to pods",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podLabels": {
+      "description": "Labels to be added to pods",
+      "required": [],
+      "title": "podLabels",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "description": "pod-level security context",
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "postgresql": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "shlink",
+              "description": "The database name to be used when using the integrated PostgreSQL database.",
+              "required": [],
+              "title": "database",
+              "type": "string"
+            },
+            "password": {
+              "default": "shlink",
+              "description": "The password credential to be used when using the integrated PostgreSQL database.",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "shlink",
+              "description": "The username credential to be used when using the integrated PostgreSQL database.",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "description": "enable integrated PostgreSQL™ subchart from Bitnami",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth"
+      ],
+      "title": "postgresql",
+      "type": "object"
+    },
+    "rabbitmq": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "enable integrated RabbitMQ™ subchart from Bitnami",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "rabbitmq",
+      "type": "object"
+    },
+    "redis": {
+      "properties": {
+        "architecture": {
+          "default": "standalone",
+          "description": "Redis™ architecture. Allowed values: `standalone` or `replication`",
+          "required": [],
+          "title": "architecture",
+          "type": "string"
+        },
+        "auth": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "Enable password authentication",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "sentinel": {
+              "default": false,
+              "description": "Enable password authentication on Redis™ Sentinels",
+              "required": [],
+              "title": "sentinel",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled",
+            "sentinel"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "description": "enable integrated Redis™ subchart from Bitnami",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "sentinel": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "Use Redis™ Sentinel on Redis™ pods",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "title": "sentinel",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "architecture",
+        "auth",
+        "sentinel"
+      ],
+      "title": "redis",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas",
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "description": "Resource limits and requests for the headwind pods.",
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "revisionHistoryLimit": {
+      "default": 10,
+      "description": "The number of old ReplicaSets to retain",
+      "required": [],
+      "title": "revisionHistoryLimit",
+      "type": "integer"
+    },
+    "securityContext": {
+      "description": "container-level security context",
+      "required": [],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "properties": {
+        "port": {
+          "default": 8080,
+          "description": "Kubernetes port where service is exposed",
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "description": "Kubernetes service type",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "tolerations": {
+      "description": "Toleration labels for pod assignment",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "tolerations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "image",
+    "imagePullSecrets",
+    "replicaCount",
+    "revisionHistoryLimit",
+    "serviceAccount",
+    "podAnnotations",
+    "podLabels",
+    "podSecurityContext",
+    "securityContext",
+    "service",
+    "ingress",
+    "resources",
+    "autoscaling",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "extraEnv",
+    "config",
+    "mariadb",
+    "mysql",
+    "postgresql",
+    "rabbitmq",
+    "redis"
+  ],
+  "type": "object"
+}

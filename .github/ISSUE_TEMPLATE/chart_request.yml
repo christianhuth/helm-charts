@@ -1,0 +1,65 @@
+name: Report a new Chart
+description: Create a report about a problem in one of the Helm Charts
+title: "[name of the software e.g. baserow] Create a Chart"
+labels: [chart-request]
+assignees:
+  - christianhuth
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please be cautious with the sensitive information/logs while filing the issue.
+
+  - id: software-name
+    type: input
+    attributes:
+      label: What's the name of the Software that should be bundled as a Helm Chart?
+      description: Enter the name of the Software that you want packaged.
+    validations:
+      required: true
+
+  - id: git-repository
+    type: textarea
+    attributes:
+      label: Where is the source code of the software located?
+      description: Enter the URL(s) of the Git repository.
+    validations:
+      required: true
+
+  - id: git-stars
+    type: input
+    attributes:
+      label: How many Stars does the Software have at the moment?
+      description: Enter the amount of Git Stars.
+    validations:
+      required: false
+
+  - id: links
+    type: textarea
+    attributes:
+      label: Documentation, Official Homepage, ...
+      description: Enter all links related to the Software.
+    validations:
+      required: true
+
+  - id: existing-helm-charts
+    type: textarea
+    attributes:
+      label: Are there existing Helm Charts you are aware of?
+      description: Enter Git or Artifacthub link.
+    validations:
+      required: false
+
+  - id: existing-helm-charts-problems
+    type: textarea
+    attributes:
+      label: Explain why the existing Helm Chart(s) isn't sufficent.
+    validations:
+      required: false
+
+  - id: anything-else
+    type: textarea
+    attributes:
+      label: Anything else we need to know?
+    validations:
+      required: false

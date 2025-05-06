@@ -1,0 +1,27 @@
+extraEnv:
+  - name: test
+    value: yeah
+
+config:
+  database:
+    driver: sqlite
+    host: my-sqlite
+    port: 20
+
+mariadb:
+  enabled: false
+  auth:
+    user: mariadb
+
+mysql:
+  enabled: false
+  auth:
+    user: mysql
+
+postgresql:
+  enabled: false
+  auth:
+    user: postgresql
+
+redis:
+  enabled: true
