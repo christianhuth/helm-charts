@@ -1,7 +1,7 @@
 # headwind-mdm
 
-## 3.3.0
+## 3.3.1
 
-### Added
+### Changed
 
-- option to define the image registry
+- dependency of postgresql to 16.6.7
