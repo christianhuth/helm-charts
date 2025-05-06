@@ -1,7 +1,7 @@
 # polr
 
-## 2.2.1
+## 2.2.2
 
-### Fixed
+### Changed
 
-- error in image definition of deployment
+- dependency of mysql to 12.3.5
