@@ -199,7 +199,7 @@ squest:
       # -- image pull policy
       pullPolicy: Always
       # -- Overrides the image tag
-      tag: "1.23.4-alpine"
+      tag: "1.28.0-alpine"
 
 celery:
 
