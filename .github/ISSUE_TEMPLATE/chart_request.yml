@@ -1,5 +1,5 @@
-name: Report a new Chart
-description: Create a report about a problem in one of the Helm Charts
+name: Request a new Chart
+description: Found a great Software without a Helm Chart? Request one
 title: "[name of the software e.g. baserow] Create a Chart"
 labels: [chart-request]
 assignees:
