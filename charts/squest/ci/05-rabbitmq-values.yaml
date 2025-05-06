@@ -1,5 +1,0 @@
----
-rabbitmq:
-  enabled: true
-  auth:
-    password: my-test-password
