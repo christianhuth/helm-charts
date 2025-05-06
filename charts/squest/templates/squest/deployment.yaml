@@ -1,0 +1,292 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "squest.squest.labels" . | nindent 4 }}
+  name: {{ include "squest.squest.fullname" . }}
+spec:
+  {{- if not .Values.squest.autoscaling.enabled }}
+  replicas: {{ .Values.squest.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.squest.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "squest.squest.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.squest.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "squest.squest.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "squest.squest.serviceAccountName" . }}
+      {{- with .Values.squest.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      initContainers:
+        - name: database-migrations
+          image: "{{ .Values.squest.image.registry }}/{{ .Values.squest.image.repository }}:{{ .Values.squest.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.squest.image.pullPolicy }}
+          command: ['/bin/bash', '-c']
+          args:
+            - |
+              echo $UID
+              echo $USER
+              echo ""
+              echo "-----------------------------------------------------"
+              echo "Wait for required services to start"
+              /wait
+              echo "Applying database migration"
+              python manage.py migrate --database=${DATABASE:-default}
+              echo ""
+              echo "-----------------------------------------------------"
+              echo "Collect static files"
+              python manage.py collectstatic --noinput
+              echo ""
+              echo "-----------------------------------------------------"
+              echo "Inserting default data"
+              python manage.py insert_default_data
+          env:
+            # Django Settings
+            - name: DEBUG
+              value: {{ .Values.squest.config.django.debug | quote }}
+            - name: GUNICORN_WORKERS
+              value: {{ .Values.squest.config.django.gunicornWorkers | quote }}
+
+            # MariaDB Settings
+            - name: DB_DATABASE
+              value: {{ include "squest.mariadb.auth.database" . | quote }}
+            - name: DB_HOST
+              value: {{ include "squest.mariadb.host" . | quote }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "squest.mariadb.auth.secretName" . | quote }}
+                  key: mariadb-password
+            - name: DB_PORT
+              value: {{ include "squest.mariadb.port" . | quote }}
+            - name: DB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "squest.mariadb.auth.secretName" . | quote }}
+                  key: mariadb-root-password
+            - name: DB_USER
+              value: {{ include "squest.mariadb.auth.username" . | quote }}
+
+            # Wait Settings
+            - name: WAIT_HOSTS
+              value: {{ include "squest.mariadb.host" . }}:{{ include "squest.mariadb.port" . }}
+            - name: WAIT_TIMEOUT
+              value: "60"
+          volumeMounts:
+            - mountPath: /app/static
+              name: static
+
+      containers:
+        - name: squest
+          image: "{{ .Values.squest.image.registry }}/{{ .Values.squest.image.repository }}:{{ .Values.squest.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.squest.image.pullPolicy }}
+          command: ['/bin/bash', '-c']
+          args:
+            - |
+              echo "Wait for required services to start"
+              /wait
+              echo "Starting web server"
+              gunicorn --bind 0.0.0.0:8000 --pythonpath /app/squest Squest.wsgi
+          env:
+            # Django Settings
+            - name: ALLOWED_HOSTS
+              value: "*"
+            - name: CSRF_TRUSTED_ORIGINS
+              value: "*"
+            - name: DEBUG
+              value: {{ .Values.squest.config.django.debug | quote }}
+            - name: GUNICORN_WORKERS
+              value: {{ .Values.squest.config.django.gunicornWorkers | quote }}
+
+            # Localization Settings
+            {{- if .Values.squest.config.localization.dateFormat }}
+            - name: DATE_FORMAT
+              value: {{ .Values.squest.config.localization.dateFormat | quote }}
+            {{- end }}
+            {{- if .Values.squest.config.localization.language }}
+            - name: LANGUAGE_CODE
+              value: {{ .Values.squest.config.localization.language | quote }}
+            {{- end }}
+            {{- if .Values.squest.config.localization.timezone }}
+            - name: TIME_ZONE
+              value: {{ .Values.squest.config.localization.timezone | quote }}
+            {{- end }}
+
+            # MariaDB Settings
+            - name: DB_DATABASE
+              value: {{ include "squest.mariadb.auth.database" . | quote }}
+            - name: DB_HOST
+              value: {{ include "squest.mariadb.host" . | quote }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "squest.mariadb.auth.secretName" . | quote }}
+                  key: mariadb-password
+            - name: DB_PORT
+              value: {{ include "squest.mariadb.port" . | quote }}
+            - name: DB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "squest.mariadb.auth.secretName" . | quote }}
+                  key: mariadb-root-password
+            - name: DB_USER
+              value: {{ include "squest.mariadb.auth.username" . | quote }}
+
+            # Plugins Settings
+            {{- if .Values.squest.config.plugins.fieldValidatorPath }}
+            - name: FIELD_VALIDATOR_PATH
+              value: {{ .Values.squest.config.plugins.fieldValidatorPath | quote }}
+            {{- end }}
+            {{- if .Values.squest.config.plugins.surveyValidatorPath }}
+            - name: SURVEY_VALIDATOR_PATH
+              value: {{ .Values.squest.config.plugins.surveyValidatorPath | quote }}
+            {{- end }}
+
+            # RabbitMQ Settings
+            - name: CELERY_BROKER_URL
+              value: {{ (include "squest.rabbitmq.url" .) | quote }}
+
+            # Redis Settings
+            - name: REDIS_CACHE_HOST
+              value: {{ include "squest.redis.host" . | quote }}
+            - name: REDIS_CACHE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "squest.redis.auth.secretName" . }}
+                  key: redis-password
+            - name: REDIS_CACHE_PORT
+              value: {{ include "squest.redis.port" . | quote }}
+            - name: REDIS_CACHE_USER
+              value: {{ include "squest.redis.auth.username" . | quote }}
+
+            # SMTP Settings
+            {{- if .Values.squest.config.smtp.host }}
+            - name: EMAIL_HOST
+              value: {{ .Values.squest.config.smtp.host | quote }}
+            {{- end }}
+            {{- if (or .Values.squest.config.smtp.auth.existingSecret .Values.squest.config.smtp.auth.password) }}
+            - name: EMAIL_HOST_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "squest.squest.smtp.secretName" . }}
+                  key: smtp-password
+            {{- end }}
+            {{- if .Values.squest.config.smtp.username }}
+            - name: EMAIL_HOST_USER
+              value: {{ .Values.squest.config.smtp.username | quote }}
+            {{- end }}
+            {{- if .Values.squest.config.smtp.port }}
+            - name: EMAIL_PORT
+              value: {{ .Values.squest.config.smtp.port | quote }}
+            {{- end }}
+            - name: EMAIL_USE_SSL
+              value: {{ .Values.squest.config.smtp.useSsl | quote }}
+            {{- if .Values.squest.config.smtp.from }}
+            - name: SQUEST_EMAIL_HOST
+              value: {{ .Values.squest.config.smtp.from | quote }}
+            {{- end }}
+
+            # Squest Settings
+            - name: MAINTENANCE_MODE_ENABLED
+              value: {{ .Values.squest.config.squest.maintenanceModeEnabled | quote }}
+            {{- if .Values.squest.config.squest.admins }}
+            - name: SQUEST_ADMINS
+              value: {{ .Values.squest.config.squest.admins | quote }}
+            {{- end }}
+            {{- if .Values.squest.config.squest.host }}
+            - name: SQUEST_HOST
+              value: {{ .Values.squest.config.squest.host | quote }}
+            {{- end }}
+            {{- if .Values.squest.config.squest.emailNotificationEnabled }}
+            - name: SQUEST_EMAIL_NOTIFICATION_ENABLED
+              value: {{ .Values.squest.config.squest.emailNotificationEnabled | quote }}
+            {{- end }}
+            - name: IS_DEV_SERVER
+              value: {{ .Values.squest.config.squest.isDevServer | quote }}
+
+            # Wait Settings
+            - name: WAIT_HOSTS
+              value: {{ include "squest.mariadb.host" . }}:{{ include "squest.mariadb.port" . }},{{ include "squest.rabbitmq.host" . }}:{{ include "squest.rabbitmq.port" . }},{{ include "squest.redis.host" . }}:{{ include "squest.redis.port" . }}
+            - name: WAIT_TIMEOUT
+              value: "60"
+
+            {{- if .Values.squest.extraEnv }}
+            # Extra Environment Variables
+            {{- .Values.squest.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+          ports:
+            - name: django
+              containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: django
+          readinessProbe:
+            httpGet:
+              path: /
+              port: django
+          {{- with .Values.squest.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - mountPath: /app/media
+              name: media
+        - name: nginx
+          image: "{{ .Values.squest.nginx.image.registry }}/{{ .Values.squest.nginx.image.repository }}:{{ .Values.squest.nginx.image.tag }}"
+          command: ["nginx", "-c", "/etc/nginx/squest/nginx.conf"]
+          ports:
+            - name: http
+              containerPort: 8080
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/squest
+              readOnly: true
+            - mountPath: /app/static
+              name: static
+              readOnly: true
+            - name: media
+              mountPath: /app/media
+              readOnly: true
+      restartPolicy: Always
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: {{ include "squest.squest.fullname" . }}
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+        - name: media
+          persistentVolumeClaim:
+            claimName: {{ include "squest.squest.fullname" . }}-media
+        - name: static
+          readOnly: true
+          persistentVolumeClaim:
+            claimName: {{ include "squest.squest.fullname" . }}-static

@@ -1,0 +1,37 @@
+apiVersion: v2
+name: squest
+description: Squest is a self-service portal that works on top of Red Hat Ansible Automation Platform/AWX.
+type: application
+version: 1.0.0
+appVersion: "2.7.1"
+home: https://github.com/christianhuth/helm-charts
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://github.com/HewlettPackard/squest
+  - https://hewlettpackard.github.io/squest
+dependencies:
+  - name: mariadb
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 20.5.3
+    condition: mariadb.enabled
+  - name: rabbitmq
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 16.0.1
+    condition: rabbitmq.enabled
+  - name: redis
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 20.13.4
+    condition: redis.enabled
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial Version
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key

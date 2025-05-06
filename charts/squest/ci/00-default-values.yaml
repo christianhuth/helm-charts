@@ -1,0 +1,17 @@
+---
+mariadb:
+  auth:
+    database: squest
+    password: RHavG92C584VMFwSS3TAXJRE67d10EzO
+    rootPassword: RSMjy3451CFV8I9XWFJgHX0AR76AP2SG
+    username: squest-mariadb-user
+
+rabbitmq:
+  auth:
+    password: Vz50U2G7K6DCYpQdAKyNZ9MT4L38W1mO
+    username: squest-rabbitmq-user
+
+redis:
+  auth:
+    password: tk24fATsiQmB6I9HGXSF15U3pU70Klj8
+    username: squest-redis-user

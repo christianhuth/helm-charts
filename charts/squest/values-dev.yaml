@@ -1,0 +1,8 @@
+squest:
+  ingress:
+    enabled: true
+    hosts:
+      - host: squest.127.0.0.1.nip.io
+        paths:
+          - path: /
+            pathType: ImplementationSpecific

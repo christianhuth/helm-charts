@@ -1,0 +1,78 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "squest.celery.beat.labels" . | nindent 4 }}
+  name: {{ include "squest.celery.beat.fullname" . }}
+spec:
+  replicas: {{ .Values.celery.beat.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "squest.celery.beat.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "squest.celery.beat.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: celery-beat
+          image: "{{ .Values.celery.beat.image.registry }}/{{ .Values.celery.beat.image.repository }}:{{ .Values.celery.beat.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.celery.beat.image.pullPolicy }}
+          command: ['/bin/bash', '-c']
+          args:
+            - |
+              echo "Wait for required services to start"
+              /wait
+              echo "Starting celery beat"
+              celery -A service_catalog beat -l info
+          env:
+            # Django Settings
+            - name: ALLOWED_HOSTS
+              value: "*"
+            - name: CSRF_TRUSTED_ORIGINS
+              value: "*"
+            - name: DEBUG
+              value: {{ .Values.celery.beat.config.django.debug | quote }}
+            - name: GUNICORN_WORKERS
+              value: {{ .Values.celery.beat.config.django.gunicornWorkers | quote }}
+
+            # MariaDB Settings
+            - name: DB_DATABASE
+              value: {{ include "squest.mariadb.auth.database" . | quote }}
+            - name: DB_HOST
+              value: {{ include "squest.mariadb.host" . | quote }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "squest.mariadb.auth.secretName" . | quote }}
+                  key: mariadb-password
+            - name: DB_PORT
+              value: {{ include "squest.mariadb.port" . | quote }}
+            - name: DB_USER
+              value: {{ include "squest.mariadb.auth.username" . | quote }}
+
+            # RabbitMQ Settings
+            - name: CELERY_BROKER_URL
+              value: {{ (include "squest.rabbitmq.url" .) | quote }}
+
+            # Redis Settings
+            - name: REDIS_CACHE_HOST
+              value: {{ include "squest.redis.host" . | quote }}
+            - name: REDIS_CACHE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "squest.redis.auth.secretName" . }}
+                  key: redis-password
+            - name: REDIS_CACHE_PORT
+              value: {{ include "squest.redis.port" . | quote }}
+            - name: REDIS_CACHE_USER
+              value: {{ include "squest.redis.auth.username" . | quote }}
+
+            # Wait Settings
+            - name: WAIT_HOSTS
+              value: {{ include "squest.mariadb.host" . }}:{{ include "squest.mariadb.port" . }},{{ include "squest.rabbitmq.host" . }}:{{ include "squest.rabbitmq.port" . }},{{ include "squest.redis.host" . }}:{{ include "squest.redis.port" . }},{{ include "squest.squest.fullname" . }}:{{ .Values.squest.service.port }}
+            - name: WAIT_TIMEOUT
+              value: "60"
+      restartPolicy: Always
+      serviceAccountName: {{ include "squest.celery.beat.serviceAccountName" . }}
