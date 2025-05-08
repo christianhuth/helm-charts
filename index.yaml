@@ -38860,6 +38860,48 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of mariadb to 20.5.5
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.28.0-alpine
+    created: "2025-05-08T17:11:39.12365438Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.5.5
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.0.2
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.13.4
+    description: Squest is a self-service portal that works on top of Red Hat Ansible
+      Automation Platform/AWX.
+    digest: 1954958bd6b08b8de133fcbc5ef2a2d9f14aea9259cba0cb61af5decdf73553b
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: squest
+    sources:
+    - https://github.com/HewlettPackard/squest
+    - https://hewlettpackard.github.io/squest
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/squest-1.1.2/squest-1.1.2.tgz
+    version: 1.1.2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of mariadb to 20.5.4
       artifacthub.io/links: |
         - name: support
@@ -50180,4 +50222,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-05-08T16:47:02.836717045Z"
+generated: "2025-05-08T17:11:39.125909102Z"
