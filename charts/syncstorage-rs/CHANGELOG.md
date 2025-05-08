@@ -1,7 +1,7 @@
 # syncstorage-rs
 
-## 1.1.2
+## 1.1.3
 
 ### Changed
 
-- url of icon
+- dependency of mariadb mariadb to 20.5.4
