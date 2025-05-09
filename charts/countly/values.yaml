@@ -283,7 +283,11 @@ mongodb:
     # -- Name for a custom database to create
     database: countly
     # @ignored this is only required for the Bitnami MongoDB Subchart
+    password: countly
+    # @ignored this is only required for the Bitnami MongoDB Subchart
     username: countly
+  # -- Set to true to use a StatefulSet instead of a Deployment (only when `architecture=standalone`)
+  useStatefulSet: true
 
 externalMongodb:
   auth:

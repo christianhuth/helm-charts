@@ -144,6 +144,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | mongodb.auth.database | string | `"countly"` | Name for a custom database to create |
 | mongodb.auth.enabled | bool | `false` | Enable authentication |
 | mongodb.enabled | bool | `true` | enable MongoDB™ subchart from Bitnami |
+| mongodb.useStatefulSet | bool | `true` | Set to true to use a StatefulSet instead of a Deployment (only when `architecture=standalone`) |
 | nameOverride | string | `""` | Provide a name in place of `baserow` |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
