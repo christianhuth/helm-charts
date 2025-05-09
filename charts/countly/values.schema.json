@@ -1069,6 +1069,12 @@
               "title": "enabled",
               "type": "boolean"
             },
+            "password": {
+              "default": "countly",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
             "username": {
               "default": "countly",
               "required": [],
@@ -1079,6 +1085,7 @@
           "required": [
             "enabled",
             "database",
+            "password",
             "username"
           ],
           "title": "auth",
@@ -1090,12 +1097,20 @@
           "required": [],
           "title": "enabled",
           "type": "boolean"
+        },
+        "useStatefulSet": {
+          "default": true,
+          "description": "Set to true to use a StatefulSet instead of a Deployment (only when `architecture=standalone`)",
+          "required": [],
+          "title": "useStatefulSet",
+          "type": "boolean"
         }
       },
       "required": [
         "enabled",
         "architecture",
-        "auth"
+        "auth",
+        "useStatefulSet"
       ],
       "title": "mongodb",
       "type": "object"
