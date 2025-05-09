@@ -1,4 +1,4 @@
-ruleS:
+rules:
   unpinned-uses:
     config:
       policies:        
