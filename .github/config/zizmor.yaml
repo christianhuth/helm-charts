@@ -2,4 +2,4 @@ ruleS:
   unpinned-uses:
     config:
       policies:        
-        "*": any
+        "*": ref-pin
