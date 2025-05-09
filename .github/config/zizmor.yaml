@@ -1,0 +1,5 @@
+ruleS:
+  unpinned-uses:
+    config:
+      policies:        
+        "*": any
