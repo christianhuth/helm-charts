@@ -1,6 +1,6 @@
 apiVersion: v2
 name: mailcow-exporter
-description:
+description: Prometheus exporter for information about a mailcow instance
 type: application
 version: 1.0.0
 appVersion: "2.0.1"
