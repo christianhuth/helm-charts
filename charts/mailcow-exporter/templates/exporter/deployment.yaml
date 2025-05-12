@@ -57,8 +57,10 @@ spec:
                 secretKeyRef:
                   name: {{ (include "mailcow-exporter.mailcow.auth.secretName" .) | quote }}
                   key: "mailcow-api-key"
+            {{- if .Values.config.mailcow.host }}
             - name: MAILCOW_EXPORTER_HOST
-              value: {{ (include "mailcow-exporter.mailcow.host" .) | quote }}
+              value: {{ .Values.config.mailcow.host | quote }}
+            {{- end }}
             - name: MAILCOW_EXPORTER_SCHEME
               value: {{ (include "mailcow-exporter.mailcow.scheme" .) | quote }}
           ports:
