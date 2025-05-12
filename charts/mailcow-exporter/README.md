@@ -1,5 +1,7 @@
 # mailcow-exporter
 
+Prometheus exporter for information about a mailcow instance
+
 ## TL;DR;
 
 ```console
