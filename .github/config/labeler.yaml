@@ -98,6 +98,9 @@ kutt:
 lxd-dashboard:
 - changed-files:
   - any-glob-to-any-file: charts/lxd-dashboard/*
+mailcow-exporter:
+- changed-files:
+  - any-glob-to-any-file: charts/mailcow-exporter/*
 maildev:
 - changed-files:
   - any-glob-to-any-file: charts/maildev/*
