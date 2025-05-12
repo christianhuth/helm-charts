@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mailcow-exporter.fullname" . }}
+  labels:
+    {{- include "mailcow-exporter.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "mailcow-exporter.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mailcow-exporter.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "mailcow-exporter.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            # Exporter Settings
+            - name: MAILCOW_EXPORTER_SECURITY_DISABLE_ACCESS_PROTECTION
+              value: {{ (include "mailcow-exporter.exporter.auth.enabled" .) | quote }}
+            - name: MAILCOW_EXPORTER_LISTEN
+              value: {{ (include "mailcow-exporter.exporter.listen" .) | quote }}
+            {{- if (eq (include "mailcow-exporter.exporter.auth.enabled" .) "0") }}
+            - name: MAILCOW_EXPORTER_SECURITY_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ (include "mailcow-exporter.exporter.auth.secretName" .) | quote }}
+                  key: {{ (include "mailcow-exporter.exporter.auth.key" .) | quote }}
+            {{- end }}
+            # Mailcow Settings
+            - name: MAILCOW_EXPORTER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ (include "mailcow-exporter.mailcow.auth.secretName" .) | quote }}
+                  key: "mailcow-api-key"
+            - name: MAILCOW_EXPORTER_HOST
+              value: {{ (include "mailcow-exporter.mailcow.host" .) | quote }}
+            - name: MAILCOW_EXPORTER_SCHEME
+              value: {{ (include "mailcow-exporter.mailcow.scheme" .) | quote }}
+          ports:
+            - name: http
+              containerPort:  {{ .Values.config.exporter.port | int }}
+              protocol: TCP
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

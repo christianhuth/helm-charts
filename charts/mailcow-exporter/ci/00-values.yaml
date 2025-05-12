@@ -1,0 +1,5 @@
+config:
+  mailcow:
+    auth:
+      apiKey: FbZ6U1O4H0ACiT5UWR23QZM79aI8nDvt
+    host: mailcow.example.com
