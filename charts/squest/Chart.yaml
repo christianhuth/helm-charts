@@ -28,7 +28,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: making podSecurityContenxt unrequired
+      description: making podSecurityContext unrequired
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
