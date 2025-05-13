@@ -107,10 +107,10 @@ squest:
   # -- Affinity settings for pod assignment
   affinity: {}
 
-  # -- additional volumes to be added to the pods
+  # -- additional volumes to be added to the squest pods
   extraVolumes: []
 
-  # -- additional volumeMounts to be added to the pods
+  # -- additional volumeMounts to be added to the squest container (nginx and init container have separate extraVolumeMounts)
   extraVolumeMounts: []
 
   # -- additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.
@@ -209,6 +209,14 @@ squest:
       pullPolicy: Always
       # -- Overrides the image tag
       tag: "1.28.0-alpine"
+
+    # -- additional volumeMounts to be added to the nginx container
+    extraVolumeMounts: []
+
+  init:
+
+    # -- additional volumeMounts to be added to the init container
+    extraVolumeMounts: []
 
 celery:
 
