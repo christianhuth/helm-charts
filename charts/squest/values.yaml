@@ -210,6 +210,9 @@ squest:
       # -- Overrides the image tag
       tag: "1.28.0-alpine"
 
+    # -- additional volumeMounts to be added to the nginx container
+    extraVolumeMounts: []
+
 celery:
 
   beat:
