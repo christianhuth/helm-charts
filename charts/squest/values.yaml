@@ -40,10 +40,10 @@ squest:
   # -- Labels to be added to pods
   podLabels: {}
 
-  # -- pod-level security context
   # @schema
   # required: false
   # @schema
+  # -- pod-level security context
   podSecurityContext:
     fsGroup: 999
 
