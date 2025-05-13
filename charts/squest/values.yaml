@@ -213,6 +213,11 @@ squest:
     # -- additional volumeMounts to be added to the nginx container
     extraVolumeMounts: []
 
+  init:
+
+    # -- additional volumeMounts to be added to the init container
+    extraVolumeMounts: []
+
 celery:
 
   beat:
