@@ -4,4 +4,4 @@
 
 ### Changed
 
-- making podSecurityContenxt unrequired
+- making podSecurityContext unrequired
