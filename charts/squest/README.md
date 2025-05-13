@@ -172,7 +172,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | squest.nodeSelector | object | `{}` | Node labels for pod assignment |
 | squest.podAnnotations | object | `{}` | Annotations to be added to pods |
 | squest.podLabels | object | `{}` | Labels to be added to pods |
-| squest.podSecurityContext | object | `{"fsGroup":999}` | pod-level security context @schema required: false @schema |
+| squest.podSecurityContext | object | `{"fsGroup":999}` | pod-level security context |
 | squest.replicaCount | int | `1` | Number of replicas |
 | squest.resources | object | `{}` | Resource limits and requests for the pods. |
 | squest.revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
