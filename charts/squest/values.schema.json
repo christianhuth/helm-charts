@@ -89,6 +89,24 @@
               "title": "extraEnv",
               "type": "array"
             },
+            "extraVolumeMounts": {
+              "description": "additional volumeMounts to be added to the pods",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraVolumeMounts",
+              "type": "array"
+            },
+            "extraVolumes": {
+              "description": "additional volumes to be added to the pods",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraVolumes",
+              "type": "array"
+            },
             "image": {
               "properties": {
                 "pullPolicy": {
@@ -259,6 +277,8 @@
             "nodeSelector",
             "tolerations",
             "affinity",
+            "extraVolumes",
+            "extraVolumeMounts",
             "extraEnv",
             "config"
           ],
@@ -351,6 +371,24 @@
               "title": "extraEnv",
               "type": "array"
             },
+            "extraVolumeMounts": {
+              "description": "additional volumeMounts to be added to the pods",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraVolumeMounts",
+              "type": "array"
+            },
+            "extraVolumes": {
+              "description": "additional volumes to be added to the pods",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraVolumes",
+              "type": "array"
+            },
             "image": {
               "properties": {
                 "pullPolicy": {
@@ -521,6 +559,8 @@
             "nodeSelector",
             "tolerations",
             "affinity",
+            "extraVolumes",
+            "extraVolumeMounts",
             "extraEnv",
             "config"
           ],
@@ -1160,6 +1200,24 @@
           "title": "extraEnv",
           "type": "array"
         },
+        "extraVolumeMounts": {
+          "description": "additional volumeMounts to be added to the pods",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "extraVolumeMounts",
+          "type": "array"
+        },
+        "extraVolumes": {
+          "description": "additional volumes to be added to the pods",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "extraVolumes",
+          "type": "array"
+        },
         "image": {
           "properties": {
             "pullPolicy": {
@@ -1483,6 +1541,8 @@
         "nodeSelector",
         "tolerations",
         "affinity",
+        "extraVolumes",
+        "extraVolumeMounts",
         "extraEnv",
         "config",
         "nginx"

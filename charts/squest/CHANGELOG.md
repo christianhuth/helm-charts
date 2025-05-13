@@ -1,7 +1,7 @@
 # squest
 
-## 1.1.4
+## 1.2.0
 
-### Changed
+### Added
 
-- making podSecurityContext unrequired
+- allow defining additional volumeMounts for squest, celery-beat and celery-worker pods

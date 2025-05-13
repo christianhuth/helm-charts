@@ -247,6 +247,11 @@ spec:
           volumeMounts:
             - mountPath: /app/media
               name: media
+            {{- if .Values.squest.extraVolumeMounts }}
+            {{- with .Values.squest.extraVolumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- end }}
         - name: nginx
           image: "{{ .Values.squest.nginx.image.registry }}/{{ .Values.squest.nginx.image.repository }}:{{ .Values.squest.nginx.image.tag }}"
           command: ["nginx", "-c", "/etc/nginx/squest/nginx.conf"]
@@ -290,3 +295,8 @@ spec:
           readOnly: true
           persistentVolumeClaim:
             claimName: {{ include "squest.squest.fullname" . }}-static
+        {{- if .Values.squest.extraVolumes }}
+        {{- with .Values.squest.extraVolumes }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
