@@ -1,7 +1,7 @@
 # headwind-mdm
 
-## 3.4.3
+## 3.4.4
 
 ### Changed
 
-- dependency of postgresql to 16.7.3
+- dependency of postgresql to 16.7.4
