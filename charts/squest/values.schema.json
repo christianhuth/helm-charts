@@ -1201,7 +1201,7 @@
           "type": "array"
         },
         "extraVolumeMounts": {
-          "description": "additional volumeMounts to be added to the pods",
+          "description": "additional volumeMounts to be added to the squest container (nginx and init container have separate extraVolumeMounts)",
           "items": {
             "required": []
           },
@@ -1210,7 +1210,7 @@
           "type": "array"
         },
         "extraVolumes": {
-          "description": "additional volumes to be added to the pods",
+          "description": "additional volumes to be added to the squest pods",
           "items": {
             "required": []
           },
@@ -1353,8 +1353,35 @@
           "title": "ingress",
           "type": "object"
         },
+        "init": {
+          "properties": {
+            "extraVolumeMounts": {
+              "description": "additional volumeMounts to be added to the init container",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraVolumeMounts",
+              "type": "array"
+            }
+          },
+          "required": [
+            "extraVolumeMounts"
+          ],
+          "title": "init",
+          "type": "object"
+        },
         "nginx": {
           "properties": {
+            "extraVolumeMounts": {
+              "description": "additional volumeMounts to be added to the nginx container",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraVolumeMounts",
+              "type": "array"
+            },
             "image": {
               "properties": {
                 "pullPolicy": {
@@ -1397,7 +1424,8 @@
             }
           },
           "required": [
-            "image"
+            "image",
+            "extraVolumeMounts"
           ],
           "title": "nginx",
           "type": "object"
@@ -1545,7 +1573,8 @@
         "extraVolumeMounts",
         "extraEnv",
         "config",
-        "nginx"
+        "nginx",
+        "init"
       ],
       "title": "squest",
       "type": "object"
