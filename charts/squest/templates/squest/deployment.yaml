@@ -89,6 +89,11 @@ spec:
           volumeMounts:
             - mountPath: /app/static
               name: static
+          {{- if .Values.squest.init.extraVolumeMounts }}
+          {{- with .Values.squest.init.extraVolumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- end }}
 
       containers:
         - name: squest
@@ -268,6 +273,11 @@ spec:
             - name: media
               mountPath: /app/media
               readOnly: true
+            {{- if .Values.squest.nginx.extraVolumeMounts }}
+            {{- with .Values.squest.nginx.extraVolumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- end }}
       restartPolicy: Always
       {{- with .Values.nodeSelector }}
       nodeSelector:
