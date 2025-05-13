@@ -4,5 +4,4 @@
 
 ### Added
 
-- allow defining additional volumeMounts for squest, celery-beat and
-  celery-worker pods
+- allow defining additional volumeMounts for squest, celery-beat and celery-worker pods
