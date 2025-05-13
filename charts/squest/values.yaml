@@ -107,6 +107,9 @@ squest:
   # -- Affinity settings for pod assignment
   affinity: {}
 
+  # -- additional volumes to be added to the pods
+  extraVolumes: []
+
   # -- additional volumeMounts to be added to the pods
   extraVolumeMounts: []
 
@@ -290,6 +293,9 @@ celery:
     # -- Affinity settings for pod assignment
     affinity: {}
 
+    # -- additional volumes to be added to the pods
+    extraVolumes: []
+
     # -- additional volumeMounts to be added to the pods
     extraVolumeMounts: []
 
@@ -383,6 +389,9 @@ celery:
 
     # -- Affinity settings for pod assignment
     affinity: {}
+
+    # -- additional volumes to be added to the pods
+    extraVolumes: []
 
     # -- additional volumeMounts to be added to the pods
     extraVolumeMounts: []
