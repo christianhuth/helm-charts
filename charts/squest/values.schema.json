@@ -1375,8 +1375,7 @@
           "required": [
             "fsGroup"
           ],
-          "title": "podSecurityContext",
-          "type": "object"
+          "title": "podSecurityContext"
         },
         "replicaCount": {
           "default": 1,
@@ -1476,7 +1475,6 @@
         "serviceAccount",
         "podAnnotations",
         "podLabels",
-        "podSecurityContext",
         "securityContext",
         "service",
         "ingress",
