@@ -4,4 +4,4 @@
 
 ### Added
 
-- allow defining additional volumeMounts for the squest init and nginx container
+- allow defining additional volumeMounts for the squest nginx and init container
