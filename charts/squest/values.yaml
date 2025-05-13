@@ -107,6 +107,9 @@ squest:
   # -- Affinity settings for pod assignment
   affinity: {}
 
+  # -- additional volumeMounts to be added to the pods
+  extraVolumeMounts: []
+
   # -- additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.
   extraEnv: []
 
@@ -287,6 +290,9 @@ celery:
     # -- Affinity settings for pod assignment
     affinity: {}
 
+    # -- additional volumeMounts to be added to the pods
+    extraVolumeMounts: []
+
     # -- additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.
     extraEnv: []
 
@@ -377,6 +383,9 @@ celery:
 
     # -- Affinity settings for pod assignment
     affinity: {}
+
+    # -- additional volumeMounts to be added to the pods
+    extraVolumeMounts: []
 
     # -- additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.
     extraEnv: []
