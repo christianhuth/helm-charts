@@ -82,3 +82,9 @@ spec:
           {{- end }}
       restartPolicy: Always
       serviceAccountName: {{ include "squest.celery.worker.serviceAccountName" . }}
+      {{- if .Values.celery.worker.extraVolumes }}
+      volumes:
+      {{- with .Values.celery.worker.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
