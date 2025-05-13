@@ -74,5 +74,11 @@ spec:
               value: {{ include "squest.mariadb.host" . }}:{{ include "squest.mariadb.port" . }},{{ include "squest.rabbitmq.host" . }}:{{ include "squest.rabbitmq.port" . }},{{ include "squest.redis.host" . }}:{{ include "squest.redis.port" . }},{{ include "squest.squest.fullname" . }}:{{ .Values.squest.service.port }}
             - name: WAIT_TIMEOUT
               value: "60"
+          {{- if .Values.celery.beat.extraVolumeMounts }}
+          volumeMounts:
+            {{- with .Values.celery.beat.extraVolumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- end }}
       restartPolicy: Always
       serviceAccountName: {{ include "squest.celery.beat.serviceAccountName" . }}
