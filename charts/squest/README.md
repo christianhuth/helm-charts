@@ -54,6 +54,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | celery.beat.config.django.debug | bool | `false` | Django DEBUG mode. |
 | celery.beat.config.django.gunicornWorkers | int | `4` | Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently |
 | celery.beat.extraEnv | list | `[]` | additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list. |
+| celery.beat.extraVolumeMounts | list | `[]` | additional volumeMounts to be added to the pods |
+| celery.beat.extraVolumes | list | `[]` | additional volumes to be added to the pods |
 | celery.beat.image.pullPolicy | string | `"Always"` | image pull policy |
 | celery.beat.image.registry | string | `"quay.io"` | image registry |
 | celery.beat.image.repository | string | `"hewlettpackardenterprise/squest"` | image repository |
@@ -80,6 +82,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | celery.worker.config.django.debug | bool | `false` | Django DEBUG mode. |
 | celery.worker.config.django.gunicornWorkers | int | `4` | Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently |
 | celery.worker.extraEnv | list | `[]` | additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list. |
+| celery.worker.extraVolumeMounts | list | `[]` | additional volumeMounts to be added to the pods |
+| celery.worker.extraVolumes | list | `[]` | additional volumes to be added to the pods |
 | celery.worker.image.pullPolicy | string | `"Always"` | image pull policy |
 | celery.worker.image.registry | string | `"quay.io"` | image registry |
 | celery.worker.image.repository | string | `"hewlettpackardenterprise/squest"` | image repository |
@@ -154,6 +158,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | squest.config.squest.isDevServer | bool | `false` | Set to True to change the navbar and footer color to visually identify a testing instance of Squest. |
 | squest.config.squest.maintenanceModeEnabled | bool | `false` | When enabled, only administrators can access squest UI and API. This can be used for example to block new requests by end users from the service catalog. So an administrator can perform operations against the API like migrating instance specs. |
 | squest.extraEnv | list | `[]` | additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list. |
+| squest.extraVolumeMounts | list | `[]` | additional volumeMounts to be added to the pods |
+| squest.extraVolumes | list | `[]` | additional volumes to be added to the pods |
 | squest.image.pullPolicy | string | `"Always"` | image pull policy |
 | squest.image.registry | string | `"quay.io"` | image registry |
 | squest.image.repository | string | `"hewlettpackardenterprise/squest"` | image repository |
