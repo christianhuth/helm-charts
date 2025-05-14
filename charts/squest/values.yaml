@@ -113,10 +113,10 @@ squest:
   # -- additional volumeMounts to be added to the squest container (nginx and init container have separate extraVolumeMounts)
   extraVolumeMounts: []
 
-  # -- additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables.
+  # -- additional environment variables to be added to the squest container. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables.
   extraEnv: []
 
-  # -- load additional environment variables from configMaps or secrets. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables.
+  # -- load additional environment variables in the squest container from configMaps or secrets. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables.
   extraEnvFrom: []
 
   config:
