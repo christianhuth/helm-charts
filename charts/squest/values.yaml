@@ -224,6 +224,12 @@ squest:
 
   init:
 
+    # -- additional environment variables to be added to the init container.
+    extraEnv: []
+
+    # -- load additional environment variables in the init container from configMaps or secrets.
+    extraEnvFrom: []
+
     # -- additional volumeMounts to be added to the init container
     extraVolumeMounts: []
 
