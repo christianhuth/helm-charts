@@ -86,6 +86,15 @@ spec:
               value: {{ include "squest.mariadb.host" . }}:{{ include "squest.mariadb.port" . }}
             - name: WAIT_TIMEOUT
               value: "60"
+          {{- if .Values.squest.init.extraEnv }}
+
+            # Extra Environment Variables
+            {{- .Values.squest.init.extraEnv | toYaml | nindent 12 }}
+          {{- end }}
+          {{- if .Values.squest.init.extraEnvFrom }}
+          envFrom:
+            {{- .Values.squest.init.extraEnvFrom | toYaml | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - mountPath: /app/static
               name: static
