@@ -213,6 +213,12 @@ squest:
       # -- Overrides the image tag
       tag: "1.28.0-alpine"
 
+    # -- additional environment variables to be added to the nginx container.
+    extraEnv: []
+
+    # -- load additional environment variables in the nginx container from configMaps or secrets.
+    extraEnvFrom: []
+
     # -- additional volumeMounts to be added to the nginx container
     extraVolumeMounts: []
 
