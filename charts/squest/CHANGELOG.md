@@ -1,7 +1,7 @@
 # squest
 
-## 1.2.2
+## 1.3.0
 
 ### Added
 
-- remove readOnly option from PVC that annoys ArgoCD
+- allow setting envFrom to load environment variables from configMaps or secrets
