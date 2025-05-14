@@ -233,6 +233,10 @@ spec:
             # Extra Environment Variables
             {{- .Values.squest.extraEnv | toYaml | nindent 12 }}
             {{- end }}
+          {{- if .Values.squest.extraEnvFrom }}
+          envFrom:
+            {{- .Values.squest.extraEnvFrom | toYaml | nindent 12 }}
+          {{- end }}
           ports:
             - name: django
               containerPort: 8000
