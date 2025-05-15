@@ -42,7 +42,51 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git checkout ${{ github.head_ref }}
           git add .
-          git commit -m "chore: auto-upgrade schema, readme and changelog"
+          git commit -m "chore: auto-upgrade schema and readme"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  changelog:
+    needs: [pre-commit]
+    runs-on: ubuntu-24.04
+    container: ghcr.io/chgl/kube-powertools:latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+      - name: Generate changelogs
+        shell: bash
+        run: .github/generate-chart-changelogs.sh
+      - name: Add an exception for dubious ownership check
+        run: git config --global --add safe.directory /__w/helm-charts/helm-charts
+      - name: Check for modified files
+        shell: bash
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "Changelogs have been modified."
+            echo "changelog_changes_detected=true" >> $GITHUB_ENV
+          else
+            echo "No changes to Changelogs detected."
+            echo "changelog_changes_detected=false" >> $GITHUB_ENV
+          fi
+      - name: Commit and push changes
+        if: env.changelog_changes_detected == 'true'
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            # Extract the source branch of the PR
+            branch_name="${{ github.event.pull_request.head.ref }}"
+          else
+            # Extract branch from push event
+            branch_name=$(echo "${GITHUB_REF#refs/heads/}")
+          fi
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git checkout ${{ github.head_ref }}
+          git add .
+          git commit -m "chore: auto-upgrade schema and readme"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
