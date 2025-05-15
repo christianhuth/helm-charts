@@ -42,6 +42,13 @@ repos:
         args: [--config=.github/config/markdownlint.yaml]
         language_version: lts
 
+  - repo: local
+    hooks:
+      - id: generate-changelogs
+        name: .github/generate-chart-changelogs.sh
+        entry: bash .github/generate-chart-changelogs.sh
+        language: system
+
   - repo: https://github.com/renovatebot/pre-commit-hooks
     rev: 39.227.2
     hooks:
