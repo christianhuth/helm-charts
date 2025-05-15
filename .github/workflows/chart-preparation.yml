@@ -19,6 +19,8 @@ jobs:
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: --all-files || exit 0
+      - name: Add an exception for dubious ownership check
+        run: git config --global --add safe.directory /__w/helm-charts/helm-charts
       - name: Check for modified files
         run: |
           if [[ -n $(git status --porcelain) ]]; then
