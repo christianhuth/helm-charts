@@ -1,0 +1,97 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nextcloud-exporter.fullname" . }}
+  labels:
+    {{- include "nextcloud-exporter.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "nextcloud-exporter.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "nextcloud-exporter.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "nextcloud-exporter.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            {{- if (eq .Values.config.nextcloud.auth.type "token") }}
+            - name: NEXTCLOUD_AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ (include "nextcloud-exporter.nextcloud.auth.secretName" .) | quote }}
+                  key: nextcloud-token
+            {{- end }}
+            - name: NEXTCLOUD_INFO_APPS
+              value: {{ .Values.config.exporter.appMetrics.enabled | quote }}
+            - name: NEXTCLOUD_INFO_UPDATE
+              value: {{ .Values.config.exporter.updateMetrics.enabled | quote }}
+            - name: NEXTCLOUD_LISTEN_ADDRESS
+              value: {{ (include "nextcloud-exporter.exporter.listen" .) | quote }}
+            {{- if .Values.config.nextcloud.server }}
+            - name: NEXTCLOUD_SERVER
+              value: {{ .Values.config.nextcloud.server | quote }}
+            {{- end }}
+            {{- if (eq .Values.config.nextcloud.auth.type "basic") }}
+            - name: NEXTCLOUD_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ (include "nextcloud-exporter.nextcloud.auth.secretName" .) | quote }}
+                  key: nextcloud-password
+            - name: NEXTCLOUD_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ (include "nextcloud-exporter.nextcloud.auth.secretName" .) | quote }}
+                  key: nextcloud-username
+            {{- end }}
+            {{- if .Values.config.nextcloud.timeout }}
+            - name: NEXTCLOUD_TIMEOUT
+              value: {{ .Values.config.nextcloud.timeout | quote }}
+            {{- end }}
+            - name: NEXTCLOUD_TLS_SKIP_VERIFY
+              value: {{ .Values.config.nextcloud.tlsSkipVerify | quote }}
+          ports:
+            - name: http
+              containerPort:  {{ .Values.config.exporter.port | int }}
+              protocol: TCP
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
