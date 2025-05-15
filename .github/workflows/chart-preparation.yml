@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-24.04
     container: ghcr.io/chgl/kube-powertools:latest
     steps:
+      - name: Install sudo package
+        run: apt update && apt install sudo
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
