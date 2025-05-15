@@ -22,6 +22,7 @@ jobs:
       - name: Add an exception for dubious ownership check
         run: git config --global --add safe.directory /__w/helm-charts/helm-charts
       - name: Check for modified files
+        shell: bash
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             echo "Files have been modified by pre-commit."
@@ -32,6 +33,7 @@ jobs:
           fi
       - name: Commit and push changes
         if: env.changes_detected == 'true'
+        shell: bash
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             # Extract the source branch of the PR
