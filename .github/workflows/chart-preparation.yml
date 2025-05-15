@@ -7,7 +7,6 @@ on:
 jobs:
   pre-commit:
     runs-on: ubuntu-24.04
-    container: ghcr.io/chgl/kube-powertools:latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -16,6 +15,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      - run: |
+          curl -o /usr/local/bin/gomplate -sSL https://github.com/hairyhenderson/gomplate/releases/download/v4.3.2/gomplate_linux-amd64
+          chmod 755 /usr/local/bin/gomplate
+          gomplate --version
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: --all-files || exit 0
@@ -42,7 +45,7 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git checkout ${{ github.head_ref }}
           git add .
-          git commit -m "chore: auto-upgrade schema, readme and changelog"
+          git commit -m "chore: auto-upgrade schema and readme"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
