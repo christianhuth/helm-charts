@@ -1,0 +1,232 @@
+# -- Provide a name in place of `taiga`
+nameOverride: ""
+
+# -- String to fully override `"taiga.fullname"`
+fullnameOverride: ""
+
+taiga:
+
+  backend:
+
+    image:
+      # -- image registry
+      registry: docker.io
+      # -- image repository
+      repository: taigaio/taiga-back
+      # -- image pull policy
+      pullPolicy: Always
+      # -- Overrides the image tag
+      tag: "6.8.2"
+
+    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+    imagePullSecrets: []
+
+    # -- Number of replicas
+    replicaCount: 1
+
+    # -- The number of old ReplicaSets to retain
+    revisionHistoryLimit: 10
+
+    serviceAccount:
+      # -- Specifies whether a service account should be created
+      create: true
+      # -- Annotations to add to the service account
+      annotations: {}
+      # -- The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
+
+    # -- Annotations to be added to exporter pods
+    podAnnotations: {}
+
+    # -- pod-level security context
+    podSecurityContext: {}
+      # fsGroup: 2000
+
+    # -- container-level security context
+    securityContext: {}
+      # capabilities:
+      #   drop:
+      #   - ALL
+      # readOnlyRootFilesystem: true
+      # runAsNonRoot: true
+      # runAsUser: 1000
+
+    service:
+      # -- Kubernetes service type
+      type: ClusterIP
+      # -- Kubernetes port where service is exposed
+      port: 8080
+
+    # -- Resource limits and requests for the headwind pods.
+    resources: {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
+
+    # -- Node labels for pod assignment
+    nodeSelector: {}
+
+    # -- Toleration labels for pod assignment
+    tolerations: []
+
+    # -- Affinity settings for pod assignment
+    affinity: {}
+
+  frontend:
+
+    image:
+      # -- image registry
+      registry: docker.io
+      # -- image repository
+      repository: taigaio/taiga-back
+      # -- image pull policy
+      pullPolicy: Always
+      # -- Overrides the image tag
+      tag: "6.8.2"
+
+    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+    imagePullSecrets: []
+
+    # -- Number of replicas
+    replicaCount: 1
+
+    # -- The number of old ReplicaSets to retain
+    revisionHistoryLimit: 10
+
+    serviceAccount:
+      # -- Specifies whether a service account should be created
+      create: true
+      # -- Annotations to add to the service account
+      annotations: {}
+      # -- The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
+
+    # -- Annotations to be added to exporter pods
+    podAnnotations: {}
+
+    # -- pod-level security context
+    podSecurityContext: {}
+      # fsGroup: 2000
+
+    # -- container-level security context
+    securityContext: {}
+      # capabilities:
+      #   drop:
+      #   - ALL
+      # readOnlyRootFilesystem: true
+      # runAsNonRoot: true
+      # runAsUser: 1000
+
+    service:
+      # -- Kubernetes service type
+      type: ClusterIP
+      # -- Kubernetes port where service is exposed
+      port: 8080
+
+    ingress:
+      enabled: false
+      className: ""
+      annotations: {}
+        # kubernetes.io/ingress.class: nginx
+        # kubernetes.io/tls-acme: "true"
+      hosts:
+        - host: chart-example.local
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls: []
+      #  - secretName: chart-example-tls
+      #    hosts:
+      #      - chart-example.local
+
+    # -- Resource limits and requests for the headwind pods.
+    resources: {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
+
+    # -- Node labels for pod assignment
+    nodeSelector: {}
+
+    # -- Toleration labels for pod assignment
+    tolerations: []
+
+    # -- Affinity settings for pod assignment
+    affinity: {}
+
+postgresql:
+  # -- enable PostgreSQL™ subchart from Bitnami
+  enabled: true
+  auth:
+    # -- Name for a custom database to create
+    database: taiga
+    # -- Name of existing secret to use for PostgreSQL credentials
+    existingSecret: ""
+    # -- Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided
+    password: taiga
+    # -- Name for a custom user to create
+    username: taiga
+
+rabbitmq:
+  # -- enable integrated RabbitMQ™ subchart from Bitnami
+  enabled: true
+  auth:
+    # -- Use existing secret for password details (`config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.
+    existingSecret: ""
+    # -- The password credential to be used when using an external database driver.
+    password: ""
+    # -- The username credential to be used when using an external database driver.
+    username: ""
+  # -- The RabbitMQ server host name
+  host: ""
+  # -- Whether connection is encrypted with SSL/TLS or not.
+  useSsl: false
+  # -- The RabbitMQ server VHost
+  vhost: "/"
+
+externalDatabase:
+  auth:
+    # -- Name of the database to use
+    database: taiga
+    # -- Name of existing secret to use for database credentials
+    existingSecret: ""
+    # -- Password to use
+    password: taiga
+    # -- Name of the user to use
+    username: taiga
+    # -- Key in the secret containing the password
+    userPasswordKey: ""
+  # -- Hostname of the database
+  hostname: ""
+  # -- Port used to connect to database
+  port: 5432
