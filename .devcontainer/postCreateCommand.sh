@@ -22,3 +22,5 @@ minikube profile helm-charts-development
 # configure git
 git config --global user.email "christian@knell.it"
 git config --global user.name "christianhuth"
+
+echo 'eval $(ssh-agent -s) && ssh-add ~/.ssh/*.opk.openssh' >> ~/.bashrc
