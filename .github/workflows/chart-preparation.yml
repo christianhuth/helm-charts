@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: '3.13'
       - run: |
-          curl -o /usr/local/bin/gomplate -sSL https://github.com/hairyhenderson/gomplate/releases/download/latest/gomplate_linux-amd64
+          curl -o /usr/local/bin/gomplate -sSL https://github.com/hairyhenderson/gomplate/releases/download/v4.3.2/gomplate_linux-amd64
           chmod 755 /usr/local/bin/gomplate
           gomplate --version
       - uses: pre-commit/action@v3.0.1
