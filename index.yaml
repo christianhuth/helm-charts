@@ -21110,6 +21110,35 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/netcupscp-exporter-1.0.0/netcupscp-exporter-1.0.0.tgz
     version: 1.0.0
+  nextcloud-exporter:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial Version
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 0.8.0
+    created: "2025-05-15T17:58:09.371298256Z"
+    description: Prometheus exporter for Nextcloud servers
+    digest: 823d5b0b33e6aa0b950dc4668bbe816b69978c9d8c5e655c1ebfb2718f8891dc
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/nextcloud-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: nextcloud-exporter
+    sources:
+    - https://github.com/xperimental/nextcloud-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/nextcloud-exporter-1.0.0/nextcloud-exporter-1.0.0.tgz
+    version: 1.0.0
   node-access:
   - annotations:
       artifacthub.io/changes: |
@@ -52269,4 +52298,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-05-15T08:05:44.24327451Z"
+generated: "2025-05-15T17:58:09.374378803Z"
