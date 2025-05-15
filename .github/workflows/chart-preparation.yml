@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-24.04
     container: ghcr.io/chgl/kube-powertools:latest
     steps:
-      - run: sudo su 1001
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -17,11 +16,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      - name: Add an exception for dubious ownership check
+        run: git config --global --add safe.directory '*'
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: --all-files || exit 0
-      - name: Add an exception for dubious ownership check
-        run: git config --global --add safe.directory /__w/helm-charts/helm-charts
       - name: Check for modified files
         shell: bash
         run: |
