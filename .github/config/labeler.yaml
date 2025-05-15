@@ -110,6 +110,9 @@ node-access:
 netcupscp-exporter:
 - changed-files:
   - any-glob-to-any-file: charts/netcupscp-exporter/*
+nextcloud-exporter:
+- changed-files:
+  - any-glob-to-any-file: charts/nextcloud-exporter/*
 passbolt-ha:
 - changed-files:
   - any-glob-to-any-file: charts/passbolt-ha/*
