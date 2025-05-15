@@ -6,7 +6,8 @@ on:
 
 jobs:
   pre-commit:
-    runs-on: ghcr.io/chgl/kube-powertools:latest
+    runs-on: ubuntu-24.04
+    container: ghcr.io/chgl/kube-powertools:latest
     steps:
       - uses: actions/checkout@v4
         with:
