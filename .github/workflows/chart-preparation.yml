@@ -15,6 +15,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      - uses: jason-dour/action-setup-gomplate@v1.0.0
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: --all-files || exit 0
