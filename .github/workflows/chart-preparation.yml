@@ -20,8 +20,6 @@ jobs:
           python-version: '3.13'
       - name: Set up Docker
         uses: docker/setup-docker-action@v4
-        with:
-          rootless: true
       - name: Add an exception for dubious ownership check
         run: git config --global --add safe.directory '*'
       - uses: pre-commit/action@v3.0.1
