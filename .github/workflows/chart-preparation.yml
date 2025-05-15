@@ -9,8 +9,7 @@ jobs:
     runs-on: ubuntu-24.04
     container: ghcr.io/chgl/kube-powertools:latest
     steps:
-      - run: whoami && id && ls -al /github && git --version
-      - run: chown -R root:root /github
+      - run: sudo su 1001
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
