@@ -6,7 +6,7 @@ on:
 
 jobs:
   pre-commit:
-    runs-on: ubuntu-24.04
+    runs-on: ghcr.io/chgl/kube-powertools:latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -15,9 +15,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - uses: jason-dour/action-setup-gomplate@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: --all-files || exit 0
