@@ -36,7 +36,7 @@
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
 
-  "postAttachCommand": "minikube start",
+  "postAttachCommand": "minikube start && eval `ssh-agent` && ssh-add ~/.ssh/*.opk.openssh",
 
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "/bin/bash .devcontainer/postCreateCommand.sh",
