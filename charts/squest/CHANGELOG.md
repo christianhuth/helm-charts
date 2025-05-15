@@ -1,7 +1,7 @@
 # squest
 
-## 1.2.1
+## 1.2.2
 
 ### Added
 
-- allow defining additional volumeMounts for the squest nginx and init container
+- remove readOnly option from PVC that annoys ArgoCD

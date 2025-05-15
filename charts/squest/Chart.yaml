@@ -2,7 +2,7 @@ apiVersion: v2
 name: squest
 description: Squest is a self-service portal that works on top of Red Hat Ansible Automation Platform/AWX.
 type: application
-version: 1.2.1
+version: 1.2.2
 appVersion: "2.7.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
@@ -28,7 +28,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: allow defining additional volumeMounts for the squest nginx and init container
+      description: remove readOnly option from PVC that annoys ArgoCD
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
