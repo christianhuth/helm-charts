@@ -22,6 +22,7 @@ spec:
       labels:
         {{- include "taiga.backend.selectorLabels" . | nindent 8 }}
     spec:
+      enableServiceLinks: false
       {{- with .Values.taiga.backend.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -33,46 +34,108 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          {{- with .Values.taiga.backend.securityContext }}
-          securityContext:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
           image: "{{ .Values.taiga.backend.image.registry }}/{{ .Values.taiga.backend.image.repository }}:{{ .Values.taiga.backend.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.taiga.backend.image.pullPolicy }}
           env:
             # PostgreSQL Settings
-            - name: DB_HOST
+            - name: POSTGRES_HOST
               value: {{ include "taiga.database.host" . | quote }}
-            - name: DB_NAME
+            - name: POSTGRES_DB
               value: {{ include "taiga.database.auth.database" . | quote }}
-            - name: DB_PASSWORD
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "taiga.database.auth.secretName" . | quote }}
-                  key: postgres-password
-            - name: DB_PORT
+                  key: password
+            - name: POSTGRES_PORT
               value: {{ include "taiga.database.port" . | quote }}
-            - name: DB_USER
+            - name: POSTGRES_USER
               value: {{ include "taiga.database.auth.username" . | quote }}
 
+            # Taiga Backend Settings
+            - name: DEBUG
+              value: {{ ((.Values.taiga.common.config.app.debug | toString) | title) | quote }}
+            - name: ENABLE_TELEMETRY
+              value: {{ ((.Values.taiga.backend.config.telemetry.enabled | toString) | title) | quote }}
+
+            # Taiga Common Auth Settings
+            - name: ENABLE_GITHUB_AUTH
+              value: {{ ((.Values.taiga.common.config.auth.github.enabled | toString) | title) | quote }}
+            - name: ENABLE_GITLAB_AUTH
+              value: {{ ((.Values.taiga.common.config.auth.gitlab.enabled | toString) | title) | quote }}
+            {{- if .Values.taiga.common.config.auth.github.enabled }}
+            - name: GITHUB_CLIENT_ID
+              value: {{ .Values.taiga.common.config.auth.github.clientId | quote }}
+            {{- end }}
+            {{- if .Values.taiga.common.config.auth.gitlab.enabled }}
+            - name: GITLAB_API_CLIENT_ID
+              value: {{ .Values.taiga.common.config.auth.gitlab.clientId | quote }}
+            - name: GITLAB_URL
+              value: {{ .Values.taiga.common.config.auth.gitlab.url | quote }}
+            {{- end }}
+            - name: PUBLIC_REGISTER_ENABLED
+              value: {{ ((.Values.taiga.common.config.auth.publicRegistration.enabled | toString) | title) | quote }}
+
+            # Taiga Common Cryptographic Settings
+            - name: TAIGA_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "taiga.common.cryptographicSigning.secretName" . }}
+                  key: secret-key
+
+            # Taiga Common Integrations Settings
+            - name: ENABLE_GITHUB_IMPORTER
+              value: {{ ((.Values.taiga.common.config.integrations.githubImporter.enabled | toString) | title) | quote }}
+            - name: ENABLE_JIRA_IMPORTER
+              value: {{ ((.Values.taiga.common.config.integrations.jiraImporter.enabled | toString) | title) | quote }}
+            - name: ENABLE_SLACK
+              value: {{ ((.Values.taiga.common.config.integrations.slack.enabled | toString) | title) | quote }}
+            - name: ENABLE_TRELLO_IMPORTER
+              value: {{ ((.Values.taiga.common.config.integrations.trelloImporter.enabled | toString) | title) | quote }}
+
+            # Taiga Frontend Settings
+            - name: TAIGA_SITES_SCHEME
+              value: "http"
+            - name: TAIGA_SITES_DOMAIN
+              value: {{ printf "%s:%s" (include "taiga.frontend.fullname" .) ( .Values.taiga.frontend.service.port ) | quote }}
+            - name: TAIGA_SUBPATH
+              value: "/"
+
+            {{- if .Values.taiga.common.extraEnv }}
+            # Extra Environment Variables
+            {{- .Values.taiga.common.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
             {{- if .Values.taiga.backend.extraEnv }}
             # Extra Environment Variables
             {{- .Values.taiga.backend.extraEnv | toYaml | nindent 12 }}
             {{- end }}
+          {{- if or .Values.taiga.common.extraEnvFrom .Values.taiga.backend.extraEnvFrom }}
+          envFrom:
+            {{- if .Values.taiga.common.extraEnvFrom }}
+              {{- .Values.taiga.common.extraEnvFrom | toYaml | nindent 12 }}
+            {{- end }}
+            {{- if .Values.taiga.backend.extraEnvFrom }}
+              {{- .Values.taiga.backend.extraEnvFrom | toYaml | nindent 12 }}
+            {{- end }}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.taiga.backend.service.port | int }}
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /rest/health
+              path: /api/v1/stats/discover
               port: http
           readinessProbe:
             httpGet:
-              path: /rest/health
+              path: /api/v1/stats/discover
               port: http
           {{- with .Values.taiga.backend.resources }}
           resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.taiga.backend.securityContext }}
+          securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
       {{- with .Values.taiga.backend.nodeSelector }}

@@ -56,7 +56,7 @@ taiga:
       # -- Kubernetes service type
       type: ClusterIP
       # -- Kubernetes port where service is exposed
-      port: 8080
+      port: 8000
 
     # -- Resource limits and requests for the headwind pods.
     resources: {}
@@ -87,13 +87,167 @@ taiga:
     # -- Affinity settings for pod assignment
     affinity: {}
 
+    # -- additional environment variables to be added to the pods
+    extraEnv: []
+
+    # -- additional environment variables to be added to the pods from configMaps or secrets
+    extraEnvFrom: []
+
+    config:
+      telemetry:
+        # -- Anonymous Telemetry data is collected in order to learn about the use of Taiga and improve the platform based on real scenarios
+        enabled: false
+
+  common:
+    config:
+      app:
+        debug: false
+        language: en-us
+      auth:
+        github:
+          # -- Activate login with GitHub
+          enabled: false
+          clientId: ""
+          clientSecret: ""
+          existingSecret: ""
+        gitlab:
+          # -- Activate login with GitLab
+          enabled: false
+          clientId: ""
+          clientSecret: ""
+          existingSecret: ""
+          url: ""
+        publicRegistration:
+          # -- To be able to use Github/Gitlab login/registration, make sure you have public registration activated
+          enabled: false
+      cryptographicSigning:
+        algorithm: HS256
+        audience: ""
+        # -- Name of existing secret that contains the secret key for cryptographic signing. Key in secret needs to be called `secret-key`.
+        existingSecret: ""
+        issuer: ""
+        # -- The secret key that will be used in the cryptographic signing
+        secretKey: ""
+        userIdClaim: user_id
+      integrations:
+        githubImporter:
+          # -- Activating this feature, you will be able to import projects from GitHub
+          enabled: false
+        jiraImporter:
+          # -- Activating this feature, you will be able to import projects from Jira
+          enabled: false
+        trelloImporter:
+          # -- Activating this feature, you will be able to import projects from Trello
+          enabled: false
+        slack:
+          # -- Enable Slack integration in your Taiga instance
+          enabled: false
+
+    # -- additional environment variables to be added to the backend and frontend pods
+    extraEnv: []
+
+    # -- additional environment variables to be added to the backend and frontend pods from configMaps or secrets
+    extraEnvFrom: []
+
+  events:
+
+    image:
+      # -- image registry
+      registry: docker.io
+      # -- image repository
+      repository: taigaio/taiga-events
+      # -- image pull policy
+      pullPolicy: Always
+      # -- Overrides the image tag
+      tag: "6.7.0"
+
+    # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+    imagePullSecrets: []
+
+    # -- Number of replicas
+    replicaCount: 1
+
+    # -- The number of old ReplicaSets to retain
+    revisionHistoryLimit: 10
+
+    serviceAccount:
+      # -- Specifies whether a service account should be created
+      create: true
+      # -- Annotations to add to the service account
+      annotations: {}
+      # -- The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
+
+    # -- Annotations to be added to exporter pods
+    podAnnotations: {}
+
+    # -- pod-level security context
+    podSecurityContext: {}
+      # fsGroup: 2000
+
+    # -- container-level security context
+    securityContext: {}
+      # capabilities:
+      #   drop:
+      #   - ALL
+      # readOnlyRootFilesystem: true
+      # runAsNonRoot: true
+      # runAsUser: 1000
+
+    service:
+      # -- Kubernetes service type
+      type: ClusterIP
+      # -- Kubernetes port where service is exposed
+      port: 3023
+
+    # -- Resource limits and requests for the headwind pods.
+    resources: {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
+
+    # -- Node labels for pod assignment
+    nodeSelector: {}
+
+    # -- Toleration labels for pod assignment
+    tolerations: []
+
+    # -- Affinity settings for pod assignment
+    affinity: {}
+
+    # -- additional environment variables to be added to the pods
+    extraEnv: []
+
+    # -- additional environment variables to be added to the pods from configMaps or secrets
+    extraEnvFrom: []
+
+    config:
+      app:
+        # -- Valid log level values: error, warn, info, http, verbose, debug, silly
+        logLevel: info
+
   frontend:
 
     image:
       # -- image registry
       registry: docker.io
       # -- image repository
-      repository: taigaio/taiga-back
+      repository: taigaio/taiga-front
       # -- image pull policy
       pullPolicy: Always
       # -- Overrides the image tag
@@ -137,7 +291,7 @@ taiga:
       # -- Kubernetes service type
       type: ClusterIP
       # -- Kubernetes port where service is exposed
-      port: 8080
+      port: 80
 
     ingress:
       enabled: false
@@ -184,6 +338,12 @@ taiga:
     # -- Affinity settings for pod assignment
     affinity: {}
 
+    # -- additional environment variables to be added to the pods
+    extraEnv: []
+
+    # -- additional environment variables to be added to the pods from configMaps or secrets
+    extraEnvFrom: []
+
 postgresql:
   # -- enable PostgreSQL™ subchart from Bitnami
   enabled: true
@@ -197,7 +357,7 @@ postgresql:
     # -- Name for a custom user to create
     username: taiga
 
-rabbitmq:
+async-rabbitmq:
   # -- enable integrated RabbitMQ™ subchart from Bitnami
   enabled: true
   auth:

@@ -1,0 +1,101 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "taiga.events.labels" . | nindent 4 }}
+  name: {{ include "taiga.events.fullname" . }}
+spec:
+  {{- if not .Values.taiga.events.autoscaling.enabled }}
+  replicas: {{ .Values.taiga.events.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.taiga.events.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "taiga.events.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.taiga.events.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "taiga.events.selectorLabels" . | nindent 8 }}
+    spec:
+      enableServiceLinks: false
+      {{- with .Values.taiga.events.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "taiga.events.serviceAccountName" . }}
+      {{- with .Values.taiga.events.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.taiga.events.image.registry }}/{{ .Values.taiga.events.image.repository }}:{{ .Values.taiga.events.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.taiga.events.image.pullPolicy }}
+          env:
+
+            # RabbitMQ Settings
+            - name: RABBITMQ_URL
+              value: "amqp://rabbitmquser:rabbitmqpassword@rabbitmqhost:5672/taiga"
+            - name: WEB_SOCKET_SERVER_PORT
+              value: "8888"
+            - name: LOG_LEVEL
+              value: {{ .Values.taiga.events.config.app.logLevel | quote }}
+
+            # Taiga Cryptographic Settings
+            - name: SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "taiga.common.cryptographicSigning.secretName" . }}
+                  key: secret-key
+
+            # Taiga Events Settings
+            - name: APP_PORT
+              value: {{ .Values.taiga.events.service.port | quote }}
+
+            {{- if .Values.taiga.events.extraEnv }}
+            # Extra Environment Variables
+            {{- .Values.taiga.events.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+          {{- if .Values.taiga.events.extraEnvFrom }}
+          envFrom:
+            {{- if .Values.taiga.events.extraEnvFrom }}
+              {{- .Values.taiga.events.extraEnvFrom | toYaml | nindent 12 }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.taiga.events.service.port | int }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          {{- with .Values.taiga.events.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.taiga.events.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.taiga.events.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.taiga.events.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.taiga.events.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
