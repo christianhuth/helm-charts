@@ -1,7 +1,7 @@
 # kutt
 
-## 5.10.5
+## 6.0.0
 
 ### Changed
 
-- Icon
+- dependency of redis to 21.1.3
