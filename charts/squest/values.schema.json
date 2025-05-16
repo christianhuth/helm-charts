@@ -1459,7 +1459,6 @@
             }
           },
           "required": [
-            "fsGroup"
           ],
           "title": "podSecurityContext"
         },

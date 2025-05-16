@@ -45,6 +45,9 @@ squest:
   # @schema
   # -- pod-level security context
   podSecurityContext:
+    # @schema
+    # required: false
+    # @schema
     fsGroup: 999
 
   # -- container-level security context

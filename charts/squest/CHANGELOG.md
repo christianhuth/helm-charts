@@ -1,7 +1,7 @@
 # squest
 
-## 1.2.2
+## 1.2.3
 
-### Added
+### Changed
 
-- remove readOnly option from PVC that annoys ArgoCD
+- also make podsecurity.fsGroup not required
