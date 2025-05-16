@@ -1,7 +1,7 @@
 # squest
 
-## 1.2.2
+## 2.0.0
 
-### Added
+### Changed
 
-- remove readOnly option from PVC that annoys ArgoCD
+- dependency of redis to 21.1.3
