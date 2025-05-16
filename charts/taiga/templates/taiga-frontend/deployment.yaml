@@ -1,0 +1,122 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "taiga.frontend.labels" . | nindent 4 }}
+  name: {{ include "taiga.frontend.fullname" . }}
+spec:
+  {{- if not .Values.taiga.frontend.autoscaling.enabled }}
+  replicas: {{ .Values.taiga.frontend.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.taiga.frontend.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "taiga.frontend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.taiga.frontend.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "taiga.frontend.selectorLabels" . | nindent 8 }}
+    spec:
+      enableServiceLinks: false
+      {{- with .Values.taiga.frontend.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "taiga.frontend.serviceAccountName" . }}
+      {{- with .Values.taiga.frontend.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.taiga.frontend.image.registry }}/{{ .Values.taiga.frontend.image.repository }}:{{ .Values.taiga.frontend.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.taiga.frontend.image.pullPolicy }}
+          env:
+
+            # Taiga Common Auth Settings
+            - name: ENABLE_GITHUB_AUTH
+              value: {{ .Values.taiga.common.config.auth.github.enabled | quote }}
+            - name: ENABLE_GITLAB_AUTH
+              value: {{ .Values.taiga.common.config.auth.gitlab.enabled | quote }}
+            {{- if .Values.taiga.common.config.auth.github.enabled }}
+            - name: GITHUB_CLIENT_ID
+              value: {{ .Values.taiga.common.config.auth.github.clientId | quote }}
+            {{- end }}
+            {{- if .Values.taiga.common.config.auth.gitlab.enabled }}
+            - name: GITLAB_CLIENT_ID
+              value: {{ .Values.taiga.common.config.auth.gitlab.clientId | quote }}
+            - name: GITLAB_URL
+              value: {{ .Values.taiga.common.config.auth.gitlab.url | quote }}
+            {{- end }}
+            - name: PUBLIC_REGISTER_ENABLED
+              value: {{ .Values.taiga.common.config.auth.publicRegistration.enabled | quote }}
+
+            # Taiga Common Integrations Settings
+            - name: ENABLE_GITHUB_IMPORTER
+              value: {{ .Values.taiga.common.config.integrations.githubImporter.enabled | quote }}
+            - name: ENABLE_JIRA_IMPORTER
+              value: {{ .Values.taiga.common.config.integrations.jiraImporter.enabled | quote }}
+            - name: ENABLE_SLACK
+              value: {{ .Values.taiga.common.config.integrations.slack.enabled | quote }}
+            - name: ENABLE_TRELLO_IMPORTER
+              value: {{ .Values.taiga.common.config.integrations.trelloImporter.enabled | quote }}
+
+            # Taiga Frontend Settings
+            - name: TAIGA_URL
+              value: {{ include "taiga.frontend.url" . | quote }}
+
+            {{- if .Values.taiga.common.extraEnv }}
+            # Extra Environment Variables
+            {{- .Values.taiga.common.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+            {{- if .Values.taiga.frontend.extraEnv }}
+            # Extra Environment Variables
+            {{- .Values.taiga.frontend.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+          {{- if or .Values.taiga.common.extraEnvFrom .Values.taiga.frontend.extraEnvFrom }}
+          envFrom:
+            - configMapRef:
+            {{- if .Values.taiga.common.extraEnvFrom }}
+              {{- .Values.taiga.common.extraEnvFrom | toYaml | nindent 12 }}
+            {{- end }}
+            {{- if .Values.taiga.frontend.extraEnvFrom }}
+              {{- .Values.taiga.frontend.extraEnvFrom | toYaml | nindent 12 }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.taiga.frontend.service.port | int }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          {{- with .Values.taiga.frontend.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.taiga.frontend.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.taiga.frontend.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.taiga.frontend.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.taiga.frontend.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

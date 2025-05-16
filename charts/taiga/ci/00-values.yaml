@@ -1,0 +1,15 @@
+---
+taiga:
+  backend:
+    config:
+      cryptographicSigning:
+        secretKey: abcdefg
+
+  frontend:
+    ingress:
+      enabled: false
+      hosts:
+        - host: taiga.127.0.0.1.nip.io
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
