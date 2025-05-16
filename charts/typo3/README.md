@@ -63,7 +63,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"martinhelmich/typo3"` | image repository |
-| image.tag | string | `"12.4"` | Overrides the image tag |
+| image.tag | string | `"13.4"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
@@ -134,7 +134,7 @@ Additionally it updates the MariaDB subchart to its newest major, 20.2.0. [Here]
 
 ### 2.0.0
 
-This major updates the TYPO3 Docker Image to its newest major, 12.4. [Here](https://get.typo3.org/release-notes/12.4.0) you can find more information about the changes introduced in that version.
+This major updates the TYPO3 Docker Image to its newest major, 13.4. [Here](https://get.typo3.org/release-notes/13.4.0) you can find more information about the changes introduced in that version.
 
 Additionaly it updates the PostgreSQL subchart to its newest major, 14.0.0. [Here](https://github.com/bitnami/charts/tree/master/bitnami/postgresql#to-1400) you can find more information about the changes introduced in that version.
 
