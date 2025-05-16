@@ -2,10 +2,10 @@ apiVersion: v2
 name: kutt
 description: Kutt is a free modern URL shortener.
 type: application
-version: 5.10.4
+version: 5.10.5
 appVersion: "v3.2.3"
 home: https://github.com/christianhuth/helm-charts
-icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.png
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.svg
 maintainers:
   - name: christianhuth
     email: christian@knell.it
@@ -23,7 +23,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of postgresql to 16.7.4
+      description: Icon
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
