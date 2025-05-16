@@ -134,7 +134,7 @@ Additionally it updates the MariaDB subchart to its newest major, 20.2.0. [Here]
 
 ### 2.0.0
 
-This major updates the TYPO3 Docker Image to its newest major, 13.4. [Here](https://get.typo3.org/release-notes/13.4.0) you can find more information about the changes introduced in that version.
+This major updates the TYPO3 Docker Image to its newest major, 12.4. [Here](https://get.typo3.org/release-notes/12.4.0) you can find more information about the changes introduced in that version.
 
 Additionaly it updates the PostgreSQL subchart to its newest major, 14.0.0. [Here](https://github.com/bitnami/charts/tree/master/bitnami/postgresql#to-1400) you can find more information about the changes introduced in that version.
 
