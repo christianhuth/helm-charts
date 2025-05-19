@@ -38,6 +38,12 @@ spec:
           imagePullPolicy: {{ .Values.taiga.frontend.image.pullPolicy }}
           env:
 
+            # Taiga Common Access Settings
+            - name: TAIGA_SUBPATH
+              value: {{ (include "taiga.common.access.path" .) | quote }}
+            - name: TAIGA_URL
+              value: {{ include "taiga.common.access.url" . | quote }}
+
             # Taiga Common Auth Settings
             - name: ENABLE_GITHUB_AUTH
               value: {{ .Values.taiga.common.config.auth.github.enabled | quote }}
@@ -66,9 +72,14 @@ spec:
             - name: ENABLE_TRELLO_IMPORTER
               value: {{ .Values.taiga.common.config.integrations.trelloImporter.enabled | quote }}
 
-            # Taiga Frontend Settings
-            - name: TAIGA_URL
-              value: {{ include "taiga.frontend.url" . | quote }}
+            # Taiga Frontend App Settings
+            - name: DEBUG
+              value: {{ .Values.taiga.frontend.config.app.debug | quote }}
+            {{- if .Values.taiga.frontend.config.app.defaultLanguage }}
+            - name: DEFAULT_LANGUAGE
+              value: {{ .Values.taiga.frontend.config.app.defaultLanguage | quote }}
+            {{- end }}
+
 
             {{- if .Values.taiga.common.extraEnv }}
             # Extra Environment Variables

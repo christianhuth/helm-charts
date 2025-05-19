@@ -37,7 +37,21 @@ spec:
           image: "{{ .Values.taiga.backend.image.registry }}/{{ .Values.taiga.backend.image.repository }}:{{ .Values.taiga.backend.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.taiga.backend.image.pullPolicy }}
           env:
-            # PostgreSQL Settings
+            # Taiga Backend App Settings
+            - name: CSRF_COOKIE_SECURE
+              value: {{ ((.Values.taiga.backend.config.app.csrfCookieSecure | toString) | title) | quote }}
+            - name: DEBUG
+              value: {{ ((.Values.taiga.backend.config.app.debug | toString) | title) | quote }}
+            - name: DEFAULT_PROJECT_SLUG_PREFIX
+              value: {{ ((.Values.taiga.backend.config.app.defaultProjectSlugPrefix | toString) | title) | quote }}
+            - name: ENABLE_TELEMETRY
+              value: {{ ((.Values.taiga.backend.config.app.telemetry | toString) | title) | quote }}
+            - name: LANGUAGE_CODE
+              value: {{ .Values.taiga.backend.config.app.language | quote }}
+            - name: SESSION_COOKIE_SECURE
+              value: {{ ((.Values.taiga.backend.config.app.sessionCookieSecure | toString) | title) | quote }}
+
+            # Taiga Backend Database Settings
             - name: POSTGRES_HOST
               value: {{ include "taiga.database.host" . | quote }}
             - name: POSTGRES_DB
@@ -52,11 +66,21 @@ spec:
             - name: POSTGRES_USER
               value: {{ include "taiga.database.auth.username" . | quote }}
 
-            # Taiga Backend Settings
-            - name: DEBUG
-              value: {{ ((.Values.taiga.common.config.app.debug | toString) | title) | quote }}
-            - name: ENABLE_TELEMETRY
-              value: {{ ((.Values.taiga.backend.config.telemetry.enabled | toString) | title) | quote }}
+            # Taiga Backend Webhooks Settings
+            - name: WEBHOOKS_ENABLED
+              value: {{ ((.Values.taiga.backend.config.webhooks.enabled | toString) | title) | quote }}
+            - name: WEBHOOKS_ALLOW_PRIVATE_ADDRESS
+              value: {{ ((.Values.taiga.backend.config.webhooks.allowPrivateAddress | toString) | title) | quote }}
+            - name: WEBHOOKS_ALLOW_REDIRECTS
+              value: {{ ((.Values.taiga.backend.config.webhooks.allowRedirects | toString) | title) | quote }}
+
+            # Taiga Common Access Settings
+            - name: TAIGA_SITES_SCHEME
+              value: {{ (include "taiga.common.access.scheme" .) | quote }}
+            - name: TAIGA_SITES_DOMAIN
+              value: {{ (include "taiga.common.access.host" .) | quote }}
+            - name: TAIGA_SUBPATH
+              value: {{ (include "taiga.common.access.path" .) | quote }}
 
             # Taiga Common Auth Settings
             - name: ENABLE_GITHUB_AUTH
@@ -64,12 +88,22 @@ spec:
             - name: ENABLE_GITLAB_AUTH
               value: {{ ((.Values.taiga.common.config.auth.gitlab.enabled | toString) | title) | quote }}
             {{- if .Values.taiga.common.config.auth.github.enabled }}
-            - name: GITHUB_CLIENT_ID
+            - name: GITHUB_API_CLIENT_ID
               value: {{ .Values.taiga.common.config.auth.github.clientId | quote }}
+            - name: GITHUB_API_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "taiga.common.githubAuth.secretName" . }}
+                  key: client-secret
             {{- end }}
             {{- if .Values.taiga.common.config.auth.gitlab.enabled }}
             - name: GITLAB_API_CLIENT_ID
               value: {{ .Values.taiga.common.config.auth.gitlab.clientId | quote }}
+            - name: GITLAB_API_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "taiga.common.gitlabAuth.secretName" . }}
+                  key: client-secret
             - name: GITLAB_URL
               value: {{ .Values.taiga.common.config.auth.gitlab.url | quote }}
             {{- end }}
@@ -92,14 +126,44 @@ spec:
               value: {{ ((.Values.taiga.common.config.integrations.slack.enabled | toString) | title) | quote }}
             - name: ENABLE_TRELLO_IMPORTER
               value: {{ ((.Values.taiga.common.config.integrations.trelloImporter.enabled | toString) | title) | quote }}
-
-            # Taiga Frontend Settings
-            - name: TAIGA_SITES_SCHEME
-              value: "http"
-            - name: TAIGA_SITES_DOMAIN
-              value: {{ printf "%s:%s" (include "taiga.frontend.fullname" .) ( .Values.taiga.frontend.service.port ) | quote }}
-            - name: TAIGA_SUBPATH
-              value: "/"
+            {{- if .Values.taiga.common.config.integrations.githubImporter.enabled }}
+            - name: GITHUB_IMPORTER_CLIENT_ID
+              value: {{ .Values.taiga.common.config.integrations.githubImporter.clientId | quote }}
+            - name: GITHUB_IMPORTER_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "taiga.common.githubImporter.secretName" . }}
+                  key: client-secret
+            {{- end }}
+            {{- if .Values.taiga.common.config.integrations.jiraImporter.enabled }}
+            - name: JIRA_IMPORTER_CONSUMER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "taiga.common.jiraImporter.secretName" . }}
+                  key: consumer-key
+            - name: JIRA_IMPORTER_CERT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "taiga.common.jiraImporter.secretName" . }}
+                  key: cert
+            - name: JIRA_IMPORTER_PUB_CERT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "taiga.common.jiraImporter.secretName" . }}
+                  key: public-cert
+            {{- end }}
+            {{- if .Values.taiga.common.config.integrations.trelloImporter.enabled }}
+            - name: TRELLO_IMPORTER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "taiga.common.trelloImporter.secretName" . }}
+                  key: api-key
+            - name: TRELLO_IMPORTER_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "taiga.common.trelloImporter.secretName" . }}
+                  key: secret-key
+            {{- end }}
 
             {{- if .Values.taiga.common.extraEnv }}
             # Extra Environment Variables

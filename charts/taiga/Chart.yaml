@@ -1,0 +1,54 @@
+---
+apiVersion: v2
+name: taiga
+description: Umami is a simple, fast, privacy-focused alternative to Google Analytics.
+type: application
+version: 1.0.0
+appVersion: "6.8.2"
+home: https://github.com/christianhuth/helm-charts
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/taiga/icon.svg
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://github.com/taigaio/taiga-docker
+  - https://taiga.io
+dependencies:
+  - name: rabbitmq
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 16.0.2
+    alias: async-rabbitmq
+    condition: async-rabbitmq.enabled
+  - name: rabbitmq
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 16.0.2
+    alias: events-rabbitmq
+    condition: events-rabbitmq.enabled
+  - name: postgresql
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 16.7.4
+    condition: postgresql.enabled
+annotations:
+  artifacthub.io/category: monitoring-logging
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial Version
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+  artifacthub.io/screenshots: |
+    - title: Intuitive and simple, yet feature complete Kanban board
+      url: https://taiga.io/media/images/image_30.original.png
+    - title: Complete set of boards to plan and show individual sprints from backlog
+      url: https://taiga.io/media/images/image_31.original.png
+    - title: Integrated and complete issues/bug tracking
+      url: https://taiga.io/media/images/image_32.original.png
+    - title: Complete set of dashboards and reporting possibilities
+      url: https://taiga.io/media/images/image_33.original.png
+    - title: Overview of progress on activities & completed deliverables
+      url: https://taiga.io/media/images/image_34.original.png
+    - title: Start simple and add functionality when you need it
+      url: https://taiga.io/media/images/Integration.original.png
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key

@@ -94,15 +94,35 @@ taiga:
     extraEnvFrom: []
 
     config:
-      telemetry:
-        # -- Anonymous Telemetry data is collected in order to learn about the use of Taiga and improve the platform based on real scenarios
-        enabled: false
-
-  common:
-    config:
       app:
         debug: false
+        # -- Setting this to false removes the username from project slug
+        defaultProjectSlugPrefix: false
         language: en-us
+          # -- Anonymous Telemetry data is collected in order to learn about the use of Taiga and improve the platform based on real scenarios
+        telemetry: false
+      security:
+        csrfCookieSecure: true
+        sessionCookieSecure: true
+      webhooks:
+        enabled: true
+        allowPrivateAddress: false
+        allowRedirects: false
+
+  common:
+
+    ingress:
+      enabled: false
+      className: ""
+      annotations: {}
+        # kubernetes.io/ingress.class: nginx
+        # kubernetes.io/tls-acme: "true"
+      hostname: chart-example.local
+      pathType: ImplementationSpecific
+      tls: false
+      tlsSecretName: ""
+
+    config:
       auth:
         github:
           # -- Activate login with GitHub
@@ -133,12 +153,22 @@ taiga:
         githubImporter:
           # -- Activating this feature, you will be able to import projects from GitHub
           enabled: false
+          clientId: ""
+          clientSecret: ""
+          existingSecret: ""
         jiraImporter:
           # -- Activating this feature, you will be able to import projects from Jira
           enabled: false
+          consumerKey: ""
+          cert: ""
+          existingSecret: ""
+          publicCert: ""
         trelloImporter:
           # -- Activating this feature, you will be able to import projects from Trello
           enabled: false
+          apiKey: ""
+          existingSecret: ""
+          secretKey: ""
         slack:
           # -- Enable Slack integration in your Taiga instance
           enabled: false
@@ -199,7 +229,7 @@ taiga:
       # -- Kubernetes service type
       type: ClusterIP
       # -- Kubernetes port where service is exposed
-      port: 3023
+      port: 8080
 
     # -- Resource limits and requests for the headwind pods.
     resources: {}
@@ -240,6 +270,8 @@ taiga:
       app:
         # -- Valid log level values: error, warn, info, http, verbose, debug, silly
         logLevel: info
+        port: 3023
+        webSocketServerPort: 8888
 
   frontend:
 
@@ -293,22 +325,6 @@ taiga:
       # -- Kubernetes port where service is exposed
       port: 80
 
-    ingress:
-      enabled: false
-      className: ""
-      annotations: {}
-        # kubernetes.io/ingress.class: nginx
-        # kubernetes.io/tls-acme: "true"
-      hosts:
-        - host: chart-example.local
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
-      tls: []
-      #  - secretName: chart-example-tls
-      #    hosts:
-      #      - chart-example.local
-
     # -- Resource limits and requests for the headwind pods.
     resources: {}
       # We usually recommend not to specify default resources and to leave this as a conscious
@@ -344,6 +360,11 @@ taiga:
     # -- additional environment variables to be added to the pods from configMaps or secrets
     extraEnvFrom: []
 
+    config:
+      app:
+        debug: false
+        defaultLanguage: en
+
 postgresql:
   # -- enable PostgreSQL™ subchart from Bitnami
   enabled: true
@@ -361,18 +382,31 @@ async-rabbitmq:
   # -- enable integrated RabbitMQ™ subchart from Bitnami
   enabled: true
   auth:
-    # -- Use existing secret for password details (`config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.
+    # -- Use existing secret for password details (`async-rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.
     existingSecret: ""
     # -- The password credential to be used when using an external database driver.
-    password: ""
+    password: taiga
     # -- The username credential to be used when using an external database driver.
-    username: ""
-  # -- The RabbitMQ server host name
-  host: ""
+    username: taiga
   # -- Whether connection is encrypted with SSL/TLS or not.
   useSsl: false
   # -- The RabbitMQ server VHost
-  vhost: "/"
+  vhost: "/taiga"
+
+events-rabbitmq:
+  # -- enable integrated RabbitMQ™ subchart from Bitnami
+  enabled: true
+  auth:
+    # -- Use existing secret for password details (`events-rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.
+    existingSecret: ""
+    # -- The password credential to be used when using an external database driver.
+    password: taiga
+    # -- The username credential to be used when using an external database driver.
+    username: taiga
+  # -- Whether connection is encrypted with SSL/TLS or not.
+  useSsl: false
+  # -- The RabbitMQ server VHost
+  vhost: "/taiga"
 
 externalDatabase:
   auth:
@@ -384,9 +418,7 @@ externalDatabase:
     password: taiga
     # -- Name of the user to use
     username: taiga
-    # -- Key in the secret containing the password
-    userPasswordKey: ""
   # -- Hostname of the database
-  hostname: ""
+  host: ""
   # -- Port used to connect to database
   port: 5432

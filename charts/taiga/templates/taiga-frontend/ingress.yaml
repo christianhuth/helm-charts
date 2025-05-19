@@ -1,9 +1,14 @@
-{{- if .Values.taiga.frontend.ingress.enabled -}}
-{{- $fullName := include "taiga.frontend.fullname" . -}}
-{{- $svcPort := .Values.taiga.frontend.service.port -}}
-{{- if and .Values.taiga.frontend.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
-  {{- if not (hasKey .Values.taiga.frontend.ingress.annotations "kubernetes.io/ingress.class") }}
-  {{- $_ := set .Values.taiga.frontend.ingress.annotations "kubernetes.io/ingress.class" .Values.taiga.frontend.ingress.className}}
+{{- if .Values.taiga.common.ingress.enabled -}}
+{{- $fullName := include "taiga.fullname" . -}}
+{{- $backendSvcName := include "taiga.backend.fullname" . -}}
+{{- $backendSvcPort := .Values.taiga.backend.service.port -}}
+{{- $eventsSvcName := include "taiga.events.fullname" . -}}
+{{- $eventsSvcPort := .Values.taiga.events.service.port -}}
+{{- $frontendSvcName := include "taiga.frontend.fullname" . -}}
+{{- $frontendSvcPort := .Values.taiga.frontend.service.port -}}
+{{- if and .Values.taiga.common.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
+  {{- if not (hasKey .Values.taiga.common.ingress.annotations "kubernetes.io/ingress.class") }}
+  {{- $_ := set .Values.taiga.common.ingress.annotations "kubernetes.io/ingress.class" .Values.taiga.common.ingress.className}}
   {{- end }}
 {{- end }}
 {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
@@ -15,7 +20,7 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  {{- with .Values.taiga.frontend.ingress.annotations }}
+  {{- with .Values.taiga.common.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
@@ -23,39 +28,73 @@ metadata:
     {{- include "taiga.labels" . | nindent 4 }}
   name: {{ $fullName }}
 spec:
-  {{- if and .Values.taiga.frontend.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
-  ingressClassName: {{ .Values.taiga.frontend.ingress.className }}
+  {{- if and .Values.taiga.common.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
+  ingressClassName: {{ .Values.taiga.common.ingress.className }}
   {{- end }}
-  {{- if .Values.taiga.frontend.ingress.tls }}
+  {{- if .Values.taiga.common.ingress.tls }}
   tls:
-    {{- range .Values.taiga.frontend.ingress.tls }}
     - hosts:
-        {{- range .hosts }}
-        - {{ . | quote }}
-        {{- end }}
-      secretName: {{ .secretName }}
-    {{- end }}
+        - {{ .Values.taiga.common.ingress.hostname | quote }}
+      secretName: {{ .Values.taiga.common.ingress.tlsSecretName }}
   {{- end }}
   rules:
-    {{- range .Values.taiga.frontend.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: {{ .Values.taiga.common.ingress.hostname | quote }}
       http:
         paths:
-          {{- range .paths }}
-          - path: {{ .path }}
-            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
-            pathType: {{ .pathType }}
+          - path: /
+            {{- if and .Values.taiga.common.ingress.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ .Values.taiga.common.ingress.pathType }}
             {{- end }}
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ $fullName }}
+                name: {{ $frontendSvcName }}
                 port:
-                  number: {{ $svcPort }}
+                  number: {{ $frontendSvcPort }}
               {{- else }}
-              serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
+              serviceName: {{ $frontendSvcName }}
+              servicePort: {{ $frontendSvcPort }}
               {{- end }}
-          {{- end }}
-    {{- end }}
+          - path: /admin
+            {{- if and .Values.taiga.common.ingress.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ .Values.taiga.common.ingress.pathType }}
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $backendSvcName }}
+                port:
+                  number: {{ $frontendSvcPort }}
+              {{- else }}
+              serviceName: {{ $backendSvcName }}
+              servicePort: {{ $backendSvcPort }}
+              {{- end }}
+          - path: /api
+            {{- if and .Values.taiga.common.ingress.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ .Values.taiga.common.ingress.pathType }}
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $backendSvcName }}
+                port:
+                  number: {{ $frontendSvcPort }}
+              {{- else }}
+              serviceName: {{ $backendSvcName }}
+              servicePort: {{ $backendSvcPort }}
+              {{- end }}
+          - path: /events
+            {{- if and .Values.taiga.common.ingress.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ .Values.taiga.common.ingress.pathType }}
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $eventsSvcName }}
+                port:
+                  number: {{ $eventsSvcPort }}
+              {{- else }}
+              serviceName: {{ $eventsSvcName }}
+              servicePort: {{ $eventsSvcPort }}
+              {{- end }}
 {{- end }}

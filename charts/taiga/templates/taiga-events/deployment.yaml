@@ -38,24 +38,40 @@ spec:
           imagePullPolicy: {{ .Values.taiga.events.image.pullPolicy }}
           env:
 
-            # RabbitMQ Settings
-            - name: RABBITMQ_URL
-              value: "amqp://rabbitmquser:rabbitmqpassword@rabbitmqhost:5672/taiga"
-            - name: WEB_SOCKET_SERVER_PORT
-              value: "8888"
-            - name: LOG_LEVEL
-              value: {{ .Values.taiga.events.config.app.logLevel | quote }}
-
-            # Taiga Cryptographic Settings
+            # Taiga Common Cryptographic Settings
             - name: SECRET
               valueFrom:
                 secretKeyRef:
                   name: {{ include "taiga.common.cryptographicSigning.secretName" . }}
                   key: secret-key
+            {{- if .Values.taiga.common.config.cryptographicSigning.algorithm }}
+            - name: ALGORITHM
+              value: {{ .Values.taiga.common.config.cryptographicSigning.algorithm | quote }}
+            {{- end }}
+            {{- if .Values.taiga.common.config.cryptographicSigning.audience }}
+            - name: AUDIENCE
+              value: {{ .Values.taiga.common.config.cryptographicSigning.audience | quote }}
+            {{- end }}
+            {{- if .Values.taiga.common.config.cryptographicSigning.issuer }}
+            - name: ISSUER
+              value: {{ .Values.taiga.common.config.cryptographicSigning.issuer | quote }}
+            {{- end }}
+            {{- if .Values.taiga.common.config.cryptographicSigning.userIdClaim }}
+            - name: USER_ID_CLAIM
+              value: {{ .Values.taiga.common.config.cryptographicSigning.userIdClaim | quote }}
+            {{- end }}
 
-            # Taiga Events Settings
+            # Taiga Events App Settings
             - name: APP_PORT
-              value: {{ .Values.taiga.events.service.port | quote }}
+              value: {{ .Values.taiga.events.config.app.port | quote }}
+            - name: LOG_LEVEL
+              value: {{ .Values.taiga.events.config.app.logLevel | quote }}
+            - name: WEB_SOCKET_SERVER_PORT
+              value: {{ .Values.taiga.events.config.app.webSocketServerPort | quote }}
+
+            # Taiga Events Connections Settings
+            - name: RABBITMQ_URL
+              value: "amqp://taiga:taiga@taiga-events-rabbitmq:5672/taiga"
 
             {{- if .Values.taiga.events.extraEnv }}
             # Extra Environment Variables
@@ -69,16 +85,16 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.taiga.events.service.port | int }}
+              containerPort: {{ .Values.taiga.events.config.app.port | int }}
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: http
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: http
           {{- with .Values.taiga.events.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
