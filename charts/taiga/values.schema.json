@@ -1,0 +1,1599 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "async-rabbitmq": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "existingSecret": {
+              "default": "",
+              "description": "Use existing secret for password details (`async-rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.",
+              "required": [],
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "password": {
+              "default": "taiga",
+              "description": "The password credential to be used when using an external database driver.",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "taiga",
+              "description": "The username credential to be used when using an external database driver.",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "existingSecret",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "enable integrated RabbitMQ™ subchart from Bitnami",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "useSsl": {
+          "default": false,
+          "description": "Whether connection is encrypted with SSL/TLS or not.",
+          "required": [],
+          "title": "useSsl",
+          "type": "boolean"
+        },
+        "vhost": {
+          "default": "/taiga",
+          "description": "The RabbitMQ server VHost",
+          "required": [],
+          "title": "vhost",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth",
+        "useSsl",
+        "vhost"
+      ],
+      "title": "async-rabbitmq",
+      "type": "object"
+    },
+    "events-rabbitmq": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "existingSecret": {
+              "default": "",
+              "description": "Use existing secret for password details (`events-rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.",
+              "required": [],
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "password": {
+              "default": "taiga",
+              "description": "The password credential to be used when using an external database driver.",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "taiga",
+              "description": "The username credential to be used when using an external database driver.",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "existingSecret",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "enable integrated RabbitMQ™ subchart from Bitnami",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "useSsl": {
+          "default": false,
+          "description": "Whether connection is encrypted with SSL/TLS or not.",
+          "required": [],
+          "title": "useSsl",
+          "type": "boolean"
+        },
+        "vhost": {
+          "default": "/taiga",
+          "description": "The RabbitMQ server VHost",
+          "required": [],
+          "title": "vhost",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth",
+        "useSsl",
+        "vhost"
+      ],
+      "title": "events-rabbitmq",
+      "type": "object"
+    },
+    "externalDatabase": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "taiga",
+              "description": "Name of the database to use",
+              "required": [],
+              "title": "database",
+              "type": "string"
+            },
+            "existingSecret": {
+              "default": "",
+              "description": "Name of existing secret to use for database credentials",
+              "required": [],
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "password": {
+              "default": "taiga",
+              "description": "Password to use",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "taiga",
+              "description": "Name of the user to use",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "existingSecret",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "host": {
+          "default": "",
+          "description": "Hostname of the database",
+          "required": [],
+          "title": "host",
+          "type": "string"
+        },
+        "port": {
+          "default": 5432,
+          "description": "Port used to connect to database",
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "auth",
+        "host",
+        "port"
+      ],
+      "title": "externalDatabase",
+      "type": "object"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"taiga.fullname\"`",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `taiga`",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "postgresql": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "database": {
+              "default": "taiga",
+              "description": "Name for a custom database to create",
+              "required": [],
+              "title": "database",
+              "type": "string"
+            },
+            "existingSecret": {
+              "default": "",
+              "description": "Name of existing secret to use for PostgreSQL credentials",
+              "required": [],
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "password": {
+              "default": "taiga",
+              "description": "Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "taiga",
+              "description": "Name for a custom user to create",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "database",
+            "existingSecret",
+            "password",
+            "username"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "enable PostgreSQL™ subchart from Bitnami",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth"
+      ],
+      "title": "postgresql",
+      "type": "object"
+    },
+    "taiga": {
+      "properties": {
+        "backend": {
+          "properties": {
+            "affinity": {
+              "description": "Affinity settings for pod assignment",
+              "required": [],
+              "title": "affinity",
+              "type": "object"
+            },
+            "autoscaling": {
+              "properties": {
+                "enabled": {
+                  "default": false,
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "maxReplicas": {
+                  "default": 100,
+                  "required": [],
+                  "title": "maxReplicas",
+                  "type": "integer"
+                },
+                "minReplicas": {
+                  "default": 1,
+                  "required": [],
+                  "title": "minReplicas",
+                  "type": "integer"
+                },
+                "targetCPUUtilizationPercentage": {
+                  "default": 80,
+                  "required": [],
+                  "title": "targetCPUUtilizationPercentage",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "enabled",
+                "minReplicas",
+                "maxReplicas",
+                "targetCPUUtilizationPercentage"
+              ],
+              "title": "autoscaling",
+              "type": "object"
+            },
+            "config": {
+              "properties": {
+                "app": {
+                  "properties": {
+                    "debug": {
+                      "default": false,
+                      "required": [],
+                      "title": "debug",
+                      "type": "boolean"
+                    },
+                    "defaultProjectSlugPrefix": {
+                      "default": false,
+                      "description": "Setting this to false removes the username from project slug",
+                      "required": [],
+                      "title": "defaultProjectSlugPrefix",
+                      "type": "boolean"
+                    },
+                    "language": {
+                      "default": "en-us",
+                      "required": [],
+                      "title": "language",
+                      "type": "string"
+                    },
+                    "telemetry": {
+                      "default": false,
+                      "description": "Anonymous Telemetry data is collected in order to learn about the use of Taiga and improve the platform based on real scenarios",
+                      "required": [],
+                      "title": "telemetry",
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "debug",
+                    "defaultProjectSlugPrefix",
+                    "language",
+                    "telemetry"
+                  ],
+                  "title": "app",
+                  "type": "object"
+                },
+                "security": {
+                  "properties": {
+                    "csrfCookieSecure": {
+                      "default": true,
+                      "required": [],
+                      "title": "csrfCookieSecure",
+                      "type": "boolean"
+                    },
+                    "sessionCookieSecure": {
+                      "default": true,
+                      "required": [],
+                      "title": "sessionCookieSecure",
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "csrfCookieSecure",
+                    "sessionCookieSecure"
+                  ],
+                  "title": "security",
+                  "type": "object"
+                },
+                "webhooks": {
+                  "properties": {
+                    "allowPrivateAddress": {
+                      "default": false,
+                      "required": [],
+                      "title": "allowPrivateAddress",
+                      "type": "boolean"
+                    },
+                    "allowRedirects": {
+                      "default": false,
+                      "required": [],
+                      "title": "allowRedirects",
+                      "type": "boolean"
+                    },
+                    "enabled": {
+                      "default": true,
+                      "required": [],
+                      "title": "enabled",
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "enabled",
+                    "allowPrivateAddress",
+                    "allowRedirects"
+                  ],
+                  "title": "webhooks",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "app",
+                "security",
+                "webhooks"
+              ],
+              "title": "config",
+              "type": "object"
+            },
+            "extraEnv": {
+              "description": "additional environment variables to be added to the pods",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraEnv",
+              "type": "array"
+            },
+            "extraEnvFrom": {
+              "description": "additional environment variables to be added to the pods from configMaps or secrets",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraEnvFrom",
+              "type": "array"
+            },
+            "image": {
+              "properties": {
+                "pullPolicy": {
+                  "default": "Always",
+                  "description": "image pull policy",
+                  "required": [],
+                  "title": "pullPolicy",
+                  "type": "string"
+                },
+                "registry": {
+                  "default": "docker.io",
+                  "description": "image registry",
+                  "required": [],
+                  "title": "registry",
+                  "type": "string"
+                },
+                "repository": {
+                  "default": "taigaio/taiga-back",
+                  "description": "image repository",
+                  "required": [],
+                  "title": "repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "default": "6.8.2",
+                  "description": "Overrides the image tag",
+                  "required": [],
+                  "title": "tag",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "registry",
+                "repository",
+                "pullPolicy",
+                "tag"
+              ],
+              "title": "image",
+              "type": "object"
+            },
+            "imagePullSecrets": {
+              "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "imagePullSecrets",
+              "type": "array"
+            },
+            "nodeSelector": {
+              "description": "Node labels for pod assignment",
+              "required": [],
+              "title": "nodeSelector",
+              "type": "object"
+            },
+            "podAnnotations": {
+              "description": "Annotations to be added to exporter pods",
+              "required": [],
+              "title": "podAnnotations",
+              "type": "object"
+            },
+            "podSecurityContext": {
+              "description": "pod-level security context",
+              "required": [],
+              "title": "podSecurityContext",
+              "type": "object"
+            },
+            "replicaCount": {
+              "default": 1,
+              "description": "Number of replicas",
+              "required": [],
+              "title": "replicaCount",
+              "type": "integer"
+            },
+            "resources": {
+              "description": "Resource limits and requests for the headwind pods.",
+              "required": [],
+              "title": "resources",
+              "type": "object"
+            },
+            "revisionHistoryLimit": {
+              "default": 10,
+              "description": "The number of old ReplicaSets to retain",
+              "required": [],
+              "title": "revisionHistoryLimit",
+              "type": "integer"
+            },
+            "securityContext": {
+              "description": "container-level security context",
+              "required": [],
+              "title": "securityContext",
+              "type": "object"
+            },
+            "service": {
+              "properties": {
+                "port": {
+                  "default": 8000,
+                  "description": "Kubernetes port where service is exposed",
+                  "required": [],
+                  "title": "port",
+                  "type": "integer"
+                },
+                "type": {
+                  "default": "ClusterIP",
+                  "description": "Kubernetes service type",
+                  "required": [],
+                  "title": "type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "port"
+              ],
+              "title": "service",
+              "type": "object"
+            },
+            "serviceAccount": {
+              "properties": {
+                "annotations": {
+                  "description": "Annotations to add to the service account",
+                  "required": [],
+                  "title": "annotations",
+                  "type": "object"
+                },
+                "create": {
+                  "default": true,
+                  "description": "Specifies whether a service account should be created",
+                  "required": [],
+                  "title": "create",
+                  "type": "boolean"
+                },
+                "name": {
+                  "default": "",
+                  "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+                  "required": [],
+                  "title": "name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "create",
+                "annotations",
+                "name"
+              ],
+              "title": "serviceAccount",
+              "type": "object"
+            },
+            "tolerations": {
+              "description": "Toleration labels for pod assignment",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "tolerations",
+              "type": "array"
+            }
+          },
+          "required": [
+            "image",
+            "imagePullSecrets",
+            "replicaCount",
+            "revisionHistoryLimit",
+            "serviceAccount",
+            "podAnnotations",
+            "podSecurityContext",
+            "securityContext",
+            "service",
+            "resources",
+            "autoscaling",
+            "nodeSelector",
+            "tolerations",
+            "affinity",
+            "extraEnv",
+            "extraEnvFrom",
+            "config"
+          ],
+          "title": "backend",
+          "type": "object"
+        },
+        "common": {
+          "properties": {
+            "config": {
+              "properties": {
+                "auth": {
+                  "properties": {
+                    "github": {
+                      "properties": {
+                        "clientId": {
+                          "default": "",
+                          "required": [],
+                          "title": "clientId",
+                          "type": "string"
+                        },
+                        "clientSecret": {
+                          "default": "",
+                          "required": [],
+                          "title": "clientSecret",
+                          "type": "string"
+                        },
+                        "enabled": {
+                          "default": false,
+                          "description": "Activate login with GitHub",
+                          "required": [],
+                          "title": "enabled",
+                          "type": "boolean"
+                        },
+                        "existingSecret": {
+                          "default": "",
+                          "required": [],
+                          "title": "existingSecret",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "enabled",
+                        "clientId",
+                        "clientSecret",
+                        "existingSecret"
+                      ],
+                      "title": "github",
+                      "type": "object"
+                    },
+                    "gitlab": {
+                      "properties": {
+                        "clientId": {
+                          "default": "",
+                          "required": [],
+                          "title": "clientId",
+                          "type": "string"
+                        },
+                        "clientSecret": {
+                          "default": "",
+                          "required": [],
+                          "title": "clientSecret",
+                          "type": "string"
+                        },
+                        "enabled": {
+                          "default": false,
+                          "description": "Activate login with GitLab",
+                          "required": [],
+                          "title": "enabled",
+                          "type": "boolean"
+                        },
+                        "existingSecret": {
+                          "default": "",
+                          "required": [],
+                          "title": "existingSecret",
+                          "type": "string"
+                        },
+                        "url": {
+                          "default": "",
+                          "required": [],
+                          "title": "url",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "enabled",
+                        "clientId",
+                        "clientSecret",
+                        "existingSecret",
+                        "url"
+                      ],
+                      "title": "gitlab",
+                      "type": "object"
+                    },
+                    "publicRegistration": {
+                      "properties": {
+                        "enabled": {
+                          "default": false,
+                          "description": "To be able to use Github/Gitlab login/registration, make sure you have public registration activated",
+                          "required": [],
+                          "title": "enabled",
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "enabled"
+                      ],
+                      "title": "publicRegistration",
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "github",
+                    "gitlab",
+                    "publicRegistration"
+                  ],
+                  "title": "auth",
+                  "type": "object"
+                },
+                "cryptographicSigning": {
+                  "properties": {
+                    "algorithm": {
+                      "default": "HS256",
+                      "required": [],
+                      "title": "algorithm",
+                      "type": "string"
+                    },
+                    "audience": {
+                      "default": "",
+                      "required": [],
+                      "title": "audience",
+                      "type": "string"
+                    },
+                    "existingSecret": {
+                      "default": "",
+                      "description": "Name of existing secret that contains the secret key for cryptographic signing. Key in secret needs to be called `secret-key`.",
+                      "required": [],
+                      "title": "existingSecret",
+                      "type": "string"
+                    },
+                    "issuer": {
+                      "default": "",
+                      "required": [],
+                      "title": "issuer",
+                      "type": "string"
+                    },
+                    "secretKey": {
+                      "default": "",
+                      "description": "The secret key that will be used in the cryptographic signing",
+                      "required": [],
+                      "title": "secretKey",
+                      "type": "string"
+                    },
+                    "userIdClaim": {
+                      "default": "user_id",
+                      "required": [],
+                      "title": "userIdClaim",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "algorithm",
+                    "audience",
+                    "existingSecret",
+                    "issuer",
+                    "secretKey",
+                    "userIdClaim"
+                  ],
+                  "title": "cryptographicSigning",
+                  "type": "object"
+                },
+                "integrations": {
+                  "properties": {
+                    "githubImporter": {
+                      "properties": {
+                        "clientId": {
+                          "default": "",
+                          "required": [],
+                          "title": "clientId",
+                          "type": "string"
+                        },
+                        "clientSecret": {
+                          "default": "",
+                          "required": [],
+                          "title": "clientSecret",
+                          "type": "string"
+                        },
+                        "enabled": {
+                          "default": false,
+                          "description": "Activating this feature, you will be able to import projects from GitHub",
+                          "required": [],
+                          "title": "enabled",
+                          "type": "boolean"
+                        },
+                        "existingSecret": {
+                          "default": "",
+                          "required": [],
+                          "title": "existingSecret",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "enabled",
+                        "clientId",
+                        "clientSecret",
+                        "existingSecret"
+                      ],
+                      "title": "githubImporter",
+                      "type": "object"
+                    },
+                    "jiraImporter": {
+                      "properties": {
+                        "cert": {
+                          "default": "",
+                          "required": [],
+                          "title": "cert",
+                          "type": "string"
+                        },
+                        "consumerKey": {
+                          "default": "",
+                          "required": [],
+                          "title": "consumerKey",
+                          "type": "string"
+                        },
+                        "enabled": {
+                          "default": false,
+                          "description": "Activating this feature, you will be able to import projects from Jira",
+                          "required": [],
+                          "title": "enabled",
+                          "type": "boolean"
+                        },
+                        "existingSecret": {
+                          "default": "",
+                          "required": [],
+                          "title": "existingSecret",
+                          "type": "string"
+                        },
+                        "publicCert": {
+                          "default": "",
+                          "required": [],
+                          "title": "publicCert",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "enabled",
+                        "consumerKey",
+                        "cert",
+                        "existingSecret",
+                        "publicCert"
+                      ],
+                      "title": "jiraImporter",
+                      "type": "object"
+                    },
+                    "slack": {
+                      "properties": {
+                        "enabled": {
+                          "default": false,
+                          "description": "Enable Slack integration in your Taiga instance",
+                          "required": [],
+                          "title": "enabled",
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "enabled"
+                      ],
+                      "title": "slack",
+                      "type": "object"
+                    },
+                    "trelloImporter": {
+                      "properties": {
+                        "apiKey": {
+                          "default": "",
+                          "required": [],
+                          "title": "apiKey",
+                          "type": "string"
+                        },
+                        "enabled": {
+                          "default": false,
+                          "description": "Activating this feature, you will be able to import projects from Trello",
+                          "required": [],
+                          "title": "enabled",
+                          "type": "boolean"
+                        },
+                        "existingSecret": {
+                          "default": "",
+                          "required": [],
+                          "title": "existingSecret",
+                          "type": "string"
+                        },
+                        "secretKey": {
+                          "default": "",
+                          "required": [],
+                          "title": "secretKey",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "enabled",
+                        "apiKey",
+                        "existingSecret",
+                        "secretKey"
+                      ],
+                      "title": "trelloImporter",
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "githubImporter",
+                    "jiraImporter",
+                    "trelloImporter",
+                    "slack"
+                  ],
+                  "title": "integrations",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "auth",
+                "cryptographicSigning",
+                "integrations"
+              ],
+              "title": "config",
+              "type": "object"
+            },
+            "extraEnv": {
+              "description": "additional environment variables to be added to the backend and frontend pods",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraEnv",
+              "type": "array"
+            },
+            "extraEnvFrom": {
+              "description": "additional environment variables to be added to the backend and frontend pods from configMaps or secrets",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraEnvFrom",
+              "type": "array"
+            },
+            "ingress": {
+              "properties": {
+                "annotations": {
+                  "required": [],
+                  "title": "annotations",
+                  "type": "object"
+                },
+                "className": {
+                  "default": "",
+                  "required": [],
+                  "title": "className",
+                  "type": "string"
+                },
+                "enabled": {
+                  "default": false,
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "hostname": {
+                  "default": "chart-example.local",
+                  "description": "kubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"",
+                  "required": [],
+                  "title": "hostname",
+                  "type": "string"
+                },
+                "pathType": {
+                  "default": "ImplementationSpecific",
+                  "required": [],
+                  "title": "pathType",
+                  "type": "string"
+                },
+                "tls": {
+                  "default": false,
+                  "required": [],
+                  "title": "tls",
+                  "type": "boolean"
+                },
+                "tlsSecretName": {
+                  "default": "",
+                  "required": [],
+                  "title": "tlsSecretName",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "enabled",
+                "className",
+                "annotations",
+                "hostname",
+                "pathType",
+                "tls",
+                "tlsSecretName"
+              ],
+              "title": "ingress",
+              "type": "object"
+            }
+          },
+          "required": [
+            "ingress",
+            "config",
+            "extraEnv",
+            "extraEnvFrom"
+          ],
+          "title": "common",
+          "type": "object"
+        },
+        "events": {
+          "properties": {
+            "affinity": {
+              "description": "Affinity settings for pod assignment",
+              "required": [],
+              "title": "affinity",
+              "type": "object"
+            },
+            "autoscaling": {
+              "properties": {
+                "enabled": {
+                  "default": false,
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "maxReplicas": {
+                  "default": 100,
+                  "required": [],
+                  "title": "maxReplicas",
+                  "type": "integer"
+                },
+                "minReplicas": {
+                  "default": 1,
+                  "required": [],
+                  "title": "minReplicas",
+                  "type": "integer"
+                },
+                "targetCPUUtilizationPercentage": {
+                  "default": 80,
+                  "required": [],
+                  "title": "targetCPUUtilizationPercentage",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "enabled",
+                "minReplicas",
+                "maxReplicas",
+                "targetCPUUtilizationPercentage"
+              ],
+              "title": "autoscaling",
+              "type": "object"
+            },
+            "config": {
+              "properties": {
+                "app": {
+                  "properties": {
+                    "logLevel": {
+                      "default": "info",
+                      "description": "Valid log level values: error, warn, info, http, verbose, debug, silly",
+                      "required": [],
+                      "title": "logLevel",
+                      "type": "string"
+                    },
+                    "port": {
+                      "default": 3023,
+                      "required": [],
+                      "title": "port",
+                      "type": "integer"
+                    },
+                    "webSocketServerPort": {
+                      "default": 8888,
+                      "required": [],
+                      "title": "webSocketServerPort",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "logLevel",
+                    "port",
+                    "webSocketServerPort"
+                  ],
+                  "title": "app",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "app"
+              ],
+              "title": "config",
+              "type": "object"
+            },
+            "extraEnv": {
+              "description": "additional environment variables to be added to the pods",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraEnv",
+              "type": "array"
+            },
+            "extraEnvFrom": {
+              "description": "additional environment variables to be added to the pods from configMaps or secrets",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraEnvFrom",
+              "type": "array"
+            },
+            "image": {
+              "properties": {
+                "pullPolicy": {
+                  "default": "Always",
+                  "description": "image pull policy",
+                  "required": [],
+                  "title": "pullPolicy",
+                  "type": "string"
+                },
+                "registry": {
+                  "default": "docker.io",
+                  "description": "image registry",
+                  "required": [],
+                  "title": "registry",
+                  "type": "string"
+                },
+                "repository": {
+                  "default": "taigaio/taiga-events",
+                  "description": "image repository",
+                  "required": [],
+                  "title": "repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "default": "6.7.0",
+                  "description": "Overrides the image tag",
+                  "required": [],
+                  "title": "tag",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "registry",
+                "repository",
+                "pullPolicy",
+                "tag"
+              ],
+              "title": "image",
+              "type": "object"
+            },
+            "imagePullSecrets": {
+              "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "imagePullSecrets",
+              "type": "array"
+            },
+            "nodeSelector": {
+              "description": "Node labels for pod assignment",
+              "required": [],
+              "title": "nodeSelector",
+              "type": "object"
+            },
+            "podAnnotations": {
+              "description": "Annotations to be added to exporter pods",
+              "required": [],
+              "title": "podAnnotations",
+              "type": "object"
+            },
+            "podSecurityContext": {
+              "description": "pod-level security context",
+              "required": [],
+              "title": "podSecurityContext",
+              "type": "object"
+            },
+            "replicaCount": {
+              "default": 1,
+              "description": "Number of replicas",
+              "required": [],
+              "title": "replicaCount",
+              "type": "integer"
+            },
+            "resources": {
+              "description": "Resource limits and requests for the headwind pods.",
+              "required": [],
+              "title": "resources",
+              "type": "object"
+            },
+            "revisionHistoryLimit": {
+              "default": 10,
+              "description": "The number of old ReplicaSets to retain",
+              "required": [],
+              "title": "revisionHistoryLimit",
+              "type": "integer"
+            },
+            "securityContext": {
+              "description": "container-level security context",
+              "required": [],
+              "title": "securityContext",
+              "type": "object"
+            },
+            "service": {
+              "properties": {
+                "port": {
+                  "default": 8080,
+                  "description": "Kubernetes port where service is exposed",
+                  "required": [],
+                  "title": "port",
+                  "type": "integer"
+                },
+                "type": {
+                  "default": "ClusterIP",
+                  "description": "Kubernetes service type",
+                  "required": [],
+                  "title": "type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "port"
+              ],
+              "title": "service",
+              "type": "object"
+            },
+            "serviceAccount": {
+              "properties": {
+                "annotations": {
+                  "description": "Annotations to add to the service account",
+                  "required": [],
+                  "title": "annotations",
+                  "type": "object"
+                },
+                "create": {
+                  "default": true,
+                  "description": "Specifies whether a service account should be created",
+                  "required": [],
+                  "title": "create",
+                  "type": "boolean"
+                },
+                "name": {
+                  "default": "",
+                  "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+                  "required": [],
+                  "title": "name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "create",
+                "annotations",
+                "name"
+              ],
+              "title": "serviceAccount",
+              "type": "object"
+            },
+            "tolerations": {
+              "description": "Toleration labels for pod assignment",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "tolerations",
+              "type": "array"
+            }
+          },
+          "required": [
+            "image",
+            "imagePullSecrets",
+            "replicaCount",
+            "revisionHistoryLimit",
+            "serviceAccount",
+            "podAnnotations",
+            "podSecurityContext",
+            "securityContext",
+            "service",
+            "resources",
+            "autoscaling",
+            "nodeSelector",
+            "tolerations",
+            "affinity",
+            "extraEnv",
+            "extraEnvFrom",
+            "config"
+          ],
+          "title": "events",
+          "type": "object"
+        },
+        "frontend": {
+          "properties": {
+            "affinity": {
+              "description": "Affinity settings for pod assignment",
+              "required": [],
+              "title": "affinity",
+              "type": "object"
+            },
+            "autoscaling": {
+              "properties": {
+                "enabled": {
+                  "default": false,
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "maxReplicas": {
+                  "default": 100,
+                  "required": [],
+                  "title": "maxReplicas",
+                  "type": "integer"
+                },
+                "minReplicas": {
+                  "default": 1,
+                  "required": [],
+                  "title": "minReplicas",
+                  "type": "integer"
+                },
+                "targetCPUUtilizationPercentage": {
+                  "default": 80,
+                  "required": [],
+                  "title": "targetCPUUtilizationPercentage",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "enabled",
+                "minReplicas",
+                "maxReplicas",
+                "targetCPUUtilizationPercentage"
+              ],
+              "title": "autoscaling",
+              "type": "object"
+            },
+            "config": {
+              "properties": {
+                "app": {
+                  "properties": {
+                    "debug": {
+                      "default": false,
+                      "required": [],
+                      "title": "debug",
+                      "type": "boolean"
+                    },
+                    "defaultLanguage": {
+                      "default": "en",
+                      "required": [],
+                      "title": "defaultLanguage",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "debug",
+                    "defaultLanguage"
+                  ],
+                  "title": "app",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "app"
+              ],
+              "title": "config",
+              "type": "object"
+            },
+            "extraEnv": {
+              "description": "additional environment variables to be added to the pods",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraEnv",
+              "type": "array"
+            },
+            "extraEnvFrom": {
+              "description": "additional environment variables to be added to the pods from configMaps or secrets",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraEnvFrom",
+              "type": "array"
+            },
+            "image": {
+              "properties": {
+                "pullPolicy": {
+                  "default": "Always",
+                  "description": "image pull policy",
+                  "required": [],
+                  "title": "pullPolicy",
+                  "type": "string"
+                },
+                "registry": {
+                  "default": "docker.io",
+                  "description": "image registry",
+                  "required": [],
+                  "title": "registry",
+                  "type": "string"
+                },
+                "repository": {
+                  "default": "taigaio/taiga-front",
+                  "description": "image repository",
+                  "required": [],
+                  "title": "repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "default": "6.8.2",
+                  "description": "Overrides the image tag",
+                  "required": [],
+                  "title": "tag",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "registry",
+                "repository",
+                "pullPolicy",
+                "tag"
+              ],
+              "title": "image",
+              "type": "object"
+            },
+            "imagePullSecrets": {
+              "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "imagePullSecrets",
+              "type": "array"
+            },
+            "nodeSelector": {
+              "description": "Node labels for pod assignment",
+              "required": [],
+              "title": "nodeSelector",
+              "type": "object"
+            },
+            "podAnnotations": {
+              "description": "Annotations to be added to exporter pods",
+              "required": [],
+              "title": "podAnnotations",
+              "type": "object"
+            },
+            "podSecurityContext": {
+              "description": "pod-level security context",
+              "required": [],
+              "title": "podSecurityContext",
+              "type": "object"
+            },
+            "replicaCount": {
+              "default": 1,
+              "description": "Number of replicas",
+              "required": [],
+              "title": "replicaCount",
+              "type": "integer"
+            },
+            "resources": {
+              "description": "Resource limits and requests for the headwind pods.",
+              "required": [],
+              "title": "resources",
+              "type": "object"
+            },
+            "revisionHistoryLimit": {
+              "default": 10,
+              "description": "The number of old ReplicaSets to retain",
+              "required": [],
+              "title": "revisionHistoryLimit",
+              "type": "integer"
+            },
+            "securityContext": {
+              "description": "container-level security context",
+              "required": [],
+              "title": "securityContext",
+              "type": "object"
+            },
+            "service": {
+              "properties": {
+                "port": {
+                  "default": 80,
+                  "description": "Kubernetes port where service is exposed",
+                  "required": [],
+                  "title": "port",
+                  "type": "integer"
+                },
+                "type": {
+                  "default": "ClusterIP",
+                  "description": "Kubernetes service type",
+                  "required": [],
+                  "title": "type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "port"
+              ],
+              "title": "service",
+              "type": "object"
+            },
+            "serviceAccount": {
+              "properties": {
+                "annotations": {
+                  "description": "Annotations to add to the service account",
+                  "required": [],
+                  "title": "annotations",
+                  "type": "object"
+                },
+                "create": {
+                  "default": true,
+                  "description": "Specifies whether a service account should be created",
+                  "required": [],
+                  "title": "create",
+                  "type": "boolean"
+                },
+                "name": {
+                  "default": "",
+                  "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+                  "required": [],
+                  "title": "name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "create",
+                "annotations",
+                "name"
+              ],
+              "title": "serviceAccount",
+              "type": "object"
+            },
+            "tolerations": {
+              "description": "Toleration labels for pod assignment",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "tolerations",
+              "type": "array"
+            }
+          },
+          "required": [
+            "image",
+            "imagePullSecrets",
+            "replicaCount",
+            "revisionHistoryLimit",
+            "serviceAccount",
+            "podAnnotations",
+            "podSecurityContext",
+            "securityContext",
+            "service",
+            "resources",
+            "autoscaling",
+            "nodeSelector",
+            "tolerations",
+            "affinity",
+            "extraEnv",
+            "extraEnvFrom",
+            "config"
+          ],
+          "title": "frontend",
+          "type": "object"
+        }
+      },
+      "required": [
+        "backend",
+        "common",
+        "events",
+        "frontend"
+      ],
+      "title": "taiga",
+      "type": "object"
+    }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "taiga",
+    "postgresql",
+    "async-rabbitmq",
+    "events-rabbitmq",
+    "externalDatabase"
+  ],
+  "type": "object"
+}
