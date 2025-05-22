@@ -1,7 +1,7 @@
 # etcd-defrag
 
-## 1.3.0
+## 1.4.0
 
-### Added
+### Changed
 
-- option to define the image registry
+- App Version to 3.6.0
