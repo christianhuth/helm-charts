@@ -2,7 +2,7 @@ apiVersion: v2
 name: squest
 description: Squest is a self-service portal that works on top of Red Hat Ansible Automation Platform/AWX.
 type: application
-version: 1.2.2
+version: 1.2.3
 appVersion: "2.7.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
@@ -15,7 +15,7 @@ sources:
 dependencies:
   - name: mariadb
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 20.5.5
+    version: 20.5.6
     condition: mariadb.enabled
   - name: rabbitmq
     repository: oci://registry-1.docker.io/bitnamicharts
@@ -27,8 +27,8 @@ dependencies:
     condition: redis.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: remove readOnly option from PVC that annoys ArgoCD
+    - kind: changed
+      description: dependency of mariadb to 20.5.6
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
