@@ -1,7 +1,7 @@
 # baserow
 
-## 3.14.6
+## 4.0.0
 
 ### Changed
 
-- App Version to 1.33.3
+- dependency of redis to 21.1.6
