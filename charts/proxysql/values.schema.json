@@ -80,7 +80,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "2.7.3",
+          "default": "3.0.1",
           "description": "Overrides the image tag",
           "required": [],
           "title": "tag",
