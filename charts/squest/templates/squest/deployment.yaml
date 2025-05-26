@@ -87,7 +87,6 @@ spec:
             - name: WAIT_TIMEOUT
               value: "60"
           {{- if .Values.squest.init.extraEnv }}
-
             # Extra Environment Variables
             {{- .Values.squest.init.extraEnv | toYaml | nindent 12 }}
           {{- end }}
