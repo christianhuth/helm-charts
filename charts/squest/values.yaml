@@ -113,8 +113,11 @@ squest:
   # -- additional volumeMounts to be added to the squest container (nginx and init container have separate extraVolumeMounts)
   extraVolumeMounts: []
 
-  # -- additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.
+  # -- additional environment variables to be added to the squest container. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables.
   extraEnv: []
+
+  # -- load additional environment variables in the squest container from configMaps or secrets. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables.
+  extraEnvFrom: []
 
   config:
     database:
@@ -210,10 +213,22 @@ squest:
       # -- Overrides the image tag
       tag: "1.28.0-alpine"
 
+    # -- additional environment variables to be added to the nginx container.
+    extraEnv: []
+
+    # -- load additional environment variables in the nginx container from configMaps or secrets.
+    extraEnvFrom: []
+
     # -- additional volumeMounts to be added to the nginx container
     extraVolumeMounts: []
 
   init:
+
+    # -- additional environment variables to be added to the init container.
+    extraEnv: []
+
+    # -- load additional environment variables in the init container from configMaps or secrets.
+    extraEnvFrom: []
 
     # -- additional volumeMounts to be added to the init container
     extraVolumeMounts: []

@@ -86,6 +86,14 @@ spec:
               value: {{ include "squest.mariadb.host" . }}:{{ include "squest.mariadb.port" . }}
             - name: WAIT_TIMEOUT
               value: "60"
+          {{- if .Values.squest.init.extraEnv }}
+            # Extra Environment Variables
+            {{- .Values.squest.init.extraEnv | toYaml | nindent 12 }}
+          {{- end }}
+          {{- if .Values.squest.init.extraEnvFrom }}
+          envFrom:
+            {{- .Values.squest.init.extraEnvFrom | toYaml | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - mountPath: /app/static
               name: static
@@ -233,6 +241,10 @@ spec:
             # Extra Environment Variables
             {{- .Values.squest.extraEnv | toYaml | nindent 12 }}
             {{- end }}
+          {{- if .Values.squest.extraEnvFrom }}
+          envFrom:
+            {{- .Values.squest.extraEnvFrom | toYaml | nindent 12 }}
+          {{- end }}
           ports:
             - name: django
               containerPort: 8000
@@ -278,6 +290,14 @@ spec:
               {{- toYaml . | nindent 12 }}
             {{- end }}
             {{- end }}
+          {{- if .Values.squest.nginx.extraEnv }}
+          env:
+            {{- .Values.squest.nginx.extraEnv | toYaml | nindent 12 }}
+          {{- end }}
+          {{- if .Values.squest.nginx.extraEnvFrom }}
+          envFrom:
+            {{- .Values.squest.nginx.extraEnvFrom | toYaml | nindent 12 }}
+          {{- end }}
       restartPolicy: Always
       {{- with .Values.nodeSelector }}
       nodeSelector:

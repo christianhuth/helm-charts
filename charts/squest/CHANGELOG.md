@@ -1,7 +1,7 @@
 # squest
 
-## 1.2.4
+## 1.3.0
 
-### Changed
+### Added
 
-- dependency of rabbitmq to 16.0.3
+- allow setting envFrom to load environment variables from configMaps or secrets
