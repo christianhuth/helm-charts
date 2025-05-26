@@ -19,6 +19,9 @@ squest:
     # -- Overrides the image tag
     tag: "2.7.1"
 
+  # -- Upgrade strategy For Deployments, valid values are Recreate (default) and RollingUpdate
+  strategy: Recreate
+
   # -- Number of replicas
   replicaCount: 1
 

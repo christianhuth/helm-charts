@@ -4,4 +4,5 @@
 
 ### Changed
 
-- also make podsecurity.fsGroup not required
+- use recreate strategy for the deployment due to the PVC
+- make podsecurity.fsGroup not required

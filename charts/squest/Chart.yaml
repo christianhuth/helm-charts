@@ -28,7 +28,9 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: also make podsecurity.fsGroup not required
+      description: use recreate strategy for the deployment due to the PVC
+    - kind: changed
+      description: make podsecurity.fsGroup not required
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
