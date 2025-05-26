@@ -1,7 +1,7 @@
 # squest
 
-## 1.3.0
+## 1.3.2
 
 ### Added
 
-- allow setting envFrom to load environment variables from configMaps or secrets
+- use recreate strategy for the deployment due to the PVC
