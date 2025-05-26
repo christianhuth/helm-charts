@@ -157,7 +157,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | squest.config.squest.host | string | `"http://squest.domain.local"` | Address of the Squest portal instance. Used in email templates and in metadata sent to Red Hat Ansible Automation Platform/AWX job templates. |
 | squest.config.squest.isDevServer | bool | `false` | Set to True to change the navbar and footer color to visually identify a testing instance of Squest. |
 | squest.config.squest.maintenanceModeEnabled | bool | `false` | When enabled, only administrators can access squest UI and API. This can be used for example to block new requests by end users from the service catalog. So an administrator can perform operations against the API like migrating instance specs. |
-| squest.extraEnv | list | `[]` | additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list. |
+| squest.extraEnv | list | `[]` | additional environment variables to be added to the squest container. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables. |
+| squest.extraEnvFrom | list | `[]` | load additional environment variables in the squest container from configMaps or secrets. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables. |
 | squest.extraVolumeMounts | list | `[]` | additional volumeMounts to be added to the squest container (nginx and init container have separate extraVolumeMounts) |
 | squest.extraVolumes | list | `[]` | additional volumes to be added to the squest pods |
 | squest.image.pullPolicy | string | `"Always"` | image pull policy |
@@ -171,7 +172,11 @@ The command removes all the Kubernetes components associated with the chart and 
 | squest.ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | squest.ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | squest.ingress.tls | list | `[]` |  |
+| squest.init.extraEnv | list | `[]` | additional environment variables to be added to the init container. |
+| squest.init.extraEnvFrom | list | `[]` | load additional environment variables in the init container from configMaps or secrets. |
 | squest.init.extraVolumeMounts | list | `[]` | additional volumeMounts to be added to the init container |
+| squest.nginx.extraEnv | list | `[]` | additional environment variables to be added to the nginx container. |
+| squest.nginx.extraEnvFrom | list | `[]` | load additional environment variables in the nginx container from configMaps or secrets. |
 | squest.nginx.extraVolumeMounts | list | `[]` | additional volumeMounts to be added to the nginx container |
 | squest.nginx.image.pullPolicy | string | `"Always"` | image pull policy |
 | squest.nginx.image.registry | string | `"docker.io"` | image registry |

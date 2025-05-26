@@ -1192,12 +1192,21 @@
           "type": "object"
         },
         "extraEnv": {
-          "description": "additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.",
+          "description": "additional environment variables to be added to the squest container. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables.",
           "items": {
             "required": []
           },
           "required": [],
           "title": "extraEnv",
+          "type": "array"
+        },
+        "extraEnvFrom": {
+          "description": "load additional environment variables in the squest container from configMaps or secrets. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables.",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "extraEnvFrom",
           "type": "array"
         },
         "extraVolumeMounts": {
@@ -1355,6 +1364,24 @@
         },
         "init": {
           "properties": {
+            "extraEnv": {
+              "description": "additional environment variables to be added to the init container.",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraEnv",
+              "type": "array"
+            },
+            "extraEnvFrom": {
+              "description": "load additional environment variables in the init container from configMaps or secrets.",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraEnvFrom",
+              "type": "array"
+            },
             "extraVolumeMounts": {
               "description": "additional volumeMounts to be added to the init container",
               "items": {
@@ -1366,6 +1393,8 @@
             }
           },
           "required": [
+            "extraEnv",
+            "extraEnvFrom",
             "extraVolumeMounts"
           ],
           "title": "init",
@@ -1373,6 +1402,24 @@
         },
         "nginx": {
           "properties": {
+            "extraEnv": {
+              "description": "additional environment variables to be added to the nginx container.",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraEnv",
+              "type": "array"
+            },
+            "extraEnvFrom": {
+              "description": "load additional environment variables in the nginx container from configMaps or secrets.",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "extraEnvFrom",
+              "type": "array"
+            },
             "extraVolumeMounts": {
               "description": "additional volumeMounts to be added to the nginx container",
               "items": {
@@ -1425,6 +1472,8 @@
           },
           "required": [
             "image",
+            "extraEnv",
+            "extraEnvFrom",
             "extraVolumeMounts"
           ],
           "title": "nginx",
@@ -1572,6 +1621,7 @@
         "extraVolumes",
         "extraVolumeMounts",
         "extraEnv",
+        "extraEnvFrom",
         "config",
         "nginx",
         "init"
