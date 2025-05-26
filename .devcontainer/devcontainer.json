@@ -21,6 +21,13 @@
       "helm": "latest",
       "minikube": "latest"
     },
+    "ghcr.io/gickis/devcontainer-features/gomplate:1": {},
+    "ghcr.io/eitsupi/devcontainer-features/jq-likes:2.1.1": {
+        "jqVersion": "none",
+        "yqVersion": "latest",
+        "gojqVersion": "none",
+        "xqVersion": "none"
+    },
     "ghcr.io/devcontainers-extra/features/pre-commit:2": {},
     "ghcr.io/dirsigler/devcontainer-features/helm-docs:1": {},
     "ghcr.io/mpriscella/features/helm-chart-testing:1": {}
@@ -31,7 +38,6 @@
 
   "postAttachCommand": "minikube start",
 
-  // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "/bin/bash .devcontainer/postCreateCommand.sh",
 
   "remoteUser": "vscode",

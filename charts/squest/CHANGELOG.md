@@ -2,6 +2,6 @@
 
 ## 1.3.0
 
-### Added
+### Changed
 
 - allow setting envFrom to load environment variables from configMaps or secrets

@@ -1,0 +1,6 @@
+---
+config:
+  nextcloud:
+    auth:
+      token: abcdefghijklmnopqrstuvwyxz
+    server: https://nextcloud.example.com

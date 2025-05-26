@@ -1,21 +1,21 @@
 apiVersion: v2
-name: etcd-defrag
-description: A Helm chart for running a defragmentation CronJob for ETCD
+name: nextcloud-exporter
+description: Prometheus exporter for Nextcloud servers
 type: application
-version: 1.4.0
-appVersion: "3.6.0"
+version: 1.0.0
+appVersion: "0.8.0"
 home: https://github.com/christianhuth/helm-charts
-icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/etcd-defrag/icon.svg
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/nextcloud-exporter/icon.svg
 maintainers:
   - name: christianhuth
     email: christian@knell.it
 sources:
-  - https://github.com/bitnami/containers/tree/main/bitnami/etcd
-  - https://etcd.io
+  - https://github.com/xperimental/nextcloud-exporter
 annotations:
+  artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: changed
-      description: App Version to 3.6.0
+    - kind: added
+      description: Initial Version
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
