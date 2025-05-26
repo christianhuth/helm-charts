@@ -22,6 +22,7 @@ spec:
       labels:
         {{- include "squest.squest.selectorLabels" . | nindent 8 }}
     spec:
+      strategy: {{ .Values.squest.strategy }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
