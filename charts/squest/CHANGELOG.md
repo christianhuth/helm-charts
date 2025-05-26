@@ -1,7 +1,8 @@
 # squest
 
-## 1.3.2
+## 1.3.1
 
-### Added
+### Changed
 
 - use recreate strategy for the deployment due to the PVC
+- make podsecurity.fsGroup not required

@@ -1501,15 +1501,12 @@
           "description": "pod-level security context",
           "properties": {
             "fsGroup": {
-              "default": 999,
+              "default": "999",
               "required": [],
-              "title": "fsGroup",
-              "type": "integer"
+              "title": "fsGroup"
             }
           },
-          "required": [
-            "fsGroup"
-          ],
+          "required": [],
           "title": "podSecurityContext"
         },
         "replicaCount": {
