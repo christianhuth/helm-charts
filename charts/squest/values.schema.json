@@ -1590,6 +1590,13 @@
           "title": "serviceAccount",
           "type": "object"
         },
+        "strategy": {
+          "default": "Recreate",
+          "description": "Upgrade strategy For Deployments, valid values are Recreate (default) and RollingUpdate",
+          "required": [],
+          "title": "strategy",
+          "type": "string"
+        },
         "tolerations": {
           "description": "Toleration labels for pod assignment",
           "items": {
@@ -1602,6 +1609,7 @@
       },
       "required": [
         "image",
+        "strategy",
         "replicaCount",
         "revisionHistoryLimit",
         "serviceAccount",

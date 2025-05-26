@@ -195,6 +195,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | squest.serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | squest.serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | squest.serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| squest.strategy | string | `"Recreate"` | Upgrade strategy For Deployments, valid values are Recreate (default) and RollingUpdate |
 | squest.tolerations | list | `[]` | Toleration labels for pod assignment |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
