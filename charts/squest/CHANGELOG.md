@@ -1,8 +1,7 @@
 # squest
 
-## 1.3.1
+## 1.3.2
 
 ### Changed
 
-- use recreate strategy for the deployment due to the PVC
-- make podsecurity.fsGroup not required
+- dependency of rabbitmq to 16.0.4
