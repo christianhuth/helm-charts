@@ -2,7 +2,7 @@ apiVersion: v2
 name: shlink-backend
 description: A PHP-based self-hosted URL shortener that can be used to serve shortened URLs under your own domain.
 type: application
-version: 6.1.7
+version: 6.1.8
 appVersion: "4.4.6"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/shlink-backend/icon.svg
@@ -27,7 +27,7 @@ dependencies:
     condition: postgresql.enabled
   - name: rabbitmq
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 16.0.3
+    version: 16.0.4
     condition: rabbitmq.enabled
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
@@ -36,7 +36,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of postgresql to 16.7.5
+      description: dependency of rabbitmq to 16.0.4
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
