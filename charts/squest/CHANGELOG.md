@@ -1,7 +1,7 @@
 # squest
 
-## 1.3.3
+## 1.3.4
 
 ### Changed
 
-- fix deployment strategy syntax
+- really fix the deployment strategy syntax
