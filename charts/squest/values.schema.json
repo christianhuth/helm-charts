@@ -131,7 +131,7 @@
                   "type": "string"
                 },
                 "tag": {
-                  "default": "2.7.1",
+                  "default": "2.8.0",
                   "description": "Overrides the image tag",
                   "required": [],
                   "title": "tag",
@@ -413,7 +413,7 @@
                   "type": "string"
                 },
                 "tag": {
-                  "default": "2.7.1",
+                  "default": "2.8.0",
                   "description": "Overrides the image tag",
                   "required": [],
                   "title": "tag",
@@ -1251,7 +1251,7 @@
               "type": "string"
             },
             "tag": {
-              "default": "2.7.1",
+              "default": "2.8.0",
               "description": "Overrides the image tag",
               "required": [],
               "title": "tag",
