@@ -1,7 +1,7 @@
 # squest
 
-## 1.3.4
+## 1.3.5
 
 ### Changed
 
-- really fix the deployment strategy syntax
+- dependency of rabbitmq to 16.0.5
