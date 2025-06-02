@@ -13,6 +13,8 @@ spec:
   selector:
     matchLabels:
       {{- include "squest.squest.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: {{ .Values.squest.strategy }}
   template:
     metadata:
       {{- with .Values.squest.podAnnotations }}
@@ -22,8 +24,6 @@ spec:
       labels:
         {{- include "squest.squest.selectorLabels" . | nindent 8 }}
     spec:
-      strategy:
-        type: {{ .Values.squest.strategy }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
