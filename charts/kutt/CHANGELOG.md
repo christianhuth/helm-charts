@@ -1,7 +1,7 @@
 # kutt
 
-## 5.10.5
+## 5.10.8
 
 ### Changed
 
-- Icon
+- dependency of postgresql to 16.7.8
