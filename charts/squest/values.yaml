@@ -17,7 +17,7 @@ squest:
     # -- image pull policy
     pullPolicy: Always
     # -- Overrides the image tag
-    tag: "2.7.1"
+    tag: "2.8.0"
 
   # -- Upgrade strategy For Deployments, valid values are Recreate (default) and RollingUpdate
   strategy: Recreate
@@ -251,7 +251,7 @@ celery:
       # -- image pull policy
       pullPolicy: Always
       # -- Overrides the image tag
-      tag: "2.7.1"
+      tag: "2.8.0"
 
     # -- Number of replicas
     replicaCount: 1
@@ -348,7 +348,7 @@ celery:
       # -- image pull policy
       pullPolicy: Always
       # -- Overrides the image tag
-      tag: "2.7.1"
+      tag: "2.8.0"
 
     # -- Number of replicas
     replicaCount: 1

@@ -59,7 +59,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | celery.beat.image.pullPolicy | string | `"Always"` | image pull policy |
 | celery.beat.image.registry | string | `"quay.io"` | image registry |
 | celery.beat.image.repository | string | `"hewlettpackardenterprise/squest"` | image repository |
-| celery.beat.image.tag | string | `"2.7.1"` | Overrides the image tag |
+| celery.beat.image.tag | string | `"2.8.0"` | Overrides the image tag |
 | celery.beat.nodeSelector | object | `{}` | Node labels for pod assignment |
 | celery.beat.podAnnotations | object | `{}` | Annotations to be added to pods |
 | celery.beat.podLabels | object | `{}` | Labels to be added to pods |
@@ -87,7 +87,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | celery.worker.image.pullPolicy | string | `"Always"` | image pull policy |
 | celery.worker.image.registry | string | `"quay.io"` | image registry |
 | celery.worker.image.repository | string | `"hewlettpackardenterprise/squest"` | image repository |
-| celery.worker.image.tag | string | `"2.7.1"` | Overrides the image tag |
+| celery.worker.image.tag | string | `"2.8.0"` | Overrides the image tag |
 | celery.worker.nodeSelector | object | `{}` | Node labels for pod assignment |
 | celery.worker.podAnnotations | object | `{}` | Annotations to be added to pods |
 | celery.worker.podLabels | object | `{}` | Labels to be added to pods |
@@ -164,7 +164,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | squest.image.pullPolicy | string | `"Always"` | image pull policy |
 | squest.image.registry | string | `"quay.io"` | image registry |
 | squest.image.repository | string | `"hewlettpackardenterprise/squest"` | image repository |
-| squest.image.tag | string | `"2.7.1"` | Overrides the image tag |
+| squest.image.tag | string | `"2.8.0"` | Overrides the image tag |
 | squest.ingress.annotations | object | `{}` |  |
 | squest.ingress.className | string | `""` |  |
 | squest.ingress.enabled | bool | `false` |  |
