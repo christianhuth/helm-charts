@@ -1,0 +1,6 @@
+dependencies:
+- name: mongodb
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 16.5.6
+digest: sha256:bd3a45a99e9c12b8dd4c5074ea938318d7f7f7360c7e375440d669cbad67d487
+generated: "2025-05-09T09:30:20.844058671+02:00"

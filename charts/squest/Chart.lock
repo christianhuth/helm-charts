@@ -1,0 +1,12 @@
+dependencies:
+- name: mariadb
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 20.5.5
+- name: rabbitmq
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 16.0.2
+- name: redis
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 20.13.4
+digest: sha256:74d55b26a484ac917e43ae416594c40a97029e633a8e95a6357e9224138ea8dc
+generated: "2025-05-13T13:16:59.356343266+02:00"
