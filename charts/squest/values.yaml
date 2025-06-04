@@ -456,6 +456,8 @@ rabbitmq:
     password: squest
     # -- The username credential to be used when using the integrated RabbitMQ.
     username: squest
+    # -- The Erlang cookie to determine whether different nodes are allowed to communicate with each other
+    erlangCookie: abcdefghijklmnopqrstuvwxyz
 
 redis:
   # -- enable integrated Redis™ subchart from Bitnami
