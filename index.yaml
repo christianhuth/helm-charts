@@ -8300,6 +8300,50 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of postgresql to 16.7.10
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Headwind MDM is a powerful Open Source platform to manage your Enterprise Android Devices.
+          url: https://images.wondershare.com/drfone/article/2022/11/opensource-mdm-3.jpg
+        - title: Open the Devices section and click the QR code icon to start the enrollment of a device.
+          url: https://h-mdm.com/wp-content/uploads/check_qr_code.jpg
+        - title: After enrollment your Android device will only have the allowed applications installed.
+          url: https://h-mdm.com/wp-content/uploads/2019/08/launcher_screen_en.png
+        - title: The Enterprise version of Headwind MDM includes a powerful module for transferring images taken by mobile devices to the server.
+          url: https://h-mdm.com/wp-content/uploads/photo_plugin.jpg
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 0.1.5
+    created: "2025-06-06T16:15:33.001121378Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.7.10
+    description: Headwind MDM - an open source mobile device management software for
+      Android
+    digest: 37c54d7347542ff7a90aead11aae3bcfc3b83385625d2bb6be4dc247a350208d
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/headwind-mdm/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: headwind-mdm
+    sources:
+    - https://github.com/h-mdm/hmdm-docker
+    - https://github.com/h-mdm
+    - https://hub.docker.com/r/headwindmdm/hmdm
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/headwind-mdm-3.4.9/headwind-mdm-3.4.9.tgz
+    version: 3.4.9
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of postgresql to 16.7.9
       artifacthub.io/links: |
         - name: support
@@ -55099,4 +55143,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-06-06T15:43:07.804678831Z"
+generated: "2025-06-06T16:15:33.00273563Z"
