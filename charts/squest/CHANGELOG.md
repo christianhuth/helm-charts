@@ -1,7 +1,7 @@
 # squest
 
-## 1.4.0
+## 1.4.1
 
 ### Changed
 
-- App Version to 2.8.0
+- dependency of rabbitmq to 16.0.6
