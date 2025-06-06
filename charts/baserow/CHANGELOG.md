@@ -1,7 +1,7 @@
 # baserow
 
-## 3.14.11
+## 3.14.12
 
 ### Changed
 
-- App Version to 1.33.4
+- dependency of postgresql to 16.7.10
