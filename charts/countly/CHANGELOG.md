@@ -1,7 +1,7 @@
 # countly
 
-## 3.0.11
+## 3.0.12
 
 ### Changed
 
-- dependency of mongodb to 16.5.17
+- dependency of mongodb to 16.5.20
