@@ -1,7 +1,7 @@
 # squest
 
-## 1.4.6
+## 1.4.7
 
 ### Changed
 
-- dependency of mariadb to 20.5.9
+- dependency of rabbitmq to 16.0.8
