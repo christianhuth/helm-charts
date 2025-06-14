@@ -1,7 +1,7 @@
 # squest
 
-## 1.4.6
+## 2.0.0
 
 ### Changed
 
-- dependency of mariadb to 20.5.9
+- dependency of redis to 21.2.3
