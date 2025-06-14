@@ -1,7 +1,7 @@
 # squest
 
-## 1.4.7
+## 2.0.0
 
 ### Changed
 
-- dependency of rabbitmq to 16.0.8
+- dependency of redis to 21.2.3
