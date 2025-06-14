@@ -42532,6 +42532,48 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of rabbitmq to 16.0.8
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.8.1
+    created: "2025-06-14T20:11:19.513890009Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.5.9
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.0.8
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 20.13.4
+    description: Squest is a self-service portal that works on top of Red Hat Ansible
+      Automation Platform/AWX.
+    digest: b8d321ce118a0f54587a0f054cefe85641ab9e415b6ada2037ebf5c963d1ed3c
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: squest
+    sources:
+    - https://github.com/HewlettPackard/squest
+    - https://hewlettpackard.github.io/squest
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/squest-1.4.7/squest-1.4.7.tgz
+    version: 1.4.7
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of mariadb to 20.5.9
       artifacthub.io/links: |
         - name: support
@@ -56454,4 +56496,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-06-14T19:39:32.498374532Z"
+generated: "2025-06-14T20:11:19.515597675Z"
