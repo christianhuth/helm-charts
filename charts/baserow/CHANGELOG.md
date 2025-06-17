@@ -1,7 +1,7 @@
 # baserow
 
-## 3.14.13
+## 3.14.14
 
 ### Changed
 
-- dependency of postgresql to 16.7.11
+- dependency of postgresql to 16.7.12
