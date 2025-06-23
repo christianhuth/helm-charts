@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.5.0
+## 1.5.1
 
-### Added
+### Changed
 
-- option to define the image registry
+- App Version to 4.4.1
