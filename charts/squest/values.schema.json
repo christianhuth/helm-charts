@@ -1453,7 +1453,7 @@
                   "type": "string"
                 },
                 "tag": {
-                  "default": "1.28.0-alpine",
+                  "default": "1.29.0-alpine",
                   "description": "Overrides the image tag",
                   "required": [],
                   "title": "tag",
