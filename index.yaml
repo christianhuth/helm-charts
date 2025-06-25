@@ -22658,6 +22658,39 @@ entries:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
         - kind: changed
+          description: App Version to v0.4.4
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Export information about your Servers from Netcup SCP as Prometheus metrics.
+          url: https://www.netcup-wiki.de/images/SCP-Willkommen.png
+        - title: Visualize your data as Grafana dashboard.
+          url: https://raw.githubusercontent.com/mrueg/netcupscp-exporter/main/grafana/dashboard.jpg
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.4.4
+    created: "2025-06-25T21:39:39.425297688Z"
+    description: Prometheus Exporter for Netcup Server Control Panel (SCP)
+    digest: 07142bdad1291427eea71421835500f97c3fd0635b437c179bd6485a8e74162a
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/netcupscp-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: netcupscp-exporter
+    sources:
+    - https://github.com/mrueg/netcupscp-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/netcupscp-exporter-1.2.6/netcupscp-exporter-1.2.6.tgz
+    version: 1.2.6
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: changed
           description: url of icon
       artifacthub.io/links: |
         - name: support
@@ -57485,4 +57518,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-06-25T14:11:57.459745764Z"
+generated: "2025-06-25T21:39:39.427432746Z"
