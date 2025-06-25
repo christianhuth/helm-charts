@@ -1,7 +1,7 @@
 # netcupscp-exporter
 
-## 1.2.5
+## 1.2.6
 
 ### Changed
 
-- url of icon
+- App Version to v0.4.4
