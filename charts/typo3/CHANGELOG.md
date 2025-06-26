@@ -1,7 +1,7 @@
 # typo3
 
-## 3.7.16
+## 3.7.17
 
 ### Changed
 
-- dependency of postgresql to 16.7.13
+- dependency of postgresql to 16.7.14
