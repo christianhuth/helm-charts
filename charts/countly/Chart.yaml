@@ -2,7 +2,7 @@ apiVersion: v2
 name: countly
 description: Countly is a product analytics platform that helps teams track, analyze and act-on their user actions and behaviour on mobile, web and desktop applications.
 type: application
-version: 3.0.16
+version: 3.0.17
 appVersion: "25.05.4"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/countly/icon.svg
@@ -15,12 +15,12 @@ sources:
 dependencies:
   - name: mongodb
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 16.5.24
+    version: 16.5.25
     condition: mongodb.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of mongodb to 16.5.24
+      description: dependency of mongodb to 16.5.25
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
