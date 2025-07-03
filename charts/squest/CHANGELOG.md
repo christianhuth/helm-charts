@@ -1,7 +1,7 @@
 # squest
 
-## 1.5.1
+## 1.5.2
 
 ### Changed
 
-- dependency of rabbitmq to 16.0.9
+- dependency of rabbitmq to 16.0.10
