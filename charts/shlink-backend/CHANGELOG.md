@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 6.1.26
+## 7.0.0
 
 ### Changed
 
-- dependency of rabbitmq to 16.0.10
+- dependency of mariadb to 21.0.1
