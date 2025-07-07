@@ -67,7 +67,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"ghcr.io"` | image registry |
 | image.repository | string | `"umami-software/umami"` | image repository |
-| image.tag | string | `"postgresql-v2.15.1"` | Overrides the image tag |
+| image.tag | string | `"postgresql-v2.18.1"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` | Additional annotations for the Ingress resource |
 | ingress.className | string | `""` | IngressClass that will be be used to implement the Ingress |
