@@ -1,7 +1,7 @@
 # umami
 
-## 4.8.0
+## 5.0.0
 
 ### Changed
 
-- app version to 2.18.1
+- dependency of mysql to 13.0.2
