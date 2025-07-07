@@ -4,4 +4,4 @@
 
 ### Changed
 
-- updated umami to 2.18.1
+- app version to 2.18.1
