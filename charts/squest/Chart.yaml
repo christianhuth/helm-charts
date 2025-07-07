@@ -15,7 +15,7 @@ sources:
 dependencies:
   - name: mariadb
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 20.5.9
+    version: 21.0.1
     condition: mariadb.enabled
   - name: rabbitmq
     repository: oci://registry-1.docker.io/bitnamicharts
@@ -27,6 +27,8 @@ dependencies:
     condition: redis.enabled
 annotations:
   artifacthub.io/changes: |
+    - kind: changed
+      description: dependency of mariadb to 21.0.1
     - kind: changed
       description: dependency of redis to 21.2.7
   artifacthub.io/links: |
