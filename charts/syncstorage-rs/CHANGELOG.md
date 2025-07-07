@@ -1,7 +1,7 @@
 # syncstorage-rs
 
-## 1.1.8
+## 2.0.0
 
 ### Changed
 
-- dependency of mariadb mariadb to 20.5.9
+- dependency of mariadb mariadb to 21.0.1
