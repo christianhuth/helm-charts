@@ -5,3 +5,4 @@
 ### Changed
 
 - dependency of mariadb to 21.0.1
+- App Version to 13.4
