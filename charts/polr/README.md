@@ -116,6 +116,10 @@ helm install my-release -f values.yaml christianhuth/polr
 
 ## Upgrading the Chart
 
+### To 3.0.0
+
+This major updates the MySQL subchart to its newest major, 13.0.0: [Here](https://github.com/bitnami/charts/tree/main/bitnami/mysql#to-1300) you can find more information about the changes introduced in that version.
+
 ### To 2.0.0
 
 This major updates the MySQL subchart to its newest major, 12.2.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mysql#upgrading) and [here](https://dev.mysql.com/doc/relnotes/mysql/8.4/en/) you can find more information about the changes introduced in that version.
