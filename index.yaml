@@ -45314,6 +45314,47 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of mariadb mariadb to 21.0.1
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: syncstorage-rs-mysql-0.18.2
+    created: "2025-07-07T06:03:27.552674739Z"
+    dependencies:
+    - alias: syncserver-db
+      condition: syncserver-db.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 21.0.1
+    - alias: tokenserver-db
+      condition: tokenserver-db.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 21.0.1
+    description: A Helm chart for deploying Mozilla's Firefox Sync Storage server
+      to Kubernetes
+    digest: 61623097f717505e636395690f4bc6a7c2b02a85841466dd6055a394f472e48f
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncstorage-rs/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: syncstorage-rs
+    sources:
+    - https://github.com/mozilla-services/syncstorage-rs
+    - https://github.com/porelli/firefox-sync
+    - https://github.com/porelli/firefox-sync/pkgs/container/firefox-sync
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/syncstorage-rs-2.0.0/syncstorage-rs-2.0.0.tgz
+    version: 2.0.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of mariadb mariadb to 20.5.9
       artifacthub.io/links: |
         - name: support
@@ -58391,4 +58432,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-07-03T21:41:29.022541887Z"
+generated: "2025-07-07T06:03:27.554939798Z"
