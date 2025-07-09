@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 7.0.1
+## 7.0.2
 
 ### Changed
 
-- dependency of mariadb to 21.0.2
+- dependency of mysql to 13.0.3
