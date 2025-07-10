@@ -95,7 +95,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"bitnami/etcd"` | image repository |
-| image.tag | string | `"3.6.1"` | Overrides the image tag |
+| image.tag | string | `"3.6.2"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | nameOverride | string | `""` | Provide a name in place of `etcd-defrag` |
 | nodeSelector | object | `{"node-role.kubernetes.io/control-plane":""}` | Node labels for pod assignment |
