@@ -1,7 +1,7 @@
 # baserow
 
-## 4.1.1
+## 4.1.2
 
 ### Changed
 
-- App Version to 1.34.1
+- App Version to 1.34.2
