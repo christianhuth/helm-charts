@@ -2,7 +2,7 @@ apiVersion: v2
 name: kutt
 description: Kutt is a free modern URL shortener.
 type: application
-version: 6.0.3
+version: 6.0.4
 appVersion: "v3.2.3"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.svg
@@ -18,12 +18,12 @@ dependencies:
     condition: postgresql.enabled
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 21.2.9
+    version: 21.2.10
     condition: redis.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of postgresql to 16.7.17
+      description: dependency of redis to 21.2.10
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
