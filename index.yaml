@@ -33604,6 +33604,56 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of postgresql to 16.7.18
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 4.4.6
+    created: "2025-07-12T18:13:07.335250227Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 21.0.2
+    - condition: mysql.enabled
+      name: mysql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 13.0.3
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.7.18
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.0.10
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 21.2.10
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 3e1d12585f7a95757f0873c5d79c3e9b760e4bca8102224e140a64135d23a394
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/shlink-backend/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-backend-7.0.7/shlink-backend-7.0.7.tgz
+    version: 7.0.7
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of redis to 21.2.10
       artifacthub.io/links: |
         - name: support
@@ -60878,4 +60928,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-07-12T17:41:58.293072904Z"
+generated: "2025-07-12T18:13:07.338476082Z"
