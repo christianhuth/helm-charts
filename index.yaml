@@ -28753,6 +28753,45 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of mysql to 13.0.4
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Polr converts some long links into shorter ones.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/shortit-1024x346.png
+        - title: Polr provides a dashboard overview containing all the links ever created.
+          url: https://assets.hongkiat.com/uploads/polr-url-shorterner/02-polr-links-table.jpg
+        - title: Polr provides some statistical data about the shortened link.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/Screenshot-2018-1-31-Shorts-1024x1024.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.3.0
+    created: "2025-07-15T20:12:39.7741878Z"
+    dependencies:
+    - name: mysql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 13.0.4
+    description: Polr is a quick, modern, and open-source link shortener
+    digest: 3a86b2bd4ee2d1bb117fc62c31e4f0a0ec5594c499c2d41a314a5d2f56cf1251
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/polr/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: polr
+    sources:
+    - https://github.com/cydrobolt/polr
+    - https://github.com/ajanvier/docker-polr
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/polr-3.0.2/polr-3.0.2.tgz
+    version: 3.0.2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of mysql to 13.0.3
       artifacthub.io/links: |
         - name: support
@@ -61319,4 +61358,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-07-15T19:42:00.094879657Z"
+generated: "2025-07-15T20:12:39.776017261Z"
