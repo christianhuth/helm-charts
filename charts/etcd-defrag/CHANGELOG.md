@@ -1,7 +1,7 @@
 # etcd-defrag
 
-## 1.4.2
+## 1.4.3
 
 ### Changed
 
-- App Version to 3.6.2
+- App Version to 3.6.3
