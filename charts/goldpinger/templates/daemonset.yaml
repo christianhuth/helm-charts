@@ -134,4 +134,4 @@ spec:
       volumes:
         - name: zap
           configMap:
-            name: {{- include "goldpinger.fullname" . | quote }}
+            name: {{ include "goldpinger.fullname" . | quote }}
