@@ -412,7 +412,6 @@
       "required": [
         "enabled",
         "className",
-        "annotations",
         "hosts",
         "tls"
       ],
