@@ -1,0 +1,20 @@
+{{- if .Values.prometheusRule.enabled }}
+{{- $fullName := include "goldpinger.fullname" . -}}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    {{- include "goldpinger.labels" . | nindent 4 }}
+  name: {{ $fullName | quote }}
+  {{- if .Values.prometheusRule.namespace }}
+  namespace: {{ .Values.prometheusRule.namespace }}
+  {{- else }}
+  namespace: {{ .Release.Namespace | quote }}
+  {{- end }}
+spec:
+  {{- with .Values.prometheusRule.rules }}
+  groups:
+    - name: {{ $fullName | quote }}
+      rules: {{- tpl (toYaml .) $ | nindent 8 }}
+  {{- end }}
+{{- end }}

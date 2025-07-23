@@ -1,0 +1,137 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    {{- include "goldpinger.labels" . | nindent 4 }}
+  name: {{ include "goldpinger.fullname" . }}
+spec:
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "goldpinger.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "goldpinger.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "goldpinger.serviceAccountName" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: CHECK_TIMEOUT
+              value: {{ .Values.goldpinger.internalPeers.timeouts.check | quote }}
+            - name: CHECK_ALL_TIMEOUT
+              value: {{ .Values.goldpinger.internalPeers.timeouts.checkAll | quote }}
+            - name: DISPLAY_NODENAME
+              value: {{ .Values.goldpinger.displayNodename | quote }}
+            - name: HOST
+              value: "0.0.0.0"
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            {{- if .Values.goldpinger.externalTargets.dns.targets }}
+            - name: HOSTS_TO_RESOLVE
+              value: {{ .Values.goldpinger.externalTargets.dns.targets | quote }}
+            - name: DNS_TARGETS_TIMEOUT
+              value: {{ .Values.goldpinger.externalTargets.dns.timeout | quote }}
+            {{- end }}
+            {{- if .Values.goldpinger.externalTargets.http.targets }}
+            - name: HTTP_TARGETS
+              value: {{ .Values.goldpinger.externalTargets.http.targets | quote }}
+            - name: HTTP_TARGETS_TIMEOUT
+              value: {{ .Values.goldpinger.externalTargets.http.timeout | quote }}
+            {{- end }}
+            - name: IP_VERSIONS
+              value: {{ .Values.goldpinger.ipVersions | quote }}
+            - name: JITTER_FACTOR
+              value: {{ .Values.goldpinger.jitterFactor | quote }}
+            - name: LABEL_SELECTOR
+              value: "app.kubernetes.io/name={{- include "goldpinger.name" . }}"
+            - name: NAMESPACE
+              value: {{ .Release.Namespace | quote }}
+            - name: PING_NUMBER
+              value: {{ .Values.goldpinger.internalPeers.pingNumber | quote }}
+            - name: PING_TIMEOUT
+              value: {{ .Values.goldpinger.internalPeers.timeouts.ping | quote }}
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: PORT
+              value: "{{ .Values.goldpinger.port }}"
+            - name: REFRESH_INTERVAL
+              value: {{ .Values.goldpinger.refreshInterval | quote }}
+            {{- if .Values.goldpinger.externalTargets.tcp.targets }}
+            - name: TCP_TARGETS
+              value: {{ .Values.goldpinger.externalTargets.tcp.targets | quote }}
+            - name: TCP_TARGETS_TIMEOUT
+              value: {{ .Values.goldpinger.externalTargets.tcp.timeout | quote }}
+            {{- end }}
+            {{- if .Values.extraEnv }}
+              {{- .Values.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+          ports:
+            - containerPort: {{ .Values.goldpinger.port | int }}
+              name: http
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | int }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | int }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold | int }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | int }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | int }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold | int }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: zap
+              mountPath: /config
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: zap
+          configMap:
+            name: {{ include "goldpinger.fullname" . | quote }}

@@ -1,0 +1,238 @@
+# -- Provide a name in place of `goldpinger`
+nameOverride: ""
+# -- String to fully override `"goldpinger.fullname"`
+fullnameOverride: ""
+
+image:
+  # -- image registory
+  registry: docker.io
+  # -- image repository
+  repository: bloomberg/goldpinger
+  # -- image pull policy
+  pullPolicy: Always
+  # -- Overrides the image tag
+  tag: "3.10.2"
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+# -- The number of old ReplicaSets to retain
+revisionHistoryLimit: 10
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Annotations to be added to pods
+podAnnotations: {}
+
+# -- pod-level security context
+podSecurityContext:
+  runAsNonRoot: true
+  fsGroup: 2000
+  runAsUser: 1000
+  runAsGroup: 1000
+  seccompProfile:
+    type: RuntimeDefault
+
+# -- container-level security context
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+
+service:
+  # -- Kubernetes service type
+  type: ClusterIP
+  # -- Kubernetes port where service is exposed
+  port: 8080
+
+livenessProbe:
+  # -- Failure threshold for livenessProbe
+  failureThreshold: 3
+  # -- Initial delay seconds for livenessProbe
+  initialDelaySeconds: 20
+  # -- Period seconds for livenessProbe
+  periodSeconds: 5
+  # -- Success threshold for livenessProbe
+  successThreshold: 1
+  # -- Timeout seconds for livenessProbe
+  timeoutSeconds: 5
+
+readinessProbe:
+  # -- Failure threshold for readinessProbe
+  failureThreshold: 3
+  # -- Initial delay seconds for readinessProbe
+  initialDelaySeconds: 20
+  # -- Period seconds for readinessProbe
+  periodSeconds: 5
+  # -- Success threshold for readinessProbe
+  successThreshold: 1
+  # -- Timeout seconds for readinessProbe
+  timeoutSeconds: 5
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# -- Resource limits and requests for the headwind pods.
+resources:
+  limits:
+    memory: 80Mi
+  requests:
+    cpu: 1m
+    memory: 40Mi
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Toleration labels for pod assignment
+tolerations: []
+
+# -- Affinity settings for pod assignment
+affinity: {}
+
+# -- additional environment variables to be added to the pods
+extraEnv: []
+
+rbac:
+  # -- Create RBAC resources
+  create: true
+  # -- Create clusterscoped resources
+  clusterscoped: true
+
+goldpinger:
+  # -- Display nodename other than podname in UI
+  displayNodename: true
+  externalTargets:
+    dns:
+      # -- A space delimited list of hosts to attempt dns resolve on
+      targets: ""
+      # -- The timeout for a dns check on the provided dns-targets
+      timeout: 500
+    http:
+      # -- A space delimited list of external targets (<http://url> or <https://url>) to attempt an HTTP{S} check on. A 200 HTTP code is considered successful.
+      targets: ""
+      # -- The timeout for a http check on the provided http-targets
+      timeout: 500
+    tcp:
+      # -- A space delimited list of external targets (<host:port> or <ip:port>) to attempt a TCP check on
+      targets: ""
+      # -- The timeout for a tcp check on the provided tcp-targets
+      timeout: 500
+  internalPeers:
+    # -- Number of peers to ping. A value of 0 indicates all peers should be pinged
+    pingNumber: 0
+    timeouts:
+      # -- The timeout for a check call to other goldpinger pods
+      check: 1000ms
+      # -- The timeout for a check-all call to other goldpinger pods
+      checkAll: 5000ms
+      # -- The timeout for a ping call to other goldpinger pods
+      ping: 300ms
+  # -- The space delimited list of IP versions to use. Possible values are 4 and 6
+  ipVersions: "4"
+  # -- The amount of jitter to add while pinging clients
+  jitterFactor: 0.05
+  # -- Port where Goldpinger will run
+  port: 8080
+  # -- If > 0, will create a thread and collect stats every n seconds
+  refreshInterval: 30
+  zapConfig: |
+    {
+      "level": "info",
+      "encoding": "json",
+      "outputPaths": [
+          "stdout"
+      ],
+      "errorOutputPaths": [
+          "stderr"
+      ],
+      "initialFields": {
+      },
+      "encoderConfig": {
+          "messageKey": "message",
+          "levelKey": "level",
+          "levelEncoder": "lowercase",
+          "timeKey": "ts",
+          "timeEncoder": "ISO8601",
+          "callerKey": "caller",
+          "callerEncoder": "Short"
+      }
+    }
+
+serviceMonitor:
+   # -- Enable a Prometheus ServiceMonitor
+  enabled: false
+  # -- Prometheus ServiceMonitor labels
+  additionalLabels: {}
+    # release: prometheus
+  # -- Prometheus ServiceMonitor selector
+  selector: {}
+    # prometheus: kube-prometheus
+  # -- Prometheus ServiceMonitor interval
+  interval: 30s
+  # -- Prometheus ServiceMonitor namespace
+  namespace: ""
+  # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
+  metricRelabelings: []
+  # -- Prometheus [RelabelConfigs] to apply to samples before scraping
+  relabelings: []
+    # - source_labels: [__address__]
+    #   target_label: __param_target
+    # - source_labels: [__param_target]
+    #   target_label: instance
+    # - target_label: __address__
+    #   replacement: prometheus-pve-exporter:9221  # PVE exporter service.
+
+## Custom PrometheusRule to be defined
+## ref: https://github.com/coreos/prometheus-operator#customresourcedefinitions
+prometheusRule:
+   # -- Enable a PrometheusRule
+  enabled: false
+  # -- List of rules
+  rules:
+    - alert: goldpinger_nodes_unhealthy
+      expr: |
+        sum(goldpinger_nodes_health_total{job="{{ template "goldpinger.fullname" . }}", status="unhealthy"})
+        BY (instance, goldpinger_instance) > 0
+      for: 5m
+      annotations:
+        description: |
+          Goldpinger instance {{ "{{ $labels.goldpinger_instance }}" }} has been reporting unhealthy nodes for at least 5 minutes.
+        summary: Instance {{ "{{ $labels.instance }}" }} down
+      labels:
+        severity: warning
+
+grafanaDashboard:
+   # -- Enable the creation of a Grafana Dashboard
+  enabled: false
+  # -- folder assignment for dashboard
+  folder: ""
+  grafanaCom:
+    # -- ID of the dashboard from the Grafana marketplace
+    id: 10949
+    # -- Revision of the dashboard from the Grafana marketplace
+    revision: 1
+  # -- Selects Grafana instances for import
+  instanceSelector: {}

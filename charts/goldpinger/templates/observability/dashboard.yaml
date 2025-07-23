@@ -1,0 +1,17 @@
+{{- if .Values.grafanaDashboard.create }}
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: {{ include "goldpinger.fullname" . }}
+spec:
+  {{- if .Values.grafanaDashboard.folder }}
+  folder: {{ .Values.grafanaDashboard.folder | quote }}
+  {{- end }}
+  grafanaCom:
+    id: {{ .Values.grafanaDashboard.grafanaCom.id | int }}
+    revision: {{ .Values.grafanaDashboard.grafanaCom.revision | int }}
+  {{- if .Values.grafanaDashboard.instanceSelector }}
+  instanceSelector:
+    {{- .Values.grafanaDashboard.instanceSelector | toYaml | nindent 4 }}
+  {{- end }}
+{{- end }}
