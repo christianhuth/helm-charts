@@ -1,6 +1,6 @@
 apiVersion: v2
 name: goldpinger
-description: Debugging tool for Kubernetes which tests and displays connectivity between nodes in the cluster. 
+description: Debugging tool for Kubernetes which tests and displays connectivity between nodes in the cluster.
 type: application
 version: 1.0.0
 appVersion: "3.10.2"
