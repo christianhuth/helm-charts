@@ -1,7 +1,7 @@
 # goldpinger
 
-## 1.0.1
+## 1.0.2
 
-### Fixed
+### Changed
 
-- missing time unit
+- icon
