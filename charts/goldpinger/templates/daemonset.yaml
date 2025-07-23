@@ -67,7 +67,7 @@ spec:
               value: {{ .Values.goldpinger.internalPeers.timeouts.ping | quote }}
             - name: POD_NAME
               valueFrom:
-                filedRef:
+                fieldRef:
                   fieldPath: metadata.name
             - name: PORT
               value: "{{ .Values.goldpinger.port }}"
