@@ -129,17 +129,17 @@ goldpinger:
       # -- A space delimited list of hosts to attempt dns resolve on
       targets: ""
       # -- The timeout for a dns check on the provided dns-targets
-      timeout: 500
+      timeout: 500ms
     http:
       # -- A space delimited list of external targets (<http://url> or <https://url>) to attempt an HTTP{S} check on. A 200 HTTP code is considered successful.
       targets: ""
       # -- The timeout for a http check on the provided http-targets
-      timeout: 500
+      timeout: 500ms
     tcp:
       # -- A space delimited list of external targets (<host:port> or <ip:port>) to attempt a TCP check on
       targets: ""
       # -- The timeout for a tcp check on the provided tcp-targets
-      timeout: 500
+      timeout: 500ms
   internalPeers:
     # -- Number of peers to ping. A value of 0 indicates all peers should be pinged
     pingNumber: 0
