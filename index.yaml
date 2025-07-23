@@ -10108,6 +10108,34 @@ entries:
   goldpinger:
   - annotations:
       artifacthub.io/changes: |
+        - kind: fixed
+          description: missing time unit
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 3.10.2
+    created: "2025-07-23T10:30:04.734700642Z"
+    description: Debugging tool for Kubernetes which tests and displays connectivity
+      between nodes in the cluster.
+    digest: ebed7dfcf76833b663ce1d896c9b039bf7d41c9d7759ee1d825cd11e33fae33f
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/goldpinger/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: goldpinger
+    sources:
+    - https://github.com/bloomberg/goldpinger
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/goldpinger-1.0.1/goldpinger-1.0.1.tgz
+    version: 1.0.1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Initial Version
       artifacthub.io/links: |
@@ -63065,4 +63093,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-07-23T09:51:19.455861967Z"
+generated: "2025-07-23T10:30:04.737151437Z"
