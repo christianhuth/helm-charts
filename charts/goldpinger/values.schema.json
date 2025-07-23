@@ -326,10 +326,9 @@
     "ingress": {
       "properties": {
         "annotations": {
-          "default": "",
           "required": [],
           "title": "annotations",
-          "type": "null"
+          "type": "object"
         },
         "className": {
           "default": "",

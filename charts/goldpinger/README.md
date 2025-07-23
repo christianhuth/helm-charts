@@ -75,7 +75,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.repository | string | `"bloomberg/goldpinger"` | image repository |
 | image.tag | string | `"3.10.2"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
-| ingress.annotations | string | `nil` |  |
+| ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"chart-example.local"` |  |
