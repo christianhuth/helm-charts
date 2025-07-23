@@ -82,7 +82,7 @@ readinessProbe:
 ingress:
   enabled: false
   className: ""
-  annotations:
+  annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
