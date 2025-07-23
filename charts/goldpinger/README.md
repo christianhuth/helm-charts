@@ -54,7 +54,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | goldpinger.externalTargets.dns.timeout | int | `500` | The timeout for a dns check on the provided dns-targets |
 | goldpinger.externalTargets.http.targets | string | `""` | A space delimited list of external targets (<http://url> or <https://url>) to attempt an HTTP{S} check on. A 200 HTTP code is considered successful. |
 | goldpinger.externalTargets.http.timeout | int | `500` | The timeout for a http check on the provided http-targets |
-| goldpinger.externalTargets.tcp.targets | string | `""` | A space delimited list of external targets (<host>:<port> or <ip>:<port>) to attempt a TCP check on |
+| goldpinger.externalTargets.tcp.targets | string | `""` | A space delimited list of external targets (<host:port> or <ip:port>) to attempt a TCP check on |
 | goldpinger.externalTargets.tcp.timeout | int | `500` | The timeout for a tcp check on the provided tcp-targets |
 | goldpinger.internalPeers.pingNumber | int | `0` | Number of peers to ping. A value of 0 indicates all peers should be pinged |
 | goldpinger.internalPeers.timeouts.check | string | `"1000ms"` | The timeout for a check call to other goldpinger pods |

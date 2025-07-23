@@ -92,7 +92,7 @@
               "properties": {
                 "targets": {
                   "default": "",
-                  "description": "A space delimited list of external targets (\u003chost\u003e:\u003cport\u003e or \u003cip\u003e:\u003cport\u003e) to attempt a TCP check on",
+                  "description": "A space delimited list of external targets (\u003chost:port\u003e or \u003cip:port\u003e) to attempt a TCP check on",
                   "required": [],
                   "title": "targets",
                   "type": "string"
