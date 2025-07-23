@@ -51,11 +51,11 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride | string | `""` | String to fully override `"goldpinger.fullname"` |
 | goldpinger.displayNodename | bool | `true` | Display nodename other than podname in UI |
 | goldpinger.externalTargets.dns.targets | string | `""` | A space delimited list of hosts to attempt dns resolve on |
-| goldpinger.externalTargets.dns.timeout | int | `500` | The timeout for a dns check on the provided dns-targets |
+| goldpinger.externalTargets.dns.timeout | string | `"500ms"` | The timeout for a dns check on the provided dns-targets |
 | goldpinger.externalTargets.http.targets | string | `""` | A space delimited list of external targets (<http://url> or <https://url>) to attempt an HTTP{S} check on. A 200 HTTP code is considered successful. |
-| goldpinger.externalTargets.http.timeout | int | `500` | The timeout for a http check on the provided http-targets |
+| goldpinger.externalTargets.http.timeout | string | `"500ms"` | The timeout for a http check on the provided http-targets |
 | goldpinger.externalTargets.tcp.targets | string | `""` | A space delimited list of external targets (<host:port> or <ip:port>) to attempt a TCP check on |
-| goldpinger.externalTargets.tcp.timeout | int | `500` | The timeout for a tcp check on the provided tcp-targets |
+| goldpinger.externalTargets.tcp.timeout | string | `"500ms"` | The timeout for a tcp check on the provided tcp-targets |
 | goldpinger.internalPeers.pingNumber | int | `0` | Number of peers to ping. A value of 0 indicates all peers should be pinged |
 | goldpinger.internalPeers.timeouts.check | string | `"1000ms"` | The timeout for a check call to other goldpinger pods |
 | goldpinger.internalPeers.timeouts.checkAll | string | `"5000ms"` | The timeout for a check-all call to other goldpinger pods |

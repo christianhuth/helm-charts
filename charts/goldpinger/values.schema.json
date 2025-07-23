@@ -50,11 +50,11 @@
                   "type": "string"
                 },
                 "timeout": {
-                  "default": 500,
+                  "default": "500ms",
                   "description": "The timeout for a dns check on the provided dns-targets",
                   "required": [],
                   "title": "timeout",
-                  "type": "integer"
+                  "type": "string"
                 }
               },
               "required": [
@@ -74,11 +74,11 @@
                   "type": "string"
                 },
                 "timeout": {
-                  "default": 500,
+                  "default": "500ms",
                   "description": "The timeout for a http check on the provided http-targets",
                   "required": [],
                   "title": "timeout",
-                  "type": "integer"
+                  "type": "string"
                 }
               },
               "required": [
@@ -98,11 +98,11 @@
                   "type": "string"
                 },
                 "timeout": {
-                  "default": 500,
+                  "default": "500ms",
                   "description": "The timeout for a tcp check on the provided tcp-targets",
                   "required": [],
                   "title": "timeout",
-                  "type": "integer"
+                  "type": "string"
                 }
               },
               "required": [
