@@ -136,7 +136,7 @@ goldpinger:
       # -- The timeout for a http check on the provided http-targets
       timeout: 500
     tcp:
-      # -- A space delimited list of external targets (<host>:<port> or <ip>:<port>) to attempt a TCP check on
+      # -- A space delimited list of external targets (<host:port> or <ip:port>) to attempt a TCP check on
       targets: ""
       # -- The timeout for a tcp check on the provided tcp-targets
       timeout: 500
