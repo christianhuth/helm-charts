@@ -1,7 +1,7 @@
 # umami
 
-## 5.0.8
+## 5.0.9
 
 ### Changed
 
-- dependency of postgresql to 16.7.21
+- updated umami to 2.19.0
