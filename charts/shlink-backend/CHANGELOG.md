@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 7.1.0
+## 7.1.1
 
 ### Changed
 
-- App Version to 4.5.0
+- dependency of redis to 21.2.14
