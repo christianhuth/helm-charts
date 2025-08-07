@@ -2,7 +2,7 @@ apiVersion: v2
 name: typo3
 description: TYPO3 — the Professional, Flexible Content Management System
 type: application
-version: 4.0.8
+version: 4.0.9
 appVersion: "13.4"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/typo3/icon.svg
@@ -19,7 +19,7 @@ dependencies:
     condition: mysql.enabled
   - name: mariadb
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 21.0.3
+    version: 21.0.4
     condition: mariadb.enabled
   - name: postgresql
     repository: oci://registry-1.docker.io/bitnamicharts
@@ -28,7 +28,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of postgresql to 16.7.21
+      description: dependency of mariadb to 21.0.4
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
