@@ -2,7 +2,7 @@ apiVersion: v2
 name: headwind-mdm
 description: Headwind MDM - an open source mobile device management software for Android
 type: application
-version: 3.4.20
+version: 3.4.21
 appVersion: "0.1.5"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/headwind-mdm/icon.svg
@@ -16,12 +16,12 @@ sources:
 dependencies:
   - name: postgresql
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 16.7.21
+    version: 16.7.24
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of postgresql to 16.7.21
+      description: dependency of postgresql to 16.7.24
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
