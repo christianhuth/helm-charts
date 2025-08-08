@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 7.1.6
+## 7.1.7
 
 ### Changed
 
-- dependency of postgresql to 16.7.24
+- dependency of rabbitmq to 16.0.13
