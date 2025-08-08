@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.5.1
+## 1.6.0
 
 ### Changed
 
-- App Version to 4.4.1
+- App Version to 4.5.0
