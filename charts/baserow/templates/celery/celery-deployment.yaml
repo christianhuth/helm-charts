@@ -70,6 +70,13 @@ spec:
                   key: secret-access-key
             {{- end }}
             # Database Settings
+            {{- if .Values.externalPostgresql.auth.userUsernameKey }}
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.postgresql.secretName" . | quote }}
+                  key: {{ include "baserow.postgresql.userUsernameKey" . | quote }}
+            {{- end }}
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -164,6 +171,13 @@ spec:
                   key: secret-access-key
             {{- end }}
             # Database Settings
+            {{- if .Values.externalPostgresql.auth.userUsernameKey }}
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "baserow.postgresql.secretName" . | quote }}
+                  key: {{ include "baserow.postgresql.userUsernameKey" . | quote }}
+            {{- end }}
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:

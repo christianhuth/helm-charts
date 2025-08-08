@@ -1972,6 +1972,13 @@
               "title": "userPasswordKey",
               "type": "string"
             },
+            "userUsernameKey": {
+              "default": "",
+              "description": "Key in the secret containing the username",
+              "required": [],
+              "title": "userUsernameKey",
+              "type": "string"
+            },
             "username": {
               "default": "baserow",
               "description": "Name of the user to use",
@@ -1985,7 +1992,8 @@
             "existingSecret",
             "password",
             "username",
-            "userPasswordKey"
+            "userPasswordKey",
+            "userUsernameKey"
           ],
           "title": "auth",
           "type": "object"
