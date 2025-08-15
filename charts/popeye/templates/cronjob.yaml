@@ -5,6 +5,10 @@ metadata:
   labels:
     {{- include "popeye.labels" . | nindent 4 }}
   namespace: {{ .Release.Namespace }}
+  {{- with .Values.podAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   schedule: "{{ .Values.cronJob.schedule }}"
   concurrencyPolicy: Forbid
@@ -16,6 +20,10 @@ spec:
       labels:
         {{- include "popeye.labels" . | nindent 8 }}
       namespace: {{ .Release.Namespace }}
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     spec:
       template:
         spec:
