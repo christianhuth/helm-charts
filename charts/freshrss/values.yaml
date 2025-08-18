@@ -11,7 +11,7 @@ image:
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag
-  tag: "1.26.3"
+  tag: "1.27.0"
   # -- Define which type of image should be used. Supported values are alpine and debian.
   type: "alpine"
 
