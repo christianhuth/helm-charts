@@ -1,7 +1,7 @@
 # freshrss
 
-## 1.1.23
+## 1.2.0
 
 ### Changed
 
-- dependency of postgresql to 16.7.26
+- App Version to 1.27.0
