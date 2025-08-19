@@ -1,0 +1,24 @@
+---
+ingress:
+  enabled: true
+  hosts:
+    - host: audiobookshelf.127.0.0.1.nip.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+audiobookshelf:
+  backup:
+    persistence:
+      resources:
+        requests:
+          storage: 1Gi
+  config:
+    persistence:
+      resources:
+        requests:
+          storage: 1Gi
+  metadata:
+    persistence:
+      resources:
+        requests:
+          storage: 1Gi
