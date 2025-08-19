@@ -1,7 +1,8 @@
 # audiobookshelf
 
-## 0.0.2
+## 1.0.0
 
-### Added
+### Changed
 
-- pvc for library
+- default security context
+- default pod security context

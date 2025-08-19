@@ -651,7 +651,17 @@
     },
     "podSecurityContext": {
       "description": "pod-level security context",
-      "required": [],
+      "properties": {
+        "fsGroup": {
+          "default": 1000,
+          "required": [],
+          "title": "fsGroup",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "fsGroup"
+      ],
       "title": "podSecurityContext",
       "type": "object"
     },
@@ -703,7 +713,92 @@
     },
     "securityContext": {
       "description": "container-level security context",
-      "required": [],
+      "properties": {
+        "allowPrivilegeEscalation": {
+          "default": false,
+          "required": [],
+          "title": "allowPrivilegeEscalation",
+          "type": "boolean"
+        },
+        "capabilities": {
+          "properties": {
+            "drop": {
+              "items": {
+                "anyOf": [
+                  {
+                    "required": [],
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "required": [],
+              "title": "drop",
+              "type": "array"
+            }
+          },
+          "required": [
+            "drop"
+          ],
+          "title": "capabilities",
+          "type": "object"
+        },
+        "privileged": {
+          "default": false,
+          "required": [],
+          "title": "privileged",
+          "type": "boolean"
+        },
+        "readOnlyRootFilesystem": {
+          "default": true,
+          "required": [],
+          "title": "readOnlyRootFilesystem",
+          "type": "boolean"
+        },
+        "runAsGroup": {
+          "default": 1000,
+          "required": [],
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "required": [],
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 1000,
+          "required": [],
+          "title": "runAsUser",
+          "type": "integer"
+        },
+        "seccompProfile": {
+          "properties": {
+            "type": {
+              "default": "RuntimeDefault",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "seccompProfile",
+          "type": "object"
+        }
+      },
+      "required": [
+        "allowPrivilegeEscalation",
+        "capabilities",
+        "privileged",
+        "readOnlyRootFilesystem",
+        "runAsNonRoot",
+        "runAsGroup",
+        "runAsUser",
+        "seccompProfile"
+      ],
       "title": "securityContext",
       "type": "object"
     },
