@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 0.0.1
+## 0.0.2
 
 ### Added
 
-- Initial Version
+- pvc for library

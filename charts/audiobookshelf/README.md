@@ -61,6 +61,13 @@ The command removes all the Kubernetes components associated with the chart and 
 | audiobookshelf.config.persistence.existingClaim | string | `""` | provide an existing PersistentVolumeClaim |
 | audiobookshelf.config.persistence.resources | object | `{}` | represents the minimum and maximum resources the volume should have. |
 | audiobookshelf.config.persistence.storageClassName | string | `""` | Name of the StorageClass required by the claim. |
+| audiobookshelf.library.path | string | `"/library"` | Path to the library directory. It will contain the library files. This location must not be mounted over the network. |
+| audiobookshelf.library.persistence.accessModes | list | `["ReadWriteOnce"]` | the desired access modes the volume should have. |
+| audiobookshelf.library.persistence.annotations | object | `{}` | Annotations to be added to the PersistentVolumeClaim |
+| audiobookshelf.library.persistence.enabled | bool | `true` | use a PVC to persist the config directory |
+| audiobookshelf.library.persistence.existingClaim | string | `""` | provide an existing PersistentVolumeClaim |
+| audiobookshelf.library.persistence.resources | object | `{}` | represents the minimum and maximum resources the volume should have. |
+| audiobookshelf.library.persistence.storageClassName | string | `""` | Name of the StorageClass required by the claim. |
 | audiobookshelf.metadata.path | string | `"/metadata"` | Path to the metadata directory. It will contain cache, streams, covers, downloads, backups and logs. |
 | audiobookshelf.metadata.persistence.accessModes | list | `["ReadWriteOnce"]` | the desired access modes the volume should have. |
 | audiobookshelf.metadata.persistence.annotations | object | `{}` | Annotations to be added to the PersistentVolumeClaim |

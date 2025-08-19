@@ -167,6 +167,85 @@
           "title": "config",
           "type": "object"
         },
+        "library": {
+          "properties": {
+            "path": {
+              "default": "/library",
+              "description": "Path to the library directory. It will contain the library files. This location must not be mounted over the network.",
+              "required": [],
+              "title": "path",
+              "type": "string"
+            },
+            "persistence": {
+              "properties": {
+                "accessModes": {
+                  "description": "the desired access modes the volume should have.",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "required": [],
+                        "type": "string"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "required": [],
+                  "title": "accessModes",
+                  "type": "array"
+                },
+                "annotations": {
+                  "description": "Annotations to be added to the PersistentVolumeClaim",
+                  "required": [],
+                  "title": "annotations",
+                  "type": "object"
+                },
+                "enabled": {
+                  "default": true,
+                  "description": "use a PVC to persist the config directory",
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "existingClaim": {
+                  "default": "",
+                  "description": "provide an existing PersistentVolumeClaim",
+                  "required": [],
+                  "title": "existingClaim",
+                  "type": "string"
+                },
+                "resources": {
+                  "description": "represents the minimum and maximum resources the volume should have.",
+                  "required": [],
+                  "title": "resources",
+                  "type": "object"
+                },
+                "storageClassName": {
+                  "default": "",
+                  "description": "Name of the StorageClass required by the claim.",
+                  "required": [],
+                  "title": "storageClassName",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "enabled",
+                "accessModes",
+                "annotations",
+                "existingClaim",
+                "storageClassName",
+                "resources"
+              ],
+              "title": "persistence",
+              "type": "object"
+            }
+          },
+          "required": [
+            "path",
+            "persistence"
+          ],
+          "title": "library",
+          "type": "object"
+        },
         "metadata": {
           "properties": {
             "path": {
@@ -343,6 +422,7 @@
       "required": [
         "backup",
         "config",
+        "library",
         "metadata",
         "nodeEnv",
         "podcast",

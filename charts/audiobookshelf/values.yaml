@@ -130,6 +130,23 @@ audiobookshelf:
       storageClassName: ""
       # -- represents the minimum and maximum resources the volume should have.
       resources: {}
+  library:
+    # -- Path to the library directory. It will contain the library files. This location must not be mounted over the network.
+    path: "/library"
+    persistence:
+      # -- use a PVC to persist the config directory
+      enabled: true
+      # -- the desired access modes the volume should have.
+      accessModes:
+        - ReadWriteOnce
+      # -- Annotations to be added to the PersistentVolumeClaim
+      annotations: {}
+      # -- provide an existing PersistentVolumeClaim
+      existingClaim: ""
+      # -- Name of the StorageClass required by the claim.
+      storageClassName: ""
+      # -- represents the minimum and maximum resources the volume should have.
+      resources: {}
   metadata:
     # -- Path to the metadata directory. It will contain cache, streams, covers, downloads, backups and logs.
     path: "/metadata"
