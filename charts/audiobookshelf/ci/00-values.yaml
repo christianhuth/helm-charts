@@ -9,13 +9,16 @@ ingress:
 audiobookshelf:
   backup:
     persistence:
-      requests:
-        storage: 1Gi
+      resources:
+        requests:
+          storage: 1Gi
   config:
     persistence:
-      requests:
-        storage: 1Gi
+      resources:
+        requests:
+          storage: 1Gi
   metadata:
     persistence:
-      requests:
-        storage: 1Gi
+      resources:
+        requests:
+          storage: 1Gi
