@@ -17,6 +17,11 @@ audiobookshelf:
       resources:
         requests:
           storage: 1Gi
+  library:
+    persistence:
+      resources:
+        requests:
+          storage: 1Gi
   metadata:
     persistence:
       resources:

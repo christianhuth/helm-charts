@@ -93,7 +93,7 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if (or .Values.audiobookshelf.backup.persistence.enabled .Values.audiobookshelf.config.persistence.enabled .Values.audiobookshelf.metadata.persistence.enabled) }}
+          {{- if (or .Values.audiobookshelf.backup.persistence.enabled .Values.audiobookshelf.config.persistence.enabled .Values.audiobookshelf.library.persistence.enabled .Values.audiobookshelf.metadata.persistence.enabled) }}
           volumeMounts:
           {{- if .Values.audiobookshelf.backup.persistence.enabled }}
             - name: backup
@@ -102,6 +102,10 @@ spec:
           {{- if .Values.audiobookshelf.config.persistence.enabled }}
             - name: config
               mountPath: {{ .Values.audiobookshelf.config.path | quote }}
+          {{- end }}
+          {{- if .Values.audiobookshelf.library.persistence.enabled }}
+            - name: library
+              mountPath: {{ .Values.audiobookshelf.library.path | quote }}
           {{- end }}
           {{- if .Values.audiobookshelf.metadata.persistence.enabled }}
             - name: metadata
@@ -120,7 +124,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if (or .Values.audiobookshelf.backup.persistence.enabled .Values.audiobookshelf.config.persistence.enabled .Values.audiobookshelf.metadata.persistence.enabled) }}
+      {{- if (or .Values.audiobookshelf.backup.persistence.enabled .Values.audiobookshelf.config.persistence.enabled .Values.audiobookshelf.library.persistence.enabled .Values.audiobookshelf.metadata.persistence.enabled) }}
       volumes:
       {{- if .Values.audiobookshelf.backup.persistence.enabled }}
         - name: backup
@@ -131,6 +135,11 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: {{ include "audiobookshelf.config.pvcName" . }}
+      {{- end }}
+      {{- if .Values.audiobookshelf.library.persistence.enabled }}
+        - name: library
+          persistentVolumeClaim:
+            claimName: {{ include "audiobookshelf.library.pvcName" . }}
       {{- end }}
       {{- if .Values.audiobookshelf.metadata.persistence.enabled }}
         - name: metadata
