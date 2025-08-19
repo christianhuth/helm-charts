@@ -6,3 +6,16 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
+audiobookshelf:
+  backup:
+    persistence:
+      requests:
+        storage: 1Gi
+  config:
+    persistence:
+      requests:
+        storage: 1Gi
+  metadata:
+    persistence:
+      requests:
+        storage: 1Gi
