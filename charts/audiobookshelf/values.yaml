@@ -24,11 +24,9 @@ replicaCount: 1
 revisionHistoryLimit: 0
 
 # -- pod-level security context
-podSecurityContext: {}
-  # if you are using direct host access to the certificates you probably need to run the pod as root
-  # fsGroup: 0
-  # runAsGroup: 0
-  # runAsUser: 0
+# @default -- see [values.yaml](./values.yaml)
+podSecurityContext:
+  fsGroup: 1000
 
 # -- Resource limits and requests for the controller pods.
 resources:
@@ -44,13 +42,19 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 # -- container-level security context
-securityContext: {}
-  # capabilities:nodeSelector:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# @default -- see [values.yaml](./values.yaml)
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  privileged: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsGroup: 1000
+  runAsUser: 1000
+  seccompProfile:
+    type: RuntimeDefault
 
 service:
   # -- Kubernetes service type
