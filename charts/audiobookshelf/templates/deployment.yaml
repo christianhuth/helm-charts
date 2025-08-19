@@ -112,6 +112,10 @@ spec:
               mountPath: {{ .Values.audiobookshelf.metadata.path | quote }}
           {{- end }}
           {{- end }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
