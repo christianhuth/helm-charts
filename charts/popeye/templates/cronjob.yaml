@@ -8,7 +8,6 @@ metadata:
   {{- with .Values.podAnnotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
-  {{- end }}
 spec:
   schedule: "{{ .Values.cronJob.schedule }}"
   concurrencyPolicy: Forbid
