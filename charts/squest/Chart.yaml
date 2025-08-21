@@ -2,7 +2,7 @@ apiVersion: v2
 name: squest
 description: Squest is a self-service portal that works on top of Red Hat Ansible Automation Platform/AWX.
 type: application
-version: 2.0.15
+version: 2.0.16
 appVersion: "1.29.1-alpine"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
@@ -19,7 +19,7 @@ dependencies:
     condition: mariadb.enabled
   - name: rabbitmq
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 16.0.13
+    version: 16.0.14
     condition: rabbitmq.enabled
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
@@ -28,7 +28,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of mariadb to 21.0.8
+      description: dependency of rabbitmq to 16.0.14
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
