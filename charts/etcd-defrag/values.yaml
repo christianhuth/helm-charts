@@ -6,9 +6,9 @@ fullnameOverride: ""
 
 image:
   # -- image registry
-  registry: docker.io
+  registry: quay.io
   # -- image repository
-  repository: bitnami/etcd
+  repository: coreos/etcd
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag

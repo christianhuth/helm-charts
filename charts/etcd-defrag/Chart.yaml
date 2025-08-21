@@ -2,7 +2,7 @@ apiVersion: v2
 name: etcd-defrag
 description: A Helm chart for running a defragmentation CronJob for ETCD
 type: application
-version: 1.4.4
+version: 1.5.0
 appVersion: "3.6.4"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/etcd-defrag/icon.svg
@@ -10,7 +10,7 @@ maintainers:
   - name: christianhuth
     email: christian@knell.it
 sources:
-  - https://github.com/bitnami/containers/tree/main/bitnami/etcd
+  - https://quay.io/repository/coreos/etcd
   - https://etcd.io
 annotations:
   artifacthub.io/changes: |
