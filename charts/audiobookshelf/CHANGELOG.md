@@ -1,8 +1,7 @@
 # audiobookshelf
 
-## 1.0.0
+## 1.1.0
 
 ### Changed
 
-- default security context
-- default pod security context
+- App Version to 2.29.0
