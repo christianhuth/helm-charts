@@ -1,7 +1,7 @@
 # etcd-defrag
 
-## 1.4.4
+## 1.5.0
 
 ### Changed
 
-- App Version to 3.6.4
+- Bitnami/etcd moved to quay/etcd due to [this](https://github.com/bitnami/containers/issues/83267)
