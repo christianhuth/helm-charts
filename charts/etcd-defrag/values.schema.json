@@ -423,14 +423,14 @@
           "type": "string"
         },
         "registry": {
-          "default": "docker.io",
+          "default": "quay.io",
           "description": "image registry",
           "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
-          "default": "bitnami/etcd",
+          "default": "coreos/etcd",
           "description": "image repository",
           "required": [],
           "title": "repository",
