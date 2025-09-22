@@ -430,7 +430,7 @@
           "type": "string"
         },
         "repository": {
-          "default": "bitnami/etcd",
+          "default": "coreos/etcd",
           "description": "image repository",
           "required": [],
           "title": "repository",
