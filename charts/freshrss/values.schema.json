@@ -117,6 +117,15 @@
       "title": "externalPostgresql",
       "type": "object"
     },
+    "extraEnv": {
+      "description": "additional environment variables to be added to the pods",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "extraEnv",
+      "type": "array"
+    },
     "freshrss": {
       "properties": {
         "baseUrl": {
@@ -790,6 +799,7 @@
     "nodeSelector",
     "tolerations",
     "affinity",
+    "extraEnv",
     "freshrss",
     "postgresql",
     "externalPostgresql"
