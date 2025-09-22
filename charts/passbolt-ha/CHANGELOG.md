@@ -1,7 +1,7 @@
 # passbolt-ha
 
-## 4.0.3
+## 5.0.0
 
 ### Changed
 
-- dependency of proxysql to 2.0.1
+- dependency of mysql to 14.0.0
