@@ -4,4 +4,4 @@
 
 ### Changed
 
-- Bitnami/etcd moved to quay/etcd due to [this](https://github.com/bitnami/containers/issues/83267)
+- App Version to 3.6.4

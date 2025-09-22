@@ -423,7 +423,7 @@
           "type": "string"
         },
         "registry": {
-          "default": "docker.io",
+          "default": "quay.io",
           "description": "image registry",
           "required": [],
           "title": "registry",
