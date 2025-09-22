@@ -9028,6 +9028,34 @@ entries:
         url: https://charts.christianhuth.de/public.key
     apiVersion: v2
     appVersion: 3.6.4
+    created: "2025-09-22T07:40:10.576979716Z"
+    description: A Helm chart for running a defragmentation CronJob for ETCD
+    digest: 16f5541157a311c0d8315de7ac745f2fc3dde4a6d4650ce51bcbe96233893ac0
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/etcd-defrag/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: etcd-defrag
+    sources:
+    - https://quay.io/repository/coreos/etcd
+    - https://etcd.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/etcd-defrag-1.5.0/etcd-defrag-1.5.0.tgz
+    version: 1.5.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to 3.6.4
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 3.6.4
     created: "2025-07-25T20:41:02.651373797Z"
     description: A Helm chart for running a defragmentation CronJob for ETCD
     digest: 3d71e65d777c0ebd61744d79a3b89d7040a4337858ef16c902cf475c86606bfd
@@ -10977,6 +11005,33 @@ entries:
     - https://github.com/christianhuth/helm-charts/releases/download/freshrss-1.0.0/freshrss-1.0.0.tgz
     version: 1.0.0
   github-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: url for Icon
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.3.1
+    created: "2025-09-22T07:40:10.796596715Z"
+    description: A Helm Chart for the GitHub Prometheus Exporter
+    digest: d8a9f9083315bbe8c3a21373147470431a3b37bbfd4983175d533d20854dfab1
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/github-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: github-exporter
+    sources:
+    - https://github.com/githubexporter/github-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/github-exporter-1.0.4/github-exporter-1.0.4.tgz
+    version: 1.0.4
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
@@ -66713,4 +66768,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-09-22T07:30:41.711453424Z"
+generated: "2025-09-22T07:40:10.800932621Z"
