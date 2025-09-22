@@ -13,3 +13,12 @@ postgresql:
     database: freshrss
     password: freshrss
     username: freshrss
+
+extraEnv:
+  - name: OIDC_ENABLED
+    value: "1"
+  - name: OIDC_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: freshrss-oidc
+        key: client-secret
