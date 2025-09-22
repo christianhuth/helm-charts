@@ -136,6 +136,10 @@ helm install my-release -f values.yaml christianhuth/umami
 
 ### To 6.0.0
 
+This major updates the MySQL subchart to its newest major, 14.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mysql#to-1400) you can find more information about the changes introduced in that version.
+
+### To 5.0.0
+
 This major updates the MySQL subchart to its newest major, 13.0.0. [Here](https://github.com/bitnami/charts/tree/master/bitnami/mysql#to-1300) you can find more information about the changes introduced in that version.
 
 ### To 4.0.0
