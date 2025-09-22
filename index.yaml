@@ -15097,6 +15097,44 @@ entries:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of redis to 22.0.7
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Dashboard overview of a Kubernetes cluster
+          url: https://codeberg.org/hjacobs/kube-ops-view/media/branch/main/screenshot.png
+        - title: Dashboard showing broken Pods
+          url: https://user-images.githubusercontent.com/1127164/53682720-a2a83780-3cf8-11e9-9384-2c1df186aad4.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 23.5.0
+    created: "2025-09-22T08:54:12.245236934Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 22.0.7
+    description: A Helm chart for bootstrapping kube-ops-view.
+    digest: e6b562a7ee2cc00b7b0086a0443f6840b60a3d3d43d57e5d7a4829a86df4c626
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kube-ops-view/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: kube-ops-view
+    sources:
+    - https://codeberg.org/hjacobs/kube-ops-view
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/kube-ops-view-6.0.0/kube-ops-view-6.0.0.tgz
+    version: 6.0.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of redis to 21.2.14
       artifacthub.io/links: |
         - name: support
@@ -51837,6 +51875,47 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of mariadb mariadb to 22.0.0
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: syncstorage-rs-mysql-0.18.2
+    created: "2025-09-22T08:54:12.442035512Z"
+    dependencies:
+    - alias: syncserver-db
+      condition: syncserver-db.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 22.0.0
+    - alias: tokenserver-db
+      condition: tokenserver-db.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 22.0.0
+    description: A Helm chart for deploying Mozilla's Firefox Sync Storage server
+      to Kubernetes
+    digest: 79ceaa7b4cd4fee4fbfa441c8d7c5a1e4e63338e229c9fbf3b3b841edc95c22d
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncstorage-rs/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: syncstorage-rs
+    sources:
+    - https://github.com/mozilla-services/syncstorage-rs
+    - https://github.com/porelli/firefox-sync
+    - https://github.com/porelli/firefox-sync/pkgs/container/firefox-sync
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/syncstorage-rs-3.0.0/syncstorage-rs-3.0.0.tgz
+    version: 3.0.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of mariadb mariadb to 21.0.8
       artifacthub.io/links: |
         - name: support
@@ -66834,4 +66913,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-09-22T08:30:21.053846968Z"
+generated: "2025-09-22T08:54:12.443921087Z"
