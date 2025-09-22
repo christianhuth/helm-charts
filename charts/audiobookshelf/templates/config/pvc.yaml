@@ -1,0 +1,25 @@
+{{- if and (.Values.audiobookshelf.config.persistence.enabled) (not .Values.audiobookshelf.config.persistence.existingClaim) }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  {{- if .Values.audiobookshelf.config.persistence.annotations }}
+  annotations:
+    {{- toYaml .Values.audiobookshelf.config.persistence.annotations | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "audiobookshelf.labels" . | nindent 4 }}
+  name: {{ include "audiobookshelf.config.pvcName" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+  {{- range .Values.audiobookshelf.config.persistence.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+  {{- with .Values.audiobookshelf.config.persistence.resources }}
+  resources:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- if .Values.audiobookshelf.config.persistence.storageClassName }}
+  storageClassName: {{ .Values.audiobookshelf.config.persistence.storageClassName | quote }}
+  {{- end }}
+{{- end }}
