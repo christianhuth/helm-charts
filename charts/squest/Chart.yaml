@@ -23,12 +23,14 @@ dependencies:
     condition: rabbitmq.enabled
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 21.2.14
+    version: 22.0.7
     condition: redis.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
       description: dependency of mariadb to 22.0.0
+    - kind: changed
+      description: dependency of redis to 22.0.7
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
