@@ -1,9 +1,9 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "popeye.fullname" . }}
   labels:
     {{- include "popeye.labels" . | nindent 4 }}
+  name: {{ include "popeye.fullname" . }}
   namespace: {{ .Release.Namespace }}
 spec:
   schedule: "{{ .Values.cronJob.schedule }}"
@@ -16,6 +16,10 @@ spec:
       labels:
         {{- include "popeye.labels" . | nindent 8 }}
       namespace: {{ .Release.Namespace }}
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     spec:
       template:
         spec:

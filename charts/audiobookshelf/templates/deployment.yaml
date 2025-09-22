@@ -1,0 +1,153 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "audiobookshelf.labels" . | nindent 4 }}
+  name: {{ include "audiobookshelf.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "audiobookshelf.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "audiobookshelf.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "audiobookshelf.serviceAccountName" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            {{- if .Values.audiobookshelf.backup.path }}
+            - name: BACKUP_PATH
+              value: {{ .Values.audiobookshelf.backup.path | quote }}
+            {{- end }}
+            {{- if .Values.audiobookshelf.config.path }}
+            - name: CONFIG_PATH
+              value: {{ .Values.audiobookshelf.config.path | quote }}
+            {{- end }}
+            {{- if .Values.audiobookshelf.metadata.path }}
+            - name: METADATA_PATH
+              value: {{ .Values.audiobookshelf.metadata.path | quote }}
+            {{- end }}
+            {{- if .Values.audiobookshelf.nodeEnv }}
+            - name: NODE_ENV
+              value: {{ .Values.audiobookshelf.nodeEnv | quote }}
+            {{- end }}
+            {{- if .Values.audiobookshelf.podcast.downloadTimeout }}
+            - name: PODCAST_DOWNLOAD_TIMEOUT
+              value: {{ .Values.audiobookshelf.podcast.downloadTimeout | quote }}
+            {{- end }}
+            - name: PORT
+              value: {{ .Values.service.port | quote }}
+            {{- if .Values.audiobookshelf.query.logging }}
+            - name: QUERY_LOGGING
+              value: {{ .Values.audiobookshelf.query.logging | quote }}
+            {{- end }}
+            {{- if .Values.audiobookshelf.query.logging }}
+            - name: QUERY_LOGGING
+              value: {{ .Values.audiobookshelf.query.logging | quote }}
+            {{- end }}
+            {{- if .Values.audiobookshelf.query.profiling }}
+            - name: QUERY_PROFILING
+              value: {{ .Values.audiobookshelf.query.profiling | quote }}
+            {{- end }}
+            {{- if .Values.audiobookshelf.source }}
+            - name: SOURCE
+              value: {{ .Values.audiobookshelf.source | quote }}
+            {{- end }}
+            {{- if .Values.audiobookshelf.sqlite.cacheSize }}
+            - name: SQLITE_CACHE_SIZE
+              value: {{ .Values.audiobookshelf.sqlite.cacheSize | quote }}
+            {{- end }}
+            {{- if .Values.audiobookshelf.sqlite.mmapSize }}
+            - name: SQLITE_MMAP_SIZE
+              value: {{ .Values.audiobookshelf.sqlite.mmapSize | quote }}
+            {{- end }}
+            {{- if .Values.audiobookshelf.sqlite.tempStore }}
+            - name: SQLITE_TEMP_STORE
+              value: {{ .Values.audiobookshelf.sqlite.tempStore | quote }}
+            {{- end }}
+          ports:
+            - containerPort: {{ .Values.service.port | int }}
+              name: http
+              protocol: TCP
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+          {{- if .Values.audiobookshelf.backup.persistence.enabled }}
+            - name: backup
+              mountPath: {{ .Values.audiobookshelf.backup.path | quote }}
+          {{- end }}
+          {{- if .Values.audiobookshelf.config.persistence.enabled }}
+            - name: config
+              mountPath: {{ .Values.audiobookshelf.config.path | quote }}
+          {{- end }}
+          {{- if .Values.audiobookshelf.library.persistence.enabled }}
+            - name: library
+              mountPath: {{ .Values.audiobookshelf.library.path | quote }}
+          {{- end }}
+          {{- if .Values.audiobookshelf.metadata.persistence.enabled }}
+            - name: metadata
+              mountPath: {{ .Values.audiobookshelf.metadata.path | quote }}
+          {{- end }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: tmp
+          emptyDir: {}
+      {{- if .Values.audiobookshelf.backup.persistence.enabled }}
+        - name: backup
+          persistentVolumeClaim:
+            claimName: {{ include "audiobookshelf.backup.pvcName" . }}
+      {{- end }}
+      {{- if .Values.audiobookshelf.config.persistence.enabled }}
+        - name: config
+          persistentVolumeClaim:
+            claimName: {{ include "audiobookshelf.config.pvcName" . }}
+      {{- end }}
+      {{- if .Values.audiobookshelf.library.persistence.enabled }}
+        - name: library
+          persistentVolumeClaim:
+            claimName: {{ include "audiobookshelf.library.pvcName" . }}
+      {{- end }}
+      {{- if .Values.audiobookshelf.metadata.persistence.enabled }}
+        - name: metadata
+          persistentVolumeClaim:
+            claimName: {{ include "audiobookshelf.metadata.pvcName" . }}
+      {{- end }}
