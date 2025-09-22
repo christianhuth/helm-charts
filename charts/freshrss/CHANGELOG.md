@@ -1,7 +1,7 @@
 # freshrss
 
-## 1.2.1
+## 1.3.0
 
-### Changed
+### Added
 
-- dependency of postgresql to 16.7.27
+- option to define extra environment variables

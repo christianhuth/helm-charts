@@ -102,6 +102,9 @@ tolerations: []
 # -- Affinity settings for pod assignment
 affinity: {}
 
+# -- additional environment variables to be added to the pods
+extraEnv: []
+
 freshrss:
   # -- URL under which FreshRSS will be available. Will use the first Ingress host if Ingress is enabled with `ingress.enabled`.
   baseUrl: ""

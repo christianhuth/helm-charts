@@ -60,6 +60,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | externalPostgresql.auth.username | string | `""` | Name of the user to use |
 | externalPostgresql.hostname | string | `""` | Hostname of the PostgreSQL database |
 | externalPostgresql.port | int | `5432` | Port used to connect to PostgreSQL database |
+| extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | freshrss.baseUrl | string | `""` | URL under which FreshRSS will be available. Will use the first Ingress host if Ingress is enabled with `ingress.enabled`. |
 | freshrss.cronjob.minutes | string | `"1,31"` | Minutes to run an automatic cronjob to refresh feeds |
 | freshrss.cronjob.type | string | `"internal"` | How to run the CronJob to synchronize your Feeds. Supported values are internal and sidecar. |
