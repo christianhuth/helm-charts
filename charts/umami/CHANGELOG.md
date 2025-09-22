@@ -4,4 +4,4 @@
 
 ### Changed
 
-- updated app version to 2.19.0
+- app version to 2.19.0
