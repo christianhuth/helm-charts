@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 7.1.13
+## 8.0.0
 
 ### Changed
 
-- App Version to 4.5.2
+- dependency of mariadb to 22.0.0
