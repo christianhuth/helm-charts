@@ -93,8 +93,9 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if (or .Values.audiobookshelf.backup.persistence.enabled .Values.audiobookshelf.config.persistence.enabled .Values.audiobookshelf.library.persistence.enabled .Values.audiobookshelf.metadata.persistence.enabled) }}
           volumeMounts:
+            - name: tmp
+              mountPath: /tmp
           {{- if .Values.audiobookshelf.backup.persistence.enabled }}
             - name: backup
               mountPath: {{ .Values.audiobookshelf.backup.path | quote }}
@@ -110,7 +111,6 @@ spec:
           {{- if .Values.audiobookshelf.metadata.persistence.enabled }}
             - name: metadata
               mountPath: {{ .Values.audiobookshelf.metadata.path | quote }}
-          {{- end }}
           {{- end }}
       {{- with .Values.podSecurityContext }}
       securityContext:
@@ -128,8 +128,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if (or .Values.audiobookshelf.backup.persistence.enabled .Values.audiobookshelf.config.persistence.enabled .Values.audiobookshelf.library.persistence.enabled .Values.audiobookshelf.metadata.persistence.enabled) }}
       volumes:
+        - name: tmp
+          emptyDir: {}
       {{- if .Values.audiobookshelf.backup.persistence.enabled }}
         - name: backup
           persistentVolumeClaim:
@@ -149,5 +150,4 @@ spec:
         - name: metadata
           persistentVolumeClaim:
             claimName: {{ include "audiobookshelf.metadata.pvcName" . }}
-      {{- end }}
       {{- end }}
