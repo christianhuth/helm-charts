@@ -423,21 +423,21 @@
           "type": "string"
         },
         "registry": {
-          "default": "docker.io",
+          "default": "quay.io",
           "description": "image registry",
           "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
-          "default": "bitnami/etcd",
+          "default": "coreos/etcd",
           "description": "image repository",
           "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
-          "default": "3.6.4",
+          "default": "3.6.5",
           "description": "Overrides the image tag",
           "required": [],
           "title": "tag",

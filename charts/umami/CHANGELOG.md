@@ -1,7 +1,7 @@
 # umami
 
-## 5.0.9
+## 5.1.0
 
 ### Changed
 
-- updated umami to 2.19.0
+- updated app version to 2.19.0
