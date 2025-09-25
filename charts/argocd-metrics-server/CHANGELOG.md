@@ -1,7 +1,7 @@
 # argocd-metrics-server
 
-## 1.0.7
+## 1.0.8
 
 ### Changed
 
-- url for Icon
+- add path to url
