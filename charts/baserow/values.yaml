@@ -702,6 +702,8 @@ externalPostgresql:
     username: baserow
     # -- Key in the secret containing the password
     userPasswordKey: ""
+    # -- Key in the secret containing the username
+    userUsernameKey: ""
   # -- Hostname of the PostgreSQL database
   hostname: ""
   # -- Port used to connect to PostgreSQL database
