@@ -238,6 +238,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | externalPostgresql.auth.existingSecret | string | `""` | Name of existing secret to use for PostgreSQL credentials |
 | externalPostgresql.auth.password | string | `"baserow"` | Password to use |
 | externalPostgresql.auth.userPasswordKey | string | `""` | Key in the secret containing the password |
+| externalPostgresql.auth.userUsernameKey | string | `""` | Key in the secret containing the username |
 | externalPostgresql.auth.username | string | `"baserow"` | Name of the user to use |
 | externalPostgresql.hostname | string | `""` | Hostname of the PostgreSQL database |
 | externalPostgresql.port | int | `5432` | Port used to connect to PostgreSQL database |
