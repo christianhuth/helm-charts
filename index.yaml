@@ -9136,6 +9136,34 @@ entries:
   etcd-defrag:
   - annotations:
       artifacthub.io/changes: |
+        - kind: fixed
+          description: wrong appversion and image tag
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v3.6.5
+    created: "2025-09-26T11:21:31.390232214Z"
+    description: A Helm chart for running a defragmentation CronJob for ETCD
+    digest: 6285dd9df8019f11dce95771d19a7174bf4b614a26310c738a6a2e284eb0fb6f
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/etcd-defrag/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: etcd-defrag
+    sources:
+    - https://quay.io/repository/coreos/etcd
+    - https://etcd.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/etcd-defrag-1.5.2/etcd-defrag-1.5.2.tgz
+    version: 1.5.2
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: App Version to 3.6.5
       artifacthub.io/links: |
@@ -67789,4 +67817,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-09-26T07:39:24.559014887Z"
+generated: "2025-09-26T11:21:31.392691678Z"
