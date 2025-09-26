@@ -1,7 +1,7 @@
 # baserow
 
-## 3.14.9
+## 5.1.0
 
-### Changed
+### Added
 
-- dependency of postgresql to 16.7.8
+- option to define username key of database secret

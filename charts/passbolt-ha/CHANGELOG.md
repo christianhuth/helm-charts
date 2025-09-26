@@ -1,7 +1,7 @@
 # passbolt-ha
 
-## 2.1.11
+## 5.0.1
 
 ### Changed
 
-- dependency of mysql to 12.3.5
+- dependency of mysql to 14.0.3

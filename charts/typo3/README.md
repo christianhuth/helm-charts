@@ -124,6 +124,16 @@ helm install my-release -f values.yaml christianhuth/typo3
 
 ## Upgrading the Chart
 
+### 5.0.0
+
+This major updates the MySQL subchart to its newest major, 14.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mysql#to-1400) you can find more information about the changes introduced in that version.
+
+Additionally it updates the MariaDB subchart to its newest major, 22.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#upgrading) you can find more information about the changes introduced in that version.
+
+### 4.0.0
+
+This major updates the MariaDB subchart to its newest major, 21.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#upgrading) you can find more information about the changes introduced in that version.
+
 ### 3.0.0
 
 This major updates the MySQL subchart to its newest major, 12.2.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mysql#to-1220) you can find more information about the changes introduced in that version.

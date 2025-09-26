@@ -388,6 +388,19 @@ Get the user-password key for the postgresql user password
 {{- end -}}
 
 {{/*
+Get the user-username key for the postgresql username
+*/}}
+{{- define "baserow.postgresql.userUsernameKey" -}}
+  {{- if .Values.postgresql.enabled -}}
+    {{- printf "%s" (include "postgresql.v1.username" .Subcharts.postgresql) -}}
+  {{- else if .Values.externalPostgresql.auth.userUsernameKey -}}
+    {{- printf "%s" (tpl .Values.externalPostgresql.auth.userUsernameKey $) -}}
+  {{- else -}}
+    {{- "username" -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
 Return the hostname of the redis to use
 */}}
 {{- define "baserow.redis.hostname" -}}

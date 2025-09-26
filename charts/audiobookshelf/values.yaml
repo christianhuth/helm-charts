@@ -1,0 +1,191 @@
+# -- Provide a name in place of `argocd-extension-metrics`
+nameOverride: ""
+
+# -- String to fully override `"argocd-extension-metrics.fullname"`
+fullnameOverride: ""
+
+image:
+  # -- image registory
+  registry: docker.io
+  # -- image repository
+  repository: advplyr/audiobookshelf
+  # -- image pull policy
+  pullPolicy: Always
+  # -- Overrides the image tag
+  tag: "2.29.0"
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+# -- Number of replicas
+replicaCount: 1
+
+# -- The number of old ReplicaSets to retain
+revisionHistoryLimit: 0
+
+# -- pod-level security context
+# @default -- see [values.yaml](./values.yaml)
+podSecurityContext:
+  fsGroup: 1000
+
+# -- Resource limits and requests for the controller pods.
+resources:
+  requests:
+    cpu: 100m
+    memory: 100Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# -- container-level security context
+# @default -- see [values.yaml](./values.yaml)
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  privileged: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsGroup: 1000
+  runAsUser: 1000
+  seccompProfile:
+    type: RuntimeDefault
+
+service:
+  # -- Kubernetes service type
+  type: ClusterIP
+  # -- Kubernetes port where service is exposed
+  port: 8080
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  className: ""
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Toleration labels for pod assignment
+tolerations: []
+
+# -- Affinity settings for pod assignment
+affinity: {}
+
+# -- additional environment variables to be added to the pods
+extraEnv: []
+
+audiobookshelf:
+  backup:
+    # -- Path to where backups are stored. Backups contain a backup of the database in /config and images/metadata stored in ./metadata/items and ./metadata/authors
+    path: "/backups"
+    persistence:
+      # -- use a PVC to persist the backup directory
+      enabled: true
+      # -- the desired access modes the volume should have.
+      accessModes:
+        - ReadWriteOnce
+      # -- Annotations to be added to the PersistentVolumeClaim
+      annotations: {}
+      # -- provide an existing PersistentVolumeClaim
+      existingClaim: ""
+      # -- Name of the StorageClass required by the claim.
+      storageClassName: ""
+      # -- represents the minimum and maximum resources the volume should have.
+      resources: {}
+  config:
+    # -- Path to the config directory. It will contain the database (users/books/libraries/settings). This location must not be mounted over the network.
+    path: "/config"
+    persistence:
+      # -- use a PVC to persist the config directory
+      enabled: true
+      # -- the desired access modes the volume should have.
+      accessModes:
+        - ReadWriteOnce
+      # -- Annotations to be added to the PersistentVolumeClaim
+      annotations: {}
+      # -- provide an existing PersistentVolumeClaim
+      existingClaim: ""
+      # -- Name of the StorageClass required by the claim.
+      storageClassName: ""
+      # -- represents the minimum and maximum resources the volume should have.
+      resources: {}
+  library:
+    # -- Path to the library directory. It will contain the library files. This location must not be mounted over the network.
+    path: "/library"
+    persistence:
+      # -- use a PVC to persist the config directory
+      enabled: true
+      # -- the desired access modes the volume should have.
+      accessModes:
+        - ReadWriteOnce
+      # -- Annotations to be added to the PersistentVolumeClaim
+      annotations: {}
+      # -- provide an existing PersistentVolumeClaim
+      existingClaim: ""
+      # -- Name of the StorageClass required by the claim.
+      storageClassName: ""
+      # -- represents the minimum and maximum resources the volume should have.
+      resources: {}
+  metadata:
+    # -- Path to the metadata directory. It will contain cache, streams, covers, downloads, backups and logs.
+    path: "/metadata"
+    persistence:
+      # -- use a PVC to persist the metadata directory
+      enabled: true
+      # -- the desired access modes the volume should have.
+      accessModes:
+        - ReadWriteOnce
+      # -- Annotations to be added to the PersistentVolumeClaim
+      annotations: {}
+      # -- provide an existing PersistentVolumeClaim
+      existingClaim: ""
+      # -- Name of the StorageClass required by the claim.
+      storageClassName: ""
+      # -- represents the minimum and maximum resources the volume should have.
+      resources: {}
+  # -- Type of deployment. Should be production unless using development.
+  nodeEnv: production
+  podcast:
+    # -- Timeout to wait for a podcast to start downloading.
+    downloadTimeout: "30"
+  query:
+    # -- Debug information for logging SQL queries. Use log to log the queries, and benchmark to also log the runtime of each query.
+    logging: ""
+    # -- Experimental profiling of specific database queries. Not implemented on most queries.
+    profiling: ""
+  # -- Installation source. Will be shown in the web client.
+  source: "Helm"
+  sqlite:
+    # -- Set the cache_size pragma for the SQLite database
+    cacheSize: ""
+    # -- Set the mmap_size pragma for the SQLite database
+    mmapSize: ""
+    # -- Set the temp_store pragma for the SQLite database
+    tempStore: ""
+  # -- specify the time zone. Check list: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  timezone: "Europe/Berlin"

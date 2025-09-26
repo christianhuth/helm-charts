@@ -59,7 +59,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | celery.beat.image.pullPolicy | string | `"Always"` | image pull policy |
 | celery.beat.image.registry | string | `"quay.io"` | image registry |
 | celery.beat.image.repository | string | `"hewlettpackardenterprise/squest"` | image repository |
-| celery.beat.image.tag | string | `"2.8.0"` | Overrides the image tag |
+| celery.beat.image.tag | string | `"2.8.1"` | Overrides the image tag |
 | celery.beat.nodeSelector | object | `{}` | Node labels for pod assignment |
 | celery.beat.podAnnotations | object | `{}` | Annotations to be added to pods |
 | celery.beat.podLabels | object | `{}` | Labels to be added to pods |
@@ -87,7 +87,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | celery.worker.image.pullPolicy | string | `"Always"` | image pull policy |
 | celery.worker.image.registry | string | `"quay.io"` | image registry |
 | celery.worker.image.repository | string | `"hewlettpackardenterprise/squest"` | image repository |
-| celery.worker.image.tag | string | `"2.8.0"` | Overrides the image tag |
+| celery.worker.image.tag | string | `"2.8.1"` | Overrides the image tag |
 | celery.worker.nodeSelector | object | `{}` | Node labels for pod assignment |
 | celery.worker.podAnnotations | object | `{}` | Annotations to be added to pods |
 | celery.worker.podLabels | object | `{}` | Labels to be added to pods |
@@ -164,7 +164,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | squest.image.pullPolicy | string | `"Always"` | image pull policy |
 | squest.image.registry | string | `"quay.io"` | image registry |
 | squest.image.repository | string | `"hewlettpackardenterprise/squest"` | image repository |
-| squest.image.tag | string | `"2.8.0"` | Overrides the image tag |
+| squest.image.tag | string | `"2.8.1"` | Overrides the image tag |
 | squest.ingress.annotations | object | `{}` |  |
 | squest.ingress.className | string | `""` |  |
 | squest.ingress.enabled | bool | `false` |  |
@@ -181,7 +181,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | squest.nginx.image.pullPolicy | string | `"Always"` | image pull policy |
 | squest.nginx.image.registry | string | `"docker.io"` | image registry |
 | squest.nginx.image.repository | string | `"nginx"` | image repository |
-| squest.nginx.image.tag | string | `"1.28.0-alpine"` | Overrides the image tag |
+| squest.nginx.image.tag | string | `"1.29.1-alpine"` | Overrides the image tag |
 | squest.nodeSelector | object | `{}` | Node labels for pod assignment |
 | squest.podAnnotations | object | `{}` | Annotations to be added to pods |
 | squest.podLabels | object | `{}` | Labels to be added to pods |
@@ -205,3 +205,17 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```console
 helm install my-release -f values.yaml christianhuth/squest
 ```
+
+## Upgrading the Chart
+
+### To 3.0.0
+
+This major updates the Redis subchart to its newest major, 22.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) and [here](https://raw.githubusercontent.com/redis/redis/8.2/00-RELEASENOTES) you can find more information about the changes introduced in that version.
+
+Additionally it updates the MariaDB subchart to its newest major, 22.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#upgrading) you can find more information about the changes introduced in that version.
+
+### To 2.0.0
+
+This major updates the Redis subchart to its newest major, 21.2.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) and [here](https://raw.githubusercontent.com/redis/redis/8.0/00-RELEASENOTES) you can find more information about the changes introduced in that version.
+
+Additionally it updates the MariaDB subchart to its newest major, 21.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#upgrading) you can find more information about the changes introduced in that version.

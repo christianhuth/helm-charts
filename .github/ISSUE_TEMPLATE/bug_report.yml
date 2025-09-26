@@ -17,18 +17,26 @@ body:
       description: Enter the name of the Chart where you encountered this bug.
       options:
         - argocd-metrics-server
+        - audiobookshelf
         - baserow
         - cluster-api-visualizer
+        - countly
+        - dns-exporter
+        - dnsbl-exporter
         - etcd-defrag
+        - freshrss
         - github-exporter
+        - goldpinger
         - headwind-mdm
         - kube-ops-view
         - kubedoom
         - kubenav
         - kubevirt-manager
         - kutt
+        - mailcow-exporter
         - maildev
         - netcupscp-exporter
+        - nextcloud-exporter
         - node-access
         - passbolt-ha
         - polr
@@ -41,7 +49,9 @@ body:
         - shlink-web
         - skooner
         - sloop
+        - squest
         - syncserver
+        - syncstorage-rs
         - tenant-namespace
         - typo3
         - umami

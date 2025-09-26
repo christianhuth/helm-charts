@@ -58,7 +58,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | backend.asgi.image.pullPolicy | string | `"Always"` | image pull policy |
 | backend.asgi.image.registry | string | `"docker.io"` | image registory |
 | backend.asgi.image.repository | string | `"baserow/backend"` | image repository |
-| backend.asgi.image.tag | string | `"1.33.3"` | Overrides the image tag |
+| backend.asgi.image.tag | string | `"1.35.1"` | Overrides the image tag |
 | backend.asgi.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | backend.asgi.livenessProbe.failureThreshold | int | `3` | Failure threshold for livenessProbe |
 | backend.asgi.livenessProbe.initialDelaySeconds | int | `120` | Initial delay seconds for livenessProbe |
@@ -95,7 +95,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | backend.celery.image.pullPolicy | string | `"Always"` | image pull policy |
 | backend.celery.image.registry | string | `"docker.io"` | image registory |
 | backend.celery.image.repository | string | `"baserow/backend"` | image repository |
-| backend.celery.image.tag | string | `"1.33.3"` | Overrides the image tag |
+| backend.celery.image.tag | string | `"1.35.1"` | Overrides the image tag |
 | backend.celery.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | backend.celery.livenessProbe.initialDelaySeconds | int | `10` | Initial delay seconds for livenessProbe |
 | backend.celery.livenessProbe.periodSeconds | int | `10` | Period seconds for livenessProbe |
@@ -203,7 +203,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | backend.wsgi.image.pullPolicy | string | `"Always"` | image pull policy |
 | backend.wsgi.image.registry | string | `"docker.io"` | image registory |
 | backend.wsgi.image.repository | string | `"baserow/backend"` | image repository |
-| backend.wsgi.image.tag | string | `"1.33.3"` | Overrides the image tag |
+| backend.wsgi.image.tag | string | `"1.35.1"` | Overrides the image tag |
 | backend.wsgi.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | backend.wsgi.livenessProbe.failureThreshold | int | `3` | Failure threshold for livenessProbe |
 | backend.wsgi.livenessProbe.initialDelaySeconds | int | `120` | Initial delay seconds for livenessProbe |
@@ -238,6 +238,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | externalPostgresql.auth.existingSecret | string | `""` | Name of existing secret to use for PostgreSQL credentials |
 | externalPostgresql.auth.password | string | `"baserow"` | Password to use |
 | externalPostgresql.auth.userPasswordKey | string | `""` | Key in the secret containing the password |
+| externalPostgresql.auth.userUsernameKey | string | `""` | Key in the secret containing the username |
 | externalPostgresql.auth.username | string | `"baserow"` | Name of the user to use |
 | externalPostgresql.hostname | string | `""` | Hostname of the PostgreSQL database |
 | externalPostgresql.port | int | `5432` | Port used to connect to PostgreSQL database |
@@ -261,7 +262,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | frontend.image.pullPolicy | string | `"Always"` | image pull policy |
 | frontend.image.registry | string | `"docker.io"` | image registory |
 | frontend.image.repository | string | `"baserow/web-frontend"` | image repository |
-| frontend.image.tag | string | `"1.33.3"` | Overrides the image tag |
+| frontend.image.tag | string | `"1.35.1"` | Overrides the image tag |
 | frontend.imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | frontend.ingress.annotations | object | `{}` | Additional annotations for the Ingress resource |
 | frontend.ingress.className | string | `""` | IngressClass that will be be used to implement the Ingress |
@@ -312,6 +313,14 @@ helm install my-release -f values.yaml christianhuth/baserow
 ```
 
 ## Upgrading the Chart
+
+### To 5.0.0
+
+This major updates the Redis subchart to its newest major, 22.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) and [here](https://raw.githubusercontent.com/redis/redis/8.2/00-RELEASENOTES) you can find more information about the changes introduced in that version.
+
+### To 4.0.0
+
+This major updates the Redis subchart to its newest major, 21.2.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) and [here](https://raw.githubusercontent.com/redis/redis/8.0/00-RELEASENOTES) you can find more information about the changes introduced in that version.
 
 ### To 3.0.0
 

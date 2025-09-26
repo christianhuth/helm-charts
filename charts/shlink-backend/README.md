@@ -126,7 +126,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"shlinkio/shlink"` | image repository |
-| image.tag | string | `"4.4.6"` | Overrides the image tag |
+| image.tag | string | `"4.5.2"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
@@ -178,6 +178,22 @@ helm install my-release -f values.yaml christianhuth/shlink-backend
 ```
 
 ## Upgrading the Chart
+
+### To 8.0.0
+
+This major updates the following dependencies:
+
+- MariaDB to its newest major, 22.0.0: [Here](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#upgrading) you can find more information about the changes introduced in that version.
+- MySQL to its newest major, 14.0.0: [Here](https://github.com/bitnami/charts/tree/main/bitnami/mysql#to-1400) you can find more information about the changes introduced in that version.
+- Redis to its newest major, 22.0.0: [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) you can find more information about the changes introduced in that version.
+
+### To 7.0.0
+
+This major updates the following dependencies:
+
+- MariaDB to its newest major, 21.0.0: [Here](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#upgrading) you can find more information about the changes introduced in that version.
+- MySQL to its newest major, 13.0.0: [Here](https://github.com/bitnami/charts/tree/main/bitnami/mysql#to-1300) you can find more information about the changes introduced in that version.
+- Redis to its newest major, 21.2.0: [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) you can find more information about the changes introduced in that version.
 
 ### To 5.0.0
 

@@ -11,6 +11,9 @@ ansible-semaphore:
 argocd-metrics-server:
 - changed-files:
   - any-glob-to-any-file: 'charts/argocd-metrics-server/*'
+audiobookshelf:
+- changed-files:
+  - any-glob-to-any-file: charts/audiobookshelf/*
 baserow:
 - changed-files:
   - any-glob-to-any-file: 'charts/baserow/*'
@@ -59,6 +62,9 @@ glances:
 goaccess:
 - changed-files:
   - any-glob-to-any-file: charts/goaccess/*
+goldpinger:
+- changed-files:
+  - any-glob-to-any-file: charts/goldpinger/*
 greenbone-ce:
 - changed-files:
   - any-glob-to-any-file: charts/greenbone-ce/*

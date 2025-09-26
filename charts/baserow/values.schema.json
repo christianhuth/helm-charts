@@ -92,7 +92,7 @@
                   "type": "string"
                 },
                 "tag": {
-                  "default": "1.33.3",
+                  "default": "1.35.1",
                   "description": "Overrides the image tag",
                   "required": [],
                   "title": "tag",
@@ -496,7 +496,7 @@
                   "type": "string"
                 },
                 "tag": {
-                  "default": "1.33.3",
+                  "default": "1.35.1",
                   "description": "Overrides the image tag",
                   "required": [],
                   "title": "tag",
@@ -1572,7 +1572,7 @@
                   "type": "string"
                 },
                 "tag": {
-                  "default": "1.33.3",
+                  "default": "1.35.1",
                   "description": "Overrides the image tag",
                   "required": [],
                   "title": "tag",
@@ -1972,6 +1972,13 @@
               "title": "userPasswordKey",
               "type": "string"
             },
+            "userUsernameKey": {
+              "default": "",
+              "description": "Key in the secret containing the username",
+              "required": [],
+              "title": "userUsernameKey",
+              "type": "string"
+            },
             "username": {
               "default": "baserow",
               "description": "Name of the user to use",
@@ -1985,7 +1992,8 @@
             "existingSecret",
             "password",
             "username",
-            "userPasswordKey"
+            "userPasswordKey",
+            "userUsernameKey"
           ],
           "title": "auth",
           "type": "object"
@@ -2208,7 +2216,7 @@
               "type": "string"
             },
             "tag": {
-              "default": "1.33.3",
+              "default": "1.35.1",
               "description": "Overrides the image tag",
               "required": [],
               "title": "tag",

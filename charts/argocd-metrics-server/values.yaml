@@ -402,3 +402,5 @@ prometheus:
   port: 9090
   # -- The name of the Prometheus service
   service: prometheus-operated
+  # -- The path of the Prometheus
+  path: ""

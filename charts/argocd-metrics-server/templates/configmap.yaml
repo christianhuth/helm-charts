@@ -23,7 +23,7 @@ data:
         {
           "Name": "default",
           "default": true,
-          "address": "http://{{ .Values.prometheus.service }}.{{ .Values.prometheus.namespace }}.svc.cluster.local:{{ .Values.prometheus.port }}"
+          "address": "http://{{ .Values.prometheus.service }}.{{ .Values.prometheus.namespace }}.svc.cluster.local:{{ .Values.prometheus.port }}{{ .Values.prometheus.path }}"
         }
       }
     }

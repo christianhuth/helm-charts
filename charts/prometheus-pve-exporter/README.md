@@ -65,7 +65,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registory |
 | image.repository | string | `"prompve/prometheus-pve-exporter"` | image repository |
-| image.tag | string | `"3.5.4"` | Overrides the image tag |
+| image.tag | string | `"3.5.5"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | nameOverride | string | `""` | Provide a name in place of `prometheus-pve-exporter` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |

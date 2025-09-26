@@ -1,7 +1,7 @@
 # kubevirt-manager
 
-## 0.2.0
+## 0.2.2
 
-### Added
+### Changed
 
-- option to define the image registry
+- App Version to 1.5.2

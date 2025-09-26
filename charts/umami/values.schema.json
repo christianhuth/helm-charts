@@ -190,7 +190,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "postgresql-v2.15.1",
+          "default": "postgresql-v2.19.0",
           "description": "Overrides the image tag",
           "required": [],
           "title": "tag",
