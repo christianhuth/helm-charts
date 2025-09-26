@@ -4,4 +4,4 @@
 
 ### Changed
 
-- add path to url
+- url for Icon
