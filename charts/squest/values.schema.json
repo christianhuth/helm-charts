@@ -665,6 +665,13 @@
       "properties": {
         "auth": {
           "properties": {
+            "erlangCookie": {
+              "default": "abcdefghijklmnopqrstuvwxyz",
+              "description": "The Erlang cookie to determine whether different nodes are allowed to communicate with each other",
+              "required": [],
+              "title": "erlangCookie",
+              "type": "string"
+            },
             "password": {
               "default": "squest",
               "description": "The password credential to be used when using the integrated RabbitMQ.",
@@ -682,7 +689,8 @@
           },
           "required": [
             "password",
-            "username"
+            "username",
+            "erlangCookie"
           ],
           "title": "auth",
           "type": "object"

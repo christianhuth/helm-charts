@@ -2,7 +2,7 @@ apiVersion: v2
 name: squest
 description: Squest is a self-service portal that works on top of Red Hat Ansible Automation Platform/AWX.
 type: application
-version: 3.0.0
+version: 3.0.1
 appVersion: "1.29.1-alpine"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
@@ -28,9 +28,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of mariadb to 22.0.0
-    - kind: changed
-      description: dependency of redis to 22.0.7
+      description: set erlangCookie for rabbitmq to avoid recreating the secret on each helm execution
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

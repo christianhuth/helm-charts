@@ -110,6 +110,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | mariadb.auth.username | string | `"squest"` | The username credential to be used when using the integrated MariaDB database. |
 | mariadb.enabled | bool | `true` | enable integrated MariaDB™ subchart from Bitnami |
 | nameOverride | string | `""` | Provide a name in place of `squest` |
+| rabbitmq.auth.erlangCookie | string | `"abcdefghijklmnopqrstuvwxyz"` | The Erlang cookie to determine whether different nodes are allowed to communicate with each other |
 | rabbitmq.auth.password | string | `"squest"` | The password credential to be used when using the integrated RabbitMQ. |
 | rabbitmq.auth.username | string | `"squest"` | The username credential to be used when using the integrated RabbitMQ. |
 | rabbitmq.enabled | bool | `true` | enable integrated RabbitMQ™ subchart from Bitnami |
