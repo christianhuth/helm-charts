@@ -259,6 +259,13 @@
           "title": "namespace",
           "type": "string"
         },
+        "path": {
+          "default": "",
+          "description": "The path of the Prometheus",
+          "required": [],
+          "title": "path",
+          "type": "string"
+        },
         "port": {
           "default": 9090,
           "description": "The port on which the Prometheus service is listening for traffic",
@@ -278,7 +285,8 @@
         "dashboards",
         "namespace",
         "port",
-        "service"
+        "service",
+        "path"
       ],
       "title": "prometheus",
       "type": "object"
