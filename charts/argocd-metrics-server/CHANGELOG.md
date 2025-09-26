@@ -1,6 +1,6 @@
 # argocd-metrics-server
 
-## 1.0.7
+## 1.0.8
 
 ### Changed
 

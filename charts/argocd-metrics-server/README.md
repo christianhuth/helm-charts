@@ -72,6 +72,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | podSecurityContext | object | `{}` | pod-level security context |
 | prometheus.dashboards | string | see [values.yaml](./values.yaml) | The dashboards that will be displayed in the Argo CD UI |
 | prometheus.namespace | string | `"monitoring"` | The namespace where Prometheus is running |
+| prometheus.path | string | `""` | The path of the Prometheus |
 | prometheus.port | int | `9090` | The port on which the Prometheus service is listening for traffic |
 | prometheus.service | string | `"prometheus-operated"` | The name of the Prometheus service |
 | replicaCount | int | `1` | Number of replicas |

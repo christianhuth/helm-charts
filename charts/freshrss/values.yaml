@@ -11,7 +11,7 @@ image:
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag
-  tag: "1.26.3"
+  tag: "1.27.0"
   # -- Define which type of image should be used. Supported values are alpine and debian.
   type: "alpine"
 
@@ -101,6 +101,9 @@ tolerations: []
 
 # -- Affinity settings for pod assignment
 affinity: {}
+
+# -- additional environment variables to be added to the pods
+extraEnv: []
 
 freshrss:
   # -- URL under which FreshRSS will be available. Will use the first Ingress host if Ingress is enabled with `ingress.enabled`.

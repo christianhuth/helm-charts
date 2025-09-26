@@ -47,7 +47,7 @@ spec:
                   name: {{ include "github-exporter.auth.secretName" . | quote }}
                   key: github-app-installation-id
             - name: GITHUB_APP_KEY_PATH
-              value: /tmp/key.pem
+              value: /tmp/github-app-private-key
             {{- end }}
             {{- if .Values.github.auth.token.enabled }}
             - name: GITHUB_TOKEN
