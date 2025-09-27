@@ -93,7 +93,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"freshrss/freshrss"` | image repository |
-| image.tag | string | `"1.27.0"` | Overrides the image tag |
+| image.tag | string | `"1.27.1"` | Overrides the image tag |
 | image.type | string | `"alpine"` | Define which type of image should be used. Supported values are alpine and debian. |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
