@@ -1,7 +1,7 @@
 # freshrss
 
-## 1.3.0
+## 1.3.1
 
-### Added
+### Changed
 
-- option to define extra environment variables
+- App Version to 1.27.1
