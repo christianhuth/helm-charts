@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 1.1.1
+## 1.2.0
 
-### Fixed
+### Changed
 
-- emptydir for /tmp folder
+- App Version to 2.30.0
