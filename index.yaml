@@ -243,6 +243,34 @@ entries:
   audiobookshelf:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to 2.30.0
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.30.0
+    created: "2025-10-08T16:42:44.109629679Z"
+    description: A Helm chart for installing the Argo CD Metrics Server, which connects
+      to Prometheus and can be used to display Metrics in the Argo CD UI
+    digest: 50cb0a3fe4cc82f21a319075747e4e0fee6a85d70557157297c1e1fccec1856c
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/audiobookshelf/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: audiobookshelf
+    sources:
+    - https://github.com/argoproj-labs/argocd-extension-metrics
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/audiobookshelf-1.2.0/audiobookshelf-1.2.0.tgz
+    version: 1.2.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: emptydir for /tmp folder
       artifacthub.io/links: |
@@ -67855,4 +67883,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-09-27T14:08:50.316297965Z"
+generated: "2025-10-08T16:42:44.111729257Z"
