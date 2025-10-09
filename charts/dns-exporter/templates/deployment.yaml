@@ -14,9 +14,14 @@ spec:
       {{- include "dns-exporter.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
+      {{- if or .Values.podAnnotations .Values.serviceMonitor.modules}}
       annotations:
-        {{- toYaml . | nindent 8 }}
+        {{- if .Values.serviceMonitor.modules}}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- end }}
+        {{- if .Values.podAnnotations }}
+          {{- toYaml .Values.podAnnotations | nindent 8 }}
+        {{- end }}
       {{- end }}
       labels:
         {{- include "dns-exporter.selectorLabels" . | nindent 8 }}
