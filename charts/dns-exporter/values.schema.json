@@ -43,6 +43,22 @@
       "title": "autoscaling",
       "type": "object"
     },
+    "containerPort": {
+      "default": 15353,
+      "description": "Defines port the container and exporter is listening on",
+      "required": [],
+      "title": "containerPort",
+      "type": "integer"
+    },
+    "extraArgs": {
+      "description": "Additional command arguments that will be passed to the exporter",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "extraArgs",
+      "type": "array"
+    },
     "extraEnv": {
       "description": "Additional environment variables that will be added to the deployment",
       "items": {
