@@ -1,7 +1,7 @@
 # baserow
 
-## 5.1.0
+## 5.1.1
 
-### Added
+### Changed
 
-- option to define username key of database secret
+- App Version to 1.35.3
