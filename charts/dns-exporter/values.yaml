@@ -101,6 +101,14 @@ affinity: {}
 # -- Additional environment variables that will be added to the deployment
 extraEnv: []
 
+# -- Additional command arguments that will be passed to the exporter
+extraArgs: []
+  # - "--debug"   # useful for debugging
+  # - "--quiet"   # should be used in production environment
+
+# -- Defines port the container and exporter is listening on
+containerPort: 15353
+
 serviceMonitor:
   # -- Enable a prometheus ServiceMonitor
   enabled: false
