@@ -151,6 +151,12 @@ data:
         transaction_persistent=1
         active=1
         max_connections={{ $element.maxConnections | default 10000 }}
+        {{- if eq (toString $element.frontend) "0" }}
+        frontend={{ toString $element.frontend }}
+        {{- end }}
+        {{- if eq (toString $element.backend) "0" }}
+        backend={{ toString $element.backend }}
+        {{- end }}
       }{{- if lt (add1 $index) $totalUsers -}},{{- end -}}
       {{- end }}
     )
