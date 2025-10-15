@@ -66,13 +66,13 @@ Instead of defining all the attributes (like family, server, ...) for each targe
 
 ```yaml
 serviceMonitor:
+  modules:
+    google_udp:
+      family: ipv4
+      protocol: udp
+      server: dns.google
+      query_type: NS
   targetsMonitor:
-    modules:
-      google_udp:
-        family: ipv4
-        protocol: udp
-        server: dns.google
-        query_type: NS
     targets:
       - query_name:
           - christianhuth.de
