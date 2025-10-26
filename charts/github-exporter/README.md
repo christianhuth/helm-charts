@@ -65,7 +65,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registory |
 | image.repository | string | `"githubexporter/github-exporter"` | image repository |
-| image.tag | string | `"1.3.1"` | Overrides the image tag |
+| image.tag | string | `"v2.1.0"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | nameOverride | string | `""` | Provide a name in place of `github-exporter` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
