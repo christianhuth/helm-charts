@@ -51,7 +51,7 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if .Values.serviceMonitor.modules }}
+          {{- if .Values.modulesConfig }}
           volumeMounts:
             - name: modules
               mountPath: /home/nonroot/dns_exporter.yml
@@ -69,7 +69,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.serviceMonitor.modules }}
+      {{- if .Values.modulesConfig }}
       volumes:
         - name: modules
           configMap:

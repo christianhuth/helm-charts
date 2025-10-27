@@ -101,16 +101,17 @@ affinity: {}
 # -- Additional environment variables that will be added to the deployment
 extraEnv: []
 
+# -- Define modules that can be used inside your targets
+modulesConfig: {}
+  # google_udp:
+  #   family: ipv4
+  #   protocol: udp
+  #   server: dns.google
+  #   query_type: NS
+
 serviceMonitor:
   # -- Enable a prometheus ServiceMonitor
   enabled: false
-  # -- Define modules that can be used inside your targets
-  modules: {}
-    # google_udp:
-    #   family: ipv4
-    #   protocol: udp
-    #   server: dns.google
-    #   query_type: NS
   selfMonitor:
     # -- Enable a prometheus ServiceMonitor to monitor the DNS Exporter
     enabled: true
@@ -128,6 +129,7 @@ serviceMonitor:
     metricRelabelings: []
     # -- Prometheus [RelabelConfigs] to apply to samples before scraping
     relabelings: []
+
   targetsMonitor:
     # -- Enable a prometheus ServiceMonitor to monitor the Targets of the DNS Exporter
     enabled: true
@@ -145,5 +147,42 @@ serviceMonitor:
     metricRelabelings: []
     # -- Prometheus [RelabelConfigs] to apply to samples before scraping
     relabelings: []
+    # -- Targets that should be scraped by the DNS-Exporter
+    targets: []
+
+podMonitor:
+  # -- Enable a prometheus PodMonitor CR for google managed prometheus
+  enabled: false
+  selfMonitor:
+    # -- Enable a prometheus PodMonitor to monitor the DNS Exporter
+    enabled: true
+    # -- Prometheus PodMonitor labels
+    additionalLabels: {}
+      # release: prometheus
+    # -- Prometheus PodMonitor selector
+    selector: {}
+      # prometheus: kube-prometheus
+    # -- Prometheus PodMonitor interval
+    interval: 30s
+    # -- Prometheus PodMonitor namespace
+    namespace: ""
+    # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
+    metricRelabelings: []
+
+  targetsMonitor:
+    # -- Enable a prometheus PodMonitor to monitor the Targets of the DNS Exporter
+    enabled: true
+    # -- Prometheus PodMonitor labels
+    additionalLabels: {}
+      # release: prometheus
+    # -- Prometheus PodMonitor selector
+    selector: {}
+      # prometheus: kube-prometheus
+    # -- Prometheus PodMonitor interval
+    interval: 30s
+    # -- Prometheus PodMonitor namespace
+    namespace: ""
+    # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
+    metricRelabelings: []
     # -- Targets that should be scraped by the DNS-Exporter
     targets: []
