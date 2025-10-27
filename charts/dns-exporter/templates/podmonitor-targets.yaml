@@ -1,0 +1,39 @@
+{{- if and .Values.podMonitor.enabled .Values.podMonitor.targetsMonitor.enabled .Values.podMonitor.targetsMonitor.targets }}
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  name: {{ template "dns-exporter.fullname" . }}-for-targets
+  {{- with .Values.podMonitor.targetsMonitor.namespace }}
+  namespace: {{ . }}
+  {{- end }}
+  labels:
+    {{- include "dns-exporter.labels" . | nindent 4 }}
+    {{- with .Values.podMonitor.targetsMonitor.selector }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- with .Values.podMonitor.targetsMonitor.additionalLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  endpoints:
+    {{- range .Values.podMonitor.targetsMonitor.targets }}
+    - port: http
+      {{- with $.Values.podMonitor.targetsMonitor.interval }}
+      interval: {{ . }}
+      {{- end }}
+      params:
+        {{- toYaml . | nindent 8 }}
+      path: /query
+      {{- with $.Values.podMonitor.targetsMonitor.relabelings }}
+      relabelings:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.podMonitor.targetsMonitor.metricRelabelings }}
+      metricRelabelings:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- end }}
+  selector:
+    matchLabels:
+      {{- include "dns-exporter.selectorLabels" . | nindent 6 }}
+{{- end }}
