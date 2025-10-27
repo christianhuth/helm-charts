@@ -234,6 +234,13 @@
       "title": "podSecurityContext",
       "type": "object"
     },
+    "priorityClassName": {
+      "default": "",
+      "description": "Priority class name",
+      "required": [],
+      "title": "priorityClassName",
+      "type": "string"
+    },
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
