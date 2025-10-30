@@ -139,9 +139,11 @@ proxysql:
       #   maxConnections: 1000
       #   compression: false
       #   weight: 1000
+      #   use_ssl: false
     users: []
       # - username: name
       #   password: pwd
+      #   use_ssl: false
       #   maxConnections: 10000
       #   readOnly: false
     slave:
