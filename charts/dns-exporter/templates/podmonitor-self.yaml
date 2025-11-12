@@ -1,0 +1,31 @@
+{{- if and .Values.podMonitor.enabled .Values.podMonitor.selfMonitor.enabled }}
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  name: {{ template "dns-exporter.fullname" . }}
+  {{- with .Values.podMonitor.selfMonitor.namespace }}
+  namespace: {{ . }}
+  {{- end }}
+  labels:
+    {{- include "dns-exporter.labels" . | nindent 4 }}
+    {{- with .Values.podMonitor.selfMonitor.selector }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- with .Values.podMonitor.selfMonitor.additionalLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  endpoints:
+    - port: http
+      {{- with .Values.podMonitor.selfMonitor.interval }}
+      interval: {{ . }}
+      {{- end }}
+      path: /metrics
+      {{- with .Values.podMonitor.selfMonitor.metricRelabelings }}
+      metricRelabelings:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  selector:
+    matchLabels:
+      {{- include "dns-exporter.selectorLabels" . | nindent 6 }}
+{{- end }}
