@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 8.0.2
+## 8.1.0
 
 ### Changed
 
-- dependency of mysql to 14.0.3
+- App Version to 4.6.0
