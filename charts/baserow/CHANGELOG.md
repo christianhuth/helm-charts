@@ -1,7 +1,7 @@
 # baserow
 
-## 5.1.0
+## 6.0.0
 
-### Added
+### Changed
 
-- option to define username key of database secret
+- dependency of redis to 23.2.12
