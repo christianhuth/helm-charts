@@ -26,7 +26,7 @@ jobs:
           python-version: '3.13'
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.7.0
+        uses: helm/chart-testing-action@v2.8.0
 
       - name: helm dependency update on changed charts
         run : ct list-changed --config .github/config/chart-testing.yaml | xargs -d '\n' -I {} helm dependency update {}
