@@ -1,7 +1,7 @@
 # mailcow-exporter
 
-## 1.0.0
+## 1.1.0
 
-### Added
+### Changed
 
-- Initial Version
+- App Version to 2.1.0
