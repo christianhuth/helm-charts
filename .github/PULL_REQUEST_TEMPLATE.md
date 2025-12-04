@@ -2,7 +2,7 @@
 Thank you for contributing to this repository.
 Before you submit this pull request we'd like to make sure you are aware of our technical requirements and best practices:
 
-* https://github.com/christianhuth/helm-charts/tree/pr-template?tab=readme-ov-file#development
+* https://github.com/christianhuth/helm-charts/tree/main?tab=readme-ov-file#development
 * https://helm.sh/docs/chart_best_practices/
 
 Following our best practices right from the start will accelerate the review process and help get your pull request merged quicker.
