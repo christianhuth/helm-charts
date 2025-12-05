@@ -65,6 +65,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | externalRedis.hostname | string | `""` | Hostname of Redis™ |
 | externalRedis.port | int | `6379` | Port used to connect to Redis |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
+| extraEnvFrom | list | `[]` | load additional environment variables from ConfigMaps or Secrets |
 | fullnameOverride | string | `""` | String to fully override `"kutt.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registory |
