@@ -3,7 +3,7 @@ name: squest
 description: Squest is a self-service portal that works on top of Red Hat Ansible Automation Platform/AWX.
 type: application
 version: 4.0.0
-appVersion: "1.29.1-alpine"
+appVersion: "2.8.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
 maintainers:
@@ -23,12 +23,16 @@ dependencies:
     condition: rabbitmq.enabled
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 22.0.7
+    version: 24.1.0
     condition: redis.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
+      description: version of nginx to 1.29.4
+    - kind: changed
       description: dependency of mariadb to 24.0.2
+    - kind: changed
+      description: dependency of redis to 24.1.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
