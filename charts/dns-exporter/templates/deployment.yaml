@@ -14,9 +14,9 @@ spec:
       {{- include "dns-exporter.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- if or .Values.podAnnotations .Values.serviceMonitor.modules}}
+      {{- if or .Values.podAnnotations .Values.serviceMonitor.modules }}
       annotations:
-        {{- if .Values.serviceMonitor.modules}}
+        {{- if .Values.serviceMonitor.modules }}
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         {{- end }}
         {{- if .Values.podAnnotations }}
