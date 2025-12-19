@@ -43,6 +43,22 @@
       "title": "autoscaling",
       "type": "object"
     },
+    "containerPort": {
+      "default": 15353,
+      "description": "Defines port the container and exporter is listening on",
+      "required": [],
+      "title": "containerPort",
+      "type": "integer"
+    },
+    "extraArgs": {
+      "description": "Additional command arguments that will be passed to the exporter",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "extraArgs",
+      "type": "array"
+    },
     "extraEnv": {
       "description": "Additional environment variables that will be added to the deployment",
       "items": {
@@ -233,6 +249,13 @@
       "required": [],
       "title": "podSecurityContext",
       "type": "object"
+    },
+    "priorityClassName": {
+      "default": "",
+      "description": "Priority class name\nref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass",
+      "required": [],
+      "title": "priorityClassName",
+      "type": "string"
     },
     "replicaCount": {
       "default": 1,
@@ -512,6 +535,9 @@
     "tolerations",
     "affinity",
     "extraEnv",
+    "extraArgs",
+    "containerPort",
+    "priorityClassName",
     "serviceMonitor"
   ],
   "type": "object"

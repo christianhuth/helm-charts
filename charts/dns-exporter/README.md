@@ -67,13 +67,13 @@ Instead of defining all the attributes (like family, server, ...) for each targe
 
 ```yaml
 serviceMonitor:
+  modules:
+    google_udp:
+      family: ipv4
+      protocol: udp
+      server: dns.google
+      query_type: NS
   targetsMonitor:
-    modules:
-      google_udp:
-        family: ipv4
-        protocol: udp
-        server: dns.google
-        query_type: NS
     targets:
       - query_name:
           - christianhuth.de
@@ -103,6 +103,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| containerPort | int | `15353` | Defines port the container and exporter is listening on |
+| extraArgs | list | `[]` | Additional command arguments that will be passed to the exporter |
 | extraEnv | list | `[]` | Additional environment variables that will be added to the deployment |
 | fullnameOverride | string | `""` | String to fully override `"netcupscp-exporter.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
@@ -121,6 +123,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to pods |
 | podSecurityContext | object | `{}` | pod-level security context |
+| priorityClassName | string | `""` | Priority class name ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the headwind pods. |
 | revisionHistoryLimit | int | `0` | The number of old ReplicaSets to retain |

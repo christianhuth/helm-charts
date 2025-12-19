@@ -2,7 +2,7 @@ apiVersion: v2
 name: dns-exporter
 description: A multi-target Prometheus exporter with an exclusive focus on DNS monitoring
 type: application
-version: 1.0.2
+version: 1.1.0
 appVersion: "v1.1.0"
 home: https://github.com/christianhuth/helm-charts
 maintainers:
@@ -13,8 +13,16 @@ sources:
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: changed
-      description: content of .helmignore
+    - kind: added
+      description: extraArgs option to be able to specify log level
+    - kind: added
+      description: containerPort to change port container uses
+    - kind: added
+      description: adds support for container reload when module configuration is updated
+    - kind: added
+      description: option to define the priorityClassName
+    - kind: fixed
+      description: issue with example for dns-exporter models in readme
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

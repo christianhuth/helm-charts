@@ -1,3 +1,4 @@
+{{- $configFileLocation := "/home/nonroot/dns_exporter.yml" -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,9 +15,14 @@ spec:
       {{- include "dns-exporter.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
+      {{- if or .Values.podAnnotations .Values.serviceMonitor.modules }}
       annotations:
-        {{- toYaml . | nindent 8 }}
+        {{- if .Values.serviceMonitor.modules }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- end }}
+        {{- if .Values.podAnnotations }}
+          {{- toYaml .Values.podAnnotations | nindent 8 }}
+        {{- end }}
       {{- end }}
       labels:
         {{- include "dns-exporter.selectorLabels" . | nindent 8 }}
@@ -34,6 +40,16 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - "-L"
+            - "0.0.0.0"
+            - "-c"
+            - "{{ $configFileLocation }}"
+            - "-p"
+            - "{{ .Values.containerPort }}"
+            {{- with .Values.extraArgs }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
           {{- if .Values.extraEnv }}
           env:
             # Additional Settings
@@ -41,7 +57,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: 15353
+              containerPort: {{ .Values.containerPort }}
               protocol: TCP
           {{- with .Values.securityContext }}
           securityContext:
@@ -54,7 +70,7 @@ spec:
           {{- if .Values.serviceMonitor.modules }}
           volumeMounts:
             - name: modules
-              mountPath: /home/nonroot/dns_exporter.yml
+              mountPath: {{ $configFileLocation }}
               subPath: dns_exporter.yml
           {{- end }}
       {{- with .Values.nodeSelector }}
@@ -74,4 +90,7 @@ spec:
         - name: modules
           configMap:
             name: {{ include "dns-exporter.fullname" . }}
+      {{- end }}
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
       {{- end }}
