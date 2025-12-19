@@ -1,7 +1,7 @@
 # squest
 
-## 3.0.1
+## 3.0.2
 
 ### Changed
 
-- set erlangCookie for rabbitmq to avoid recreating the secret on each helm execution
+- App Version to 1.29.4-alpine
