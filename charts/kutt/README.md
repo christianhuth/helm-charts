@@ -65,6 +65,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | externalRedis.hostname | string | `""` | Hostname of Redis™ |
 | externalRedis.port | int | `6379` | Port used to connect to Redis |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
+| extraEnvFrom | list | `[]` | load additional environment variables from ConfigMaps or Secrets |
 | fullnameOverride | string | `""` | String to fully override `"kutt.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registory |
@@ -137,6 +138,12 @@ helm install my-release -f values.yaml christianhuth/kutt
 ```
 
 ## Upgrading the Chart
+
+### To 8.0.0
+
+This major updates the PostgreSQL subchart to its newest major, 18.1.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#upgrading) you can find more information about the changes introduced in that version.
+
+It also updates the Redis subchart to its newest major, 24.1.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) you can find more information about the changes introduced in that version.
 
 ### To 7.0.0
 

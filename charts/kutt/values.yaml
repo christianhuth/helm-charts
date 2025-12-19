@@ -115,6 +115,13 @@ extraEnv: []
   # - name: FOO
   #   value: BAR
 
+# -- load additional environment variables from ConfigMaps or Secrets
+extraEnvFrom: []
+  # - configMapRef:
+  #     name: my-configmap
+  # - secretRef:
+  #     name: my-secret
+
 kutt:
   admin:
     # -- Comma seperated list of email addresses that can access admin actions on settings page
