@@ -9053,6 +9053,45 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: added
+          description: extraArgs option to be able to specify log level
+        - kind: added
+          description: containerPort to change port container uses
+        - kind: added
+          description: adds support for container reload when module configuration is updated
+        - kind: added
+          description: option to define the priorityClassName
+        - kind: fixed
+          description: issue with example for dns-exporter models in readme
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Display DNS exporter results using Grafana
+          url: https://grafana.com/api/dashboards/20617/images/15803/image
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v1.1.0
+    created: "2025-12-19T15:12:14.900800606Z"
+    description: A multi-target Prometheus exporter with an exclusive focus on DNS
+      monitoring
+    digest: c25d6fca55808970dd0619e9b58b8e09a4c25ec6a8c8a3cf5706620988ce3017
+    home: https://github.com/christianhuth/helm-charts
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: dns-exporter
+    sources:
+    - https://github.com/tykling/dns_exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/dns-exporter-1.1.0/dns-exporter-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: changed
           description: content of .helmignore
       artifacthub.io/links: |
@@ -68285,4 +68324,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-12-19T14:32:48.827560923Z"
+generated: "2025-12-19T15:12:14.903287063Z"
