@@ -14,7 +14,7 @@ jobs:
           ref: ${{ github.head_ref }}
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: '3.14'
       - run: |
           curl -o /usr/local/bin/gomplate -sSL https://github.com/hairyhenderson/gomplate/releases/download/v4.3.2/gomplate_linux-amd64
           chmod 755 /usr/local/bin/gomplate

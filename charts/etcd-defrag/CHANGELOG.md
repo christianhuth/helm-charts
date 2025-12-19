@@ -1,7 +1,7 @@
 # etcd-defrag
 
-## 1.5.2
+## 1.5.4
 
-### Fixed
+### Changed
 
-- wrong appversion and image tag
+- App Version to v3.6.7

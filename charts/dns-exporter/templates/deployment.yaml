@@ -80,3 +80,6 @@ spec:
           configMap:
             name: {{ include "dns-exporter.fullname" . }}
       {{- end }}
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}

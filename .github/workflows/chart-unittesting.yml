@@ -23,16 +23,16 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: '3.14'
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.7.0
+        uses: helm/chart-testing-action@v2.8.0
 
       - name: helm dependency update on changed charts
         run : ct list-changed --config .github/config/chart-testing.yaml | xargs -d '\n' -I {} helm dependency update {}
 
       - name: Set up helm-unittest plugin
-        run: helm plugin install https://github.com/helm-unittest/helm-unittest.git
+        run: helm plugin install --verify=false https://github.com/helm-unittest/helm-unittest.git
 
       - name: helm unittest on changed charts
         run: ct list-changed --config .github/config/chart-testing.yaml | xargs -d '\n' -I {} helm unittest {}

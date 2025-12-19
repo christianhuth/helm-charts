@@ -25,10 +25,10 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: '3.14'
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.7.0
+        uses: helm/chart-testing-action@v2.8.0
 
       - name: Identify changed charts
         id: get-changed-charts
@@ -57,7 +57,7 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: '3.14'
 
       - name: install pyyaml
         run: pip install pyyaml
@@ -66,7 +66,7 @@ jobs:
         uses: azure/setup-helm@v4
 
       - name: Set up kubeconform-helm plugin
-        run: helm plugin install https://github.com/jtyr/kubeconform-helm
+        run: helm plugin install --verify=false https://github.com/jtyr/kubeconform-helm
 
       - name: helm dependency update on changed chart
         run : helm dependency update ${{ matrix.chart }}

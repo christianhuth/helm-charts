@@ -1,7 +1,11 @@
 # dns-exporter
 
-## 1.0.2
+## 1.1.0
 
-### Changed
+### Added
 
-- content of .helmignore
+- option to define the priorityClassName
+
+### Fixed
+
+- issue with example for dns-exporter models in readme
