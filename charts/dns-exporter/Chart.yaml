@@ -14,6 +14,8 @@ annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
     - kind: added
+      description: adds support for container reload when module configuration is updated
+    - kind: added
       description: option to define the priorityClassName
     - kind: fixed
       description: issue with example for dns-exporter models in readme
