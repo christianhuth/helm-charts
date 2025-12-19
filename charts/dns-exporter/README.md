@@ -121,6 +121,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to pods |
 | podSecurityContext | object | `{}` | pod-level security context |
+| priorityClassName | string | `""` | Priority class name ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the headwind pods. |
 | revisionHistoryLimit | int | `0` | The number of old ReplicaSets to retain |
