@@ -535,6 +535,8 @@
     "tolerations",
     "affinity",
     "extraEnv",
+    "extraArgs",
+    "containerPort",
     "priorityClassName",
     "serviceMonitor"
   ],
