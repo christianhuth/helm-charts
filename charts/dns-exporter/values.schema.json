@@ -236,7 +236,7 @@
     },
     "priorityClassName": {
       "default": "",
-      "description": "Priority class name",
+      "description": "Priority class name\nref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass",
       "required": [],
       "title": "priorityClassName",
       "type": "string"
@@ -519,6 +519,7 @@
     "tolerations",
     "affinity",
     "extraEnv",
+    "priorityClassName",
     "serviceMonitor"
   ],
   "type": "object"
