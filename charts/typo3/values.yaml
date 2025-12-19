@@ -140,6 +140,9 @@ mysql:
     password: typo3
     # -- Name for a custom user to create
     username: typo3
+  image:
+    # -- Image tag for the MySQL™ subchart from Bitnami
+    tag: latest
 
 mariadb:
   # -- enable MariaDB™ subchart from Bitnami
