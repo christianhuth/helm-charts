@@ -1,7 +1,7 @@
 # squest
 
-## 3.0.1
+## 4.0.0
 
 ### Changed
 
-- set erlangCookie for rabbitmq to avoid recreating the secret on each helm execution
+- dependency of redis to 24.1.0
