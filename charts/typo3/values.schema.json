@@ -386,11 +386,28 @@
           "required": [],
           "title": "enabled",
           "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "tag": {
+              "default": "latest",
+              "description": "Image tag for the MySQL™ subchart from Bitnami",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "auth",
+        "image"
       ],
       "title": "mysql",
       "type": "object"
