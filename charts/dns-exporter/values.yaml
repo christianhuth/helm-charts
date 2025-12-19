@@ -109,6 +109,10 @@ extraArgs: []
 # -- Defines port the container and exporter is listening on
 containerPort: 15353
 
+# -- Priority class name
+# ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
+priorityClassName: ""
+
 serviceMonitor:
   # -- Enable a prometheus ServiceMonitor
   enabled: false

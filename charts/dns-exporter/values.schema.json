@@ -250,6 +250,13 @@
       "title": "podSecurityContext",
       "type": "object"
     },
+    "priorityClassName": {
+      "default": "",
+      "description": "Priority class name\nref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass",
+      "required": [],
+      "title": "priorityClassName",
+      "type": "string"
+    },
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
@@ -528,6 +535,7 @@
     "tolerations",
     "affinity",
     "extraEnv",
+    "priorityClassName",
     "serviceMonitor"
   ],
   "type": "object"
