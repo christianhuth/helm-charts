@@ -103,6 +103,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| containerPort | int | `15353` | Defines port the container and exporter is listening on |
+| extraArgs | list | `[]` | Additional command arguments that will be passed to the exporter |
 | extraEnv | list | `[]` | Additional environment variables that will be added to the deployment |
 | fullnameOverride | string | `""` | String to fully override `"netcupscp-exporter.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
