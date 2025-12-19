@@ -4,6 +4,7 @@
 
 ### Added
 
+- adds support for container reload when module configuration is updated
 - option to define the priorityClassName
 
 ### Fixed
