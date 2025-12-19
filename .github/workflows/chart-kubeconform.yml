@@ -66,7 +66,7 @@ jobs:
         uses: azure/setup-helm@v4
 
       - name: Set up kubeconform-helm plugin
-        run: helm plugin install https://github.com/jtyr/kubeconform-helm
+        run: helm plugin install --verify=false https://github.com/jtyr/kubeconform-helm
 
       - name: helm dependency update on changed chart
         run : helm dependency update ${{ matrix.chart }}
