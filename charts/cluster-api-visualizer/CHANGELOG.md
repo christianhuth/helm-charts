@@ -1,7 +1,7 @@
 # cluster-api-visualizer
 
-## 0.1.4
+## 0.2.0
 
 ### Changed
 
-- url for Icon
+- App Version to v1.5.0
