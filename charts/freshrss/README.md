@@ -132,6 +132,12 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 helm install my-release -f values.yaml christianhuth/freshrss
 ```
 
+## Upgrading
+
+### To 2.0.0
+
+This major updates the PostgreSQL subchart to its newest major, 18.1.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#upgrading) you can find more information about the changes introduced in that version.
+
 ## Initialization
 
 This Chart can initialize FreshRSS on the first installation using the attribute `freshrss.initialization.enabled`, which defaults to `true`.
