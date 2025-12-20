@@ -56,6 +56,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | mysql.fullnameOverride | string | `"passbolt-mysql"` |  |
 | mysql.global.storageClass | string | `""` |  |
 | mysql.image.pullPolicy | string | `"Always"` |  |
+| mysql.image.tag | string | `"latest"` |  |
 | mysql.metrics.enabled | bool | `false` |  |
 | mysql.metrics.image.pullPolicy | string | `"Always"` |  |
 | mysql.metrics.serviceMonitor.enabled | bool | `false` |  |
