@@ -2,7 +2,7 @@ apiVersion: v2
 name: baserow
 description: Baserow is an open source no-code database and Airtable alternative.
 type: application
-version: 5.1.0
+version: 6.0.0
 appVersion: "1.35.1"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/baserow/icon.svg
@@ -19,13 +19,13 @@ dependencies:
     condition: postgresql.enabled
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 22.0.7
+    version: 24.1.0
     condition: redis.enabled
 annotations:
   artifacthub.io/category: database
   artifacthub.io/changes: |
-    - kind: added
-      description: option to define username key of database secret
+    - kind: changed
+      description: dependency of redis to 24.1.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
