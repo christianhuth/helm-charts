@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 8.0.2
+## 9.0.0
 
 ### Changed
 
-- dependency of mysql to 14.0.3
+- dependency of postgresql to 18.1.15
