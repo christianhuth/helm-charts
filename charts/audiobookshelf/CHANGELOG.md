@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 1.3.0
+## 1.4.0
 
 ### Changed
 
-- App Version to 2.31.0
+- App Version to 2.32.0
