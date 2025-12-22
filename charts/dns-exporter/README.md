@@ -119,9 +119,24 @@ The command removes all the Kubernetes components associated with the chart and 
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | ingress.tls | list | `[]` |  |
+| modulesConfig | object | `{}` | Define modules that can be used inside your targets |
 | nameOverride | string | `""` | Provide a name in place of `netcupscp-exporter` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to pods |
+| podMonitor.enabled | bool | `false` | Enable a prometheus PodMonitor CR for google managed prometheus |
+| podMonitor.selfMonitor.additionalLabels | object | `{}` | Prometheus PodMonitor labels |
+| podMonitor.selfMonitor.enabled | bool | `true` | Enable a prometheus PodMonitor to monitor the DNS Exporter |
+| podMonitor.selfMonitor.interval | string | `"30s"` | Prometheus PodMonitor interval |
+| podMonitor.selfMonitor.metricRelabelings | list | `[]` | Prometheus [MetricRelabelConfigs] to apply to samples before ingestion |
+| podMonitor.selfMonitor.namespace | string | `""` | Prometheus PodMonitor namespace |
+| podMonitor.selfMonitor.selector | object | `{}` | Prometheus PodMonitor selector |
+| podMonitor.targetsMonitor.additionalLabels | object | `{}` | Prometheus PodMonitor labels |
+| podMonitor.targetsMonitor.enabled | bool | `true` | Enable a prometheus PodMonitor to monitor the Targets of the DNS Exporter |
+| podMonitor.targetsMonitor.interval | string | `"30s"` | Prometheus PodMonitor interval |
+| podMonitor.targetsMonitor.metricRelabelings | list | `[]` | Prometheus [MetricRelabelConfigs] to apply to samples before ingestion |
+| podMonitor.targetsMonitor.namespace | string | `""` | Prometheus PodMonitor namespace |
+| podMonitor.targetsMonitor.selector | object | `{}` | Prometheus PodMonitor selector |
+| podMonitor.targetsMonitor.targets | list | `[]` | Targets that should be scraped by the DNS-Exporter |
 | podSecurityContext | object | `{}` | pod-level security context |
 | priorityClassName | string | `""` | Priority class name ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass |
 | replicaCount | int | `1` | Number of replicas |
@@ -134,7 +149,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
 | serviceMonitor.enabled | bool | `false` | Enable a prometheus ServiceMonitor |
-| serviceMonitor.modules | object | `{}` | Define modules that can be used inside your targets |
 | serviceMonitor.selfMonitor.additionalLabels | object | `{}` | Prometheus ServiceMonitor labels |
 | serviceMonitor.selfMonitor.enabled | bool | `true` | Enable a prometheus ServiceMonitor to monitor the DNS Exporter |
 | serviceMonitor.selfMonitor.interval | string | `"30s"` | Prometheus ServiceMonitor interval |
