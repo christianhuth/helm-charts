@@ -22,6 +22,10 @@ spec:
       {{- end }}
     spec:
       template:
+        {{- with .Values.podSecurityContext }}
+        securityContext:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         spec:
           {{- with .Values.imagePullSecrets }}
           imagePullSecrets:
