@@ -26,7 +26,6 @@ mysql:
     storageClass: ""
   image:
     pullPolicy: Always
-    tag: latest
   metrics:
     enabled: false
     image:
