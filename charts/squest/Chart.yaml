@@ -33,6 +33,8 @@ annotations:
       description: dependency of mariadb to 24.0.2
     - kind: changed
       description: dependency of redis to 24.1.0
+    - kind: changed
+      description: repository and tag of mariadb and redis image
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
