@@ -1,7 +1,10 @@
 # squest
 
-## 3.0.1
+## 4.0.0
 
 ### Changed
 
-- set erlangCookie for rabbitmq to avoid recreating the secret on each helm execution
+- version of nginx to 1.29.4
+- dependency of mariadb to 24.0.2
+- dependency of redis to 24.1.0
+- image repository and tag for subcharts
