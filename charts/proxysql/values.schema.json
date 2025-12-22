@@ -519,7 +519,7 @@
               "type": "array"
             },
             "slave": {
-              "description": "- username: name\n  password: pwd\n  maxConnections: 10000\n  readOnly: false",
+              "description": "- username: name\n  password: pwd\n  use_ssl: false\n  maxConnections: 10000\n  readOnly: false",
               "properties": {
                 "checkType": {
                   "default": "read_only",
@@ -542,7 +542,7 @@
               "type": "object"
             },
             "users": {
-              "description": "- isWriter: true\n  hostname: example.mysql.org\n  port: 3306\n  maxConnections: 1000\n  compression: false\n  weight: 1000",
+              "description": "- isWriter: true\n  hostname: example.mysql.org\n  port: 3306\n  maxConnections: 1000\n  compression: false\n  weight: 1000\n  use_ssl: false",
               "items": {
                 "required": []
               },
