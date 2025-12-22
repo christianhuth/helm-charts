@@ -1,0 +1,147 @@
+# Copyright (c) 2025 Erick Bourgeois, firestoned
+# SPDX-License-Identifier: MIT
+#
+# This file is AUTO-GENERATED from src/crd.rs
+# DO NOT EDIT MANUALLY - Run `cargo run --bin crdgen` to regenerate
+#
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: mxrecords.bindy.firestoned.io
+spec:
+  group: bindy.firestoned.io
+  names:
+    categories: []
+    kind: MXRecord
+    plural: mxrecords
+    shortNames:
+    - mx
+    singular: mxrecord
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.zoneRef
+      name: ZoneRef
+      type: string
+    - jsonPath: .spec.name
+      name: Name
+      type: string
+    - jsonPath: .spec.ttl
+      name: TTL
+      type: integer
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: Ready
+      type: string
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: MXRecord specifies mail exchange servers for a domain. Lower priority values indicate higher preference for mail delivery.
+        properties:
+          spec:
+            description: |-
+              `MXRecord` specifies mail servers for a domain.
+
+              MX (Mail Exchange) records specify the mail servers responsible for accepting email
+              for a domain. Lower priority values indicate higher preference.
+
+              # Example
+
+              ```yaml
+              apiVersion: bindy.firestoned.io/v1alpha1
+              kind: MXRecord
+              metadata:
+                name: mail-example-com
+              spec:
+                zoneRef: example-com
+                name: "@"
+                priority: 10
+                mailServer: mail.example.com.
+                ttl: 3600
+              ```
+            properties:
+              mailServer:
+                description: |-
+                  Fully qualified domain name of the mail server.
+
+                  Must end with a dot. Example: "mail.example.com."
+                type: string
+              name:
+                description: Record name within the zone. Use "@" for the zone apex.
+                type: string
+              priority:
+                description: |-
+                  Priority (preference) of this mail server. Lower values = higher priority.
+
+                  Common values: 0-100. Multiple MX records can exist with different priorities.
+                format: int32
+                maximum: 65535.0
+                minimum: 0.0
+                type: integer
+              ttl:
+                description: Time To Live in seconds.
+                format: int32
+                maximum: 2147483647.0
+                minimum: 0.0
+                nullable: true
+                type: integer
+              zoneRef:
+                description: |-
+                  Reference to a `DNSZone` resource by metadata.name.
+
+                  Directly references a `DNSZone` resource in the same namespace by its Kubernetes resource name.
+                type: string
+            required:
+            - mailServer
+            - name
+            - priority
+            - zoneRef
+            type: object
+          status:
+            description: Generic record status
+            nullable: true
+            properties:
+              conditions:
+                default: []
+                items:
+                  description: |-
+                    Condition represents an observation of a resource's current state.
+
+                    Conditions are used in status subresources to communicate the state of
+                    a resource to users and controllers.
+                  properties:
+                    lastTransitionTime:
+                      description: Last time the condition transitioned from one status to another (RFC3339 format).
+                      nullable: true
+                      type: string
+                    message:
+                      description: Human-readable message indicating details about the transition.
+                      nullable: true
+                      type: string
+                    reason:
+                      description: Brief CamelCase reason for the condition's last transition.
+                      nullable: true
+                      type: string
+                    status:
+                      description: 'Status of the condition: True, False, or Unknown.'
+                      type: string
+                    type:
+                      description: 'Type of condition. Common types include: Ready, Available, Progressing, Degraded, Failed.'
+                      type: string
+                  required:
+                  - status
+                  - type
+                  type: object
+                type: array
+              observedGeneration:
+                format: int64
+                nullable: true
+                type: integer
+            type: object
+        required:
+        - spec
+        title: MXRecord
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

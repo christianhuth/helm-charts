@@ -1,0 +1,142 @@
+# Copyright (c) 2025 Erick Bourgeois, firestoned
+# SPDX-License-Identifier: MIT
+#
+# This file is AUTO-GENERATED from src/crd.rs
+# DO NOT EDIT MANUALLY - Run `cargo run --bin crdgen` to regenerate
+#
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: cnamerecords.bindy.firestoned.io
+spec:
+  group: bindy.firestoned.io
+  names:
+    categories: []
+    kind: CNAMERecord
+    plural: cnamerecords
+    shortNames:
+    - cname
+    singular: cnamerecord
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.zoneRef
+      name: ZoneRef
+      type: string
+    - jsonPath: .spec.name
+      name: Name
+      type: string
+    - jsonPath: .spec.ttl
+      name: TTL
+      type: integer
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: Ready
+      type: string
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: CNAMERecord creates a DNS alias from one hostname to another. A CNAME cannot coexist with other record types for the same name.
+        properties:
+          spec:
+            description: |-
+              `CNAMERecord` creates an alias from one name to another.
+
+              CNAME (Canonical Name) records create an alias from one DNS name to another.
+              The target can be in the same zone or a different zone.
+
+              **Important**: A CNAME cannot coexist with other record types for the same name.
+
+              # Example
+
+              ```yaml
+              apiVersion: bindy.firestoned.io/v1alpha1
+              kind: CNAMERecord
+              metadata:
+                name: blog-example-com
+              spec:
+                zoneRef: example-com
+                name: blog
+                target: example.github.io.
+                ttl: 3600
+              ```
+            properties:
+              name:
+                description: |-
+                  Record name within the zone.
+
+                  Note: CNAME records cannot be created at the zone apex (@).
+                type: string
+              target:
+                description: |-
+                  Target hostname (canonical name).
+
+                  Should be a fully qualified domain name ending with a dot.
+                  Example: "example.com." or "www.example.com."
+                type: string
+              ttl:
+                description: Time To Live in seconds.
+                format: int32
+                maximum: 2147483647.0
+                minimum: 0.0
+                nullable: true
+                type: integer
+              zoneRef:
+                description: |-
+                  Reference to a `DNSZone` resource by metadata.name.
+
+                  Directly references a `DNSZone` resource in the same namespace by its Kubernetes resource name.
+                type: string
+            required:
+            - name
+            - target
+            - zoneRef
+            type: object
+          status:
+            description: Generic record status
+            nullable: true
+            properties:
+              conditions:
+                default: []
+                items:
+                  description: |-
+                    Condition represents an observation of a resource's current state.
+
+                    Conditions are used in status subresources to communicate the state of
+                    a resource to users and controllers.
+                  properties:
+                    lastTransitionTime:
+                      description: Last time the condition transitioned from one status to another (RFC3339 format).
+                      nullable: true
+                      type: string
+                    message:
+                      description: Human-readable message indicating details about the transition.
+                      nullable: true
+                      type: string
+                    reason:
+                      description: Brief CamelCase reason for the condition's last transition.
+                      nullable: true
+                      type: string
+                    status:
+                      description: 'Status of the condition: True, False, or Unknown.'
+                      type: string
+                    type:
+                      description: 'Type of condition. Common types include: Ready, Available, Progressing, Degraded, Failed.'
+                      type: string
+                  required:
+                  - status
+                  - type
+                  type: object
+                type: array
+              observedGeneration:
+                format: int64
+                nullable: true
+                type: integer
+            type: object
+        required:
+        - spec
+        title: CNAMERecord
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

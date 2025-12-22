@@ -1,0 +1,16 @@
+{{- if (and .Values.rbac.create .Values.rbac.adminRole.create .Values.rbac.adminRole.bindToBindy) }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    {{- include "bindy.labels" . | nindent 4 }}
+  name: {{ include "bindy.fullname" . }}-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "bindy.fullname" . }}-admin
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "bindy.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end }}

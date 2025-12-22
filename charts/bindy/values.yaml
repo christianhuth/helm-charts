@@ -1,0 +1,153 @@
+# -- Provide a name in place of `bindy`
+nameOverride: ""
+
+# -- String to fully override `"bindy.fullname"`
+fullnameOverride: ""
+
+image:
+  # -- image registry
+  registry: ghcr.io
+  # -- image repository
+  repository: firestoned/bindy
+  # -- image pull policy
+  pullPolicy: Always
+  # -- Overrides the image tag
+  tag: "vsha-663a19a"
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+# -- Number of replicas
+replicaCount: 1
+
+# -- The number of old ReplicaSets to retain
+revisionHistoryLimit: 0
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Annotations to be added to exporter pods
+podAnnotations: {}
+
+# -- pod-level security context
+# @default -- see [values.yaml](./values.yaml)
+podSecurityContext:
+  fsGroup: 65534
+  runAsNonRoot: true
+
+# -- container-level security context
+# @default -- see [values.yaml](./values.yaml)
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 65534
+
+service:
+  # -- Kubernetes service type
+  type: ClusterIP
+  # -- Kubernetes port where service is exposed
+  port: 80
+
+# -- Resource limits and requests for the pods.
+# @default -- see [values.yaml](./values.yaml)
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  # -- Enable Horizontal POD autoscaling
+  enabled: false
+  # -- Minimum number of replicas
+  minReplicas: 1
+  # -- Maximum number of replicas
+  maxReplicas: 100
+  # -- Target CPU utilization percentage
+  targetCPUUtilizationPercentage: 80
+  # -- Target Memory utilization percentage
+  # targetMemoryUtilizationPercentage: 80
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Toleration labels for pod assignment
+tolerations: []
+
+# -- Affinity settings for pod assignment
+affinity: {}
+
+# -- additional environment variables to be added to the pods
+extraEnv: []
+  # - name: FOO
+  #   value: BAR
+
+# -- additional environment variables from ConfigMaps or Secrets
+extraEnvFrom: []
+  # - configMapRef:
+  #     name: my-configmap
+  # - secretRef:
+  #     name: my-secret
+
+config:
+  leaderElection:
+    # -- Enable leader election for controller manager
+    enabled: true
+    # -- Lease name for leader election
+    leaseName: bindy-leader
+    # -- Lease duration in seconds
+    leaseDurationSeconds: 15
+    # -- Renew deadline in seconds
+    renewDeadlineSeconds: 10
+    # -- Retry period in seconds
+    retryPeriodSeconds: 2
+  log:
+    # -- Log format: text or json
+    format: json
+    # -- Log level for the controller: error, warn, info, debug, trace
+    level: info
+
+rbac:
+  # -- Create RBAC resources
+  create: true
+  adminRole:
+    # -- Create admin role that enables the deletion of resources
+    create: false
+    # -- Create a rolebinding to allow Bindy to delete resources
+    bindToBindy: false
+
+serviceMonitor:
+   # -- Enable a Prometheus ServiceMonitor
+  enabled: false
+  # -- Prometheus ServiceMonitor labels
+  additionalLabels: {}
+    # release: prometheus
+  # -- Prometheus ServiceMonitor selector
+  selector: {}
+    # prometheus: kube-prometheus
+  # -- Prometheus ServiceMonitor interval
+  interval: 30s
+  # -- Prometheus ServiceMonitor namespace
+  namespace: ""
+  # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
+  metricRelabelings: []
+  # -- Prometheus [RelabelConfigs] to apply to samples before scraping
+  relabelings: []
+    # - source_labels: [__address__]
+    #   target_label: __param_target
+    # - source_labels: [__param_target]
+    #   target_label: instance
+    # - target_label: __address__
+    #   replacement: prometheus-pve-exporter:9221  # PVE exporter service.

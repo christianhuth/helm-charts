@@ -1,0 +1,303 @@
+# Copyright (c) 2025 Erick Bourgeois, firestoned
+# SPDX-License-Identifier: MIT
+#
+# This file is AUTO-GENERATED from src/crd.rs
+# DO NOT EDIT MANUALLY - Run `cargo run --bin crdgen` to regenerate
+#
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: dnszones.bindy.firestoned.io
+spec:
+  group: bindy.firestoned.io
+  names:
+    categories: []
+    kind: DNSZone
+    plural: dnszones
+    shortNames:
+    - zone
+    - zones
+    - dz
+    - dzs
+    singular: dnszone
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.zoneName
+      name: Zone
+      type: string
+    - jsonPath: .spec.clusterRef
+      name: Cluster
+      type: string
+    - jsonPath: .spec.globalClusterRef
+      name: Global Cluster
+      type: string
+    - jsonPath: .spec.ttl
+      name: TTL
+      type: integer
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: Ready
+      type: string
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: DNSZone represents an authoritative DNS zone managed by BIND9. Each DNSZone defines a zone (e.g., example.com) with SOA record parameters. Can reference either a namespace-scoped Bind9Cluster or cluster-scoped Bind9GlobalCluster.
+        properties:
+          spec:
+            description: |-
+              `DNSZone` defines a DNS zone to be managed by BIND9.
+
+              A `DNSZone` represents an authoritative DNS zone (e.g., example.com) that will be
+              served by a BIND9 cluster. The zone includes SOA record information and will be
+              synchronized to all instances in the referenced cluster via AXFR/IXFR.
+
+              `DNSZones` can reference either:
+              - A namespace-scoped `Bind9Cluster` (using `clusterRef`)
+              - A cluster-scoped `Bind9GlobalCluster` (using `globalClusterRef`)
+
+              Exactly one of `clusterRef` or `globalClusterRef` must be specified.
+
+              # Example: Namespace-scoped Cluster
+
+              ```yaml
+              apiVersion: bindy.firestoned.io/v1alpha1
+              kind: DNSZone
+              metadata:
+                name: example-com
+                namespace: dev-team-alpha
+              spec:
+                zoneName: example.com
+                clusterRef: dev-team-dns  # References Bind9Cluster in same namespace
+                soaRecord:
+                  primaryNs: ns1.example.com.
+                  adminEmail: admin.example.com.
+                  serial: 2024010101
+                  refresh: 3600
+                  retry: 600
+                  expire: 604800
+                  negativeTtl: 86400
+                ttl: 3600
+              ```
+
+              # Example: Cluster-scoped Global Cluster
+
+              ```yaml
+              apiVersion: bindy.firestoned.io/v1alpha1
+              kind: DNSZone
+              metadata:
+                name: production-example-com
+                namespace: production
+              spec:
+                zoneName: example.com
+                globalClusterRef: shared-production-dns  # References Bind9GlobalCluster (cluster-scoped)
+                soaRecord:
+                  primaryNs: ns1.example.com.
+                  adminEmail: admin.example.com.
+                  serial: 2024010101
+                  refresh: 3600
+                  retry: 600
+                  expire: 604800
+                  negativeTtl: 86400
+                ttl: 3600
+              ```
+            properties:
+              clusterRef:
+                description: |-
+                  Reference to a namespace-scoped `Bind9Cluster` in the same namespace.
+
+                  Must match the name of a `Bind9Cluster` resource in the same namespace.
+                  The zone will be added to all instances in this cluster.
+
+                  Either `clusterRef` or `globalClusterRef` must be specified (not both).
+                nullable: true
+                type: string
+              globalClusterRef:
+                description: |-
+                  Reference to a cluster-scoped `Bind9GlobalCluster`.
+
+                  Must match the name of a `Bind9GlobalCluster` resource (cluster-scoped).
+                  The zone will be added to all instances in this global cluster.
+
+                  Either `clusterRef` or `globalClusterRef` must be specified (not both).
+                nullable: true
+                type: string
+              nameServerIps:
+                additionalProperties:
+                  type: string
+                description: |-
+                  Map of nameserver hostnames to IP addresses for glue records.
+
+                  Glue records provide IP addresses for nameservers within the zone's own domain.
+                  This is necessary when delegating subdomains where the nameserver is within the
+                  delegated zone itself.
+
+                  Example: When delegating `sub.example.com` with nameserver `ns1.sub.example.com`,
+                  you must provide the IP address of `ns1.sub.example.com` as a glue record.
+
+                  Format: `{"ns1.example.com.": "192.0.2.1", "ns2.example.com.": "192.0.2.2"}`
+
+                  Note: Nameserver hostnames should end with a dot (.) for FQDN.
+                nullable: true
+                type: object
+              soaRecord:
+                description: |-
+                  SOA (Start of Authority) record - defines zone authority and refresh parameters.
+
+                  The SOA record is required for all authoritative zones and contains
+                  timing information for zone transfers and caching.
+                properties:
+                  adminEmail:
+                    description: |-
+                      Email address of the zone administrator (@ replaced with ., must end with .).
+
+                      Example: `admin.example.com.` for admin@example.com
+                    pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.$
+                    type: string
+                  expire:
+                    description: |-
+                      Expire time in seconds. After this time, secondaries stop serving the zone
+                      if they can't contact the primary.
+
+                      Should be much larger than refresh+retry. Typical values: 604800-2419200 (1-4 weeks).
+                    format: int32
+                    maximum: 2147483647.0
+                    minimum: 1.0
+                    type: integer
+                  negativeTtl:
+                    description: |-
+                      Negative caching TTL in seconds. How long to cache NXDOMAIN responses.
+
+                      Typical values: 300-86400 (5 minutes to 1 day).
+                    format: int32
+                    maximum: 2147483647.0
+                    minimum: 0.0
+                    type: integer
+                  primaryNs:
+                    description: |-
+                      Primary nameserver for this zone (must be a FQDN ending with .).
+
+                      Example: `ns1.example.com.`
+                    pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.$
+                    type: string
+                  refresh:
+                    description: |-
+                      Refresh interval in seconds. How often secondaries should check for updates.
+
+                      Typical values: 3600-86400 (1 hour to 1 day).
+                    format: int32
+                    maximum: 2147483647.0
+                    minimum: 1.0
+                    type: integer
+                  retry:
+                    description: |-
+                      Retry interval in seconds. How long to wait before retrying a failed refresh.
+
+                      Should be less than refresh. Typical values: 600-7200 (10 minutes to 2 hours).
+                    format: int32
+                    maximum: 2147483647.0
+                    minimum: 1.0
+                    type: integer
+                  serial:
+                    description: |-
+                      Serial number for this zone. Typically in YYYYMMDDNN format.
+                      Secondaries use this to determine if they need to update.
+
+                      Must be a 32-bit unsigned integer (0 to 4294967295).
+                      The field is i64 to accommodate the full u32 range.
+                    format: int64
+                    maximum: 4294967295.0
+                    minimum: 0.0
+                    type: integer
+                required:
+                - adminEmail
+                - expire
+                - negativeTtl
+                - primaryNs
+                - refresh
+                - retry
+                - serial
+                type: object
+              ttl:
+                description: |-
+                  Default TTL (Time To Live) for records in this zone, in seconds.
+
+                  If not specified, individual records must specify their own TTL.
+                  Typical values: 300-86400 (5 minutes to 1 day).
+                format: int32
+                maximum: 2147483647.0
+                minimum: 0.0
+                nullable: true
+                type: integer
+              zoneName:
+                description: |-
+                  DNS zone name (e.g., "example.com").
+
+                  Must be a valid DNS zone name. Can be a domain or subdomain.
+                  Examples: "example.com", "internal.example.com", "10.in-addr.arpa"
+                pattern: ^([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)*[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$
+                type: string
+            required:
+            - soaRecord
+            - zoneName
+            type: object
+          status:
+            description: '`DNSZone` status'
+            nullable: true
+            properties:
+              conditions:
+                default: []
+                items:
+                  description: |-
+                    Condition represents an observation of a resource's current state.
+
+                    Conditions are used in status subresources to communicate the state of
+                    a resource to users and controllers.
+                  properties:
+                    lastTransitionTime:
+                      description: Last time the condition transitioned from one status to another (RFC3339 format).
+                      nullable: true
+                      type: string
+                    message:
+                      description: Human-readable message indicating details about the transition.
+                      nullable: true
+                      type: string
+                    reason:
+                      description: Brief CamelCase reason for the condition's last transition.
+                      nullable: true
+                      type: string
+                    status:
+                      description: 'Status of the condition: True, False, or Unknown.'
+                      type: string
+                    type:
+                      description: 'Type of condition. Common types include: Ready, Available, Progressing, Degraded, Failed.'
+                      type: string
+                  required:
+                  - status
+                  - type
+                  type: object
+                type: array
+              observedGeneration:
+                format: int64
+                nullable: true
+                type: integer
+              recordCount:
+                format: int32
+                nullable: true
+                type: integer
+              secondaryIps:
+                description: |-
+                  IP addresses of secondary servers configured for zone transfers.
+                  Used to detect when secondary IPs change and zones need updating.
+                items:
+                  type: string
+                nullable: true
+                type: array
+            type: object
+        required:
+        - spec
+        title: DNSZone
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
