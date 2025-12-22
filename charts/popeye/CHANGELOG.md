@@ -1,7 +1,7 @@
 # popeye
 
-## 2.4.1
+## 2.4.2
 
-### Added
+### Fixed
 
-- option to define the image registry
+- not referencing .Values.podSecurityContext correctly in cronjob template
