@@ -22,6 +22,8 @@ annotations:
   artifacthub.io/changes: |
     - kind: changed
       description: dependency of postgresql to 18.1.15
+    - kind: changed
+      description: image repo and tag for subchart
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

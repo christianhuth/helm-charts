@@ -145,6 +145,11 @@ postgresql:
     password: mychart
     # -- Name for a custom user to create
     username: mychart
+  image:
+    # -- image repository for PostgreSQL™ subchart from Bitnami
+    repository: bitnamilegacy/postgresql
+    # -- image tag for PostgreSQL™ subchart from Bitnami
+    tag: 17.6.0-debian-12-r4
 
 externalPostgresql:
   ## Authentication parameters
