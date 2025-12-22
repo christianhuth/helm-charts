@@ -105,7 +105,7 @@ data:
         compression={{ (int $element.compression) | default 0 }}
         max_connections={{ $element.maxConnections | default 1000 }}
         max_replication_lag={{ $element.maxReplicationLag | default 0 }}
-        use_ssl=0
+        use_ssl={{ (int $element.use_ssl) | default 0 }}
       }{{- if lt (add1 $index) $totalServers -}},{{- end -}}
       {{- end }}
     )
@@ -146,11 +146,17 @@ data:
       {
         username="{{ required "mysql username is required!" $element.username }}"
         password="{{ required "mysql passowrd is required!" $element.password }}"
-        use_ssl=0
+        use_ssl={{ (int $element.use_ssl) | default 0 }}
         default_hostgroup={{ (add1 (int $element.readOnly | default 0)) }}
         transaction_persistent=1
         active=1
         max_connections={{ $element.maxConnections | default 10000 }}
+        {{- if eq (toString $element.frontend) "0" }}
+        frontend={{ toString $element.frontend }}
+        {{- end }}
+        {{- if eq (toString $element.backend) "0" }}
+        backend={{ toString $element.backend }}
+        {{- end }}
       }{{- if lt (add1 $index) $totalUsers -}},{{- end -}}
       {{- end }}
     )
