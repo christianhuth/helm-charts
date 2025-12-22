@@ -3,6 +3,11 @@ nameOverride: ""
 # -- String to fully override `"shlink-backend.fullname"`
 fullnameOverride: ""
 
+# @ignored
+global:
+  security:
+    allowInsecureImages: true
+
 image:
   # -- image registry
   registry: docker.io
