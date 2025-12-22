@@ -1,14 +1,11 @@
 # dns-exporter
 
-## 1.1.0
+## 2.0.0
 
 ### Added
 
-- extraArgs option to be able to specify log level
-- containerPort to change port container uses
-- adds support for container reload when module configuration is updated
-- option to define the priorityClassName
+- PodMonitor resource
 
-### Fixed
+### Changed
 
-- issue with example for dns-exporter models in readme
+- serviceMonitor.modules moved to modulesConfig

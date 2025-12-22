@@ -1,0 +1,40 @@
+{{- if (and .Values.podMonitor.enabled .Values.podMonitor.selfMonitor.enabled) }}
+{{- if (eq .Values.podMonitor.type "google") }}
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+{{- else if (eq .Values.podMonitor.type "prometheus") }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+{{- end }}
+metadata:
+  labels:
+    {{- include "dns-exporter.labels" . | nindent 4 }}
+    {{- with .Values.podMonitor.selfMonitor.selector }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- with .Values.podMonitor.selfMonitor.additionalLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ template "dns-exporter.fullname" . }}
+  {{- with .Values.podMonitor.selfMonitor.namespace }}
+  namespace: {{ . }}
+  {{- end }}
+spec:
+  {{- if (eq .Values.podMonitor.type "google") }}
+  endpoints:
+  {{- else if (eq .Values.podMonitor.type "prometheus") }}
+  podMetricsEndpoints:
+  {{- end }}
+    - port: http
+      {{- with .Values.podMonitor.selfMonitor.interval }}
+      interval: {{ . }}
+      {{- end }}
+      path: /metrics
+      {{- with .Values.podMonitor.selfMonitor.metricRelabelings }}
+      metricRelabelings:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  selector:
+    matchLabels:
+      {{- include "dns-exporter.selectorLabels" . | nindent 6 }}
+{{- end }}
