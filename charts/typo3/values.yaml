@@ -141,8 +141,8 @@ mysql:
     # -- Name for a custom user to create
     username: typo3
   image:
-    # -- Image tag for the MySQL™ subchart from Bitnami
-    tag: latest
+    # -- image repository for MySQL™ subchart from Bitnami
+    repository: bitnamilegacy/mysql
 
 mariadb:
   # -- enable MariaDB™ subchart from Bitnami

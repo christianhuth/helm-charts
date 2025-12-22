@@ -32,7 +32,7 @@ annotations:
     - kind: changed
       description: dependency of postgresql to 18.1.15
     - kind: changed
-      description: image tag for mysql subchart to latest
+      description: image repository for mysql subchart to bitnamilegacy
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
