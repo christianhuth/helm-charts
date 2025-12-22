@@ -2,8 +2,26 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "properties": {
     "global": {
-      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
-      "required": [],
+      "properties": {
+        "security": {
+          "properties": {
+            "allowInsecureImages": {
+              "default": true,
+              "required": [],
+              "title": "allowInsecureImages",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "allowInsecureImages"
+          ],
+          "title": "security",
+          "type": "object"
+        }
+      },
+      "required": [
+        "security"
+      ],
       "title": "global",
       "type": "object"
     },
@@ -91,10 +109,24 @@
               "required": [],
               "title": "pullPolicy",
               "type": "string"
+            },
+            "repository": {
+              "default": "bitnamilegacy/mysql",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "9.4.0-debian-12-r1",
+              "required": [],
+              "title": "tag",
+              "type": "string"
             }
           },
           "required": [
-            "pullPolicy"
+            "pullPolicy",
+            "repository",
+            "tag"
           ],
           "title": "image",
           "type": "object"
@@ -251,10 +283,24 @@
                   "required": [],
                   "title": "pullPolicy",
                   "type": "string"
+                },
+                "repository": {
+                  "default": "bitnamilegacy/os-shell",
+                  "required": [],
+                  "title": "repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "default": "12-debian-12-r50",
+                  "required": [],
+                  "title": "tag",
+                  "type": "string"
                 }
               },
               "required": [
-                "pullPolicy"
+                "pullPolicy",
+                "repository",
+                "tag"
               ],
               "title": "image",
               "type": "object"
@@ -866,6 +912,7 @@
     }
   },
   "required": [
+    "global",
     "mysql",
     "passbolt",
     "proxysql"
