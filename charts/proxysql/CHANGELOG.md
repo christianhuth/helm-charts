@@ -1,7 +1,7 @@
 # proxysql
 
-## 2.1.0
+## 2.1.1
 
 ### Changed
 
-- handling of values in configmap
+- App Version to 3.0.4
