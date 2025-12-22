@@ -95,6 +95,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | postgresql.auth.password | string | `"mychart"` | Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided |
 | postgresql.auth.username | string | `"mychart"` | Name for a custom user to create |
 | postgresql.enabled | bool | `true` | enable PostgreSQL™ subchart from Bitnami |
+| postgresql.image.repository | string | `"bitnamilegacy/postgresql"` | image repository for PostgreSQL™ subchart from Bitnami |
+| postgresql.image.tag | string | `"17.6.0-debian-12-r4"` | image tag for PostgreSQL™ subchart from Bitnami |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the headwind pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
@@ -115,6 +117,10 @@ helm install my-release -f values.yaml christianhuth/headwind-mdm
 ```
 
 ## Upgrading the Chart
+
+### To 4.0.0
+
+This major updates the PostgreSQL subchart to its newest major, 18.1.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#upgrading) you can find more information about the changes introduced in that version.
 
 ### To 3.0.0
 
