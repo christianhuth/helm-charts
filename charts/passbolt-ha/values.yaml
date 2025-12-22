@@ -1,4 +1,8 @@
 ---
+global:
+  security:
+    allowInsecureImages: true
+
 mysql:
   affinity: {}
     # podAntiAffinity:
@@ -26,7 +30,8 @@ mysql:
     storageClass: ""
   image:
     pullPolicy: Always
-    tag: latest
+    repository: bitnamilegacy/mysql
+    tag: 9.4.0-debian-12-r1
   metrics:
     enabled: false
     image:
@@ -49,6 +54,8 @@ mysql:
     enabled: true
     image:
       pullPolicy: Always
+      repository: bitnamilegacy/os-shell
+      tag: 12-debian-12-r50
 
 passbolt:
   db:

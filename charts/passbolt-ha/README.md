@@ -46,6 +46,7 @@ The command removes all the Kubernetes components associated with the chart and 
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| global.security.allowInsecureImages | bool | `true` |  |
 | mysql.affinity | object | `{}` |  |
 | mysql.architecture | string | `"replication"` |  |
 | mysql.auth.database | string | `"passbolt"` |  |
@@ -56,7 +57,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | mysql.fullnameOverride | string | `"passbolt-mysql"` |  |
 | mysql.global.storageClass | string | `""` |  |
 | mysql.image.pullPolicy | string | `"Always"` |  |
-| mysql.image.tag | string | `"latest"` |  |
+| mysql.image.repository | string | `"bitnamilegacy/mysql"` |  |
+| mysql.image.tag | string | `"9.4.0-debian-12-r1"` |  |
 | mysql.metrics.enabled | bool | `false` |  |
 | mysql.metrics.image.pullPolicy | string | `"Always"` |  |
 | mysql.metrics.serviceMonitor.enabled | bool | `false` |  |
@@ -69,6 +71,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | mysql.secondary.replicaCount | int | `2` |  |
 | mysql.volumePermissions.enabled | bool | `true` |  |
 | mysql.volumePermissions.image.pullPolicy | string | `"Always"` |  |
+| mysql.volumePermissions.image.repository | string | `"bitnamilegacy/os-shell"` |  |
+| mysql.volumePermissions.image.tag | string | `"12-debian-12-r50"` |  |
 | passbolt.db.host | string | `"passbolt-proxysql"` |  |
 | passbolt.db.name | string | `"passbolt"` |  |
 | passbolt.db.password | string | `"passbolt"` |  |
