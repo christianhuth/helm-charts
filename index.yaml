@@ -7347,6 +7347,35 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/baserow-1.0.0/baserow-1.0.0.tgz
     version: 1.0.0
+  bindy:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: initial version
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: vsha-663a19a
+    created: "2025-12-22T15:48:28.307757168Z"
+    description: Bindy is a Kubernetes operator that manages BIND9 DNS infrastructure
+      declaratively
+    digest: 57945c9b5c3d55760bf8173e10fc62966ddb7363a78285ee312aacbfe4b7509f
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/bindy/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: bindy
+    sources:
+    - https://github.com/firestoned/bindy
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/bindy-1.0.0/bindy-1.0.0.tgz
+    version: 1.0.0
   cluster-api-visualizer:
   - annotations:
       artifacthub.io/changes: |
@@ -69147,4 +69176,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-12-22T15:09:50.658760417Z"
+generated: "2025-12-22T15:48:28.309730489Z"
