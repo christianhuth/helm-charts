@@ -116,6 +116,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | rabbitmq.auth.password | string | `"squest"` | The password credential to be used when using the integrated RabbitMQ. |
 | rabbitmq.auth.username | string | `"squest"` | The username credential to be used when using the integrated RabbitMQ. |
 | rabbitmq.enabled | bool | `true` | enable integrated RabbitMQ™ subchart from Bitnami |
+| rabbitmq.image.repository | string | `"bitnamilegacy/rabbitmq"` | image repository for the RabbitMQ™ subchart from Bitnami |
+| rabbitmq.image.tag | string | `"4.1.3-debian-12-r1"` | image tag for the RabbitMQ™ subchart from Bitnami |
 | redis.architecture | string | `"standalone"` | Redis™ architecture. Allowed values: `standalone` or `replication` |
 | redis.auth.enabled | bool | `true` | Enable password authentication |
 | redis.auth.password | string | `"squest"` | The password credential to be used when using the integrated Redis. |
