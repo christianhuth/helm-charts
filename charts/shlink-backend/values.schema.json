@@ -789,8 +789,26 @@
       "type": "string"
     },
     "global": {
-      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
-      "required": [],
+      "properties": {
+        "security": {
+          "properties": {
+            "allowInsecureImages": {
+              "default": true,
+              "required": [],
+              "title": "allowInsecureImages",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "allowInsecureImages"
+          ],
+          "title": "security",
+          "type": "object"
+        }
+      },
+      "required": [
+        "security"
+      ],
       "title": "global",
       "type": "object"
     },
@@ -818,7 +836,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "4.5.2",
+          "default": "4.6.0",
           "description": "Overrides the image tag",
           "required": [],
           "title": "tag",
@@ -978,11 +996,36 @@
           "required": [],
           "title": "enabled",
           "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "repository": {
+              "default": "bitnamilegacy/mariadb",
+              "description": "image repository for MariaDB™ subchart from Bitnami",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "12.0.2-debian-12-r0",
+              "description": "image tag for MariaDB™ subchart from Bitnami",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "auth",
+        "image"
       ],
       "title": "mariadb",
       "type": "object"
@@ -1027,11 +1070,36 @@
           "required": [],
           "title": "enabled",
           "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "repository": {
+              "default": "bitnamilegacy/mysql",
+              "description": "image repository for MySQL™ subchart from Bitnami",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "9.4.0-debian-12-r1",
+              "description": "image tag for MySQL™ subchart from Bitnami",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "auth",
+        "image"
       ],
       "title": "mysql",
       "type": "object"
@@ -1107,11 +1175,36 @@
           "required": [],
           "title": "enabled",
           "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "repository": {
+              "default": "bitnamilegacy/postgresql",
+              "description": "image repository for PostgreSQL™ subchart from Bitnami",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "17.6.0-debian-12-r4",
+              "description": "image tag for PostgreSQL™ subchart from Bitnami",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "auth",
+        "image"
       ],
       "title": "postgresql",
       "type": "object"
@@ -1124,10 +1217,35 @@
           "required": [],
           "title": "enabled",
           "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "repository": {
+              "default": "bitnamilegacy/rabbitmq",
+              "description": "image repository for RabbitMQ™ subchart from Bitnami",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "4.1.3-debian-12-r1",
+              "description": "image tag for RabbitMQ™ subchart from Bitnami",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
         }
       },
       "required": [
-        "enabled"
+        "enabled",
+        "image"
       ],
       "title": "rabbitmq",
       "type": "object"
@@ -1172,6 +1290,30 @@
           "title": "enabled",
           "type": "boolean"
         },
+        "image": {
+          "properties": {
+            "repository": {
+              "default": "bitnamilegacy/redis",
+              "description": "image repository for Redis™ subchart from Bitnami",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "8.2.1-debian-12-r0",
+              "description": "image tag for Redis™ subchart from Bitnami",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
+        },
         "sentinel": {
           "properties": {
             "enabled": {
@@ -1193,7 +1335,8 @@
         "enabled",
         "architecture",
         "auth",
-        "sentinel"
+        "sentinel",
+        "image"
       ],
       "title": "redis",
       "type": "object"
@@ -1292,6 +1435,7 @@
   "required": [
     "nameOverride",
     "fullnameOverride",
+    "global",
     "image",
     "imagePullSecrets",
     "replicaCount",

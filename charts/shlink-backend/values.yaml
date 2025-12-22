@@ -3,6 +3,11 @@ nameOverride: ""
 # -- String to fully override `"shlink-backend.fullname"`
 fullnameOverride: ""
 
+# @ignored
+global:
+  security:
+    allowInsecureImages: true
+
 image:
   # -- image registry
   registry: docker.io
@@ -11,7 +16,7 @@ image:
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag
-  tag: "4.5.2"
+  tag: "4.6.0"
 
 # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
 imagePullSecrets: []
@@ -273,6 +278,11 @@ mariadb:
     password: shlink
     # -- The username credential to be used when using the integrated MariaDB database.
     username: shlink
+  image:
+    # -- image repository for MariaDB™ subchart from Bitnami
+    repository: bitnamilegacy/mariadb
+    # -- image tag for MariaDB™ subchart from Bitnami
+    tag: 12.0.2-debian-12-r0
 
 mysql:
   # -- enable integrated MySQL™ subchart from Bitnami
@@ -284,6 +294,11 @@ mysql:
     password: shlink
     # -- The username credential to be used when using the integrated MySQL database.
     username: shlink
+  image:
+    # -- image repository for MySQL™ subchart from Bitnami
+    repository: bitnamilegacy/mysql
+    # -- image tag for MySQL™ subchart from Bitnami
+    tag: 9.4.0-debian-12-r1
 
 postgresql:
   # -- enable integrated PostgreSQL™ subchart from Bitnami
@@ -295,10 +310,20 @@ postgresql:
     password: shlink
     # -- The username credential to be used when using the integrated PostgreSQL database.
     username: shlink
+  image:
+    # -- image repository for PostgreSQL™ subchart from Bitnami
+    repository: bitnamilegacy/postgresql
+    # -- image tag for PostgreSQL™ subchart from Bitnami
+    tag: 17.6.0-debian-12-r4
 
 rabbitmq:
   # -- enable integrated RabbitMQ™ subchart from Bitnami
   enabled: false
+  image:
+    # -- image repository for RabbitMQ™ subchart from Bitnami
+    repository: bitnamilegacy/rabbitmq
+    # -- image tag for RabbitMQ™ subchart from Bitnami
+    tag: 4.1.3-debian-12-r1
 
 redis:
   # -- enable integrated Redis™ subchart from Bitnami
@@ -313,3 +338,8 @@ redis:
   sentinel:
     # -- Use Redis™ Sentinel on Redis™ pods
     enabled: false
+  image:
+    # -- image repository for Redis™ subchart from Bitnami
+    repository: bitnamilegacy/redis
+    # -- image tag for Redis™ subchart from Bitnami
+    tag: 8.2.1-debian-12-r0
