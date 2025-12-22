@@ -1,0 +1,61 @@
+{{- if (and .Values.rbac.create .Values.rbac.adminRole.create) }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    description: "Admin role for destructive operations - SHOULD NOT bind to ServiceAccount"
+  labels:
+    {{- include "bindy.labels" . | nindent 4 }}
+  name: {{ include "bindy.fullname" . }}-admin
+rules:
+  # ADMIN ONLY: Delete permissions for Bindy CRDs
+  # This role should be bound to human administrators, NOT the controller ServiceAccount
+  # Usage: kubectl create rolebinding ... --clusterrole=bindy-admin-role --user=admin@example.com
+
+  # Bind9Instance - admin delete permission
+  - apiGroups: ["bindy.firestoned.io"]
+    resources: ["bind9instances"]
+    verbs: ["delete", "deletecollection"]
+
+  # Bind9Cluster - admin delete permission
+  - apiGroups: ["bindy.firestoned.io"]
+    resources: ["bind9clusters"]
+    verbs: ["delete", "deletecollection"]
+
+  # Bind9GlobalCluster - admin delete permission
+  - apiGroups: ["bindy.firestoned.io"]
+    resources: ["bind9globalclusters"]
+    verbs: ["delete", "deletecollection"]
+
+  # DNSZone - admin delete permission
+  - apiGroups: ["bindy.firestoned.io"]
+    resources: ["dnszones"]
+    verbs: ["delete", "deletecollection"]
+
+  # DNS Records - admin delete permission
+  - apiGroups: ["bindy.firestoned.io"]
+    resources:
+      - "arecords"
+      - "aaaarecords"
+      - "txtrecords"
+      - "cnamerecords"
+      - "mxrecords"
+      - "nsrecords"
+      - "srvrecords"
+      - "caarecords"
+    verbs: ["delete", "deletecollection"]
+
+  # Kubernetes resources - admin delete permission
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["delete"]
+
+  - apiGroups: [""]
+    resources: ["services", "configmaps", "serviceaccounts"]
+    verbs: ["delete"]
+
+  # Secrets - admin delete permission (CRITICAL: use with extreme caution)
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["delete"]
+{{- end }}
