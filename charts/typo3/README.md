@@ -82,7 +82,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | mysql.auth.password | string | `"typo3"` | Password for the custom user to create. Ignored if mysql.auth.existingSecret is provided |
 | mysql.auth.username | string | `"typo3"` | Name for a custom user to create |
 | mysql.enabled | bool | `true` | enable MySQL™ subchart from Bitnami |
-| mysql.image.tag | string | `"latest"` | Image tag for the MySQL™ subchart from Bitnami |
+| mysql.image.repository | string | `"bitnamilegacy/mysql"` | image repository for MySQL™ subchart from Bitnami |
 | nameOverride | string | `""` | Provide a name in place of `typo3` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | persistence.fileadmin.accessModes | list | `["ReadWriteOnce"]` | the desired access modes the volume should have. |

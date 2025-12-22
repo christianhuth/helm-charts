@@ -389,16 +389,16 @@
         },
         "image": {
           "properties": {
-            "tag": {
-              "default": "latest",
-              "description": "Image tag for the MySQL™ subchart from Bitnami",
+            "repository": {
+              "default": "bitnamilegacy/mysql",
+              "description": "image repository for MySQL™ subchart from Bitnami",
               "required": [],
-              "title": "tag",
+              "title": "repository",
               "type": "string"
             }
           },
           "required": [
-            "tag"
+            "repository"
           ],
           "title": "image",
           "type": "object"

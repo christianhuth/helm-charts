@@ -6,4 +6,4 @@
 
 - dependency of mariadb to 24.0.2
 - dependency of postgresql to 18.1.15
-- image tag for mysql subchart to latest
+- image repository for mysql subchart to bitnamilegacy
