@@ -123,7 +123,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | nameOverride | string | `""` | Provide a name in place of `netcupscp-exporter` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to pods |
-| podMonitor.enabled | bool | `false` | Enable a prometheus PodMonitor CR for google managed prometheus |
+| podMonitor.enabled | bool | `false` | Enable a prometheus PodMonitor CR |
 | podMonitor.selfMonitor.additionalLabels | object | `{}` | Prometheus PodMonitor labels |
 | podMonitor.selfMonitor.enabled | bool | `true` | Enable a prometheus PodMonitor to monitor the DNS Exporter |
 | podMonitor.selfMonitor.interval | string | `"30s"` | Prometheus PodMonitor interval |
@@ -137,6 +137,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | podMonitor.targetsMonitor.namespace | string | `""` | Prometheus PodMonitor namespace |
 | podMonitor.targetsMonitor.selector | object | `{}` | Prometheus PodMonitor selector |
 | podMonitor.targetsMonitor.targets | list | `[]` | Targets that should be scraped by the DNS-Exporter |
+| podMonitor.type | string | `"prometheus"` | Which api version for the podmonitor should be used. Valid values are google and prometheus |
 | podSecurityContext | object | `{}` | pod-level security context |
 | priorityClassName | string | `""` | Priority class name ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass |
 | replicaCount | int | `1` | Number of replicas |

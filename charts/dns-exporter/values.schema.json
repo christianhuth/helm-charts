@@ -254,7 +254,7 @@
       "properties": {
         "enabled": {
           "default": false,
-          "description": "Enable a prometheus PodMonitor CR for google managed prometheus",
+          "description": "Enable a prometheus PodMonitor CR",
           "required": [],
           "title": "enabled",
           "type": "boolean"
@@ -380,10 +380,18 @@
           ],
           "title": "targetsMonitor",
           "type": "object"
+        },
+        "type": {
+          "default": "prometheus",
+          "description": "Which api version for the podmonitor should be used. Valid values are google and prometheus",
+          "required": [],
+          "title": "type",
+          "type": "string"
         }
       },
       "required": [
         "enabled",
+        "type",
         "selfMonitor",
         "targetsMonitor"
       ],
