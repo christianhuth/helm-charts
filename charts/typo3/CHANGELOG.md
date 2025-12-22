@@ -1,7 +1,9 @@
 # typo3
 
-## 5.0.1
+## 6.0.0
 
 ### Changed
 
-- dependency of mysql to 14.0.3
+- dependency of mariadb to 24.0.2
+- dependency of postgresql to 18.1.15
+- image repository and tag for mariadb, mysql and postgresql subchart to bitnamilegacy

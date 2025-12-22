@@ -109,6 +109,18 @@ modulesConfig: {}
   #   server: dns.google
   #   query_type: NS
 
+# -- Additional command arguments that will be passed to the exporter
+extraArgs: []
+  # - "--debug"   # useful for debugging
+  # - "--quiet"   # should be used in production environment
+
+# -- Defines port the container and exporter is listening on
+containerPort: 15353
+
+# -- Priority class name
+# ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
+priorityClassName: ""
+
 serviceMonitor:
   # -- Enable a prometheus ServiceMonitor
   enabled: false

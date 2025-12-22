@@ -194,6 +194,15 @@
       "title": "extraEnv",
       "type": "array"
     },
+    "extraEnvFrom": {
+      "description": "load additional environment variables from ConfigMaps or Secrets",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "extraEnvFrom",
+      "type": "array"
+    },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"kutt.fullname\"`",
@@ -900,6 +909,7 @@
     "tolerations",
     "affinity",
     "extraEnv",
+    "extraEnvFrom",
     "kutt",
     "postgresql",
     "externalPostgresql",

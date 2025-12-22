@@ -77,11 +77,15 @@ The command removes all the Kubernetes components associated with the chart and 
 | mariadb.auth.password | string | `"typo3"` | Password for the custom user to create. Ignored if mariadb.auth.existingSecret is provided |
 | mariadb.auth.username | string | `"typo3"` | Name for a custom user to create |
 | mariadb.enabled | bool | `false` | enable MariaDB™ subchart from Bitnami |
+| mariadb.image.repository | string | `"bitnamilegacy/mariadb"` | image repository for MariaDB™ subchart from Bitnami |
+| mariadb.image.tag | string | `"12.0.2-debian-12-r0"` | image tag for MariaDB™ subchart from Bitnami |
 | mysql.auth.database | string | `"typo3"` | Name for a custom database to create |
 | mysql.auth.existingSecret | string | `""` | Name of existing secret to use for MySQL credentials |
 | mysql.auth.password | string | `"typo3"` | Password for the custom user to create. Ignored if mysql.auth.existingSecret is provided |
 | mysql.auth.username | string | `"typo3"` | Name for a custom user to create |
 | mysql.enabled | bool | `true` | enable MySQL™ subchart from Bitnami |
+| mysql.image.repository | string | `"bitnamilegacy/mysql"` | image repository for MySQL™ subchart from Bitnami |
+| mysql.image.tag | string | `"9.4.0-debian-12-r1"` | image tag for MySQL™ subchart from Bitnami |
 | nameOverride | string | `""` | Provide a name in place of `typo3` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | persistence.fileadmin.accessModes | list | `["ReadWriteOnce"]` | the desired access modes the volume should have. |
@@ -103,6 +107,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | postgresql.auth.password | string | `"typo3"` | Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided |
 | postgresql.auth.username | string | `"typo3"` | Name for a custom user to create |
 | postgresql.enabled | bool | `false` | enable PostgreSQL™ subchart from Bitnami |
+| postgresql.image.repository | string | `"bitnamilegacy/postgresql"` | image repository for PostgreSQL™ subchart from Bitnami |
+| postgresql.image.tag | string | `"17.6.0-debian-12-r4"` | image tag for PostgreSQL™ subchart from Bitnami |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the headwind pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
@@ -123,6 +129,12 @@ helm install my-release -f values.yaml christianhuth/typo3
 ```
 
 ## Upgrading the Chart
+
+### 6.0.0
+
+This major updates the MariaDB subchart to its newest major, 24.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#upgrading) you can find more information about the changes introduced in that version.
+
+Additionaly it updates the PostgreSQL subchart to its newest major, 18.1.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#upgrading) you can find more information about the changes introduced in that version.
 
 ### 5.0.0
 

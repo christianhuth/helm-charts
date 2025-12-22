@@ -93,7 +93,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "1.5.2",
+          "default": "1.5.3",
           "description": "Overrides the image tag",
           "required": [],
           "title": "tag",

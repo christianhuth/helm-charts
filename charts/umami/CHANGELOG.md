@@ -1,7 +1,8 @@
 # umami
 
-## 6.0.1
+## 7.0.0
 
 ### Changed
 
-- dependency of mysql to 14.0.3
+- App version to v2.20.1
+- dependency of postgresql to 18.1.15

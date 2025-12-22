@@ -2,8 +2,8 @@ apiVersion: v2
 name: kubevirt-manager
 description: KubeVirt Web UI to manage the lifecycle of Virtual Machines and more
 type: application
-version: 0.2.2
-appVersion: "1.5.2"
+version: 0.2.3
+appVersion: "1.5.3"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kubevirt-manager/icon.svg
 maintainers:
@@ -14,7 +14,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: App Version to 1.5.2
+      description: App Version to 1.5.3
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

@@ -1,7 +1,8 @@
 # headwind-mdm
 
-## 3.4.24
+## 4.0.0
 
 ### Changed
 
-- App Version to 0.1.6
+- dependency of postgresql to 18.1.15
+- image repo and tag for subchart

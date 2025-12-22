@@ -2,8 +2,8 @@ apiVersion: v2
 name: github-exporter
 description: A Helm Chart for the GitHub Prometheus Exporter
 type: application
-version: 1.0.4
-appVersion: "1.3.1"
+version: 2.0.0
+appVersion: "v2.1.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/github-exporter/icon.svg
 maintainers:
@@ -14,7 +14,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: url for Icon
+      description: App Version to v2.1.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

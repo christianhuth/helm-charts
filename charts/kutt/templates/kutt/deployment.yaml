@@ -156,6 +156,10 @@ spec:
               value: {{ .value | quote }}
             {{- end }}
             {{- end }}
+          {{- if .Values.extraEnvFrom }}
+          envFrom:
+            {{- .Values.extraEnvFrom | toYaml | nindent 12 }}
+          {{- end }}
           {{- with .Values.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}

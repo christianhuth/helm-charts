@@ -1,7 +1,7 @@
 # github-exporter
 
-## 1.0.4
+## 2.0.0
 
 ### Changed
 
-- url for Icon
+- App Version to v2.1.0

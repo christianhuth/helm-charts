@@ -90,6 +90,10 @@ helm install my-release -f values.yaml christianhuth/kube-ops-view
 
 ## Upgrading the Chart
 
+### To 7.0.0
+
+This major updates the Redis subchart to its newest major, 24.1.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) you can find more information about the changes introduced in that version.
+
 ### To 6.0.0
 
 This major updates the Redis subchart to its newest major, 22.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) and [here](https://raw.githubusercontent.com/redis/redis/8.2/00-RELEASENOTES) you can find more information about the changes introduced in that version.
