@@ -225,6 +225,12 @@
       "title": "ingress",
       "type": "object"
     },
+    "modulesConfig": {
+      "description": "Define modules that can be used inside your targets",
+      "required": [],
+      "title": "modulesConfig",
+      "type": "object"
+    },
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `netcupscp-exporter`",
@@ -242,6 +248,146 @@
       "description": "Annotations to be added to pods",
       "required": [],
       "title": "podAnnotations",
+      "type": "object"
+    },
+    "podMonitor": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable a prometheus PodMonitor CR for google managed prometheus",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "selfMonitor": {
+          "properties": {
+            "additionalLabels": {
+              "description": "Prometheus PodMonitor labels",
+              "required": [],
+              "title": "additionalLabels",
+              "type": "object"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Enable a prometheus PodMonitor to monitor the DNS Exporter",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "interval": {
+              "default": "30s",
+              "description": "prometheus: kube-prometheus\nPrometheus PodMonitor interval",
+              "required": [],
+              "title": "interval",
+              "type": "string"
+            },
+            "metricRelabelings": {
+              "description": "Prometheus [MetricRelabelConfigs] to apply to samples before ingestion",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "metricRelabelings",
+              "type": "array"
+            },
+            "namespace": {
+              "default": "",
+              "description": "Prometheus PodMonitor namespace",
+              "required": [],
+              "title": "namespace",
+              "type": "string"
+            },
+            "selector": {
+              "description": "release: prometheus\nPrometheus PodMonitor selector",
+              "required": [],
+              "title": "selector",
+              "type": "object"
+            }
+          },
+          "required": [
+            "enabled",
+            "additionalLabels",
+            "selector",
+            "interval",
+            "namespace",
+            "metricRelabelings"
+          ],
+          "title": "selfMonitor",
+          "type": "object"
+        },
+        "targetsMonitor": {
+          "properties": {
+            "additionalLabels": {
+              "description": "Prometheus PodMonitor labels",
+              "required": [],
+              "title": "additionalLabels",
+              "type": "object"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Enable a prometheus PodMonitor to monitor the Targets of the DNS Exporter",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "interval": {
+              "default": "30s",
+              "description": "prometheus: kube-prometheus\nPrometheus PodMonitor interval",
+              "required": [],
+              "title": "interval",
+              "type": "string"
+            },
+            "metricRelabelings": {
+              "description": "Prometheus [MetricRelabelConfigs] to apply to samples before ingestion",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "metricRelabelings",
+              "type": "array"
+            },
+            "namespace": {
+              "default": "",
+              "description": "Prometheus PodMonitor namespace",
+              "required": [],
+              "title": "namespace",
+              "type": "string"
+            },
+            "selector": {
+              "description": "release: prometheus\nPrometheus PodMonitor selector",
+              "required": [],
+              "title": "selector",
+              "type": "object"
+            },
+            "targets": {
+              "description": "Targets that should be scraped by the DNS-Exporter",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "targets",
+              "type": "array"
+            }
+          },
+          "required": [
+            "enabled",
+            "additionalLabels",
+            "selector",
+            "interval",
+            "namespace",
+            "metricRelabelings",
+            "targets"
+          ],
+          "title": "targetsMonitor",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "selfMonitor",
+        "targetsMonitor"
+      ],
+      "title": "podMonitor",
       "type": "object"
     },
     "podSecurityContext": {
@@ -338,12 +484,6 @@
       "title": "serviceAccount",
       "type": "object"
     },
-    "modulesConfig": {
-      "description": "Define modules that can be used inside your targets",
-      "required": [],
-      "title": "modules",
-      "type": "object"
-    },
     "serviceMonitor": {
       "properties": {
         "enabled": {
@@ -354,7 +494,6 @@
           "type": "boolean"
         },
         "selfMonitor": {
-          "description": "google_udp:\n  family: ipv4\n  protocol: udp\n  server: dns.google\n  query_type: NS",
           "properties": {
             "additionalLabels": {
               "description": "Prometheus ServiceMonitor labels",
@@ -505,147 +644,6 @@
       "title": "serviceMonitor",
       "type": "object"
     },
-    "podMonitor": {
-      "properties": {
-        "enabled": {
-          "default": false,
-          "description": "Enable a prometheus PodMonitor",
-          "required": [],
-          "title": "enabled",
-          "type": "boolean"
-        },
-        "selfMonitor": {
-          "description": "google_udp:\n  family: ipv4\n  protocol: udp\n  server: dns.google\n  query_type: NS",
-          "properties": {
-            "additionalLabels": {
-              "description": "Prometheus PodMonitor labels",
-              "required": [],
-              "title": "additionalLabels",
-              "type": "object"
-            },
-            "enabled": {
-              "default": true,
-              "description": "Enable a prometheus PodMonitor to monitor the DNS Exporter",
-              "required": [],
-              "title": "enabled",
-              "type": "boolean"
-            },
-            "interval": {
-              "default": "30s",
-              "description": "prometheus: kube-prometheus\nPrometheus PodMonitor interval",
-              "required": [],
-              "title": "interval",
-              "type": "string"
-            },
-            "metricRelabelings": {
-              "description": "Prometheus [MetricRelabelConfigs] to apply to samples before ingestion",
-              "items": {
-                "required": []
-              },
-              "required": [],
-              "title": "metricRelabelings",
-              "type": "array"
-            },
-            "namespace": {
-              "default": "",
-              "description": "Prometheus PodMonitor namespace",
-              "required": [],
-              "title": "namespace",
-              "type": "string"
-            },
-            "selector": {
-              "description": "release: prometheus\nPrometheus PodMonitor selector",
-              "required": [],
-              "title": "selector",
-              "type": "object"
-            }
-          },
-          "required": [
-            "enabled",
-            "additionalLabels",
-            "selector",
-            "interval",
-            "namespace",
-            "metricRelabelings"
-          ],
-          "title": "selfMonitor",
-          "type": "object"
-        },
-        "targetsMonitor": {
-          "properties": {
-            "additionalLabels": {
-              "description": "Prometheus PodMonitor labels",
-              "required": [],
-              "title": "additionalLabels",
-              "type": "object"
-            },
-            "enabled": {
-              "default": true,
-              "description": "Enable a prometheus PodMonitor to monitor the Targets of the DNS Exporter",
-              "required": [],
-              "title": "enabled",
-              "type": "boolean"
-            },
-            "interval": {
-              "default": "30s",
-              "description": "prometheus: kube-prometheus\nPrometheus PodMonitor interval",
-              "required": [],
-              "title": "interval",
-              "type": "string"
-            },
-            "metricRelabelings": {
-              "description": "Prometheus [MetricRelabelConfigs] to apply to samples before ingestion",
-              "items": {
-                "required": []
-              },
-              "required": [],
-              "title": "metricRelabelings",
-              "type": "array"
-            },
-            "namespace": {
-              "default": "",
-              "description": "Prometheus PodMonitor namespace",
-              "required": [],
-              "title": "namespace",
-              "type": "string"
-            },
-            "selector": {
-              "description": "release: prometheus\nPrometheus PodMonitor selector",
-              "required": [],
-              "title": "selector",
-              "type": "object"
-            },
-            "targets": {
-              "description": "Targets that should be scraped by the DNS-Exporter",
-              "items": {
-                "required": []
-              },
-              "required": [],
-              "title": "targets",
-              "type": "array"
-            }
-          },
-          "required": [
-            "enabled",
-            "additionalLabels",
-            "selector",
-            "interval",
-            "namespace",
-            "metricRelabelings",
-            "targets"
-          ],
-          "title": "targetsMonitor",
-          "type": "object"
-        }
-      },
-      "required": [
-        "enabled",
-        "selfMonitor",
-        "targetsMonitor"
-      ],
-      "title": "podMonitor",
-      "type": "object"
-    },
     "tolerations": {
       "description": "Toleration labels for pod assignment",
       "items": {
@@ -676,11 +674,11 @@
     "affinity",
     "extraEnv",
     "modulesConfig",
-    "podMonitor"
     "extraArgs",
     "containerPort",
     "priorityClassName",
-    "serviceMonitor"
+    "serviceMonitor",
+    "podMonitor"
   ],
   "type": "object"
 }
