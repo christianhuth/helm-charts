@@ -978,11 +978,36 @@
           "required": [],
           "title": "enabled",
           "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "repository": {
+              "default": "bitnamilegacy/mariadb",
+              "description": "image repository for MariaDB™ subchart from Bitnami",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "12.0.2-debian-12-r0",
+              "description": "image tag for MariaDB™ subchart from Bitnami",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "auth",
+        "image"
       ],
       "title": "mariadb",
       "type": "object"
@@ -1027,11 +1052,36 @@
           "required": [],
           "title": "enabled",
           "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "repository": {
+              "default": "bitnamilegacy/mysql",
+              "description": "image repository for MySQL™ subchart from Bitnami",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "9.4.0-debian-12-r1",
+              "description": "image tag for MySQL™ subchart from Bitnami",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "auth",
+        "image"
       ],
       "title": "mysql",
       "type": "object"
@@ -1107,11 +1157,36 @@
           "required": [],
           "title": "enabled",
           "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "repository": {
+              "default": "bitnamilegacy/postgresql",
+              "description": "image repository for PostgreSQL™ subchart from Bitnami",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "17.6.0-debian-12-r4",
+              "description": "image tag for PostgreSQL™ subchart from Bitnami",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "auth",
+        "image"
       ],
       "title": "postgresql",
       "type": "object"

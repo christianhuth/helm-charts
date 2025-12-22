@@ -139,10 +139,14 @@ The command removes all the Kubernetes components associated with the chart and 
 | mariadb.auth.password | string | `"shlink"` | The password credential to be used when using the integrated MariaDB database. |
 | mariadb.auth.username | string | `"shlink"` | The username credential to be used when using the integrated MariaDB database. |
 | mariadb.enabled | bool | `false` | enable integrated MariaDB™ subchart from Bitnami |
+| mariadb.image.repository | string | `"bitnamilegacy/mariadb"` | image repository for MariaDB™ subchart from Bitnami |
+| mariadb.image.tag | string | `"12.0.2-debian-12-r0"` | image tag for MariaDB™ subchart from Bitnami |
 | mysql.auth.database | string | `"shlink"` | The database name to be used when using the integrated MySQL database. |
 | mysql.auth.password | string | `"shlink"` | The password credential to be used when using the integrated MySQL database. |
 | mysql.auth.username | string | `"shlink"` | The username credential to be used when using the integrated MySQL database. |
 | mysql.enabled | bool | `false` | enable integrated MySQL™ subchart from Bitnami |
+| mysql.image.repository | string | `"bitnamilegacy/mysql"` | image repository for MySQL™ subchart from Bitnami |
+| mysql.image.tag | string | `"9.4.0-debian-12-r1"` | image tag for MySQL™ subchart from Bitnami |
 | nameOverride | string | `""` | Provide a name in place of `shlink-backend` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to pods |
@@ -152,6 +156,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | postgresql.auth.password | string | `"shlink"` | The password credential to be used when using the integrated PostgreSQL database. |
 | postgresql.auth.username | string | `"shlink"` | The username credential to be used when using the integrated PostgreSQL database. |
 | postgresql.enabled | bool | `false` | enable integrated PostgreSQL™ subchart from Bitnami |
+| postgresql.image.repository | string | `"bitnamilegacy/postgresql"` | image repository for PostgreSQL™ subchart from Bitnami |
+| postgresql.image.tag | string | `"17.6.0-debian-12-r4"` | image tag for PostgreSQL™ subchart from Bitnami |
 | rabbitmq.enabled | bool | `false` | enable integrated RabbitMQ™ subchart from Bitnami |
 | redis.architecture | string | `"standalone"` | Redis™ architecture. Allowed values: `standalone` or `replication` |
 | redis.auth.enabled | bool | `false` | Enable password authentication |
