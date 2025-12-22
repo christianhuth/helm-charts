@@ -91,17 +91,10 @@
               "required": [],
               "title": "pullPolicy",
               "type": "string"
-            },
-            "tag": {
-              "default": "latest",
-              "required": [],
-              "title": "tag",
-              "type": "string"
             }
           },
           "required": [
-            "pullPolicy",
-            "tag"
+            "pullPolicy"
           ],
           "title": "image",
           "type": "object"
