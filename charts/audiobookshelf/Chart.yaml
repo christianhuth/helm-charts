@@ -2,8 +2,8 @@ apiVersion: v2
 name: audiobookshelf
 description: A Helm chart for installing the Argo CD Metrics Server, which connects to Prometheus and can be used to display Metrics in the Argo CD UI
 type: application
-version: 1.4.0
-appVersion: "2.32.0"
+version: 1.4.1
+appVersion: "2.32.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/audiobookshelf/icon.svg
 maintainers:
@@ -14,7 +14,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: App Version to 2.32.0
+      description: App Version to 2.32.1
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
