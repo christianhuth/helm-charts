@@ -1,7 +1,7 @@
 # bindy
 
-## 1.0.0
+## 1.0.1
 
-### Added
+### Changed
 
-- initial version
+- app version to v0.2.2

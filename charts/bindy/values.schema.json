@@ -184,7 +184,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "vsha-663a19a",
+          "default": "v0.2.2",
           "description": "Overrides the image tag",
           "required": [],
           "title": "tag",
