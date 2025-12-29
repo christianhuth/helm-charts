@@ -17,6 +17,9 @@ audiobookshelf:
 baserow:
 - changed-files:
   - any-glob-to-any-file: 'charts/baserow/*'
+bindy:
+- changed-files:
+  - any-glob-to-any-file: charts/bindy/*
 bluespice:
 - changed-files:
   - any-glob-to-any-file: charts/bluespice/*
@@ -176,6 +179,9 @@ talkyard:
 tenant-namespace:
 - changed-files:
   - any-glob-to-any-file: charts/tenant-namespace/*
+timetagger:
+- changed-files:
+  - any-glob-to-any-file: charts/timetagger/*
 typo3:
 - changed-files:
   - any-glob-to-any-file: charts/typo3/*
