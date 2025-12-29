@@ -79,11 +79,9 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if .Values.persistence.enabled }}
           volumeMounts:
             - name: timetagger
               mountPath: "/tmp/timedata"
-          {{- end }}
       {{- with .Values.podSecurityContext }}
       securityContext:
         {{- toYaml . | nindent 8 }}
@@ -100,9 +98,11 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.persistence.enabled }}
       volumes:
         - name: timetagger
+          {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
             claimName: {{ include "timetagger.pvcName" . }}
-      {{- end }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
