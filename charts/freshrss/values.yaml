@@ -73,6 +73,33 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+# -- HTTPRoute configuration
+httproute:
+  enabled: false
+  annotations: {}
+  # -- Hostnames to be matched
+  hostnames: []
+  # hostnames:
+  #   - freshrss.example.com
+  # -- Parent references (Gateway)
+  parentRefs: []
+  # parentRefs:
+  #   - name: my-gateway
+  #     namespace: my-gateway-namespace
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+  # rules:
+  #   - matches:
+  #       - path:
+  #           type: PathPrefix
+  #           value: /
+  #     backendRefs:
+  #       - name: freshrss
+  #         port: 8080
+
 # -- Resource limits and requests for the freshrss pods.
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
