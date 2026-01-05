@@ -1,7 +1,7 @@
 # timetagger
 
-## 1.0.0
+## 2.0.0
 
-### Added
+### Changed
 
-- initial version
+- App Version to v26.1.1
