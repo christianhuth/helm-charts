@@ -55256,6 +55256,34 @@ entries:
   timetagger:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to v26.1.1
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v26.1.1
+    created: "2026-01-07T09:47:17.245603326Z"
+    description: A Helm Chart for installing Timetagger, an open source time-tracker
+      with an interactive user experience and powerful reporting.
+    digest: 0e938a08dddcce8f5dc098e3fe3fa1173c353dc4a9e40bdd1f97b5c9220cc2d5
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/timetagger/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: timetagger
+    sources:
+    - https://github.com/almarklein/timetagger
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/timetagger-2.0.0/timetagger-2.0.0.tgz
+    version: 2.0.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: initial version
       artifacthub.io/links: |
@@ -69753,4 +69781,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-12-29T09:35:04.359244344Z"
+generated: "2026-01-07T09:47:17.248537883Z"
