@@ -407,108 +407,6 @@
       "title": "global",
       "type": "object"
     },
-    "httproute": {
-      "description": "HTTPRoute configuration",
-      "properties": {
-        "annotations": {
-          "required": [],
-          "title": "annotations",
-          "type": "object"
-        },
-        "enabled": {
-          "default": false,
-          "required": [],
-          "title": "enabled",
-          "type": "boolean"
-        },
-        "hostnames": {
-          "description": "Hostnames to be matched",
-          "items": {
-            "required": []
-          },
-          "required": [],
-          "title": "hostnames",
-          "type": "array"
-        },
-        "parentRefs": {
-          "description": "hostnames:\n  - freshrss.example.com\nParent references (Gateway)",
-          "items": {
-            "required": []
-          },
-          "required": [],
-          "title": "parentRefs",
-          "type": "array"
-        },
-        "rules": {
-          "description": "parentRefs:\n  - name: my-gateway\n    namespace: my-gateway-namespace",
-          "items": {
-            "anyOf": [
-              {
-                "properties": {
-                  "matches": {
-                    "items": {
-                      "anyOf": [
-                        {
-                          "properties": {
-                            "path": {
-                              "properties": {
-                                "type": {
-                                  "default": "PathPrefix",
-                                  "required": [],
-                                  "title": "type",
-                                  "type": "string"
-                                },
-                                "value": {
-                                  "default": "/",
-                                  "required": [],
-                                  "title": "value",
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "type",
-                                "value"
-                              ],
-                              "title": "path",
-                              "type": "object"
-                            }
-                          },
-                          "required": [
-                            "path"
-                          ],
-                          "type": "object"
-                        }
-                      ],
-                      "required": []
-                    },
-                    "required": [],
-                    "title": "matches",
-                    "type": "array"
-                  }
-                },
-                "required": [
-                  "matches"
-                ],
-                "type": "object"
-              }
-            ],
-            "required": []
-          },
-          "required": [],
-          "title": "rules",
-          "type": "array"
-        }
-      },
-      "required": [
-        "enabled",
-        "annotations",
-        "hostnames",
-        "parentRefs",
-        "rules"
-      ],
-      "title": "httproute",
-      "type": "object"
-    },
     "image": {
       "properties": {
         "pullPolicy": {
@@ -749,6 +647,151 @@
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
+    "route": {
+      "description": "BETA: Configure the gateway routes for the chart here.\nMore routes can be added by adding a dictionary key like the 'main' route.\nBeing BETA this can/will change in the future without notice, do not use unless you want to take that risk\n[[ref]](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io%2fv1alpha2)",
+      "properties": {
+        "main": {
+          "properties": {
+            "additionalRules": {
+              "description": "# -- Additional custom rules that can be added to the route",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "additionalRules",
+              "type": "array"
+            },
+            "annotations": {
+              "description": "Add annotations to the route",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "apiVersion": {
+              "default": "gateway.networking.k8s.io/v1",
+              "description": "Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2",
+              "required": [],
+              "title": "apiVersion",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enables or disables the route",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "filters": {
+              "description": "# -- Filters define the filters that are applied to requests that match this rule.",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "filters",
+              "type": "array"
+            },
+            "hostnames": {
+              "description": "Hostnames to be matched",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "hostnames",
+              "type": "array"
+            },
+            "httpsRedirect": {
+              "default": false,
+              "description": "# -- adds a filter for redirecting to https (HTTP 301 Moved Permanently).\n# To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners.\n# Matches and filters do not take effect if enabled.\n# Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/",
+              "required": [],
+              "title": "httpsRedirect",
+              "type": "boolean"
+            },
+            "kind": {
+              "default": "HTTPRoute",
+              "description": "Set the route kind\nValid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute",
+              "required": [],
+              "title": "kind",
+              "type": "string"
+            },
+            "labels": {
+              "description": "Add labels to the route",
+              "required": [],
+              "title": "labels",
+              "type": "object"
+            },
+            "matches": {
+              "items": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "path": {
+                        "properties": {
+                          "type": {
+                            "default": "PathPrefix",
+                            "required": [],
+                            "title": "type",
+                            "type": "string"
+                          },
+                          "value": {
+                            "default": "/",
+                            "required": [],
+                            "title": "value",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "value"
+                        ],
+                        "title": "path",
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "path"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "required": []
+              },
+              "required": [],
+              "title": "matches",
+              "type": "array"
+            },
+            "parentRefs": {
+              "description": "Parent references (Gateway)",
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "parentRefs",
+              "type": "array"
+            }
+          },
+          "required": [
+            "enabled",
+            "apiVersion",
+            "kind",
+            "annotations",
+            "labels",
+            "hostnames",
+            "parentRefs",
+            "matches",
+            "filters",
+            "additionalRules",
+            "httpsRedirect"
+          ],
+          "title": "main",
+          "type": "object"
+        }
+      },
+      "required": [
+        "main"
+      ],
+      "title": "route",
+      "type": "object"
+    },
     "securityContext": {
       "description": "container-level security context",
       "required": [],
@@ -828,7 +871,7 @@
     "securityContext",
     "service",
     "ingress",
-    "httproute",
+    "route",
     "resources",
     "autoscaling",
     "nodeSelector",
