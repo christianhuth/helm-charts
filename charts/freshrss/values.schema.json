@@ -407,6 +407,108 @@
       "title": "global",
       "type": "object"
     },
+    "httproute": {
+      "description": "HTTPRoute configuration",
+      "properties": {
+        "annotations": {
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hostnames": {
+          "description": "Hostnames to be matched",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "hostnames",
+          "type": "array"
+        },
+        "parentRefs": {
+          "description": "hostnames:\n  - freshrss.example.com\nParent references (Gateway)",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "parentRefs",
+          "type": "array"
+        },
+        "rules": {
+          "description": "parentRefs:\n  - name: my-gateway\n    namespace: my-gateway-namespace",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "matches": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "path": {
+                              "properties": {
+                                "type": {
+                                  "default": "PathPrefix",
+                                  "required": [],
+                                  "title": "type",
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "default": "/",
+                                  "required": [],
+                                  "title": "value",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "value"
+                              ],
+                              "title": "path",
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "path"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "matches",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "matches"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "rules",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "annotations",
+        "hostnames",
+        "parentRefs",
+        "rules"
+      ],
+      "title": "httproute",
+      "type": "object"
+    },
     "image": {
       "properties": {
         "pullPolicy": {
@@ -726,6 +828,7 @@
     "securityContext",
     "service",
     "ingress",
+    "httproute",
     "resources",
     "autoscaling",
     "nodeSelector",
