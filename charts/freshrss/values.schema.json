@@ -720,6 +720,7 @@
               "type": "object"
             },
             "matches": {
+              "description": "define conditions used for matching the rule against incoming HTTP requests.",
               "items": {
                 "anyOf": [
                   {
