@@ -1,7 +1,7 @@
 # netcupscp-exporter
 
-## 1.2.7
+## 1.3.0
 
 ### Changed
 
-- App Version to v0.4.5
+- hpa spec to align with v2

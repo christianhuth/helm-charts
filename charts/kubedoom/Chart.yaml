@@ -2,7 +2,7 @@
 apiVersion: v2
 name: kubedoom
 description: A Helm chart for Kubedoom
-version: 1.0.8
+version: 1.1.0
 type: application
 appVersion: "0.6.0"
 home: https://github.com/christianhuth/helm-charts
@@ -15,7 +15,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: url of Icon
+      description: hpa spec to align with v2
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

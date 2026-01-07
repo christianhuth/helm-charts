@@ -91,6 +91,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | mysql.auth.password | string | `"polr"` |  |
 | mysql.auth.username | string | `"polr"` |  |
 | mysql.enabled | bool | `true` |  |
+| mysql.image.repository | string | `"bitnamilegacy/mysql"` | image repository for MySQL™ subchart from Bitnami |
+| mysql.image.tag | string | `"9.4.0-debian-12-r1"` | image tag for MySQL™ subchart from Bitnami |
 | nameOverride | string | `""` | Provide a name in place of `polr` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to pods |

@@ -452,11 +452,36 @@
           "required": [],
           "title": "enabled",
           "type": "boolean"
+        },
+        "image": {
+          "properties": {
+            "repository": {
+              "default": "bitnamilegacy/mysql",
+              "description": "image repository for MySQL™ subchart from Bitnami",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "9.4.0-debian-12-r1",
+              "description": "image tag for MySQL™ subchart from Bitnami",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "auth",
+        "image"
       ],
       "title": "mysql",
       "type": "object"

@@ -1,7 +1,7 @@
 # freshrss
 
-## 2.2.0
+## 2.3.0
 
 ### Changed
 
-- App Version to 1.28.0
+- hpa spec to align with v2

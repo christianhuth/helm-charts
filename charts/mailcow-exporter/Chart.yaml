@@ -2,7 +2,7 @@ apiVersion: v2
 name: mailcow-exporter
 description: Prometheus exporter for information about a mailcow instance
 type: application
-version: 1.1.0
+version: 1.2.0
 appVersion: "2.1.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/mailcow-exporter/icon.svg
@@ -15,7 +15,7 @@ annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
     - kind: changed
-      description: App Version to 2.1.0
+      description: hpa spec to align with v2
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
