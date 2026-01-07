@@ -116,13 +116,17 @@ The command removes all the Kubernetes components associated with the chart and 
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the freshrss pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
-| route | object | `{"main":{"additionalRules":[],"annotations":{},"apiVersion":"gateway.networking.k8s.io/v1","enabled":false,"filters":[],"hostnames":[],"httpsRedirect":false,"kind":"HTTPRoute","labels":{},"matches":[{"path":{"type":"PathPrefix","value":"/"}}],"parentRefs":[]}}` | BETA: Configure the gateway routes for the chart here. More routes can be added by adding a dictionary key like the 'main' route. Being BETA this can/will change in the future without notice, do not use unless you want to take that risk [[ref]](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io%2fv1alpha2) |
+| route.main.additionalRules | list | `[]` |  |
 | route.main.annotations | object | `{}` | Add annotations to the route |
 | route.main.apiVersion | string | `"gateway.networking.k8s.io/v1"` | Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2 |
 | route.main.enabled | bool | `false` | Enables or disables the route |
+| route.main.filters | list | `[]` |  |
 | route.main.hostnames | list | `[]` | Hostnames to be matched |
+| route.main.httpsRedirect | bool | `false` |  |
 | route.main.kind | string | `"HTTPRoute"` | Set the route kind Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute |
 | route.main.labels | object | `{}` | Add labels to the route |
+| route.main.matches[0].path.type | string | `"PathPrefix"` |  |
+| route.main.matches[0].path.value | string | `"/"` |  |
 | route.main.parentRefs | list | `[]` | Parent references (Gateway) |
 | securityContext | object | `{}` | container-level security context |
 | service.port | int | `8080` | Kubernetes port where service is exposed |
