@@ -122,7 +122,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | route.main.enabled | bool | `false` | Enables or disables the route |
 | route.main.filters | list | `[]` | Filters define the filters that are applied to requests that match this rule. |
 | route.main.hostnames | list | `[]` | Hostnames to be matched |
-| route.main.httpsRedirect | bool | `false` | adds a filter for redirecting to https (HTTP 301 Moved Permanently). # -- To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. # -- Matches and filters do not take effect if enabled. # -- Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/ |
+| route.main.httpsRedirect | bool | `false` | adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/ |
 | route.main.kind | string | `"HTTPRoute"` | Set the route kind Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute |
 | route.main.labels | object | `{}` | Add labels to the route |
 | route.main.matches | list | see [values.yaml](./values.yaml) | define conditions used for matching the rule against incoming HTTP requests. |
