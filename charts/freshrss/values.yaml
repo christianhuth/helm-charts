@@ -73,7 +73,7 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-# -- BETA: Configure the gateway routes for the chart here.
+# BETA: Configure the gateway routes for the chart here.
 # More routes can be added by adding a dictionary key like the 'main' route.
 # Being BETA this can/will change in the future without notice, do not use unless you want to take that risk
 # [[ref]](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io%2fv1alpha2)
