@@ -701,7 +701,7 @@
             },
             "httpsRedirect": {
               "default": false,
-              "description": "adds a filter for redirecting to https (HTTP 301 Moved Permanently).\n# To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners.\n# Matches and filters do not take effect if enabled.\n# Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/",
+              "description": "adds a filter for redirecting to https (HTTP 301 Moved Permanently).\n# -- To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners.\n# -- Matches and filters do not take effect if enabled.\n# -- Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/",
               "required": [],
               "title": "httpsRedirect",
               "type": "boolean"
