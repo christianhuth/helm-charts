@@ -1,7 +1,7 @@
 # maildev
 
-## 1.3.4
+## 1.4.0
 
 ### Changed
 
-- url of icon
+- hpa spec to align with v2

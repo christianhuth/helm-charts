@@ -1,7 +1,7 @@
 # promlens
 
-## 1.1.0
+## 1.2.0
 
-### Added
+### Changed
 
-- option to define the image registry
+- hpa spec to align with v2

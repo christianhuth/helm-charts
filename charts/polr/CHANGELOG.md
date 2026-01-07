@@ -1,7 +1,8 @@
 # polr
 
-## 4.0.1
+## 4.1.0
 
 ### Changed
 
-- dependency of mysql to 14.0.3
+- hpa spec to align with v2
+- image repository and tag for mysql subchart

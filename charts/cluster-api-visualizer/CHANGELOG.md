@@ -1,7 +1,7 @@
 # cluster-api-visualizer
 
-## 0.2.0
+## 0.3.0
 
 ### Changed
 
-- App Version to v1.5.0
+- hpa spec to align with v2

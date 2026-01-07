@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.7.1
+## 1.8.0
 
 ### Changed
 
-- App Version to 4.6.2
+- hpa spec to align with v2

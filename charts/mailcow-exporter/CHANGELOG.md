@@ -1,7 +1,7 @@
 # mailcow-exporter
 
-## 1.1.0
+## 1.2.0
 
 ### Changed
 
-- App Version to 2.1.0
+- hpa spec to align with v2
