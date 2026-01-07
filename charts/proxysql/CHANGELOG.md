@@ -1,7 +1,7 @@
 # proxysql
 
-## 2.1.1
+## 2.2.0
 
 ### Changed
 
-- App Version to 3.0.4
+- hpa spec to align with v2

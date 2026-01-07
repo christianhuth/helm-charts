@@ -1,7 +1,7 @@
 # dnsbl-exporter
 
-## 1.0.2
+## 1.1.0
 
 ### Changed
 
-- content of .helmignore
+- hpa spec to align with v2

@@ -1,7 +1,7 @@
 # kubevirt-manager
 
-## 0.2.3
+## 0.3.0
 
 ### Changed
 
-- App Version to 1.5.3
+- hpa spec to align with v2

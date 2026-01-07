@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.3.0
+## 2.4.0
 
 ### Changed
 
-- App Version to 3.8.0
+- hpa spec to align with v2

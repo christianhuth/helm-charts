@@ -1,7 +1,7 @@
 # bindy
 
-## 1.0.1
+## 1.1.0
 
 ### Changed
 
-- app version to v0.2.2
+- hpa spec to align with v2
