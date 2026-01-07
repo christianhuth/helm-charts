@@ -103,6 +103,8 @@ route:
     parentRefs: []
     # - name: acme-gw
 
+    # -- define conditions used for matching the rule against incoming HTTP requests.
+    # @default -- see [values.yaml](./values.yaml)
     matches:
       - path:
           type: PathPrefix
