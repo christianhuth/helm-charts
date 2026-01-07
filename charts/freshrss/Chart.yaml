@@ -20,7 +20,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: supprt for GatewayAPI
+      description: support for GatewayAPI
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
