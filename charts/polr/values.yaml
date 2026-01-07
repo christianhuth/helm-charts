@@ -146,3 +146,8 @@ mysql:
     ## @param mysql.auth.existingSecret Use existing secret for password details. The secret has to contain the keys `mysql-root-password`, `mysql-replication-password` and `mysql-password`
     ## NOTE: When it's set the mysql.auth.rootPassword, mysql.auth.password, mysql.auth.replicationPassword are ignored.
     existingSecret: ""
+  image:
+    # -- image repository for MySQL™ subchart from Bitnami
+    repository: bitnamilegacy/mysql
+    # -- image tag for MySQL™ subchart from Bitnami
+    tag: 9.4.0-debian-12-r1

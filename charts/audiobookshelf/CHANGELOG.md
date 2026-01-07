@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 1.4.1
+## 1.5.0
 
 ### Changed
 
-- App Version to 2.32.1
+- hpa spec to align with v2

@@ -2,7 +2,7 @@ apiVersion: v2
 name: freshrss
 description: FreshRSS is a free, self-hostable feed aggregator
 type: application
-version: 2.3.0
+version: 2.4.0
 appVersion: "1.28.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/freshrss/icon.svg
@@ -20,7 +20,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: HTTPRoute Support
+      description: supprt for GatewayAPI
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
