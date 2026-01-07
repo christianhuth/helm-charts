@@ -90,6 +90,9 @@ The command removes all the Kubernetes components associated with the chart and 
 | freshrss.persistence.storageClass | string | `""` | Define the storage class for the different FreshRSS PVCs |
 | freshrss.timezone | string | `"Europe/Berlin"` | Timezone |
 | fullnameOverride | string | `""` | String to fully override `"freshrss.fullname"` |
+| httproute | object | `{"annotations":{},"enabled":false,"hostnames":[],"parentRefs":[],"rules":[{"matches":[{"path":{"type":"PathPrefix","value":"/"}}]}]}` | HTTPRoute configuration |
+| httproute.hostnames | list | `[]` | Hostnames to be matched |
+| httproute.parentRefs | list | `[]` | Parent references (Gateway) |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"freshrss/freshrss"` | image repository |

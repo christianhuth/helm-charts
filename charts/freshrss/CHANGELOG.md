@@ -1,7 +1,7 @@
 # freshrss
 
-## 2.3.0
+## 2.4.0
 
-### Changed
+### Added
 
-- hpa spec to align with v2
+- supprt for GatewayAPI
