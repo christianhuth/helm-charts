@@ -20,6 +20,8 @@ annotations:
   artifacthub.io/changes: |
     - kind: changed
       description: hpa spec to align with v2
+    - kind: changed
+      description: image repository and tag for mysql subchart
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
