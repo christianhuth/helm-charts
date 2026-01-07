@@ -125,8 +125,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | route.main.httpsRedirect | bool | `false` |  |
 | route.main.kind | string | `"HTTPRoute"` | Set the route kind Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute |
 | route.main.labels | object | `{}` | Add labels to the route |
-| route.main.matches[0].path.type | string | `"PathPrefix"` |  |
-| route.main.matches[0].path.value | string | `"/"` |  |
+| route.main.matches | list | see [values.yaml](./values.yaml) | define conditions used for matching the rule against incoming HTTP requests. |
 | route.main.parentRefs | list | `[]` | Parent references (Gateway) |
 | securityContext | object | `{}` | container-level security context |
 | service.port | int | `8080` | Kubernetes port where service is exposed |
