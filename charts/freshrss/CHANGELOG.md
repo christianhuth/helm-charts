@@ -4,4 +4,4 @@
 
 ### Added
 
-- supprt for GatewayAPI
+- support for GatewayAPI
