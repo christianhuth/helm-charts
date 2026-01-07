@@ -13,11 +13,3 @@ postgresql:
     database: freshrss
     password: freshrss
     username: freshrss
-
-route:
-  main:
-    enabled: true
-    hostnames:
-      - freshrss.example.com
-    parentRefs:
-      - name: acme-gw
