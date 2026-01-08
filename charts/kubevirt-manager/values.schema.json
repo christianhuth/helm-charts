@@ -368,6 +368,141 @@
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
+    "route": {
+      "description": "BETA: Configure the gateway routes for the chart here.\nMore routes can be added by adding a dictionary key like the 'main' route.\nBeing BETA this can/will change in the future without notice, do not use unless you want to take that risk\n[[ref]](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io%2fv1alpha2)",
+      "properties": {
+        "main": {
+          "properties": {
+            "additionalRules": {
+              "description": "Additional custom rules that can be added to the route",
+              "items": {
+                "required": []
+              },
+              "title": "additionalRules",
+              "type": "array"
+            },
+            "annotations": {
+              "description": "Add annotations to the route",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "apiVersion": {
+              "default": "gateway.networking.k8s.io/v1",
+              "description": "Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2",
+              "title": "apiVersion",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enables or disables the route",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "filters": {
+              "description": "Filters define the filters that are applied to requests that match this rule.",
+              "items": {
+                "required": []
+              },
+              "title": "filters",
+              "type": "array"
+            },
+            "hostnames": {
+              "description": "Hostnames to be matched",
+              "items": {
+                "required": []
+              },
+              "title": "hostnames",
+              "type": "array"
+            },
+            "httpsRedirect": {
+              "default": false,
+              "description": "adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/",
+              "title": "httpsRedirect",
+              "type": "boolean"
+            },
+            "kind": {
+              "default": "HTTPRoute",
+              "description": "Set the route kind\nValid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute",
+              "title": "kind",
+              "type": "string"
+            },
+            "labels": {
+              "description": "Add labels to the route",
+              "required": [],
+              "title": "labels",
+              "type": "object"
+            },
+            "matches": {
+              "description": "define conditions used for matching the rule against incoming HTTP requests.",
+              "items": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "path": {
+                        "properties": {
+                          "type": {
+                            "default": "PathPrefix",
+                            "title": "type",
+                            "type": "string"
+                          },
+                          "value": {
+                            "default": "/",
+                            "title": "value",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "value"
+                        ],
+                        "title": "path",
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "path"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "required": []
+              },
+              "title": "matches",
+              "type": "array"
+            },
+            "parentRefs": {
+              "description": "Parent references (Gateway)",
+              "items": {
+                "required": []
+              },
+              "title": "parentRefs",
+              "type": "array"
+            }
+          },
+          "required": [
+            "enabled",
+            "apiVersion",
+            "kind",
+            "annotations",
+            "labels",
+            "hostnames",
+            "parentRefs",
+            "matches",
+            "filters",
+            "additionalRules",
+            "httpsRedirect"
+          ],
+          "title": "main",
+          "type": "object"
+        }
+      },
+      "required": [
+        "main"
+      ],
+      "title": "route",
+      "type": "object"
+    },
     "securityContext": {
       "description": "container-level security context",
       "properties": {
@@ -517,6 +652,7 @@
     "securityContext",
     "service",
     "ingress",
+    "route",
     "resources",
     "autoscaling",
     "nodeSelector",
