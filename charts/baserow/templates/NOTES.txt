@@ -1,6 +1,10 @@
 1. Get the frontend URL by running these commands:
 {{- if .Values.frontend.ingress.enabled }}
   http{{ if $.Values.frontend.ingress.tls }}s{{ end }}://{{ .Values.frontend.ingress.hostname }}
+{{- else if .Values.frontend.route.main.enabled }}
+  {{- range $host := .Values.frontend.route.main.hostnames }}
+  http://{{ $host }}
+  {{- end }}
 {{- else if contains "NodePort" .Values.frontend.service.type }}
   export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "baserow.frontend.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
@@ -21,6 +25,17 @@
 {{- if .Values.backend.ingress.enabled }}
   ASGI: http{{ if $.Values.backend.ingress.tls }}s{{ end }}://{{ .Values.backend.ingress.hostname }}{{ .Values.backend.ingress.paths.asgiPath }}
   WSGI: http{{ if $.Values.backend.ingress.tls }}s{{ end }}://{{ .Values.backend.ingress.hostname }}{{ .Values.backend.ingress.paths.wsgiPath }}
+{{- else if (or .Values.backend.asgi.route.main.enabled .Values.backend.wsgi.route.main.enabled) }}
+  {{- if .Values.backend.asgi.route.main.enabled }}
+  {{- range $host := .Values.backend.asgi.route.main.hostnames }}
+  ASGI: http://{{ $host }}
+  {{- end }}
+  {{- end }}
+  {{- if .Values.backend.wsgi.route.main.enabled }}
+  {{- range $host := .Values.backend.wsgi.route.main.hostnames }}
+  WSGI: http://{{ $host }}
+  {{- end }}
+  {{- end }}
 {{- else if contains "NodePort" .Values.backend.wsgi.service.type }}
   export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "baserow.backend.wsgi.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
