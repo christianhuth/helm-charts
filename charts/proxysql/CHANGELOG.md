@@ -1,7 +1,7 @@
 # proxysql
 
-## 2.2.1
+## 2.3.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
