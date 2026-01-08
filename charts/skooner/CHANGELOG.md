@@ -1,7 +1,7 @@
 # skooner
 
-## 0.2.1
+## 0.3.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
