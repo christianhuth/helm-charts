@@ -2,6 +2,10 @@
 {{- if .Values.ingress.enabled }}
   {{- $hostname := .Values.ingress.hostname }}
   http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $hostname }}
+{{- else if .Values.route.main.enabled }}
+  {{- range $host := .Values.route.main.hostnames }}
+  http://{{ $host }}
+  {{- end }}
 {{- else if contains "NodePort" .Values.frontend.service.type }}
   export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "kubevirt-manager.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
