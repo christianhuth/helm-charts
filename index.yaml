@@ -611,6 +611,51 @@ entries:
   - annotations:
       artifacthub.io/category: database
       artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Create your own online database without technical experience.
+          url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
+        - title: With Baserow you decide how you want to structure everything. Whether you’re managing customers, products, airplanes or all of them.
+          url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
+        - title: Easily create custom plugins with our boilerplate or use third party ones.
+          url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.0.6
+    created: "2026-01-08T15:46:05.500930126Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 18.2.0
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 24.1.0
+    description: Baserow is an open source no-code database and Airtable alternative.
+    digest: 444e96a10ec197591b629a9b6c70dcfe3f86bb4fd6d2cec7eb42c49bc0c1c732
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/baserow/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: baserow
+    sources:
+    - https://gitlab.com/bramw/baserow
+    - https://baserow.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/baserow-6.2.0/baserow-6.2.0.tgz
+    version: 6.2.0
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
         - kind: fixed
           description: helm schema
       artifacthub.io/links: |
@@ -58314,6 +58359,34 @@ entries:
   timetagger:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v26.1.1
+    created: "2026-01-08T15:46:05.654818007Z"
+    description: A Helm Chart for installing Timetagger, an open source time-tracker
+      with an interactive user experience and powerful reporting.
+    digest: b30243df9f2088d414749773373bfab7d364612fc8dc16ba29afff5d1853502f
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/timetagger/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: timetagger
+    sources:
+    - https://github.com/almarklein/timetagger
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/timetagger-2.1.0/timetagger-2.1.0.tgz
+    version: 2.1.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: helm schema
       artifacthub.io/links: |
@@ -58397,6 +58470,60 @@ entries:
     - https://github.com/christianhuth/helm-charts/releases/download/timetagger-1.0.0/timetagger-1.0.0.tgz
     version: 1.0.0
   typo3:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: TYPO3 is a very powerful Web Content Management System.
+          url: https://docs.typo3.org/m/typo3/tutorial-getting-started/10.4/en-us/_images/BackendAboutModules.png
+        - title: Easilly create and manage pages for your website.
+          url: https://typo3.org/fileadmin/t3o_common_storage/images/release_notes/v12/12.0/screenshots/backend-ux-page-tree.png
+        - title: Manage existing and add new content to your pages.
+          url: https://typo3.org/fileadmin/t3o_common_storage/images/release_notes/v12/12.0/screenshots/new-page-module.png
+        - title: Files including documents and images can be managed in the Filelist module.
+          url: https://docs.typo3.org/m/typo3/tutorial-editors/main/en-us/_images/FilelistModule.png
+        - title: Extensions can be installed and managed from the Extension Manager.
+          url: https://docs.typo3.org/m/typo3/reference-coreapi/10.4/en-us/_images/ExtensionManager76To86.png
+        - title: Create your own dashboard to visualize information inside of your TYPO3 backend.
+          url: https://typo3.org/fileadmin/t3o_common_storage/images/release_notes/v10/10.4/typo3-100400_0036_dashboard-my-dashboard.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: "13.4"
+    created: "2026-01-08T15:46:05.848354213Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 14.0.3
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 24.0.2
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 18.2.0
+    description: TYPO3 — the Professional, Flexible Content Management System
+    digest: 98c67afe1b96794ac3cd802ea6ace369cf572fde935a1518745f8bdb82acde76
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/typo3/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: typo3
+    sources:
+    - https://github.com/martin-helmich/docker-typo3
+    - https://github.com/TYPO3/typo3
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/typo3-6.3.0/typo3-6.3.0.tgz
+    version: 6.3.0
   - annotations:
       artifacthub.io/changes: |
         - kind: fixed
@@ -65850,6 +65977,65 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Umami measures just the important metrics that you care about and everything is displayed on a single, easy to browse page.
+          url: https://umami.is/images/feature-website-stats.png
+        - title: Get detailed breakdowns about your visitors including what browser, OS and device they used.
+          url: https://umami.is/images/feature-session-stats.png
+        - title: Track more than just pageviews. Capture any event on your website like button clicks and form entries.
+          url: https://umami.is/images/feature-events.png
+        - title: Dive deeper into your data using easy to apply filters. Segment your users by any metric such as browser, OS, and country.
+          url: https://umami.is/images/feature-filters.png
+        - title: Get a realtime view of your current website traffic. See the exact pages where your visitors are landing.
+          url: https://umami.is/images/feature-realtime.png
+        - title: Umami has been translated into many different languages by the very active open source community.
+          url: https://umami.is/images/feature-languages.png
+        - title: Umami is able to track an unlimited number of websites from a single installation. You can even track subdomains and individual URLs.
+          url: https://umami.is/images/feature-websites.png
+        - title: Umami can be used to host data for friends or clients. Just create a separate account and they can start tracking their own websites on their own dashboard.
+          url: https://umami.is/images/feature-accounts.png
+        - title: The Umami interface has been optimized for mobile so you can view your stats from anywhere.
+          url: https://umami.is/images/feature-mobile.png
+        - title: Dark mode included. Choose your favorite theme for Umami.
+          url: https://umami.is/images/feature-dark-mode.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v2.20.1
+    created: "2026-01-08T15:46:06.02551454Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 18.2.0
+    - condition: mysql.enabled
+      name: mysql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 14.0.3
+    description: Umami is a simple, fast, privacy-focused alternative to Google Analytics.
+    digest: 83ea32791c80cb7863954ea1f649a124456b255ce730cc36c065cced876e2222
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/umami/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: umami
+    sources:
+    - https://github.com/umami-software/umami
+    - https://umami.is/
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/umami-7.3.0/umami-7.3.0.tgz
+    version: 7.3.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: fixed
           description: helm schema
       artifacthub.io/links: |
@@ -73093,4 +73279,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-01-08T15:27:39.504308676Z"
+generated: "2026-01-08T15:46:06.028040406Z"
