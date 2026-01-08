@@ -1,7 +1,7 @@
 # syncstorage-rs
 
-## 4.0.1
+## 4.1.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes

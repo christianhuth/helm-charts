@@ -196,6 +196,17 @@ The command removes all the Kubernetes components associated with the chart and 
 | squest.replicaCount | int | `1` | Number of replicas |
 | squest.resources | object | `{}` | Resource limits and requests for the pods. |
 | squest.revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
+| squest.route.main.additionalRules | list | `[]` | Additional custom rules that can be added to the route |
+| squest.route.main.annotations | object | `{}` | Add annotations to the route |
+| squest.route.main.apiVersion | string | `"gateway.networking.k8s.io/v1"` | Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2 |
+| squest.route.main.enabled | bool | `false` | Enables or disables the route |
+| squest.route.main.filters | list | `[]` | Filters define the filters that are applied to requests that match this rule. |
+| squest.route.main.hostnames | list | `[]` | Hostnames to be matched |
+| squest.route.main.httpsRedirect | bool | `false` | adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/ |
+| squest.route.main.kind | string | `"HTTPRoute"` | Set the route kind Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute |
+| squest.route.main.labels | object | `{}` | Add labels to the route |
+| squest.route.main.matches | list | see [values.yaml](./values.yaml) | define conditions used for matching the rule against incoming HTTP requests. |
+| squest.route.main.parentRefs | list | `[]` | Parent references (Gateway) |
 | squest.securityContext | object | `{}` | container-level security context |
 | squest.service.port | int | `8080` | Kubernetes port where service is exposed |
 | squest.service.type | string | `"ClusterIP"` | Kubernetes service type |
