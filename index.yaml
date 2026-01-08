@@ -40540,6 +40540,56 @@ entries:
   shlink-backend:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 4.6.0
+    created: "2026-01-08T15:12:54.199080108Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 24.0.2
+    - condition: mysql.enabled
+      name: mysql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 14.0.3
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 18.2.0
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.0.14
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 24.1.0
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 23cff644c2bf23461b722ce78d64c289fa8ec4649087185e8265f1499a80a2a3
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/shlink-backend/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-backend-9.3.0/shlink-backend-9.3.0.tgz
+    version: 9.3.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: helm schema
       artifacthub.io/links: |
@@ -52376,6 +52426,43 @@ entries:
   shlink-web:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Add a new link that should be shortened.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/creation-form-after.png
+        - title: You can have an overview of all your shortened links.
+          url: https://shlink.io/images/shlink-web-client-placeholder.jpg
+        - title: For each link there are multiple statistical data collected and visualized.
+          url: https://alejandrocelaya.blog/assets/img/shlink-web-client-3/visits-after.png
+        - title: A typical architecture in which Shlink would be integrated.
+          url: https://shlink.io/images/architecture/shlink-architecture.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 4.6.2
+    created: "2026-01-08T15:12:54.409536592Z"
+    description: A  ReactJS-based progressive web application for Shlink.
+    digest: 19dc6cbc6efd5969a06243b32dba5714cbac1e030d7248e726f33ddb385e290e
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/shlink-web/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-web
+    sources:
+    - https://github.com/shlinkio/shlink-web-client
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-web-1.9.0/shlink-web-1.9.0.tgz
+    version: 1.9.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: helm schema
       artifacthub.io/links: |
@@ -53438,6 +53525,39 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Overview of the workloads running inside of Kubernetes.
+          url: https://skooner.io/images/k8dash-screen.png
+        - title: Dashboard of the nodes and their resources.
+          url: https://loft.sh/images/blog/posts/skooner-ui.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: stable
+    created: "2026-01-08T15:12:54.585306839Z"
+    description: Simple Kubernetes real-time dashboard and management.
+    digest: e6663257536316ae68b8bce3d25bc5b4e18afd6c93f9482044221e0919f1950d
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/skooner/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: skooner
+    sources:
+    - https://github.com/skooner-k8s/skooner
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/skooner-0.3.0/skooner-0.3.0.tgz
+    version: 0.3.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: fixed
           description: helm schema
       artifacthub.io/links: |
@@ -53935,6 +54055,39 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/skooner-0.0.2/skooner-0.0.2.tgz
     version: 0.0.2
   sloop:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Visualize the different Events inside your Kubernetes cluster.
+          url: https://civo-com-assets.ams3.digitaloceanspaces.com/content_images/989.blog.png
+        - title: You can filter the events that should be visualized.
+          url: https://raw.githubusercontent.com/milindchawre/civo-k8s/master/blog/sloop/images/sloop1.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: sha-2ce8bbe
+    created: "2026-01-08T15:12:54.751142857Z"
+    description: Kubernetes History Visualization
+    digest: 173abb3de42d72c07e50d5460da8c9a8044dbf004ec7d9dd0d266eee066ff196
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/sloop/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: sloop
+    sources:
+    - https://github.com/salesforce/sloop
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/sloop-0.3.0/sloop-0.3.0.tgz
+    version: 0.3.0
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
@@ -72775,4 +72928,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-01-08T15:00:14.425472974Z"
+generated: "2026-01-08T15:12:54.754197646Z"
