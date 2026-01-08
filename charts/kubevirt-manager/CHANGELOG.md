@@ -1,7 +1,7 @@
 # kubevirt-manager
 
-## 0.3.0
+## 0.3.1
 
-### Changed
+### Fixed
 
-- hpa spec to align with v2
+- helm schema

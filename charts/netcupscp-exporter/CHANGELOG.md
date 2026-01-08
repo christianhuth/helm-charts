@@ -1,7 +1,7 @@
 # netcupscp-exporter
 
-## 1.3.0
+## 1.3.1
 
-### Changed
+### Fixed
 
-- hpa spec to align with v2
+- helm schema

@@ -1,7 +1,7 @@
 # popeye
 
-## 2.4.2
+## 2.4.3
 
 ### Fixed
 
-- not referencing .Values.podSecurityContext correctly in cronjob template
+- helm schema

@@ -12,14 +12,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"goldpinger.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -34,7 +32,6 @@
         "displayNodename": {
           "default": true,
           "description": "Display nodename other than podname in UI",
-          "required": [],
           "title": "displayNodename",
           "type": "boolean"
         },
@@ -45,14 +42,12 @@
                 "targets": {
                   "default": "",
                   "description": "A space delimited list of hosts to attempt dns resolve on",
-                  "required": [],
                   "title": "targets",
                   "type": "string"
                 },
                 "timeout": {
                   "default": "500ms",
                   "description": "The timeout for a dns check on the provided dns-targets",
-                  "required": [],
                   "title": "timeout",
                   "type": "string"
                 }
@@ -69,14 +64,12 @@
                 "targets": {
                   "default": "",
                   "description": "A space delimited list of external targets (\u003chttp://url\u003e or \u003chttps://url\u003e) to attempt an HTTP{S} check on. A 200 HTTP code is considered successful.",
-                  "required": [],
                   "title": "targets",
                   "type": "string"
                 },
                 "timeout": {
                   "default": "500ms",
                   "description": "The timeout for a http check on the provided http-targets",
-                  "required": [],
                   "title": "timeout",
                   "type": "string"
                 }
@@ -93,14 +86,12 @@
                 "targets": {
                   "default": "",
                   "description": "A space delimited list of external targets (\u003chost:port\u003e or \u003cip:port\u003e) to attempt a TCP check on",
-                  "required": [],
                   "title": "targets",
                   "type": "string"
                 },
                 "timeout": {
                   "default": "500ms",
                   "description": "The timeout for a tcp check on the provided tcp-targets",
-                  "required": [],
                   "title": "timeout",
                   "type": "string"
                 }
@@ -126,7 +117,6 @@
             "pingNumber": {
               "default": 0,
               "description": "Number of peers to ping. A value of 0 indicates all peers should be pinged",
-              "required": [],
               "title": "pingNumber",
               "type": "integer"
             },
@@ -135,21 +125,18 @@
                 "check": {
                   "default": "1000ms",
                   "description": "The timeout for a check call to other goldpinger pods",
-                  "required": [],
                   "title": "check",
                   "type": "string"
                 },
                 "checkAll": {
                   "default": "5000ms",
                   "description": "The timeout for a check-all call to other goldpinger pods",
-                  "required": [],
                   "title": "checkAll",
                   "type": "string"
                 },
                 "ping": {
                   "default": "300ms",
                   "description": "The timeout for a ping call to other goldpinger pods",
-                  "required": [],
                   "title": "ping",
                   "type": "string"
                 }
@@ -173,34 +160,29 @@
         "ipVersions": {
           "default": "4",
           "description": "The space delimited list of IP versions to use. Possible values are 4 and 6",
-          "required": [],
           "title": "ipVersions",
           "type": "string"
         },
         "jitterFactor": {
           "default": 0.05,
           "description": "The amount of jitter to add while pinging clients",
-          "required": [],
           "title": "jitterFactor",
           "type": "number"
         },
         "port": {
           "default": 8080,
           "description": "Port where Goldpinger will run",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "refreshInterval": {
           "default": 30,
           "description": "If \u003e 0, will create a thread and collect stats every n seconds",
-          "required": [],
           "title": "refreshInterval",
           "type": "integer"
         },
         "zapConfig": {
           "default": "{\n  \"level\": \"info\",\n  \"encoding\": \"json\",\n  \"outputPaths\": [\n      \"stdout\"\n  ],\n  \"errorOutputPaths\": [\n      \"stderr\"\n  ],\n  \"initialFields\": {\n  },\n  \"encoderConfig\": {\n      \"messageKey\": \"message\",\n      \"levelKey\": \"level\",\n      \"levelEncoder\": \"lowercase\",\n      \"timeKey\": \"ts\",\n      \"timeEncoder\": \"ISO8601\",\n      \"callerKey\": \"caller\",\n      \"callerEncoder\": \"Short\"\n  }\n}\n",
-          "required": [],
           "title": "zapConfig",
           "type": "string"
         }
@@ -223,14 +205,12 @@
         "enabled": {
           "default": false,
           "description": "Enable the creation of a Grafana Dashboard",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "folder": {
           "default": "",
           "description": "folder assignment for dashboard",
-          "required": [],
           "title": "folder",
           "type": "string"
         },
@@ -239,14 +219,12 @@
             "id": {
               "default": 10949,
               "description": "ID of the dashboard from the Grafana marketplace",
-              "required": [],
               "title": "id",
               "type": "integer"
             },
             "revision": {
               "default": 1,
               "description": "Revision of the dashboard from the Grafana marketplace",
-              "required": [],
               "title": "revision",
               "type": "integer"
             }
@@ -279,28 +257,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "bloomberg/goldpinger",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "3.10.2",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -319,7 +293,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -332,13 +305,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -350,7 +321,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -361,13 +331,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -381,7 +349,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -395,7 +362,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -403,7 +369,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -423,35 +388,30 @@
         "failureThreshold": {
           "default": 3,
           "description": "Failure threshold for livenessProbe",
-          "required": [],
           "title": "failureThreshold",
           "type": "integer"
         },
         "initialDelaySeconds": {
           "default": 20,
           "description": "Initial delay seconds for livenessProbe",
-          "required": [],
           "title": "initialDelaySeconds",
           "type": "integer"
         },
         "periodSeconds": {
           "default": 5,
           "description": "Period seconds for livenessProbe",
-          "required": [],
           "title": "periodSeconds",
           "type": "integer"
         },
         "successThreshold": {
           "default": 1,
           "description": "Success threshold for livenessProbe",
-          "required": [],
           "title": "successThreshold",
           "type": "integer"
         },
         "timeoutSeconds": {
           "default": 5,
           "description": "Timeout seconds for livenessProbe",
-          "required": [],
           "title": "timeoutSeconds",
           "type": "integer"
         }
@@ -469,7 +429,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `goldpinger`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -490,25 +449,21 @@
       "properties": {
         "fsGroup": {
           "default": 2000,
-          "required": [],
           "title": "fsGroup",
           "type": "integer"
         },
         "runAsGroup": {
           "default": 1000,
-          "required": [],
           "title": "runAsGroup",
           "type": "integer"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 1000,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         },
@@ -516,7 +471,6 @@
           "properties": {
             "type": {
               "default": "RuntimeDefault",
-              "required": [],
               "title": "type",
               "type": "string"
             }
@@ -544,7 +498,6 @@
         "enabled": {
           "default": false,
           "description": "Enable a PrometheusRule",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -556,7 +509,6 @@
                 "properties": {
                   "alert": {
                     "default": "goldpinger_nodes_unhealthy",
-                    "required": [],
                     "title": "alert",
                     "type": "string"
                   },
@@ -564,13 +516,11 @@
                     "properties": {
                       "description": {
                         "default": "Goldpinger instance {{ \"{{ $labels.goldpinger_instance }}\" }} has been reporting unhealthy nodes for at least 5 minutes.\n",
-                        "required": [],
                         "title": "description",
                         "type": "string"
                       },
                       "summary": {
                         "default": "Instance {{ \"{{ $labels.instance }}\" }} down",
-                        "required": [],
                         "title": "summary",
                         "type": "string"
                       }
@@ -584,13 +534,11 @@
                   },
                   "expr": {
                     "default": "sum(goldpinger_nodes_health_total{job=\"{{ template \"goldpinger.fullname\" . }}\", status=\"unhealthy\"})\nBY (instance, goldpinger_instance) \u003e 0\n",
-                    "required": [],
                     "title": "expr",
                     "type": "string"
                   },
                   "for": {
                     "default": "5m",
-                    "required": [],
                     "title": "for",
                     "type": "string"
                   },
@@ -598,7 +546,6 @@
                     "properties": {
                       "severity": {
                         "default": "warning",
-                        "required": [],
                         "title": "severity",
                         "type": "string"
                       }
@@ -622,7 +569,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "rules",
           "type": "array"
         }
@@ -639,14 +585,12 @@
         "clusterscoped": {
           "default": true,
           "description": "Create clusterscoped resources",
-          "required": [],
           "title": "clusterscoped",
           "type": "boolean"
         },
         "create": {
           "default": true,
           "description": "Create RBAC resources",
-          "required": [],
           "title": "create",
           "type": "boolean"
         }
@@ -663,35 +607,30 @@
         "failureThreshold": {
           "default": 3,
           "description": "Failure threshold for readinessProbe",
-          "required": [],
           "title": "failureThreshold",
           "type": "integer"
         },
         "initialDelaySeconds": {
           "default": 20,
           "description": "Initial delay seconds for readinessProbe",
-          "required": [],
           "title": "initialDelaySeconds",
           "type": "integer"
         },
         "periodSeconds": {
           "default": 5,
           "description": "Period seconds for readinessProbe",
-          "required": [],
           "title": "periodSeconds",
           "type": "integer"
         },
         "successThreshold": {
           "default": 1,
           "description": "Success threshold for readinessProbe",
-          "required": [],
           "title": "successThreshold",
           "type": "integer"
         },
         "timeoutSeconds": {
           "default": 5,
           "description": "Timeout seconds for readinessProbe",
-          "required": [],
           "title": "timeoutSeconds",
           "type": "integer"
         }
@@ -713,7 +652,6 @@
           "properties": {
             "memory": {
               "default": "80Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -728,13 +666,11 @@
           "properties": {
             "cpu": {
               "default": "1m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "40Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -757,7 +693,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -766,7 +701,6 @@
       "properties": {
         "allowPrivilegeEscalation": {
           "default": false,
-          "required": [],
           "title": "allowPrivilegeEscalation",
           "type": "boolean"
         },
@@ -776,13 +710,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "drop",
               "type": "array"
             }
@@ -795,13 +727,11 @@
         },
         "readOnlyRootFilesystem": {
           "default": true,
-          "required": [],
           "title": "readOnlyRootFilesystem",
           "type": "boolean"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         }
@@ -820,14 +750,12 @@
         "port": {
           "default": 8080,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -850,14 +778,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -881,14 +807,12 @@
         "enabled": {
           "default": false,
           "description": "Enable a Prometheus ServiceMonitor",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "interval": {
           "default": "30s",
           "description": "prometheus: kube-prometheus\nPrometheus ServiceMonitor interval",
-          "required": [],
           "title": "interval",
           "type": "string"
         },
@@ -897,14 +821,12 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "metricRelabelings",
           "type": "array"
         },
         "namespace": {
           "default": "",
           "description": "Prometheus ServiceMonitor namespace",
-          "required": [],
           "title": "namespace",
           "type": "string"
         },
@@ -913,7 +835,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "relabelings",
           "type": "array"
         },
@@ -941,7 +862,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

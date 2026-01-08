@@ -1,7 +1,7 @@
 # tenant-namespace
 
-## 2.0.5
+## 2.0.6
 
-### Changed
+### Fixed
 
-- url of icon
+- helm schema

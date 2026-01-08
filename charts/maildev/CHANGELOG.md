@@ -1,7 +1,7 @@
 # maildev
 
-## 1.4.1
+## 1.4.2
 
-### Changed
+### Fixed
 
-- hpa spec to align with v2
+- helm schema

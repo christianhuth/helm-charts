@@ -2,7 +2,7 @@ apiVersion: v2
 name: dnsbl-exporter
 description: Prometheus compatible exporter to query DNSBLs/RBLs.
 type: application
-version: 1.1.0
+version: 1.1.1
 appVersion: "v0.7.0-rc3"
 home: https://github.com/christianhuth/helm-charts
 maintainers:
@@ -13,8 +13,8 @@ sources:
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: changed
-      description: hpa spec to align with v2
+    - kind: fixed
+      description: helm schema
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

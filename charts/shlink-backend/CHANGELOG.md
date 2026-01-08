@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 9.2.0
+## 9.2.1
 
-### Changed
+### Fixed
 
-- hpa spec to align with v2
+- helm schema

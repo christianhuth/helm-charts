@@ -1,7 +1,7 @@
 # node-access
 
-## 1.2.0
+## 1.2.1
 
-### Added
+### Fixed
 
-- option to define the image registry
+- helm schema

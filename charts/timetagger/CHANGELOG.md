@@ -1,7 +1,7 @@
 # timetagger
 
-## 2.0.0
+## 2.0.1
 
-### Changed
+### Fixed
 
-- App Version to v26.1.1
+- helm schema

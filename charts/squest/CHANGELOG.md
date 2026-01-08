@@ -1,7 +1,7 @@
 # squest
 
-## 4.1.0
+## 4.1.1
 
-### Changed
+### Fixed
 
-- hpa spec to align with v2
+- helm schema

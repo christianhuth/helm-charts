@@ -4,7 +4,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"kubenav.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -17,7 +16,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `kubenav`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -28,14 +26,12 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "customPermissions",
           "type": "array"
         },
         "mode": {
           "default": "readonly",
           "description": "Decide which access mode should be granted to kubenav: `readonly`, `cluster-admin` or `custom`.",
-          "required": [],
           "title": "mode",
           "type": "string"
         },
@@ -44,7 +40,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "namespaceLimits",
           "type": "array"
         }
@@ -68,14 +63,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname templatev",
-          "required": [],
           "title": "name",
           "type": "string"
         }

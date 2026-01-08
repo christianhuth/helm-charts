@@ -1,7 +1,7 @@
 # kubenav
 
-## 1.0.7
+## 1.0.8
 
-### Changed
+### Fixed
 
-- url of icon
+- helm schema

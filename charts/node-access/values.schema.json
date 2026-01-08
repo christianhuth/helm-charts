@@ -4,7 +4,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"node-access.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -19,28 +18,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "busybox",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "1.37.0",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -59,14 +54,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `node-access`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -75,7 +68,6 @@
         "accessMode": {
           "default": "deployment",
           "description": "How to deploy the Pods to access the host system: daemonset or deployment",
-          "required": [],
           "title": "accessMode",
           "type": "string"
         },
@@ -84,7 +76,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "hostPaths",
           "type": "array"
         },
@@ -100,7 +91,6 @@
             "nodeName": {
               "default": "",
               "description": "Request to schedule this pod onto a specific node",
-              "required": [],
               "title": "nodeName",
               "type": "string"
             },
@@ -115,7 +105,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "tolerations",
               "type": "array"
             },
@@ -124,7 +113,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "topologySpreadConstraints",
               "type": "array"
             }
@@ -159,19 +147,16 @@
       "properties": {
         "runAsGroup": {
           "default": 0,
-          "required": [],
           "title": "runAsGroup",
           "type": "integer"
         },
         "runAsNonRoot": {
           "default": false,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 0,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -187,7 +172,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas. Only used if `accessNode.accessMode` equals `deployment`",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -198,13 +182,11 @@
           "properties": {
             "cpu": {
               "default": "200m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "256Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -220,13 +202,11 @@
           "properties": {
             "cpu": {
               "default": "100m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "128Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -249,7 +229,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -258,31 +237,26 @@
       "properties": {
         "privileged": {
           "default": true,
-          "required": [],
           "title": "privileged",
           "type": "boolean"
         },
         "readOnlyRootFilesystem": {
           "default": false,
-          "required": [],
           "title": "readOnlyRootFilesystem",
           "type": "boolean"
         },
         "runAsGroup": {
           "default": 0,
-          "required": [],
           "title": "runAsGroup",
           "type": "integer"
         },
         "runAsNonRoot": {
           "default": false,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 0,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -308,14 +282,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }

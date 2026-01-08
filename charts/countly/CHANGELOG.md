@@ -1,7 +1,7 @@
 # countly
 
-## 4.0.0
+## 4.0.1
 
-### Changed
+### Fixed
 
-- dependency of mongodb to 18.1.20
+- helm schema

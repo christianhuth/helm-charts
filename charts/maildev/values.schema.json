@@ -12,35 +12,30 @@
         "enabled": {
           "default": false,
           "description": "Enable Horizontal POD autoscaling",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
           "description": "Maximum number of replicas",
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
           "description": "Minimum number of replicas",
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
           "description": "Target CPU utilization percentage",
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         },
         "targetMemoryUtilizationPercentage": {
           "default": 80,
           "description": "Target Memory utilization percentage",
-          "required": [],
           "title": "targetMemoryUtilizationPercentage",
           "type": "integer"
         }
@@ -60,14 +55,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"maildev.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -82,28 +75,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registry",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "maildev/maildev",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "2.2.1",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -122,7 +111,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -137,14 +125,12 @@
         "className": {
           "default": "",
           "description": "IngressClass that will be be used to implement the Ingress",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
           "description": "Enable ingress record generation",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -156,7 +142,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -167,13 +152,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -187,7 +170,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -201,7 +183,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -210,7 +191,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -234,21 +214,18 @@
                 "cert": {
                   "default": "",
                   "description": "The ssl cert file",
-                  "required": [],
                   "title": "cert",
                   "type": "string"
                 },
                 "enabled": {
                   "default": false,
                   "description": "Switch from http to https protocol",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "key": {
                   "default": "",
                   "description": "The ssl private key",
-                  "required": [],
                   "title": "key",
                   "type": "string"
                 }
@@ -264,14 +241,12 @@
             "logMailContents": {
               "default": false,
               "description": "Log a JSON representation of each incoming mail",
-              "required": [],
               "title": "logMailContents",
               "type": "boolean"
             },
             "mailDirectory": {
               "default": "/home/node/maildev-data",
               "description": "Directory for persisting mail",
-              "required": [],
               "title": "mailDirectory",
               "type": "string"
             },
@@ -280,14 +255,12 @@
                 "silent": {
                   "default": true,
                   "description": "Run maildev in silent mode to disable the startup messages",
-                  "required": [],
                   "title": "silent",
                   "type": "boolean"
                 },
                 "verbose": {
                   "default": false,
                   "description": "Run maildev in verbose mode",
-                  "required": [],
                   "title": "verbose",
                   "type": "boolean"
                 }
@@ -304,7 +277,6 @@
                 "hideExtensions": {
                   "default": "",
                   "description": "Comma separated list of SMTP extensions to NOT advertise (SMTPUTF8, PIPELINING, 8BITMIME)",
-                  "required": [],
                   "title": "hideExtensions",
                   "type": "string"
                 },
@@ -313,14 +285,12 @@
                     "existingSecret": {
                       "default": "",
                       "description": "Name of an existing secret containing the password for the incoming SMTP mail. If set `maildev.config.smtp.incoming.password` will be ignored. Key needs to be `smtp-incoming-password`.",
-                      "required": [],
                       "title": "existingSecret",
                       "type": "string"
                     },
                     "password": {
                       "default": "",
                       "description": "SMTP password for incoming mail",
-                      "required": [],
                       "title": "password",
                       "type": "string"
                     },
@@ -329,28 +299,24 @@
                         "cert": {
                           "default": "",
                           "description": "Cert for incoming SSL",
-                          "required": [],
                           "title": "cert",
                           "type": "string"
                         },
                         "enabled": {
                           "default": false,
                           "description": "Use SMTP SSL for incoming emails",
-                          "required": [],
                           "title": "enabled",
                           "type": "boolean"
                         },
                         "existingSecret": {
                           "default": "",
                           "description": "Name of an existing TLS secret containing the cert and key for the incoming SMTP mail. If set `maildev.config.smtp.incoming.tls.cert` and `maildev.config.smtp.incoming.tls.key` will be ignored. Keys need to be `tls.crt` and `tls.key`.",
-                          "required": [],
                           "title": "existingSecret",
                           "type": "string"
                         },
                         "key": {
                           "default": "",
                           "description": "Key for incoming SSL",
-                          "required": [],
                           "title": "key",
                           "type": "string"
                         }
@@ -367,7 +333,6 @@
                     "username": {
                       "default": "",
                       "description": "SMTP user for incoming mail",
-                      "required": [],
                       "title": "username",
                       "type": "string"
                     }
@@ -388,14 +353,12 @@
                         "enabled": {
                           "default": false,
                           "description": "Enabling the auto relay mode will automatically send each email to it's recipient without the need to click the \"Relay\" button. The outgoing email options are required to enable this feature.",
-                          "required": [],
                           "title": "enabled",
                           "type": "boolean"
                         },
                         "mail": {
                           "default": "",
                           "description": "Optionally define a single email address which Maildev will forward all emails to instead of the original recipient",
-                          "required": [],
                           "title": "mail",
                           "type": "string"
                         },
@@ -404,7 +367,6 @@
                           "items": {
                             "required": []
                           },
-                          "required": [],
                           "title": "rules",
                           "type": "array"
                         }
@@ -420,42 +382,36 @@
                     "existingSecret": {
                       "default": "",
                       "description": "Name of an existing secret containing the password for the outgoing SMTP mail. If set `maildev.config.smtp.outgoing.password` will be ignored. Key needs to be `smtp-outgoing-password`.",
-                      "required": [],
                       "title": "existingSecret",
                       "type": "string"
                     },
                     "host": {
                       "default": "",
                       "description": "SMTP host for outgoing mail",
-                      "required": [],
                       "title": "host",
                       "type": "string"
                     },
                     "password": {
                       "default": "",
                       "description": "SMTP password for outgoing mail",
-                      "required": [],
                       "title": "password",
                       "type": "string"
                     },
                     "port": {
                       "default": 25,
                       "description": "SMTP port for outgoing mail",
-                      "required": [],
                       "title": "port",
                       "type": "integer"
                     },
                     "ssl": {
                       "default": false,
                       "description": "Use SMTP SSL for outgoing mail",
-                      "required": [],
                       "title": "ssl",
                       "type": "boolean"
                     },
                     "username": {
                       "default": "",
                       "description": "SMTP user for outgoing mail",
-                      "required": [],
                       "title": "username",
                       "type": "string"
                     }
@@ -486,28 +442,24 @@
                 "disabled": {
                   "default": false,
                   "description": "Disable the use of the web interface. Useful for unit testing",
-                  "required": [],
                   "title": "disabled",
                   "type": "boolean"
                 },
                 "existingSecret": {
                   "default": "",
                   "description": "Name of an existing secret containing the password for the GUI. If set `maildev.config.web.password` will be ignored. Key needs to be `web-password`.",
-                  "required": [],
                   "title": "existingSecret",
                   "type": "string"
                 },
                 "password": {
                   "default": "",
                   "description": "Password for the GUI",
-                  "required": [],
                   "title": "password",
                   "type": "string"
                 },
                 "username": {
                   "default": "",
                   "description": "Username for the GUI",
-                  "required": [],
                   "title": "username",
                   "type": "string"
                 }
@@ -540,13 +492,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "accessModes",
               "type": "array"
             },
@@ -564,14 +514,12 @@
                     "daysToKeep": {
                       "default": 15,
                       "description": "How old emails may be before they get deleted",
-                      "required": [],
                       "title": "daysToKeep",
                       "type": "integer"
                     },
                     "schedule": {
                       "default": "0 1 * * *",
                       "description": "The schedule on which the cronjob should run",
-                      "required": [],
                       "title": "schedule",
                       "type": "string"
                     }
@@ -586,7 +534,6 @@
                 "enabled": {
                   "default": false,
                   "description": "Enable the creation of a cronjob to periodically delete old emails",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
@@ -595,28 +542,24 @@
                     "pullPolicy": {
                       "default": "Always",
                       "description": "Image pull policy",
-                      "required": [],
                       "title": "pullPolicy",
                       "type": "string"
                     },
                     "registry": {
                       "default": "docker.io",
                       "description": "Image registry",
-                      "required": [],
                       "title": "registry",
                       "type": "string"
                     },
                     "repository": {
                       "default": "busybox",
                       "description": "Image repository",
-                      "required": [],
                       "title": "repository",
                       "type": "string"
                     },
                     "tag": {
                       "default": "latest",
                       "description": "Overrides the image tag",
-                      "required": [],
                       "title": "tag",
                       "type": "string"
                     }
@@ -642,14 +585,12 @@
             "enabled": {
               "default": false,
               "description": "Use a PVC to persist data",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "existingClaim": {
               "default": "",
               "description": "Provide an existing PersistentVolumeClaim",
-              "required": [],
               "title": "existingClaim",
               "type": "string"
             },
@@ -660,7 +601,6 @@
                   "properties": {
                     "storage": {
                       "default": "2Gi",
-                      "required": [],
                       "title": "storage",
                       "type": "string"
                     }
@@ -681,7 +621,6 @@
             "storageClassName": {
               "default": "",
               "description": "Name of the StorageClass required by the claim.",
-              "required": [],
               "title": "storageClassName",
               "type": "string"
             }
@@ -709,7 +648,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `maildev`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -734,7 +672,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -747,7 +684,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -768,14 +704,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -795,28 +729,24 @@
             "nodePort": {
               "default": 0,
               "description": "You can set the node port for the external SMTP server that should be used or leave it blank to get a random node port. Only active if `services.smtp.type == NodePort`",
-              "required": [],
               "title": "nodePort",
               "type": "integer"
             },
             "podPort": {
               "default": 1025,
               "description": "Pod port to use for the internal SMTP server",
-              "required": [],
               "title": "podPort",
               "type": "integer"
             },
             "port": {
               "default": 1025,
               "description": "Kubernetes service port to use for the internal SMTP server",
-              "required": [],
               "title": "port",
               "type": "integer"
             },
             "type": {
               "default": "ClusterIP",
               "description": "Kubernetes service type for the SMTP server",
-              "required": [],
               "title": "type",
               "type": "string"
             }
@@ -835,21 +765,18 @@
             "podPort": {
               "default": 1080,
               "description": "Pod port to use for the web GUI",
-              "required": [],
               "title": "podPort",
               "type": "integer"
             },
             "port": {
               "default": 1080,
               "description": "Kubernetes service port to use for the web GUI",
-              "required": [],
               "title": "port",
               "type": "integer"
             },
             "type": {
               "default": "ClusterIP",
               "description": "Kubernetes service type for the web GUI",
-              "required": [],
               "title": "type",
               "type": "string"
             }
@@ -875,7 +802,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

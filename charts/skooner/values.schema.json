@@ -11,25 +11,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -48,7 +44,6 @@
         "clusterRole": {
           "default": "edit",
           "description": "Define which ClusterRole to bind to: cluster-admin, edit, view",
-          "required": [],
           "title": "clusterRole",
           "type": "string"
         }
@@ -62,7 +57,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"skooner.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -77,28 +71,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "ghcr.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "skooner-k8s/skooner",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "stable",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -117,7 +107,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -130,13 +119,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -148,7 +135,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -159,13 +145,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -179,7 +163,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -193,7 +176,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -201,7 +183,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -219,7 +200,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `skooner`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -228,7 +208,6 @@
       "properties": {
         "kubernetes.io/os": {
           "default": "linux",
-          "required": [],
           "title": "kubernetes.io/os",
           "type": "string"
         }
@@ -243,7 +222,6 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -251,20 +229,17 @@
           "properties": {
             "oidcMetadata": {
               "default": "",
-              "required": [],
               "title": "oidcMetadata",
               "type": "string"
             },
             "oidcScopes": {
               "default": "openid email",
-              "required": [],
               "title": "oidcScopes",
               "type": "string"
             },
             "oidcUrl": {
               "default": "",
               "description": "The URL of the OIDC endpoint.",
-              "required": [],
               "title": "oidcUrl",
               "type": "string"
             }
@@ -281,27 +256,23 @@
           "properties": {
             "clientId": {
               "default": "",
-              "required": [],
               "title": "clientId",
               "type": "string"
             },
             "clientSecret": {
               "default": "",
-              "required": [],
               "title": "clientSecret",
               "type": "string"
             },
             "name": {
               "default": "",
               "description": "The name of the secret that contains the client credentials. Uses fullname if none given.",
-              "required": [],
               "title": "name",
               "type": "string"
             },
             "useExistingSecret": {
               "default": false,
               "description": "Secret must provide the following variables: OIDC_CLIENT_ID and OIDC_SECRET.",
-              "required": [],
               "title": "useExistingSecret",
               "type": "boolean"
             }
@@ -335,7 +306,6 @@
       "properties": {
         "fsGroup": {
           "default": 1000,
-          "required": [],
           "title": "fsGroup",
           "type": "integer"
         }
@@ -349,7 +319,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -362,7 +331,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -371,13 +339,11 @@
       "properties": {
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 1000,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -394,14 +360,12 @@
         "port": {
           "default": 80,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -424,14 +388,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -449,7 +411,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     },
@@ -458,7 +419,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "volumeMounts",
       "type": "array"
     },
@@ -467,7 +427,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "volumes",
       "type": "array"
     }

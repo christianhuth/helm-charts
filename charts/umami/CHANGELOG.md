@@ -1,7 +1,7 @@
 # umami
 
-## 7.2.0
+## 7.2.1
 
-### Changed
+### Fixed
 
-- hpa spec to align with v2
+- helm schema

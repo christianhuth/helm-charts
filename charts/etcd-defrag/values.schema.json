@@ -16,28 +16,24 @@
                 "enabled": {
                   "default": false,
                   "description": "use username and password for authentication against etcd",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "existingSecret": {
                   "default": "",
                   "description": "Name of existing secret to use for authentication credentials. Key needs to be called `etcd-password`.",
-                  "required": [],
                   "title": "existingSecret",
                   "type": "string"
                 },
                 "password": {
                   "default": "",
                   "description": "password for authentication",
-                  "required": [],
                   "title": "password",
                   "type": "string"
                 },
                 "user": {
                   "default": "",
                   "description": "username for authentication",
-                  "required": [],
                   "title": "user",
                   "type": "string"
                 }
@@ -54,28 +50,24 @@
             "clusterWide": {
               "default": true,
               "description": "Run defragment operations for all endpoints in the cluster associated with the default endpoint.",
-              "required": [],
               "title": "clusterWide",
               "type": "boolean"
             },
             "commandTimeout": {
               "default": "",
               "description": "timeout for short running command (excluding dial timeout)",
-              "required": [],
               "title": "commandTimeout",
               "type": "string"
             },
             "debug": {
               "default": false,
               "description": "enable client-side debug logging",
-              "required": [],
               "title": "debug",
               "type": "boolean"
             },
             "dialTimeout": {
               "default": "",
               "description": "dial timeout for client connections",
-              "required": [],
               "title": "dialTimeout",
               "type": "string"
             },
@@ -84,21 +76,18 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "endpoints",
               "type": "array"
             },
             "insecureSkipTlsVerify": {
               "default": false,
               "description": "skip server certificate verification",
-              "required": [],
               "title": "insecureSkipTlsVerify",
               "type": "boolean"
             },
             "insecureTransport": {
               "default": true,
               "description": "disable transport security for client connections",
-              "required": [],
               "title": "insecureTransport",
               "type": "boolean"
             },
@@ -107,21 +96,18 @@
                 "ca": {
                   "default": "",
                   "description": "certificate authority used for the etcd certificates",
-                  "required": [],
                   "title": "ca",
                   "type": "string"
                 },
                 "cert": {
                   "default": "",
                   "description": "identify secure client using this TLS certificate",
-                  "required": [],
                   "title": "cert",
                   "type": "string"
                 },
                 "existingSecret": {
                   "default": "",
                   "description": "Name of existing secret with certificates. Keys needs to be called `ca`, `cert` and `key`.",
-                  "required": [],
                   "title": "existingSecret",
                   "type": "string"
                 },
@@ -130,28 +116,24 @@
                     "caFilePath": {
                       "default": "/etc/kubernetes/pki/etcd/ca.crt",
                       "description": "file on host containing the certificate authority",
-                      "required": [],
                       "title": "caFilePath",
                       "type": "string"
                     },
                     "certFilePath": {
                       "default": "/etc/kubernetes/pki/etcd/server.crt",
                       "description": "file on host containing the server certificate",
-                      "required": [],
                       "title": "certFilePath",
                       "type": "string"
                     },
                     "enabled": {
                       "default": false,
                       "description": "get certificates directly from host where the Pod is running",
-                      "required": [],
                       "title": "enabled",
                       "type": "boolean"
                     },
                     "keyFilePath": {
                       "default": "/etc/kubernetes/pki/etcd/server.key",
                       "description": "file on host containing the server private key",
-                      "required": [],
                       "title": "keyFilePath",
                       "type": "string"
                     }
@@ -168,7 +150,6 @@
                 "key": {
                   "default": "",
                   "description": "identify secure client using this TLS key",
-                  "required": [],
                   "title": "key",
                   "type": "string"
                 }
@@ -186,7 +167,6 @@
             "writeOut": {
               "default": "table",
               "description": "set the output format: `fields`, `json`, `protobuf`, `simple`, `table`)",
-              "required": [],
               "title": "writeOut",
               "type": "string"
             }
@@ -211,42 +191,36 @@
             "concurrencyPolicy": {
               "default": "Forbid",
               "description": "Specifies how to treat concurrent executions of a Job. Valid values are: `Allow`, `Forbid` and `Replace`.",
-              "required": [],
               "title": "concurrencyPolicy",
               "type": "string"
             },
             "failedJobsHistoryLimit": {
               "default": "1",
               "description": "The number of failed finished jobs to retain.",
-              "required": [],
               "title": "failedJobsHistoryLimit",
               "type": "string"
             },
             "schedule": {
               "default": "0 */1 * * *",
               "description": "The schedule in Cron format, see https://en.wikipedia.org/wiki/Cron.",
-              "required": [],
               "title": "schedule",
               "type": "string"
             },
             "startingDeadlineSeconds": {
               "default": "30",
               "description": "Optional deadline in seconds for starting the job if it misses scheduled time for any reason. Missed jobs executions will be counted as failed ones.",
-              "required": [],
               "title": "startingDeadlineSeconds",
               "type": "string"
             },
             "successfulJobsHistoryLimit": {
               "default": "3",
               "description": "The number of successful finished jobs to retain.",
-              "required": [],
               "title": "successfulJobsHistoryLimit",
               "type": "string"
             },
             "suspend": {
               "default": false,
               "description": "This flag tells the controller to suspend subsequent executions, it does not apply to already started executions.",
-              "required": [],
               "title": "suspend",
               "type": "boolean"
             }
@@ -265,7 +239,6 @@
         "enabled": {
           "default": true,
           "description": "create a CronJob for defragmentation",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -274,56 +247,48 @@
             "activeDeadlineSeconds": {
               "default": "",
               "description": "Specifies the duration in seconds relative to the startTime that the job may be continuously active before the system tries to terminate it.",
-              "required": [],
               "title": "activeDeadlineSeconds",
               "type": "string"
             },
             "backoffLimit": {
               "default": "",
               "description": "Specifies the number of retries before marking this job failed.",
-              "required": [],
               "title": "backoffLimit",
               "type": "string"
             },
             "completionMode": {
               "default": "",
               "description": "CompletionMode specifies how Pod completions are tracked. It can be: `NonIndexed` or `Indexed`.",
-              "required": [],
               "title": "completionMode",
               "type": "string"
             },
             "completions": {
               "default": "",
               "description": "Specifies the desired number of successfully finished pods the job should be run with.",
-              "required": [],
               "title": "completions",
               "type": "string"
             },
             "parallelism": {
               "default": "",
               "description": "Specifies the maximum desired number of pods the job should run at any given time.",
-              "required": [],
               "title": "parallelism",
               "type": "string"
             },
             "podFailurePolicy": {
               "default": "",
               "description": "Specifies the policy of handling failed pods.",
-              "required": [],
               "title": "podFailurePolicy",
               "type": "string"
             },
             "suspend": {
               "default": false,
               "description": "Suspend specifies whether the Job controller should create Pods or not.",
-              "required": [],
               "title": "suspend",
               "type": "boolean"
             },
             "ttlSecondsAfterFinished": {
               "default": "",
               "description": "limits the lifetime of a Job that has finished execution",
-              "required": [],
               "title": "ttlSecondsAfterFinished",
               "type": "string"
             }
@@ -346,7 +311,6 @@
             "restartPolicy": {
               "default": "OnFailure",
               "description": "Restart policy for all containers within the pod. One of `Always`, `OnFailure`, `Never`.",
-              "required": [],
               "title": "restartPolicy",
               "type": "string"
             }
@@ -373,7 +337,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
@@ -396,7 +359,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"etcd-defrag.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -409,7 +371,6 @@
     "hostNetwork": {
       "default": false,
       "description": "specify if the CronJob should run on the hostNetwork",
-      "required": [],
       "title": "hostNetwork",
       "type": "boolean"
     },
@@ -418,28 +379,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "quay.io",
           "description": "image registry",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "coreos/etcd",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "v3.6.7",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -458,14 +415,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `etcd-defrag`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -474,7 +429,6 @@
       "properties": {
         "node-role.kubernetes.io/control-plane": {
           "default": "",
-          "required": [],
           "title": "node-role.kubernetes.io/control-plane",
           "type": "string"
         }
@@ -513,14 +467,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -538,7 +490,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

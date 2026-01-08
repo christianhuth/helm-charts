@@ -1,7 +1,7 @@
 # syncstorage-rs
 
-## 4.0.0
+## 4.0.1
 
-### Changed
+### Fixed
 
-- dependency of mariadb mariadb to 24.0.2
+- helm schema

@@ -1,7 +1,7 @@
 # syncserver
 
-## 1.1.0
+## 1.1.1
 
-### Added
+### Fixed
 
-- option to define the image registry
+- helm schema

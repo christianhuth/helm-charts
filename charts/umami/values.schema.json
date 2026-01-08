@@ -12,35 +12,30 @@
         "enabled": {
           "default": false,
           "description": "Enable Horizontal POD autoscaling",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
           "description": "Maximum number of replicas",
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
           "description": "Minimum number of replicas",
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
           "description": "Target CPU utilization percentage",
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         },
         "targetMemoryUtilizationPercentage": {
           "default": 80,
           "description": "Target Memory utilization percentage",
-          "required": [],
           "title": "targetMemoryUtilizationPercentage",
           "type": "integer"
         }
@@ -60,14 +55,12 @@
         "databaseUrlKey": {
           "default": "",
           "description": "Key in the existing secret containing the database url",
-          "required": [],
           "title": "databaseUrlKey",
           "type": "string"
         },
         "existingSecret": {
           "default": "",
           "description": "use an existing secret containing the database url. If none given, we will generate the database url by using the other values. The password for the database has to be set using `.Values.postgresql.auth.password`, `.Values.mysql.auth.password` or `.Values.externalDatabase.auth.password`.",
-          "required": [],
           "title": "existingSecret",
           "type": "string"
         }
@@ -86,21 +79,18 @@
             "database": {
               "default": "mychart",
               "description": "Name of the database to use",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "password": {
               "default": "mychart",
               "description": "Password to use",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "mychart",
               "description": "Name of the user to use",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -116,21 +106,18 @@
         "hostname": {
           "default": "",
           "description": "Hostname of the database",
-          "required": [],
           "title": "hostname",
           "type": "string"
         },
         "port": {
           "default": 5432,
           "description": "Port used to connect to database",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "postgresql",
           "description": "Type of database",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -149,14 +136,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"umami.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -171,28 +156,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "ghcr.io",
           "description": "image registry",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "umami-software/umami",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "postgresql-v2.20.1",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -211,7 +192,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -226,14 +206,12 @@
         "className": {
           "default": "",
           "description": "IngressClass that will be be used to implement the Ingress",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
           "description": "Enable ingress record generation",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -245,7 +223,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -256,13 +233,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -276,7 +251,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -290,7 +264,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -299,7 +272,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -327,21 +299,18 @@
             "database": {
               "default": "mychart",
               "description": "Name for a custom database to create",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "password": {
               "default": "mychart",
               "description": "Password for the custom user to create",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "mychart",
               "description": "Name for a custom user to create",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -357,7 +326,6 @@
         "enabled": {
           "default": false,
           "description": "enable MySQL™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -372,7 +340,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `umami`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -407,21 +374,18 @@
             "database": {
               "default": "mychart",
               "description": "Name for a custom database to create",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "password": {
               "default": "mychart",
               "description": "Password for the custom user to create",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "mychart",
               "description": "Name for a custom user to create",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -437,7 +401,6 @@
         "enabled": {
           "default": true,
           "description": "enable PostgreSQL™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -452,7 +415,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -465,7 +427,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -474,19 +435,16 @@
       "properties": {
         "runAsGroup": {
           "default": 65533,
-          "required": [],
           "title": "runAsGroup",
           "type": "integer"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 1001,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -504,14 +462,12 @@
         "port": {
           "default": 3000,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -534,14 +490,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -559,7 +513,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     },
@@ -570,14 +523,12 @@
             "existingSecret": {
               "default": "",
               "description": "Name of an existing secret containing the app secret under the key app-secret.",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "secret": {
               "default": "",
               "description": "A random string used to generate unique values.",
-              "required": [],
               "title": "secret",
               "type": "string"
             }
@@ -592,28 +543,24 @@
         "clientIpHeader": {
           "default": "",
           "description": "HTTP header to check for the client's IP address. This is useful when you're behind a proxy that uses non-standard headers.",
-          "required": [],
           "title": "clientIpHeader",
           "type": "string"
         },
         "cloudMode": {
           "default": "0",
           "description": "Disables users, teams, and websites settings page.",
-          "required": [],
           "title": "cloudMode",
           "type": "string"
         },
         "collectApiEndpoint": {
           "default": "",
           "description": "Allows you to send metrics to a location different than the default `/api/send`. This is to help you avoid some ad-blockers.",
-          "required": [],
           "title": "collectApiEndpoint",
           "type": "string"
         },
         "corsMaxAge": {
           "default": "86400",
           "description": "How many seconds a CORS preflight should last. Default is 24 hours.",
-          "required": [],
           "title": "corsMaxAge",
           "type": "string"
         },
@@ -622,28 +569,24 @@
             "data": {
               "default": "",
               "description": "The custom script",
-              "required": [],
               "title": "data",
               "type": "string"
             },
             "enabled": {
               "default": false,
               "description": "Create and mount a ConfigMap with a custom script",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "key": {
               "default": "script.js",
               "description": "Key in the ConfigMap",
-              "required": [],
               "title": "key",
               "type": "string"
             },
             "mountPath": {
               "default": "/app/public/script.js",
               "description": "The path to mount the custom script to",
-              "required": [],
               "title": "mountPath",
               "type": "string"
             }
@@ -660,77 +603,66 @@
         "debug": {
           "default": "",
           "description": "Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`.",
-          "required": [],
           "title": "debug",
           "type": "string"
         },
         "disableBotCheck": {
           "default": "1",
           "description": "By default bots are excluded from statistics. This disables checking for bots.",
-          "required": [],
           "title": "disableBotCheck",
           "type": "string"
         },
         "disableLogin": {
           "default": "1",
           "description": "Disables the login page for the application",
-          "required": [],
           "title": "disableLogin",
           "type": "string"
         },
         "disableTelemetry": {
           "default": "1",
           "description": "Umami collects completely anonymous telemetry data in order help improve the application. You can choose to disable this if you don't want to participate.",
-          "required": [],
           "title": "disableTelemetry",
           "type": "string"
         },
         "disableUpdates": {
           "default": "1",
           "description": "Disables the check for new versions of Umami",
-          "required": [],
           "title": "disableUpdates",
           "type": "string"
         },
         "enableTestConsole": {
           "default": "1",
           "description": "Enables the internal test page, {host}/console. Admin access is required. Users can manually fire pageviews and events to their websites.",
-          "required": [],
           "title": "enableTestConsole",
           "type": "string"
         },
         "forceSSL": {
           "default": "1",
           "description": "This will redirect all requests from http to https in the Umami application. Note, this does not apply to the tracking script.",
-          "required": [],
           "title": "forceSSL",
           "type": "string"
         },
         "hostname": {
           "default": "0.0.0.0",
           "description": "hostname under which Umami will be reached",
-          "required": [],
           "title": "hostname",
           "type": "string"
         },
         "ignoreHostname": {
           "default": "",
           "description": "This will do a DNS lookup on a hostname and the resulting IP address will be ignored. This can be a comma delimited list of hostnames.",
-          "required": [],
           "title": "ignoreHostname",
           "type": "string"
         },
         "ignoredIpAddresses": {
           "default": "",
           "description": "You can provide a comma-delimited list of IP address to exclude from data collection.",
-          "required": [],
           "title": "ignoredIpAddresses",
           "type": "string"
         },
         "logQuery": {
           "default": "1",
           "description": "If you are running in development mode, this will log database queries to the console for debugging.",
-          "required": [],
           "title": "logQuery",
           "type": "string"
         },
@@ -741,7 +673,6 @@
                 "enabled": {
                   "default": false,
                   "description": "enable a job that migrates database structure from v1 to v2",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 }
@@ -762,21 +693,18 @@
         "removeDisableLoginEnv": {
           "default": true,
           "description": "setting this to true removes the environment variable DISABLE_LOGIN defined in `umami.disableLogin` from the deployment as this caused errors in some setups",
-          "required": [],
           "title": "removeDisableLoginEnv",
           "type": "boolean"
         },
         "removeTrailingSlash": {
           "default": "1",
           "description": "Removes the trailing slash from all incoming urls.",
-          "required": [],
           "title": "removeTrailingSlash",
           "type": "string"
         },
         "trackerScriptName": {
           "default": "umami",
           "description": "Allows you to assign a custom name to the tracker script different from the default umami. This is to help you avoid some ad-blockers.",
-          "required": [],
           "title": "trackerScriptName",
           "type": "string"
         }

@@ -11,25 +11,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -50,35 +46,30 @@
             "apiToken": {
               "default": "",
               "description": "The auth token to pass to the Grafana API, see https://grafana.com/docs/grafana/latest/http_api/auth/",
-              "required": [],
               "title": "apiToken",
               "type": "string"
             },
             "defaultDatasourceId": {
               "default": "",
               "description": "The default Grafana datasource ID to use (overrides Grafana's own default).",
-              "required": [],
               "title": "defaultDatasourceId",
               "type": "string"
             },
             "enabled": {
               "default": false,
               "description": "Enable integration with Grafana",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "existingSecret": {
               "default": "",
               "description": "An existing secret containing the auth token, key needs to be api-token",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "url": {
               "default": "",
               "description": "The URL of your Grafana installation",
-              "required": [],
               "title": "url",
               "type": "string"
             }
@@ -98,14 +89,12 @@
             "format": {
               "default": "json",
               "description": "Output format of log messages. One of: [logfmt, json]",
-              "required": [],
               "title": "format",
               "type": "string"
             },
             "level": {
               "default": "info",
               "description": "Only log messages with the given severity or above. One of: [debug, info, warn, error]",
-              "required": [],
               "title": "level",
               "type": "string"
             }
@@ -124,28 +113,24 @@
                 "bucket": {
                   "default": "",
                   "description": "Name of the GCS bucket for storing shared links",
-                  "required": [],
                   "title": "bucket",
                   "type": "string"
                 },
                 "enabled": {
                   "default": false,
                   "description": "Enable Link Sharing via Google Storage Bucket",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "existingSecret": {
                   "default": "",
                   "description": "An existing secret containing the credentials for the storage-account as json, key needs to be gcs-cred.json",
-                  "required": [],
                   "title": "existingSecret",
                   "type": "string"
                 },
                 "storageAccount": {
                   "default": "",
                   "description": "Google Cloud Storage Account key",
-                  "required": [],
                   "title": "storageAccount",
                   "type": "string"
                 }
@@ -164,42 +149,36 @@
                 "createTables": {
                   "default": true,
                   "description": "Whether to automatically create the required tables when using a SQL database for shared links.",
-                  "required": [],
                   "title": "createTables",
                   "type": "boolean"
                 },
                 "driver": {
                   "default": "sqlite",
                   "description": "The SQL driver to use for storing shared links in a SQL database. Supported values: [mysql, sqlite].",
-                  "required": [],
                   "title": "driver",
                   "type": "string"
                 },
                 "dsn": {
                   "default": "/tmp/promlens-links.db",
                   "description": "SQL Data Source Name when using a SQL database to shared links (see https://github.com/go-sql-driver/mysql#dsn-data-source-name) for MySQL, https://github.com/glebarez/go-sqlite#example for SQLite)",
-                  "required": [],
                   "title": "dsn",
                   "type": "string"
                 },
                 "enabled": {
                   "default": false,
                   "description": "Enable Link Sharing via SQL database",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "existingSecret": {
                   "default": "",
                   "description": "An existing secret containing the dsn for the link storage backend, key needs to be dsn",
-                  "required": [],
                   "title": "existingSecret",
                   "type": "string"
                 },
                 "retention": {
                   "default": "0",
                   "description": "The maximum retention time for shared links when using a SQL database (e.g. '10m', '12h'). Set to 0 for infinite retention.",
-                  "required": [],
                   "title": "retention",
                   "type": "string"
                 }
@@ -228,21 +207,18 @@
             "defaultPrometheusUrl": {
               "default": "",
               "description": "The default Prometheus URL to load PromLens with.",
-              "required": [],
               "title": "defaultPrometheusUrl",
               "type": "string"
             },
             "externalUrl": {
               "default": "",
               "description": "The URL under which PromLens is externally reachable (for example, if PromLens is served via a reverse proxy). Used for generating relative and absolute links back to PromLens itself. If the URL has a path portion, it will be used to prefix all HTTP endpoints served by PromLens. If omitted, relevant URL components will be derived automatically.",
-              "required": [],
               "title": "externalUrl",
               "type": "string"
             },
             "routePrefix": {
               "default": "",
               "description": "Prefix for the internal routes of web endpoints. Defaults to path of --web.external-url.",
-              "required": [],
               "title": "routePrefix",
               "type": "string"
             }
@@ -268,7 +244,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"promlens.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -283,28 +258,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "prom/promlens",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "v0.3.0",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -323,7 +294,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -338,14 +308,12 @@
         "className": {
           "default": "",
           "description": "Ingress class name",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
           "description": "Enable ingress",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -357,7 +325,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -368,13 +335,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -388,7 +353,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -402,7 +366,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -410,7 +373,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -428,7 +390,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `promlens`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -453,7 +414,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -466,7 +426,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -481,14 +440,12 @@
         "port": {
           "default": 8080,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -511,14 +468,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -536,7 +491,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

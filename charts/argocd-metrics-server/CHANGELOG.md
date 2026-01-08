@@ -1,7 +1,7 @@
 # argocd-metrics-server
 
-## 1.0.8
+## 1.0.9
 
-### Changed
+### Fixed
 
-- url for Icon
+- helm schema

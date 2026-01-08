@@ -1,7 +1,7 @@
 # kube-ops-view
 
-## 7.0.0
+## 7.0.1
 
-### Changed
+### Fixed
 
-- dependency of redis to 24.1.0
+- helm schema

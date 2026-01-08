@@ -14,35 +14,30 @@
             "enabled": {
               "default": false,
               "description": "Enable Horizontal POD autoscaling",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "maxReplicas": {
               "default": 100,
               "description": "Maximum number of replicas",
-              "required": [],
               "title": "maxReplicas",
               "type": "integer"
             },
             "minReplicas": {
               "default": 1,
               "description": "Minimum number of replicas",
-              "required": [],
               "title": "minReplicas",
               "type": "integer"
             },
             "targetCPUUtilizationPercentage": {
               "default": 80,
               "description": "Target CPU utilization percentage",
-              "required": [],
               "title": "targetCPUUtilizationPercentage",
               "type": "integer"
             },
             "targetMemoryUtilizationPercentage": {
               "default": 80,
               "description": "Target Memory utilization percentage",
-              "required": [],
               "title": "targetMemoryUtilizationPercentage",
               "type": "integer"
             }
@@ -62,7 +57,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "extraEnv",
           "type": "array"
         },
@@ -71,28 +65,24 @@
             "pullPolicy": {
               "default": "Always",
               "description": "image pull policy",
-              "required": [],
               "title": "pullPolicy",
               "type": "string"
             },
             "registry": {
               "default": "docker.io",
               "description": "image registry",
-              "required": [],
               "title": "registry",
               "type": "string"
             },
             "repository": {
               "default": "countly/api",
               "description": "image repository",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "25.05.4",
               "description": "Overrides the image tag",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -111,7 +101,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "imagePullSecrets",
           "type": "array"
         },
@@ -120,35 +109,30 @@
             "failureThreshold": {
               "default": 6,
               "description": "Failure threshold for livenessProbe",
-              "required": [],
               "title": "failureThreshold",
               "type": "integer"
             },
             "initialDelaySeconds": {
               "default": 60,
               "description": "Initial delay seconds for livenessProbe",
-              "required": [],
               "title": "initialDelaySeconds",
               "type": "integer"
             },
             "periodSeconds": {
               "default": 30,
               "description": "Period seconds for livenessProbe",
-              "required": [],
               "title": "periodSeconds",
               "type": "integer"
             },
             "successThreshold": {
               "default": 1,
               "description": "Success threshold for livenessProbe",
-              "required": [],
               "title": "successThreshold",
               "type": "integer"
             },
             "timeoutSeconds": {
               "default": 2,
               "description": "Timeout in seconds for livenessProbe",
-              "required": [],
               "title": "timeoutSeconds",
               "type": "integer"
             }
@@ -184,7 +168,6 @@
         "priorityClassName": {
           "default": "",
           "description": "Pod priority class name",
-          "required": [],
           "title": "priorityClassName",
           "type": "string"
         },
@@ -193,35 +176,30 @@
             "failureThreshold": {
               "default": 6,
               "description": "Failure threshold for readinessProbe",
-              "required": [],
               "title": "failureThreshold",
               "type": "integer"
             },
             "initialDelaySeconds": {
               "default": 60,
               "description": "Initial delay seconds for readinessProbe",
-              "required": [],
               "title": "initialDelaySeconds",
               "type": "integer"
             },
             "periodSeconds": {
               "default": 30,
               "description": "Period seconds for readinessProbe",
-              "required": [],
               "title": "periodSeconds",
               "type": "integer"
             },
             "successThreshold": {
               "default": 1,
               "description": "Success threshold for readinessProbe",
-              "required": [],
               "title": "successThreshold",
               "type": "integer"
             },
             "timeoutSeconds": {
               "default": 2,
               "description": "Timeout in seconds for readinessProbe",
-              "required": [],
               "title": "timeoutSeconds",
               "type": "integer"
             }
@@ -239,7 +217,6 @@
         "replicaCount": {
           "default": 1,
           "description": "Number of replicas",
-          "required": [],
           "title": "replicaCount",
           "type": "integer"
         },
@@ -250,7 +227,6 @@
               "properties": {
                 "memory": {
                   "default": "2Gi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -265,13 +241,11 @@
               "properties": {
                 "cpu": {
                   "default": "200m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "400Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -294,7 +268,6 @@
         "revisionHistoryLimit": {
           "default": 10,
           "description": "The number of old ReplicaSets to retain",
-          "required": [],
           "title": "revisionHistoryLimit",
           "type": "integer"
         },
@@ -315,14 +288,12 @@
             "port": {
               "default": 3000,
               "description": "Kubernetes port where service is exposed",
-              "required": [],
               "title": "port",
               "type": "integer"
             },
             "type": {
               "default": "ClusterIP",
               "description": "Kubernetes service type",
-              "required": [],
               "title": "type",
               "type": "string"
             }
@@ -345,14 +316,12 @@
             "create": {
               "default": true,
               "description": "Specifies whether a service account should be created",
-              "required": [],
               "title": "create",
               "type": "boolean"
             },
             "name": {
               "default": "",
               "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-              "required": [],
               "title": "name",
               "type": "string"
             }
@@ -370,7 +339,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tolerations",
           "type": "array"
         }
@@ -406,7 +374,6 @@
           "properties": {
             "filestorage": {
               "default": "gridfs",
-              "required": [],
               "title": "filestorage",
               "type": "string"
             },
@@ -417,21 +384,18 @@
                     "existingSecret": {
                       "default": "",
                       "description": "Use existing secret for password details. The secret has to contain the key `mail-password`. When it's set the `config.api.mail.auth.password` is ignored.",
-                      "required": [],
                       "title": "existingSecret",
                       "type": "string"
                     },
                     "password": {
                       "default": "",
                       "description": "The password to authenticate to the smtp host when sending emails.",
-                      "required": [],
                       "title": "password",
                       "type": "string"
                     },
                     "username": {
                       "default": "",
                       "description": "The username to authenticate to the smtp host when sending emails.",
-                      "required": [],
                       "title": "username",
                       "type": "string"
                     }
@@ -447,28 +411,24 @@
                 "enabled": {
                   "default": false,
                   "description": "Enable sending of emails",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "from": {
                   "default": "",
                   "description": "The email address Countly will send emails from.",
-                  "required": [],
                   "title": "from",
                   "type": "string"
                 },
                 "host": {
                   "default": "",
                   "description": "The host of the external SMTP server that Countly should use to send emails.",
-                  "required": [],
                   "title": "host",
                   "type": "string"
                 },
                 "port": {
                   "default": 0,
                   "description": "The port used to connect to the smtp host.",
-                  "required": [],
                   "title": "port",
                   "type": "integer"
                 }
@@ -485,7 +445,6 @@
             },
             "workerCount": {
               "default": "1",
-              "required": [],
               "title": "workerCount",
               "type": "string"
             }
@@ -500,13 +459,11 @@
         },
         "nodeOptions": {
           "default": "--max-old-space-size=2048",
-          "required": [],
           "title": "nodeOptions",
           "type": "string"
         },
         "plugins": {
           "default": "mobile,web,desktop,plugins,density,locale,browser,sources,views,logger,systemlogs,populator,reports,crashes,push,star-rating,slipping-away-users,compare,server-stats,dbviewer,times-of-day,compliance-hub,alerts,onboarding,consolidate,remote-config,hooks,dashboards,sdk,data-manager,guides",
-          "required": [],
           "title": "plugins",
           "type": "string"
         }
@@ -526,7 +483,6 @@
             "database": {
               "default": "countly",
               "description": "Name for a custom database to use",
-              "required": [],
               "title": "database",
               "type": "string"
             }
@@ -540,14 +496,12 @@
         "hostname": {
           "default": "",
           "description": "Hostname of the MongoDB database",
-          "required": [],
           "title": "hostname",
           "type": "string"
         },
         "port": {
           "default": 27017,
           "description": "Port used to connect to MongoDB database",
-          "required": [],
           "title": "port",
           "type": "integer"
         }
@@ -565,7 +519,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
@@ -582,35 +535,30 @@
             "enabled": {
               "default": false,
               "description": "Enable Horizontal POD autoscaling",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "maxReplicas": {
               "default": 100,
               "description": "Maximum number of replicas",
-              "required": [],
               "title": "maxReplicas",
               "type": "integer"
             },
             "minReplicas": {
               "default": 1,
               "description": "Minimum number of replicas",
-              "required": [],
               "title": "minReplicas",
               "type": "integer"
             },
             "targetCPUUtilizationPercentage": {
               "default": 80,
               "description": "Target CPU utilization percentage",
-              "required": [],
               "title": "targetCPUUtilizationPercentage",
               "type": "integer"
             },
             "targetMemoryUtilizationPercentage": {
               "default": 80,
               "description": "Target Memory utilization percentage",
-              "required": [],
               "title": "targetMemoryUtilizationPercentage",
               "type": "integer"
             }
@@ -630,7 +578,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "extraEnv",
           "type": "array"
         },
@@ -639,28 +586,24 @@
             "pullPolicy": {
               "default": "Always",
               "description": "image pull policy",
-              "required": [],
               "title": "pullPolicy",
               "type": "string"
             },
             "registry": {
               "default": "docker.io",
               "description": "image registry",
-              "required": [],
               "title": "registry",
               "type": "string"
             },
             "repository": {
               "default": "countly/frontend",
               "description": "image repository",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "25.05.4",
               "description": "Overrides the image tag",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -679,7 +622,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "imagePullSecrets",
           "type": "array"
         },
@@ -688,35 +630,30 @@
             "failureThreshold": {
               "default": 6,
               "description": "Failure threshold for livenessProbe",
-              "required": [],
               "title": "failureThreshold",
               "type": "integer"
             },
             "initialDelaySeconds": {
               "default": 60,
               "description": "Initial delay seconds for livenessProbe",
-              "required": [],
               "title": "initialDelaySeconds",
               "type": "integer"
             },
             "periodSeconds": {
               "default": 30,
               "description": "Period seconds for livenessProbe",
-              "required": [],
               "title": "periodSeconds",
               "type": "integer"
             },
             "successThreshold": {
               "default": 1,
               "description": "Success threshold for livenessProbe",
-              "required": [],
               "title": "successThreshold",
               "type": "integer"
             },
             "timeoutSeconds": {
               "default": 2,
               "description": "Timeout in seconds for livenessProbe",
-              "required": [],
               "title": "timeoutSeconds",
               "type": "integer"
             }
@@ -752,7 +689,6 @@
         "priorityClassName": {
           "default": "",
           "description": "Pod priority class name",
-          "required": [],
           "title": "priorityClassName",
           "type": "string"
         },
@@ -761,35 +697,30 @@
             "failureThreshold": {
               "default": 6,
               "description": "Failure threshold for readinessProbe",
-              "required": [],
               "title": "failureThreshold",
               "type": "integer"
             },
             "initialDelaySeconds": {
               "default": 60,
               "description": "Initial delay seconds for readinessProbe",
-              "required": [],
               "title": "initialDelaySeconds",
               "type": "integer"
             },
             "periodSeconds": {
               "default": 30,
               "description": "Period seconds for readinessProbe",
-              "required": [],
               "title": "periodSeconds",
               "type": "integer"
             },
             "successThreshold": {
               "default": 1,
               "description": "Success threshold for readinessProbe",
-              "required": [],
               "title": "successThreshold",
               "type": "integer"
             },
             "timeoutSeconds": {
               "default": 2,
               "description": "Timeout in seconds for readinessProbe",
-              "required": [],
               "title": "timeoutSeconds",
               "type": "integer"
             }
@@ -807,7 +738,6 @@
         "replicaCount": {
           "default": 1,
           "description": "Number of replicas",
-          "required": [],
           "title": "replicaCount",
           "type": "integer"
         },
@@ -818,13 +748,11 @@
               "properties": {
                 "cpu": {
                   "default": "500m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "500Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -840,13 +768,11 @@
               "properties": {
                 "cpu": {
                   "default": "100m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "100Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -869,7 +795,6 @@
         "revisionHistoryLimit": {
           "default": 10,
           "description": "The number of old ReplicaSets to retain",
-          "required": [],
           "title": "revisionHistoryLimit",
           "type": "integer"
         },
@@ -890,14 +815,12 @@
             "port": {
               "default": 3000,
               "description": "Kubernetes port where service is exposed",
-              "required": [],
               "title": "port",
               "type": "integer"
             },
             "type": {
               "default": "ClusterIP",
               "description": "Kubernetes service type",
-              "required": [],
               "title": "type",
               "type": "string"
             }
@@ -920,14 +843,12 @@
             "create": {
               "default": true,
               "description": "Specifies whether a service account should be created",
-              "required": [],
               "title": "create",
               "type": "boolean"
             },
             "name": {
               "default": "",
               "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-              "required": [],
               "title": "name",
               "type": "string"
             }
@@ -945,7 +866,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tolerations",
           "type": "array"
         }
@@ -977,7 +897,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"baserow.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -998,28 +917,24 @@
         "className": {
           "default": "",
           "description": "IngressClass that will be be used to implement the Ingress",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
           "description": "Enable ingress record generation",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "hostname": {
           "default": "",
           "description": "cert-manager.io/cluster-issuer: cluster-issuer-name\nkubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"\nThe publicly reachable hostname",
-          "required": [],
           "title": "hostname",
           "type": "string"
         },
         "pathType": {
           "default": "Prefix",
           "description": "Valid values: ImplementationSpecific, Exact, Prefix",
-          "required": [],
           "title": "pathType",
           "type": "string"
         },
@@ -1028,7 +943,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -1049,7 +963,6 @@
         "architecture": {
           "default": "standalone",
           "description": "MongoDB™ architecture. Currently only standalone is supported by this Chart.",
-          "required": [],
           "title": "architecture",
           "type": "string"
         },
@@ -1058,26 +971,22 @@
             "database": {
               "default": "countly",
               "description": "Name for a custom database to create",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "enabled": {
               "default": false,
               "description": "Enable authentication",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "password": {
               "default": "countly",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "countly",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -1094,14 +1003,12 @@
         "enabled": {
           "default": true,
           "description": "enable MongoDB™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "useStatefulSet": {
           "default": true,
           "description": "Set to true to use a StatefulSet instead of a Deployment (only when `architecture=standalone`)",
-          "required": [],
           "title": "useStatefulSet",
           "type": "boolean"
         }
@@ -1118,7 +1025,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `baserow`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     }

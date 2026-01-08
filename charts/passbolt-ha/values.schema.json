@@ -7,7 +7,6 @@
           "properties": {
             "allowInsecureImages": {
               "default": true,
-              "required": [],
               "title": "allowInsecureImages",
               "type": "boolean"
             }
@@ -35,7 +34,6 @@
         "architecture": {
           "default": "replication",
           "description": "podAntiAffinity:\n  requiredDuringSchedulingIgnoredDuringExecution:\n    - labelSelector:\n        matchExpressions:\n          - key: app.kubernetes.io/instance\n            operator: In\n            values:\n              - release-name\n          - key: app.kubernetes.io/name\n            operator: In\n            values:\n              - mysql\n      topologyKey: \"kubernetes.io/hostname\"",
-          "required": [],
           "title": "architecture",
           "type": "string"
         },
@@ -43,25 +41,21 @@
           "properties": {
             "database": {
               "default": "passbolt",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "password": {
               "default": "passbolt",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "rootPassword": {
               "default": "root",
-              "required": [],
               "title": "rootPassword",
               "type": "string"
             },
             "username": {
               "default": "passbolt",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -77,13 +71,11 @@
         },
         "enabled": {
           "default": true,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "fullnameOverride": {
           "default": "passbolt-mysql",
-          "required": [],
           "title": "fullnameOverride",
           "type": "string"
         },
@@ -91,7 +83,6 @@
           "properties": {
             "storageClass": {
               "default": "",
-              "required": [],
               "title": "storageClass",
               "type": "string"
             }
@@ -106,19 +97,16 @@
           "properties": {
             "pullPolicy": {
               "default": "Always",
-              "required": [],
               "title": "pullPolicy",
               "type": "string"
             },
             "repository": {
               "default": "bitnamilegacy/mysql",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "9.4.0-debian-12-r1",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -135,7 +123,6 @@
           "properties": {
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
@@ -143,7 +130,6 @@
               "properties": {
                 "pullPolicy": {
                   "default": "Always",
-                  "required": [],
                   "title": "pullPolicy",
                   "type": "string"
                 }
@@ -158,7 +144,6 @@
               "properties": {
                 "enabled": {
                   "default": false,
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
@@ -188,7 +173,6 @@
           "properties": {
             "create": {
               "default": true,
-              "required": [],
               "title": "create",
               "type": "boolean"
             }
@@ -205,13 +189,11 @@
               "properties": {
                 "cpu": {
                   "default": "200m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "1024Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -227,13 +209,11 @@
               "properties": {
                 "cpu": {
                   "default": "10m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "256Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -257,7 +237,6 @@
           "properties": {
             "replicaCount": {
               "default": 2,
-              "required": [],
               "title": "replicaCount",
               "type": "integer"
             }
@@ -272,7 +251,6 @@
           "properties": {
             "enabled": {
               "default": true,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
@@ -280,19 +258,16 @@
               "properties": {
                 "pullPolicy": {
                   "default": "Always",
-                  "required": [],
                   "title": "pullPolicy",
                   "type": "string"
                 },
                 "repository": {
                   "default": "bitnamilegacy/os-shell",
-                  "required": [],
                   "title": "repository",
                   "type": "string"
                 },
                 "tag": {
                   "default": "12-debian-12-r50",
-                  "required": [],
                   "title": "tag",
                   "type": "string"
                 }
@@ -337,25 +312,21 @@
           "properties": {
             "host": {
               "default": "passbolt-proxysql",
-              "required": [],
               "title": "host",
               "type": "string"
             },
             "name": {
               "default": "passbolt",
-              "required": [],
               "title": "name",
               "type": "string"
             },
             "password": {
               "default": "passbolt",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "passbolt",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -371,7 +342,6 @@
         },
         "fullnameOverride": {
           "default": "passbolt",
-          "required": [],
           "title": "fullnameOverride",
           "type": "string"
         },
@@ -379,7 +349,6 @@
           "properties": {
             "pullPolicy": {
               "default": "Always",
-              "required": [],
               "title": "pullPolicy",
               "type": "string"
             }
@@ -399,13 +368,11 @@
             },
             "className": {
               "default": "",
-              "required": [],
               "title": "className",
               "type": "string"
             },
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
@@ -417,7 +384,6 @@
                     "properties": {
                       "host": {
                         "default": "chart-example.local",
-                        "required": [],
                         "title": "host",
                         "type": "string"
                       },
@@ -428,13 +394,11 @@
                               "properties": {
                                 "path": {
                                   "default": "/",
-                                  "required": [],
                                   "title": "path",
                                   "type": "string"
                                 },
                                 "pathType": {
                                   "default": "ImplementationSpecific",
-                                  "required": [],
                                   "title": "pathType",
                                   "type": "string"
                                 }
@@ -448,7 +412,6 @@
                           ],
                           "required": []
                         },
-                        "required": [],
                         "title": "paths",
                         "type": "array"
                       }
@@ -462,7 +425,6 @@
                 ],
                 "required": []
               },
-              "required": [],
               "title": "hosts",
               "type": "array"
             },
@@ -470,7 +432,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "tls",
               "type": "array"
             }
@@ -489,7 +450,6 @@
           "properties": {
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             }
@@ -504,7 +464,6 @@
           "properties": {
             "baseUrl": {
               "default": "",
-              "required": [],
               "title": "baseUrl",
               "type": "string"
             }
@@ -519,19 +478,16 @@
           "properties": {
             "accessMode": {
               "default": "ReadWriteOnce",
-              "required": [],
               "title": "accessMode",
               "type": "string"
             },
             "enabled": {
               "default": true,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "size": {
               "default": "512Mi",
-              "required": [],
               "title": "size",
               "type": "string"
             }
@@ -550,13 +506,11 @@
               "properties": {
                 "cpu": {
                   "default": "100m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "512Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -572,13 +526,11 @@
               "properties": {
                 "cpu": {
                   "default": "50m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "256Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -622,13 +574,11 @@
         "enabled": {
           "default": true,
           "description": "podAntiAffinity:\n  requiredDuringSchedulingIgnoredDuringExecution:\n    - labelSelector:\n        matchExpressions:\n          - key: app.kubernetes.io/instance\n            operator: In\n            values:\n              - release-name\n          - key: app.kubernetes.io/name\n            operator: In\n            values:\n              - proxysql\n      topologyKey: \"kubernetes.io/hostname\"",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "fullnameOverride": {
           "default": "passbolt-proxysql",
-          "required": [],
           "title": "fullnameOverride",
           "type": "string"
         },
@@ -636,7 +586,6 @@
           "properties": {
             "pullPolicy": {
               "default": "Always",
-              "required": [],
               "title": "pullPolicy",
               "type": "string"
             }
@@ -653,13 +602,11 @@
               "properties": {
                 "password": {
                   "default": "admin",
-                  "required": [],
                   "title": "password",
                   "type": "string"
                 },
                 "user": {
                   "default": "admin",
-                  "required": [],
                   "title": "user",
                   "type": "string"
                 }
@@ -680,19 +627,16 @@
                         "properties": {
                           "hostname": {
                             "default": "passbolt-mysql-primary",
-                            "required": [],
                             "title": "hostname",
                             "type": "string"
                           },
                           "isWriter": {
                             "default": true,
-                            "required": [],
                             "title": "isWriter",
                             "type": "boolean"
                           },
                           "port": {
                             "default": 3306,
-                            "required": [],
                             "title": "port",
                             "type": "integer"
                           }
@@ -708,19 +652,16 @@
                         "properties": {
                           "hostname": {
                             "default": "passbolt-mysql-secondary",
-                            "required": [],
                             "title": "hostname",
                             "type": "string"
                           },
                           "isWriter": {
                             "default": false,
-                            "required": [],
                             "title": "isWriter",
                             "type": "boolean"
                           },
                           "port": {
                             "default": 3306,
-                            "required": [],
                             "title": "port",
                             "type": "integer"
                           }
@@ -735,7 +676,6 @@
                     ],
                     "required": []
                   },
-                  "required": [],
                   "title": "servers",
                   "type": "array"
                 },
@@ -746,13 +686,11 @@
                         "properties": {
                           "password": {
                             "default": "root",
-                            "required": [],
                             "title": "password",
                             "type": "string"
                           },
                           "username": {
                             "default": "root",
-                            "required": [],
                             "title": "username",
                             "type": "string"
                           }
@@ -767,13 +705,11 @@
                         "properties": {
                           "password": {
                             "default": "passbolt",
-                            "required": [],
                             "title": "password",
                             "type": "string"
                           },
                           "username": {
                             "default": "passbolt",
-                            "required": [],
                             "title": "username",
                             "type": "string"
                           }
@@ -787,13 +723,11 @@
                     ],
                     "required": []
                   },
-                  "required": [],
                   "title": "users",
                   "type": "array"
                 },
                 "version": {
                   "default": "8.0.29",
-                  "required": [],
                   "title": "version",
                   "type": "string"
                 }
@@ -810,13 +744,11 @@
               "properties": {
                 "password": {
                   "default": "admin",
-                  "required": [],
                   "title": "password",
                   "type": "string"
                 },
                 "user": {
                   "default": "admin",
-                  "required": [],
                   "title": "user",
                   "type": "string"
                 }
@@ -839,7 +771,6 @@
         },
         "replicaCount": {
           "default": 3,
-          "required": [],
           "title": "replicaCount",
           "type": "integer"
         },
@@ -849,13 +780,11 @@
               "properties": {
                 "cpu": {
                   "default": "200m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "512Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -871,13 +800,11 @@
               "properties": {
                 "cpu": {
                   "default": "100m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "128Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }

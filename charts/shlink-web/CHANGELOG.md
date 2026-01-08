@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.8.0
+## 1.8.1
 
-### Changed
+### Fixed
 
-- hpa spec to align with v2
+- helm schema

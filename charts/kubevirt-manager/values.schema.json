@@ -12,28 +12,24 @@
         "enabled": {
           "default": false,
           "description": "Enable Horizontal POD autoscaling",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
           "description": "Maximum number of replicas",
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
           "description": "Minimum number of replicas",
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
           "description": "Target CPU utilization percentage",
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -52,14 +48,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"kubevirt-manager.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -74,28 +68,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "kubevirtmanager/kubevirt-manager",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "1.5.3",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -114,7 +104,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -131,28 +120,24 @@
             "enabled": {
               "default": false,
               "description": "enable the configuration of basic authentication with nginx",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "existingSecret": {
               "default": "",
               "description": "An existing Secret containing the username and password for basic authentication. Username and password have to be base64 encoded in the form username:password. The Secret needs to contain a key `.htpasswd` with the base64 encoded authentication information. If set `ingress.basicAuth.username` and `ingress.basicAuth.password` will be ignored.",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "password",
               "description": "Password for authentication",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "admin",
               "description": "Username for authentication",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -169,14 +154,12 @@
         "className": {
           "default": "",
           "description": "IngressClass that will be be used to implement the Ingress",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
           "description": "Enable ingress record generation",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -188,7 +171,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -199,13 +181,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -219,7 +199,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -233,7 +212,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -242,7 +220,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -261,7 +238,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `kubevirt-manager`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -294,14 +270,12 @@
         "enabled": {
           "default": false,
           "description": "Enable a Prometheus ServiceMonitor",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "interval": {
           "default": "30s",
           "description": "prometheus: kube-prometheus\nPrometheus ServiceMonitor interval",
-          "required": [],
           "title": "interval",
           "type": "string"
         },
@@ -310,14 +284,12 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "metricRelabelings",
           "type": "array"
         },
         "namespace": {
           "default": "",
           "description": "Prometheus ServiceMonitor namespace",
-          "required": [],
           "title": "namespace",
           "type": "string"
         },
@@ -326,7 +298,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "relabelings",
           "type": "array"
         },
@@ -341,21 +312,18 @@
             "name": {
               "default": "",
               "description": "Name of the Prometheus Service",
-              "required": [],
               "title": "name",
               "type": "string"
             },
             "namespace": {
               "default": "",
               "description": "Namespace of the Prometheus Service",
-              "required": [],
               "title": "namespace",
               "type": "string"
             },
             "port": {
               "default": "",
               "description": "Port of the Prometheus Service",
-              "required": [],
               "title": "port",
               "type": "string"
             }
@@ -385,7 +353,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -398,7 +365,6 @@
     "revisionHistoryLimit": {
       "default": 0,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -407,7 +373,6 @@
       "properties": {
         "allowPrivilegeEscalation": {
           "default": false,
-          "required": [],
           "title": "allowPrivilegeEscalation",
           "type": "boolean"
         },
@@ -417,13 +382,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "drop",
               "type": "array"
             }
@@ -436,25 +399,21 @@
         },
         "readOnlyRootFilesystem": {
           "default": true,
-          "required": [],
           "title": "readOnlyRootFilesystem",
           "type": "boolean"
         },
         "runAsGroup": {
           "default": 30000,
-          "required": [],
           "title": "runAsGroup",
           "type": "integer"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 10000,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         },
@@ -462,7 +421,6 @@
           "properties": {
             "type": {
               "default": "RuntimeDefault",
-              "required": [],
               "title": "type",
               "type": "string"
             }
@@ -491,14 +449,12 @@
         "port": {
           "default": 8080,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -521,14 +477,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -546,7 +500,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }
