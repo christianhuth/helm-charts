@@ -1,7 +1,7 @@
 # typo3
 
-## 6.2.1
+## 6.3.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
