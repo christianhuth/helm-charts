@@ -1,7 +1,7 @@
 # freshrss
 
-## 2.3.1
+## 2.4.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
