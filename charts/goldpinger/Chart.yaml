@@ -2,7 +2,7 @@ apiVersion: v2
 name: goldpinger
 description: Debugging tool for Kubernetes which tests and displays connectivity between nodes in the cluster.
 type: application
-version: 1.0.3
+version: 1.1.0
 appVersion: "3.10.2"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/goldpinger/icon.svg
@@ -13,8 +13,8 @@ sources:
   - https://github.com/bloomberg/goldpinger
 annotations:
   artifacthub.io/changes: |
-    - kind: fixed
-      description: helm schema
+    - kind: added
+      description: support for Gateway API routes
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
