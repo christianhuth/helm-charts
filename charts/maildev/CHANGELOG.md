@@ -1,7 +1,7 @@
 # maildev
 
-## 1.4.2
+## 1.5.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
