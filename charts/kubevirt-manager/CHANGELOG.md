@@ -1,7 +1,7 @@
 # kubevirt-manager
 
-## 0.3.1
+## 0.4.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
