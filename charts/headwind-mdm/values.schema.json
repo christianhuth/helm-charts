@@ -11,25 +11,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -51,35 +47,30 @@
             "database": {
               "default": "mychart",
               "description": "Name of the database to use",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for PostgreSQL credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "mychart",
               "description": "Password to use",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "userPasswordKey": {
               "default": "",
               "description": "Key in the secret containing the password",
-              "required": [],
               "title": "userPasswordKey",
               "type": "string"
             },
             "username": {
               "default": "mychart",
               "description": "Name of the user to use",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -97,14 +88,12 @@
         "hostname": {
           "default": "",
           "description": "Hostname of the PostgreSQL database",
-          "required": [],
           "title": "hostname",
           "type": "string"
         },
         "port": {
           "default": 5432,
           "description": "Port used to connect to PostgreSQL database",
-          "required": [],
           "title": "port",
           "type": "integer"
         }
@@ -120,7 +109,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"headwind-mdm.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -135,52 +123,44 @@
         "adminEmail": {
           "default": "",
           "description": "Email of admin user",
-          "required": [],
           "title": "adminEmail",
           "type": "string"
         },
         "baseDomain": {
           "default": "",
           "description": "URL under which Headwind will be available",
-          "required": [],
           "title": "baseDomain",
           "type": "string"
         },
         "clientVersion": {
           "default": "5.14",
-          "required": [],
           "title": "clientVersion",
           "type": "string"
         },
         "downloadCredentials": {
           "default": false,
-          "required": [],
           "title": "downloadCredentials",
           "type": "boolean"
         },
         "forceReconfigure": {
           "default": false,
           "description": "Subsequent starts of the container skip this step, but you can force the renewal of the configuration",
-          "required": [],
           "title": "forceReconfigure",
           "type": "boolean"
         },
         "hmdmUrl": {
           "default": "https://h-mdm.com/files/hmdm-5.12.1-os.war",
-          "required": [],
           "title": "hmdmUrl",
           "type": "string"
         },
         "hmdmVariant": {
           "default": "os",
-          "required": [],
           "title": "hmdmVariant",
           "type": "string"
         },
         "installLanguage": {
           "default": "en",
           "description": "Available values: en, ru (en by default)",
-          "required": [],
           "title": "installLanguage",
           "type": "string"
         },
@@ -189,14 +169,12 @@
             "existingSecret": {
               "default": "",
               "description": "An existing secret that contains the shared secret for a premium setup. If this is provided `headwind.sharedSecret.secretValue` is ignored. Key needs to be `shared-secret``.",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "secretValue": {
               "default": "",
               "description": "The shared secret for a premium setup. Ignored if `headwind.sharedSecret.existingSecret` is provided.",
-              "required": [],
               "title": "secretValue",
               "type": "string"
             }
@@ -228,28 +206,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registry",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "headwindmdm/hmdm",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "0.1.6",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -268,7 +242,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -281,13 +254,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -299,7 +270,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -310,13 +280,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -330,7 +298,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -344,14 +311,12 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
         "ip": {
           "default": "",
           "description": "ip to resolve public uri behind reverse proxy",
-          "required": [],
           "title": "ip",
           "type": "string"
         },
@@ -359,7 +324,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -378,7 +342,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `headwind-mdm`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -394,13 +357,11 @@
           "items": {
             "anyOf": [
               {
-                "required": [],
                 "type": "string"
               }
             ],
             "required": []
           },
-          "required": [],
           "title": "accessModes",
           "type": "array"
         },
@@ -411,25 +372,21 @@
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "existingClaim": {
           "default": "",
-          "required": [],
           "title": "existingClaim",
           "type": "string"
         },
         "size": {
           "default": "10Gi",
-          "required": [],
           "title": "size",
           "type": "string"
         },
         "storageClass": {
           "default": "",
-          "required": [],
           "title": "storageClass",
           "type": "string"
         }
@@ -465,28 +422,24 @@
             "database": {
               "default": "mychart",
               "description": "Name for a custom database to create",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for PostgreSQL credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "mychart",
               "description": "Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "mychart",
               "description": "Name for a custom user to create",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -503,7 +456,6 @@
         "enabled": {
           "default": true,
           "description": "enable PostgreSQL™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -512,14 +464,12 @@
             "repository": {
               "default": "bitnamilegacy/postgresql",
               "description": "image repository for PostgreSQL™ subchart from Bitnami",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "17.6.0-debian-12-r4",
               "description": "image tag for PostgreSQL™ subchart from Bitnami",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -543,7 +493,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -556,7 +505,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -571,14 +519,12 @@
         "port": {
           "default": 8080,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -601,14 +547,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -626,7 +570,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

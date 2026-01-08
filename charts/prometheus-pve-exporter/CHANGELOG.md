@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.4.0
+## 2.4.1
 
-### Changed
+### Fixes
 
-- hpa spec to align with v2
+- helm schema

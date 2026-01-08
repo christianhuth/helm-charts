@@ -4,7 +4,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"tenant-namespace.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -31,7 +30,6 @@
         "enabled": {
           "default": false,
           "description": "- create a LimitRange resource",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -40,14 +38,12 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "limits",
           "type": "array"
         },
         "name": {
           "default": "",
           "description": "- default:\n    cpu: 500m\n  defaultRequest:\n    cpu: 500m\n  max:\n    cpu: \"1\"\n  min:\n    cpu: 100m\n  type: Container\nThe name of the LimitRange to be created. If left empty will simply use the Release name.",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -65,7 +61,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `tenant-namespace`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -84,21 +79,18 @@
                 "description": {
                   "default": "",
                   "description": "The optional description can be a more detailed description of the project and is visible in the web console.",
-                  "required": [],
                   "title": "description",
                   "type": "string"
                 },
                 "displayName": {
                   "default": "",
                   "description": "The optional displayName is how the project is displayed in the web console (defaults to name).",
-                  "required": [],
                   "title": "displayName",
                   "type": "string"
                 },
                 "requester": {
                   "default": "",
                   "description": "The optional requesting user.",
-                  "required": [],
                   "title": "requester",
                   "type": "string"
                 }
@@ -118,14 +110,12 @@
                   "items": {
                     "required": []
                   },
-                  "required": [],
                   "title": "defaultTolerations",
                   "type": "array"
                 },
                 "nodeSelector": {
                   "default": "",
                   "description": "- operator: Equal\n  value: value1\n  effect: NoSchedule\n  key: dedicated-node\nThe PodNodeSelector uses this annotation key to assign node selectors to pods in namespaces.",
-                  "required": [],
                   "title": "nodeSelector",
                   "type": "string"
                 },
@@ -134,7 +124,6 @@
                   "items": {
                     "required": []
                   },
-                  "required": [],
                   "title": "tolerationsWhitelist",
                   "type": "array"
                 }
@@ -159,7 +148,6 @@
         "enabled": {
           "default": false,
           "description": "- create a Namespace resource",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -178,14 +166,12 @@
                     "standard": {
                       "default": "",
                       "description": "Value must be one of privileged, baseline, or restricted which correspond to Pod Security Standard levels.",
-                      "required": [],
                       "title": "standard",
                       "type": "string"
                     },
                     "version": {
                       "default": "",
                       "description": "Version label that can be used to pin the policy to the version that shipped with a given Kubernetes minor version (for example v1.27).",
-                      "required": [],
                       "title": "version",
                       "type": "string"
                     }
@@ -202,14 +188,12 @@
                     "standard": {
                       "default": "",
                       "description": "Value must be one of privileged, baseline, or restricted which correspond to Pod Security Standard levels.",
-                      "required": [],
                       "title": "standard",
                       "type": "string"
                     },
                     "version": {
                       "default": "",
                       "description": "Version label that can be used to pin the policy to the version that shipped with a given Kubernetes minor version (for example v1.27).",
-                      "required": [],
                       "title": "version",
                       "type": "string"
                     }
@@ -226,14 +210,12 @@
                     "standard": {
                       "default": "",
                       "description": "Value must be one of privileged, baseline, or restricted which correspond to Pod Security Standard levels.",
-                      "required": [],
                       "title": "standard",
                       "type": "string"
                     },
                     "version": {
                       "default": "",
                       "description": "Version label that can be used to pin the policy to the version that shipped with a given Kubernetes minor version (for example v1.27).",
-                      "required": [],
                       "title": "version",
                       "type": "string"
                     }
@@ -265,7 +247,6 @@
         "name": {
           "default": "",
           "description": "The Name of the newly created namespace. Uses the Release name be default.",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -302,14 +283,12 @@
                     "enabled": {
                       "default": true,
                       "description": "create a NetworkPolicy that allows outgoing traffic to the Kubernetes DNS",
-                      "required": [],
                       "title": "enabled",
                       "type": "boolean"
                     },
                     "namespace": {
                       "default": "kube-system",
                       "description": "The namespace where the Kubneretes DNS is running",
-                      "required": [],
                       "title": "namespace",
                       "type": "string"
                     },
@@ -318,7 +297,6 @@
                       "properties": {
                         "k8s-app": {
                           "default": "kube-dns",
-                          "required": [],
                           "title": "k8s-app",
                           "type": "string"
                         }
@@ -359,7 +337,6 @@
                     "enabled": {
                       "default": true,
                       "description": "create a NetworkPolicy that denies all outgoing traffic",
-                      "required": [],
                       "title": "enabled",
                       "type": "boolean"
                     },
@@ -395,7 +372,6 @@
         "enabled": {
           "default": false,
           "description": "- create NetworkPolicy resources to limit the allowed traffic",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -410,7 +386,6 @@
                         "enabled": {
                           "default": true,
                           "description": "create a NetworkPolicy that allows incoming traffic from the OpenShift Ingress Controller",
-                          "required": [],
                           "title": "enabled",
                           "type": "boolean"
                         },
@@ -433,7 +408,6 @@
                         "enabled": {
                           "default": true,
                           "description": "create a NetworkPolicy that allows incoming traffic from the OpenShift Monitoring",
-                          "required": [],
                           "title": "enabled",
                           "type": "boolean"
                         },
@@ -473,7 +447,6 @@
                     "enabled": {
                       "default": true,
                       "description": "create a NetworkPolicy that denies all incoming traffic",
-                      "required": [],
                       "title": "enabled",
                       "type": "boolean"
                     },
@@ -511,7 +484,6 @@
             "enabled": {
               "default": false,
               "description": "enabled the creation of NetworkPolicies for OpenShift like Ingress and Monitoring",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             }
@@ -551,7 +523,6 @@
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -559,7 +530,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "quotas",
           "type": "array"
         }

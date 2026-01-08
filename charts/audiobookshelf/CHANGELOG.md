@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 1.5.0
+## 1.5.1
 
-### Changed
+### Fixes
 
-- hpa spec to align with v2
+- helm schema

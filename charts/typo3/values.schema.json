@@ -11,25 +11,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -50,35 +46,30 @@
             "database": {
               "default": "typo3",
               "description": "Name of the database to use",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for database credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "typo3",
               "description": "Password to use",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "userPasswordKey": {
               "default": "",
               "description": "Key in the secret containing the password",
-              "required": [],
               "title": "userPasswordKey",
               "type": "string"
             },
             "username": {
               "default": "typo3",
               "description": "Name of the user to use",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -96,21 +87,18 @@
         "hostname": {
           "default": "",
           "description": "Hostname of the database",
-          "required": [],
           "title": "hostname",
           "type": "string"
         },
         "port": {
           "default": 3306,
           "description": "Port used to connect to database",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "mysql",
           "description": "Type of database",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -127,7 +115,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"typo3.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -142,28 +129,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registry",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "martinhelmich/typo3",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "12.4",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -182,7 +165,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -195,13 +177,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -213,7 +193,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -224,13 +203,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -244,7 +221,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -258,7 +234,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -266,7 +241,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -288,28 +262,24 @@
             "database": {
               "default": "typo3",
               "description": "Name for a custom database to create",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for MariaDB credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "typo3",
               "description": "Password for the custom user to create. Ignored if mariadb.auth.existingSecret is provided",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "typo3",
               "description": "Name for a custom user to create",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -326,7 +296,6 @@
         "enabled": {
           "default": false,
           "description": "enable MariaDB™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -335,14 +304,12 @@
             "repository": {
               "default": "bitnamilegacy/mariadb",
               "description": "image repository for MariaDB™ subchart from Bitnami",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "12.0.2-debian-12-r0",
               "description": "image tag for MariaDB™ subchart from Bitnami",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -370,28 +337,24 @@
             "database": {
               "default": "typo3",
               "description": "Name for a custom database to create",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for MySQL credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "typo3",
               "description": "Password for the custom user to create. Ignored if mysql.auth.existingSecret is provided",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "typo3",
               "description": "Name for a custom user to create",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -408,7 +371,6 @@
         "enabled": {
           "default": true,
           "description": "enable MySQL™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -417,14 +379,12 @@
             "repository": {
               "default": "bitnamilegacy/mysql",
               "description": "image repository for MySQL™ subchart from Bitnami",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "9.4.0-debian-12-r1",
               "description": "image tag for MySQL™ subchart from Bitnami",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -448,7 +408,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `typo3`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -467,13 +426,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "accessModes",
               "type": "array"
             },
@@ -486,14 +443,12 @@
             "enabled": {
               "default": false,
               "description": "use a PVC to persist fileadmin data",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "existingClaim": {
               "default": "",
               "description": "provide an existing PersistentVolumeClaim",
-              "required": [],
               "title": "existingClaim",
               "type": "string"
             },
@@ -506,7 +461,6 @@
             "storageClassName": {
               "default": "",
               "description": "Name of the StorageClass required by the claim.",
-              "required": [],
               "title": "storageClassName",
               "type": "string"
             }
@@ -529,13 +483,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "accessModes",
               "type": "array"
             },
@@ -548,14 +500,12 @@
             "enabled": {
               "default": false,
               "description": "use a PVC to persist typo3conf data",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "existingClaim": {
               "default": "",
               "description": "provide an existing PersistentVolumeClaim",
-              "required": [],
               "title": "existingClaim",
               "type": "string"
             },
@@ -568,7 +518,6 @@
             "storageClassName": {
               "default": "",
               "description": "Name of the StorageClass required by the claim.",
-              "required": [],
               "title": "storageClassName",
               "type": "string"
             }
@@ -611,28 +560,24 @@
             "database": {
               "default": "typo3",
               "description": "Name for a custom database to create",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for PostgreSQL credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "typo3",
               "description": "Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "typo3",
               "description": "Name for a custom user to create",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -649,7 +594,6 @@
         "enabled": {
           "default": false,
           "description": "enable PostgreSQL™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -658,14 +602,12 @@
             "repository": {
               "default": "bitnamilegacy/postgresql",
               "description": "image repository for PostgreSQL™ subchart from Bitnami",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "17.6.0-debian-12-r4",
               "description": "image tag for PostgreSQL™ subchart from Bitnami",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -689,7 +631,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -702,7 +643,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -717,14 +657,12 @@
         "port": {
           "default": 8080,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -747,14 +685,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -772,7 +708,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

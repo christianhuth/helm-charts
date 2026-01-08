@@ -1,7 +1,7 @@
 # mailcow-exporter
 
-## 1.2.0
+## 1.2.1
 
-### Changed
+### Fixes
 
-- hpa spec to align with v2
+- helm schema

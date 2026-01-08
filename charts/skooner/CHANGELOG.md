@@ -1,7 +1,7 @@
 # skooner
 
-## 0.2.0
+## 0.2.1
 
-### Changed
+### Fixes
 
-- hpa spec to align with v2
+- helm schema

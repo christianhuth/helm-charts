@@ -15,25 +15,21 @@
               "properties": {
                 "enabled": {
                   "default": false,
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "maxReplicas": {
                   "default": 100,
-                  "required": [],
                   "title": "maxReplicas",
                   "type": "integer"
                 },
                 "minReplicas": {
                   "default": 1,
-                  "required": [],
                   "title": "minReplicas",
                   "type": "integer"
                 },
                 "targetCPUUtilizationPercentage": {
                   "default": 80,
-                  "required": [],
                   "title": "targetCPUUtilizationPercentage",
                   "type": "integer"
                 }
@@ -54,14 +50,12 @@
                     "debug": {
                       "default": false,
                       "description": "Django DEBUG mode.",
-                      "required": [],
                       "title": "debug",
                       "type": "boolean"
                     },
                     "gunicornWorkers": {
                       "default": 4,
                       "description": "Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently",
-                      "required": [],
                       "title": "gunicornWorkers",
                       "type": "integer"
                     }
@@ -85,7 +79,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraEnv",
               "type": "array"
             },
@@ -94,7 +87,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraVolumeMounts",
               "type": "array"
             },
@@ -103,7 +95,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraVolumes",
               "type": "array"
             },
@@ -112,28 +103,24 @@
                 "pullPolicy": {
                   "default": "Always",
                   "description": "image pull policy",
-                  "required": [],
                   "title": "pullPolicy",
                   "type": "string"
                 },
                 "registry": {
                   "default": "quay.io",
                   "description": "image registry",
-                  "required": [],
                   "title": "registry",
                   "type": "string"
                 },
                 "repository": {
                   "default": "hewlettpackardenterprise/squest",
                   "description": "image repository",
-                  "required": [],
                   "title": "repository",
                   "type": "string"
                 },
                 "tag": {
                   "default": "2.8.1",
                   "description": "Overrides the image tag",
-                  "required": [],
                   "title": "tag",
                   "type": "string"
                 }
@@ -174,7 +161,6 @@
             "replicaCount": {
               "default": 1,
               "description": "Number of replicas",
-              "required": [],
               "title": "replicaCount",
               "type": "integer"
             },
@@ -187,7 +173,6 @@
             "revisionHistoryLimit": {
               "default": 10,
               "description": "The number of old ReplicaSets to retain",
-              "required": [],
               "title": "revisionHistoryLimit",
               "type": "integer"
             },
@@ -202,14 +187,12 @@
                 "port": {
                   "default": 8080,
                   "description": "Kubernetes port where service is exposed",
-                  "required": [],
                   "title": "port",
                   "type": "integer"
                 },
                 "type": {
                   "default": "ClusterIP",
                   "description": "Kubernetes service type",
-                  "required": [],
                   "title": "type",
                   "type": "string"
                 }
@@ -232,14 +215,12 @@
                 "create": {
                   "default": true,
                   "description": "Specifies whether a service account should be created",
-                  "required": [],
                   "title": "create",
                   "type": "boolean"
                 },
                 "name": {
                   "default": "",
                   "description": "The name of the service account to use\nIf not set and create is true, a name is generated using the fullname template",
-                  "required": [],
                   "title": "name",
                   "type": "string"
                 }
@@ -257,7 +238,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "tolerations",
               "type": "array"
             }
@@ -297,25 +277,21 @@
               "properties": {
                 "enabled": {
                   "default": false,
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "maxReplicas": {
                   "default": 100,
-                  "required": [],
                   "title": "maxReplicas",
                   "type": "integer"
                 },
                 "minReplicas": {
                   "default": 1,
-                  "required": [],
                   "title": "minReplicas",
                   "type": "integer"
                 },
                 "targetCPUUtilizationPercentage": {
                   "default": 80,
-                  "required": [],
                   "title": "targetCPUUtilizationPercentage",
                   "type": "integer"
                 }
@@ -336,14 +312,12 @@
                     "debug": {
                       "default": false,
                       "description": "Django DEBUG mode.",
-                      "required": [],
                       "title": "debug",
                       "type": "boolean"
                     },
                     "gunicornWorkers": {
                       "default": 4,
                       "description": "Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently",
-                      "required": [],
                       "title": "gunicornWorkers",
                       "type": "integer"
                     }
@@ -367,7 +341,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraEnv",
               "type": "array"
             },
@@ -376,7 +349,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraVolumeMounts",
               "type": "array"
             },
@@ -385,7 +357,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraVolumes",
               "type": "array"
             },
@@ -394,28 +365,24 @@
                 "pullPolicy": {
                   "default": "Always",
                   "description": "image pull policy",
-                  "required": [],
                   "title": "pullPolicy",
                   "type": "string"
                 },
                 "registry": {
                   "default": "quay.io",
                   "description": "image registry",
-                  "required": [],
                   "title": "registry",
                   "type": "string"
                 },
                 "repository": {
                   "default": "hewlettpackardenterprise/squest",
                   "description": "image repository",
-                  "required": [],
                   "title": "repository",
                   "type": "string"
                 },
                 "tag": {
                   "default": "2.8.1",
                   "description": "Overrides the image tag",
-                  "required": [],
                   "title": "tag",
                   "type": "string"
                 }
@@ -456,7 +423,6 @@
             "replicaCount": {
               "default": 1,
               "description": "Number of replicas",
-              "required": [],
               "title": "replicaCount",
               "type": "integer"
             },
@@ -469,7 +435,6 @@
             "revisionHistoryLimit": {
               "default": 10,
               "description": "The number of old ReplicaSets to retain",
-              "required": [],
               "title": "revisionHistoryLimit",
               "type": "integer"
             },
@@ -484,14 +449,12 @@
                 "port": {
                   "default": 8080,
                   "description": "Kubernetes port where service is exposed",
-                  "required": [],
                   "title": "port",
                   "type": "integer"
                 },
                 "type": {
                   "default": "ClusterIP",
                   "description": "Kubernetes service type",
-                  "required": [],
                   "title": "type",
                   "type": "string"
                 }
@@ -514,14 +477,12 @@
                 "create": {
                   "default": true,
                   "description": "Specifies whether a service account should be created",
-                  "required": [],
                   "title": "create",
                   "type": "boolean"
                 },
                 "name": {
                   "default": "",
                   "description": "The name of the service account to use\nIf not set and create is true, a name is generated using the fullname template",
-                  "required": [],
                   "title": "name",
                   "type": "string"
                 }
@@ -539,7 +500,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "tolerations",
               "type": "array"
             }
@@ -578,7 +538,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"squest.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -593,7 +552,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -604,28 +562,24 @@
             "database": {
               "default": "squest",
               "description": "The database name to be used when using the integrated MariaDB database.",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "password": {
               "default": "squest",
               "description": "The password credential to be used when using the integrated MariaDB database.",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "rootPassword": {
               "default": "squest",
               "description": "The root password credential to be used when using the integrated MariaDB database.",
-              "required": [],
               "title": "rootPassword",
               "type": "string"
             },
             "username": {
               "default": "squest",
               "description": "The username credential to be used when using the integrated MariaDB database.",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -642,7 +596,6 @@
         "enabled": {
           "default": true,
           "description": "enable integrated MariaDB™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -651,14 +604,12 @@
             "repository": {
               "default": "bitnamilegacy/mariadb",
               "description": "image repository for the MariaDB™ subchart from Bitnami",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "12.0.2-debian-12-r0",
               "description": "image tag for the MariaDB™ subchart from Bitnami",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -682,7 +633,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `squest`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -693,21 +643,18 @@
             "erlangCookie": {
               "default": "abcdefghijklmnopqrstuvwxyz",
               "description": "The Erlang cookie to determine whether different nodes are allowed to communicate with each other",
-              "required": [],
               "title": "erlangCookie",
               "type": "string"
             },
             "password": {
               "default": "squest",
               "description": "The password credential to be used when using the integrated RabbitMQ.",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "squest",
               "description": "The username credential to be used when using the integrated RabbitMQ.",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -723,7 +670,6 @@
         "enabled": {
           "default": true,
           "description": "enable integrated RabbitMQ™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -732,14 +678,12 @@
             "repository": {
               "default": "bitnamilegacy/rabbitmq",
               "description": "image repository for the RabbitMQ™ subchart from Bitnami",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "4.1.3-debian-12-r1",
               "description": "image tag for the RabbitMQ™ subchart from Bitnami",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -765,7 +709,6 @@
         "architecture": {
           "default": "standalone",
           "description": "Redis™ architecture. Allowed values: `standalone` or `replication`",
-          "required": [],
           "title": "architecture",
           "type": "string"
         },
@@ -774,21 +717,18 @@
             "enabled": {
               "default": true,
               "description": "Enable password authentication",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "password": {
               "default": "squest",
               "description": "The password credential to be used when using the integrated Redis.",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "squest",
               "description": "The username credential to be used when using the integrated Redis.",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -804,7 +744,6 @@
         "enabled": {
           "default": true,
           "description": "enable integrated Redis™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -813,14 +752,12 @@
             "repository": {
               "default": "bitnamilegacy/redis",
               "description": "image repository for the Redis™ subchart from Bitnami",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "8.2.1-debian-12-r0",
               "description": "image tag for the Redis™ subchart from Bitnami",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -854,25 +791,21 @@
           "properties": {
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "maxReplicas": {
               "default": 100,
-              "required": [],
               "title": "maxReplicas",
               "type": "integer"
             },
             "minReplicas": {
               "default": 1,
-              "required": [],
               "title": "minReplicas",
               "type": "integer"
             },
             "targetCPUUtilizationPercentage": {
               "default": 80,
-              "required": [],
               "title": "targetCPUUtilizationPercentage",
               "type": "integer"
             }
@@ -895,35 +828,30 @@
                     "database": {
                       "default": "",
                       "description": "The database name to be used when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.",
-                      "required": [],
                       "title": "database",
                       "type": "string"
                     },
                     "existingSecret": {
                       "default": "",
                       "description": "Use existing secret for password details (`squest.config.database.auth.password` and `squest.config.database.auth.rootPassword` will be ignored and picked up from this secret). The secret has to contain the keys `mariadb-password` and `mariadb-root-password`.",
-                      "required": [],
                       "title": "existingSecret",
                       "type": "string"
                     },
                     "password": {
                       "default": "",
                       "description": "The password credential to be used when using an external MariaDB database.",
-                      "required": [],
                       "title": "password",
                       "type": "string"
                     },
                     "rootPassword": {
                       "default": "",
                       "description": "The root password credential to be used when using an external MariaDB database.",
-                      "required": [],
                       "title": "rootPassword",
                       "type": "string"
                     },
                     "username": {
                       "default": "",
                       "description": "The username credential to be used when using an external MariaDB database.",
-                      "required": [],
                       "title": "username",
                       "type": "string"
                     }
@@ -941,14 +869,12 @@
                 "host": {
                   "default": "",
                   "description": "The host name of the database server when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.",
-                  "required": [],
                   "title": "host",
                   "type": "string"
                 },
                 "port": {
                   "default": 3306,
                   "description": "The port in which the database service is running when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.",
-                  "required": [],
                   "title": "port",
                   "type": "integer"
                 }
@@ -966,14 +892,12 @@
                 "debug": {
                   "default": false,
                   "description": "Django DEBUG mode.",
-                  "required": [],
                   "title": "debug",
                   "type": "boolean"
                 },
                 "gunicornWorkers": {
                   "default": 4,
                   "description": "Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently",
-                  "required": [],
                   "title": "gunicornWorkers",
                   "type": "integer"
                 }
@@ -990,21 +914,18 @@
                 "dateFormat": {
                   "default": "%d %b, %Y %H:%M",
                   "description": "Change the format of all date in Squest UI. Based on Python strftime. See https://strftime.org for a strftime cheatsheet.",
-                  "required": [],
                   "title": "dateFormat",
                   "type": "string"
                 },
                 "language": {
                   "default": "en-us",
                   "description": "Django language. See https://docs.djangoproject.com/en/4.2/ref/settings/#language-code for details.",
-                  "required": [],
                   "title": "language",
                   "type": "string"
                 },
                 "timezone": {
                   "default": "Europe/Berlin",
                   "description": "Time zone of the server that host Squest service. See https://docs.djangoproject.com/en/4.2/ref/settings/#std:setting-TIME_ZONE for details.",
-                  "required": [],
                   "title": "timezone",
                   "type": "string"
                 }
@@ -1022,14 +943,12 @@
                 "fieldValidatorPath": {
                   "default": "",
                   "description": "Path to form field validation modules. It is deprecated. Please use squest.config.plugins.surveyValidatorPath instead.",
-                  "required": [],
                   "title": "fieldValidatorPath",
                   "type": "string"
                 },
                 "surveyValidatorPath": {
                   "default": "plugins/survey_validators",
                   "description": "Path to SurveyValidator modules.",
-                  "required": [],
                   "title": "surveyValidatorPath",
                   "type": "string"
                 }
@@ -1048,21 +967,18 @@
                     "existingSecret": {
                       "default": "",
                       "description": "Use existing secret for password details (`squest.config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.",
-                      "required": [],
                       "title": "existingSecret",
                       "type": "string"
                     },
                     "password": {
                       "default": "",
                       "description": "The password credential to be used when using an external database driver.",
-                      "required": [],
                       "title": "password",
                       "type": "string"
                     },
                     "username": {
                       "default": "",
                       "description": "The username credential to be used when using an external database driver.",
-                      "required": [],
                       "title": "username",
                       "type": "string"
                     }
@@ -1078,14 +994,12 @@
                 "host": {
                   "default": "",
                   "description": "The RabbitMQ server host name",
-                  "required": [],
                   "title": "host",
                   "type": "string"
                 },
                 "vhost": {
                   "default": "",
                   "description": "The RabbitMQ server VHost",
-                  "required": [],
                   "title": "vhost",
                   "type": "string"
                 }
@@ -1105,21 +1019,18 @@
                     "existingSecret": {
                       "default": "",
                       "description": "Use existing secret for password details (`squest.config.redis.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `redis-password`.",
-                      "required": [],
                       "title": "existingSecret",
                       "type": "string"
                     },
                     "password": {
                       "default": "",
                       "description": "The password credential to be used when using an external redis server.",
-                      "required": [],
                       "title": "password",
                       "type": "string"
                     },
                     "username": {
                       "default": "",
                       "description": "The username credential to be used when using an external redis server.",
-                      "required": [],
                       "title": "username",
                       "type": "string"
                     }
@@ -1146,21 +1057,18 @@
                     "existingSecret": {
                       "default": "",
                       "description": "Use existing secret for password details (`squest.config.smtp.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `smtp-password`.",
-                      "required": [],
                       "title": "existingSecret",
                       "type": "string"
                     },
                     "password": {
                       "default": "",
                       "description": "The password credential to be used when using an external SMTP host.",
-                      "required": [],
                       "title": "password",
                       "type": "string"
                     },
                     "username": {
                       "default": "",
                       "description": "The username credential to be used when using an external SMTP host.",
-                      "required": [],
                       "title": "username",
                       "type": "string"
                     }
@@ -1176,28 +1084,24 @@
                 "from": {
                   "default": "squest@squest.domain.local",
                   "description": "Domain name used as email sender.",
-                  "required": [],
                   "title": "from",
                   "type": "string"
                 },
                 "host": {
                   "default": "localhost",
                   "description": "The SMTP host to use for sending email.",
-                  "required": [],
                   "title": "host",
                   "type": "string"
                 },
                 "port": {
                   "default": 25,
                   "description": "Port to use for the SMTP server defined in squest.config.email.host.",
-                  "required": [],
                   "title": "port",
                   "type": "integer"
                 },
                 "useSsl": {
                   "default": false,
                   "description": "Whether to use an implicit TLS (secure) connection when talking to the SMTP server defined in squest.config.smtp.host.",
-                  "required": [],
                   "title": "useSsl",
                   "type": "boolean"
                 }
@@ -1217,35 +1121,30 @@
                 "admins": {
                   "default": "",
                   "description": "A list of all the email who get code error notifications when squest.config.django.debug=false",
-                  "required": [],
                   "title": "admins",
                   "type": "string"
                 },
                 "emailNotificationEnabled": {
                   "default": "",
                   "description": "Set to True to enable email notifications. The default is based on the squest.config.django.debug value.",
-                  "required": [],
                   "title": "emailNotificationEnabled",
                   "type": "string"
                 },
                 "host": {
                   "default": "http://squest.domain.local",
                   "description": "Address of the Squest portal instance. Used in email templates and in metadata sent to Red Hat Ansible Automation Platform/AWX job templates.",
-                  "required": [],
                   "title": "host",
                   "type": "string"
                 },
                 "isDevServer": {
                   "default": false,
                   "description": "Set to True to change the navbar and footer color to visually identify a testing instance of Squest.",
-                  "required": [],
                   "title": "isDevServer",
                   "type": "boolean"
                 },
                 "maintenanceModeEnabled": {
                   "default": false,
                   "description": "When enabled, only administrators can access squest UI and API. This can be used for example to block new requests by end users from the service catalog. So an administrator can perform operations against the API like migrating instance specs.",
-                  "required": [],
                   "title": "maintenanceModeEnabled",
                   "type": "boolean"
                 }
@@ -1279,7 +1178,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "extraEnv",
           "type": "array"
         },
@@ -1288,7 +1186,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "extraEnvFrom",
           "type": "array"
         },
@@ -1297,7 +1194,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "extraVolumeMounts",
           "type": "array"
         },
@@ -1306,7 +1202,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "extraVolumes",
           "type": "array"
         },
@@ -1315,28 +1210,24 @@
             "pullPolicy": {
               "default": "Always",
               "description": "image pull policy",
-              "required": [],
               "title": "pullPolicy",
               "type": "string"
             },
             "registry": {
               "default": "quay.io",
               "description": "image registry",
-              "required": [],
               "title": "registry",
               "type": "string"
             },
             "repository": {
               "default": "hewlettpackardenterprise/squest",
               "description": "image repository",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "2.8.1",
               "description": "Overrides the image tag",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -1359,13 +1250,11 @@
             },
             "className": {
               "default": "",
-              "required": [],
               "title": "className",
               "type": "string"
             },
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
@@ -1377,7 +1266,6 @@
                     "properties": {
                       "host": {
                         "default": "chart-example.local",
-                        "required": [],
                         "title": "host",
                         "type": "string"
                       },
@@ -1388,13 +1276,11 @@
                               "properties": {
                                 "path": {
                                   "default": "/",
-                                  "required": [],
                                   "title": "path",
                                   "type": "string"
                                 },
                                 "pathType": {
                                   "default": "ImplementationSpecific",
-                                  "required": [],
                                   "title": "pathType",
                                   "type": "string"
                                 }
@@ -1408,7 +1294,6 @@
                           ],
                           "required": []
                         },
-                        "required": [],
                         "title": "paths",
                         "type": "array"
                       }
@@ -1422,7 +1307,6 @@
                 ],
                 "required": []
               },
-              "required": [],
               "title": "hosts",
               "type": "array"
             },
@@ -1430,7 +1314,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "tls",
               "type": "array"
             }
@@ -1452,7 +1335,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraEnv",
               "type": "array"
             },
@@ -1461,7 +1343,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraEnvFrom",
               "type": "array"
             },
@@ -1470,7 +1351,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraVolumeMounts",
               "type": "array"
             }
@@ -1490,7 +1370,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraEnv",
               "type": "array"
             },
@@ -1499,7 +1378,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraEnvFrom",
               "type": "array"
             },
@@ -1508,7 +1386,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraVolumeMounts",
               "type": "array"
             },
@@ -1517,28 +1394,24 @@
                 "pullPolicy": {
                   "default": "Always",
                   "description": "image pull policy",
-                  "required": [],
                   "title": "pullPolicy",
                   "type": "string"
                 },
                 "registry": {
                   "default": "docker.io",
                   "description": "image registry",
-                  "required": [],
                   "title": "registry",
                   "type": "string"
                 },
                 "repository": {
                   "default": "nginx",
                   "description": "image repository",
-                  "required": [],
                   "title": "repository",
                   "type": "string"
                 },
                 "tag": {
                   "default": "1.29.4-alpine",
                   "description": "Overrides the image tag",
-                  "required": [],
                   "title": "tag",
                   "type": "string"
                 }
@@ -1595,7 +1468,6 @@
         "replicaCount": {
           "default": 1,
           "description": "Number of replicas",
-          "required": [],
           "title": "replicaCount",
           "type": "integer"
         },
@@ -1608,7 +1480,6 @@
         "revisionHistoryLimit": {
           "default": 10,
           "description": "The number of old ReplicaSets to retain",
-          "required": [],
           "title": "revisionHistoryLimit",
           "type": "integer"
         },
@@ -1623,14 +1494,12 @@
             "port": {
               "default": 8080,
               "description": "Kubernetes port where service is exposed",
-              "required": [],
               "title": "port",
               "type": "integer"
             },
             "type": {
               "default": "ClusterIP",
               "description": "Kubernetes service type",
-              "required": [],
               "title": "type",
               "type": "string"
             }
@@ -1653,14 +1522,12 @@
             "create": {
               "default": true,
               "description": "Specifies whether a service account should be created",
-              "required": [],
               "title": "create",
               "type": "boolean"
             },
             "name": {
               "default": "",
               "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-              "required": [],
               "title": "name",
               "type": "string"
             }
@@ -1676,7 +1543,6 @@
         "strategy": {
           "default": "Recreate",
           "description": "Upgrade strategy For Deployments, valid values are Recreate (default) and RollingUpdate",
-          "required": [],
           "title": "strategy",
           "type": "string"
         },
@@ -1685,7 +1551,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tolerations",
           "type": "array"
         }

@@ -11,25 +11,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -50,14 +46,12 @@
             "debug": {
               "default": false,
               "description": "Enable debug log level",
-              "required": [],
               "title": "debug",
               "type": "boolean"
             },
             "format": {
               "default": "text",
               "description": "Define the log format. Valid values are text or json",
-              "required": [],
               "title": "format",
               "type": "string"
             }
@@ -74,7 +68,6 @@
             "domainBased": {
               "default": false,
               "description": "Enabled domain based RBLs",
-              "required": [],
               "title": "domainBased",
               "type": "boolean"
             },
@@ -83,7 +76,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "rbls",
               "type": "array"
             }
@@ -98,7 +90,6 @@
         "resolver": {
           "default": "",
           "description": "The URL of the DNS resolver that should be used. If unbound is enabled (unbound.enabled) this will be ignored",
-          "required": [],
           "title": "resolver",
           "type": "string"
         },
@@ -107,7 +98,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "targets",
           "type": "array"
         }
@@ -126,14 +116,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"dnsbl-exporter.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -148,28 +136,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "ghcr.io",
           "description": "image registry",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "luzilla/dnsbl_exporter",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "v0.7.0-rc3",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -188,7 +172,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -201,13 +184,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -219,7 +200,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -230,13 +210,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -250,7 +228,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -264,7 +241,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -272,7 +248,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -292,42 +267,36 @@
         "enabled": {
           "default": true,
           "description": "Enable the livenessProbe",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "failureThreshold": {
           "default": 5,
           "description": "Failure threshold for livenessProbe",
-          "required": [],
           "title": "failureThreshold",
           "type": "integer"
         },
         "initialDelaySeconds": {
           "default": 30,
           "description": "Initial delay seconds for livenessProbe",
-          "required": [],
           "title": "initialDelaySeconds",
           "type": "integer"
         },
         "periodSeconds": {
           "default": 30,
           "description": "Period seconds for livenessProbe",
-          "required": [],
           "title": "periodSeconds",
           "type": "integer"
         },
         "successThreshold": {
           "default": 1,
           "description": "Success threshold for livenessProbe",
-          "required": [],
           "title": "successThreshold",
           "type": "integer"
         },
         "timeoutSeconds": {
           "default": 10,
           "description": "Timeout in seconds for livenessProbe",
-          "required": [],
           "title": "timeoutSeconds",
           "type": "integer"
         }
@@ -346,7 +315,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `dnsbl-exporter`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -373,42 +341,36 @@
         "enabled": {
           "default": true,
           "description": "Enable the readinessProbe",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "failureThreshold": {
           "default": 5,
           "description": "Failure threshold for readinessProbe",
-          "required": [],
           "title": "failureThreshold",
           "type": "integer"
         },
         "initialDelaySeconds": {
           "default": 30,
           "description": "Initial delay seconds for readinessProbe",
-          "required": [],
           "title": "initialDelaySeconds",
           "type": "integer"
         },
         "periodSeconds": {
           "default": 30,
           "description": "Period seconds for readinessProbe",
-          "required": [],
           "title": "periodSeconds",
           "type": "integer"
         },
         "successThreshold": {
           "default": 1,
           "description": "Success threshold for readinessProbe",
-          "required": [],
           "title": "successThreshold",
           "type": "integer"
         },
         "timeoutSeconds": {
           "default": 10,
           "description": "Timeout in seconds for readinessProbe",
-          "required": [],
           "title": "timeoutSeconds",
           "type": "integer"
         }
@@ -427,7 +389,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -438,13 +399,11 @@
           "properties": {
             "cpu": {
               "default": "200m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "256Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -460,13 +419,11 @@
           "properties": {
             "cpu": {
               "default": "100m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "128Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -489,7 +446,6 @@
     "revisionHistoryLimit": {
       "default": 0,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -502,13 +458,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "drop",
               "type": "array"
             }
@@ -521,25 +475,21 @@
         },
         "readOnlyRootFilesystem": {
           "default": true,
-          "required": [],
           "title": "readOnlyRootFilesystem",
           "type": "boolean"
         },
         "runAsGroup": {
           "default": 65534,
-          "required": [],
           "title": "runAsGroup",
           "type": "integer"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 65534,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -559,14 +509,12 @@
         "port": {
           "default": 80,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -589,14 +537,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -620,14 +566,12 @@
         "enabled": {
           "default": false,
           "description": "Enable a prometheus ServiceMonitor",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "interval": {
           "default": "60s",
           "description": "prometheus: kube-prometheus\nPrometheus ServiceMonitor interval",
-          "required": [],
           "title": "interval",
           "type": "string"
         },
@@ -636,14 +580,12 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "metricRelabelings",
           "type": "array"
         },
         "namespace": {
           "default": "",
           "description": "Prometheus ServiceMonitor namespace",
-          "required": [],
           "title": "namespace",
           "type": "string"
         },
@@ -652,14 +594,12 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "relabelings",
           "type": "array"
         },
         "scrapeTimeout": {
           "default": "20s",
           "description": "How long until a scrape request times out. It cannot be greater than the scrape interval",
-          "required": [],
           "title": "scrapeTimeout",
           "type": "string"
         },
@@ -688,7 +628,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     },
@@ -697,7 +636,6 @@
         "enabled": {
           "default": true,
           "description": "Enable the integrated unbound DNS resolver",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -706,28 +644,24 @@
             "pullPolicy": {
               "default": "Always",
               "description": "image pull policy for the unbound image",
-              "required": [],
               "title": "pullPolicy",
               "type": "string"
             },
             "registry": {
               "default": "ghcr.io",
               "description": "image registry for the unbound image",
-              "required": [],
               "title": "registry",
               "type": "string"
             },
             "repository": {
               "default": "luzilla/unbound",
               "description": "image repository for the unbound image",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "v0.7.0-rc3",
               "description": "Overrides the image tag for the unbound image",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -746,42 +680,36 @@
             "enabled": {
               "default": true,
               "description": "Enable the livenessProbe of unbound",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "failureThreshold": {
               "default": 5,
               "description": "Failure threshold for livenessProbe of unbound",
-              "required": [],
               "title": "failureThreshold",
               "type": "integer"
             },
             "initialDelaySeconds": {
               "default": 10,
               "description": "Initial delay seconds for livenessProbe of unbound",
-              "required": [],
               "title": "initialDelaySeconds",
               "type": "integer"
             },
             "periodSeconds": {
               "default": 30,
               "description": "Period seconds for livenessProbe of unbound",
-              "required": [],
               "title": "periodSeconds",
               "type": "integer"
             },
             "successThreshold": {
               "default": 1,
               "description": "Success threshold for livenessProbe of unbound",
-              "required": [],
               "title": "successThreshold",
               "type": "integer"
             },
             "timeoutSeconds": {
               "default": 2,
               "description": "Timeout in seconds for livenessProbe of unbound",
-              "required": [],
               "title": "timeoutSeconds",
               "type": "integer"
             }
@@ -802,42 +730,36 @@
             "enabled": {
               "default": true,
               "description": "Enable the readinessProbe of unbound",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "failureThreshold": {
               "default": 5,
               "description": "Failure threshold for readinessProbe of unbound",
-              "required": [],
               "title": "failureThreshold",
               "type": "integer"
             },
             "initialDelaySeconds": {
               "default": 10,
               "description": "Initial delay seconds for readinessProbe of unbound",
-              "required": [],
               "title": "initialDelaySeconds",
               "type": "integer"
             },
             "periodSeconds": {
               "default": 30,
               "description": "Period seconds for readinessProbe of unbound",
-              "required": [],
               "title": "periodSeconds",
               "type": "integer"
             },
             "successThreshold": {
               "default": 1,
               "description": "Success threshold for readinessProbe of unbound",
-              "required": [],
               "title": "successThreshold",
               "type": "integer"
             },
             "timeoutSeconds": {
               "default": 2,
               "description": "Timeout in seconds for readinessProbe of unbound",
-              "required": [],
               "title": "timeoutSeconds",
               "type": "integer"
             }
@@ -860,13 +782,11 @@
               "properties": {
                 "cpu": {
                   "default": "200m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "200Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -882,13 +802,11 @@
               "properties": {
                 "cpu": {
                   "default": "100m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "32Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -917,13 +835,11 @@
                   "items": {
                     "anyOf": [
                       {
-                        "required": [],
                         "type": "string"
                       }
                     ],
                     "required": []
                   },
-                  "required": [],
                   "title": "add",
                   "type": "array"
                 },
@@ -931,13 +847,11 @@
                   "items": {
                     "anyOf": [
                       {
-                        "required": [],
                         "type": "string"
                       }
                     ],
                     "required": []
                   },
-                  "required": [],
                   "title": "drop",
                   "type": "array"
                 }
@@ -951,25 +865,21 @@
             },
             "readOnlyRootFilesystem": {
               "default": false,
-              "required": [],
               "title": "readOnlyRootFilesystem",
               "type": "boolean"
             },
             "runAsGroup": {
               "default": 101,
-              "required": [],
               "title": "runAsGroup",
               "type": "integer"
             },
             "runAsNonRoot": {
               "default": true,
-              "required": [],
               "title": "runAsNonRoot",
               "type": "boolean"
             },
             "runAsUser": {
               "default": 100,
-              "required": [],
               "title": "runAsUser",
               "type": "integer"
             }

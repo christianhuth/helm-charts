@@ -1,7 +1,7 @@
 # priority-classes
 
-## 1.0.7
+## 1.0.8
 
-### Changed
+### Fixes
 
-- content of .helmignore
+- helm schema

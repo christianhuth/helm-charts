@@ -12,14 +12,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "args",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"kube-ops-view.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -34,28 +32,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "hjacobs/kube-ops-view",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "23.5.0",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -74,7 +68,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -87,13 +80,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -105,7 +96,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -116,13 +106,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -136,7 +124,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -150,7 +137,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -158,7 +144,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -176,7 +161,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `kube-ops-view`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -197,7 +181,6 @@
         "architecture": {
           "default": "standalone",
           "description": "Redis™ architecture. Allowed values: standalone or replication",
-          "required": [],
           "title": "architecture",
           "type": "string"
         },
@@ -206,7 +189,6 @@
             "enabled": {
               "default": false,
               "description": "Disable password authentication as the kube-ops-view container has no support for password authentication",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             }
@@ -220,7 +202,6 @@
         "enabled": {
           "default": false,
           "description": "enable Redis™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -236,7 +217,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -249,7 +229,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -262,13 +241,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "drop",
               "type": "array"
             }
@@ -281,19 +258,16 @@
         },
         "readOnlyRootFilesystem": {
           "default": true,
-          "required": [],
           "title": "readOnlyRootFilesystem",
           "type": "boolean"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 1000,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -312,14 +286,12 @@
         "port": {
           "default": 80,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -342,14 +314,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -367,7 +337,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

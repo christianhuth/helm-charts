@@ -1,7 +1,7 @@
 # bindy
 
-## 1.1.0
+## 1.1.1
 
-### Changed
+### Fixes
 
-- hpa spec to align with v2
+- helm schema

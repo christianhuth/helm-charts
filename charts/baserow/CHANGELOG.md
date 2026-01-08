@@ -1,7 +1,7 @@
 # baserow
 
-## 6.1.0
+## 6.1.1
 
-### Changed
+### Fixes
 
-- dependency of postgresql to 18.2.0
+- helm schema

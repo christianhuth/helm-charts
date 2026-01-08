@@ -11,25 +11,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -48,14 +44,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"syncstorage-rs.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -70,28 +64,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "ghcr.io",
           "description": "image registry",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "porelli/firefox-sync",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "syncstorage-rs-mysql-0.18.2",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -110,7 +100,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -123,13 +112,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -141,7 +128,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -152,13 +138,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -172,7 +156,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -186,7 +169,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -194,7 +176,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -214,42 +195,36 @@
         "enabled": {
           "default": true,
           "description": "Enable the livenessProbe",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "failureThreshold": {
           "default": 6,
           "description": "Failure threshold for livenessProbe",
-          "required": [],
           "title": "failureThreshold",
           "type": "integer"
         },
         "initialDelaySeconds": {
           "default": 10,
           "description": "Initial delay seconds for livenessProbe",
-          "required": [],
           "title": "initialDelaySeconds",
           "type": "integer"
         },
         "periodSeconds": {
           "default": 10,
           "description": "Period seconds for livenessProbe",
-          "required": [],
           "title": "periodSeconds",
           "type": "integer"
         },
         "successThreshold": {
           "default": 1,
           "description": "Success threshold for livenessProbe",
-          "required": [],
           "title": "successThreshold",
           "type": "integer"
         },
         "timeoutSeconds": {
           "default": 2,
           "description": "Timeout in seconds for livenessProbe",
-          "required": [],
           "title": "timeoutSeconds",
           "type": "integer"
         }
@@ -268,7 +243,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `syncstorage-rs`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -295,42 +269,36 @@
         "enabled": {
           "default": true,
           "description": "Enable the readinessProbe",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "failureThreshold": {
           "default": 6,
           "description": "Failure threshold for readinessProbe",
-          "required": [],
           "title": "failureThreshold",
           "type": "integer"
         },
         "initialDelaySeconds": {
           "default": 10,
           "description": "Initial delay seconds for readinessProbe",
-          "required": [],
           "title": "initialDelaySeconds",
           "type": "integer"
         },
         "periodSeconds": {
           "default": 10,
           "description": "Period seconds for readinessProbe",
-          "required": [],
           "title": "periodSeconds",
           "type": "integer"
         },
         "successThreshold": {
           "default": 1,
           "description": "Success threshold for readinessProbe",
-          "required": [],
           "title": "successThreshold",
           "type": "integer"
         },
         "timeoutSeconds": {
           "default": 2,
           "description": "Timeout in seconds for readinessProbe",
-          "required": [],
           "title": "timeoutSeconds",
           "type": "integer"
         }
@@ -349,7 +317,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -362,7 +329,6 @@
     "revisionHistoryLimit": {
       "default": 0,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -377,14 +343,12 @@
         "port": {
           "default": 80,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -407,14 +371,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -434,21 +396,18 @@
             "database": {
               "default": "syncserver",
               "description": "The database name to be used when using the integrated MariaDB database.",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "password": {
               "default": "syncserver",
               "description": "The password credential to be used when using the integrated MariaDB database.",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "syncserver",
               "description": "The username credential to be used when using the integrated MariaDB database.",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -464,7 +423,6 @@
         "enabled": {
           "default": true,
           "description": "enable integrated MariaDB™ subchart from Bitnami for the Syncserver database",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -483,28 +441,24 @@
             "host": {
               "default": "0.0.0.0",
               "description": "host to listen for connections",
-              "required": [],
               "title": "host",
               "type": "string"
             },
             "logLevel": {
               "default": "info",
               "description": "The minimum Rust error logging level. Valid values: debug, info, warn, error.",
-              "required": [],
               "title": "logLevel",
               "type": "string"
             },
             "port": {
               "default": 8000,
               "description": "connection port",
-              "required": [],
               "title": "port",
               "type": "integer"
             },
             "runTokenserverDbMigrations": {
               "default": true,
               "description": "run migrations for the tokenserver database",
-              "required": [],
               "title": "runTokenserverDbMigrations",
               "type": "boolean"
             }
@@ -523,14 +477,12 @@
             "existingSecret": {
               "default": "",
               "description": "Use existing secret for the sync master key (`syncstorage.masterKey.value` will be ignored and picked up from this secret). The secret has to contain the key `master-key`.",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "value": {
               "default": "",
               "description": "The sync master key value",
-              "required": [],
               "title": "value",
               "type": "string"
             }
@@ -549,28 +501,24 @@
                 "database": {
                   "default": "",
                   "description": "The database name to be used when using an external database for the Syncserver. Will be ignored when you activate the integrated database with syncserver-db.enabled.",
-                  "required": [],
                   "title": "database",
                   "type": "string"
                 },
                 "existingSecret": {
                   "default": "",
                   "description": "Use existing secret for connection url. The secret has to contain the key `database-url`.",
-                  "required": [],
                   "title": "existingSecret",
                   "type": "string"
                 },
                 "password": {
                   "default": "",
                   "description": "The password credential to be used when using an external database driver. Will be ignored when you activate the integrated database with syncserver-db.enabled.",
-                  "required": [],
                   "title": "password",
                   "type": "string"
                 },
                 "username": {
                   "default": "",
                   "description": "The username credential to be used when using an external database driver. Will be ignored when you activate the integrated database with syncserver-db.enabled.",
-                  "required": [],
                   "title": "username",
                   "type": "string"
                 }
@@ -587,14 +535,12 @@
             "host": {
               "default": "",
               "description": "The host name of the database server when using an external database driver. Will be ignored when you activate the integrated database with syncserver-db.enabled.",
-              "required": [],
               "title": "host",
               "type": "string"
             },
             "port": {
               "default": 3306,
               "description": "The port in which the database service is running when using an external database driver. Will be ignored when you activate the integrated database with syncserver-db.enabled.",
-              "required": [],
               "title": "port",
               "type": "integer"
             }
@@ -614,28 +560,24 @@
                 "database": {
                   "default": "",
                   "description": "The database name to be used when using an external database for the Tokenserver. Will be ignored when you activate the integrated database with tokenserver-db.enabled.",
-                  "required": [],
                   "title": "database",
                   "type": "string"
                 },
                 "existingSecret": {
                   "default": "",
                   "description": "Use existing secret for connection url. The secret has to contain the keys `database-password` and `database-url`.",
-                  "required": [],
                   "title": "existingSecret",
                   "type": "string"
                 },
                 "password": {
                   "default": "",
                   "description": "The password credential to be used when using an external database driver. Will be ignored when you activate the integrated database with tokenserver-db.enabled.",
-                  "required": [],
                   "title": "password",
                   "type": "string"
                 },
                 "username": {
                   "default": "",
                   "description": "The username credential to be used when using an external database driver. Will be ignored when you activate the integrated database with tokenserver-db.enabled.",
-                  "required": [],
                   "title": "username",
                   "type": "string"
                 }
@@ -652,14 +594,12 @@
             "host": {
               "default": "",
               "description": "The host name of the database server when using an external database driver. Will be ignored when you activate the integrated database with tokenserver-db.enabled.",
-              "required": [],
               "title": "host",
               "type": "string"
             },
             "port": {
               "default": 3306,
               "description": "The port in which the database service is running when using an external database driver. Will be ignored when you activate the integrated database with tokenserver-db.enabled.",
-              "required": [],
               "title": "port",
               "type": "integer"
             }
@@ -679,7 +619,6 @@
                 "maxUsers": {
                   "default": 1,
                   "description": "maximum number of users that are allowed to user your server",
-                  "required": [],
                   "title": "maxUsers",
                   "type": "integer"
                 }
@@ -693,7 +632,6 @@
             "enabled": {
               "default": false,
               "description": "enable an init container that locks the tokenserver db from accepting new users if the maximum number of users are registered already",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
@@ -702,28 +640,24 @@
                 "pullPolicy": {
                   "default": "Always",
                   "description": "image pull policy",
-                  "required": [],
                   "title": "pullPolicy",
                   "type": "string"
                 },
                 "registry": {
                   "default": "ghcr.io",
                   "description": "image registry",
-                  "required": [],
                   "title": "registry",
                   "type": "string"
                 },
                 "repository": {
                   "default": "porelli/firefox-sync",
                   "description": "image repository",
-                  "required": [],
                   "title": "repository",
                   "type": "string"
                 },
                 "tag": {
                   "default": "syncstorage-rs-mysql-init-0.18.2",
                   "description": "Overrides the image tag",
-                  "required": [],
                   "title": "tag",
                   "type": "string"
                 }
@@ -764,21 +698,18 @@
             "database": {
               "default": "tokenserver",
               "description": "The database name to be used when using the integrated MariaDB database.",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "password": {
               "default": "tokenserver",
               "description": "The password credential to be used when using the integrated MariaDB database.",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "tokenserver",
               "description": "The username credential to be used when using the integrated MariaDB database.",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -794,7 +725,6 @@
         "enabled": {
           "default": true,
           "description": "enable integrated MariaDB™ subchart from Bitnami for the Tokenserver database",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -811,7 +741,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

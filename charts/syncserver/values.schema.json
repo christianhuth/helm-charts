@@ -11,25 +11,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -46,7 +42,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"syncserver.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -61,28 +56,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registry",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "mozilla/syncserver",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "latest",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -101,7 +92,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -114,13 +104,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -132,7 +120,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -143,13 +130,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -163,7 +148,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -177,7 +161,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -185,7 +168,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -203,7 +185,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `syncserver`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -228,7 +209,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -241,7 +221,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -256,14 +235,12 @@
         "port": {
           "default": 5000,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -286,14 +263,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -313,51 +288,43 @@
             "allowNewUser": {
               "default": false,
               "description": "controls whether the server will accept requests from previously-unseen users",
-              "required": [],
               "title": "allowNewUser",
               "type": "boolean"
             },
             "batchUploadEnabled": {
               "default": true,
-              "required": [],
               "title": "batchUploadEnabled",
               "type": "boolean"
             },
             "debugEnabled": {
               "default": false,
-              "required": [],
               "title": "debugEnabled",
               "type": "boolean"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of an existing secret containing the syncserver secret under the key syncserver-secret",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "forceWsgiEnviron": {
               "default": true,
-              "required": [],
               "title": "forceWsgiEnviron",
               "type": "boolean"
             },
             "publicUrl": {
               "default": "http://localhost:5000",
-              "required": [],
               "title": "publicUrl",
               "type": "string"
             },
             "secret": {
               "default": "super-strong-secret",
               "description": "Secret to secure the syncserver",
-              "required": [],
               "title": "secret",
               "type": "string"
             },
             "sqlUri": {
               "default": "sqlite:////data/syncserver.db",
-              "required": [],
               "title": "sqlUri",
               "type": "string"
             }
@@ -380,7 +347,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "extraEnv",
           "type": "array"
         },
@@ -391,13 +357,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "accessModes",
               "type": "array"
             },
@@ -409,14 +373,12 @@
             "enabled": {
               "default": false,
               "description": "use a PVC to persist data",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "existingClaim": {
               "default": "",
               "description": "provide an existing PersistentVolumeClaim",
-              "required": [],
               "title": "existingClaim",
               "type": "string"
             },
@@ -429,7 +391,6 @@
             "storageClassName": {
               "default": "",
               "description": "Name of the StorageClass required by the claim.",
-              "required": [],
               "title": "storageClassName",
               "type": "string"
             }
@@ -459,7 +420,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

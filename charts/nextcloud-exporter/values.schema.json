@@ -11,25 +11,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -52,7 +48,6 @@
                 "enabled": {
                   "default": true,
                   "description": "Enable gathering of apps-related metrics",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 }
@@ -66,14 +61,12 @@
             "port": {
               "default": 9205,
               "description": "The port the exporter will listen on",
-              "required": [],
               "title": "port",
               "type": "integer"
             },
             "timeout": {
               "default": "5s",
               "description": "Timeout for getting server info document",
-              "required": [],
               "title": "timeout",
               "type": "string"
             },
@@ -82,7 +75,6 @@
                 "enabled": {
                   "default": true,
                   "description": "Enable gathering of system update-related metrics.",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 }
@@ -110,35 +102,30 @@
                 "existingSecret": {
                   "default": "",
                   "description": "Name of existing secret to use for nextcloud authentication. Key in secret needs to be `nextcloud-token`.",
-                  "required": [],
                   "title": "existingSecret",
                   "type": "string"
                 },
                 "password": {
                   "default": "",
                   "description": "Password for connecting to Nextcloud",
-                  "required": [],
                   "title": "password",
                   "type": "string"
                 },
                 "token": {
                   "default": "",
                   "description": "Authentication token",
-                  "required": [],
                   "title": "token",
                   "type": "string"
                 },
                 "type": {
                   "default": "token",
                   "description": "Define how to authenticate against Nextcloud. Supported values are basic and token.",
-                  "required": [],
                   "title": "type",
                   "type": "string"
                 },
                 "username": {
                   "default": "",
                   "description": "Username for connecting to Nextcloud",
-                  "required": [],
                   "title": "username",
                   "type": "string"
                 }
@@ -156,14 +143,12 @@
             "server": {
               "default": "",
               "description": "The URL to Nextcloud server including the scheme",
-              "required": [],
               "title": "server",
               "type": "string"
             },
             "tlsSkipVerify": {
               "default": false,
               "description": "Skip certificate verification of Nextcloud server",
-              "required": [],
               "title": "tlsSkipVerify",
               "type": "boolean"
             }
@@ -189,14 +174,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"nextcloud-exporter.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -211,28 +194,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registry",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "xperimental/nextcloud-exporter",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "0.9.0",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -251,7 +230,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -264,13 +242,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -282,7 +258,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -293,13 +268,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -313,7 +286,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -327,7 +299,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -335,7 +306,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -353,7 +323,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `nextcloud-exporter`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -378,7 +347,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -391,7 +359,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -406,14 +373,12 @@
         "port": {
           "default": 80,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -436,14 +401,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -467,14 +430,12 @@
         "enabled": {
           "default": false,
           "description": "Enable a prometheus ServiceMonitor",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "interval": {
           "default": "30s",
           "description": "prometheus: kube-prometheus\nPrometheus ServiceMonitor interval",
-          "required": [],
           "title": "interval",
           "type": "string"
         },
@@ -483,14 +444,12 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "metricRelabelings",
           "type": "array"
         },
         "namespace": {
           "default": "",
           "description": "Prometheus ServiceMonitor namespace",
-          "required": [],
           "title": "namespace",
           "type": "string"
         },
@@ -499,7 +458,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "relabelings",
           "type": "array"
         },
@@ -527,7 +485,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

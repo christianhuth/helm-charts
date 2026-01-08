@@ -11,25 +11,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -51,35 +47,30 @@
             "database": {
               "default": "",
               "description": "Name of the database to use",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for PostgreSQL credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "",
               "description": "Password to use",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "userPasswordKey": {
               "default": "",
               "description": "Key in the secret containing the password",
-              "required": [],
               "title": "userPasswordKey",
               "type": "string"
             },
             "username": {
               "default": "",
               "description": "Name of the user to use",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -97,14 +88,12 @@
         "hostname": {
           "default": "",
           "description": "Hostname of the PostgreSQL database",
-          "required": [],
           "title": "hostname",
           "type": "string"
         },
         "port": {
           "default": 5432,
           "description": "Port used to connect to PostgreSQL database",
-          "required": [],
           "title": "port",
           "type": "integer"
         }
@@ -122,7 +111,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
@@ -131,7 +119,6 @@
         "baseUrl": {
           "default": "",
           "description": "URL under which FreshRSS will be available. Will use the first Ingress host if Ingress is enabled with `ingress.enabled`.",
-          "required": [],
           "title": "baseUrl",
           "type": "string"
         },
@@ -140,14 +127,12 @@
             "minutes": {
               "default": "1,31",
               "description": "Minutes to run an automatic cronjob to refresh feeds",
-              "required": [],
               "title": "minutes",
               "type": "string"
             },
             "type": {
               "default": "internal",
               "description": "How to run the CronJob to synchronize your Feeds. Supported values are internal and sidecar.",
-              "required": [],
               "title": "type",
               "type": "string"
             }
@@ -164,7 +149,6 @@
             "type": {
               "default": "sqlite",
               "description": "Database type to use. Supported values are sqlite and postgresql.",
-              "required": [],
               "title": "type",
               "type": "string"
             }
@@ -178,7 +162,6 @@
         "environment": {
           "default": "production",
           "description": "Enables additional development information if set to development (increases the level of logging and ensures that errors are displayed).",
-          "required": [],
           "title": "environment",
           "type": "string"
         },
@@ -189,28 +172,24 @@
                 "apiPassword": {
                   "default": "",
                   "description": "API Password of admin user. Will only be used if initialization is activated.",
-                  "required": [],
                   "title": "apiPassword",
                   "type": "string"
                 },
                 "email": {
                   "default": "",
                   "description": "Email of admin user. Will only be used if initialization is activated.",
-                  "required": [],
                   "title": "email",
                   "type": "string"
                 },
                 "password": {
                   "default": "",
                   "description": "Password of admin user. Will only be used if initialization is activated.",
-                  "required": [],
                   "title": "password",
                   "type": "string"
                 },
                 "username": {
                   "default": "admin",
                   "description": "Username of admin user. Will only be used if initialization is activated.",
-                  "required": [],
                   "title": "username",
                   "type": "string"
                 }
@@ -227,21 +206,18 @@
             "apiEnabled": {
               "default": true,
               "description": "enable the FreshRSS API. Will only be used if initialization is activated.",
-              "required": [],
               "title": "apiEnabled",
               "type": "boolean"
             },
             "enabled": {
               "default": true,
               "description": "Use Auto-install for initialization. Make sure to set this to false once the initialization is done.",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "language": {
               "default": "en",
               "description": "Language of the FreshRSS UI. Will only be used if initialization is activated.",
-              "required": [],
               "title": "language",
               "type": "string"
             }
@@ -270,13 +246,11 @@
                   "items": {
                     "anyOf": [
                       {
-                        "required": [],
                         "type": "string"
                       }
                     ],
                     "required": []
                   },
-                  "required": [],
                   "title": "accessModes",
                   "type": "array"
                 },
@@ -289,28 +263,24 @@
                 "enabled": {
                   "default": true,
                   "description": "Enable persistence for the data folder",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "existingClaim": {
                   "default": "",
                   "description": "Use an existing claim as PVC for the data folder",
-                  "required": [],
                   "title": "existingClaim",
                   "type": "string"
                 },
                 "size": {
                   "default": "5Gi",
                   "description": "Define the size of the PVC for the data folder",
-                  "required": [],
                   "title": "size",
                   "type": "string"
                 },
                 "storageClass": {
                   "default": "",
                   "description": "Define the storage class of the PVC for the data folder",
-                  "required": [],
                   "title": "storageClass",
                   "type": "string"
                 }
@@ -329,7 +299,6 @@
             "enabled": {
               "default": true,
               "description": "Enable persistence for FreshRSS data",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
@@ -340,13 +309,11 @@
                   "items": {
                     "anyOf": [
                       {
-                        "required": [],
                         "type": "string"
                       }
                     ],
                     "required": []
                   },
-                  "required": [],
                   "title": "accessModes",
                   "type": "array"
                 },
@@ -359,28 +326,24 @@
                 "enabled": {
                   "default": true,
                   "description": "Enable persistence for the extensions folder",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "existingClaim": {
                   "default": "",
                   "description": "Use an existing claim as PVC for the extensions folder",
-                  "required": [],
                   "title": "existingClaim",
                   "type": "string"
                 },
                 "size": {
                   "default": "5Gi",
                   "description": "Define the size of the PVC for the extensions folder",
-                  "required": [],
                   "title": "size",
                   "type": "string"
                 },
                 "storageClass": {
                   "default": "",
                   "description": "Define the storage class of the PVC for the extensions folder",
-                  "required": [],
                   "title": "storageClass",
                   "type": "string"
                 }
@@ -399,7 +362,6 @@
             "storageClass": {
               "default": "",
               "description": "Define the storage class for the different FreshRSS PVCs",
-              "required": [],
               "title": "storageClass",
               "type": "string"
             }
@@ -417,7 +379,6 @@
         "timezone": {
           "default": "Europe/Berlin",
           "description": "Timezone",
-          "required": [],
           "title": "timezone",
           "type": "string"
         }
@@ -437,7 +398,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"freshrss.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -452,35 +412,30 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registry",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "freshrss/freshrss",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "1.28.0",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         },
         "type": {
           "default": "alpine",
           "description": "Define which type of image should be used. Supported values are alpine and debian.",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -500,7 +455,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -513,13 +467,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -531,7 +483,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -542,13 +493,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -562,7 +511,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -576,14 +524,12 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
         "ip": {
           "default": "",
           "description": "ip to resolve public uri behind reverse proxy",
-          "required": [],
           "title": "ip",
           "type": "string"
         },
@@ -591,7 +537,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -610,7 +555,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `freshrss`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -640,28 +584,24 @@
             "database": {
               "default": "",
               "description": "Name for a custom database to create",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for PostgreSQL credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "",
               "description": "Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "",
               "description": "Name for a custom user to create",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -678,7 +618,6 @@
         "enabled": {
           "default": false,
           "description": "enable PostgreSQL™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -693,7 +632,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -706,7 +644,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -721,14 +658,12 @@
         "port": {
           "default": 8080,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -751,14 +686,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -776,7 +709,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

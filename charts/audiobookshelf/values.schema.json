@@ -14,7 +14,6 @@
             "path": {
               "default": "/backups",
               "description": "Path to where backups are stored. Backups contain a backup of the database in /config and images/metadata stored in ./metadata/items and ./metadata/authors",
-              "required": [],
               "title": "path",
               "type": "string"
             },
@@ -25,13 +24,11 @@
                   "items": {
                     "anyOf": [
                       {
-                        "required": [],
                         "type": "string"
                       }
                     ],
                     "required": []
                   },
-                  "required": [],
                   "title": "accessModes",
                   "type": "array"
                 },
@@ -44,14 +41,12 @@
                 "enabled": {
                   "default": true,
                   "description": "use a PVC to persist the backup directory",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "existingClaim": {
                   "default": "",
                   "description": "provide an existing PersistentVolumeClaim",
-                  "required": [],
                   "title": "existingClaim",
                   "type": "string"
                 },
@@ -64,7 +59,6 @@
                 "storageClassName": {
                   "default": "",
                   "description": "Name of the StorageClass required by the claim.",
-                  "required": [],
                   "title": "storageClassName",
                   "type": "string"
                 }
@@ -93,7 +87,6 @@
             "path": {
               "default": "/config",
               "description": "Path to the config directory. It will contain the database (users/books/libraries/settings). This location must not be mounted over the network.",
-              "required": [],
               "title": "path",
               "type": "string"
             },
@@ -104,13 +97,11 @@
                   "items": {
                     "anyOf": [
                       {
-                        "required": [],
                         "type": "string"
                       }
                     ],
                     "required": []
                   },
-                  "required": [],
                   "title": "accessModes",
                   "type": "array"
                 },
@@ -123,14 +114,12 @@
                 "enabled": {
                   "default": true,
                   "description": "use a PVC to persist the config directory",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "existingClaim": {
                   "default": "",
                   "description": "provide an existing PersistentVolumeClaim",
-                  "required": [],
                   "title": "existingClaim",
                   "type": "string"
                 },
@@ -143,7 +132,6 @@
                 "storageClassName": {
                   "default": "",
                   "description": "Name of the StorageClass required by the claim.",
-                  "required": [],
                   "title": "storageClassName",
                   "type": "string"
                 }
@@ -172,7 +160,6 @@
             "path": {
               "default": "/library",
               "description": "Path to the library directory. It will contain the library files. This location must not be mounted over the network.",
-              "required": [],
               "title": "path",
               "type": "string"
             },
@@ -183,13 +170,11 @@
                   "items": {
                     "anyOf": [
                       {
-                        "required": [],
                         "type": "string"
                       }
                     ],
                     "required": []
                   },
-                  "required": [],
                   "title": "accessModes",
                   "type": "array"
                 },
@@ -202,14 +187,12 @@
                 "enabled": {
                   "default": true,
                   "description": "use a PVC to persist the config directory",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "existingClaim": {
                   "default": "",
                   "description": "provide an existing PersistentVolumeClaim",
-                  "required": [],
                   "title": "existingClaim",
                   "type": "string"
                 },
@@ -222,7 +205,6 @@
                 "storageClassName": {
                   "default": "",
                   "description": "Name of the StorageClass required by the claim.",
-                  "required": [],
                   "title": "storageClassName",
                   "type": "string"
                 }
@@ -251,7 +233,6 @@
             "path": {
               "default": "/metadata",
               "description": "Path to the metadata directory. It will contain cache, streams, covers, downloads, backups and logs.",
-              "required": [],
               "title": "path",
               "type": "string"
             },
@@ -262,13 +243,11 @@
                   "items": {
                     "anyOf": [
                       {
-                        "required": [],
                         "type": "string"
                       }
                     ],
                     "required": []
                   },
-                  "required": [],
                   "title": "accessModes",
                   "type": "array"
                 },
@@ -281,14 +260,12 @@
                 "enabled": {
                   "default": true,
                   "description": "use a PVC to persist the metadata directory",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "existingClaim": {
                   "default": "",
                   "description": "provide an existing PersistentVolumeClaim",
-                  "required": [],
                   "title": "existingClaim",
                   "type": "string"
                 },
@@ -301,7 +278,6 @@
                 "storageClassName": {
                   "default": "",
                   "description": "Name of the StorageClass required by the claim.",
-                  "required": [],
                   "title": "storageClassName",
                   "type": "string"
                 }
@@ -328,7 +304,6 @@
         "nodeEnv": {
           "default": "production",
           "description": "Type of deployment. Should be production unless using development.",
-          "required": [],
           "title": "nodeEnv",
           "type": "string"
         },
@@ -337,7 +312,6 @@
             "downloadTimeout": {
               "default": "30",
               "description": "Timeout to wait for a podcast to start downloading.",
-              "required": [],
               "title": "downloadTimeout",
               "type": "string"
             }
@@ -353,14 +327,12 @@
             "logging": {
               "default": "",
               "description": "Debug information for logging SQL queries. Use log to log the queries, and benchmark to also log the runtime of each query.",
-              "required": [],
               "title": "logging",
               "type": "string"
             },
             "profiling": {
               "default": "",
               "description": "Experimental profiling of specific database queries. Not implemented on most queries.",
-              "required": [],
               "title": "profiling",
               "type": "string"
             }
@@ -375,7 +347,6 @@
         "source": {
           "default": "Helm",
           "description": "Installation source. Will be shown in the web client.",
-          "required": [],
           "title": "source",
           "type": "string"
         },
@@ -384,21 +355,18 @@
             "cacheSize": {
               "default": "",
               "description": "Set the cache_size pragma for the SQLite database",
-              "required": [],
               "title": "cacheSize",
               "type": "string"
             },
             "mmapSize": {
               "default": "",
               "description": "Set the mmap_size pragma for the SQLite database",
-              "required": [],
               "title": "mmapSize",
               "type": "string"
             },
             "tempStore": {
               "default": "",
               "description": "Set the temp_store pragma for the SQLite database",
-              "required": [],
               "title": "tempStore",
               "type": "string"
             }
@@ -414,7 +382,6 @@
         "timezone": {
           "default": "Europe/Berlin",
           "description": "specify the time zone. Check list: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
-          "required": [],
           "title": "timezone",
           "type": "string"
         }
@@ -438,25 +405,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -475,14 +438,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"argocd-extension-metrics.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -497,28 +458,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "advplyr/audiobookshelf",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "2.32.1",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -537,7 +494,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -551,13 +507,11 @@
         "className": {
           "default": "",
           "description": "kubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -568,7 +522,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -579,13 +532,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -599,7 +550,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -613,7 +563,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -621,7 +570,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -639,7 +587,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `argocd-extension-metrics`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -654,7 +601,6 @@
       "properties": {
         "fsGroup": {
           "default": 1000,
-          "required": [],
           "title": "fsGroup",
           "type": "integer"
         }
@@ -668,7 +614,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -679,13 +624,11 @@
           "properties": {
             "cpu": {
               "default": "100m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "100Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -707,7 +650,6 @@
     "revisionHistoryLimit": {
       "default": 0,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -716,7 +658,6 @@
       "properties": {
         "allowPrivilegeEscalation": {
           "default": false,
-          "required": [],
           "title": "allowPrivilegeEscalation",
           "type": "boolean"
         },
@@ -726,13 +667,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "drop",
               "type": "array"
             }
@@ -745,31 +684,26 @@
         },
         "privileged": {
           "default": false,
-          "required": [],
           "title": "privileged",
           "type": "boolean"
         },
         "readOnlyRootFilesystem": {
           "default": true,
-          "required": [],
           "title": "readOnlyRootFilesystem",
           "type": "boolean"
         },
         "runAsGroup": {
           "default": 1000,
-          "required": [],
           "title": "runAsGroup",
           "type": "integer"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 1000,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         },
@@ -777,7 +711,6 @@
           "properties": {
             "type": {
               "default": "RuntimeDefault",
-              "required": [],
               "title": "type",
               "type": "string"
             }
@@ -807,14 +740,12 @@
         "port": {
           "default": 8080,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -837,14 +768,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -862,7 +791,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

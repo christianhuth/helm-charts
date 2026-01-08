@@ -12,28 +12,24 @@
         "enabled": {
           "default": false,
           "description": "Enable Horizontal POD autoscaling",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
           "description": "Maximum number of replicas",
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
           "description": "Minimum number of replicas",
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
           "description": "Target CPU utilization percentage",
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -54,35 +50,30 @@
             "database": {
               "default": "kutt",
               "description": "Name of the database to use",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for PostgreSQL credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "kutt",
               "description": "Password to use",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "userPasswordKey": {
               "default": "",
               "description": "Key in the secret containing the password",
-              "required": [],
               "title": "userPasswordKey",
               "type": "string"
             },
             "username": {
               "default": "kutt",
               "description": "Name of the user to use",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -100,14 +91,12 @@
         "hostname": {
           "default": "",
           "description": "Hostname of the PostgreSQL database",
-          "required": [],
           "title": "hostname",
           "type": "string"
         },
         "port": {
           "default": 5432,
           "description": "Port used to connect to PostgreSQL database",
-          "required": [],
           "title": "port",
           "type": "integer"
         }
@@ -127,28 +116,24 @@
             "enabled": {
               "default": true,
               "description": "if authentication should be used with external Redis™",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for Redis™ credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "",
               "description": "Password to use",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "userPasswordKey": {
               "default": "",
               "description": "Key in the secret containing the password",
-              "required": [],
               "title": "userPasswordKey",
               "type": "string"
             }
@@ -165,14 +150,12 @@
         "hostname": {
           "default": "",
           "description": "Hostname of Redis™",
-          "required": [],
           "title": "hostname",
           "type": "string"
         },
         "port": {
           "default": 6379,
           "description": "Port used to connect to Redis",
-          "required": [],
           "title": "port",
           "type": "integer"
         }
@@ -190,7 +173,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
@@ -199,14 +181,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnvFrom",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"kutt.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -221,28 +201,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "kutt/kutt",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "v3.2.3",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -261,7 +237,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -276,14 +251,12 @@
         "className": {
           "default": "",
           "description": "IngressClass that will be be used to implement the Ingress",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
           "description": "Enable ingress record generation",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -295,7 +268,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -306,13 +278,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -326,7 +296,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -340,7 +309,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -349,7 +317,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -371,7 +338,6 @@
             "emails": {
               "default": "",
               "description": "Comma seperated list of email addresses that can access admin actions on settings page",
-              "required": [],
               "title": "emails",
               "type": "string"
             }
@@ -387,42 +353,36 @@
             "disallowAnonymousLinks": {
               "default": false,
               "description": "Disable anonymous link creation",
-              "required": [],
               "title": "disallowAnonymousLinks",
               "type": "boolean"
             },
             "disallowRegistration": {
               "default": false,
               "description": "Disable registration",
-              "required": [],
               "title": "disallowRegistration",
               "type": "boolean"
             },
             "enableRateLimit": {
               "default": false,
               "description": "Enable rate limitting for some API routes. If Redis is enabled uses Redis, otherwise, uses memory.",
-              "required": [],
               "title": "enableRateLimit",
               "type": "boolean"
             },
             "linkCustomAlphabet": {
               "default": "",
               "description": "Alphabet used to generate custom addresses. Default value omits o, O, 0, i, I, l, 1, and j to avoid confusion when reading the URL.",
-              "required": [],
               "title": "linkCustomAlphabet",
               "type": "string"
             },
             "linkLength": {
               "default": 6,
               "description": "Generated link length",
-              "required": [],
               "title": "linkLength",
               "type": "integer"
             },
             "siteName": {
               "default": "Kutt",
               "description": "The name of the site where Kutt is hosted",
-              "required": [],
               "title": "siteName",
               "type": "string"
             }
@@ -443,7 +403,6 @@
             "client": {
               "default": "pg",
               "description": "Which database client to use. This Chart currently only supports PostgreSQL: pg or pg-native. NOTE: pg-native is not installed by default, create your own image to use it.",
-              "required": [],
               "title": "client",
               "type": "string"
             },
@@ -452,14 +411,12 @@
                 "max": {
                   "default": 10,
                   "description": "Maximum number of database connection pools. Only if you use Postgres or MySQL.",
-                  "required": [],
                   "title": "max",
                   "type": "integer"
                 },
                 "min": {
                   "default": 0,
                   "description": "Minimum number of database connection pools. Only if you use Postgres or MySQL.",
-                  "required": [],
                   "title": "min",
                   "type": "integer"
                 }
@@ -484,21 +441,18 @@
             "customDomainUseHttps": {
               "default": false,
               "description": "Use HTTPS for links with custom domain",
-              "required": [],
               "title": "customDomainUseHttps",
               "type": "boolean"
             },
             "defaultDomain": {
               "default": "localhost:3000",
               "description": "The domain that this website is on",
-              "required": [],
               "title": "defaultDomain",
               "type": "string"
             },
             "useFirstIngressHost": {
               "default": false,
               "description": "If you use an ingress to expose Kutt you can simply set this to true to use the first hostname defined in the ingress.",
-              "required": [],
               "title": "useFirstIngressHost",
               "type": "boolean"
             }
@@ -516,14 +470,12 @@
             "existingSecret": {
               "default": "",
               "description": "Use existing secret for JWT secret key. The secret has to contain the key `JWT_SECRET`. When it's set the kutt.jwt.key is ignored.",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "key": {
               "default": "secret-jwt-key",
               "description": "make sure to replace with your own secret key",
-              "required": [],
               "title": "key",
               "type": "string"
             }
@@ -540,70 +492,60 @@
             "contactEmail": {
               "default": "",
               "description": "Support email to show on the app",
-              "required": [],
               "title": "contactEmail",
               "type": "string"
             },
             "enabled": {
               "default": false,
               "description": "Enable emails, which are used for signup, verifying or changing email address, resetting password, and sending reports. If is disabled, all these functionalities will be disabled too.",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "existingSecret": {
               "default": "",
               "description": "Use existing secret for password details. The secret has to contain the key `MAIL_PASSWORD`. When it's set the `kutt.mail.password` is ignored.",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "from": {
               "default": "",
               "description": "The email address Kutt will send emails from.",
-              "required": [],
               "title": "from",
               "type": "string"
             },
             "host": {
               "default": "smtp.example.com",
               "description": "The host of the external SMTP server that Kutt should use to send emails.",
-              "required": [],
               "title": "host",
               "type": "string"
             },
             "password": {
               "default": "",
               "description": "The password to authenticate to the smtp host when sending emails.",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "port": {
               "default": 465,
               "description": "The port used to connect to the smtp host.",
-              "required": [],
               "title": "port",
               "type": "integer"
             },
             "reportEmail": {
               "default": "",
               "description": "The email address that will receive submitted reports.",
-              "required": [],
               "title": "reportEmail",
               "type": "string"
             },
             "secure": {
               "default": false,
               "description": "If true the connection will use TLS when connecting to server. If false (the default) then TLS is used if server supports the STARTTLS extension. In most cases set this value to true if you are connecting to port 465. For port 587 or 25 keep it false",
-              "required": [],
               "title": "secure",
               "type": "boolean"
             },
             "username": {
               "default": "user@example.com",
               "description": "The username to authenticate to the smtp host when sending emails.",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -628,21 +570,18 @@
             "existingSecret": {
               "default": "",
               "description": "Use existing secret for ReCaptacha secrets. The secret has to contain the keys `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY`. When it's set the kutt.recaptcha.siteKey and kutt.recaptcha.secretKey is ignored.",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "secretKey": {
               "default": "",
               "description": "Invisible reCaptcha secret key. Create one in https://www.google.com/recaptcha/intro/",
-              "required": [],
               "title": "secretKey",
               "type": "string"
             },
             "siteKey": {
               "default": "",
               "description": "Invisible reCaptcha site key. Create one in https://www.google.com/recaptcha/intro/",
-              "required": [],
               "title": "siteKey",
               "type": "string"
             }
@@ -671,7 +610,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `kutt`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -700,28 +638,24 @@
             "database": {
               "default": "kutt",
               "description": "Name for a custom database to create",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for PostgreSQL credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "kutt",
               "description": "Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "kutt",
               "description": "Name for a custom user to create",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -738,7 +672,6 @@
         "enabled": {
           "default": true,
           "description": "enable PostgreSQL™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -755,7 +688,6 @@
         "architecture": {
           "default": "standalone",
           "description": "Redis® architecture. Allowed values: standalone or replication",
-          "required": [],
           "title": "architecture",
           "type": "string"
         },
@@ -764,14 +696,12 @@
             "enabled": {
               "default": true,
               "description": "Enable password authentication",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "password": {
               "default": "kutt",
               "description": "Redis™ password",
-              "required": [],
               "title": "password",
               "type": "string"
             }
@@ -786,7 +716,6 @@
         "enabled": {
           "default": true,
           "description": "enable Redis™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -802,7 +731,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -815,7 +743,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -830,14 +757,12 @@
         "port": {
           "default": 80,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -860,14 +785,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -885,7 +808,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

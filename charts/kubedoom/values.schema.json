@@ -12,35 +12,30 @@
         "enabled": {
           "default": false,
           "description": "Enable Horizontal POD autoscaling",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
           "description": "Maximum number of replicas",
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
           "description": "Minimum number of replicas",
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
           "description": "Target CPU utilization percentage",
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         },
         "targetMemoryUtilizationPercentage": {
           "default": 80,
           "description": "Target Memory utilization percentage",
-          "required": [],
           "title": "targetMemoryUtilizationPercentage",
           "type": "integer"
         }
@@ -60,14 +55,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"kubedoom.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -82,28 +75,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "ghcr.io",
           "description": "image registry",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "storax/kubedoom",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "0.6.0",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -122,7 +111,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -131,14 +119,12 @@
         "mode": {
           "default": "pods",
           "description": "You can also kill Namespaces instead of Pods. Simply set this to `namespaces`. Allowed values: `pods`, `namespaces`.",
-          "required": [],
           "title": "mode",
           "type": "string"
         },
         "namespace": {
           "default": "",
           "description": "You can limit Kubedoom to deleting pods in a single namespace",
-          "required": [],
           "title": "namespace",
           "type": "string"
         }
@@ -153,7 +139,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `kubedoom`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -178,7 +163,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -191,7 +175,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -206,14 +189,12 @@
         "port": {
           "default": 5900,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -236,14 +217,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -261,7 +240,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }
