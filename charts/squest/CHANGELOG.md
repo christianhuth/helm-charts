@@ -1,7 +1,7 @@
 # squest
 
-## 4.1.1
+## 4.2.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
