@@ -35,7 +35,11 @@ spec:
             statusCode: 301
     {{- else }}
     - backendRefs:
+<<<<<<< HEAD
         - name: {{ include "cluster-api-visualizer.fullname" $ }}
+=======
+        - name: {{ include "grafana.fullname" $ }}
+>>>>>>> 60e92025 (add support for gateway api to cluster-api-visualizer)
           port: {{ $.Values.service.port }}
           group: ''
           kind: Service
