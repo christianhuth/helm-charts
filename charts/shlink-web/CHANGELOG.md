@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.8.1
+## 1.9.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
