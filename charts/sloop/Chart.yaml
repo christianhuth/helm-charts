@@ -2,7 +2,7 @@ apiVersion: v2
 name: sloop
 description: Kubernetes History Visualization
 type: application
-version: 0.2.1
+version: 0.3.0
 appVersion: "sha-2ce8bbe"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/sloop/icon.svg
@@ -14,8 +14,8 @@ sources:
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: fixed
-      description: helm schema
+    - kind: added
+      description: support for Gateway API routes
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
