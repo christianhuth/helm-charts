@@ -77,6 +77,17 @@ The command removes all the Kubernetes components associated with the chart and 
 | backend.asgi.replicaCount | int | `1` | Number of replicas |
 | backend.asgi.resources | object | `{}` | Resource limits and requests for the controller pods. |
 | backend.asgi.revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
+| backend.asgi.route.main.additionalRules | list | `[]` | Additional custom rules that can be added to the route |
+| backend.asgi.route.main.annotations | object | `{}` | Add annotations to the route |
+| backend.asgi.route.main.apiVersion | string | `"gateway.networking.k8s.io/v1"` | Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2 |
+| backend.asgi.route.main.enabled | bool | `false` | Enables or disables the route |
+| backend.asgi.route.main.filters | list | `[]` | Filters define the filters that are applied to requests that match this rule. |
+| backend.asgi.route.main.hostnames | list | `[]` | Hostnames to be matched |
+| backend.asgi.route.main.httpsRedirect | bool | `false` | adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/ |
+| backend.asgi.route.main.kind | string | `"HTTPRoute"` | Set the route kind Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute |
+| backend.asgi.route.main.labels | object | `{}` | Add labels to the route |
+| backend.asgi.route.main.matches | list | see [values.yaml](./values.yaml) | define conditions used for matching the rule against incoming HTTP requests. |
+| backend.asgi.route.main.parentRefs | list | `[]` | Parent references (Gateway) |
 | backend.asgi.securityContext | object | `{"runAsGroup":9999,"runAsNonRoot":true,"runAsUser":9999}` | container-level security context |
 | backend.asgi.selectorLabels | object | `{}` | Additional labels to add to the pod |
 | backend.asgi.service.port | int | `8000` | Kubernetes port where service is exposed |
@@ -222,6 +233,17 @@ The command removes all the Kubernetes components associated with the chart and 
 | backend.wsgi.replicaCount | int | `1` | Number of replicas |
 | backend.wsgi.resources | object | `{}` | Resource limits and requests for the controller pods. |
 | backend.wsgi.revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
+| backend.wsgi.route.main.additionalRules | list | `[]` | Additional custom rules that can be added to the route |
+| backend.wsgi.route.main.annotations | object | `{}` | Add annotations to the route |
+| backend.wsgi.route.main.apiVersion | string | `"gateway.networking.k8s.io/v1"` | Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2 |
+| backend.wsgi.route.main.enabled | bool | `false` | Enables or disables the route |
+| backend.wsgi.route.main.filters | list | `[]` | Filters define the filters that are applied to requests that match this rule. |
+| backend.wsgi.route.main.hostnames | list | `[]` | Hostnames to be matched |
+| backend.wsgi.route.main.httpsRedirect | bool | `false` | adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/ |
+| backend.wsgi.route.main.kind | string | `"HTTPRoute"` | Set the route kind Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute |
+| backend.wsgi.route.main.labels | object | `{}` | Add labels to the route |
+| backend.wsgi.route.main.matches | list | see [values.yaml](./values.yaml) | define conditions used for matching the rule against incoming HTTP requests. |
+| backend.wsgi.route.main.parentRefs | list | `[]` | Parent references (Gateway) |
 | backend.wsgi.securityContext | object | `{"runAsGroup":9999,"runAsNonRoot":true,"runAsUser":9999}` | container-level security context |
 | backend.wsgi.selectorLabels | object | `{}` | Additional labels to add to the pod |
 | backend.wsgi.service.port | int | `8000` | Kubernetes port where service is exposed |
@@ -284,6 +306,17 @@ The command removes all the Kubernetes components associated with the chart and 
 | frontend.replicaCount | int | `1` | Number of replicas |
 | frontend.resources | object | `{}` | Resource limits and requests for the controller pods. |
 | frontend.revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
+| frontend.route.main.additionalRules | list | `[]` | Additional custom rules that can be added to the route |
+| frontend.route.main.annotations | object | `{}` | Add annotations to the route |
+| frontend.route.main.apiVersion | string | `"gateway.networking.k8s.io/v1"` | Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2 |
+| frontend.route.main.enabled | bool | `false` | Enables or disables the route |
+| frontend.route.main.filters | list | `[]` | Filters define the filters that are applied to requests that match this rule. |
+| frontend.route.main.hostnames | list | `[]` | Hostnames to be matched |
+| frontend.route.main.httpsRedirect | bool | `false` | adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/ |
+| frontend.route.main.kind | string | `"HTTPRoute"` | Set the route kind Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute |
+| frontend.route.main.labels | object | `{}` | Add labels to the route |
+| frontend.route.main.matches | list | see [values.yaml](./values.yaml) | define conditions used for matching the rule against incoming HTTP requests. |
+| frontend.route.main.parentRefs | list | `[]` | Parent references (Gateway) |
 | frontend.securityContext | object | `{"runAsGroup":9999,"runAsNonRoot":true,"runAsUser":9999}` | container-level security context |
 | frontend.selectorLabels | object | `{}` | Additional labels to add to the pod |
 | frontend.service.port | int | `3000` | Kubernetes port where service is exposed |
