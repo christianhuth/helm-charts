@@ -1,7 +1,7 @@
 # kube-ops-view
 
-## 7.0.1
+## 7.1.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
