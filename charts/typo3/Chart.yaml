@@ -2,7 +2,7 @@ apiVersion: v2
 name: typo3
 description: TYPO3 — the Professional, Flexible Content Management System
 type: application
-version: 6.2.0
+version: 6.2.1
 appVersion: "13.4"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/typo3/icon.svg
@@ -27,8 +27,8 @@ dependencies:
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: hpa spec to align with v2
+    - kind: fixes
+      description: helm schema
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

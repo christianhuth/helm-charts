@@ -1,7 +1,7 @@
 apiVersion: v2
 name: tenant-namespace
 description: A Helm Chart to bootstrap a Namespace in a Multi-Tenancy setup
-version: 2.0.5
+version: 2.0.6
 type: application
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/tenant-namespace/icon.svg
@@ -10,8 +10,8 @@ maintainers:
     email: christian@knell.it
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: url of icon
+    - kind: fixes
+      description: helm schema
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

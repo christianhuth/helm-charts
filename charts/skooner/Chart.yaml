@@ -2,7 +2,7 @@ apiVersion: v2
 name: skooner
 description: Simple Kubernetes real-time dashboard and management.
 type: application
-version: 0.2.0
+version: 0.2.1
 appVersion: "stable"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/skooner/icon.svg
@@ -14,8 +14,8 @@ sources:
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: changed
-      description: hpa spec to align with v2
+    - kind: fixes
+      description: helm schema
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
