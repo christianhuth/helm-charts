@@ -2,7 +2,7 @@ apiVersion: v2
 name: timetagger
 description: A Helm Chart for installing Timetagger, an open source time-tracker with an interactive user experience and powerful reporting.
 type: application
-version: 2.0.1
+version: 2.1.0
 appVersion: "v26.1.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/timetagger/icon.svg
@@ -13,8 +13,8 @@ sources:
   - https://github.com/almarklein/timetagger
 annotations:
   artifacthub.io/changes: |
-    - kind: fixed
-      description: helm schema
+    - kind: added
+      description: support for Gateway API routes
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
