@@ -1,7 +1,7 @@
 # baserow
 
-## 6.1.1
+## 6.2.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
