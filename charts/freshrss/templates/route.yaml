@@ -9,11 +9,11 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
   labels:
-    {{- include "cluster-api-visualizer.labels" $ | nindent 4 }}
+    {{- include "freshrss.labels" $ | nindent 4 }}
     {{- with $route.labels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
-  name: {{ template "cluster-api-visualizer.fullname" $ }}{{ if ne $name "main" }}-{{ $name }}{{ end }}
+  name: {{ template "freshrss.fullname" $ }}{{ if ne $name "main" }}-{{ $name }}{{ end }}
 spec:
   {{- with $route.parentRefs }}
   parentRefs:
@@ -35,7 +35,7 @@ spec:
             statusCode: 301
     {{- else }}
     - backendRefs:
-        - name: {{ include "cluster-api-visualizer.fullname" $ }}
+        - name: {{ include "freshrss.fullname" $ }}
           port: {{ $.Values.service.port }}
           group: ''
           kind: Service
