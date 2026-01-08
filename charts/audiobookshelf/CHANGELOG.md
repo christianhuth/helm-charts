@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 1.5.1
+## 1.6.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes

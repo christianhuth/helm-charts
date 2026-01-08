@@ -657,7 +657,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "additionalRules",
               "type": "array"
             },
@@ -670,14 +669,12 @@
             "apiVersion": {
               "default": "gateway.networking.k8s.io/v1",
               "description": "Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2",
-              "required": [],
               "title": "apiVersion",
               "type": "string"
             },
             "enabled": {
               "default": false,
               "description": "Enables or disables the route",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
@@ -686,7 +683,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "filters",
               "type": "array"
             },
@@ -695,21 +691,18 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "hostnames",
               "type": "array"
             },
             "httpsRedirect": {
               "default": false,
               "description": "adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/",
-              "required": [],
               "title": "httpsRedirect",
               "type": "boolean"
             },
             "kind": {
               "default": "HTTPRoute",
               "description": "Set the route kind\nValid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute",
-              "required": [],
               "title": "kind",
               "type": "string"
             },
@@ -729,13 +722,11 @@
                         "properties": {
                           "type": {
                             "default": "PathPrefix",
-                            "required": [],
                             "title": "type",
                             "type": "string"
                           },
                           "value": {
                             "default": "/",
-                            "required": [],
                             "title": "value",
                             "type": "string"
                           }
@@ -756,7 +747,6 @@
                 ],
                 "required": []
               },
-              "required": [],
               "title": "matches",
               "type": "array"
             },
@@ -765,7 +755,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "parentRefs",
               "type": "array"
             }
