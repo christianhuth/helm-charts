@@ -1,7 +1,7 @@
 # kutt
 
-## 8.2.1
+## 8.3.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
