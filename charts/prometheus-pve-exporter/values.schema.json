@@ -12,7 +12,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "args",
       "type": "array"
     },
@@ -20,25 +19,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -57,45 +52,38 @@
         "pveAuthType": {
           "default": "token",
           "description": "define how to authenticate against pve instances: password, token",
-          "required": [],
           "title": "pveAuthType",
           "type": "string"
         },
         "pveExistingSecretName": {
           "default": "",
           "description": "if you provide an existing secret, no additional secret will be created. Depending on the setting in pveAuthType the secret needs to have password OR tokenName and tokenValue fields.",
-          "required": [],
           "title": "pveExistingSecretName",
           "type": "string"
         },
         "pvePassword": {
           "default": "password",
-          "required": [],
           "title": "pvePassword",
           "type": "string"
         },
         "pveTokenName": {
           "default": "tokenName",
-          "required": [],
           "title": "pveTokenName",
           "type": "string"
         },
         "pveTokenValue": {
           "default": "tokenValue",
-          "required": [],
           "title": "pveTokenValue",
           "type": "string"
         },
         "pveUser": {
           "default": "user",
-          "required": [],
           "title": "pveUser",
           "type": "string"
         },
         "pveVerifySsl": {
           "default": false,
           "description": "Optional: set to false to skip SSL/TLS verification",
-          "required": [],
           "title": "pveVerifySsl",
           "type": "boolean"
         }
@@ -115,7 +103,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"prometheus-pve-exporter.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -130,28 +117,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "prompve/prometheus-pve-exporter",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "3.8.0",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -170,14 +153,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `prometheus-pve-exporter`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -202,7 +183,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -215,7 +195,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -228,13 +207,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "drop",
               "type": "array"
             }
@@ -247,19 +224,16 @@
         },
         "readOnlyRootFilesystem": {
           "default": true,
-          "required": [],
           "title": "readOnlyRootFilesystem",
           "type": "boolean"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 65534,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -278,14 +252,12 @@
         "port": {
           "default": 80,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -308,14 +280,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -339,14 +309,12 @@
         "enabled": {
           "default": false,
           "description": "Enable a prometheus ServiceMonitor",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "interval": {
           "default": "30s",
           "description": "prometheus: kube-prometheus\nPrometheus ServiceMonitor interval",
-          "required": [],
           "title": "interval",
           "type": "string"
         },
@@ -355,14 +323,12 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "metricRelabelings",
           "type": "array"
         },
         "namespace": {
           "default": "",
           "description": "Prometheus ServiceMonitor namespace",
-          "required": [],
           "title": "namespace",
           "type": "string"
         },
@@ -371,7 +337,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "pveTargets",
           "type": "array"
         },
@@ -380,7 +345,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "relabelings",
           "type": "array"
         },
@@ -409,7 +373,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

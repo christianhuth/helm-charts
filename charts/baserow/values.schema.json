@@ -16,35 +16,30 @@
                 "enabled": {
                   "default": false,
                   "description": "Enable Horizontal POD autoscaling",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "maxReplicas": {
                   "default": 100,
                   "description": "Maximum number of replicas",
-                  "required": [],
                   "title": "maxReplicas",
                   "type": "integer"
                 },
                 "minReplicas": {
                   "default": 1,
                   "description": "Minimum number of replicas",
-                  "required": [],
                   "title": "minReplicas",
                   "type": "integer"
                 },
                 "targetCPUUtilizationPercentage": {
                   "default": 80,
                   "description": "Target CPU utilization percentage",
-                  "required": [],
                   "title": "targetCPUUtilizationPercentage",
                   "type": "integer"
                 },
                 "targetMemoryUtilizationPercentage": {
                   "default": 80,
                   "description": "Target Memory utilization percentage",
-                  "required": [],
                   "title": "targetMemoryUtilizationPercentage",
                   "type": "integer"
                 }
@@ -64,7 +59,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraEnv",
               "type": "array"
             },
@@ -73,28 +67,24 @@
                 "pullPolicy": {
                   "default": "Always",
                   "description": "image pull policy",
-                  "required": [],
                   "title": "pullPolicy",
                   "type": "string"
                 },
                 "registry": {
                   "default": "docker.io",
                   "description": "image registory",
-                  "required": [],
                   "title": "registry",
                   "type": "string"
                 },
                 "repository": {
                   "default": "baserow/backend",
                   "description": "image repository",
-                  "required": [],
                   "title": "repository",
                   "type": "string"
                 },
                 "tag": {
                   "default": "2.0.6",
                   "description": "Overrides the image tag",
-                  "required": [],
                   "title": "tag",
                   "type": "string"
                 }
@@ -113,7 +103,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "imagePullSecrets",
               "type": "array"
             },
@@ -122,35 +111,30 @@
                 "failureThreshold": {
                   "default": 3,
                   "description": "Failure threshold for livenessProbe",
-                  "required": [],
                   "title": "failureThreshold",
                   "type": "integer"
                 },
                 "initialDelaySeconds": {
                   "default": 120,
                   "description": "Initial delay seconds for livenessProbe",
-                  "required": [],
                   "title": "initialDelaySeconds",
                   "type": "integer"
                 },
                 "periodSeconds": {
                   "default": 30,
                   "description": "Period seconds for livenessProbe",
-                  "required": [],
                   "title": "periodSeconds",
                   "type": "integer"
                 },
                 "successThreshold": {
                   "default": 1,
                   "description": "Success threshold for livenessProbe",
-                  "required": [],
                   "title": "successThreshold",
                   "type": "integer"
                 },
                 "timeoutSeconds": {
                   "default": 5,
                   "description": "Timeout seconds for livenessProbe",
-                  "required": [],
                   "title": "timeoutSeconds",
                   "type": "integer"
                 }
@@ -182,19 +166,16 @@
               "properties": {
                 "fsGroup": {
                   "default": 9999,
-                  "required": [],
                   "title": "fsGroup",
                   "type": "integer"
                 },
                 "runAsGroup": {
                   "default": 9999,
-                  "required": [],
                   "title": "runAsGroup",
                   "type": "integer"
                 },
                 "runAsUser": {
                   "default": 9999,
-                  "required": [],
                   "title": "runAsUser",
                   "type": "integer"
                 }
@@ -210,7 +191,6 @@
             "priorityClassName": {
               "default": "",
               "description": "Pod priority class name",
-              "required": [],
               "title": "priorityClassName",
               "type": "string"
             },
@@ -219,35 +199,30 @@
                 "failureThreshold": {
                   "default": 3,
                   "description": "Failure threshold for readinessProbe",
-                  "required": [],
                   "title": "failureThreshold",
                   "type": "integer"
                 },
                 "initialDelaySeconds": {
                   "default": 120,
                   "description": "Initial delay seconds for readinessProbe",
-                  "required": [],
                   "title": "initialDelaySeconds",
                   "type": "integer"
                 },
                 "periodSeconds": {
                   "default": 30,
                   "description": "Period seconds for readinessProbe",
-                  "required": [],
                   "title": "periodSeconds",
                   "type": "integer"
                 },
                 "successThreshold": {
                   "default": 1,
                   "description": "Success threshold for readinessProbe",
-                  "required": [],
                   "title": "successThreshold",
                   "type": "integer"
                 },
                 "timeoutSeconds": {
                   "default": 5,
                   "description": "Timeout seconds for readinessProbe",
-                  "required": [],
                   "title": "timeoutSeconds",
                   "type": "integer"
                 }
@@ -265,7 +240,6 @@
             "replicaCount": {
               "default": 1,
               "description": "Number of replicas",
-              "required": [],
               "title": "replicaCount",
               "type": "integer"
             },
@@ -278,7 +252,6 @@
             "revisionHistoryLimit": {
               "default": 10,
               "description": "The number of old ReplicaSets to retain",
-              "required": [],
               "title": "revisionHistoryLimit",
               "type": "integer"
             },
@@ -287,19 +260,16 @@
               "properties": {
                 "runAsGroup": {
                   "default": 9999,
-                  "required": [],
                   "title": "runAsGroup",
                   "type": "integer"
                 },
                 "runAsNonRoot": {
                   "default": true,
-                  "required": [],
                   "title": "runAsNonRoot",
                   "type": "boolean"
                 },
                 "runAsUser": {
                   "default": 9999,
-                  "required": [],
                   "title": "runAsUser",
                   "type": "integer"
                 }
@@ -323,14 +293,12 @@
                 "port": {
                   "default": 8000,
                   "description": "Kubernetes port where service is exposed",
-                  "required": [],
                   "title": "port",
                   "type": "integer"
                 },
                 "type": {
                   "default": "ClusterIP",
                   "description": "Kubernetes service type",
-                  "required": [],
                   "title": "type",
                   "type": "string"
                 }
@@ -353,14 +321,12 @@
                 "create": {
                   "default": true,
                   "description": "Specifies whether a service account should be created",
-                  "required": [],
                   "title": "create",
                   "type": "boolean"
                 },
                 "name": {
                   "default": "",
                   "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-                  "required": [],
                   "title": "name",
                   "type": "string"
                 }
@@ -378,7 +344,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "tolerations",
               "type": "array"
             }
@@ -420,35 +385,30 @@
                 "enabled": {
                   "default": false,
                   "description": "Enable Horizontal POD autoscaling",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "maxReplicas": {
                   "default": 100,
                   "description": "Maximum number of replicas",
-                  "required": [],
                   "title": "maxReplicas",
                   "type": "integer"
                 },
                 "minReplicas": {
                   "default": 1,
                   "description": "Minimum number of replicas",
-                  "required": [],
                   "title": "minReplicas",
                   "type": "integer"
                 },
                 "targetCPUUtilizationPercentage": {
                   "default": 80,
                   "description": "Target CPU utilization percentage",
-                  "required": [],
                   "title": "targetCPUUtilizationPercentage",
                   "type": "integer"
                 },
                 "targetMemoryUtilizationPercentage": {
                   "default": 80,
                   "description": "Target Memory utilization percentage",
-                  "required": [],
                   "title": "targetMemoryUtilizationPercentage",
                   "type": "integer"
                 }
@@ -468,7 +428,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraEnv",
               "type": "array"
             },
@@ -477,28 +436,24 @@
                 "pullPolicy": {
                   "default": "Always",
                   "description": "image pull policy",
-                  "required": [],
                   "title": "pullPolicy",
                   "type": "string"
                 },
                 "registry": {
                   "default": "docker.io",
                   "description": "image registory",
-                  "required": [],
                   "title": "registry",
                   "type": "string"
                 },
                 "repository": {
                   "default": "baserow/backend",
                   "description": "image repository",
-                  "required": [],
                   "title": "repository",
                   "type": "string"
                 },
                 "tag": {
                   "default": "2.0.6",
                   "description": "Overrides the image tag",
-                  "required": [],
                   "title": "tag",
                   "type": "string"
                 }
@@ -517,7 +472,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "imagePullSecrets",
               "type": "array"
             },
@@ -526,21 +480,18 @@
                 "initialDelaySeconds": {
                   "default": 10,
                   "description": "Initial delay seconds for livenessProbe",
-                  "required": [],
                   "title": "initialDelaySeconds",
                   "type": "integer"
                 },
                 "periodSeconds": {
                   "default": 10,
                   "description": "Period seconds for livenessProbe",
-                  "required": [],
                   "title": "periodSeconds",
                   "type": "integer"
                 },
                 "timeoutSeconds": {
                   "default": 10,
                   "description": "Timeout seconds for livenessProbe",
-                  "required": [],
                   "title": "timeoutSeconds",
                   "type": "integer"
                 }
@@ -570,19 +521,16 @@
               "properties": {
                 "fsGroup": {
                   "default": 9999,
-                  "required": [],
                   "title": "fsGroup",
                   "type": "integer"
                 },
                 "runAsGroup": {
                   "default": 9999,
-                  "required": [],
                   "title": "runAsGroup",
                   "type": "integer"
                 },
                 "runAsUser": {
                   "default": 9999,
-                  "required": [],
                   "title": "runAsUser",
                   "type": "integer"
                 }
@@ -598,7 +546,6 @@
             "priorityClassName": {
               "default": "",
               "description": "Pod priority class name",
-              "required": [],
               "title": "priorityClassName",
               "type": "string"
             },
@@ -607,21 +554,18 @@
                 "initialDelaySeconds": {
                   "default": 10,
                   "description": "Initial delay seconds for readinessProbe",
-                  "required": [],
                   "title": "initialDelaySeconds",
                   "type": "integer"
                 },
                 "periodSeconds": {
                   "default": 10,
                   "description": "Period seconds for readinessProbe",
-                  "required": [],
                   "title": "periodSeconds",
                   "type": "integer"
                 },
                 "timeoutSeconds": {
                   "default": 10,
                   "description": "Timeout seconds for readinessProbe",
-                  "required": [],
                   "title": "timeoutSeconds",
                   "type": "integer"
                 }
@@ -637,7 +581,6 @@
             "replicaCount": {
               "default": 1,
               "description": "Number of replicas",
-              "required": [],
               "title": "replicaCount",
               "type": "integer"
             },
@@ -650,7 +593,6 @@
             "revisionHistoryLimit": {
               "default": 10,
               "description": "The number of old ReplicaSets to retain",
-              "required": [],
               "title": "revisionHistoryLimit",
               "type": "integer"
             },
@@ -659,19 +601,16 @@
               "properties": {
                 "runAsGroup": {
                   "default": 9999,
-                  "required": [],
                   "title": "runAsGroup",
                   "type": "integer"
                 },
                 "runAsNonRoot": {
                   "default": true,
-                  "required": [],
                   "title": "runAsNonRoot",
                   "type": "boolean"
                 },
                 "runAsUser": {
                   "default": 9999,
-                  "required": [],
                   "title": "runAsUser",
                   "type": "integer"
                 }
@@ -701,14 +640,12 @@
                 "create": {
                   "default": true,
                   "description": "Specifies whether a service account should be created",
-                  "required": [],
                   "title": "create",
                   "type": "boolean"
                 },
                 "name": {
                   "default": "",
                   "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-                  "required": [],
                   "title": "name",
                   "type": "string"
                 }
@@ -726,7 +663,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "tolerations",
               "type": "array"
             }
@@ -760,21 +696,18 @@
             "additionalApps": {
               "default": "",
               "description": "A comma separated list of additional django applications to add to the INSTALLED_APPS django setting",
-              "required": [],
               "title": "additionalApps",
               "type": "string"
             },
             "airtableImportSoftTimeLimit": {
               "default": "1800",
               "description": "The maximum amount of seconds an Airtable migration import job can run.",
-              "required": [],
               "title": "airtableImportSoftTimeLimit",
               "type": "string"
             },
             "amountOfGunicornWorkers": {
               "default": "",
               "description": "The number of concurrent worker processes used by the Baserow backend gunicorn server to process incoming requests",
-              "required": [],
               "title": "amountOfGunicornWorkers",
               "type": "string"
             },
@@ -783,49 +716,42 @@
                 "accessKeyId": {
                   "default": "",
                   "description": "The access key for your AWS account. When set to anything other than empty will switch Baserow to use a S3 compatible bucket for storing user file uploads.",
-                  "required": [],
                   "title": "accessKeyId",
                   "type": "string"
                 },
                 "bucketName": {
                   "default": "",
                   "description": "Your Amazon Web Services storage bucket name.",
-                  "required": [],
                   "title": "bucketName",
                   "type": "string"
                 },
                 "existingSecret": {
                   "default": "",
                   "description": "Name of existing secret to use for AWS credentials like backend.config.aws.accessKeyId and backend.config.aws.secretAccessKey. Keys in secret should be called `access-key-id` and `secret-access-key`.",
-                  "required": [],
                   "title": "existingSecret",
                   "type": "string"
                 },
                 "s3CustomDomain": {
                   "default": "",
                   "description": "Your custom domain where the files can be downloaded from.",
-                  "required": [],
                   "title": "s3CustomDomain",
                   "type": "string"
                 },
                 "s3EndpointUrl": {
                   "default": "",
                   "description": "Custom S3 URL to use when connecting to S3, including scheme.",
-                  "required": [],
                   "title": "s3EndpointUrl",
                   "type": "string"
                 },
                 "s3RegionName": {
                   "default": "",
                   "description": "Name of the AWS S3 region to use (eg. eu-west-1)",
-                  "required": [],
                   "title": "s3RegionName",
                   "type": "string"
                 },
                 "secretAccessKey": {
                   "default": "",
                   "description": "The access secret key for your AWS account.",
-                  "required": [],
                   "title": "secretAccessKey",
                   "type": "string"
                 }
@@ -845,7 +771,6 @@
             "batchRowsSizeLimit": {
               "default": "200",
               "description": "Controls how many rows can be created, deleted or updated at once using the batch endpoints.",
-              "required": [],
               "title": "batchRowsSizeLimit",
               "type": "string"
             },
@@ -854,28 +779,24 @@
                 "amountOfWorkers": {
                   "default": "",
                   "description": "The number of concurrent celery worker processes used to process asynchronous tasks. If not set will default to the number of available cores. Each celery process uses memory, to reduce Baserow’s memory footprint consider setting and reducing this variable.",
-                  "required": [],
                   "title": "amountOfWorkers",
                   "type": "string"
                 },
                 "beatDebugLevel": {
                   "default": "INFO",
                   "description": "The logging level for the celery beat service.",
-                  "required": [],
                   "title": "beatDebugLevel",
                   "type": "string"
                 },
                 "beatStartupDelay": {
                   "default": "15",
                   "description": "The number of seconds the celery beat worker sleeps before starting up.",
-                  "required": [],
                   "title": "beatStartupDelay",
                   "type": "string"
                 },
                 "runMinimal": {
                   "default": "",
                   "description": "When BASEROW_AMOUNT_OF_WORKERS is 1 and this is set to a non empty value Baserow will not run the export-worker but instead run both the celery export and normal tasks on the normal celery worker. Set this to lower the memory usage of Baserow in expense of performance.",
-                  "required": [],
                   "title": "runMinimal",
                   "type": "string"
                 }
@@ -892,21 +813,18 @@
             "disableAnonymousPublicViewWsConnections": {
               "default": "",
               "description": "When sharing views publicly a websocket connection is opened to provide realtime updates to viewers of the public link. To disable this set any non empty value. When disabled publicly shared links will need to be refreshed to see any updates to the view.",
-              "required": [],
               "title": "disableAnonymousPublicViewWsConnections",
               "type": "string"
             },
             "disableModelCache": {
               "default": "",
               "description": "When set to any non empty value the model cache used to speed up Baserow will be disabled. Useful to enable when debugging Baserow errors if they are possibly caused by the model cache itself.",
-              "required": [],
               "title": "disableModelCache",
               "type": "string"
             },
             "dontUpdateFormulasAfterMigration": {
               "default": "",
               "description": "Baserow’s formulas have an internal version number. When upgrading Baserow if the formula language has also changed then after the database migration has run Baserow will also automatically recalculate all formulas if they have a different version. Set this to any non empty value to disable this automatic update if you would prefer to run the update_formulas management command manually yourself. Formulas might break if you forget to do so after an upgrade of Baserow until and so it is recommended to leave this empty.",
-              "required": [],
               "title": "dontUpdateFormulasAfterMigration",
               "type": "string"
             },
@@ -915,56 +833,48 @@
                 "existingSecret": {
                   "default": "",
                   "description": "Name of existing secret to use for the email password. Key in secret should be called `email-password`.",
-                  "required": [],
                   "title": "existingSecret",
                   "type": "string"
                 },
                 "fromEmail": {
                   "default": "",
                   "description": "The email address Baserow will send emails from.",
-                  "required": [],
                   "title": "fromEmail",
                   "type": "string"
                 },
                 "smtp": {
                   "default": "",
                   "description": "If set to any non empty value then Baserow will start sending emails using the configuration options below. If not set then Baserow will not send emails and just log them to the Celery worker logs instead.",
-                  "required": [],
                   "title": "smtp",
                   "type": "string"
                 },
                 "smtpHost": {
                   "default": "",
                   "description": "The host of the external SMTP server that Baserow should use to send emails.",
-                  "required": [],
                   "title": "smtpHost",
                   "type": "string"
                 },
                 "smtpPassword": {
                   "default": "",
                   "description": "The password to authenticate to the smtp host when sending emails.",
-                  "required": [],
                   "title": "smtpPassword",
                   "type": "string"
                 },
                 "smtpPort": {
                   "default": "",
                   "description": "The port used to connect to the smtp host.",
-                  "required": [],
                   "title": "smtpPort",
                   "type": "string"
                 },
                 "smtpUseTls": {
                   "default": "",
                   "description": "If set to any non empty value then Baserow will attempt to send emails using TLS.",
-                  "required": [],
                   "title": "smtpUseTls",
                   "type": "string"
                 },
                 "smtpUser": {
                   "default": "",
                   "description": "The username to authenticate to the smtp host when sending emails.",
-                  "required": [],
                   "title": "smtpUser",
                   "type": "string"
                 }
@@ -985,42 +895,36 @@
             "enableSecureProxySslHeader": {
               "default": "",
               "description": "Set to any non-empty value to ensure Baserow generates https:// next links provided by paginated API endpoints. Baserow will still work correctly if not enabled, this is purely for giving the correct https url for clients of the API.",
-              "required": [],
               "title": "enableSecureProxySslHeader",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for secret configuration values like backend.config.jwtSigningKey and backend.config.secretKey. Keys in secret should be called `jwt-signing-key` and `secret-key`.",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "fileUploadSizeLimit": {
               "default": "1048576",
               "description": "The max file size in MB allowed to be uploaded by users into a Baserow File Field.",
-              "required": [],
               "title": "fileUploadSizeLimit",
               "type": "string"
             },
             "hoursUntilTrashPermanentlyDeleted": {
               "default": "",
               "description": "Items from the trash will be permanently deleted after this number of hours.",
-              "required": [],
               "title": "hoursUntilTrashPermanentlyDeleted",
               "type": "string"
             },
             "initialCreateSyncTableDataLimit": {
               "default": "5000",
               "description": "The maximum number of rows you can import in a synchronous way",
-              "required": [],
               "title": "initialCreateSyncTableDataLimit",
               "type": "string"
             },
             "initialTableDataLimit": {
               "default": "",
               "description": "The amount of rows that can be imported when creating a table. Defaults to empty which means unlimited rows.",
-              "required": [],
               "title": "initialTableDataLimit",
               "type": "string"
             },
@@ -1029,21 +933,18 @@
                 "cleanupIntervalMinutes": {
                   "default": "5",
                   "description": "How often the job cleanup task will run.",
-                  "required": [],
                   "title": "cleanupIntervalMinutes",
                   "type": "string"
                 },
                 "expirationTimeLimit": {
                   "default": "43200",
                   "description": "How long before a Baserow job will be kept before being cleaned up.",
-                  "required": [],
                   "title": "expirationTimeLimit",
                   "type": "string"
                 },
                 "softTimeLimit": {
                   "default": "1800",
                   "description": "The number of seconds a Baserow job can run before being terminated.",
-                  "required": [],
                   "title": "softTimeLimit",
                   "type": "string"
                 }
@@ -1059,7 +960,6 @@
             "jwtSigningKey": {
               "default": "",
               "description": "The signing key that is used to sign the content of generated tokens. For HMAC signing, this should be a random string with at least as many bits of data as is required by the signing protocol. See https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html#signing-key for more details.",
-              "required": [],
               "title": "jwtSigningKey",
               "type": "string"
             },
@@ -1068,21 +968,18 @@
                 "backendDebug": {
                   "default": "off",
                   "description": "If set to “on” then will enable the non production safe debug mode for the Baserow django backend.",
-                  "required": [],
                   "title": "backendDebug",
                   "type": "string"
                 },
                 "backendLogLevel": {
                   "default": "INFO",
                   "description": "The default log level used by the backend, supports ERROR, WARNING, INFO, DEBUG, TRACE",
-                  "required": [],
                   "title": "backendLogLevel",
                   "type": "string"
                 },
                 "databaseLogLevel": {
                   "default": "ERROR",
                   "description": "The default log level used for database related logs in the backend. Supports the same values as the normal log level. If you also enable BASEROW_BACKEND_DEBUG and set this to DEBUG you will be able to see all SQL queries in the backend logs.",
-                  "required": [],
                   "title": "databaseLogLevel",
                   "type": "string"
                 }
@@ -1098,14 +995,12 @@
             "maxFileImportErrorCount": {
               "default": "30",
               "description": "The max number of per row errors than can occur in a file import before an overall failure is declared.",
-              "required": [],
               "title": "maxFileImportErrorCount",
               "type": "string"
             },
             "maxRowReportErrorCount": {
               "default": "30",
               "description": "The maximum row error count tolerated before a file import fails. Before this max error count the import will continue and the non failing rows will be imported and after it, no rows are imported at all.",
-              "required": [],
               "title": "maxRowReportErrorCount",
               "type": "string"
             },
@@ -1114,14 +1009,12 @@
                 "root": {
                   "default": "/baserow/media",
                   "description": "The folder in which the backend will store user uploaded files",
-                  "required": [],
                   "title": "root",
                   "type": "string"
                 },
                 "url": {
                   "default": "$PUBLIC_BACKEND_URL/media/",
                   "description": "The URL at which user uploaded media files will be made available",
-                  "required": [],
                   "title": "url",
                   "type": "string"
                 }
@@ -1136,49 +1029,42 @@
             "migrateOnStartup": {
               "default": "true",
               "description": "If set to “true” when the Baserow backend service starts up it will automatically apply database migrations. Set to any other value to disable. If you disable this then you must remember to manually apply the database migrations when upgrading Baserow to a new version.",
-              "required": [],
               "title": "migrateOnStartup",
               "type": "string"
             },
             "minutesUntilActionCleanedUp": {
               "default": "120",
               "description": "How long before actions are cleaned up, actions are used to let you undo/redo so this is effectively the max length of time you can undo/redo can action.",
-              "required": [],
               "title": "minutesUntilActionCleanedUp",
               "type": "string"
             },
             "postgresStartupCheckAttempts": {
               "default": "5",
               "description": "When Baserow’s Backend service starts up it first checks to see if the postgres database is available.",
-              "required": [],
               "title": "postgresStartupCheckAttempts",
               "type": "string"
             },
             "rowPageSizeLimit": {
               "default": "200",
               "description": "The maximum number of rows that can be requested at once.",
-              "required": [],
               "title": "rowPageSizeLimit",
               "type": "string"
             },
             "secretKey": {
               "default": "",
               "description": "The Secret key used by Django for cryptographic signing such as generating secure password reset links and managing sessions. See https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-SECRET_KEY for more details.",
-              "required": [],
               "title": "secretKey",
               "type": "string"
             },
             "snapshotExpirationTimeDays": {
               "default": "360",
               "description": "Controls when snapshots expire, set in number of days. Expired snapshots will be automatically deleted.",
-              "required": [],
               "title": "snapshotExpirationTimeDays",
               "type": "string"
             },
             "syncTemplatesTimeLimit": {
               "default": "1800",
               "description": "The number of seconds before the background sync templates job will timeout if not yet completed.",
-              "required": [],
               "title": "syncTemplatesTimeLimit",
               "type": "string"
             },
@@ -1187,14 +1073,12 @@
                 "accessTokenLifetimeMinutes": {
                   "default": "10",
                   "description": "The number of minutes which specifies how long access tokens are valid. This will be converted in a timedelta value and added to the current UTC time during token generation to obtain the token’s default “exp” claim value.",
-                  "required": [],
                   "title": "accessTokenLifetimeMinutes",
                   "type": "string"
                 },
                 "refreshTokenLifetimeHours": {
                   "default": "168",
                   "description": "The number of hours which specifies how long refresh tokens are valid. This will be converted in a timedelta value and added to the current UTC time during token generation to obtain the token’s default “exp” claim value.",
-                  "required": [],
                   "title": "refreshTokenLifetimeHours",
                   "type": "string"
                 }
@@ -1209,14 +1093,12 @@
             "triggerSyncTemplatesAfterMigration": {
               "default": "true",
               "description": "If set to “true” when after a migration Baserow will automatically sync all builtin Baserow templates in the background. If you are using a postgres database which is constrained to fewer than 10000 rows then we recommend you disable this as the Baserow templates will go over that row limit. To disable this set to any other value than “true”",
-              "required": [],
               "title": "triggerSyncTemplatesAfterMigration",
               "type": "string"
             },
             "waitInsteadOf409ConflictError": {
               "default": "",
               "description": "When updating or creating various resources in Baserow if another concurrent operation is ongoing (like a snapshot, duplication, import etc) which would be affected by your modification a 409 HTTP error will be returned. If you instead would prefer Baserow to not return a 409 and just block waiting until the operation finishes and then to perform the requested operation set this flag to any non-empty value.",
-              "required": [],
               "title": "waitInsteadOf409ConflictError",
               "type": "string"
             },
@@ -1225,70 +1107,60 @@
                 "allowPrivateAddress": {
                   "default": "",
                   "description": "If set to any non empty value allows webhooks to access all addresses. Enabling this flag is a security risk as it will allow users to send webhook requests to internal addresses on your network. Instead consider using the three variables below first to allow access to only some internal network hostnames or IPs.",
-                  "required": [],
                   "title": "allowPrivateAddress",
                   "type": "string"
                 },
                 "ipBlacklist": {
                   "default": "",
                   "description": "Disabled if backend.config.webhook.allowPrivateAddress is set. List of comma seperated IP addresses or ranges that webhooks will be denied from using after the URL has been resolved to an IP using DNS.",
-                  "required": [],
                   "title": "ipBlacklist",
                   "type": "string"
                 },
                 "ipWhitelist": {
                   "default": "",
                   "description": "Disabled if backend.config.webhook.allowPrivateAddress is set. List of comma seperated IP addresses or ranges that webhooks will be allowed to use after the webhook URL has been resolved to an IP using DNS.",
-                  "required": [],
                   "title": "ipWhitelist",
                   "type": "string"
                 },
                 "maxCallLogEntries": {
                   "default": "10",
                   "description": "The maximum number of call log entries stored per webhook.",
-                  "required": [],
                   "title": "maxCallLogEntries",
                   "type": "string"
                 },
                 "maxConsecutiveTriggerFailures": {
                   "default": "8",
                   "description": "The number of consecutive trigger failures that can occur before a webhook is disabled.",
-                  "required": [],
                   "title": "maxConsecutiveTriggerFailures",
                   "type": "string"
                 },
                 "maxPerTable": {
                   "default": "20",
                   "description": "The max number of webhooks per Baserow table.",
-                  "required": [],
                   "title": "maxPerTable",
                   "type": "string"
                 },
                 "maxRetriesPerCall": {
                   "default": "8",
                   "description": "The max number of retries per webhook call.",
-                  "required": [],
                   "title": "maxRetriesPerCall",
                   "type": "string"
                 },
                 "requestTimeoutSeconds": {
                   "default": "5",
                   "description": "How long to wait on making the webhook request before timing out.",
-                  "required": [],
                   "title": "requestTimeoutSeconds",
                   "type": "string"
                 },
                 "urlCheckTimeoutSecs": {
                   "default": "10",
                   "description": "Disabled if backend.config.webhook.allowPrivateAddress is set. How long to wait before timing out and returning an error when checking if an url can be accessed for a webhook.",
-                  "required": [],
                   "title": "urlCheckTimeoutSecs",
                   "type": "string"
                 },
                 "urlRegexBlacklist": {
                   "default": "",
                   "description": "Disabled if backend.config.webhook.allowPrivateAddress is set. List of comma seperated regexes used to validate user configured webhook URLs, will show the user an error if any regexes match their webhook URL and prevent it from running.",
-                  "required": [],
                   "title": "urlRegexBlacklist",
                   "type": "string"
                 }
@@ -1358,21 +1230,18 @@
             "className": {
               "default": "",
               "description": "IngressClass that will be be used to implement the Ingress",
-              "required": [],
               "title": "className",
               "type": "string"
             },
             "enabled": {
               "default": false,
               "description": "Enable ingress record generation for the backend",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "hostname": {
               "default": "",
               "description": "cert-manager.io/cluster-issuer: cluster-issuer-name\nkubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"\nThe publicly reachable hostname for the backend",
-              "required": [],
               "title": "hostname",
               "type": "string"
             },
@@ -1381,14 +1250,12 @@
                 "asgiPath": {
                   "default": "/ws/",
                   "description": "The path under witch the asgi backend should be reached",
-                  "required": [],
                   "title": "asgiPath",
                   "type": "string"
                 },
                 "wsgiPath": {
                   "default": "/",
                   "description": "The path under witch the wsgi backend should be reached",
-                  "required": [],
                   "title": "wsgiPath",
                   "type": "string"
                 }
@@ -1405,7 +1272,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "tls",
               "type": "array"
             }
@@ -1428,13 +1294,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "accessModes",
               "type": "array"
             },
@@ -1447,14 +1311,12 @@
             "enabled": {
               "default": false,
               "description": "use a PVC to persist file uploads",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "existingClaim": {
               "default": "",
               "description": "provide an existing PersistentVolumeClaim",
-              "required": [],
               "title": "existingClaim",
               "type": "string"
             },
@@ -1467,7 +1329,6 @@
             "storageClassName": {
               "default": "",
               "description": "Name of the StorageClass required by the claim.",
-              "required": [],
               "title": "storageClassName",
               "type": "string"
             }
@@ -1496,35 +1357,30 @@
                 "enabled": {
                   "default": false,
                   "description": "Enable Horizontal POD autoscaling",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "maxReplicas": {
                   "default": 100,
                   "description": "Maximum number of replicas",
-                  "required": [],
                   "title": "maxReplicas",
                   "type": "integer"
                 },
                 "minReplicas": {
                   "default": 1,
                   "description": "Minimum number of replicas",
-                  "required": [],
                   "title": "minReplicas",
                   "type": "integer"
                 },
                 "targetCPUUtilizationPercentage": {
                   "default": 80,
                   "description": "Target CPU utilization percentage",
-                  "required": [],
                   "title": "targetCPUUtilizationPercentage",
                   "type": "integer"
                 },
                 "targetMemoryUtilizationPercentage": {
                   "default": 80,
                   "description": "Target Memory utilization percentage",
-                  "required": [],
                   "title": "targetMemoryUtilizationPercentage",
                   "type": "integer"
                 }
@@ -1544,7 +1400,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "extraEnv",
               "type": "array"
             },
@@ -1553,28 +1408,24 @@
                 "pullPolicy": {
                   "default": "Always",
                   "description": "image pull policy",
-                  "required": [],
                   "title": "pullPolicy",
                   "type": "string"
                 },
                 "registry": {
                   "default": "docker.io",
                   "description": "image registory",
-                  "required": [],
                   "title": "registry",
                   "type": "string"
                 },
                 "repository": {
                   "default": "baserow/backend",
                   "description": "image repository",
-                  "required": [],
                   "title": "repository",
                   "type": "string"
                 },
                 "tag": {
                   "default": "2.0.6",
                   "description": "Overrides the image tag",
-                  "required": [],
                   "title": "tag",
                   "type": "string"
                 }
@@ -1593,7 +1444,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "imagePullSecrets",
               "type": "array"
             },
@@ -1602,35 +1452,30 @@
                 "failureThreshold": {
                   "default": 3,
                   "description": "Failure threshold for livenessProbe",
-                  "required": [],
                   "title": "failureThreshold",
                   "type": "integer"
                 },
                 "initialDelaySeconds": {
                   "default": 120,
                   "description": "Initial delay seconds for livenessProbe",
-                  "required": [],
                   "title": "initialDelaySeconds",
                   "type": "integer"
                 },
                 "periodSeconds": {
                   "default": 530,
                   "description": "Period seconds for livenessProbe",
-                  "required": [],
                   "title": "periodSeconds",
                   "type": "integer"
                 },
                 "successThreshold": {
                   "default": 1,
                   "description": "Success threshold for livenessProbe",
-                  "required": [],
                   "title": "successThreshold",
                   "type": "integer"
                 },
                 "timeoutSeconds": {
                   "default": 5,
                   "description": "Timeout seconds for livenessProbe",
-                  "required": [],
                   "title": "timeoutSeconds",
                   "type": "integer"
                 }
@@ -1662,19 +1507,16 @@
               "properties": {
                 "fsGroup": {
                   "default": 9999,
-                  "required": [],
                   "title": "fsGroup",
                   "type": "integer"
                 },
                 "runAsGroup": {
                   "default": 9999,
-                  "required": [],
                   "title": "runAsGroup",
                   "type": "integer"
                 },
                 "runAsUser": {
                   "default": 9999,
-                  "required": [],
                   "title": "runAsUser",
                   "type": "integer"
                 }
@@ -1690,7 +1532,6 @@
             "priorityClassName": {
               "default": "",
               "description": "Pod priority class name",
-              "required": [],
               "title": "priorityClassName",
               "type": "string"
             },
@@ -1699,35 +1540,30 @@
                 "failureThreshold": {
                   "default": 3,
                   "description": "Failure threshold for readinessProbe",
-                  "required": [],
                   "title": "failureThreshold",
                   "type": "integer"
                 },
                 "initialDelaySeconds": {
                   "default": 120,
                   "description": "Initial delay seconds for readinessProbe",
-                  "required": [],
                   "title": "initialDelaySeconds",
                   "type": "integer"
                 },
                 "periodSeconds": {
                   "default": 30,
                   "description": "Period seconds for readinessProbe",
-                  "required": [],
                   "title": "periodSeconds",
                   "type": "integer"
                 },
                 "successThreshold": {
                   "default": 1,
                   "description": "Success threshold for readinessProbe",
-                  "required": [],
                   "title": "successThreshold",
                   "type": "integer"
                 },
                 "timeoutSeconds": {
                   "default": 5,
                   "description": "Timeout seconds for readinessProbe",
-                  "required": [],
                   "title": "timeoutSeconds",
                   "type": "integer"
                 }
@@ -1745,7 +1581,6 @@
             "replicaCount": {
               "default": 1,
               "description": "Number of replicas",
-              "required": [],
               "title": "replicaCount",
               "type": "integer"
             },
@@ -1758,7 +1593,6 @@
             "revisionHistoryLimit": {
               "default": 10,
               "description": "The number of old ReplicaSets to retain",
-              "required": [],
               "title": "revisionHistoryLimit",
               "type": "integer"
             },
@@ -1767,19 +1601,16 @@
               "properties": {
                 "runAsGroup": {
                   "default": 9999,
-                  "required": [],
                   "title": "runAsGroup",
                   "type": "integer"
                 },
                 "runAsNonRoot": {
                   "default": true,
-                  "required": [],
                   "title": "runAsNonRoot",
                   "type": "boolean"
                 },
                 "runAsUser": {
                   "default": 9999,
-                  "required": [],
                   "title": "runAsUser",
                   "type": "integer"
                 }
@@ -1803,14 +1634,12 @@
                 "port": {
                   "default": 8000,
                   "description": "Kubernetes port where service is exposed",
-                  "required": [],
                   "title": "port",
                   "type": "integer"
                 },
                 "type": {
                   "default": "ClusterIP",
                   "description": "Kubernetes service type",
-                  "required": [],
                   "title": "type",
                   "type": "string"
                 }
@@ -1833,14 +1662,12 @@
                 "create": {
                   "default": true,
                   "description": "Specifies whether a service account should be created",
-                  "required": [],
                   "title": "create",
                   "type": "boolean"
                 },
                 "name": {
                   "default": "",
                   "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-                  "required": [],
                   "title": "name",
                   "type": "string"
                 }
@@ -1858,7 +1685,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "tolerations",
               "type": "array"
             }
@@ -1905,28 +1731,24 @@
         "maxImportFileSizeMb": {
           "default": "512",
           "description": "The maximum file size in mb you can import to create a new table. Default 512Mb.",
-          "required": [],
           "title": "maxImportFileSizeMb",
           "type": "string"
         },
         "maxSnapshotsPerGroup": {
           "default": "-1",
           "description": "Controls how many application snapshots can be created per group.",
-          "required": [],
           "title": "maxSnapshotsPerGroup",
           "type": "string"
         },
         "publicBackendUrl": {
           "default": "http://localhost:8000",
           "description": "The publicly accessible URL of the backend. Should include the port if non-standard.",
-          "required": [],
           "title": "publicBackendUrl",
           "type": "string"
         },
         "publicFrontendUrl": {
           "default": "http://localhost:3000",
           "description": "The publicly accessible URL of the frontend. Should include the port if non-standard.",
-          "required": [],
           "title": "publicFrontendUrl",
           "type": "string"
         }
@@ -1947,42 +1769,36 @@
             "database": {
               "default": "baserow",
               "description": "Name of the database to use",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for PostgreSQL credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "baserow",
               "description": "Password to use",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "userPasswordKey": {
               "default": "",
               "description": "Key in the secret containing the password",
-              "required": [],
               "title": "userPasswordKey",
               "type": "string"
             },
             "userUsernameKey": {
               "default": "",
               "description": "Key in the secret containing the username",
-              "required": [],
               "title": "userUsernameKey",
               "type": "string"
             },
             "username": {
               "default": "baserow",
               "description": "Name of the user to use",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -2001,14 +1817,12 @@
         "hostname": {
           "default": "",
           "description": "Hostname of the PostgreSQL database",
-          "required": [],
           "title": "hostname",
           "type": "string"
         },
         "port": {
           "default": 5432,
           "description": "Port used to connect to PostgreSQL database",
-          "required": [],
           "title": "port",
           "type": "integer"
         }
@@ -2028,28 +1842,24 @@
             "enabled": {
               "default": true,
               "description": "if authentication should be used with external Redis™",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for Redis™ credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "",
               "description": "Password to use",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "userPasswordKey": {
               "default": "",
               "description": "Key in the secret containing the password",
-              "required": [],
               "title": "userPasswordKey",
               "type": "string"
             }
@@ -2066,14 +1876,12 @@
         "hostname": {
           "default": "",
           "description": "Hostname of Redis™",
-          "required": [],
           "title": "hostname",
           "type": "string"
         },
         "port": {
           "default": 6379,
           "description": "Port used to connect to Redis",
-          "required": [],
           "title": "port",
           "type": "integer"
         }
@@ -2099,35 +1907,30 @@
             "enabled": {
               "default": false,
               "description": "Enable Horizontal POD autoscaling",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "maxReplicas": {
               "default": 100,
               "description": "Maximum number of replicas",
-              "required": [],
               "title": "maxReplicas",
               "type": "integer"
             },
             "minReplicas": {
               "default": 1,
               "description": "Minimum number of replicas",
-              "required": [],
               "title": "minReplicas",
               "type": "integer"
             },
             "targetCPUUtilizationPercentage": {
               "default": 80,
               "description": "Target CPU utilization percentage",
-              "required": [],
               "title": "targetCPUUtilizationPercentage",
               "type": "integer"
             },
             "targetMemoryUtilizationPercentage": {
               "default": 80,
               "description": "Target Memory utilization percentage",
-              "required": [],
               "title": "targetMemoryUtilizationPercentage",
               "type": "integer"
             }
@@ -2148,28 +1951,24 @@
             "additionalModules": {
               "default": "",
               "description": "A list of file paths to Nuxt module.js files to load as additional Nuxt modules into Baserow on startup.",
-              "required": [],
               "title": "additionalModules",
               "type": "string"
             },
             "disableGoogleDocsFilePreview": {
               "default": "",
               "description": "Set to `true` or `1` to disable Google docs file preview.",
-              "required": [],
               "title": "disableGoogleDocsFilePreview",
               "type": "string"
             },
             "disablePublicUrlCheck": {
               "default": "",
               "description": "When opening the Baserow login page a check is run to ensure the PUBLIC_BACKEND_URL/BASEROW_PUBLIC_URL variables are set correctly and your browser can correctly connect to the backend. If misconfigured an error is shown. If you wish to disable this check and warning set this to any non empty value.",
-              "required": [],
               "title": "disablePublicUrlCheck",
               "type": "string"
             },
             "downloadFileViaXhr": {
               "default": "0",
               "description": "Set to `1` to force download links to download files via XHR query to bypass `Content-Disposition: inline` that can’t be overridden in another way. If your files are stored under another origin, you also must add CORS headers to your server.",
-              "required": [],
               "title": "downloadFileViaXhr",
               "type": "string"
             }
@@ -2188,7 +1987,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "extraEnv",
           "type": "array"
         },
@@ -2197,28 +1995,24 @@
             "pullPolicy": {
               "default": "Always",
               "description": "image pull policy",
-              "required": [],
               "title": "pullPolicy",
               "type": "string"
             },
             "registry": {
               "default": "docker.io",
               "description": "image registory",
-              "required": [],
               "title": "registry",
               "type": "string"
             },
             "repository": {
               "default": "baserow/web-frontend",
               "description": "image repository",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "2.0.6",
               "description": "Overrides the image tag",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -2237,7 +2031,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "imagePullSecrets",
           "type": "array"
         },
@@ -2252,35 +2045,30 @@
             "className": {
               "default": "",
               "description": "IngressClass that will be be used to implement the Ingress",
-              "required": [],
               "title": "className",
               "type": "string"
             },
             "enabled": {
               "default": false,
               "description": "Enable ingress record generation for the frontend",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "hostname": {
               "default": "chart-example.local",
               "description": "cert-manager.io/cluster-issuer: cluster-issuer-name\nkubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"\nThe publicly reachable hostname for the frontend",
-              "required": [],
               "title": "hostname",
               "type": "string"
             },
             "path": {
               "default": "/",
               "description": "The path under witch the frontend should be reached",
-              "required": [],
               "title": "path",
               "type": "string"
             },
             "pathType": {
               "default": "Prefix",
               "description": "Valid values: ImplementationSpecific, Exact, Prefix",
-              "required": [],
               "title": "pathType",
               "type": "string"
             },
@@ -2289,7 +2077,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "tls",
               "type": "array"
             }
@@ -2311,21 +2098,18 @@
             "initialDelaySeconds": {
               "default": 5,
               "description": "Initial delay seconds for livenessProbe",
-              "required": [],
               "title": "initialDelaySeconds",
               "type": "integer"
             },
             "periodSeconds": {
               "default": 5,
               "description": "Period seconds for livenessProbe",
-              "required": [],
               "title": "periodSeconds",
               "type": "integer"
             },
             "successThreshold": {
               "default": 1,
               "description": "Success threshold for livenessProbe",
-              "required": [],
               "title": "successThreshold",
               "type": "integer"
             }
@@ -2355,19 +2139,16 @@
           "properties": {
             "fsGroup": {
               "default": 9999,
-              "required": [],
               "title": "fsGroup",
               "type": "integer"
             },
             "runAsGroup": {
               "default": 9999,
-              "required": [],
               "title": "runAsGroup",
               "type": "integer"
             },
             "runAsUser": {
               "default": 9999,
-              "required": [],
               "title": "runAsUser",
               "type": "integer"
             }
@@ -2383,7 +2164,6 @@
         "priorityClassName": {
           "default": "",
           "description": "Pod priority class name",
-          "required": [],
           "title": "priorityClassName",
           "type": "string"
         },
@@ -2392,21 +2172,18 @@
             "initialDelaySeconds": {
               "default": 5,
               "description": "Initial delay seconds for readinessProbe",
-              "required": [],
               "title": "initialDelaySeconds",
               "type": "integer"
             },
             "periodSeconds": {
               "default": 5,
               "description": "Period seconds for readinessProbe",
-              "required": [],
               "title": "periodSeconds",
               "type": "integer"
             },
             "successThreshold": {
               "default": 1,
               "description": "Success threshold for readinessProbe",
-              "required": [],
               "title": "successThreshold",
               "type": "integer"
             }
@@ -2422,7 +2199,6 @@
         "replicaCount": {
           "default": 1,
           "description": "Number of replicas",
-          "required": [],
           "title": "replicaCount",
           "type": "integer"
         },
@@ -2435,7 +2211,6 @@
         "revisionHistoryLimit": {
           "default": 10,
           "description": "The number of old ReplicaSets to retain",
-          "required": [],
           "title": "revisionHistoryLimit",
           "type": "integer"
         },
@@ -2444,19 +2219,16 @@
           "properties": {
             "runAsGroup": {
               "default": 9999,
-              "required": [],
               "title": "runAsGroup",
               "type": "integer"
             },
             "runAsNonRoot": {
               "default": true,
-              "required": [],
               "title": "runAsNonRoot",
               "type": "boolean"
             },
             "runAsUser": {
               "default": 9999,
-              "required": [],
               "title": "runAsUser",
               "type": "integer"
             }
@@ -2480,14 +2252,12 @@
             "port": {
               "default": 3000,
               "description": "Kubernetes port where service is exposed",
-              "required": [],
               "title": "port",
               "type": "integer"
             },
             "type": {
               "default": "ClusterIP",
               "description": "Kubernetes service type",
-              "required": [],
               "title": "type",
               "type": "string"
             }
@@ -2510,14 +2280,12 @@
             "create": {
               "default": true,
               "description": "Specifies whether a service account should be created",
-              "required": [],
               "title": "create",
               "type": "boolean"
             },
             "name": {
               "default": "",
               "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-              "required": [],
               "title": "name",
               "type": "string"
             }
@@ -2535,7 +2303,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tolerations",
           "type": "array"
         }
@@ -2569,7 +2336,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"baserow.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -2582,7 +2348,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `baserow`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -2593,28 +2358,24 @@
             "database": {
               "default": "baserow",
               "description": "Name for a custom database to create",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for PostgreSQL credentials",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "baserow",
               "description": "Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "baserow",
               "description": "Name for a custom user to create",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -2631,7 +2392,6 @@
         "enabled": {
           "default": true,
           "description": "enable PostgreSQL™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -2648,7 +2408,6 @@
         "architecture": {
           "default": "standalone",
           "description": "Redis® architecture. Allowed values: standalone or replication",
-          "required": [],
           "title": "architecture",
           "type": "string"
         },
@@ -2657,14 +2416,12 @@
             "enabled": {
               "default": true,
               "description": "Enable password authentication",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "password": {
               "default": "baserow",
               "description": "Redis™ password",
-              "required": [],
               "title": "password",
               "type": "string"
             }
@@ -2679,7 +2436,6 @@
         "enabled": {
           "default": true,
           "description": "enable Redis™ subchart from Bitnami",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }

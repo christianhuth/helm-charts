@@ -11,25 +11,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -46,7 +42,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"proxysql.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -61,28 +56,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "proxysql/proxysql",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "3.0.4",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -101,7 +92,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -111,7 +101,6 @@
           "properties": {
             "nginx.ingress.kubernetes.io/backend-protocol": {
               "default": "HTTPS",
-              "required": [],
               "title": "nginx.ingress.kubernetes.io/backend-protocol",
               "type": "string"
             }
@@ -124,13 +113,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -141,7 +128,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -152,13 +138,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -172,7 +156,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -186,7 +169,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -194,7 +176,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -213,7 +194,6 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -226,7 +206,6 @@
             },
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             }
@@ -249,7 +228,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `proxysql`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -270,25 +248,21 @@
       "properties": {
         "fsGroup": {
           "default": 999,
-          "required": [],
           "title": "fsGroup",
           "type": "integer"
         },
         "runAsGroup": {
           "default": 999,
-          "required": [],
           "title": "runAsGroup",
           "type": "integer"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 999,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -308,13 +282,11 @@
           "properties": {
             "password": {
               "default": "admin",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "user": {
               "default": "admin",
-              "required": [],
               "title": "user",
               "type": "string"
             }
@@ -334,31 +306,26 @@
                   "items": {
                     "anyOf": [
                       {
-                        "required": [],
                         "type": "string"
                       }
                     ],
                     "required": []
                   },
-                  "required": [],
                   "title": "accessModes",
                   "type": "array"
                 },
                 "enabled": {
                   "default": true,
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "size": {
                   "default": "1Gi",
-                  "required": [],
                   "title": "size",
                   "type": "string"
                 },
                 "storageClassName": {
                   "default": "default",
-                  "required": [],
                   "title": "storageClassName",
                   "type": "string"
                 }
@@ -374,19 +341,16 @@
             },
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "password": {
               "default": "cluster",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "user": {
               "default": "cluster",
-              "required": [],
               "title": "user",
               "type": "string"
             }
@@ -404,31 +368,26 @@
           "properties": {
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "replicationLagInterval": {
               "default": 10000,
-              "required": [],
               "title": "replicationLagInterval",
               "type": "integer"
             },
             "replicationLagTimeout": {
               "default": 1500,
-              "required": [],
               "title": "replicationLagTimeout",
               "type": "integer"
             },
             "slaveLagWhenNull": {
               "default": 60,
-              "required": [],
               "title": "slaveLagWhenNull",
               "type": "integer"
             },
             "writerAsReader": {
               "default": true,
-              "required": [],
               "title": "writerAsReader",
               "type": "boolean"
             }
@@ -447,7 +406,6 @@
           "properties": {
             "connectionMaxAgeMS": {
               "default": 0,
-              "required": [],
               "title": "connectionMaxAgeMS",
               "type": "integer"
             },
@@ -455,19 +413,16 @@
               "properties": {
                 "enabled": {
                   "default": false,
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "maxWriters": {
                   "default": 1,
-                  "required": [],
                   "title": "maxWriters",
                   "type": "integer"
                 },
                 "writerAsReader": {
                   "default": true,
-                  "required": [],
                   "title": "writerAsReader",
                   "type": "boolean"
                 }
@@ -482,31 +437,26 @@
             },
             "maxConnections": {
               "default": 2048,
-              "required": [],
               "title": "maxConnections",
               "type": "integer"
             },
             "port": {
               "default": 3306,
-              "required": [],
               "title": "port",
               "type": "integer"
             },
             "queryRetriesOnFailure": {
               "default": 2,
-              "required": [],
               "title": "queryRetriesOnFailure",
               "type": "integer"
             },
             "queyCacheSizeMB": {
               "default": 256,
-              "required": [],
               "title": "queyCacheSizeMB",
               "type": "integer"
             },
             "readWriteSplit": {
               "default": true,
-              "required": [],
               "title": "readWriteSplit",
               "type": "boolean"
             },
@@ -514,7 +464,6 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "servers",
               "type": "array"
             },
@@ -523,13 +472,11 @@
               "properties": {
                 "checkType": {
                   "default": "read_only",
-                  "required": [],
                   "title": "checkType",
                   "type": "string"
                 },
                 "enabled": {
                   "default": false,
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 }
@@ -546,19 +493,16 @@
               "items": {
                 "required": []
               },
-              "required": [],
               "title": "users",
               "type": "array"
             },
             "version": {
               "default": "5.7.34",
-              "required": [],
               "title": "version",
               "type": "string"
             },
             "waitTimeout": {
               "default": 28800000,
-              "required": [],
               "title": "waitTimeout",
               "type": "integer"
             }
@@ -582,7 +526,6 @@
         },
         "port": {
           "default": 6032,
-          "required": [],
           "title": "port",
           "type": "integer"
         },
@@ -591,25 +534,21 @@
           "properties": {
             "enabled": {
               "default": true,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "password": {
               "default": "sadmin",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "port": {
               "default": 443,
-              "required": [],
               "title": "port",
               "type": "integer"
             },
             "user": {
               "default": "sadmin",
-              "required": [],
               "title": "user",
               "type": "string"
             }
@@ -638,7 +577,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -651,7 +589,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -666,7 +603,6 @@
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -688,14 +624,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -713,7 +647,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

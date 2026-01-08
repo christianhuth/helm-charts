@@ -12,28 +12,24 @@
         "enabled": {
           "default": false,
           "description": "Enable Horizontal POD autoscaling",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
           "description": "Maximum number of replicas",
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
           "description": "Minimum number of replicas",
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
           "description": "Target CPU utilization percentage",
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -54,35 +50,30 @@
             "enabled": {
               "default": true,
               "description": "Enable leader election for controller manager",
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "leaseDurationSeconds": {
               "default": 15,
               "description": "Lease duration in seconds",
-              "required": [],
               "title": "leaseDurationSeconds",
               "type": "integer"
             },
             "leaseName": {
               "default": "bindy-leader",
               "description": "Lease name for leader election",
-              "required": [],
               "title": "leaseName",
               "type": "string"
             },
             "renewDeadlineSeconds": {
               "default": 10,
               "description": "Renew deadline in seconds",
-              "required": [],
               "title": "renewDeadlineSeconds",
               "type": "integer"
             },
             "retryPeriodSeconds": {
               "default": 2,
               "description": "Retry period in seconds",
-              "required": [],
               "title": "retryPeriodSeconds",
               "type": "integer"
             }
@@ -102,14 +93,12 @@
             "format": {
               "default": "json",
               "description": "Log format: text or json",
-              "required": [],
               "title": "format",
               "type": "string"
             },
             "level": {
               "default": "info",
               "description": "Log level for the controller: error, warn, info, debug, trace",
-              "required": [],
               "title": "level",
               "type": "string"
             }
@@ -134,7 +123,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
@@ -143,14 +131,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnvFrom",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"bindy.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -165,28 +151,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "ghcr.io",
           "description": "image registry",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "firestoned/bindy",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "v0.2.2",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -205,14 +187,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `bindy`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -233,13 +213,11 @@
       "properties": {
         "fsGroup": {
           "default": 65534,
-          "required": [],
           "title": "fsGroup",
           "type": "integer"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         }
@@ -258,14 +236,12 @@
             "bindToBindy": {
               "default": false,
               "description": "Create a rolebinding to allow Bindy to delete resources",
-              "required": [],
               "title": "bindToBindy",
               "type": "boolean"
             },
             "create": {
               "default": false,
               "description": "Create admin role that enables the deletion of resources",
-              "required": [],
               "title": "create",
               "type": "boolean"
             }
@@ -280,7 +256,6 @@
         "create": {
           "default": true,
           "description": "Create RBAC resources",
-          "required": [],
           "title": "create",
           "type": "boolean"
         }
@@ -295,7 +270,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -306,13 +280,11 @@
           "properties": {
             "cpu": {
               "default": "500m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "512Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -328,13 +300,11 @@
           "properties": {
             "cpu": {
               "default": "100m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "128Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -357,7 +327,6 @@
     "revisionHistoryLimit": {
       "default": 0,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -366,7 +335,6 @@
       "properties": {
         "allowPrivilegeEscalation": {
           "default": false,
-          "required": [],
           "title": "allowPrivilegeEscalation",
           "type": "boolean"
         },
@@ -376,13 +344,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "drop",
               "type": "array"
             }
@@ -395,19 +361,16 @@
         },
         "readOnlyRootFilesystem": {
           "default": true,
-          "required": [],
           "title": "readOnlyRootFilesystem",
           "type": "boolean"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 65534,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -427,14 +390,12 @@
         "port": {
           "default": 80,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -457,14 +418,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -488,14 +447,12 @@
         "enabled": {
           "default": false,
           "description": "Enable a Prometheus ServiceMonitor",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "interval": {
           "default": "30s",
           "description": "prometheus: kube-prometheus\nPrometheus ServiceMonitor interval",
-          "required": [],
           "title": "interval",
           "type": "string"
         },
@@ -504,14 +461,12 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "metricRelabelings",
           "type": "array"
         },
         "namespace": {
           "default": "",
           "description": "Prometheus ServiceMonitor namespace",
-          "required": [],
           "title": "namespace",
           "type": "string"
         },
@@ -520,7 +475,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "relabelings",
           "type": "array"
         },
@@ -548,7 +502,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

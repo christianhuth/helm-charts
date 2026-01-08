@@ -12,21 +12,18 @@
         "existingSecret": {
           "default": "",
           "description": "Use an existing Secret for basic authentication. Username and password have to be stored as key credentials in the form username:password",
-          "required": [],
           "title": "existingSecret",
           "type": "string"
         },
         "password": {
           "default": "$2a$08$5R4yIIiiea0DjjwJV1UyBuRkql7Eik9uBiyzwMI5E8d.WtBshWdl2",
           "description": "Password for basic authentication. Should be a salted bcrypt hash of the password. Can be generated e.g. using https://timetagger.app/cred.",
-          "required": [],
           "title": "password",
           "type": "string"
         },
         "username": {
           "default": "test",
           "description": "Username for basic authentication",
-          "required": [],
           "title": "username",
           "type": "string"
         }
@@ -44,35 +41,30 @@
         "enabled": {
           "default": false,
           "description": "Enable Horizontal POD autoscaling",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
           "description": "Maximum number of replicas",
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
           "description": "Minimum number of replicas",
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
           "description": "Target CPU utilization percentage",
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         },
         "targetMemoryUtilizationPercentage": {
           "default": 80,
           "description": "Target Memory utilization percentage",
-          "required": [],
           "title": "targetMemoryUtilizationPercentage",
           "type": "integer"
         }
@@ -94,7 +86,6 @@
             "level": {
               "default": "info",
               "description": "log level: debug, info, warn, error",
-              "required": [],
               "title": "level",
               "type": "string"
             }
@@ -117,7 +108,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
@@ -126,14 +116,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnvFrom",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"timetagger.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -148,28 +136,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "ghcr.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "almarklein/timetagger",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "v26.1.1",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -188,7 +172,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -201,13 +184,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -219,7 +200,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -230,13 +210,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -250,7 +228,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -264,7 +241,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -272,7 +248,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -292,35 +267,30 @@
         "failureThreshold": {
           "default": 6,
           "description": "Failure threshold for livenessProbe",
-          "required": [],
           "title": "failureThreshold",
           "type": "integer"
         },
         "initialDelaySeconds": {
           "default": 10,
           "description": "Initial delay seconds for livenessProbe",
-          "required": [],
           "title": "initialDelaySeconds",
           "type": "integer"
         },
         "periodSeconds": {
           "default": 5,
           "description": "Period seconds for livenessProbe",
-          "required": [],
           "title": "periodSeconds",
           "type": "integer"
         },
         "successThreshold": {
           "default": 1,
           "description": "Success threshold for livenessProbe",
-          "required": [],
           "title": "successThreshold",
           "type": "integer"
         },
         "timeoutSeconds": {
           "default": 1,
           "description": "Timeout seconds for livenessProbe",
-          "required": [],
           "title": "timeoutSeconds",
           "type": "integer"
         }
@@ -338,7 +308,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `timetagger`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -355,13 +324,11 @@
           "items": {
             "anyOf": [
               {
-                "required": [],
                 "type": "string"
               }
             ],
             "required": []
           },
-          "required": [],
           "title": "accessModes",
           "type": "array"
         },
@@ -374,14 +341,12 @@
         "enabled": {
           "default": false,
           "description": "use a PVC to persist data",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "existingClaim": {
           "default": "",
           "description": "provide an existing PersistentVolumeClaim",
-          "required": [],
           "title": "existingClaim",
           "type": "string"
         },
@@ -394,7 +359,6 @@
         "storageClassName": {
           "default": "",
           "description": "Name of the StorageClass required by the claim.",
-          "required": [],
           "title": "storageClassName",
           "type": "string"
         }
@@ -415,19 +379,16 @@
       "properties": {
         "fsGroup": {
           "default": 1000,
-          "required": [],
           "title": "fsGroup",
           "type": "integer"
         },
         "runAsGroup": {
           "default": 1000,
-          "required": [],
           "title": "runAsGroup",
           "type": "integer"
         },
         "runAsUser": {
           "default": 1000,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -445,35 +406,30 @@
         "failureThreshold": {
           "default": 6,
           "description": "Failure threshold for readinessProbe",
-          "required": [],
           "title": "failureThreshold",
           "type": "integer"
         },
         "initialDelaySeconds": {
           "default": 10,
           "description": "Initial delay seconds for readinessProbe",
-          "required": [],
           "title": "initialDelaySeconds",
           "type": "integer"
         },
         "periodSeconds": {
           "default": 5,
           "description": "Period seconds for readinessProbe",
-          "required": [],
           "title": "periodSeconds",
           "type": "integer"
         },
         "successThreshold": {
           "default": 1,
           "description": "Success threshold for readinessProbe",
-          "required": [],
           "title": "successThreshold",
           "type": "integer"
         },
         "timeoutSeconds": {
           "default": 1,
           "description": "Timeout seconds for readinessProbe",
-          "required": [],
           "title": "timeoutSeconds",
           "type": "integer"
         }
@@ -491,7 +447,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -502,13 +457,11 @@
           "properties": {
             "cpu": {
               "default": "200m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "256Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -524,13 +477,11 @@
           "properties": {
             "cpu": {
               "default": "100m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "100Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -553,7 +504,6 @@
     "revisionHistoryLimit": {
       "default": 0,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -566,13 +516,11 @@
               "items": {
                 "anyOf": [
                   {
-                    "required": [],
                     "type": "string"
                   }
                 ],
                 "required": []
               },
-              "required": [],
               "title": "drop",
               "type": "array"
             }
@@ -585,19 +533,16 @@
         },
         "readOnlyRootFilesystem": {
           "default": true,
-          "required": [],
           "title": "readOnlyRootFilesystem",
           "type": "boolean"
         },
         "runAsNonRoot": {
           "default": true,
-          "required": [],
           "title": "runAsNonRoot",
           "type": "boolean"
         },
         "runAsUser": {
           "default": 1000,
-          "required": [],
           "title": "runAsUser",
           "type": "integer"
         }
@@ -616,14 +561,12 @@
         "port": {
           "default": 8080,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -646,14 +589,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -671,7 +612,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

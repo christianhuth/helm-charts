@@ -4,7 +4,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"priority-classes.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -17,7 +16,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `priority-classes`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -29,31 +27,26 @@
             "properties": {
               "description": {
                 "default": "Mission critical Pods. Does preempt lower priority Pods.",
-                "required": [],
                 "title": "description",
                 "type": "string"
               },
               "globalDefault": {
                 "default": false,
-                "required": [],
                 "title": "globalDefault",
                 "type": "boolean"
               },
               "name": {
                 "default": "critical",
-                "required": [],
                 "title": "name",
                 "type": "string"
               },
               "preemptionPolicy": {
                 "default": "PreemptLowerPriority",
-                "required": [],
                 "title": "preemptionPolicy",
                 "type": "string"
               },
               "value": {
                 "default": 1000000,
-                "required": [],
                 "title": "value",
                 "type": "integer"
               }
@@ -71,31 +64,26 @@
             "properties": {
               "description": {
                 "default": "High priority Pods. Does preempt lower priority Pods.",
-                "required": [],
                 "title": "description",
                 "type": "string"
               },
               "globalDefault": {
                 "default": false,
-                "required": [],
                 "title": "globalDefault",
                 "type": "boolean"
               },
               "name": {
                 "default": "high",
-                "required": [],
                 "title": "name",
                 "type": "string"
               },
               "preemptionPolicy": {
                 "default": "PreemptLowerPriority",
-                "required": [],
                 "title": "preemptionPolicy",
                 "type": "string"
               },
               "value": {
                 "default": 900000,
-                "required": [],
                 "title": "value",
                 "type": "integer"
               }
@@ -113,31 +101,26 @@
             "properties": {
               "description": {
                 "default": "Default priority class for all Pods. Does preempt lower priority Pods.",
-                "required": [],
                 "title": "description",
                 "type": "string"
               },
               "globalDefault": {
                 "default": true,
-                "required": [],
                 "title": "globalDefault",
                 "type": "boolean"
               },
               "name": {
                 "default": "medium",
-                "required": [],
                 "title": "name",
                 "type": "string"
               },
               "preemptionPolicy": {
                 "default": "PreemptLowerPriority",
-                "required": [],
                 "title": "preemptionPolicy",
                 "type": "string"
               },
               "value": {
                 "default": 500000,
-                "required": [],
                 "title": "value",
                 "type": "integer"
               }
@@ -155,31 +138,26 @@
             "properties": {
               "description": {
                 "default": "Low priority Pods.",
-                "required": [],
                 "title": "description",
                 "type": "string"
               },
               "globalDefault": {
                 "default": false,
-                "required": [],
                 "title": "globalDefault",
                 "type": "boolean"
               },
               "name": {
                 "default": "low",
-                "required": [],
                 "title": "name",
                 "type": "string"
               },
               "preemptionPolicy": {
                 "default": "Never",
-                "required": [],
                 "title": "preemptionPolicy",
                 "type": "string"
               },
               "value": {
                 "default": 100000,
-                "required": [],
                 "title": "value",
                 "type": "integer"
               }
@@ -196,7 +174,6 @@
         ],
         "required": []
       },
-      "required": [],
       "title": "priorityClasses",
       "type": "array"
     }

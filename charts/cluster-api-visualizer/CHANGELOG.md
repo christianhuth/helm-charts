@@ -1,7 +1,7 @@
 # cluster-api-visualizer
 
-## 0.3.0
+## 0.4.0
 
-### Changed
+### Added
 
-- hpa spec to align with v2
+- support for Gateway API routes

@@ -5,26 +5,22 @@
       "properties": {
         "email": {
           "default": "",
-          "required": [],
           "title": "email",
           "type": "string"
         },
         "existingSecret": {
           "default": "",
           "description": "expected key is ADMIN_PASSWORD",
-          "required": [],
           "title": "existingSecret",
           "type": "string"
         },
         "password": {
           "default": "admin",
-          "required": [],
           "title": "password",
           "type": "string"
         },
         "username": {
           "default": "admin",
-          "required": [],
           "title": "username",
           "type": "string"
         }
@@ -48,25 +44,21 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "maxReplicas": {
           "default": 100,
-          "required": [],
           "title": "maxReplicas",
           "type": "integer"
         },
         "minReplicas": {
           "default": 1,
-          "required": [],
           "title": "minReplicas",
           "type": "integer"
         },
         "targetCPUUtilizationPercentage": {
           "default": 80,
-          "required": [],
           "title": "targetCPUUtilizationPercentage",
           "type": "integer"
         }
@@ -88,13 +80,11 @@
             "properties": {
               "name": {
                 "default": "APP_ADDRESS",
-                "required": [],
                 "title": "name",
                 "type": "string"
               },
               "value": {
                 "default": "polr.local",
-                "required": [],
                 "title": "value",
                 "type": "string"
               }
@@ -109,13 +99,11 @@
             "properties": {
               "name": {
                 "default": "APP_NAME",
-                "required": [],
                 "title": "name",
                 "type": "string"
               },
               "value": {
                 "default": "Polr",
-                "required": [],
                 "title": "value",
                 "type": "string"
               }
@@ -129,7 +117,6 @@
         ],
         "required": []
       },
-      "required": [],
       "title": "env",
       "type": "array"
     },
@@ -138,38 +125,32 @@
       "properties": {
         "database": {
           "default": "polr",
-          "required": [],
           "title": "database",
           "type": "string"
         },
         "existingSecret": {
           "default": "",
           "description": "#\n# NOTE: When it's set the externalDatabase.password is ignored.",
-          "required": [],
           "title": "existingSecret",
           "type": "string"
         },
         "host": {
           "default": "polr-mysql",
-          "required": [],
           "title": "host",
           "type": "string"
         },
         "password": {
           "default": "polr",
-          "required": [],
           "title": "password",
           "type": "string"
         },
         "port": {
           "default": "3306",
-          "required": [],
           "title": "port",
           "type": "string"
         },
         "username": {
           "default": "polr",
-          "required": [],
           "title": "username",
           "type": "string"
         }
@@ -188,7 +169,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"polr.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -203,28 +183,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "ajanvier/polr",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "2.3.0",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -243,7 +219,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
@@ -256,13 +231,11 @@
         },
         "className": {
           "default": "",
-          "required": [],
           "title": "className",
           "type": "string"
         },
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -274,7 +247,6 @@
                 "properties": {
                   "host": {
                     "default": "chart-example.local",
-                    "required": [],
                     "title": "host",
                     "type": "string"
                   },
@@ -285,13 +257,11 @@
                           "properties": {
                             "path": {
                               "default": "/",
-                              "required": [],
                               "title": "path",
                               "type": "string"
                             },
                             "pathType": {
                               "default": "ImplementationSpecific",
-                              "required": [],
                               "title": "pathType",
                               "type": "string"
                             }
@@ -305,7 +275,6 @@
                       ],
                       "required": []
                     },
-                    "required": [],
                     "title": "paths",
                     "type": "array"
                   }
@@ -319,7 +288,6 @@
             ],
             "required": []
           },
-          "required": [],
           "title": "hosts",
           "type": "array"
         },
@@ -327,7 +295,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "tls",
           "type": "array"
         }
@@ -346,50 +313,42 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "existingSecret": {
           "default": "",
           "description": "#\n# NOTE: When it's set the mail.password is ignored.",
-          "required": [],
           "title": "existingSecret",
           "type": "string"
         },
         "fromAddress": {
           "default": "",
-          "required": [],
           "title": "fromAddress",
           "type": "string"
         },
         "fromName": {
           "default": "",
-          "required": [],
           "title": "fromName",
           "type": "string"
         },
         "host": {
           "default": "",
-          "required": [],
           "title": "host",
           "type": "string"
         },
         "password": {
           "default": "",
-          "required": [],
           "title": "password",
           "type": "string"
         },
         "port": {
           "default": "",
-          "required": [],
           "title": "port",
           "type": "string"
         },
         "username": {
           "default": "",
-          "required": [],
           "title": "username",
           "type": "string"
         }
@@ -413,26 +372,22 @@
           "properties": {
             "database": {
               "default": "polr",
-              "required": [],
               "title": "database",
               "type": "string"
             },
             "existingSecret": {
               "default": "",
               "description": "#\n# NOTE: When it's set the mysql.auth.rootPassword, mysql.auth.password, mysql.auth.replicationPassword are ignored.",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
             "password": {
               "default": "polr",
-              "required": [],
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "polr",
-              "required": [],
               "title": "username",
               "type": "string"
             }
@@ -449,7 +404,6 @@
         "enabled": {
           "default": true,
           "description": "if disabled please provide db-attributes via externalDatabase attributes",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
@@ -458,14 +412,12 @@
             "repository": {
               "default": "bitnamilegacy/mysql",
               "description": "image repository for MySQL™ subchart from Bitnami",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "tag": {
               "default": "9.4.0-debian-12-r1",
               "description": "image tag for MySQL™ subchart from Bitnami",
-              "required": [],
               "title": "tag",
               "type": "string"
             }
@@ -489,7 +441,6 @@
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `polr`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -514,7 +465,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -527,7 +477,6 @@
     "revisionHistoryLimit": {
       "default": 10,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -542,14 +491,12 @@
         "port": {
           "default": 80,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -572,14 +519,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -597,7 +542,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

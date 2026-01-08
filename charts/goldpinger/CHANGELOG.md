@@ -1,7 +1,7 @@
 # goldpinger
 
-## 1.0.2
+## 1.1.0
 
-### Changed
+### Added
 
-- icon
+- support for Gateway API routes

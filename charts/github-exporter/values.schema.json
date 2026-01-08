@@ -12,14 +12,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "extraEnv",
       "type": "array"
     },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"github-exporter.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -32,28 +30,24 @@
                 "enabled": {
                   "default": false,
                   "description": "Enable authentication using a GitHub App.",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "id": {
                   "default": "",
                   "description": "The APP ID of the GitHub App.",
-                  "required": [],
                   "title": "id",
                   "type": "string"
                 },
                 "installationId": {
                   "default": "",
                   "description": "The INSTALLATION ID of the GitHub App.",
-                  "required": [],
                   "title": "installationId",
                   "type": "string"
                 },
                 "privateKey": {
                   "default": "",
                   "description": "The private Key.",
-                  "required": [],
                   "title": "privateKey",
                   "type": "string"
                 }
@@ -70,7 +64,6 @@
             "existingSecret": {
               "default": "",
               "description": "Name of existing secret to use for authentication credentials. Keys in secret should be called `github-app-id`, `github-app-installation-id`, `github-app-private-key` or `github-token` depenending on the choosen authentication type (`github.auth.type``).",
-              "required": [],
               "title": "existingSecret",
               "type": "string"
             },
@@ -79,14 +72,12 @@
                 "enabled": {
                   "default": false,
                   "description": "Enable authentication with an API Token",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "value": {
                   "default": "",
                   "description": "The Token used to authenticate against the GitHub API",
-                  "required": [],
                   "title": "value",
                   "type": "string"
                 }
@@ -112,21 +103,18 @@
             "apiUrl": {
               "default": "https://api.github.com",
               "description": "Github API URL, shouldn't need to change this.",
-              "required": [],
               "title": "apiUrl",
               "type": "string"
             },
             "logLevel": {
               "default": "error",
               "description": "The level of logging the exporter will run with.",
-              "required": [],
               "title": "logLevel",
               "type": "string"
             },
             "rateLimit": {
               "default": 0,
               "description": "The rate limit that suppose to be for github app (default is 15,000). If the exporter sees the value is below this variable it generating new token for the app.",
-              "required": [],
               "title": "rateLimit",
               "type": "integer"
             }
@@ -144,21 +132,18 @@
             "organizations": {
               "default": "",
               "description": "If supplied, the exporter will enumerate all repositories for that organization. Expected in the format \"org1, org2\".",
-              "required": [],
               "title": "organizations",
               "type": "string"
             },
             "repositories": {
               "default": "",
               "description": "If supplied, The repos you wish to monitor, expected in the format \"user/repo1, user/repo2\". Can be across different Github users/orgs.",
-              "required": [],
               "title": "repositories",
               "type": "string"
             },
             "users": {
               "default": "",
               "description": "If supplied, the exporter will enumerate all repositories for that users. Expected in the format \"user1, user2\".",
-              "required": [],
               "title": "users",
               "type": "string"
             }
@@ -191,28 +176,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "githubexporter/github-exporter",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "v2.1.0",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -231,14 +212,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `github-exporter`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -257,7 +236,6 @@
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -268,13 +246,11 @@
           "properties": {
             "cpu": {
               "default": "100m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "100Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -296,7 +272,6 @@
     "revisionHistoryLimit": {
       "default": 0,
       "description": "The number of old ReplicaSets to retain",
-      "required": [],
       "title": "revisionHistoryLimit",
       "type": "integer"
     },
@@ -311,14 +286,12 @@
         "port": {
           "default": 9171,
           "description": "Kubernetes port where service is exposed",
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
           "description": "Kubernetes service type",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -341,14 +314,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -372,14 +343,12 @@
         "enabled": {
           "default": false,
           "description": "Enable a Prometheus ServiceMonitor",
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         },
         "interval": {
           "default": "30s",
           "description": "prometheus: kube-prometheus\nPrometheus ServiceMonitor interval",
-          "required": [],
           "title": "interval",
           "type": "string"
         },
@@ -388,14 +357,12 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "metricRelabelings",
           "type": "array"
         },
         "namespace": {
           "default": "",
           "description": "Prometheus ServiceMonitor namespace",
-          "required": [],
           "title": "namespace",
           "type": "string"
         },
@@ -404,7 +371,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "relabelings",
           "type": "array"
         },
@@ -432,7 +398,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }

@@ -12,7 +12,6 @@
         "clusterName": {
           "default": "",
           "description": "Specify a cluster name when running popeye in cluster",
-          "required": [],
           "title": "clusterName",
           "type": "string"
         },
@@ -21,7 +20,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "extraArgs",
           "type": "array"
         },
@@ -30,14 +28,12 @@
             "failedJobsHistoryLimit": {
               "default": 1,
               "description": "The number of failed finished jobs to retain. Value must be non-negative integer",
-              "required": [],
               "title": "failedJobsHistoryLimit",
               "type": "integer"
             },
             "successfulJobsHistoryLimit": {
               "default": 1,
               "description": "The number of successful finished jobs to retain. Value must be non-negative integer",
-              "required": [],
               "title": "successfulJobsHistoryLimit",
               "type": "integer"
             }
@@ -52,7 +48,6 @@
         "outputFormat": {
           "default": "standard",
           "description": "Popeye can generate sanitizer reports in a variety of formats: standard, jurassic, yaml, html, json, junit, prometheus, score",
-          "required": [],
           "title": "outputFormat",
           "type": "string"
         },
@@ -63,28 +58,24 @@
                 "enabled": {
                   "default": false,
                   "description": "Use authentication against Prometheus Pushgateway",
-                  "required": [],
                   "title": "enabled",
                   "type": "boolean"
                 },
                 "existingSecret": {
                   "default": "",
                   "description": "Name of existing secret to use for authentication against Prometheus Pushgateway, needs to contain the key pushgateway-password",
-                  "required": [],
                   "title": "existingSecret",
                   "type": "string"
                 },
                 "password": {
                   "default": "",
                   "description": "Password for authentication against Prometheus Pushgateway",
-                  "required": [],
                   "title": "password",
                   "type": "string"
                 },
                 "user": {
                   "default": "",
                   "description": "Username for authentication against Prometheus Pushgateway",
-                  "required": [],
                   "title": "user",
                   "type": "string"
                 }
@@ -100,7 +91,6 @@
             },
             "pushgatewayAddress": {
               "default": "",
-              "required": [],
               "title": "pushgatewayAddress",
               "type": "string"
             }
@@ -117,21 +107,18 @@
             "bucket": {
               "default": "",
               "description": "bucket name can be the URI and the bucket name path s3://example-bucket",
-              "required": [],
               "title": "bucket",
               "type": "string"
             },
             "endpoint": {
               "default": "",
               "description": "example endpoint: \"https://s3.us-east-1.amazonaws.com\"",
-              "required": [],
               "title": "endpoint",
               "type": "string"
             },
             "region": {
               "default": "",
               "description": "example region: \"us-east-1\"",
-              "required": [],
               "title": "region",
               "type": "string"
             }
@@ -147,7 +134,6 @@
         "schedule": {
           "default": "* */1 * * *",
           "description": "The schedule in Cron format",
-          "required": [],
           "title": "schedule",
           "type": "string"
         },
@@ -173,7 +159,6 @@
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"popeye.fullname\"`",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -188,28 +173,24 @@
         "pullPolicy": {
           "default": "Always",
           "description": "image pull policy",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "registry": {
           "default": "docker.io",
           "description": "image registory",
-          "required": [],
           "title": "registry",
           "type": "string"
         },
         "repository": {
           "default": "derailed/popeye",
           "description": "image repository",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
           "default": "v0.22.1",
           "description": "Overrides the image tag",
-          "required": [],
           "title": "tag",
           "type": "string"
         }
@@ -228,14 +209,12 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `popeye`",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
@@ -264,13 +243,11 @@
           "properties": {
             "cpu": {
               "default": "1000m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "1000Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -306,14 +283,12 @@
         "create": {
           "default": true,
           "description": "Specifies whether a service account should be created",
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
           "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
-          "required": [],
           "title": "name",
           "type": "string"
         }
@@ -331,7 +306,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "tolerations",
       "type": "array"
     }
