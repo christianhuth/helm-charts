@@ -1,7 +1,7 @@
 # promlens
 
-## 1.2.1
+## 1.3.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
