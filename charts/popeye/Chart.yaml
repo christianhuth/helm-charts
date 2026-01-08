@@ -14,7 +14,7 @@ sources:
 annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
-    - kind: fixes
+    - kind: fixed
       description: helm schema
   artifacthub.io/links: |
     - name: support

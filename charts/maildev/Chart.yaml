@@ -15,7 +15,7 @@ sources:
   - https://hub.docker.com/r/maildev/maildev
 annotations:
   artifacthub.io/changes: |
-    - kind: fixes
+    - kind: fixed
       description: helm schema
   artifacthub.io/links: |
     - name: support

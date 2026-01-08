@@ -19,7 +19,7 @@ dependencies:
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: fixes
+    - kind: fixed
       description: helm schema
   artifacthub.io/links: |
     - name: support
