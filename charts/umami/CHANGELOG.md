@@ -1,7 +1,7 @@
 # umami
 
-## 7.2.1
+## 7.3.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
