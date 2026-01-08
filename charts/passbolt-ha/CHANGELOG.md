@@ -1,7 +1,7 @@
 # passbolt-ha
 
-## 5.2.1
+## 5.2.2
 
-### Fixed
+### Changed
 
-- helm schema
+- dependency of proxysql to 2.2.1
