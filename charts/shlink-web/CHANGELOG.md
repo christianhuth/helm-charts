@@ -2,6 +2,6 @@
 
 ## 1.8.1
 
-### Fixes
+### Fixed
 
 - helm schema

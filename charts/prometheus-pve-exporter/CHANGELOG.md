@@ -2,6 +2,6 @@
 
 ## 2.4.1
 
-### Fixes
+### Fixed
 
 - helm schema

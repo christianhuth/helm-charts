@@ -2,6 +2,6 @@
 
 ## 6.2.1
 
-### Fixes
+### Fixed
 
 - helm schema

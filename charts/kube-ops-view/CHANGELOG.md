@@ -2,6 +2,6 @@
 
 ## 7.0.1
 
-### Fixes
+### Fixed
 
 - helm schema
