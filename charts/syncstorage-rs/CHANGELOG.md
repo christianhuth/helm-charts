@@ -1,7 +1,7 @@
 # syncstorage-rs
 
-## 4.1.0
+## 4.1.1
 
-### Added
+### Changed
 
-- support for Gateway API routes
+- dependency of mariadb mariadb to 24.0.3
