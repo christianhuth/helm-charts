@@ -1,7 +1,7 @@
 # typo3
 
-## 6.3.0
+## 6.3.1
 
-### Added
+### Changed
 
-- support for Gateway API routes
+- dependency of mariadb to 24.0.3
