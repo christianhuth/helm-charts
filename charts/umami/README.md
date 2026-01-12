@@ -75,6 +75,12 @@ The command removes all the Kubernetes components associated with the chart and 
 | ingress.hosts | list | see [values.yaml](./values.yaml) | An array with hosts and paths |
 | ingress.tls | list | `[]` | An array with the tls configuration |
 | initContainers | object | `{}` | define additional init containers |
+| livenessProbe.failureThreshold | int | `3` | Failure threshold for livenessProbe |
+| livenessProbe.httpGet.path | string | `"/"` | Path for livenessProbe |
+| livenessProbe.initialDelaySeconds | int | `15` | Initial delay seconds for livenessProbe |
+| livenessProbe.periodSeconds | int | `10` | Period seconds for livenessProbe |
+| livenessProbe.successThreshold | int | `1` | Success threshold for livenessProbe |
+| livenessProbe.timeoutSeconds | int | `1` | Timeout seconds for livenessProbe |
 | mysql.auth.database | string | `"mychart"` | Name for a custom database to create |
 | mysql.auth.password | string | `"mychart"` | Password for the custom user to create |
 | mysql.auth.username | string | `"mychart"` | Name for a custom user to create |
@@ -88,6 +94,12 @@ The command removes all the Kubernetes components associated with the chart and 
 | postgresql.auth.password | string | `"mychart"` | Password for the custom user to create |
 | postgresql.auth.username | string | `"mychart"` | Name for a custom user to create |
 | postgresql.enabled | bool | `true` | enable PostgreSQL™ subchart from Bitnami |
+| readinessProbe.failureThreshold | int | `3` | Failure threshold for readinessProbe |
+| readinessProbe.httpGet.path | string | `"/"` | Path for readinessProbe |
+| readinessProbe.initialDelaySeconds | int | `15` | Initial delay seconds for readinessProbe |
+| readinessProbe.periodSeconds | int | `10` | Period seconds for readinessProbe |
+| readinessProbe.successThreshold | int | `1` | Success threshold for readinessProbe |
+| readinessProbe.timeoutSeconds | int | `1` | Timeout seconds for readinessProbe |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the controller pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
@@ -108,6 +120,12 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| startupProbe.failureThreshold | int | `30` | Failure threshold for startupProbe |
+| startupProbe.httpGet.path | string | `"/"` | Path for startupProbe |
+| startupProbe.initialDelaySeconds | int | `30` | Initial delay seconds for startupProbe |
+| startupProbe.periodSeconds | int | `10` | Period seconds for startupProbe |
+| startupProbe.successThreshold | int | `1` | Success threshold for startupProbe |
+| startupProbe.timeoutSeconds | int | `1` | Timeout seconds for startupProbe |
 | tolerations | list | `[]` | Toleration labels for pod assignment |
 | umami.appSecret.existingSecret | string | `""` | Name of an existing secret containing the app secret under the key app-secret. |
 | umami.appSecret.secret | string | `""` | A random string used to generate unique values. |
