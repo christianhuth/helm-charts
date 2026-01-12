@@ -37,7 +37,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: ARGOCD_BASE_URL
-              value: {{ .Values.argocd.baseUrl | required "You need to define the Base URL of the Argo CD instance to connect to" | quote }}
+              value: {{ .Values.argocd.baseUrl | quote }}
             - name: ARGOCD_API_TOKEN
               valueFrom:
                 secretKeyRef:

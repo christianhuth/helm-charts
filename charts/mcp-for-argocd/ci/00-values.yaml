@@ -1,7 +1,0 @@
----
-argocd:
-  baseUrl: "https://argocd.example.com"
-  auth:
-    apiToken: "secret1234"
-  readOnly: true
-  skipTlsVerify: true
