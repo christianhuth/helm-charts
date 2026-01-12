@@ -1,7 +1,8 @@
 # umami
 
-## 7.3.0
+## 7.4.0
 
 ### Added
 
-- support for Gateway API routes
+- support for startup probe
+- configuration for readiness and liveness probe

@@ -292,6 +292,65 @@
       "title": "initContainers",
       "type": "object"
     },
+    "livenessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 3,
+          "description": "Failure threshold for livenessProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/",
+              "description": "Path for livenessProbe",
+              "title": "path",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        },
+        "initialDelaySeconds": {
+          "default": 15,
+          "description": "Initial delay seconds for livenessProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for livenessProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for livenessProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "description": "Timeout seconds for livenessProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "failureThreshold",
+        "httpGet",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "livenessProbe",
+      "type": "object"
+    },
     "mysql": {
       "properties": {
         "auth": {
@@ -410,6 +469,65 @@
         "auth"
       ],
       "title": "postgresql",
+      "type": "object"
+    },
+    "readinessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 3,
+          "description": "Failure threshold for readinessProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/",
+              "description": "Path for readinessProbe",
+              "title": "path",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        },
+        "initialDelaySeconds": {
+          "default": 15,
+          "description": "Initial delay seconds for readinessProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for readinessProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for readinessProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "description": "Timeout seconds for readinessProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "failureThreshold",
+        "httpGet",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "readinessProbe",
       "type": "object"
     },
     "replicaCount": {
@@ -641,6 +759,65 @@
         "name"
       ],
       "title": "serviceAccount",
+      "type": "object"
+    },
+    "startupProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 30,
+          "description": "Failure threshold for startupProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/",
+              "description": "Path for startupProbe",
+              "title": "path",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        },
+        "initialDelaySeconds": {
+          "default": 30,
+          "description": "Initial delay seconds for startupProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for startupProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for startupProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "description": "Timeout seconds for startupProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "failureThreshold",
+        "httpGet",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "startupProbe",
       "type": "object"
     },
     "tolerations": {
@@ -888,6 +1065,9 @@
     "ingress",
     "route",
     "autoscaling",
+    "livenessProbe",
+    "readinessProbe",
+    "startupProbe",
     "nodeSelector",
     "tolerations",
     "affinity",

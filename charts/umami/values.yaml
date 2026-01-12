@@ -148,6 +148,51 @@ autoscaling:
   # -- Target Memory utilization percentage
   targetMemoryUtilizationPercentage: 80
 
+livenessProbe:
+  # -- Failure threshold for livenessProbe
+  failureThreshold: 3
+  httpGet:
+    # -- Path for livenessProbe
+    path: "/"
+  # -- Initial delay seconds for livenessProbe
+  initialDelaySeconds: 15
+  # -- Period seconds for livenessProbe
+  periodSeconds: 10
+  # -- Success threshold for livenessProbe
+  successThreshold: 1
+  # -- Timeout seconds for livenessProbe
+  timeoutSeconds: 1
+
+readinessProbe:
+  # -- Failure threshold for readinessProbe
+  failureThreshold: 3
+  httpGet:
+    # -- Path for readinessProbe
+    path: "/"
+  # -- Initial delay seconds for readinessProbe
+  initialDelaySeconds: 15
+  # -- Period seconds for readinessProbe
+  periodSeconds: 10
+  # -- Success threshold for readinessProbe
+  successThreshold: 1
+  # -- Timeout seconds for readinessProbe
+  timeoutSeconds: 1
+
+startupProbe:
+  # -- Failure threshold for startupProbe
+  failureThreshold: 30
+  httpGet:
+    # -- Path for startupProbe
+    path: "/"
+  # -- Initial delay seconds for startupProbe
+  initialDelaySeconds: 30
+  # -- Period seconds for startupProbe
+  periodSeconds: 10
+  # -- Success threshold for startupProbe
+  successThreshold: 1
+  # -- Timeout seconds for startupProbe
+  timeoutSeconds: 1
+
 # -- Node labels for pod assignment
 nodeSelector: {}
 
