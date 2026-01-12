@@ -29642,6 +29642,36 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/maildev-1.0.0/maildev-1.0.0.tgz
     version: 1.0.0
+  mcp-for-argocd:
+  - annotations:
+      artifacthub.io/category: ai-machine-learning
+      artifacthub.io/changes: |
+        - kind: added
+          description: initial version
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.5.0
+    created: "2026-01-12T10:34:33.910724298Z"
+    description: An implementation of Model Context Protocol (MCP) server for Argo
+      CD
+    digest: 0bfc2636dddb8a9f6a47b03f2c02401d92b6b0c4424fa6e4f0e4eca5c1feb81a
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/mcp-for-argocd/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: mcp-for-argocd
+    sources:
+    - https://github.com/argoproj-labs/mcp-for-argocd
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/mcp-for-argocd-1.0.0/mcp-for-argocd-1.0.0.tgz
+    version: 1.0.0
   netcupscp-exporter:
   - annotations:
       artifacthub.io/category: monitoring-logging
@@ -73340,4 +73370,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-01-12T09:33:21.090565306Z"
+generated: "2026-01-12T10:34:33.914239499Z"
