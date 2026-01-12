@@ -115,19 +115,32 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
             httpGet:
-              path: /
+              path: {{ .Values.livenessProbe.httpGet.path | quote}}
               port: http
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | int }}
           readinessProbe:
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold | int }}
             httpGet:
-              path: /
+              path: {{ .Values.readinessProbe.httpGet.path | quote}}
               port: http
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | int }}
           startupProbe:
+            failureThreshold: {{ .Values.startupProbe.failureThreshold | int }}
             httpGet:
-              path: /
+              path: {{ .Values.startupProbe.httpGet.path | quote}}
               port: http
-            failureThreshold: 30
-            periodSeconds: 10
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.startupProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds | int }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
