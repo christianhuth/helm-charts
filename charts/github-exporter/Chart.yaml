@@ -14,9 +14,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: Add Ingress resource and `ingress` values to expose the exporter via Ingress.
-    - kind: fixed
-      description: helm schema
+      description: Add Ingress resource and `ingress` values to expose the exporter via Ingress
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
