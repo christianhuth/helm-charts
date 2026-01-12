@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 9.3.0
+## 9.3.1
 
-### Added
+### Changed
 
-- support for Gateway API routes
+- dependency of mariadb to 24.0.3
