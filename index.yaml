@@ -12517,6 +12517,33 @@ entries:
   github-exporter:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: Add Ingress resource and `ingress` values to expose the exporter via Ingress
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v2.1.0
+    created: "2026-01-12T14:28:45.506415817Z"
+    description: A Helm Chart for the GitHub Prometheus Exporter
+    digest: ebbbcbc04a7a60e27298f28d10dca0bdd898889d7d12b6292e0245071abe637f
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/github-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: github-exporter
+    sources:
+    - https://github.com/githubexporter/github-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/github-exporter-2.1.0/github-exporter-2.1.0.tgz
+    version: 2.1.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: helm schema
       artifacthub.io/links: |
@@ -38195,6 +38222,43 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/priority-classes-1.0.0/priority-classes-1.0.0.tgz
     version: 1.0.0
   prometheus-pve-exporter:
+  - annotations:
+      artifacthub.io/alternativeName: pve-exporter
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: added
+          description: Add Ingress resource and `ingress` values to expose the exporter via Ingress
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Add an user inside of Proxmox, that will be used for the Exporter.
+          url: https://xinux.net/images/6/6e/Prometheus-proxmox-grafana-user.png
+        - title: Add permissions for this user.
+          url: https://xinux.net/images/5/5d/Prometheus-proxmox-grafana-user-permission.png
+        - title: Visualize the data collected with Grafana.
+          url: https://grafana.com/api/dashboards/10347/images/6529/image
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 3.8.0
+    created: "2026-01-12T14:28:45.696530794Z"
+    description: A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor
+      to collect metrics.
+    digest: 872cd9d0bb7f5d0ece92cfd97e3ee6151607d70267c2a50995241a4241a1506d
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/prometheus-pve-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: prometheus-pve-exporter
+    sources:
+    - https://github.com/prometheus-pve/prometheus-pve-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/prometheus-pve-exporter-2.5.0/prometheus-pve-exporter-2.5.0.tgz
+    version: 2.5.0
   - annotations:
       artifacthub.io/alternativeName: pve-exporter
       artifacthub.io/category: monitoring-logging
@@ -73370,4 +73434,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-01-12T10:34:33.914239499Z"
+generated: "2026-01-12T14:28:45.698822262Z"
