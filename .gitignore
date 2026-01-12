@@ -25,4 +25,8 @@ charts/**/Chart.lock
 # Support for Project snippet scope
 !.vscode/*.code-snippets
 
+### Claude Code ###
+# Ignore local settings (personal/machine-specific)
+.claude/settings.local.json
+
 # End of https://www.toptal.com/developers/gitignore/api/helm,visualstudiocode
