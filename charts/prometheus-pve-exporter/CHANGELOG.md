@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.4.1
+## 2.5.0
 
-### Fixed
+### Added
 
-- helm schema
+- Add Ingress resource and `ingress` values to expose the exporter via Ingress
