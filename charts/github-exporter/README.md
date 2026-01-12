@@ -67,6 +67,13 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.repository | string | `"githubexporter/github-exporter"` | image repository |
 | image.tag | string | `"v2.1.0"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
+| ingress.annotations | object | `{}` |  |
+| ingress.className | string | `""` |  |
+| ingress.enabled | bool | `false` |  |
+| ingress.hosts[0].host | string | `"chart-example.local"` |  |
+| ingress.hosts[0].paths[0].path | string | `"/"` |  |
+| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
+| ingress.tls | list | `[]` |  |
 | nameOverride | string | `""` | Provide a name in place of `github-exporter` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podSecurityContext | object | `{}` | pod-level security context |

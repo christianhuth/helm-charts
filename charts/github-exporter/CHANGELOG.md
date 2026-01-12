@@ -1,7 +1,7 @@
 # github-exporter
 
-## 2.0.1
+## 2.1.0
 
-### Fixed
+### Added
 
-- helm schema
+- Add Ingress resource and `ingress` values to expose the exporter via Ingress
