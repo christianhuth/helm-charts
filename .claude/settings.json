@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /home/christianhuth/code/k8s/helm-charts pull:*)",
+      "Bash(git -C /home/christianhuth/code/k8s/helm-charts checkout main)"
+    ]
+  }
+}
