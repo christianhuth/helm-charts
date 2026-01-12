@@ -1,7 +1,7 @@
 # squest
 
-## 4.2.0
+## 4.2.1
 
-### Added
+### Changed
 
-- support for Gateway API routes
+- dependency of mariadb to 24.0.3
