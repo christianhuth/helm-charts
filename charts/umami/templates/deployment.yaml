@@ -122,6 +122,12 @@ spec:
             httpGet:
               path: /
               port: http
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
