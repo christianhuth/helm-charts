@@ -113,6 +113,9 @@ mailcow-exporter:
 maildev:
 - changed-files:
   - any-glob-to-any-file: charts/maildev/*
+mcp-for-argocd:
+- changed-files:
+  - any-glob-to-any-file: charts/mcp-for-argocd/*
 node-access:
 - changed-files:
   - any-glob-to-any-file: charts/node-access/*
