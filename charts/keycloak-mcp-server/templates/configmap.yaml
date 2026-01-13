@@ -1,0 +1,18 @@
+{{- if not .Values.keycloak.auth.existingResourceName -}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  {{- if .Values.keycloak.auth.tls.useOpenshiftServiceCA }}
+  annotations:
+    service.beta.openshift.io/inject-cabundle: "true"
+  {{- end }}
+  labels:
+    {{- include "keycloak-mcp-server.labels" . | nindent 4 }}
+  name: {{ include "keycloak-mcp-server.auth.resourceName" . }}
+{{- if not .Values.keycloak.auth.tls.useOpenshiftServiceCA }}
+data:
+  ca.crt: |
+    {{- .Values.keycloak.auth.tls.ca | nindent 4 }}
+{{- end }}
+{{- end }}

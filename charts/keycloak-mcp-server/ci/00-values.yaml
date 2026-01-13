@@ -1,0 +1,3 @@
+---
+keycloak:
+  url: "https://keycloak.example.com"

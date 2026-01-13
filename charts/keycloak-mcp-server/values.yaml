@@ -1,0 +1,224 @@
+# -- Provide a name in place of `keycloak-mcp-server`
+nameOverride: ""
+# -- String to fully override `"keycloak-mcp-server.fullname"`
+fullnameOverride: ""
+
+image:
+  # -- image registry
+  registry: quay.io
+  # -- image repository
+  repository: sshaaf/keycloak-mcp-server
+  # -- image pull policy
+  pullPolicy: Always
+  # -- Overrides the image tag
+  tag: "0.3.0"
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+# -- Number of replicas
+replicaCount: 1
+
+# -- The number of old ReplicaSets to retain
+revisionHistoryLimit: 10
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Annotations to be added to pods
+podAnnotations: {}
+
+# -- pod-level security context
+# @default -- see [values.yaml](./values.yaml)
+podSecurityContext:
+  fsGroup: 185
+  seccompProfile:
+    type: RuntimeDefault
+
+# -- container-level security context
+# @default -- see [values.yaml](./values.yaml)
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  runAsGroup: 185
+  runAsUser: 185
+  runAsNonRoot: true
+
+service:
+  # -- Kubernetes service type
+  type: ClusterIP
+  # -- Kubernetes port where service is exposed
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# BETA: Configure the gateway routes for the chart here.
+# More routes can be added by adding a dictionary key like the 'main' route.
+# Being BETA this can/will change in the future without notice, do not use unless you want to take that risk
+# [[ref]](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io%2fv1alpha2)
+route:
+  main:
+    # -- Enables or disables the route
+    enabled: false
+
+    # -- Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2
+    apiVersion: gateway.networking.k8s.io/v1
+
+    # -- Set the route kind
+    # Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute
+    kind: HTTPRoute
+
+    # -- Add annotations to the route
+    annotations: {}
+
+    # -- Add labels to the route
+    labels: {}
+
+    # -- Hostnames to be matched
+    hostnames: []
+    # - my-filter.example.com
+
+    # -- Parent references (Gateway)
+    parentRefs: []
+    # - name: acme-gw
+
+    # -- define conditions used for matching the rule against incoming HTTP requests.
+    # @default -- see [values.yaml](./values.yaml)
+    matches:
+      - path:
+          type: PathPrefix
+          value: /
+
+    # -- Filters define the filters that are applied to requests that match this rule.
+    filters: []
+
+    # -- Additional custom rules that can be added to the route
+    additionalRules: []
+
+    # -- adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/
+    httpsRedirect: false
+
+# -- Resource limits and requests for the pods.
+# @default -- see [values.yaml](./values.yaml)
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 100m
+  limits:
+    memory: 512Mi
+    cpu: 250m
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+livenessProbe:
+  # -- Failure threshold for livenessProbe
+  failureThreshold: 3
+  httpGet:
+    # -- Path for livenessProbe
+    path: /q/health/live
+  # -- Initial delay seconds for livenessProbe
+  initialDelaySeconds: 30
+  # -- Period seconds for livenessProbe
+  periodSeconds: 10
+  # -- Success threshold for livenessProbe
+  successThreshold: 1
+  # -- Timeout seconds for livenessProbe
+  timeoutSeconds: 3
+
+readinessProbe:
+  # -- Failure threshold for readinessProbe
+  failureThreshold: 3
+  httpGet:
+    # -- Path for readinessProbe
+    path: /q/health/ready
+  # -- Initial delay seconds for readinessProbe
+  initialDelaySeconds: 10
+  # -- Period seconds for readinessProbe
+  periodSeconds: 5
+  # -- Success threshold for readinessProbe
+  successThreshold: 1
+  # -- Timeout seconds for readinessProbe
+  timeoutSeconds: 3
+
+startupProbe:
+  # -- Failure threshold for startupProbe
+  failureThreshold: 30
+  httpGet:
+    # -- Path for startupProbe
+    path: /q/health/started
+  # -- Initial delay seconds for startupProbe
+  initialDelaySeconds: 0
+  # -- Period seconds for startupProbe
+  periodSeconds: 10
+  # -- Success threshold for startupProbe
+  successThreshold: 1
+  # -- Timeout seconds for startupProbe
+  timeoutSeconds: 3
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Toleration labels for pod assignment
+tolerations: []
+
+# -- Affinity settings for pod assignment
+affinity: {}
+
+# -- additional environment variables to be added to the pods
+extraEnv: []
+  # - name: FOO
+  #   value: BAR
+
+# -- additional environment variables from ConfigMaps or Secrets
+extraEnvFrom: []
+  # - configMapRef:
+  #     name: my-configmap
+  # - secretRef:
+  #     name: my-secret
+
+keycloak:
+  auth:
+    # -- OIDC Client ID for JWT token validation. Used to validate incoming user JWT tokens (no secret needed)
+    oidcClientId: ""
+    tls:
+      # -- Whether to add the ca certificate to the MCP Server
+      enabled: false
+      # -- CA certificate in PEM format to validate Keycloak server certificate
+      ca: ""
+      # -- Whether to use an existing resource for obtaining the CA certificate. The key needs to be ca.crt
+      existingResourceName: ""
+      # -- Type of the existing resource: secret or configmap
+      existingResourceType: configmap
+      # -- Whether to use the OpenShift Service CA. When true, the Service CA will be injected and used to validate the Keycloak server certificate
+      useOpenshiftServiceCA: false
+  # -- Name of the Keycloak realm
+  realm: "master"
+  # -- URL of the Keycloak instance to connect to
+  url: ""
