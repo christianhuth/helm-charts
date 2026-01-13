@@ -1,0 +1,125 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "keycloak-mcp-server.fullname" . }}
+  labels:
+    {{- include "keycloak-mcp-server.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "keycloak-mcp-server.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "keycloak-mcp-server.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "keycloak-mcp-server.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: KC_URL
+              value: {{ .Values.keycloak.url | quote }}
+            - name: KC_REALM
+              value: {{ .Values.keycloak.realm | quote }}
+            - name: OIDC_CLIENT_ID
+              value: {{ .Values.keycloak.auth.oidcClientId | quote }}
+            {{- if .Values.extraEnv }}
+              {{- .Values.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+          {{- if .Values.extraEnvFrom }}
+          envFrom:
+            {{- .Values.extraEnvFrom | toYaml | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
+            httpGet:
+              path: {{ .Values.livenessProbe.httpGet.path | quote }}
+              port: http
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | int }}
+          readinessProbe:
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold | int }}
+            httpGet:
+              path: {{ .Values.readinessProbe.httpGet.path | quote }}
+              port: http
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | int }}
+          startupProbe:
+            failureThreshold: {{ .Values.startupProbe.failureThreshold | int }}
+            httpGet:
+              path: {{ .Values.startupProbe.httpGet.path | quote }}
+              port: http
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.startupProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds | int }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.keycloak.auth.tls.enabled }}
+          volumeMounts:
+            - name: keycloak-ca-cert
+              mountPath: /certs
+              readOnly: true
+          {{- end }}
+      {{- if .Values.keycloak.auth.tls.enabled }}
+      volumes:
+        - name: keycloak-ca-cert
+          {{- if (eq .Values.keycloak.auth.tls.existingResourceType "configmap") }}
+          configMap:
+            name: {{ (include "keycloak-mcp-server.auth.resourceName" .) | quote }}
+            items:
+              - key: ca.crt
+                path: ca.crt
+          {{- else if (eq .Values.keycloak.auth.tls.existingResourceType "secret") }}
+          secret:
+            secretName: {{ (include "keycloak-mcp-server.auth.resourceName" .) | quote }}
+            items:
+              - key: ca.crt
+                path: ca.crt
+          {{- end }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
