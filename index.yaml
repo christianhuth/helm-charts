@@ -9727,6 +9727,37 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Display DNS exporter results using Grafana
+          url: https://grafana.com/api/dashboards/20617/images/15803/image
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v1.1.0
+    created: "2026-01-13T14:59:02.96236556Z"
+    description: A multi-target Prometheus exporter with an exclusive focus on DNS
+      monitoring
+    digest: 180590f8be3552ef7ee3c94aa5cab70d49a0a82f05c67e053fdb7783a0b25bb4
+    home: https://github.com/christianhuth/helm-charts
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: dns-exporter
+    sources:
+    - https://github.com/tykling/dns_exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/dns-exporter-2.2.0/dns-exporter-2.2.0.tgz
+    version: 2.2.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: fixed
           description: helm schema
       artifacthub.io/links: |
@@ -9949,6 +9980,33 @@ entries:
     - https://github.com/christianhuth/helm-charts/releases/download/dns-exporter-1.0.0/dns-exporter-1.0.0.tgz
     version: 1.0.0
   dnsbl-exporter:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.7.0-rc3
+    created: "2026-01-13T14:59:03.211930826Z"
+    description: Prometheus compatible exporter to query DNSBLs/RBLs.
+    digest: 77094c6693898104342398aafb4a4f9aa43478209ad90637b3f644361480b67e
+    home: https://github.com/christianhuth/helm-charts
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: dnsbl-exporter
+    sources:
+    - https://github.com/Luzilla/dnsbl_exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/dnsbl-exporter-1.2.0/dnsbl-exporter-1.2.0.tgz
+    version: 1.2.0
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
@@ -12515,6 +12573,33 @@ entries:
     - https://github.com/christianhuth/helm-charts/releases/download/freshrss-1.0.0/freshrss-1.0.0.tgz
     version: 1.0.0
   github-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v2.1.0
+    created: "2026-01-13T14:59:03.455186368Z"
+    description: A Helm Chart for the GitHub Prometheus Exporter
+    digest: 1cb9f6af5ddffc3c69f54463e554ad0b3efa0cf73ab98cc92a4d01d7f5e94a4d
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/github-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: github-exporter
+    sources:
+    - https://github.com/githubexporter/github-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/github-exporter-2.2.0/github-exporter-2.2.0.tgz
+    version: 2.2.0
   - annotations:
       artifacthub.io/changes: |
         - kind: added
@@ -28904,6 +28989,34 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.1.0
+    created: "2026-01-13T14:59:03.692787746Z"
+    description: Prometheus exporter for information about a mailcow instance
+    digest: 9cf91443d50f91e2b1518989e465b0dae772df150456975880ea6973f219a392
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/mailcow-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: mailcow-exporter
+    sources:
+    - https://github.com/mailcow/prometheus-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/mailcow-exporter-1.3.0/mailcow-exporter-1.3.0.tgz
+    version: 1.3.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: fixed
           description: helm schema
       artifacthub.io/links: |
@@ -29734,6 +29847,39 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Export information about your Servers from Netcup SCP as Prometheus metrics.
+          url: https://www.netcup-wiki.de/images/SCP-Willkommen.png
+        - title: Visualize your data as Grafana dashboard.
+          url: https://raw.githubusercontent.com/mrueg/netcupscp-exporter/main/grafana/dashboard.jpg
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.4.5
+    created: "2026-01-13T14:59:03.958315232Z"
+    description: Prometheus Exporter for Netcup Server Control Panel (SCP)
+    digest: bb490db15f1401135b1f4ada52f6980d79e1861c396f41969293121dce9eda58
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/netcupscp-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: netcupscp-exporter
+    sources:
+    - https://github.com/mrueg/netcupscp-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/netcupscp-exporter-1.4.0/netcupscp-exporter-1.4.0.tgz
+    version: 1.4.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: fixed
           description: helm schema
       artifacthub.io/links: |
@@ -30480,6 +30626,34 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/netcupscp-exporter-1.0.0/netcupscp-exporter-1.0.0.tgz
     version: 1.0.0
   nextcloud-exporter:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 0.9.0
+    created: "2026-01-13T14:59:04.239252907Z"
+    description: Prometheus exporter for Nextcloud servers
+    digest: 4388efccaba12bcafc2c352599ebb08b4f86a488b22462b572b0749fa62694cf
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/nextcloud-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: nextcloud-exporter
+    sources:
+    - https://github.com/xperimental/nextcloud-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/nextcloud-exporter-1.3.0/nextcloud-exporter-1.3.0.tgz
+    version: 1.3.0
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
@@ -38253,6 +38427,43 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/priority-classes-1.0.0/priority-classes-1.0.0.tgz
     version: 1.0.0
   prometheus-pve-exporter:
+  - annotations:
+      artifacthub.io/alternativeName: pve-exporter
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Add an user inside of Proxmox, that will be used for the Exporter.
+          url: https://xinux.net/images/6/6e/Prometheus-proxmox-grafana-user.png
+        - title: Add permissions for this user.
+          url: https://xinux.net/images/5/5d/Prometheus-proxmox-grafana-user-permission.png
+        - title: Visualize the data collected with Grafana.
+          url: https://grafana.com/api/dashboards/10347/images/6529/image
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 3.8.0
+    created: "2026-01-13T14:59:04.453300369Z"
+    description: A Helm chart for bootstrapping a PVE Exporter. Uses ServiceMonitor
+      to collect metrics.
+    digest: 0bf7c3e47e11dc74cef6d7a42d7b7ab5a3e36910169d5197f16590bf54a5565a
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/prometheus-pve-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: prometheus-pve-exporter
+    sources:
+    - https://github.com/prometheus-pve/prometheus-pve-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/prometheus-pve-exporter-2.6.0/prometheus-pve-exporter-2.6.0.tgz
+    version: 2.6.0
   - annotations:
       artifacthub.io/alternativeName: pve-exporter
       artifacthub.io/category: monitoring-logging
@@ -73652,4 +73863,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-01-13T08:58:56.994874898Z"
+generated: "2026-01-13T14:59:04.455773204Z"
