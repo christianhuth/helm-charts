@@ -1,7 +1,7 @@
 # bindy
 
-## 1.1.1
+## 1.2.0
 
-### Fixed
+### Changed
 
-- helm schema
+- App Version to v0.3.0
