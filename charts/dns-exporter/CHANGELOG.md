@@ -1,7 +1,7 @@
 # dns-exporter
 
-## 2.1.1
+## 2.2.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes

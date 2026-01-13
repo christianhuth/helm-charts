@@ -1,7 +1,7 @@
 # dnsbl-exporter
 
-## 1.1.1
+## 1.2.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
