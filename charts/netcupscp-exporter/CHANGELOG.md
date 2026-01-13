@@ -1,7 +1,7 @@
 # netcupscp-exporter
 
-## 1.3.1
+## 1.4.0
 
-### Fixed
+### Added
 
-- helm schema
+- support for Gateway API routes
