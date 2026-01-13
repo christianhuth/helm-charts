@@ -16895,6 +16895,37 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/headwind-mdm-1.0.0/headwind-mdm-1.0.0.tgz
     version: 1.0.0
+  keycloak-mcp-server:
+  - annotations:
+      artifacthub.io/category: ai-machine-learning
+      artifacthub.io/changes: |
+        - kind: added
+          description: initial version
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 0.3.0
+    created: "2026-01-13T08:58:56.992849126Z"
+    description: An MCP server for Keycloak, designed to work with Keycloak for identity
+      and access management, covering, Users, Realms, Clients, Roles, Groups, IDPs,
+      Authentication
+    digest: f384852c76032304fdf927e30f863d8321315a72482ac31677d7b777825a7aaf
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/keycloak-mcp-server/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: keycloak-mcp-server
+    sources:
+    - https://github.com/sshaaf/keycloak-mcp-server
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/keycloak-mcp-server-1.0.0/keycloak-mcp-server-1.0.0.tgz
+    version: 1.0.0
   kube-ops-view:
   - annotations:
       artifacthub.io/category: monitoring-logging
@@ -73621,4 +73652,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-01-12T21:13:22.911697982Z"
+generated: "2026-01-13T08:58:56.994874898Z"
