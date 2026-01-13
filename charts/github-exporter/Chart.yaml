@@ -2,7 +2,7 @@ apiVersion: v2
 name: github-exporter
 description: A Helm Chart for the GitHub Prometheus Exporter
 type: application
-version: 2.1.0
+version: 2.2.0
 appVersion: "v2.1.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/github-exporter/icon.svg
@@ -14,7 +14,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: Add Ingress resource and `ingress` values to expose the exporter via Ingress
+      description: support for Gateway API routes
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

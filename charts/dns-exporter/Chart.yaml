@@ -2,7 +2,7 @@ apiVersion: v2
 name: dns-exporter
 description: A multi-target Prometheus exporter with an exclusive focus on DNS monitoring
 type: application
-version: 2.1.1
+version: 2.2.0
 appVersion: "v1.1.0"
 home: https://github.com/christianhuth/helm-charts
 maintainers:
@@ -13,8 +13,8 @@ sources:
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: fixed
-      description: helm schema
+    - kind: added
+      description: support for Gateway API routes
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
