@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.5.0
+## 2.6.0
 
 ### Added
 
-- Add Ingress resource and `ingress` values to expose the exporter via Ingress
+- support for Gateway API routes
