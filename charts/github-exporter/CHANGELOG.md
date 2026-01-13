@@ -1,7 +1,7 @@
 # github-exporter
 
-## 2.1.0
+## 2.2.0
 
 ### Added
 
-- Add Ingress resource and `ingress` values to expose the exporter via Ingress
+- support for Gateway API routes
