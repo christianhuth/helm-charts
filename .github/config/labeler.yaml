@@ -86,6 +86,9 @@ isso:
 kateyes:
 - changed-files:
   - any-glob-to-any-file: charts/kateyes/*
+keycloak-mcp-server:
+- changed-files:
+  - any-glob-to-any-file: 'charts/keycloak-mcp-server/*'
 kirby:
 - changed-files:
   - any-glob-to-any-file: charts/kirby/*
