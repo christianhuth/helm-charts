@@ -2,7 +2,7 @@ apiVersion: v2
 name: bindy
 description: Bindy is a Kubernetes operator that manages BIND9 DNS infrastructure declaratively
 type: application
-version: 1.2.0
+version: 1.2.1
 appVersion: "v0.3.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/bindy/icon.svg
