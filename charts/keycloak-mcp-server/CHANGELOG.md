@@ -1,6 +1,6 @@
 # keycloak-mcp-server
 
-## 1.0.0
+## 1.0.1
 
 ### Fixed
 
