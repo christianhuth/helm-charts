@@ -2,7 +2,7 @@ apiVersion: v2
 name: maildev
 description: MailDev is a simple way to test your emails during development with an easy to use web interface.
 type: application
-version: 1.5.0
+version: 1.5.1
 appVersion: "2.2.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/maildev/icon.svg
@@ -15,8 +15,8 @@ sources:
   - https://hub.docker.com/r/maildev/maildev
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: support for Gateway API routes
+    - kind: fixed
+      description: problem in hpa template
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
