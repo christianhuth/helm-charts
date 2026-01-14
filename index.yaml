@@ -8299,6 +8299,43 @@ entries:
   countly:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: support for Gateway API routes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: From analytics to surveys, everything you need to build delightful customer experiences on mobile, web, and desktop. Your dedicated product analytics server awaits you.
+          url: https://cdn.prod.website-files.com/61c1b7c3e2f3805325be4594/646ca75af762159d03f456f1_mycountlyhero.svg
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 25.05.4
+    created: "2026-01-14T13:17:01.867358435Z"
+    dependencies:
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 18.1.20
+    description: Countly is a product analytics platform that helps teams track, analyze
+      and act-on their user actions and behaviour on mobile, web and desktop applications.
+    digest: 7aba0146de3952da7844925be4194e69b4cd5be4c9cc012ac125329219607d39
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/countly/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: countly
+    sources:
+    - https://github.com/Countly/countly-server
+    - https://countly.com/
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/countly-4.1.0/countly-4.1.0.tgz
+    version: 4.1.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: problem in hpa template
       artifacthub.io/links: |
@@ -75050,4 +75087,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-01-14T09:45:15.74061084Z"
+generated: "2026-01-14T13:17:01.869780365Z"
