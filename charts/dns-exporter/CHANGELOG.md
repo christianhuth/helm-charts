@@ -1,7 +1,7 @@
 # dns-exporter
 
-## 2.2.0
+## 2.2.1
 
-### Added
+### Fixed
 
-- support for Gateway API routes
+- problem in hpa template

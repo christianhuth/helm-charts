@@ -1,7 +1,7 @@
 # typo3
 
-## 6.3.1
+## 6.3.2
 
-### Changed
+### Fixed
 
-- dependency of mariadb to 24.0.3
+- problem in hpa template

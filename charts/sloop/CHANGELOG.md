@@ -1,7 +1,7 @@
 # sloop
 
-## 0.3.0
+## 0.3.1
 
-### Added
+### Fixed
 
-- support for Gateway API routes
+- problem in hpa template

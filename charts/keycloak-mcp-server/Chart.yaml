@@ -2,7 +2,7 @@ apiVersion: v2
 name: keycloak-mcp-server
 description: An MCP server for Keycloak, designed to work with Keycloak for identity and access management, covering, Users, Realms, Clients, Roles, Groups, IDPs, Authentication
 type: application
-version: 1.0.0
+version: 1.0.1
 appVersion: "0.3.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/keycloak-mcp-server/icon.svg
@@ -14,8 +14,8 @@ sources:
 annotations:
   artifacthub.io/category: ai-machine-learning
   artifacthub.io/changes: |
-    - kind: added
-      description: initial version
+    - kind: fixed
+      description: problem in hpa template
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

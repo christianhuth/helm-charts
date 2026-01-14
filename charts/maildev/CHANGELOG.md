@@ -1,7 +1,7 @@
 # maildev
 
-## 1.5.0
+## 1.5.1
 
-### Added
+### Fixed
 
-- support for Gateway API routes
+- problem in hpa template

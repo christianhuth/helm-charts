@@ -1,7 +1,7 @@
 # squest
 
-## 4.2.1
+## 4.2.2
 
-### Changed
+### Fixed
 
-- dependency of mariadb to 24.0.3
+- problem in hpa template

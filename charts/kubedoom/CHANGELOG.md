@@ -1,7 +1,7 @@
 # kubedoom
 
-## 1.1.1
+## 1.1.2
 
 ### Fixed
 
-- helm schema
+- problem in hpa template

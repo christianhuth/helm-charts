@@ -1,7 +1,7 @@
 # polr
 
-## 4.2.0
+## 4.2.1
 
-### Added
+### Fixed
 
-- support for Gateway API routes
+- problem in hpa template

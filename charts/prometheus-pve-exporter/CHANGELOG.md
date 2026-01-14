@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.6.0
+## 2.6.1
 
-### Added
+### Fixed
 
-- support for Gateway API routes
+- problem in hpa template

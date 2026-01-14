@@ -1,7 +1,7 @@
 # bindy
 
-## 1.1.1
+## 1.2.1
 
 ### Fixed
 
-- helm schema
+- problem in hpa template

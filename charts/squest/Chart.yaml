@@ -2,7 +2,7 @@ apiVersion: v2
 name: squest
 description: Squest is a self-service portal that works on top of Red Hat Ansible Automation Platform/AWX.
 type: application
-version: 4.2.1
+version: 4.2.2
 appVersion: "2.8.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
@@ -27,8 +27,8 @@ dependencies:
     condition: redis.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: dependency of mariadb to 24.0.3
+    - kind: fixed
+      description: problem in hpa template
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

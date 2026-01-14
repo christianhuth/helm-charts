@@ -1,7 +1,7 @@
 # keycloak-mcp-server
 
-## 1.0.0
+## 1.0.1
 
-### Added
+### Fixed
 
-- initial version
+- problem in hpa template
