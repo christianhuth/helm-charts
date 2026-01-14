@@ -2,6 +2,6 @@
 
 ## 0.4.0
 
-### Added
+### Fixed
 
-- support for Gateway API routes
+- problem in hpa template

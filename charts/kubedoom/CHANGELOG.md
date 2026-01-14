@@ -4,4 +4,4 @@
 
 ### Fixed
 
-- helm schema
+- problem in hpa template

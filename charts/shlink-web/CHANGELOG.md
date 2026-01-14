@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.9.0
+## 1.9.1
 
-### Added
+### Fixed
 
-- support for Gateway API routes
+- problem in hpa template

@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 1.6.0
+## 1.6.1
 
-### Added
+### Fixed
 
-- support for Gateway API routes
+- problem in hpa template

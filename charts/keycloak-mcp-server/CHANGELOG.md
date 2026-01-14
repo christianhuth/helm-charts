@@ -2,6 +2,6 @@
 
 ## 1.0.0
 
-### Added
+### Fixed
 
-- initial version
+- problem in hpa template

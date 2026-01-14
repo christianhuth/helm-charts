@@ -1,7 +1,7 @@
 # headwind-mdm
 
-## 4.3.0
+## 4.3.1
 
-### Added
+### Fixed
 
-- support for Gateway API routes
+- problem in hpa template
