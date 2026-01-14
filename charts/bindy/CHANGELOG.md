@@ -1,7 +1,7 @@
 # bindy
 
-## 1.2.1
+## 1.2.2
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- App Version to v0.3.1
