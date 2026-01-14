@@ -77,6 +77,17 @@ The command removes all the Kubernetes components associated with the chart and 
 | api.replicaCount | int | `1` | Number of replicas |
 | api.resources | object | see [values.yaml](./values.yaml) | Resource limits and requests for the controller pods. |
 | api.revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
+| api.route.main.additionalRules | list | `[]` | Additional custom rules that can be added to the route |
+| api.route.main.annotations | object | `{}` | Add annotations to the route |
+| api.route.main.apiVersion | string | `"gateway.networking.k8s.io/v1"` | Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2 |
+| api.route.main.enabled | bool | `false` | Enables or disables the route |
+| api.route.main.filters | list | `[]` | Filters define the filters that are applied to requests that match this rule. |
+| api.route.main.hostnames | list | `[]` | Hostnames to be matched |
+| api.route.main.httpsRedirect | bool | `false` | adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/ |
+| api.route.main.kind | string | `"HTTPRoute"` | Set the route kind Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute |
+| api.route.main.labels | object | `{}` | Add labels to the route |
+| api.route.main.matches | list | see [values.yaml](./values.yaml) | define conditions used for matching the rule against incoming HTTP requests. |
+| api.route.main.parentRefs | list | `[]` | Parent references (Gateway) |
 | api.securityContext | object | `{}` | container-level security context |
 | api.selectorLabels | object | `{}` | Additional labels to add to the pod |
 | api.service.port | int | `3000` | Kubernetes port where service is exposed |
@@ -125,6 +136,17 @@ The command removes all the Kubernetes components associated with the chart and 
 | frontend.replicaCount | int | `1` | Number of replicas |
 | frontend.resources | object | see [values.yaml](./values.yaml) | Resource limits and requests for the controller pods. |
 | frontend.revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
+| frontend.route.main.additionalRules | list | `[]` | Additional custom rules that can be added to the route |
+| frontend.route.main.annotations | object | `{}` | Add annotations to the route |
+| frontend.route.main.apiVersion | string | `"gateway.networking.k8s.io/v1"` | Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2 |
+| frontend.route.main.enabled | bool | `false` | Enables or disables the route |
+| frontend.route.main.filters | list | `[]` | Filters define the filters that are applied to requests that match this rule. |
+| frontend.route.main.hostnames | list | `[]` | Hostnames to be matched |
+| frontend.route.main.httpsRedirect | bool | `false` | adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/ |
+| frontend.route.main.kind | string | `"HTTPRoute"` | Set the route kind Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute |
+| frontend.route.main.labels | object | `{}` | Add labels to the route |
+| frontend.route.main.matches | list | see [values.yaml](./values.yaml) | define conditions used for matching the rule against incoming HTTP requests. |
+| frontend.route.main.parentRefs | list | `[]` | Parent references (Gateway) |
 | frontend.securityContext | object | `{}` | container-level security context |
 | frontend.selectorLabels | object | `{}` | Additional labels to add to the pod |
 | frontend.service.port | int | `3000` | Kubernetes port where service is exposed |
