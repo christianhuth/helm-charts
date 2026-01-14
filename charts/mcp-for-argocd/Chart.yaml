@@ -2,7 +2,7 @@ apiVersion: v2
 name: mcp-for-argocd
 description: An implementation of Model Context Protocol (MCP) server for Argo CD
 type: application
-version: 1.0.0
+version: 1.0.1
 appVersion: "v0.5.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/mcp-for-argocd/icon.svg
@@ -14,8 +14,8 @@ sources:
 annotations:
   artifacthub.io/category: ai-machine-learning
   artifacthub.io/changes: |
-    - kind: added
-      description: initial version
+    - kind: fixed
+      description: problem in hpa template
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

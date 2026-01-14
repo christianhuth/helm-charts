@@ -1,8 +1,7 @@
 # umami
 
-## 7.4.0
+## 7.4.1
 
-### Added
+### Fixed
 
-- support for startup probe
-- configuration for readiness and liveness probe
+- problem in hpa template

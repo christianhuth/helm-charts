@@ -1,7 +1,7 @@
 {{- if .Values.backend.celery.autoscaling.enabled }}
-{{- if semverCompare ">=1.23-0" .Capabilities.KubeVersion.GitVersion -}}
+{{- if semverCompare ">=1.23-0" .Capabilities.KubeVersion.GitVersion }}
 apiVersion: autoscaling/v2
-{{- else -}}
+{{- else }}
 apiVersion: autoscaling/v2beta1
 {{- end }}
 kind: HorizontalPodAutoscaler

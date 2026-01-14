@@ -1,7 +1,7 @@
 # freshrss
 
-## 2.4.0
+## 2.4.1
 
-### Added
+### Fixed
 
-- support for Gateway API routes
+- problem in hpa template
