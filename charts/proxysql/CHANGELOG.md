@@ -1,7 +1,7 @@
 # proxysql
 
-## 2.3.1
+## 2.3.2
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- App Version to 3.0.5
