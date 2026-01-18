@@ -1,7 +1,7 @@
 # squest
 
-## 4.2.2
+## 4.2.3
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- dependency of redis to 24.1.2
