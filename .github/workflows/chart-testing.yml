@@ -12,7 +12,7 @@ jobs:
       matrix: ${{ steps.get-changed-charts.outputs.matrix }}
     steps:
       - name: checkout git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -49,7 +49,7 @@ jobs:
         include: ${{ fromJson(needs.detect-changed-charts.outputs.matrix) }}
     steps:
       - name: checkout git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           persist-credentials: false
