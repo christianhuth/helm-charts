@@ -1,7 +1,7 @@
 # kutt
 
-## 8.3.1
+## 8.3.2
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- dependency of redis to 24.1.2
