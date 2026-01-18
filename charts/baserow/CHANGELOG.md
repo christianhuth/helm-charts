@@ -1,7 +1,7 @@
 # baserow
 
-## 6.2.1
+## 6.2.2
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- dependency of redis to 24.1.2
