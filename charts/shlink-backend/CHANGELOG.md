@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 9.3.2
+## 9.3.3
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- dependency of redis to 24.1.2
