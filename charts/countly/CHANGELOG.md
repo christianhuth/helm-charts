@@ -1,7 +1,7 @@
 # countly
 
-## 4.1.0
+## 4.1.1
 
-### Added
+### Changed
 
-- support for Gateway API routes
+- dependency of mongodb to 18.1.23
