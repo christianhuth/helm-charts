@@ -1,7 +1,7 @@
 # kube-ops-view
 
-## 7.1.0
+## 7.1.1
 
-### Added
+### Changed
 
-- support for Gateway API routes
+- dependency of redis to 24.1.2
