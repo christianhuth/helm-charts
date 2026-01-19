@@ -1,7 +1,7 @@
 # typo3
 
-## 6.3.2
+## 6.3.3
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- dependency of postgresql to 18.2.1
