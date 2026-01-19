@@ -1,7 +1,7 @@
 # umami
 
-## 7.4.1
+## 7.4.2
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- dependency of postgresql to 18.2.1
