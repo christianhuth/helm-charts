@@ -1,7 +1,7 @@
 # freshrss
 
-## 2.4.1
+## 2.4.2
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- dependency of postgresql to 18.2.1
