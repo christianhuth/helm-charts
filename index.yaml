@@ -640,6 +640,51 @@ entries:
       artifacthub.io/category: database
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of postgresql to 18.2.1
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Create your own online database without technical experience.
+          url: https://baserow.io/_nuxt/img/home_intro_screenshot.194c66b.png
+        - title: With Baserow you decide how you want to structure everything. Whether you’re managing customers, products, airplanes or all of them.
+          url: https://baserow.io/_nuxt/img/home_screenshot_2.d05a825.png
+        - title: Easily create custom plugins with our boilerplate or use third party ones.
+          url: https://baserow.io/_nuxt/img/home_screenshot_3.182742a.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.0.6
+    created: "2026-01-19T16:51:56.887640369Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 18.2.1
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 24.1.2
+    description: Baserow is an open source no-code database and Airtable alternative.
+    digest: fdcc170149b5301551608ae4012824341a98d7dad689135b478de7c9a9195712
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/baserow/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: baserow
+    sources:
+    - https://gitlab.com/bramw/baserow
+    - https://baserow.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/baserow-6.2.3/baserow-6.2.3.tgz
+    version: 6.2.3
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of redis to 24.1.2
       artifacthub.io/links: |
         - name: support
@@ -75672,4 +75717,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-01-19T16:16:04.372806623Z"
+generated: "2026-01-19T16:51:56.890284764Z"
