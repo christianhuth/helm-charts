@@ -1,7 +1,7 @@
 # squest
 
-## 4.2.3
+## 4.2.4
 
 ### Changed
 
-- dependency of redis to 24.1.2
+- App Version to 2.8.2
