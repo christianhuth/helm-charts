@@ -1,7 +1,7 @@
 # kubevirt-manager
 
-## 0.4.1
+## 0.4.2
 
 ### Fixed
 
-- problem in hpa template
+- a problem in Template for the Prometheus ServiceMonitor
