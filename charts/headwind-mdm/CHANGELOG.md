@@ -1,7 +1,7 @@
 # headwind-mdm
 
-## 4.3.1
+## 4.3.2
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- dependency of postgresql to 18.2.1
