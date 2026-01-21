@@ -1,11 +1,7 @@
 # kubevirt-manager
 
-## 0.5.0
-
-### Added
-
-- support for basic auth in the probes
+## 0.5.1
 
 ### Fixed
 
-- basic auth secret generation
+- readiness probe with basic auth

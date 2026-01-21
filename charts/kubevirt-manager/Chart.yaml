@@ -2,7 +2,7 @@ apiVersion: v2
 name: kubevirt-manager
 description: KubeVirt Web UI to manage the lifecycle of Virtual Machines and more
 type: application
-version: 0.5.0
+version: 0.5.1
 appVersion: "1.5.3"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kubevirt-manager/icon.svg
@@ -14,9 +14,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: fixed
-      description: basic auth secret generation
-    - kind: added
-      description: support for basic auth in the probes
+      description: readiness probe with basic auth
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
