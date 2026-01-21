@@ -49,6 +49,9 @@ spec:
             httpGet:
               path: /
               port: http
+              httpHeaders:
+                - name: Authorization
+                  value: Basic {{ printf "%s:%s" .Values.ingress.basicAuth.username .Values.ingress.basicAuth.password | b64enc }}
           readinessProbe:
             httpGet:
               path: /
