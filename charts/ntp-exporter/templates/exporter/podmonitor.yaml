@@ -18,16 +18,6 @@ metadata:
 spec:
   endpoints:
     - port: http
-      {{- if (eq (include "ntp-exporter.exporter.auth.enabled" .) "0") }}
-      params:
-        {{- if .Values.config.exporter.auth.securityToken }}
-        token:
-          - {{ .Values.config.exporter.auth.securityToken | quote }}
-        {{- else if .Values.config.mailcow.auth.apiKey }}
-        token:
-          - {{ .Values.config.mailcow.auth.apiKey | quote }}
-        {{- end }}
-      {{- end }}
       {{- with .Values.podMonitor.interval }}
       interval: {{ . }}
       {{- end }}
