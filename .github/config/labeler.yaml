@@ -128,6 +128,9 @@ netcupscp-exporter:
 nextcloud-exporter:
 - changed-files:
   - any-glob-to-any-file: charts/nextcloud-exporter/*
+ntp-exporter:
+- changed-files:
+  - any-glob-to-any-file: charts/ntp-exporter/*
 passbolt-ha:
 - changed-files:
   - any-glob-to-any-file: charts/passbolt-ha/*
