@@ -32588,6 +32588,35 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to v2.9.0
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v2.9.0
+    created: "2026-01-21T22:10:16.854704984Z"
+    description: Prometheus exporter that checks the drift of Kubernetes node's clock
+      against a given NTP server or servers
+    digest: 605c6a29311de6918a9d23ebdfab09a0e8d8dc66e6641232a6b1959b5f4f4b8d
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/ntp-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: ntp-exporter
+    sources:
+    - https://github.com/sapcc/ntp_exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/ntp-exporter-1.1.0/ntp-exporter-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: added
           description: initial version
       artifacthub.io/links: |
@@ -76530,4 +76559,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-01-21T21:16:32.500091058Z"
+generated: "2026-01-21T22:10:16.856890914Z"
