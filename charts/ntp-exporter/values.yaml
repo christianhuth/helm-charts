@@ -1,0 +1,169 @@
+# -- Provide a name in place of `ntp-exporter`
+nameOverride: ""
+# -- String to fully override `"ntp-exporter.fullname"`
+fullnameOverride: ""
+
+image:
+  # -- image registry
+  registry: ghcr.io
+  # -- image repository
+  repository: sapcc/ntp_exporter
+  # -- image pull policy
+  pullPolicy: Always
+  # -- Overrides the image tag
+  tag: "v2.8.0"
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Annotations to be added to pods
+podAnnotations: {}
+
+# -- pod-level security context
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# -- container-level security context
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  # -- Kubernetes service type
+  type: ClusterIP
+  # -- Kubernetes port where service is exposed
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# BETA: Configure the gateway routes for the chart here.
+# More routes can be added by adding a dictionary key like the 'main' route.
+# Being BETA this can/will change in the future without notice, do not use unless you want to take that risk
+# [[ref]](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io%2fv1alpha2)
+route:
+  main:
+    # -- Enables or disables the route
+    enabled: false
+
+    # -- Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2
+    apiVersion: gateway.networking.k8s.io/v1
+
+    # -- Set the route kind
+    # Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute
+    kind: HTTPRoute
+
+    # -- Add annotations to the route
+    annotations: {}
+
+    # -- Add labels to the route
+    labels: {}
+
+    # -- Hostnames to be matched
+    hostnames: []
+    # - my-filter.example.com
+
+    # -- Parent references (Gateway)
+    parentRefs: []
+    # - name: acme-gw
+
+    # -- define conditions used for matching the rule against incoming HTTP requests.
+    # @default -- see [values.yaml](./values.yaml)
+    matches:
+      - path:
+          type: PathPrefix
+          value: /
+
+    # -- Filters define the filters that are applied to requests that match this rule.
+    filters: []
+
+    # -- Additional custom rules that can be added to the route
+    additionalRules: []
+
+    # -- adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/
+    httpsRedirect: false
+
+# -- Resource limits and requests for the headwind pods.
+# @default -- see [values.yaml](./values.yaml)
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Toleration labels for pod assignment
+# @default -- see [values.yaml](./values.yaml)
+tolerations:
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
+    effect: "NoSchedule"
+
+# -- Affinity settings for pod assignment
+affinity: {}
+
+ntp:
+  config:
+    # -- High drift threshold
+    highDriftThreshold: "10ms"
+    # -- Duration of measurements in case of high (>10ms) drift
+    measurementDuration: 30s
+    # -- NTP protocol version to use
+    protocolVersion: "4"
+  exporter:
+    # -- Path under which to expose metrics
+    path: /metrics
+    # -- The port the exporter will listen on
+    port: 9559
+  # -- NTP server to query for time
+  server: ""
+  # -- source of information about ntp server. Valid options are cli and http
+  source: "cli"
+
+podMonitor:
+   # -- Enable a prometheus PodMonitor
+  enabled: false
+  # -- Prometheus PodMonitor labels
+  additionalLabels: {}
+    # release: prometheus
+  # -- Prometheus PodMonitor selector
+  selector: {}
+    # prometheus: kube-prometheus
+  # -- Prometheus PodMonitor interval
+  interval: 30s
+  # -- Prometheus PodMonitor namespace
+  namespace: ""
+  # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
+  metricRelabelings: []
+  # -- Prometheus [RelabelConfigs] to apply to samples before scraping
+  relabelings: []
