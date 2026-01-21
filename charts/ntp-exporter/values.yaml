@@ -29,17 +29,20 @@ serviceAccount:
 podAnnotations: {}
 
 # -- pod-level security context
-podSecurityContext: {}
-  # fsGroup: 2000
+# @default -- see [values.yaml](./values.yaml)
+podSecurityContext:
+  fsGroup: 4200
 
 # -- container-level security context
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# @default -- see [values.yaml](./values.yaml)
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsGroup: 4200
+  runAsUser: 4200
 
 service:
   # -- Kubernetes service type
@@ -166,4 +169,8 @@ podMonitor:
   # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
   metricRelabelings: []
   # -- Prometheus [RelabelConfigs] to apply to samples before scraping
-  relabelings: []
+  # @default -- see [values.yaml](./values.yaml)
+  relabelings:
+    - action: replace
+      sourceLabels: [__meta_kubernetes_pod_container_name]
+      targetLabel: node
