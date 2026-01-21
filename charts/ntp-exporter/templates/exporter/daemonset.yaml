@@ -1,0 +1,88 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "ntp-exporter.fullname" . }}
+  labels:
+    {{- include "ntp-exporter.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "ntp-exporter.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "ntp-exporter.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "ntp-exporter.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            # Exporter configuration
+            {{- if .Values.ntp.exporter.port }}
+            - "-web.listen-address"
+            - {{ printf ":%d" (.Values.ntp.exporter.port | int) | quote }}
+            {{- end }}
+            {{- if .Values.ntp.exporter.port }}
+            - "-web.telemetry-path"
+            - {{ .Values.ntp.exporter.path | quote }}
+            {{- end }}
+            # NTP configuration
+            {{- if .Values.ntp.config.highDriftThreshold }}
+            - "-ntp.high-drift"
+            - {{ .Values.ntp.config.highDriftThreshold | quote }}
+            {{- end }}
+            {{- if .Values.ntp.config.measurementDuration }}
+            - "-ntp.measurement-duration"
+            - {{ .Values.ntp.config.measurementDuration | quote }}
+            {{- end }}
+            {{- if .Values.ntp.config.protocolVersion }}
+            - "-ntp.protocol-version"
+            - {{ .Values.ntp.config.protocolVersion | quote }}
+            {{- end }}
+            {{- if .Values.ntp.source }}
+            - "-ntp.source"
+            - {{ .Values.ntp.source | quote }}
+            {{- end }}
+            {{- if .Values.ntp.server }}
+            - "-ntp.server"
+            - {{ .Values.ntp.server | quote }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.ntp.exporter.port | int }}
+              protocol: TCP
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
