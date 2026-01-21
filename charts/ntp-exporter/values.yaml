@@ -172,5 +172,5 @@ podMonitor:
   # @default -- see [values.yaml](./values.yaml)
   relabelings:
     - action: replace
-      sourceLabels: [__meta_kubernetes_pod_container_name]
+      sourceLabels: [__meta_kubernetes_pod_node_name]
       targetLabel: node
