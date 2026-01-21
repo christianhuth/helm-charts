@@ -1,7 +1,11 @@
 # kubevirt-manager
 
-## 0.4.2
+## 0.5.0
+
+### Added
+
+- support for basic auth in the probes
 
 ### Fixed
 
-- a problem in Template for the Prometheus ServiceMonitor
+- basic auth secret generation
