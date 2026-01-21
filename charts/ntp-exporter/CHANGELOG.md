@@ -1,7 +1,7 @@
 # ntp-exporter
 
-## 1.0.0
+## 1.1.0
 
-### Added
+### Changed
 
-- initial version
+- App Version to v2.9.0

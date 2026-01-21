@@ -2,8 +2,8 @@ apiVersion: v2
 name: ntp-exporter
 description: Prometheus exporter that checks the drift of Kubernetes node's clock against a given NTP server or servers
 type: application
-version: 1.0.0
-appVersion: "v2.8.0"
+version: 1.1.0
+appVersion: "v2.9.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/ntp-exporter/icon.svg
 maintainers:
@@ -14,8 +14,8 @@ sources:
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: added
-      description: initial version
+    - kind: changed
+      description: App Version to v2.9.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
