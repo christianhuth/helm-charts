@@ -280,6 +280,40 @@
         "relabelings": {
           "description": "Prometheus [RelabelConfigs] to apply to samples before scraping",
           "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "action": {
+                    "default": "replace",
+                    "title": "action",
+                    "type": "string"
+                  },
+                  "sourceLabels": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "title": "sourceLabels",
+                    "type": "array"
+                  },
+                  "targetLabel": {
+                    "default": "node",
+                    "title": "targetLabel",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "action",
+                  "sourceLabels",
+                  "targetLabel"
+                ],
+                "type": "object"
+              }
+            ],
             "required": []
           },
           "title": "relabelings",
@@ -306,7 +340,16 @@
     },
     "podSecurityContext": {
       "description": "pod-level security context",
-      "required": [],
+      "properties": {
+        "fsGroup": {
+          "default": 4200,
+          "title": "fsGroup",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "fsGroup"
+      ],
       "title": "podSecurityContext",
       "type": "object"
     },
@@ -498,7 +541,56 @@
     },
     "securityContext": {
       "description": "container-level security context",
-      "required": [],
+      "properties": {
+        "capabilities": {
+          "properties": {
+            "drop": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "title": "drop",
+              "type": "array"
+            }
+          },
+          "required": [
+            "drop"
+          ],
+          "title": "capabilities",
+          "type": "object"
+        },
+        "readOnlyRootFilesystem": {
+          "default": true,
+          "title": "readOnlyRootFilesystem",
+          "type": "boolean"
+        },
+        "runAsGroup": {
+          "default": 4200,
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 4200,
+          "title": "runAsUser",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "capabilities",
+        "readOnlyRootFilesystem",
+        "runAsNonRoot",
+        "runAsGroup",
+        "runAsUser"
+      ],
       "title": "securityContext",
       "type": "object"
     },

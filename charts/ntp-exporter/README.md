@@ -76,9 +76,9 @@ The command removes all the Kubernetes components associated with the chart and 
 | podMonitor.interval | string | `"30s"` | Prometheus PodMonitor interval |
 | podMonitor.metricRelabelings | list | `[]` | Prometheus [MetricRelabelConfigs] to apply to samples before ingestion |
 | podMonitor.namespace | string | `""` | Prometheus PodMonitor namespace |
-| podMonitor.relabelings | list | `[]` | Prometheus [RelabelConfigs] to apply to samples before scraping |
+| podMonitor.relabelings | list | see [values.yaml](./values.yaml) | Prometheus [RelabelConfigs] to apply to samples before scraping |
 | podMonitor.selector | object | `{}` | Prometheus PodMonitor selector |
-| podSecurityContext | object | `{}` | pod-level security context |
+| podSecurityContext | object | see [values.yaml](./values.yaml) | pod-level security context |
 | resources | object | see [values.yaml](./values.yaml) | Resource limits and requests for the headwind pods. |
 | route.main.additionalRules | list | `[]` | Additional custom rules that can be added to the route |
 | route.main.annotations | object | `{}` | Add annotations to the route |
@@ -91,7 +91,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | route.main.labels | object | `{}` | Add labels to the route |
 | route.main.matches | list | see [values.yaml](./values.yaml) | define conditions used for matching the rule against incoming HTTP requests. |
 | route.main.parentRefs | list | `[]` | Parent references (Gateway) |
-| securityContext | object | `{}` | container-level security context |
+| securityContext | object | see [values.yaml](./values.yaml) | container-level security context |
 | service.port | int | `80` | Kubernetes port where service is exposed |
 | service.type | string | `"ClusterIP"` | Kubernetes service type |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
