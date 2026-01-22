@@ -64,7 +64,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"ghcr.io"` | image registry |
 | image.repository | string | `"firestoned/bindy"` | image repository |
-| image.tag | string | `"v0.3.2"` | Overrides the image tag |
+| image.tag | string | `"v0.3.3"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | nameOverride | string | `""` | Provide a name in place of `bindy` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
