@@ -1,7 +1,7 @@
 # bindy
 
-## 1.2.3
+## 1.2.4
 
 ### Changed
 
-- App Version to v0.3.2
+- App Version to v0.3.3
