@@ -353,6 +353,207 @@
       "title": "podSecurityContext",
       "type": "object"
     },
+    "prometheusRule": {
+      "description": "# Custom PrometheusRule to be defined\n# ref: https://github.com/coreos/prometheus-operator#customresourcedefinitions",
+      "properties": {
+        "defaultRules": {
+          "properties": {
+            "absence": {
+              "properties": {
+                "enabled": {
+                  "default": true,
+                  "description": "Enable the rule that alerts if no metrics are scraped from ntp-exporter",
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "rule": {
+                  "description": "The rule definition for clock drift alerting",
+                  "properties": {
+                    "alert": {
+                      "default": "KubernetesNodeNTPMetricsDown",
+                      "title": "alert",
+                      "type": "string"
+                    },
+                    "annotations": {
+                      "properties": {
+                        "description": {
+                          "default": "The NTP drift metrics are missing for node {{`{{ $labels.node }}`}}. Check NTP exporter pod logs and connectifity to NTP servers.",
+                          "title": "description",
+                          "type": "string"
+                        },
+                        "summary": {
+                          "default": "NTP drift metrics absent",
+                          "title": "summary",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "summary",
+                        "description"
+                      ],
+                      "title": "annotations",
+                      "type": "object"
+                    },
+                    "expr": {
+                      "default": "absent(ntp_drift_seconds)",
+                      "title": "expr",
+                      "type": "string"
+                    },
+                    "for": {
+                      "default": "1h",
+                      "title": "for",
+                      "type": "string"
+                    },
+                    "labels": {
+                      "properties": {
+                        "severity": {
+                          "default": "warning",
+                          "title": "severity",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "severity"
+                      ],
+                      "title": "labels",
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "alert",
+                    "expr",
+                    "for",
+                    "labels",
+                    "annotations"
+                  ],
+                  "title": "rule",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "enabled",
+                "rule"
+              ],
+              "title": "absence",
+              "type": "object"
+            },
+            "clockDrift": {
+              "properties": {
+                "enabled": {
+                  "default": true,
+                  "description": "Enable the rule that alerts on high clock drift",
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "rule": {
+                  "description": "The rule definition for clock drift alerting",
+                  "properties": {
+                    "alert": {
+                      "default": "KubernetesNodeNTPClockDrift",
+                      "title": "alert",
+                      "type": "string"
+                    },
+                    "annotations": {
+                      "properties": {
+                        "description": {
+                          "default": "The local clock on node {{`{{ $labels.node }}`}} is more than 100ms apart from its NTP server. This can cause service degradation.",
+                          "title": "description",
+                          "type": "string"
+                        },
+                        "summary": {
+                          "default": "High NTP drift",
+                          "title": "summary",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "summary",
+                        "description"
+                      ],
+                      "title": "annotations",
+                      "type": "object"
+                    },
+                    "expr": {
+                      "default": "abs(ntp_drift_seconds) \u003e 0.1",
+                      "title": "expr",
+                      "type": "string"
+                    },
+                    "for": {
+                      "default": "1h",
+                      "title": "for",
+                      "type": "string"
+                    },
+                    "labels": {
+                      "properties": {
+                        "severity": {
+                          "default": "warning",
+                          "title": "severity",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "severity"
+                      ],
+                      "title": "labels",
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "alert",
+                    "expr",
+                    "for",
+                    "annotations",
+                    "labels"
+                  ],
+                  "title": "rule",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "enabled",
+                "rule"
+              ],
+              "title": "clockDrift",
+              "type": "object"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Enable the default rules that alert on clock drift and metrics absence",
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled",
+            "absence",
+            "clockDrift"
+          ],
+          "title": "defaultRules",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enable a PrometheusRule",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "rules": {
+          "description": "List of additional rules",
+          "items": {
+            "required": []
+          },
+          "title": "rules",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "defaultRules",
+        "rules"
+      ],
+      "title": "prometheusRule",
+      "type": "object"
+    },
     "resources": {
       "description": "Resource limits and requests for the headwind pods.",
       "properties": {
@@ -698,7 +899,8 @@
     "tolerations",
     "affinity",
     "ntp",
-    "podMonitor"
+    "podMonitor",
+    "prometheusRule"
   ],
   "type": "object"
 }

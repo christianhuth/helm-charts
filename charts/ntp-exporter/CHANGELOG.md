@@ -1,7 +1,7 @@
 # ntp-exporter
 
-## 1.1.0
+## 1.2.0
 
-### Changed
+### Added
 
-- App Version to v2.9.0
+- PrometheusRule and some default alerting rules
