@@ -174,3 +174,42 @@ podMonitor:
     - action: replace
       sourceLabels: [__meta_kubernetes_pod_node_name]
       targetLabel: node
+
+## Custom PrometheusRule to be defined
+## ref: https://github.com/coreos/prometheus-operator#customresourcedefinitions
+prometheusRule:
+  # -- Enable a PrometheusRule
+  enabled: false
+  defaultRules:
+    # -- Enable the default rules that alert on clock drift and metrics absence
+    enabled: true
+    absence:
+      # -- Enable the rule that alerts if no metrics are scraped from ntp-exporter
+      enabled: true
+      # -- The rule definition for clock drift alerting
+      # @default -- see [values.yaml](./values.yaml) for definition
+      rule:
+        alert: KubernetesNodeNTPMetricsDown
+        expr: absent(ntp_drift_seconds)
+        for: 1h
+        labels:
+          severity: warning
+        annotations:
+          summary: NTP drift metrics absent
+          description: The NTP drift metrics are missing for node {{`{{ $labels.node }}`}}. Check NTP exporter pod logs and connectifity to NTP servers.
+    clockDrift:
+      # -- Enable the rule that alerts on high clock drift
+      enabled: true
+      # -- The rule definition for clock drift alerting
+      # @default -- see [values.yaml](./values.yaml) for definition
+      rule:
+        alert: KubernetesNodeNTPClockDrift
+        expr: abs(ntp_drift_seconds) > 0.1
+        for: 1h
+        annotations:
+          summary: High NTP drift
+          description: The local clock on node {{`{{ $labels.node }}`}} is more than 100ms apart from its NTP server. This can cause service degradation.
+        labels:
+          severity: warning
+  # -- List of additional rules
+  rules: []
