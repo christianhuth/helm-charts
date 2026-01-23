@@ -3,7 +3,7 @@ apiVersion: v2
 name: passbolt-ha
 description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
 type: application
-version: 5.3.2
+version: 5.4.0
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/passbolt-ha/icon.svg
 maintainers:
@@ -22,12 +22,12 @@ dependencies:
     version: 1.1.17
   - name: proxysql
     repository: https://charts.christianhuth.de
-    version: 2.3.2
+    version: 2.4.0
 annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of proxysql to 2.3.2
+      description: dependency of proxysql to 2.4.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
