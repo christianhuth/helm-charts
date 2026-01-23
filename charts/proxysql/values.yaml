@@ -178,6 +178,7 @@ proxysql:
     queryRetriesOnFailure: 2
     waitTimeout: 28800000
     readWriteSplit: true
+    autocommitFalseIsTransaction: false
     servers: []
       # - isWriter: true
       #   hostname: example.mysql.org

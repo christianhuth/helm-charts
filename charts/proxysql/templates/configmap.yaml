@@ -23,6 +23,7 @@ data:
     mysql_variables=
     {
       interfaces="0.0.0.0:{{ .Values.proxysql.mysql.port }}"
+      autocommit_false_is_transaction={{ .Values.proxysql.mysql.autocommitFalseIsTransaction }}
       connect_timeout_server=1500
       connect_timeout_server_max=10000
       connection_max_age_ms={{ .Values.proxysql.mysql.connectionMaxAgeMS }}

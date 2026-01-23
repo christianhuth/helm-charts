@@ -404,6 +404,11 @@
         },
         "mysql": {
           "properties": {
+            "autocommitFalseIsTransaction": {
+              "default": false,
+              "title": "autocommitFalseIsTransaction",
+              "type": "boolean"
+            },
             "connectionMaxAgeMS": {
               "default": 0,
               "title": "connectionMaxAgeMS",
