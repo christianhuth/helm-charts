@@ -6,12 +6,12 @@
 ```console
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
-helm install my-release christianhuth/mailcow-exporter
+helm install my-release christianhuth/ntp-exporter
 ```
 
 ## Introduction
 
-This chart bootstraps a [Prometheus Exporter for Mailcow](https://github.com/mailcow/prometheus-exporter) using the [Helm](https://helm.sh) package manager.
+This chart bootstraps a [NTP-Exporter for Prometheus](https://github.com/sapcc/ntp_exporter) using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
 
@@ -25,10 +25,10 @@ To install the chart with the release name `my-release`:
 ```console
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
-helm install my-release christianhuth/mailcow-exporter
+helm install my-release christianhuth/ntp-exporter
 ```
 
-These commands deploy the Mailcow Exporter on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
+These commands deploy the NTP-Exporter on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
 
@@ -49,5 +49,5 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianhuth/mailcow-exporter
+helm install my-release -f values.yaml christianhuth/ntp-exporter
 ```
