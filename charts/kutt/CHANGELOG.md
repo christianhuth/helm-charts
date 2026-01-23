@@ -1,7 +1,7 @@
 # kutt
 
-## 8.3.4
+## 8.3.5
 
-### Changed
+### Fixed
 
-- dependency of postgresql to 18.2.3
+- environment variable REDIS_ENABLED being false when using externalRedis

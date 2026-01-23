@@ -62,6 +62,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | externalRedis.auth.existingSecret | string | `""` | Name of existing secret to use for Redis™ credentials |
 | externalRedis.auth.password | string | `""` | Password to use |
 | externalRedis.auth.userPasswordKey | string | `""` | Key in the secret containing the password |
+| externalRedis.enabled | bool | `true` | enable the Redis integration for an external Redis™ |
 | externalRedis.hostname | string | `""` | Hostname of Redis™ |
 | externalRedis.port | int | `6379` | Port used to connect to Redis |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |

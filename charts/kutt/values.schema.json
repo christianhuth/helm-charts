@@ -147,6 +147,12 @@
           "title": "auth",
           "type": "object"
         },
+        "enabled": {
+          "default": true,
+          "description": "enable the Redis integration for an external Redis™",
+          "title": "enabled",
+          "type": "boolean"
+        },
         "hostname": {
           "default": "",
           "description": "Hostname of Redis™",
@@ -161,6 +167,7 @@
         }
       },
       "required": [
+        "enabled",
         "auth",
         "hostname",
         "port"
