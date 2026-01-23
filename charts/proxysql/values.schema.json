@@ -521,6 +521,7 @@
             "queryRetriesOnFailure",
             "waitTimeout",
             "readWriteSplit",
+            "autocommitFalseIsTransaction",
             "servers",
             "users",
             "slave",
