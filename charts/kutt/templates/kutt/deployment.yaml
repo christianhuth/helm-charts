@@ -137,8 +137,9 @@ spec:
             - name: DB_SSL
               value: "false"
             # Redis Settings
+            {{- if (or .Values.redis.enabled .Values.externalRedis.enabled) }}
             - name: REDIS_ENABLED
-              value: {{ .Values.redis.enabled | quote }}
+              value: "true"
             - name: REDIS_HOST
               value: {{ include "kutt.redis.hostname" . | quote }}
             - name: REDIS_PORT
@@ -149,7 +150,8 @@ spec:
                 secretKeyRef:
                   name: {{ include "kutt.redis.secretName" . | quote }}
                   key: {{ include "kutt.redis.userPasswordKey" . | quote }}
-            {{- end -}}
+            {{- end }}
+            {{- end }}
             {{- range .Values.extraEnv }}
             {{- if and (.name) (.value) }}
             - name: {{ .name | quote }}

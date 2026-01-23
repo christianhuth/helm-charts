@@ -276,6 +276,8 @@ redis:
     password: kutt
 
 externalRedis:
+  # -- enable the Redis integration for an external Redis™
+  enabled: true
   auth:
     # -- if authentication should be used with external Redis™
     enabled: true
