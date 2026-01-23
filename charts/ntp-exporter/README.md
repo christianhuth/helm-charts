@@ -79,6 +79,13 @@ The command removes all the Kubernetes components associated with the chart and 
 | podMonitor.relabelings | list | see [values.yaml](./values.yaml) | Prometheus [RelabelConfigs] to apply to samples before scraping |
 | podMonitor.selector | object | `{}` | Prometheus PodMonitor selector |
 | podSecurityContext | object | see [values.yaml](./values.yaml) | pod-level security context |
+| prometheusRule.defaultRules.absence.enabled | bool | `true` | Enable the rule that alerts if no metrics are scraped from ntp-exporter |
+| prometheusRule.defaultRules.absence.rule | object | see [values.yaml](./values.yaml) for definition | The rule definition for clock drift alerting |
+| prometheusRule.defaultRules.clockDrift.enabled | bool | `true` | Enable the rule that alerts on high clock drift |
+| prometheusRule.defaultRules.clockDrift.rule | object | see [values.yaml](./values.yaml) for definition | The rule definition for clock drift alerting |
+| prometheusRule.defaultRules.enabled | bool | `true` | Enable the default rules that alert on clock drift and metrics absence |
+| prometheusRule.enabled | bool | `false` | Enable a PrometheusRule |
+| prometheusRule.rules | list | `[]` | List of additional rules |
 | resources | object | see [values.yaml](./values.yaml) | Resource limits and requests for the headwind pods. |
 | route.main.additionalRules | list | `[]` | Additional custom rules that can be added to the route |
 | route.main.annotations | object | `{}` | Add annotations to the route |

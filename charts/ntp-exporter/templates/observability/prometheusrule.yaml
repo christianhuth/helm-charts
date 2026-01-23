@@ -1,0 +1,27 @@
+{{- if .Values.prometheusRule.enabled }}
+{{- $fullName := include "ntp-exporter.fullname" . }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    {{- include "ntp-exporter.labels" . | nindent 4 }}
+  name: {{ $fullName | quote }}
+  {{- if .Values.prometheusRule.namespace }}
+  namespace: {{ .Values.prometheusRule.namespace }}
+  {{- else }}
+  namespace: {{ .Release.Namespace | quote }}
+  {{- end }}
+spec:
+  groups:
+    - name: {{ $fullName | quote }}
+      rules:
+      {{- if (and .Values.prometheusRule.defaultRules.enabled .Values.prometheusRule.defaultRules.absence.enabled) }}
+        {{- .Values.prometheusRule.defaultRules.absence.rule | list | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if (and .Values.prometheusRule.defaultRules.enabled .Values.prometheusRule.defaultRules.clockDrift.enabled) }}
+        {{- .Values.prometheusRule.defaultRules.clockDrift.rule | list | toYaml | nindent 8 }}
+      {{- end }}
+      {{- with .Values.prometheusRule.rules }}
+         {{- tpl (toYaml .) $ | nindent 8 }}
+      {{- end }}
+{{- end }}
