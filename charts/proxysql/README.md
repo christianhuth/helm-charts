@@ -85,6 +85,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | proxysql.monitor.replicationLagTimeout | int | `1500` |  |
 | proxysql.monitor.slaveLagWhenNull | int | `60` |  |
 | proxysql.monitor.writerAsReader | bool | `true` |  |
+| proxysql.mysql.autocommitFalseIsTransaction | bool | `false` |  |
 | proxysql.mysql.connectionMaxAgeMS | int | `0` |  |
 | proxysql.mysql.galera.enabled | bool | `false` |  |
 | proxysql.mysql.galera.maxWriters | int | `1` |  |
