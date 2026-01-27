@@ -133,6 +133,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| strategy | object | `{"type":"RollingUpdate"}` | Deployment strategy |
+| strategy.type | string | `"RollingUpdate"` | Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate. |
 | tolerations | list | `[]` | Toleration labels for pod assignment |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.

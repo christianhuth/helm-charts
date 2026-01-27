@@ -249,3 +249,12 @@ externalPostgresql:
   hostname: ""
   # -- Port used to connect to PostgreSQL database
   port: 5432
+
+# -- Deployment strategy
+strategy:
+  # -- Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
+  type: RollingUpdate
+  # -- Rolling update configuration parameters
+  # rollingUpdate:
+  #   maxUnavailable: 25%
+  #   maxSurge: 25%
