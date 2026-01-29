@@ -9,6 +9,16 @@ spec:
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  {{- with .Values.strategy }}
+  strategy:
+    type: {{ .type }}
+    {{- if and (eq .type "RollingUpdate") .rollingUpdate }}
+    rollingUpdate:
+      {{- toYaml .rollingUpdate | nindent 6 }}
+    {{- else }}
+    rollingUpdate: null
+    {{- end }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "freshrss.selectorLabels" . | nindent 6 }}
