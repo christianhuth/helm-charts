@@ -1,7 +1,7 @@
 # goldpinger
 
-## 1.1.0
+## 1.1.1
 
-### Added
+### Changed
 
-- support for Gateway API routes
+- App Version to 3.10.3
