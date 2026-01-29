@@ -1,7 +1,7 @@
 # freshrss
 
-## 2.4.4
+## 2.5.0
 
-### Changed
+### Added
 
-- App Version to 1.28.1
+- support for deployment strategy

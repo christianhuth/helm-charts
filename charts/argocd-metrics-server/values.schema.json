@@ -7,6 +7,12 @@
       "title": "affinity",
       "type": "object"
     },
+    "deploymentStrategy": {
+      "description": "Deployment strategy for the all deployed Deployments",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "extraEnv": {
       "description": "additional environment variables to be added to the pods",
       "items": {
@@ -391,6 +397,7 @@
     "securityContext",
     "service",
     "serviceAccount",
+    "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",

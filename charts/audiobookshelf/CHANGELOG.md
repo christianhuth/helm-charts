@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 1.6.1
+## 1.7.0
 
-### Fixed
+### Added
 
-- problem in hpa template
+- support for deployment strategy

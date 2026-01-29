@@ -53,6 +53,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| deploymentStrategy | object | `{}` | Deployment strategy for the all deployed Deployments |
 | externalPostgresql.auth.database | string | `""` | Name of the database to use |
 | externalPostgresql.auth.existingSecret | string | `""` | Name of existing secret to use for PostgreSQL credentials |
 | externalPostgresql.auth.password | string | `""` | Password to use |
