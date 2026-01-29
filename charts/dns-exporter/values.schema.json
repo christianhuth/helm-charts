@@ -45,6 +45,12 @@
       "title": "containerPort",
       "type": "integer"
     },
+    "deploymentStrategy": {
+      "description": "Deployment strategy for the all deployed Deployments",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "extraArgs": {
       "description": "Additional command arguments that will be passed to the exporter",
       "items": {
@@ -760,6 +766,7 @@
     "route",
     "resources",
     "autoscaling",
+    "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",
