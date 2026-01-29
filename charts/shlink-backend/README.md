@@ -121,6 +121,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | config.urlShortening.multiSegmentSlugsEnabled | bool | `false` | Allows to create and handle multi-segment custom slugs when true is provided. See [multi-segment custom slugs](https://shlink.io/documentation/some-features/#multi-segment-custom-slugs) for more information. |
 | config.urlShortening.shortUrlMode | string | `"strict"` | Determines how to match short URLs. Valid values are strict or loose. See [short URLs mode](https://shlink.io/documentation/some-features/#short-urls-mode) for more information. |
 | config.urlShortening.shortUrlTrailingSlash | bool | `false` | Allows to enable support for trailing slashes in short URLs when true is provided. See [short URLs trailing slash](https://shlink.io/documentation/some-features/#short-urls-trailing-slash) for more information. |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods. See https://shlink.io/documentation/environment-variables for a complete list. |
 | fullnameOverride | string | `""` | String to fully override `"shlink-backend.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |

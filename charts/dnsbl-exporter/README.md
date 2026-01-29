@@ -51,7 +51,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| deploymentStrategy | object | `{}` | Deployment strategy for the all deployed Deployments |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | dnsblConfig.log.debug | bool | `false` | Enable debug log level |
 | dnsblConfig.log.format | string | `"text"` | Define the log format. Valid values are text or json |
 | dnsblConfig.rbl.domainBased | bool | `false` |  |

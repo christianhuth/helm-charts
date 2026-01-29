@@ -51,6 +51,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | externalDatabase.auth.database | string | `"typo3"` | Name of the database to use |
 | externalDatabase.auth.existingSecret | string | `""` | Name of existing secret to use for database credentials |
 | externalDatabase.auth.password | string | `"typo3"` | Password to use |

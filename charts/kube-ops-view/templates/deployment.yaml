@@ -8,6 +8,10 @@ metadata:
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  {{- with .Values.deploymentStrategy }}
+  strategy:
+    {{- . | toYaml | nindent 4 }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "kube-ops-view.selectorLabels" . | nindent 6 }}

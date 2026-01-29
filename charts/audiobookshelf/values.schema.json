@@ -434,7 +434,7 @@
       "type": "object"
     },
     "deploymentStrategy": {
-      "description": "Deployment strategy for the all deployed Deployments",
+      "description": "Update strategy for the deployment",
       "required": [],
       "title": "deploymentStrategy",
       "type": "object"

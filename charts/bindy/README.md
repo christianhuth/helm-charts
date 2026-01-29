@@ -58,7 +58,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | config.leaderElection.retryPeriodSeconds | int | `2` | Retry period in seconds |
 | config.log.format | string | `"json"` | Log format: text or json |
 | config.log.level | string | `"info"` | Log level for the controller: error, warn, info, debug, trace |
-| deploymentStrategy | object | `{}` | Deployment strategy for the all deployed Deployments |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | extraEnvFrom | list | `[]` | additional environment variables from ConfigMaps or Secrets |
 | fullnameOverride | string | `""` | String to fully override `"bindy.fullname"` |

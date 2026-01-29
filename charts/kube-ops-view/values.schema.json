@@ -15,6 +15,12 @@
       "title": "args",
       "type": "array"
     },
+    "deploymentStrategy": {
+      "description": "Update strategy for the deployment",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"kube-ops-view.fullname\"`",
@@ -488,6 +494,7 @@
     "securityContext",
     "service",
     "resources",
+    "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",

@@ -147,7 +147,7 @@ autoscaling:
   # -- Target Memory utilization percentage
   # targetMemoryUtilizationPercentage: 80
 
-# -- Deployment strategy for the all deployed Deployments
+# -- Update strategy for the deployment
 deploymentStrategy: {}
   # type: RollingUpdate
   # rollingUpdate:

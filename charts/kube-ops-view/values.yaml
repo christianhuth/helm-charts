@@ -63,6 +63,13 @@ resources: {}
   #   cpu: 50m
   #   memory: 50Mi
 
+# -- Update strategy for the deployment
+deploymentStrategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxSurge: 25%
+  #   maxUnavailable: 25%
+
 # -- Node labels for pod assignment
 nodeSelector: {}
 

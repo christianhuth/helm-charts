@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.9.1
+## 1.10.0
 
-### Fixed
+### Added
 
-- problem in hpa template
+- support for deployment strategy

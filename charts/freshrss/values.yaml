@@ -139,7 +139,7 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-# -- Deployment strategy for the all deployed Deployments
+# -- Update strategy for the deployment
 deploymentStrategy: {}
   # type: RollingUpdate
   # rollingUpdate:

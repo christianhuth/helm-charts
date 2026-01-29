@@ -1,7 +1,7 @@
 # argocd-metrics-server
 
-## 1.1.0
+## 1.1.1
 
-### Added
+### Fixed
 
-- support for deployment strategy
+- doc for deployment strategy

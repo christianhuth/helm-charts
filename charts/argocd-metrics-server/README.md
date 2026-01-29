@@ -49,7 +49,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity settings for pod assignment |
-| deploymentStrategy | object | `{}` | Deployment strategy for the all deployed Deployments |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | fullnameOverride | string | `""` | String to fully override `"argocd-extension-metrics.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |

@@ -698,6 +698,12 @@
       "title": "config",
       "type": "object"
     },
+    "deploymentStrategy": {
+      "description": "Update strategy for the deployment",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "extraEnv": {
       "description": "additional environment variables to be added to the pods. See https://shlink.io/documentation/environment-variables for a complete list.",
       "items": {
@@ -1459,6 +1465,7 @@
     "route",
     "resources",
     "autoscaling",
+    "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",

@@ -39,6 +39,12 @@
       "title": "autoscaling",
       "type": "object"
     },
+    "deploymentStrategy": {
+      "description": "Update strategy for the deployment",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "externalDatabase": {
       "properties": {
         "auth": {
@@ -863,6 +869,7 @@
     "route",
     "resources",
     "autoscaling",
+    "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",
