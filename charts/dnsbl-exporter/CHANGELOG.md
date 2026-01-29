@@ -1,7 +1,7 @@
 # dnsbl-exporter
 
-## 1.2.1
+## 1.3.0
 
-### Fixed
+### Added
 
-- problem in hpa template
+- support for deployment strategy

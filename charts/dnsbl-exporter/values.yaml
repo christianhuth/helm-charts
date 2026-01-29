@@ -160,6 +160,13 @@ readinessProbe:
   # -- Timeout in seconds for readinessProbe
   timeoutSeconds: 10
 
+# -- Deployment strategy for the all deployed Deployments
+deploymentStrategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxSurge: 25%
+  #   maxUnavailable: 25%
+
 # -- Node labels for pod assignment
 nodeSelector: {}
 

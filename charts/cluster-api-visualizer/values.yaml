@@ -147,6 +147,13 @@ autoscaling:
   # -- Target Memory utilization percentage
   # targetMemoryUtilizationPercentage: 80
 
+# -- Deployment strategy for the all deployed Deployments
+deploymentStrategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxSurge: 25%
+  #   maxUnavailable: 25%
+
 # -- Node labels for pod assignment
 nodeSelector: {}
 

@@ -1,7 +1,7 @@
 # dns-exporter
 
-## 2.2.1
+## 2.3.0
 
-### Fixed
+### Added
 
-- problem in hpa template
+- support for deployment strategy

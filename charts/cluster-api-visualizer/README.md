@@ -51,6 +51,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` | Maximum number of replicas |
 | autoscaling.minReplicas | int | `1` | Minimum number of replicas |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
+| deploymentStrategy | object | `{}` | Deployment strategy for the all deployed Deployments |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | fullnameOverride | string | `""` | String to fully override `"cluster-api-visualizer.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
