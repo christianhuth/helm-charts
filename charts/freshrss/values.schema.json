@@ -39,6 +39,12 @@
       "title": "autoscaling",
       "type": "object"
     },
+    "deploymentStrategy": {
+      "description": "Deployment strategy for the all deployed Deployments",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "externalPostgresql": {
       "properties": {
         "auth": {
@@ -864,6 +870,7 @@
     "route",
     "resources",
     "autoscaling",
+    "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",
