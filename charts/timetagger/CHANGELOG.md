@@ -1,7 +1,7 @@
 # timetagger
 
-## 2.1.1
+## 2.1.2
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- App Version to v26.1.2
