@@ -2,6 +2,6 @@
 
 ## 1.3.1
 
-### Fixed
+### Added
 
 - doc for deployment strategy
