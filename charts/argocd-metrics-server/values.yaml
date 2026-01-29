@@ -70,6 +70,13 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+# -- Deployment strategy for the all deployed Deployments
+deploymentStrategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 25%
+    maxUnavailable: 25%
+
 # -- Node labels for pod assignment
 nodeSelector: {}
 
