@@ -50,6 +50,7 @@ The command removes all the Kubernetes components associated with the chart and 
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity settings for pod assignment |
 | args | list | `[]` |  |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | fullnameOverride | string | `""` | String to fully override `"kube-ops-view.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registory |

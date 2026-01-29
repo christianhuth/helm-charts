@@ -52,6 +52,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | configuration | list | `[]` |  |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods. See https://shlink.io/documentation/shlink-web-client/pre-configuring-servers for the supported variables. |
 | fullnameOverride | string | `""` | String to fully override `"shlink-web.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |

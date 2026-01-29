@@ -1,7 +1,7 @@
 # typo3
 
-## 6.3.4
+## 6.4.0
 
-### Changed
+### Added
 
-- dependency of postgresql to 18.2.3
+- support for deployment strategy

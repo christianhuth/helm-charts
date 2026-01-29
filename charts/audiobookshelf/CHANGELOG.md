@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 1.7.0
+## 1.7.1
 
-### Added
+### Fixed
 
-- support for deployment strategy
+- doc for deployment strategy

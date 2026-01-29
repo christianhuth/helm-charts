@@ -39,6 +39,12 @@
       "title": "autoscaling",
       "type": "object"
     },
+    "deploymentStrategy": {
+      "description": "Update strategy for the deployment",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "dnsblConfig": {
       "properties": {
         "log": {
@@ -1060,6 +1066,7 @@
     "autoscaling",
     "livenessProbe",
     "readinessProbe",
+    "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",

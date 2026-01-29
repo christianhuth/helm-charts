@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 10.0.2
+## 10.1.0
 
-### Changed
+### Added
 
-- dependency of postgresql to 18.2.3
+- support for deployment strategy

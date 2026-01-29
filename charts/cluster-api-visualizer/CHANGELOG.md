@@ -1,7 +1,7 @@
 # cluster-api-visualizer
 
-## 0.5.0
+## 0.5.1
 
-### Added
+### Fixed
 
-- support for deployment strategy
+- doc for deployment strategy
