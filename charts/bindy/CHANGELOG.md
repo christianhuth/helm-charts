@@ -1,7 +1,7 @@
 # bindy
 
-## 1.2.4
+## 1.3.0
 
-### Changed
+### Added
 
-- App Version to v0.3.3
+- support for deployment strategy
