@@ -7889,6 +7889,34 @@ entries:
   bindy:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: support for deployment strategy
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.3.3
+    created: "2026-01-29T12:48:42.150571974Z"
+    description: Bindy is a Kubernetes operator that manages BIND9 DNS infrastructure
+      declaratively
+    digest: a80a3163dd894c87624b5190454f10d06a74aa7326de27e1cea3fc24e463c485
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/bindy/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: bindy
+    sources:
+    - https://github.com/firestoned/bindy
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/bindy-1.3.0/bindy-1.3.0.tgz
+    version: 1.3.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: App Version to v0.3.3
       artifacthub.io/links: |
@@ -8140,6 +8168,36 @@ entries:
     - https://github.com/christianhuth/helm-charts/releases/download/bindy-1.0.0/bindy-1.0.0.tgz
     version: 1.0.0
   cluster-api-visualizer:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: support for deployment strategy
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Simply shorten your link using the Web UI.
+          url: https://github.com/Jont828/cluster-api-visualizer/raw/main/demo/demo.gif
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v1.5.0
+    created: "2026-01-29T12:48:42.375727885Z"
+    description: Multicluster resource visualization tool for Cluster API.
+    digest: 4cd1cd1b51eb9b8236c525b57142d345d5daa0fb64759db0382823da813fe5f5
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/cluster-api-visualizer/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: cluster-api-visualizer
+    sources:
+    - https://github.com/Jont828/cluster-api-visualizer
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/cluster-api-visualizer-0.5.0/cluster-api-visualizer-0.5.0.tgz
+    version: 0.5.0
   - annotations:
       artifacthub.io/changes: |
         - kind: fixed
@@ -10346,6 +10404,37 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: added
+          description: support for deployment strategy
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Display DNS exporter results using Grafana
+          url: https://grafana.com/api/dashboards/20617/images/15803/image
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v1.1.0
+    created: "2026-01-29T12:48:42.708717204Z"
+    description: A multi-target Prometheus exporter with an exclusive focus on DNS
+      monitoring
+    digest: 553583a117a510abf760b2fc7be69df2a6473d2074569296b7c8760cb68ab61b
+    home: https://github.com/christianhuth/helm-charts
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: dns-exporter
+    sources:
+    - https://github.com/tykling/dns_exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/dns-exporter-2.3.0/dns-exporter-2.3.0.tgz
+    version: 2.3.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: fixed
           description: problem in hpa template
       artifacthub.io/links: |
@@ -10630,6 +10719,33 @@ entries:
     - https://github.com/christianhuth/helm-charts/releases/download/dns-exporter-1.0.0/dns-exporter-1.0.0.tgz
     version: 1.0.0
   dnsbl-exporter:
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: added
+          description: support for deployment strategy
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.7.0-rc3
+    created: "2026-01-29T12:48:42.980755907Z"
+    description: Prometheus compatible exporter to query DNSBLs/RBLs.
+    digest: dad872c8c1de72d675dd9adec9b368d1cf1ec93e0485304d5a9cd2971773c48f
+    home: https://github.com/christianhuth/helm-charts
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: dnsbl-exporter
+    sources:
+    - https://github.com/Luzilla/dnsbl_exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/dnsbl-exporter-1.3.0/dnsbl-exporter-1.3.0.tgz
+    version: 1.3.0
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
@@ -76960,4 +77076,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-01-29T12:13:28.914899822Z"
+generated: "2026-01-29T12:48:42.985810977Z"
