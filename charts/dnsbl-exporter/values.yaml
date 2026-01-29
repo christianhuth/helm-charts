@@ -160,7 +160,7 @@ readinessProbe:
   # -- Timeout in seconds for readinessProbe
   timeoutSeconds: 10
 
-# -- Deployment strategy for the all deployed Deployments
+# -- Update strategy for the deployment
 deploymentStrategy: {}
   # type: RollingUpdate
   # rollingUpdate:

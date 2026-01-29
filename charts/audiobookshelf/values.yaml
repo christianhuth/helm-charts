@@ -133,7 +133,7 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-# -- Deployment strategy for the all deployed Deployments
+# -- Update strategy for the deployment
 deploymentStrategy: {}
   # type: RollingUpdate
   # rollingUpdate:
