@@ -3,6 +3,34 @@ entries:
   argocd-metrics-server:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: support for deployment strategy
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v1.0.3
+    created: "2026-01-29T12:13:28.481597779Z"
+    description: A Helm chart for installing the Argo CD Metrics Server, which connects
+      to Prometheus and can be used to display Metrics in the Argo CD UI
+    digest: 08c9b65becbbf052e645a8c5a25583a80e8dece9413ac154a217649c9d25ee0e
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/argocd-metrics-server/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: argocd-metrics-server
+    sources:
+    - https://github.com/argoproj-labs/argocd-extension-metrics
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/argocd-metrics-server-1.1.0/argocd-metrics-server-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: helm schema
       artifacthub.io/links: |
@@ -269,6 +297,34 @@ entries:
     - https://github.com/christianhuth/helm-charts/releases/download/argocd-metrics-server-1.0.0/argocd-metrics-server-1.0.0.tgz
     version: 1.0.0
   audiobookshelf:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: support for deployment strategy
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.32.1
+    created: "2026-01-29T12:13:28.691817051Z"
+    description: A Helm chart for installing the Argo CD Metrics Server, which connects
+      to Prometheus and can be used to display Metrics in the Argo CD UI
+    digest: dae22446880789cfa30aa7c880f46f4debc1738e3043b176f3152d57c1cb961f
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/audiobookshelf/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: audiobookshelf
+    sources:
+    - https://github.com/argoproj-labs/argocd-extension-metrics
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/audiobookshelf-1.7.0/audiobookshelf-1.7.0.tgz
+    version: 1.7.0
   - annotations:
       artifacthub.io/changes: |
         - kind: fixed
@@ -11595,6 +11651,44 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/etcd-defrag-1.0.0/etcd-defrag-1.0.0.tgz
     version: 1.0.0
   freshrss:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: support for deployment strategy
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: FreshRSS is a self-hosted RSS and Atom feed aggregator.
+          url: https://freshrss.org/images/screenshot.webp
+        - title: FreshRSS natively supports basic Web scraping, based on XPath, for Web sites not providing any RSS / Atom feed. Also supports JSON documents.
+          url: https://raw.githubusercontent.com/FreshRSS/FreshRSS/edge/docs/img/FreshRSS-screenshot.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.28.1
+    created: "2026-01-29T12:13:28.912044539Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 18.2.3
+    description: FreshRSS is a free, self-hostable feed aggregator
+    digest: 7efd5c346bfa5aad2b4bc9d53482334dc5a39a2e3fa555508b09855b9c3d6b80
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/freshrss/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: freshrss
+    sources:
+    - https://github.com/FreshRSS/FreshRSS
+    - https://freshrss.org/
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/freshrss-2.5.0/freshrss-2.5.0.tgz
+    version: 2.5.0
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
@@ -76866,4 +76960,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-01-29T11:45:58.016064044Z"
+generated: "2026-01-29T12:13:28.914899822Z"
