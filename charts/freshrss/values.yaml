@@ -139,6 +139,13 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+# -- Deployment strategy for the all deployed Deployments
+deploymentStrategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxSurge: 25%
+  #   maxUnavailable: 25%
+
 # -- Node labels for pod assignment
 nodeSelector: {}
 
@@ -249,12 +256,3 @@ externalPostgresql:
   hostname: ""
   # -- Port used to connect to PostgreSQL database
   port: 5432
-
-# -- Deployment strategy
-strategy:
-  # -- Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
-  type: RollingUpdate
-  # -- Rolling update configuration parameters
-  # rollingUpdate:
-  #   maxUnavailable: 25%
-  #   maxSurge: 25%

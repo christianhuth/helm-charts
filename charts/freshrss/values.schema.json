@@ -839,22 +839,6 @@
       "title": "serviceAccount",
       "type": "object"
     },
-    "strategy": {
-      "description": "Deployment strategy",
-      "properties": {
-        "type": {
-          "default": "RollingUpdate",
-          "description": "Type of deployment. Can be \"Recreate\" or \"RollingUpdate\". Default is RollingUpdate.",
-          "title": "type",
-          "type": "string"
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "title": "strategy",
-      "type": "object"
-    },
     "tolerations": {
       "description": "Toleration labels for pod assignment",
       "items": {
@@ -886,8 +870,7 @@
     "extraEnv",
     "freshrss",
     "postgresql",
-    "externalPostgresql",
-    "strategy"
+    "externalPostgresql"
   ],
   "type": "object"
 }
