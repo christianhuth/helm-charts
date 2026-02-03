@@ -1,7 +1,7 @@
 # squest
 
-## 4.2.4
+## 4.2.5
 
 ### Changed
 
-- App Version to 2.8.2
+- dependency of mariadb to 24.0.4
