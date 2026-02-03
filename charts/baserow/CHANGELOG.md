@@ -1,7 +1,7 @@
 # baserow
 
-## 6.2.4
+## 6.2.5
 
 ### Changed
 
-- dependency of postgresql to 18.2.3
+- dependency of redis to 24.1.3
