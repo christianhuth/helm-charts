@@ -1,7 +1,7 @@
 # freshrss
 
-## 2.5.1
+## 2.5.2
 
-### Fixed
+### Changed
 
-- doc for deployment strategy
+- dependency of postgresql to 18.2.4
