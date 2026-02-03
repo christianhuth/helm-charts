@@ -1,7 +1,7 @@
 # typo3
 
-## 6.4.0
+## 6.4.1
 
-### Added
+### Changed
 
-- support for deployment strategy
+- dependency of mariadb to 24.0.4
