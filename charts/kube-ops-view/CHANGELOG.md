@@ -1,7 +1,7 @@
 # kube-ops-view
 
-## 7.2.0
+## 7.2.1
 
-### Added
+### Changed
 
-- support for deployment strategy
+- dependency of redis to 24.1.3
