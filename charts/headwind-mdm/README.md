@@ -70,7 +70,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"headwindmdm/hmdm"` | image repository |
-| image.tag | string | `"0.1.6"` | Overrides the image tag |
+| image.tag | string | `"0.1.7"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
