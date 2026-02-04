@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.10.0
+## 1.11.0
 
-### Added
+### Changed
 
-- support for deployment strategy
+- App Version to 4.7.0

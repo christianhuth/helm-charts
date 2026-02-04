@@ -2,8 +2,8 @@ apiVersion: v2
 name: shlink-web
 description: A  ReactJS-based progressive web application for Shlink.
 type: application
-version: 1.10.0
-appVersion: "4.6.2"
+version: 1.11.0
+appVersion: "4.7.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/shlink-web/icon.svg
 maintainers:
@@ -14,8 +14,8 @@ sources:
   - https://shlink.io
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: support for deployment strategy
+    - kind: changed
+      description: App Version to 4.7.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
