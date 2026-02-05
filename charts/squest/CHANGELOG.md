@@ -4,4 +4,4 @@
 
 ### Changed
 
-- App Version to 1.29.5-alpine
+- nginx version to 1.29.5-alpine
