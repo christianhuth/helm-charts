@@ -1,7 +1,7 @@
 # headwind-mdm
 
-## 4.3.5
+## 5.0.0
 
 ### Changed
 
-- App Version to 0.1.7
+- type of headwind.downloadCredentials from boolean to string
