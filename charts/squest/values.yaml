@@ -263,7 +263,7 @@ squest:
       # -- image pull policy
       pullPolicy: Always
       # -- Overrides the image tag
-      tag: "1.29.4-alpine"
+      tag: "1.29.5-alpine"
 
     # -- additional environment variables to be added to the nginx container.
     extraEnv: []
