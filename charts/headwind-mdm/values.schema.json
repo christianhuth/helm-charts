@@ -138,9 +138,9 @@
           "type": "string"
         },
         "downloadCredentials": {
-          "default": false,
+          "default": "",
           "title": "downloadCredentials",
-          "type": "boolean"
+          "type": "string"
         },
         "forceReconfigure": {
           "default": false,

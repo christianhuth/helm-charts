@@ -154,7 +154,7 @@ headwind:
   # @ignored
   clientVersion: "5.14"
   # @ignored
-  downloadCredentials: false
+  downloadCredentials: ""
   # -- Subsequent starts of the container skip this step, but you can force the renewal of the configuration
   forceReconfigure: false
   # @ignored
