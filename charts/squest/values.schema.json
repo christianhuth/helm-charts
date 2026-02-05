@@ -1410,7 +1410,7 @@
                   "type": "string"
                 },
                 "tag": {
-                  "default": "1.29.4-alpine",
+                  "default": "1.29.5-alpine",
                   "description": "Overrides the image tag",
                   "title": "tag",
                   "type": "string"
