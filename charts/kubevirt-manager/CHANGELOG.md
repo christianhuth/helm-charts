@@ -1,7 +1,7 @@
 # kubevirt-manager
 
-## 0.5.1
+## 0.5.2
 
-### Fixed
+### Changed
 
-- readiness probe with basic auth
+- App Version to 1.5.4
