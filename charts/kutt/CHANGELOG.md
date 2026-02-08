@@ -1,7 +1,7 @@
 # kutt
 
-## 8.3.7
+## 8.3.8
 
 ### Changed
 
-- dependency of redis to 24.1.3
+- dependency of redis to 24.1.6
