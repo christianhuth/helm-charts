@@ -1,7 +1,7 @@
 # github-exporter
 
-## 2.2.0
+## 2.3.0
 
-### Added
+### Changed
 
-- support for Gateway API routes
+- App Version to v2.2.0
