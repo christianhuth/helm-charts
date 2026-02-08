@@ -13933,6 +13933,33 @@ entries:
   github-exporter:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to v2.2.0
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v2.2.0
+    created: "2026-02-08T04:24:20.406088611Z"
+    description: A Helm Chart for the GitHub Prometheus Exporter
+    digest: 0b5b242bce5037cbf44af817ce4dcaf4e071d8034c03ade4fe1147ca5920a60f
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/github-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: github-exporter
+    sources:
+    - https://github.com/githubexporter/github-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/github-exporter-2.3.0/github-exporter-2.3.0.tgz
+    version: 2.3.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: support for Gateway API routes
       artifacthub.io/links: |
@@ -78499,4 +78526,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-02-07T22:10:04.296307999Z"
+generated: "2026-02-08T04:24:20.408387991Z"
