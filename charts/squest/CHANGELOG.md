@@ -1,7 +1,7 @@
 # squest
 
-## 4.3.0
+## 4.3.1
 
 ### Changed
 
-- dependency of mariadb to 24.1.0
+- dependency of mariadb to 24.1.1
