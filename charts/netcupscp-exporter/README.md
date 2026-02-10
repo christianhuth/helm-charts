@@ -58,7 +58,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"ghcr.io"` | image registry |
 | image.repository | string | `"mrueg/netcupscp-exporter"` | image repository |
-| image.tag | string | `"v0.4.5"` | Overrides the image tag |
+| image.tag | string | `"v0.4.6"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
