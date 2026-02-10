@@ -1,7 +1,7 @@
 # netcupscp-exporter
 
-## 1.4.1
+## 1.4.2
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- App Version to v0.4.6
