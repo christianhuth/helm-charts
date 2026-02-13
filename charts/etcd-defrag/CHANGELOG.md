@@ -1,7 +1,7 @@
 # etcd-defrag
 
-## 1.5.5
+## 1.5.6
 
-### Fixed
+### Changed
 
-- helm schema
+- App Version to v3.6.8
