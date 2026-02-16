@@ -33460,6 +33460,39 @@ entries:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
         - kind: changed
+          description: App Version to v0.5.0
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Export information about your Servers from Netcup SCP as Prometheus metrics.
+          url: https://www.netcup-wiki.de/images/SCP-Willkommen.png
+        - title: Visualize your data as Grafana dashboard.
+          url: https://raw.githubusercontent.com/mrueg/netcupscp-exporter/main/grafana/dashboard.jpg
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.5.0
+    created: "2026-02-16T15:20:24.304262952Z"
+    description: Prometheus Exporter for Netcup Server Control Panel (SCP)
+    digest: 84a0550108a4b585509eb9f70689335ed81649b64977a376e1067278bf537e08
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/netcupscp-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: netcupscp-exporter
+    sources:
+    - https://github.com/mrueg/netcupscp-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/netcupscp-exporter-1.5.0/netcupscp-exporter-1.5.0.tgz
+    version: 1.5.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: changed
           description: App Version to v0.4.6
       artifacthub.io/links: |
         - name: support
@@ -80885,4 +80918,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-02-16T14:53:38.050427084Z"
+generated: "2026-02-16T15:20:24.307079626Z"
