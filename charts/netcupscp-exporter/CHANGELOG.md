@@ -1,7 +1,7 @@
 # netcupscp-exporter
 
-## 1.4.2
+## 1.5.0
 
 ### Changed
 
-- App Version to v0.4.6
+- App Version to v0.5.0
