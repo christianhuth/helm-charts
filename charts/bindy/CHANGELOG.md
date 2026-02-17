@@ -1,7 +1,7 @@
 # bindy
 
-## 1.3.1
+## 1.4.0
 
-### Fixed
+### Changed
 
-- doc for deployment strategy
+- App Version to v0.4.0
