@@ -1,7 +1,7 @@
 # umami
 
-## 7.6.1
+## 7.7.0
 
 ### Changed
 
-- dependency of postgresql to 18.4.2
+- dependency of postgresql to 18.5.1
