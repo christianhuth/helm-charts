@@ -158,6 +158,8 @@ frontend:
     periodSeconds: 5
     # -- Success threshold for livenessProbe
     successThreshold: 1
+    # -- Timeout seconds for livenessProbe
+    timeoutSeconds: 1
 
   readinessProbe:
     # -- Initial delay seconds for readinessProbe
@@ -166,6 +168,8 @@ frontend:
     periodSeconds: 5
     # -- Success threshold for readinessProbe
     successThreshold: 1
+    # -- Timeout seconds for readinessProbe
+    timeoutSeconds: 1
 
   # -- Node labels for pod assignment
   nodeSelector: {}
