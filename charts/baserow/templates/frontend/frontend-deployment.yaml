@@ -59,6 +59,7 @@ spec:
             initialDelaySeconds: {{ .Values.frontend.livenessProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.frontend.livenessProbe.periodSeconds | int }}
             successThreshold: {{ .Values.frontend.livenessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.frontend.livenessProbe.timeoutSeconds | int }}
           readinessProbe:
             httpGet:
               path: /_health/
@@ -66,6 +67,7 @@ spec:
             initialDelaySeconds: {{ .Values.frontend.readinessProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.frontend.readinessProbe.periodSeconds | int }}
             successThreshold: {{ .Values.frontend.readinessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.frontend.readinessProbe.timeoutSeconds | int }}
           {{- with .Values.frontend.resources }}
           resources:
             {{- toYaml . | nindent 12 }}

@@ -296,6 +296,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | frontend.livenessProbe.initialDelaySeconds | int | `5` | Initial delay seconds for livenessProbe |
 | frontend.livenessProbe.periodSeconds | int | `5` | Period seconds for livenessProbe |
 | frontend.livenessProbe.successThreshold | int | `1` | Success threshold for livenessProbe |
+| frontend.livenessProbe.timeoutSeconds | int | `1` | Timeout seconds for livenessProbe |
 | frontend.nodeSelector | object | `{}` | Node labels for pod assignment |
 | frontend.podAnnotations | object | `{}` | Annotations to be added to the frontend pods |
 | frontend.podSecurityContext | object | `{"fsGroup":9999,"runAsGroup":9999,"runAsUser":9999}` | pod-level security context |
@@ -303,6 +304,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | frontend.readinessProbe.initialDelaySeconds | int | `5` | Initial delay seconds for readinessProbe |
 | frontend.readinessProbe.periodSeconds | int | `5` | Period seconds for readinessProbe |
 | frontend.readinessProbe.successThreshold | int | `1` | Success threshold for readinessProbe |
+| frontend.readinessProbe.timeoutSeconds | int | `1` | Timeout seconds for readinessProbe |
 | frontend.replicaCount | int | `1` | Number of replicas |
 | frontend.resources | object | `{}` | Resource limits and requests for the controller pods. |
 | frontend.revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
