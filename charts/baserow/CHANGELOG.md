@@ -1,7 +1,7 @@
 # baserow
 
-## 6.5.0
+## 6.6.0
 
-### Changed
+### Added
 
-- dependency of postgresql to 18.5.1
+- attribute timeoutSeconds to both probes
