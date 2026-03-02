@@ -2384,12 +2384,19 @@
               "description": "Success threshold for livenessProbe",
               "title": "successThreshold",
               "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "description": "Timeout seconds for livenessProbe",
+              "title": "timeoutSeconds",
+              "type": "integer"
             }
           },
           "required": [
             "initialDelaySeconds",
             "periodSeconds",
-            "successThreshold"
+            "successThreshold",
+            "timeoutSeconds"
           ],
           "title": "livenessProbe",
           "type": "object"
@@ -2458,12 +2465,19 @@
               "description": "Success threshold for readinessProbe",
               "title": "successThreshold",
               "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "description": "Timeout seconds for readinessProbe",
+              "title": "timeoutSeconds",
+              "type": "integer"
             }
           },
           "required": [
             "initialDelaySeconds",
             "periodSeconds",
-            "successThreshold"
+            "successThreshold",
+            "timeoutSeconds"
           ],
           "title": "readinessProbe",
           "type": "object"
