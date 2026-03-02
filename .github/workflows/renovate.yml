@@ -28,7 +28,7 @@ jobs:
           chmod 755 /tmp/yq
 
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v44.2.1
+        uses: renovatebot/github-action@v46.1.1
         env:
           LOG_LEVEL: DEBUG  # or INFO, WARN, ERROR, FATAL
           RENOVATE_REPOSITORIES: ${{ github.repository }}
