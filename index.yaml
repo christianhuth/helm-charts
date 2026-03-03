@@ -25352,6 +25352,51 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of redis to 25.3.2
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Simply shorten your link using the Web UI.
+          url: https://d4.alternativeto.net/v9sHosD3RiPblfBOOHZi0gwU1M0pRL6Jn53oiobJi9k/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2t1dHQtaXRfNzY3MjMzX2Z1bGwucG5n.jpg
+        - title: You can see a list of the most recent created links and some statistical data about them.
+          url: https://docs.cloudron.io/img/kutt-admin.png
+        - title: View detailed statistics about each created link.
+          url: https://kutt.it/images/callout.png
+        - title: Kutt supports having more than one domain.
+          url: https://docs.cloudron.io/img/kutt-custom-domain.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v3.2.3
+    created: "2026-03-03T20:47:35.864521665Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 18.5.1
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 25.3.2
+    description: Kutt is a free modern URL shortener.
+    digest: 59f82fbd56a3d6451de9bfd9b6b189d152ddd9efc0f6b2bdc06af507d9203540
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: kutt
+    sources:
+    - https://github.com/thedevs-network/kutt
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/kutt-9.0.0/kutt-9.0.0.tgz
+    version: 9.0.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of postgresql to 18.5.1
       artifacthub.io/links: |
         - name: support
@@ -82493,4 +82538,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-03-03T20:43:25.86623422Z"
+generated: "2026-03-03T20:47:35.866776086Z"
