@@ -225,7 +225,7 @@ This major updates the following dependencies:
 - MySQL to its newest major, 13.0.0: [Here](https://github.com/bitnami/charts/tree/main/bitnami/mysql#to-1300) you can find more information about the changes introduced in that version.
 - Redis to its newest major, 21.2.0: [Here](https://github.com/bitnami/charts/tree/main/bitnami/redis#upgrading) you can find more information about the changes introduced in that version.
 
-### To 5.0.1
+### To 5.0.0
 
 This major updates the following dependencies:
 
