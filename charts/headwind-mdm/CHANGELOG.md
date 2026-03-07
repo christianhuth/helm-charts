@@ -1,7 +1,7 @@
 # headwind-mdm
 
-## 5.3.1
+## 5.3.2
 
 ### Changed
 
-- dependency of postgresql to 18.5.2
+- dependency of postgresql to 18.5.5
