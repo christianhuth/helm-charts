@@ -1,7 +1,7 @@
 # dns-exporter
 
-## 2.3.1
+## 2.4.0
 
-### Fixed
+### Changed
 
-- doc for deployment strategy
+- App Version to 1.2.2
