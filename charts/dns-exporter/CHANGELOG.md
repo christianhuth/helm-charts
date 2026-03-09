@@ -8,4 +8,4 @@
 
 ### Fixed
 
-- doc for deployment strategy
+- docs for module configuration
