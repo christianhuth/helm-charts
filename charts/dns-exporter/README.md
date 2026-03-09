@@ -63,16 +63,17 @@ Defining multiple values will result in only the first value taking affect.
 There are more attributes you can define for each target.
 A complete list can be found [https://dns-exporter.readthedocs.io/latest/configuration.html#settings](in the official documentation).
 
-Instead of defining all the attributes (like family, server, ...) for each target again, you can use pre-defined modules or define your own ones using .Values.serviceMonitor.modules.
+Instead of defining all the attributes (like family, server, ...) for each target again, you can use pre-defined modules or define your own ones using `.Values.modulesConfig`.
 
 ```yaml
+modulesConfig:
+  google_udp:
+    family: ipv4
+    protocol: udp
+    server: dns.google
+    query_type: NS
+
 serviceMonitor:
-  modules:
-    google_udp:
-      family: ipv4
-      protocol: udp
-      server: dns.google
-      query_type: NS
   targetsMonitor:
     targets:
       - query_name:
@@ -111,7 +112,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"tykling/dns_exporter"` | image repository |
-| image.tag | string | `"v1.1.0"` | Overrides the image tag |
+| image.tag | string | `"v1.2.2"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
