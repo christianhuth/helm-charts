@@ -3,7 +3,7 @@ name: dns-exporter
 description: A multi-target Prometheus exporter with an exclusive focus on DNS monitoring
 type: application
 version: 2.4.0
-appVersion: "v1.2.1"
+appVersion: "v1.2.2"
 home: https://github.com/christianhuth/helm-charts
 maintainers:
   - name: christianhuth
