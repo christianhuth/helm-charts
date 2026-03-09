@@ -5,3 +5,4 @@
 ### Changed
 
 - dependency of redis to 25.3.2
+- dependency of mariadb to 25.0.1
