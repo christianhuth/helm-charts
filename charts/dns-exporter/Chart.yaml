@@ -15,6 +15,8 @@ annotations:
   artifacthub.io/changes: |
     - kind: fixed
       description: doc for deployment strategy
+    - kind: changed
+      description: App version to v1.2.2
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
