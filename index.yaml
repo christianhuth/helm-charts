@@ -11489,6 +11489,39 @@ entries:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
         - kind: fixed
+          description: docs for module configuration
+        - kind: changed
+          description: App version to v1.2.2
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Display DNS exporter results using Grafana
+          url: https://grafana.com/api/dashboards/20617/images/15803/image
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v1.2.2
+    created: "2026-03-09T16:57:52.26591705Z"
+    description: A multi-target Prometheus exporter with an exclusive focus on DNS
+      monitoring
+    digest: 78fe29f34486dcdb896ad87c0e3942c821906f59f312fa51e0a6ac2212b58de1
+    home: https://github.com/christianhuth/helm-charts
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: dns-exporter
+    sources:
+    - https://github.com/tykling/dns_exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/dns-exporter-2.4.0/dns-exporter-2.4.0.tgz
+    version: 2.4.0
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
+        - kind: fixed
           description: doc for deployment strategy
       artifacthub.io/links: |
         - name: support
@@ -83482,4 +83515,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-03-09T10:27:37.208971313Z"
+generated: "2026-03-09T16:57:52.269139997Z"
