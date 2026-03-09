@@ -14,7 +14,7 @@ annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
     - kind: fixed
-      description: doc for deployment strategy
+      description: docs for module configuration
     - kind: changed
       description: App version to v1.2.2
   artifacthub.io/links: |
