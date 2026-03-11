@@ -101,6 +101,9 @@ kubenav:
 kube-ops-view:
 - changed-files:
   - any-glob-to-any-file: charts/kube-ops-view/*
+kubevirt-cloud-controller-manager:
+- changed-files:
+  - any-glob-to-any-file: charts/kubevirt-cloud-controller-manager/*
 kubevirt-manager:
 - changed-files:
   - any-glob-to-any-file: charts/kubevirt-manager/*
