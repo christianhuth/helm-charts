@@ -1,7 +1,7 @@
 # squest
 
-## 6.0.0
+## 6.0.1
 
 ### Changed
 
-- dependency of redis to 25.3.2
+- nginx Version to 1.29.6-alpine
