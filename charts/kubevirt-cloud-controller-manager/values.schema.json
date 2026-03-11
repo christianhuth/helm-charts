@@ -1,0 +1,505 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "description": "Affinity settings for pod assignment",
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "autoscaling": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable Horizontal POD autoscaling",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "maxReplicas": {
+          "default": 100,
+          "description": "Maximum number of replicas",
+          "title": "maxReplicas",
+          "type": "integer"
+        },
+        "minReplicas": {
+          "default": 1,
+          "description": "Minimum number of replicas",
+          "title": "minReplicas",
+          "type": "integer"
+        },
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "description": "Target CPU utilization percentage",
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage"
+      ],
+      "title": "autoscaling",
+      "type": "object"
+    },
+    "extraEnv": {
+      "description": "additional environment variables to be added to the pods",
+      "items": {
+        "required": []
+      },
+      "title": "extraEnv",
+      "type": "array"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"kubevirt-cloud-controller-manager.fullname\"`",
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "description": "image pull policy",
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "registry": {
+          "default": "quay.io",
+          "description": "image registory",
+          "title": "registry",
+          "type": "string"
+        },
+        "repository": {
+          "default": "kubevirt/kubevirt-cloud-controller-manager",
+          "description": "image repository",
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "v0.6.0",
+          "description": "Overrides the image tag",
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "registry",
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "kccm": {
+      "properties": {
+        "additionalLabels": {
+          "properties": {
+            "enabled": {
+              "default": true,
+              "description": "Adds additional capi labels to the cloud controller manager resources",
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "title": "additionalLabels",
+          "type": "object"
+        },
+        "cloudConfig": {
+          "properties": {
+            "instancesV2": {
+              "properties": {
+                "enabled": {
+                  "default": true,
+                  "description": "Whether to use the instancesV2 API for listing and watching instances. This is required for OpenShift 4.13 and later.",
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "zoneAndRegionEnabled": {
+                  "default": false,
+                  "description": "Whether to use the zone and region information from the instance metadata. This is required for OpenShift 4.13 and later.",
+                  "title": "zoneAndRegionEnabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled",
+                "zoneAndRegionEnabled"
+              ],
+              "title": "instancesV2",
+              "type": "object"
+            },
+            "loadBalancer": {
+              "properties": {
+                "creationPollInterval": {
+                  "default": 5,
+                  "description": "The interval at which the cloud controller manager polls for the creation of load balancers",
+                  "title": "creationPollInterval",
+                  "type": "integer"
+                },
+                "creationPollTimeout": {
+                  "default": 60,
+                  "description": "The timeout for polling for the creation of load balancers",
+                  "title": "creationPollTimeout",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "creationPollInterval",
+                "creationPollTimeout"
+              ],
+              "title": "loadBalancer",
+              "type": "object"
+            }
+          },
+          "required": [
+            "instancesV2",
+            "loadBalancer"
+          ],
+          "title": "cloudConfig",
+          "type": "object"
+        },
+        "cluster": {
+          "properties": {
+            "kubeconfig": {
+              "properties": {
+                "content": {
+                  "properties": {
+                    "cluster": {
+                      "properties": {
+                        "ca": {
+                          "default": "",
+                          "description": "The base64-encoded value of the cluster CA",
+                          "title": "ca",
+                          "type": "string"
+                        },
+                        "server": {
+                          "default": "",
+                          "description": "The address of the CAPI api server in the form https://\u003chost\u003e:\u003cport\u003e",
+                          "title": "server",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "ca",
+                        "server"
+                      ],
+                      "title": "cluster",
+                      "type": "object"
+                    },
+                    "users": {
+                      "properties": {
+                        "cert": {
+                          "default": "",
+                          "description": "The base64-encoded value of the user certificate",
+                          "title": "cert",
+                          "type": "string"
+                        },
+                        "key": {
+                          "default": "",
+                          "description": "The base64-encoded value of the user key",
+                          "title": "key",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "cert",
+                        "key"
+                      ],
+                      "title": "users",
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "cluster",
+                    "users"
+                  ],
+                  "title": "content",
+                  "type": "object"
+                },
+                "existingSecret": {
+                  "default": "",
+                  "description": "The name of the secret containing the kubeconfig to access the CAPI cluster. If not set, will default to \"\u003ccluster-name\u003e-kubeconfig\"",
+                  "title": "existingSecret",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "content",
+                "existingSecret"
+              ],
+              "title": "kubeconfig",
+              "type": "object"
+            },
+            "name": {
+              "default": "",
+              "description": "The name of the cluster to which the cloud controller manager belongs. This is used by the cloud controller manager to watch for changes to the cluster object and update its status accordingly.",
+              "title": "name",
+              "type": "string"
+            },
+            "namespace": {
+              "default": "",
+              "description": "The namespace in which the cloud controller manager should watch for changes to the cluster object. If not set, the cloud controller manager will watch for changes to the cluster object in the Release namespace.",
+              "title": "namespace",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kubeconfig",
+            "name",
+            "namespace"
+          ],
+          "title": "cluster",
+          "type": "object"
+        },
+        "deploymentMode": {
+          "default": "isolated",
+          "description": "Indicates whether the cloud controller manager is installed outside of the managed cluster (isolated) or inside",
+          "title": "deploymentMode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "additionalLabels",
+        "cluster",
+        "cloudConfig",
+        "deploymentMode"
+      ],
+      "title": "kccm",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `kubevirt-cloud-controller-manager`",
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "description": "Node labels for pod assignment",
+      "properties": {
+        "node-role.kubernetes.io/control-plane": {
+          "default": "",
+          "title": "node-role.kubernetes.io/control-plane",
+          "type": "string"
+        }
+      },
+      "required": [
+        "node-role.kubernetes.io/control-plane"
+      ],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to exporter pods",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "description": "pod-level security context",
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas",
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "description": "Resource limits and requests for the pods.",
+      "properties": {
+        "limits": {
+          "properties": {
+            "cpu": {
+              "default": "100m",
+              "title": "cpu",
+              "type": "string"
+            },
+            "memory": {
+              "default": "128Mi",
+              "title": "memory",
+              "type": "string"
+            }
+          },
+          "required": [
+            "cpu",
+            "memory"
+          ],
+          "title": "limits",
+          "type": "object"
+        },
+        "requests": {
+          "properties": {
+            "cpu": {
+              "default": "100m",
+              "title": "cpu",
+              "type": "string"
+            },
+            "memory": {
+              "default": "128Mi",
+              "title": "memory",
+              "type": "string"
+            }
+          },
+          "required": [
+            "cpu",
+            "memory"
+          ],
+          "title": "requests",
+          "type": "object"
+        }
+      },
+      "required": [
+        "limits",
+        "requests"
+      ],
+      "title": "resources",
+      "type": "object"
+    },
+    "revisionHistoryLimit": {
+      "default": 0,
+      "description": "The number of old ReplicaSets to retain",
+      "title": "revisionHistoryLimit",
+      "type": "integer"
+    },
+    "securityContext": {
+      "description": "container-level security context",
+      "properties": {
+        "privileged": {
+          "default": true,
+          "title": "privileged",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "privileged"
+      ],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "tolerations": {
+      "description": "Toleration labels for pod assignment",
+      "items": {
+        "anyOf": [
+          {
+            "properties": {
+              "effect": {
+                "default": "NoSchedule",
+                "title": "effect",
+                "type": "string"
+              },
+              "key": {
+                "default": "node.cloudprovider.kubernetes.io/uninitialized",
+                "title": "key",
+                "type": "string"
+              },
+              "value": {
+                "default": "true",
+                "title": "value",
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "value",
+              "effect"
+            ],
+            "type": "object"
+          },
+          {
+            "properties": {
+              "effect": {
+                "default": "NoSchedule",
+                "title": "effect",
+                "type": "string"
+              },
+              "key": {
+                "default": "node-role.kubernetes.io/control-plane",
+                "title": "key",
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "effect"
+            ],
+            "type": "object"
+          }
+        ],
+        "required": []
+      },
+      "title": "tolerations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "image",
+    "imagePullSecrets",
+    "replicaCount",
+    "revisionHistoryLimit",
+    "serviceAccount",
+    "podAnnotations",
+    "podSecurityContext",
+    "securityContext",
+    "resources",
+    "autoscaling",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "extraEnv",
+    "kccm"
+  ],
+  "type": "object"
+}
