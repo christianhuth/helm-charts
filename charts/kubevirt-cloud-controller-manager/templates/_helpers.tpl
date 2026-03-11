@@ -84,5 +84,34 @@ Create the name of the secret containing the kubeconfig
 */}}
 {{- define "kubevirt-cloud-controller-manager.capi.cluster.kubeconfig.secretName" -}}
   {{- $clusterName := (include "kubevirt-cloud-controller-manager.capi.cluster.name" .) }}
-  {{- printf "%s-%s" $clusterName "kubeconfig " -}}
+  {{- .Values.kccm.cluster.kubeconfig.existingSecret | default (printf "%s-%s" $clusterName "kubeconfig") -}}
+{{- end }}
+
+{{/*
+Create the content of the kubeconfig
+*/}}
+{{- define "kubevirt-cloud-controller-manager.capi.cluster.kubeconfig.content" -}}
+  {{- $clusterCA := .Values.kccm.cluster.kubeconfig.content.cluster.ca -}}
+  {{- $clusterServer := .Values.kccm.cluster.kubeconfig.content.cluster.server -}}
+  {{- $userCert := .Values.kccm.cluster.kubeconfig.content.user.cert -}}
+  {{- $userKey := .Values.kccm.cluster.kubeconfig.content.user.key -}}
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: {{ $clusterCA }}
+    server: {{ $clusterServer }}
+  name: cluster
+contexts:
+- context:
+    cluster: cluster
+    user: user
+  name: user@cluster
+current-context: user@cluster
+kind: Config
+preferences: {}
+users:
+- name: user
+  user:
+    client-certificate-data: {{ $userCert }}
+    client-key-data: {{ $userKey }}
 {{- end }}

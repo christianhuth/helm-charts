@@ -90,8 +90,19 @@ kccm:
     enabled: true
   cluster:
     kubeconfig:
-      # -- The name of the secret containing the kubeconfig to access the cluster API server. If not set, will default to "<cluster-name>-kubeconfig"
-      secretName: ""
+      content:
+        cluster:
+          # -- The base64-encoded value of the cluster CA
+          ca: ""
+          # -- The address of the CAPI api server in the form https://<host>:<port>
+          server: ""
+        users:
+          # -- The base64-encoded value of the user certificate
+          cert: ""
+          # -- The base64-encoded value of the user key
+          key: ""
+      # -- The name of the secret containing the kubeconfig to access the CAPI cluster. If not set, will default to "<cluster-name>-kubeconfig"
+      existingSecret: ""
     # -- The name of the cluster to which the cloud controller manager belongs. This is used by the cloud controller manager to watch for changes to the cluster object and update its status accordingly.
     name: ""
     # -- The namespace in which the cloud controller manager should watch for changes to the cluster object. If not set, the cloud controller manager will watch for changes to the cluster object in the Release namespace.

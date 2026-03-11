@@ -76,12 +76,12 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        - configMap:
-            name: cloud-config
-          name: cloud-config
-        - secret:
+        - name: cloud-config
+          configMap:
+            name: {{ include "kubevirt-cloud-controller-manager.fullname" . }}
+        - name: kubeconfig
+          secret:
             secretName: {{ include "kubevirt-cloud-controller-manager.capi.cluster.kubeconfig.secretName" . }}
             items:
               - key: kubeconfig
                 path: value
-          name: kubeconfig
