@@ -90,6 +90,8 @@ kccm:
     enabled: true
   cluster:
     kubeconfig:
+      # -- create a Secret for the kubeconfig created through the values defined in kccm.cluster.kubeconfig.content.*
+      create: false
       content:
         cluster:
           # -- The base64-encoded value of the cluster CA
