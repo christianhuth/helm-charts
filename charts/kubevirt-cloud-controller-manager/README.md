@@ -63,7 +63,11 @@ The command removes all the Kubernetes components associated with the chart and 
 | kccm.cloudConfig.instancesV2.zoneAndRegionEnabled | bool | `false` | Whether to use the zone and region information from the instance metadata. This is required for OpenShift 4.13 and later. |
 | kccm.cloudConfig.loadBalancer.creationPollInterval | int | `5` | The interval at which the cloud controller manager polls for the creation of load balancers |
 | kccm.cloudConfig.loadBalancer.creationPollTimeout | int | `60` | The timeout for polling for the creation of load balancers |
-| kccm.cluster.kubeconfig.secretName | string | `""` | The name of the secret containing the kubeconfig to access the cluster API server. If not set, will default to "<cluster-name>-kubeconfig" |
+| kccm.cluster.kubeconfig.content.cluster.ca | string | `""` | The base64-encoded value of the cluster CA |
+| kccm.cluster.kubeconfig.content.cluster.server | string | `""` | The address of the CAPI api server in the form https://<host>:<port> |
+| kccm.cluster.kubeconfig.content.users.cert | string | `""` | The base64-encoded value of the user certificate |
+| kccm.cluster.kubeconfig.content.users.key | string | `""` | The base64-encoded value of the user key |
+| kccm.cluster.kubeconfig.existingSecret | string | `""` | The name of the secret containing the kubeconfig to access the CAPI cluster. If not set, will default to "<cluster-name>-kubeconfig" |
 | kccm.cluster.name | string | `""` | The name of the cluster to which the cloud controller manager belongs. This is used by the cloud controller manager to watch for changes to the cluster object and update its status accordingly. |
 | kccm.cluster.namespace | string | `""` | The namespace in which the cloud controller manager should watch for changes to the cluster object. If not set, the cloud controller manager will watch for changes to the cluster object in the Release namespace. |
 | kccm.deploymentMode | string | `"isolated"` | Indicates whether the cloud controller manager is installed outside of the managed cluster (isolated) or inside |
