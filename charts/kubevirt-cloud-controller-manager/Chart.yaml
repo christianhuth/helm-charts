@@ -1,0 +1,23 @@
+apiVersion: v2
+name: kubevirt-cloud-controller-manager
+description: Kubernetes cloud-provider for KubeVirt
+type: application
+version: 0.0.1
+appVersion: "0.6.0"
+home: https://github.com/christianhuth/helm-charts
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kubevirt-cloud-controller-manager/icon.svg
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://github.com/kubevirt/cloud-provider-kubevirt
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial version
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key

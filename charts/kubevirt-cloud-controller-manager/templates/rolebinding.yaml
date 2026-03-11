@@ -1,0 +1,34 @@
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    {{- include "kubevirt-cloud-controller-manager.labels" . | nindent 4 }}
+  name: {{ include "kubevirt-cloud-controller-manager.fullname" . }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "kubevirt-cloud-controller-manager.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "kubevirt-cloud-controller-manager.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- if (ne .Values.kccm.deploymentMode "isolated") }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    {{- include "kubevirt-cloud-controller-manager.labels" . | nindent 4 }}
+  name: {{ include "kubevirt-cloud-controller-manager.fullname" . }}
+  namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: extension-apiserver-authentication-reader
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "kubevirt-cloud-controller-manager.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end }}

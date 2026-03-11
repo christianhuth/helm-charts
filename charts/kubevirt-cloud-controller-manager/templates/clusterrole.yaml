@@ -1,0 +1,16 @@
+{{- if (ne .Values.kccm.deploymentMode "isolated") }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    {{- include "kubevirt-cloud-controller-manager.labels" . | nindent 4 }}
+  name: {{ include "kubevirt-cloud-controller-manager.fullname" . }}
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - "nodes"
+    verbs:
+      - "get"
+{{- end }}
