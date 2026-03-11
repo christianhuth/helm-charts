@@ -69,7 +69,7 @@ Create the name of the service account to use
 Create the name of the capi cluster
 */}}
 {{- define "kubevirt-cloud-controller-manager.capi.cluster.name" -}}
-  {{- .Values.kccm.cluster.name | default (include "kubevirt-cloud-controller-manager.fullname" .) }}
+  {{- .Values.kccm.cluster.name | default .Release.Name }}
 {{- end }}
 
 {{/*
