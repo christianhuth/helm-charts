@@ -82,6 +82,3 @@ spec:
         - name: kubeconfig
           secret:
             secretName: {{ include "kubevirt-cloud-controller-manager.capi.cluster.kubeconfig.secretName" . }}
-            items:
-              - key: kubeconfig
-                path: value
