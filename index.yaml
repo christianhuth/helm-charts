@@ -24601,6 +24601,33 @@ entries:
   kubevirt-cloud-controller-manager:
   - annotations:
       artifacthub.io/changes: |
+        - kind: fixed
+          description: wrong calculation of cluster name when including Chart as Sub-Chart
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 0.6.0
+    created: "2026-03-11T15:04:03.213845223Z"
+    description: Kubernetes cloud-provider for KubeVirt
+    digest: f4329f5081398ada46cfeed4089b61a4be8dda7fd0472db53aabc9e551a5c6bf
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kubevirt-cloud-controller-manager/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: kubevirt-cloud-controller-manager
+    sources:
+    - https://github.com/kubevirt/cloud-provider-kubevirt
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/kubevirt-cloud-controller-manager-0.0.2/kubevirt-cloud-controller-manager-0.0.2.tgz
+    version: 0.0.2
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Initial version
       artifacthub.io/links: |
@@ -83920,4 +83947,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-03-11T14:45:23.090791697Z"
+generated: "2026-03-11T15:04:03.21741675Z"
