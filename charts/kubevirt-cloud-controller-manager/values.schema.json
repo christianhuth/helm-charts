@@ -236,6 +236,12 @@
                   "title": "content",
                   "type": "object"
                 },
+                "create": {
+                  "default": false,
+                  "description": "create a Secret for the kubeconfig created through the values defined in kccm.cluster.kubeconfig.content.*",
+                  "title": "create",
+                  "type": "boolean"
+                },
                 "existingSecret": {
                   "default": "",
                   "description": "The name of the secret containing the kubeconfig to access the CAPI cluster. If not set, will default to \"\u003ccluster-name\u003e-kubeconfig\"",
@@ -244,6 +250,7 @@
                 }
               },
               "required": [
+                "create",
                 "content",
                 "existingSecret"
               ],
