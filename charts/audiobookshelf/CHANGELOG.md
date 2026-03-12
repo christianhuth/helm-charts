@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 1.7.1
+## 1.8.0
 
-### Fixed
+### Changed
 
-- doc for deployment strategy
+- App Version to 2.33.0
