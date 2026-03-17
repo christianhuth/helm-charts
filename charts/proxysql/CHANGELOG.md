@@ -1,7 +1,7 @@
 # proxysql
 
-## 2.4.0
+## 2.4.1
 
 ### Changed
 
-- Added `autocommitFalseIsTransaction` field to mysql configuration
+- App Version to 3.0.6
