@@ -1,7 +1,7 @@
 # squest
 
-## 6.0.1
+## 6.0.2
 
 ### Changed
 
-- nginx Version to 1.29.6-alpine
+- dependency of mariadb to 25.0.2
