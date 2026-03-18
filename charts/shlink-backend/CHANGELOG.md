@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 11.0.4
+## 11.0.5
 
 ### Changed
 
-- dependency of redis to 25.3.5
+- dependency of postgresql to 18.5.8
