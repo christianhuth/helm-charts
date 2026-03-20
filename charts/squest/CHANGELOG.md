@@ -1,7 +1,7 @@
 # squest
 
-## 6.0.5
+## 6.0.6
 
 ### Changed
 
-- dependency of mariadb to 25.0.4
+- dependency of mariadb to 25.0.5
