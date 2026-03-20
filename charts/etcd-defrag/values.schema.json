@@ -395,7 +395,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "v3.6.8",
+          "default": "v3.6.9",
           "description": "Overrides the image tag",
           "title": "tag",
           "type": "string"
