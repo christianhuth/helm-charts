@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 11.0.7
+## 11.0.8
 
 ### Changed
 
-- dependency of mariadb to 25.0.4
+- dependency of mariadb to 25.0.5
