@@ -64878,6 +64878,48 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of redis to 25.3.8
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.8.2
+    created: "2026-03-23T21:22:30.598548158Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 25.0.6
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.0.14
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 25.3.8
+    description: Squest is a self-service portal that works on top of Red Hat Ansible
+      Automation Platform/AWX.
+    digest: a5afb850e73e7e348c08edd57b9a43037356bb04e758dbab8cfec1ed863b280c
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: squest
+    sources:
+    - https://github.com/HewlettPackard/squest
+    - https://hewlettpackard.github.io/squest
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/squest-6.0.9/squest-6.0.9.tgz
+    version: 6.0.9
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of mariadb to 25.0.6
       artifacthub.io/links: |
         - name: support
@@ -87900,4 +87942,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-03-23T20:54:28.217684526Z"
+generated: "2026-03-23T21:22:30.600984512Z"
