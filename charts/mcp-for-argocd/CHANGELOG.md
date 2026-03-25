@@ -1,7 +1,7 @@
 # mcp-for-argocd
 
-## 1.0.1
+## 1.1.0
 
-### Fixed
+### Changed
 
-- problem in hpa template
+- App Version to v0.6.0
