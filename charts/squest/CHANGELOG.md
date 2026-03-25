@@ -1,7 +1,7 @@
 # squest
 
-## 6.0.10
+## 6.0.11
 
 ### Changed
 
-- dependency of redis to 25.3.9
+- App Version to 1.29.7-alpine
