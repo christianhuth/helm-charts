@@ -88,6 +88,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to exporter pods |
 | podSecurityContext | object | `{}` | Pod-level security context |
+| priorityClassName | string | `""` | Priority class name for the pod |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |

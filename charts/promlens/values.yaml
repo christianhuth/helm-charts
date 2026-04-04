@@ -147,6 +147,9 @@ tolerations: []
 # -- Affinity settings for pod assignment
 affinity: {}
 
+# -- Priority class name for the pod
+priorityClassName: ""
+
 config:
   grafana:
     # -- Enable integration with Grafana
