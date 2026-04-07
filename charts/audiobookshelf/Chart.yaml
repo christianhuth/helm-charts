@@ -14,7 +14,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: App Version to 2.33.1
+      description: default value of audiobookshelf.podcast.downloadTimeout from 30 to 30.000
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
