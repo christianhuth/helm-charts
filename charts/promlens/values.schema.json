@@ -411,6 +411,12 @@
       "title": "podSecurityContext",
       "type": "object"
     },
+    "priorityClassName": {
+      "default": "",
+      "description": "Priority class name for the pod",
+      "title": "priorityClassName",
+      "type": "string"
+    },
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas",
@@ -649,6 +655,7 @@
     "nodeSelector",
     "tolerations",
     "affinity",
+    "priorityClassName",
     "config"
   ],
   "type": "object"

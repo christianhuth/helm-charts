@@ -1,7 +1,7 @@
 # promlens
 
-## 1.3.1
+## 1.4.0
 
-### Fixed
+### Added
 
-- problem in hpa template
+- support for setting priorityClassName
