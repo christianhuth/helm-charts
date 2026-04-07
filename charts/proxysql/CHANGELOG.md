@@ -1,7 +1,7 @@
 # proxysql
 
-## 2.4.1
+## 2.4.2
 
 ### Changed
 
-- App Version to 3.0.6
+- App Version to 3.0.7
