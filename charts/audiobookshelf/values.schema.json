@@ -310,8 +310,8 @@
         "podcast": {
           "properties": {
             "downloadTimeout": {
-              "default": "30",
-              "description": "Timeout to wait for a podcast to start downloading.",
+              "default": "30000",
+              "description": "Timeout in ms for podcast downloads. Set to 0 to disable timeouts altogether.",
               "title": "downloadTimeout",
               "type": "string"
             }

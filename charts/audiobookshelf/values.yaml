@@ -224,8 +224,8 @@ audiobookshelf:
   # -- Type of deployment. Should be production unless using development.
   nodeEnv: production
   podcast:
-    # -- Timeout to wait for a podcast to start downloading.
-    downloadTimeout: "30"
+    # -- Timeout in ms for podcast downloads. Set to 0 to disable timeouts altogether.
+    downloadTimeout: "30000"
   query:
     # -- Debug information for logging SQL queries. Use log to log the queries, and benchmark to also log the runtime of each query.
     logging: ""
