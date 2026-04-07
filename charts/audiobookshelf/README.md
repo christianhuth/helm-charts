@@ -76,7 +76,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | audiobookshelf.metadata.persistence.resources | object | `{}` | represents the minimum and maximum resources the volume should have. |
 | audiobookshelf.metadata.persistence.storageClassName | string | `""` | Name of the StorageClass required by the claim. |
 | audiobookshelf.nodeEnv | string | `"production"` | Type of deployment. Should be production unless using development. |
-| audiobookshelf.podcast.downloadTimeout | string | `"30"` | Timeout to wait for a podcast to start downloading. |
+| audiobookshelf.podcast.downloadTimeout | string | `"30000"` | Timeout in ms for podcast downloads. Set to 0 to disable timeouts altogether. |
 | audiobookshelf.query.logging | string | `""` | Debug information for logging SQL queries. Use log to log the queries, and benchmark to also log the runtime of each query. |
 | audiobookshelf.query.profiling | string | `""` | Experimental profiling of specific database queries. Not implemented on most queries. |
 | audiobookshelf.source | string | `"Helm"` | Installation source. Will be shown in the web client. |
