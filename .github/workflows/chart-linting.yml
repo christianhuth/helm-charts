@@ -34,7 +34,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: setup helm
-        uses: azure/setup-helm@v4
+        uses: azure/setup-helm@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -59,7 +59,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: setup helm
-        uses: azure/setup-helm@v4
+        uses: azure/setup-helm@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

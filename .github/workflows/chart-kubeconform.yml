@@ -19,7 +19,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: setup helm
-        uses: azure/setup-helm@v4
+        uses: azure/setup-helm@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -63,7 +63,7 @@ jobs:
         run: pip install pyyaml
 
       - name: setup helm
-        uses: azure/setup-helm@v4
+        uses: azure/setup-helm@v5
 
       - name: Set up kubeconform-helm plugin
         run: helm plugin install --verify=false https://github.com/jtyr/kubeconform-helm
