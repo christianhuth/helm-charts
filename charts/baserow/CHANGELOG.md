@@ -1,7 +1,7 @@
 # baserow
 
-## 7.0.17
+## 7.0.18
 
 ### Changed
 
-- dependency of redis to 25.3.10
+- dependency of redis to 25.3.11
