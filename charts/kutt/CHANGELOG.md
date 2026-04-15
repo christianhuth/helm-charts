@@ -1,7 +1,7 @@
 # kutt
 
-## 9.0.21
+## 9.0.22
 
 ### Changed
 
-- dependency of redis to 25.3.11
+- dependency of postgresql to 18.5.18
