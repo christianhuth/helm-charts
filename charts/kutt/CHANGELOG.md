@@ -1,7 +1,7 @@
 # kutt
 
-## 9.0.23
+## 9.0.24
 
 ### Changed
 
-- dependency of postgresql to 18.5.19
+- dependency of postgresql to 18.5.20
