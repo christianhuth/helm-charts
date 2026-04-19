@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 2.0.0
+## 2.0.1
 
 ### Changed
 
-- default value of audiobookshelf.podcast.downloadTimeout from 30 to 30.000
+- App Version to 2.33.2
