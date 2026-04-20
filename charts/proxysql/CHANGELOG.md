@@ -4,4 +4,5 @@
 
 ### Added
 
-- option to define route timeouts
+- Support storing ProxySQL configuration in a Kubernetes Secret instead of a ConfigMap
+- Support using an existing Secret for ProxySQL configuration

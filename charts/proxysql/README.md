@@ -102,6 +102,9 @@ The command removes all the Kubernetes components associated with the chart and 
 | proxysql.mysql.version | string | `"5.7.34"` |  |
 | proxysql.mysql.waitTimeout | int | `28800000` |  |
 | proxysql.port | int | `6032` |  |
+| proxysql.secret | object | `{"enabled":false,"existingSecret":""}` | Use an existing ConfigMap for the ProxySQL configuration. If set, the chart will not create a ConfigMap or Secret. configmap: proxysql-configmap-name |
+| proxysql.secret.enabled | bool | `false` | Store the ProxySQL configuration in a Kubernetes Secret instead of a ConfigMap. This prevents credentials from being stored in plain text in a ConfigMap. |
+| proxysql.secret.existingSecret | string | `""` | Use an existing Secret containing the proxysql.cnf config. If set, the chart will not create a Secret and will use this name instead. The Secret must contain a key named "proxysql.cnf". |
 | proxysql.web.enabled | bool | `true` |  |
 | proxysql.web.password | string | `"sadmin"` |  |
 | proxysql.web.port | int | `443` |  |
