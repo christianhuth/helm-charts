@@ -1,7 +1,7 @@
 # squest
 
-## 6.1.2
+## 6.2.0
 
 ### Changed
 
-- dependency of redis to 25.3.12
+- dependency of redis to 25.4.1
