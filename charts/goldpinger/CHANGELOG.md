@@ -1,7 +1,7 @@
 # goldpinger
 
-## 1.2.1
+## 1.2.2
 
 ### Changed
 
-- App Version to 3.11.1
+- App Version to 3.11.2
