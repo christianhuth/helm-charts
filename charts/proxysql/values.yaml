@@ -150,7 +150,17 @@ tolerations: []
 affinity: {}
 
 proxysql:
+  # -- Use an existing ConfigMap for the ProxySQL configuration.
+  # If set, the chart will not create a ConfigMap or Secret.
   # configmap: proxysql-configmap-name
+  secret:
+    # -- Store the ProxySQL configuration in a Kubernetes Secret instead of a ConfigMap.
+    # This prevents credentials from being stored in plain text in a ConfigMap.
+    enabled: false
+    # -- Use an existing Secret containing the proxysql.cnf config.
+    # If set, the chart will not create a Secret and will use this name instead.
+    # The Secret must contain a key named "proxysql.cnf".
+    existingSecret: ""
   web:
     enabled: true
     port: 443
