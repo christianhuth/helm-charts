@@ -1,8 +1,11 @@
 # proxysql
 
-## 2.5.0
+## 3.0.0
 
-### Added
+### Changed
 
-- Support storing ProxySQL configuration in a Kubernetes Secret instead of a ConfigMap
-- Support using an existing Secret for ProxySQL configuration
+- Always store ProxySQL configuration in a Kubernetes Secret instead of a ConfigMap
+
+### Removed
+
+- Removed ConfigMap support for ProxySQL configuration

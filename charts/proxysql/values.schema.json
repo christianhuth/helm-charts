@@ -535,28 +535,11 @@
           "title": "port",
           "type": "integer"
         },
-        "secret": {
-          "description": "Use an existing ConfigMap for the ProxySQL configuration.\nIf set, the chart will not create a ConfigMap or Secret.\nconfigmap: proxysql-configmap-name",
-          "properties": {
-            "enabled": {
-              "default": false,
-              "description": "Store the ProxySQL configuration in a Kubernetes Secret instead of a ConfigMap.\nThis prevents credentials from being stored in plain text in a ConfigMap.",
-              "title": "enabled",
-              "type": "boolean"
-            },
-            "existingSecret": {
-              "default": "",
-              "description": "Use an existing Secret containing the proxysql.cnf config.\nIf set, the chart will not create a Secret and will use this name instead.\nThe Secret must contain a key named \"proxysql.cnf\".",
-              "title": "existingSecret",
-              "type": "string"
-            }
-          },
-          "required": [
-            "enabled",
-            "existingSecret"
-          ],
-          "title": "secret",
-          "type": "object"
+        "existingSecret": {
+          "default": "",
+          "description": "Use an existing Secret containing the proxysql.cnf config. The secret has to contain the key `proxysql.cnf`. When it's set the chart will not generate a Secret.",
+          "title": "existingSecret",
+          "type": "string"
         },
         "web": {
           "properties": {
@@ -591,15 +574,7 @@
           "type": "object"
         }
       },
-      "required": [
-        "secret",
-        "web",
-        "admin",
-        "port",
-        "cluster",
-        "mysql",
-        "monitor"
-      ],
+      "required": [],
       "title": "proxysql",
       "type": "object"
     },
