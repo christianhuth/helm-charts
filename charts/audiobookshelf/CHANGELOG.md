@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 2.1.0
+## 2.2.0
 
-### Added
+### Changed
 
-- option to define route timeouts
+- App Version to 2.34.0

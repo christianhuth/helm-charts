@@ -480,7 +480,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "2.33.2",
+          "default": "2.34.0",
           "description": "Overrides the image tag",
           "title": "tag",
           "type": "string"
