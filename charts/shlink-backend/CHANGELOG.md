@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 11.4.0
+## 11.5.0
 
 ### Changed
 
-- dependency of redis to 25.5.0
+- dependency of mariadb to 25.1.0
