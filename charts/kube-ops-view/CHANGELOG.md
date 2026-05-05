@@ -1,7 +1,7 @@
 # kube-ops-view
 
-## 8.2.0
+## 8.3.0
 
-### Added
+### Changed
 
-- option to define route timeouts
+- dependency of redis to 25.5.0
