@@ -1,7 +1,7 @@
 # kutt
 
-## 9.4.0
+## 9.5.0
 
-### Added
+### Changed
 
-- option to define if ssl should be used for the db connection
+- dependency of redis to 25.5.0
