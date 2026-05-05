@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 11.3.0
+## 11.4.0
 
-### Added
+### Changed
 
-- option to define route timeouts
+- dependency of redis to 25.5.0
