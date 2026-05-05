@@ -1,7 +1,7 @@
 # typo3
 
-## 7.2.0
+## 7.3.0
 
-### Added
+### Changed
 
-- option to define route timeouts
+- dependency of mariadb to 25.1.0
