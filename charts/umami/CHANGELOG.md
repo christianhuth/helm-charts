@@ -1,7 +1,7 @@
 # umami
 
-## 7.9.0
+## 7.9.1
 
-### Added
+### Changed
 
-- option to define route timeouts
+- dependency of postgresql to 18.6.3
