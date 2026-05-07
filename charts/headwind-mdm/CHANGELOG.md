@@ -1,7 +1,7 @@
 # headwind-mdm
 
-## 5.5.1
+## 5.5.2
 
 ### Changed
 
-- App Version to 0.1.8
+- dependency of postgresql to 18.6.3
