@@ -1,7 +1,7 @@
 # typo3
 
-## 7.3.0
+## 7.3.1
 
 ### Changed
 
-- dependency of mariadb to 25.1.0
+- dependency of mariadb to 25.1.1
