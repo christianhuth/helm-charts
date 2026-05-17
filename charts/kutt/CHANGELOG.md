@@ -1,7 +1,7 @@
 # kutt
 
-## 9.5.7
+## 9.5.8
 
 ### Changed
 
-- dependency of postgresql to 18.6.6
+- App Version to v3.2.5
