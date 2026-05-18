@@ -308,7 +308,7 @@
         "image": {
           "properties": {
             "repository": {
-              "default": "bitnamilegacy/mariadb",
+              "default": "soldevelo/mariadb",
               "description": "image repository for MariaDB™ subchart from Bitnami",
               "title": "repository",
               "type": "string"
@@ -606,7 +606,7 @@
         "image": {
           "properties": {
             "repository": {
-              "default": "bitnamilegacy/postgresql",
+              "default": "soldevelo/postgresql",
               "description": "image repository for PostgreSQL™ subchart from Bitnami",
               "title": "repository",
               "type": "string"

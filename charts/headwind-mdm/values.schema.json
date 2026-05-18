@@ -462,7 +462,7 @@
         "image": {
           "properties": {
             "repository": {
-              "default": "bitnamilegacy/postgresql",
+              "default": "soldevelo/postgresql",
               "description": "image repository for PostgreSQL™ subchart from Bitnami",
               "title": "repository",
               "type": "string"

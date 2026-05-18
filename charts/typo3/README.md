@@ -78,7 +78,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | mariadb.auth.password | string | `"typo3"` | Password for the custom user to create. Ignored if mariadb.auth.existingSecret is provided |
 | mariadb.auth.username | string | `"typo3"` | Name for a custom user to create |
 | mariadb.enabled | bool | `false` | enable MariaDB™ subchart from Bitnami |
-| mariadb.image.repository | string | `"bitnamilegacy/mariadb"` | image repository for MariaDB™ subchart from Bitnami |
+| mariadb.image.repository | string | `"soldevelo/mariadb"` | image repository for MariaDB™ subchart from Bitnami |
 | mariadb.image.tag | string | `"12.0.2-debian-12-r0"` | image tag for MariaDB™ subchart from Bitnami |
 | mysql.auth.database | string | `"typo3"` | Name for a custom database to create |
 | mysql.auth.existingSecret | string | `""` | Name of existing secret to use for MySQL credentials |
@@ -108,7 +108,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | postgresql.auth.password | string | `"typo3"` | Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided |
 | postgresql.auth.username | string | `"typo3"` | Name for a custom user to create |
 | postgresql.enabled | bool | `false` | enable PostgreSQL™ subchart from Bitnami |
-| postgresql.image.repository | string | `"bitnamilegacy/postgresql"` | image repository for PostgreSQL™ subchart from Bitnami |
+| postgresql.image.repository | string | `"soldevelo/postgresql"` | image repository for PostgreSQL™ subchart from Bitnami |
 | postgresql.image.tag | string | `"17.6.0-debian-12-r4"` | image tag for PostgreSQL™ subchart from Bitnami |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the headwind pods. |

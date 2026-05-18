@@ -109,21 +109,21 @@ The command removes all the Kubernetes components associated with the chart and 
 | mariadb.auth.rootPassword | string | `"squest"` | The root password credential to be used when using the integrated MariaDB database. |
 | mariadb.auth.username | string | `"squest"` | The username credential to be used when using the integrated MariaDB database. |
 | mariadb.enabled | bool | `true` | enable integrated MariaDB™ subchart from Bitnami |
-| mariadb.image.repository | string | `"bitnamilegacy/mariadb"` | image repository for the MariaDB™ subchart from Bitnami |
+| mariadb.image.repository | string | `"soldevelo/mariadb"` | image repository for the MariaDB™ subchart from Bitnami |
 | mariadb.image.tag | string | `"12.0.2-debian-12-r0"` | image tag for the MariaDB™ subchart from Bitnami |
 | nameOverride | string | `""` | Provide a name in place of `squest` |
 | rabbitmq.auth.erlangCookie | string | `"abcdefghijklmnopqrstuvwxyz"` | The Erlang cookie to determine whether different nodes are allowed to communicate with each other |
 | rabbitmq.auth.password | string | `"squest"` | The password credential to be used when using the integrated RabbitMQ. |
 | rabbitmq.auth.username | string | `"squest"` | The username credential to be used when using the integrated RabbitMQ. |
 | rabbitmq.enabled | bool | `true` | enable integrated RabbitMQ™ subchart from Bitnami |
-| rabbitmq.image.repository | string | `"bitnamilegacy/rabbitmq"` | image repository for the RabbitMQ™ subchart from Bitnami |
+| rabbitmq.image.repository | string | `"soldevelo/rabbitmq"` | image repository for the RabbitMQ™ subchart from Bitnami |
 | rabbitmq.image.tag | string | `"4.1.3-debian-12-r1"` | image tag for the RabbitMQ™ subchart from Bitnami |
 | redis.architecture | string | `"standalone"` | Redis™ architecture. Allowed values: `standalone` or `replication` |
 | redis.auth.enabled | bool | `true` | Enable password authentication |
 | redis.auth.password | string | `"squest"` | The password credential to be used when using the integrated Redis. |
 | redis.auth.username | string | `"squest"` | The username credential to be used when using the integrated Redis. |
 | redis.enabled | bool | `true` | enable integrated Redis™ subchart from Bitnami |
-| redis.image.repository | string | `"bitnamilegacy/redis"` | image repository for the Redis™ subchart from Bitnami |
+| redis.image.repository | string | `"soldevelo/redis"` | image repository for the Redis™ subchart from Bitnami |
 | redis.image.tag | string | `"8.2.1-debian-12-r0"` | image tag for the Redis™ subchart from Bitnami |
 | squest.affinity | object | `{}` | Affinity settings for pod assignment |
 | squest.autoscaling.enabled | bool | `false` |  |

@@ -71,7 +71,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | mysql.secondary.replicaCount | int | `2` |  |
 | mysql.volumePermissions.enabled | bool | `true` |  |
 | mysql.volumePermissions.image.pullPolicy | string | `"Always"` |  |
-| mysql.volumePermissions.image.repository | string | `"bitnamilegacy/os-shell"` |  |
+| mysql.volumePermissions.image.repository | string | `"soldevelo/os-shell"` |  |
 | mysql.volumePermissions.image.tag | string | `"12-debian-12-r50"` |  |
 | passbolt.db.host | string | `"passbolt-proxysql"` |  |
 | passbolt.db.name | string | `"passbolt"` |  |

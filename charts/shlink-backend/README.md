@@ -140,7 +140,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | mariadb.auth.password | string | `"shlink"` | The password credential to be used when using the integrated MariaDB database. |
 | mariadb.auth.username | string | `"shlink"` | The username credential to be used when using the integrated MariaDB database. |
 | mariadb.enabled | bool | `false` | enable integrated MariaDB™ subchart from Bitnami |
-| mariadb.image.repository | string | `"bitnamilegacy/mariadb"` | image repository for MariaDB™ subchart from Bitnami |
+| mariadb.image.repository | string | `"soldevelo/mariadb"` | image repository for MariaDB™ subchart from Bitnami |
 | mariadb.image.tag | string | `"12.0.2-debian-12-r0"` | image tag for MariaDB™ subchart from Bitnami |
 | mysql.auth.database | string | `"shlink"` | The database name to be used when using the integrated MySQL database. |
 | mysql.auth.password | string | `"shlink"` | The password credential to be used when using the integrated MySQL database. |
@@ -157,16 +157,16 @@ The command removes all the Kubernetes components associated with the chart and 
 | postgresql.auth.password | string | `"shlink"` | The password credential to be used when using the integrated PostgreSQL database. |
 | postgresql.auth.username | string | `"shlink"` | The username credential to be used when using the integrated PostgreSQL database. |
 | postgresql.enabled | bool | `false` | enable integrated PostgreSQL™ subchart from Bitnami |
-| postgresql.image.repository | string | `"bitnamilegacy/postgresql"` | image repository for PostgreSQL™ subchart from Bitnami |
+| postgresql.image.repository | string | `"soldevelo/postgresql"` | image repository for PostgreSQL™ subchart from Bitnami |
 | postgresql.image.tag | string | `"17.6.0-debian-12-r4"` | image tag for PostgreSQL™ subchart from Bitnami |
 | rabbitmq.enabled | bool | `false` | enable integrated RabbitMQ™ subchart from Bitnami |
-| rabbitmq.image.repository | string | `"bitnamilegacy/rabbitmq"` | image repository for RabbitMQ™ subchart from Bitnami |
+| rabbitmq.image.repository | string | `"soldevelo/rabbitmq"` | image repository for RabbitMQ™ subchart from Bitnami |
 | rabbitmq.image.tag | string | `"4.1.3-debian-12-r1"` | image tag for RabbitMQ™ subchart from Bitnami |
 | redis.architecture | string | `"standalone"` | Redis™ architecture. Allowed values: `standalone` or `replication` |
 | redis.auth.enabled | bool | `false` | Enable password authentication |
 | redis.auth.sentinel | bool | `false` | Enable password authentication on Redis™ Sentinels |
 | redis.enabled | bool | `false` | enable integrated Redis™ subchart from Bitnami |
-| redis.image.repository | string | `"bitnamilegacy/redis"` | image repository for Redis™ subchart from Bitnami |
+| redis.image.repository | string | `"soldevelo/redis"` | image repository for Redis™ subchart from Bitnami |
 | redis.image.tag | string | `"8.2.1-debian-12-r0"` | image tag for Redis™ subchart from Bitnami |
 | redis.sentinel.enabled | bool | `false` | Use Redis™ Sentinel on Redis™ pods |
 | replicaCount | int | `1` | Number of replicas |

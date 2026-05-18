@@ -262,7 +262,7 @@
                   "type": "string"
                 },
                 "repository": {
-                  "default": "bitnamilegacy/os-shell",
+                  "default": "soldevelo/os-shell",
                   "title": "repository",
                   "type": "string"
                 },

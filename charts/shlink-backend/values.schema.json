@@ -912,7 +912,7 @@
         "image": {
           "properties": {
             "repository": {
-              "default": "bitnamilegacy/mariadb",
+              "default": "soldevelo/mariadb",
               "description": "image repository for MariaDB™ subchart from Bitnami",
               "title": "repository",
               "type": "string"
@@ -1078,7 +1078,7 @@
         "image": {
           "properties": {
             "repository": {
-              "default": "bitnamilegacy/postgresql",
+              "default": "soldevelo/postgresql",
               "description": "image repository for PostgreSQL™ subchart from Bitnami",
               "title": "repository",
               "type": "string"
@@ -1117,7 +1117,7 @@
         "image": {
           "properties": {
             "repository": {
-              "default": "bitnamilegacy/rabbitmq",
+              "default": "soldevelo/rabbitmq",
               "description": "image repository for RabbitMQ™ subchart from Bitnami",
               "title": "repository",
               "type": "string"
@@ -1183,7 +1183,7 @@
         "image": {
           "properties": {
             "repository": {
-              "default": "bitnamilegacy/redis",
+              "default": "soldevelo/redis",
               "description": "image repository for Redis™ subchart from Bitnami",
               "title": "repository",
               "type": "string"

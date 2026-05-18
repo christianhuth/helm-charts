@@ -54,7 +54,7 @@ mysql:
     enabled: true
     image:
       pullPolicy: Always
-      repository: bitnamilegacy/os-shell
+      repository: soldevelo/os-shell
       tag: 12-debian-12-r50
 
 passbolt:

@@ -216,7 +216,7 @@ mariadb:
     username: typo3
   image:
     # -- image repository for MariaDB™ subchart from Bitnami
-    repository: bitnamilegacy/mariadb
+    repository: soldevelo/mariadb
     # -- image tag for MariaDB™ subchart from Bitnami
     tag: 12.0.2-debian-12-r0
 
@@ -234,7 +234,7 @@ postgresql:
     username: typo3
   image:
     # -- image repository for PostgreSQL™ subchart from Bitnami
-    repository: bitnamilegacy/postgresql
+    repository: soldevelo/postgresql
     # -- image tag for PostgreSQL™ subchart from Bitnami
     tag: 17.6.0-debian-12-r4
 

@@ -196,7 +196,7 @@ postgresql:
     username: mychart
   image:
     # -- image repository for PostgreSQL™ subchart from Bitnami
-    repository: bitnamilegacy/postgresql
+    repository: soldevelo/postgresql
     # -- image tag for PostgreSQL™ subchart from Bitnami
     tag: 17.6.0-debian-12-r4
 
