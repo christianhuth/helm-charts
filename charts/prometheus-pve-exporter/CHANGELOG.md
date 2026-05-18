@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.7.1
+## 2.8.0
 
 ### Changed
 
-- App Version to 3.8.3
+- App Version to 3.9.0
