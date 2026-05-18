@@ -1,7 +1,7 @@
 # netcupscp-exporter
 
-## 1.6.0
+## 1.6.1
 
-### Added
+### Changed
 
-- option to define route timeouts
+- App Version to v0.5.1
