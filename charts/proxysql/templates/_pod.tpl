@@ -63,8 +63,8 @@ spec:
         {{- toYaml .Values.resources | nindent 8 }}
   volumes:
     - name: proxysql-config
-      configMap:
-        name: {{ .Values.proxysql.configmap | default (include "proxysql.fullname" .) }}
+      secret:
+        secretName: {{ .Values.proxysql.existingSecret | default (include "proxysql.fullname" .) }}
   {{- with .Values.nodeSelector }}
   nodeSelector:
     {{- toYaml . | nindent 4 }}
