@@ -1,7 +1,7 @@
 # node-access
 
-## 1.2.1
+## 1.3.0
 
-### Fixed
+### Changed
 
-- helm schema
+- App Version to 1.38.0
