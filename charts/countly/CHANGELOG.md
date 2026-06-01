@@ -1,7 +1,7 @@
 # countly
 
-## 4.8.1
+## 5.0.0
 
 ### Changed
 
-- dependency of mongodb to 18.7.1
+- dependency of mongodb to 19.0.9
