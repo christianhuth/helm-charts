@@ -153,7 +153,8 @@ tolerations: []
 affinity: {}
 
 proxysql:
-  # configmap: proxysql-configmap-name
+  # -- Use an existing Secret containing the proxysql.cnf config. The secret has to contain the key `proxysql.cnf`. When it's set the chart will not generate a Secret.
+  existingSecret: ""
   web:
     enabled: true
     port: 443

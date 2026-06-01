@@ -80,6 +80,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | proxysql.cluster.enabled | bool | `false` |  |
 | proxysql.cluster.password | string | `"cluster"` |  |
 | proxysql.cluster.user | string | `"cluster"` |  |
+| proxysql.existingSecret | string | `""` | Use an existing Secret containing the proxysql.cnf config. The secret has to contain the key `proxysql.cnf`. When it's set the chart will not generate a Secret. |
 | proxysql.monitor.enabled | bool | `false` |  |
 | proxysql.monitor.replicationLagInterval | int | `10000` |  |
 | proxysql.monitor.replicationLagTimeout | int | `1500` |  |
