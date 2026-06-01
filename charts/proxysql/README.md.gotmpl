@@ -50,3 +50,9 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```console
 helm install my-release -f values.yaml christianhuth/proxysql
 ```
+
+## Upgrading the Chart
+
+### To 3.0.0
+
+This major updates the way the configuration of ProxySQL is managed. The configuration is now stored in a Kubernetes Secret and mounted as a file into the container. This increases security, but comes with the cost of having to manage the configuration file outside of the chart, when using GitOps. The old way of managing the configuration via chart values is still supported.
