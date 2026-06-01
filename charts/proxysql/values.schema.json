@@ -535,8 +535,13 @@
           "title": "port",
           "type": "integer"
         },
+        "existingSecret": {
+          "default": "",
+          "description": "Use an existing Secret containing the proxysql.cnf config. The secret has to contain the key `proxysql.cnf`. When it's set the chart will not generate a Secret.",
+          "title": "existingSecret",
+          "type": "string"
+        },
         "web": {
-          "description": "configmap: proxysql-configmap-name",
           "properties": {
             "enabled": {
               "default": true,
@@ -569,14 +574,7 @@
           "type": "object"
         }
       },
-      "required": [
-        "web",
-        "admin",
-        "port",
-        "cluster",
-        "mysql",
-        "monitor"
-      ],
+      "required": [],
       "title": "proxysql",
       "type": "object"
     },

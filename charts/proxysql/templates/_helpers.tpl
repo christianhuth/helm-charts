@@ -61,3 +61,15 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+
+{{/*
+Get the name of the secret containing the secrets for authentication against AWS
+*/}}
+{{- define "proxysql.secretName" -}}
+  {{- if .Values.proxysql.config.existingSecret -}}
+    {{- printf "%s" (tpl .Values.proxysql.config.existingSecret $) -}}
+  {{- else -}}
+      {{- printf "%s" (include "proxysql.fullname" .) -}}
+  {{- end -}}
+{{- end -}}

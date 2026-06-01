@@ -80,6 +80,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | proxysql.cluster.enabled | bool | `false` |  |
 | proxysql.cluster.password | string | `"cluster"` |  |
 | proxysql.cluster.user | string | `"cluster"` |  |
+| proxysql.config.existingSecret | string | `""` | Use an existing Secret containing the proxysql.cnf config. The secret has to contain the key `proxysql.cnf`. When it's set the chart will not generate a Secret. |
 | proxysql.monitor.enabled | bool | `false` |  |
 | proxysql.monitor.replicationLagInterval | int | `10000` |  |
 | proxysql.monitor.replicationLagTimeout | int | `1500` |  |
@@ -135,3 +136,9 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```console
 helm install my-release -f values.yaml christianhuth/proxysql
 ```
+
+## Upgrading the Chart
+
+### To 3.0.0
+
+This major updates the way the configuration of ProxySQL is managed. The configuration is now stored in a Kubernetes Secret and mounted as a file into the container. This increases security, but comes with the cost of having to manage the configuration file outside of the chart, when using GitOps. The old way of managing the configuration via chart values is still supported.
