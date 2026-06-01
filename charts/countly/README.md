@@ -181,6 +181,10 @@ helm install my-release -f values.yaml christianhuth/baserow
 
 ## Upgrading the Chart
 
+### To 5.0.0
+
+This major updates the MongoDB subchart to its newest major, 19.0.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mongodb#upgrading) you can find more information about the changes introduced in that version.
+
 ### To 4.0.0
 
 This major updates the MongoDB subchart to its newest major, 18.2.0. [Here](https://github.com/bitnami/charts/tree/main/bitnami/mongodb#upgrading) you can find more information about the changes introduced in that version.
