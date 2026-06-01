@@ -38,7 +38,7 @@ spec:
           args:
             - "gunicorn-wsgi"
             - "--timeout"
-            - "60"
+            - "120"
           env:
             # Baserow Backend Settings
             - name: BASEROW_JWT_SIGNING_KEY
