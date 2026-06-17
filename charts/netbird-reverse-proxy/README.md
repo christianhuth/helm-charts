@@ -126,6 +126,8 @@ persistence:
   storageClassName: "my-storage-class"
 ```
 
+If you'd rather not deal with a privileged port at all, set `proxy.tls.acme.challengeType=http-01` instead - it validates on `proxy.tls.acme.address` (port 80 by default) rather than 443, so `proxy.address` can stay at its non-privileged default. This needs `service.http.port` (80) reachable from the internet instead of 443. Some ACME providers (e.g. ZeroSSL) also require External Account Binding - set `proxy.tls.acme.eab.kid` and `proxy.tls.acme.eab.existingSecret` (a Secret with a `hmacKey` key) for those.
+
 ### Exposure: `service.type=LoadBalancer`
 
 This is the normal way to run this proxy: the Service gets its own external IP directly from your cloud provider or MetalLB, and since a Service is always L4, passthrough is automatic - no special configuration needed. Pair it with [external-dns](https://github.com/kubernetes-sigs/external-dns) to publish a DNS record for the assigned IP automatically, matching the hostname configured in `proxy.domain` / your certificate:
@@ -138,6 +140,26 @@ service:
 ```
 
 This chart intentionally does not support Ingress or Gateway API routes: both terminate TLS by design, which - as explained above - this proxy cannot run behind. If you need to multiplex several TLS-terminating backends behind a single shared IP via SNI, that is a deliberate, more advanced setup (Gateway API `TLSRoute` with a `Passthrough` listener) that is outside the scope of this chart - the dedicated LoadBalancer above is the supported path.
+
+### Health checks
+
+The proxy exposes a combined health endpoint at `proxy.health.address` (`:8080` by default - the chart deliberately binds this to all interfaces, unlike the binary's own `localhost:8080` default, so that standard Kubernetes `httpGet` probes can reach it). This chart wires up `livenessProbe`/`readinessProbe`/`startupProbe` against it automatically:
+
+- `/healthz/live` (liveness) - a pure process check, independent of the management server connection, so a transient management-server outage won't cause Kubernetes to restart the pod.
+- `/healthz/ready` (readiness) - gated on the management server connection; the pod is taken out of the Service's endpoints while disconnected.
+- `/healthz/startup` (startup) - the full check set, including initial sync completion.
+
+The same port also serves Prometheus metrics at `/metrics`.
+
+A separate, more sensitive debug endpoint (connected clients, runtime stats, packet capture) can be enabled via `proxy.debugEndpoint.enabled` - it stays bound to `localhost` and is not exposed via the Service even when enabled; reach it with `kubectl exec`/port-forward.
+
+### Geolocation database persistence
+
+The proxy downloads a GeoLite2 city database to `proxy.geoDataDir` from `pkgs.netbird.io` at startup if it's missing. By default this isn't backed by a volume, so it's re-downloaded on every pod restart. If you want to avoid that, or are running without egress to `pkgs.netbird.io`, mount a volume at that path yourself via `extraVolumes`/`extraVolumeMounts`.
+
+### CrowdSec integration
+
+Set `proxy.crowdsec.apiUrl` to enable IP reputation checks against a [CrowdSec](https://www.crowdsec.net/) LAPI instance. Provide the bouncer API key via `proxy.crowdsec.auth.apiKey` or, preferably, `proxy.crowdsec.auth.existingSecret` (a Secret with an `apiKey` key).
 
 ## Using an Existing Secret for the Proxy Token
 
@@ -165,6 +187,8 @@ helm install my-release christianhuth/netbird-reverse-proxy \
 | autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | extraEnvFrom | list | `[]` | additional environment variables from ConfigMaps or Secrets |
+| extraVolumeMounts | list | `[]` | additional volume mounts to add to the container, paired with extraVolumes |
+| extraVolumes | list | `[]` | additional volumes to add to the pod. Useful for example to mount a pre-populated GeoLite2 database (proxy.geoDataDir) or a wildcard certificate directory, neither of which this chart provisions directly. |
 | fullnameOverride | string | `""` | String to fully override `"netbird-reverse-proxy.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registry |
@@ -184,14 +208,35 @@ helm install my-release christianhuth/netbird-reverse-proxy \
 | proxy.address | string | `":8443"` | Address the proxy's main TLS listener binds to (NB_PROXY_ADDRESS). The proxy always terminates TLS itself for client-facing traffic - there is no plain-HTTP mode for this listener. Defaults to the binary's own non-privileged default port, so the container never needs to bind a privileged port (<1024) itself; service.https.port still exposes the conventional 443 externally - the Service's named targetPort maps it to whatever numeric port is set here. Must be in ":PORT" form (no host part) - the chart derives the container's port from it. |
 | proxy.auth.existingSecret | string | `""` | Name of an existing secret containing the proxy token. If set, proxy.auth.token will be ignored. The secret must contain a key named `token`. |
 | proxy.auth.token | string | `""` | Proxy authentication token (NB_PROXY_TOKEN). It is strongly recommended to use proxy.auth.existingSecret instead of providing the token here. |
+| proxy.crowdsec.apiUrl | string | `""` | CrowdSec LAPI URL for IP reputation checks (NB_PROXY_CROWDSEC_API_URL). Leave empty to disable the CrowdSec integration entirely. |
+| proxy.crowdsec.auth.apiKey | string | `""` | CrowdSec bouncer API key (NB_PROXY_CROWDSEC_API_KEY). It is strongly recommended to use proxy.crowdsec.auth.existingSecret instead of providing the key here. |
+| proxy.crowdsec.auth.existingSecret | string | `""` | Name of an existing secret containing the CrowdSec bouncer API key. If set, proxy.crowdsec.auth.apiKey will be ignored. The secret must contain a key named `apiKey`. |
+| proxy.debugEndpoint.address | string | `"localhost:8444"` | Address for the debug HTTP endpoint (NB_PROXY_DEBUG_ENDPOINT_ADDRESS). Only relevant when proxy.debugEndpoint.enabled=true. |
+| proxy.debugEndpoint.enabled | bool | `false` | Enable the debug HTTP endpoint (NB_PROXY_DEBUG_ENDPOINT), which exposes richer introspection (connected clients, runtime stats, packet capture) than the health endpoint. Disabled by default since it's a more sensitive surface; left bound to localhost (not exposed via the Service) even when enabled - reach it via `kubectl exec`/port-forward. |
 | proxy.domain | string | `""` | Domain name the proxy serves (NB_PROXY_DOMAIN) |
+| proxy.forwardedProto | string | `"auto"` | Value to set for the X-Forwarded-Proto header sent to backends (NB_PROXY_FORWARDED_PROTO). One of "auto", "http", or "https". |
+| proxy.geoDataDir | string | `"/var/lib/netbird/geolocation"` | Directory for the GeoLite2 city database (NB_PROXY_GEO_DATA_DIR), auto-downloaded from pkgs.netbird.io at startup if missing. Not backed by a volume by default, so it is re-downloaded on every pod restart; mount a volume here via extraVolumes/extraVolumeMounts (e.g. a small PVC) if you want to avoid that, or are running in an environment without egress to pkgs.netbird.io. |
+| proxy.health.address | string | `":8080"` | Address for the health probe endpoint (NB_PROXY_HEALTH_ADDRESS), used for this chart's liveness/readiness/startup probes. Deliberately overrides the binary's own "localhost:8080" default to bind all interfaces within the pod's network namespace, since the kubelet's httpGet probes connect to the Pod IP and cannot reach a port bound only to 127.0.0.1 inside the container. This is not exposed via the Service, so it stays unreachable from outside the pod's network namespace regardless. |
 | proxy.logLevel | string | `"info"` | Log level for the proxy (NB_PROXY_LOG_LEVEL) |
 | proxy.managementServer.address | string | `""` | Address of the NetBird management server (NB_PROXY_MANAGEMENT_ADDRESS) |
 | proxy.managementServer.allowInsecure | bool | `true` | Allow insecure connections to the management server, e.g. when it presents a self-signed certificate (NB_PROXY_ALLOW_INSECURE). Note: this flag is not documented on docs.netbird.io as of writing; verify its exact behavior against `reverse-proxy --help` for your image version if it matters for your setup. |
+| proxy.maxDialTimeout | string | `""` | Cap the per-service backend dial timeout (NB_PROXY_MAX_DIAL_TIMEOUT), e.g. "5s". Empty means no cap (binary default). |
+| proxy.maxSessionIdleTimeout | string | `""` | Cap the per-service session idle timeout (NB_PROXY_MAX_SESSION_IDLE_TIMEOUT), e.g. "30m". Empty means no cap (binary default). |
 | proxy.private | bool | `false` | Advertises this proxy cluster's support for "NetBird-Only" private services (NB_PROXY_PRIVATE) - see https://netbird.io/knowledge-hub/netbird-only-private-services. This is an opt-in, per-service access-control feature configured in the NetBird UI/API, not a network-exposure setting - most deployments don't need it. Enabling it makes the proxy set up an additional, hardcoded :80/:443 listener pair for such services regardless of proxy.address, which requires NET_BIND_SERVICE for both ports rather than just the one proxy.address points at. |
+| proxy.proxyProtocol | bool | `false` | Enable PROXY protocol on the proxy's TCP listeners to preserve real client IPs behind an L4 load balancer that supports it, e.g. an AWS NLB with proxy protocol enabled (NB_PROXY_PROXY_PROTOCOL). |
+| proxy.requireSubdomain | bool | `false` | Require a subdomain label in front of proxy.domain for routed services (NB_PROXY_REQUIRE_SUBDOMAIN). |
+| proxy.tls.acme.address | string | `":80"` | HTTP address for ACME http-01 challenges (NB_PROXY_ACME_ADDRESS). Only used when proxy.tls.acme.challengeType=http-01. |
+| proxy.tls.acme.challengeType | string | `"tls-alpn-01"` | ACME challenge type when proxy.tls.source=acme (NB_PROXY_ACME_CHALLENGE_TYPE). "tls-alpn-01" (default) is always validated by the CA on port 443 - not configurable - which is why proxy.address must be set to ":443" for this mode (see proxy.tls.source above). "http-01" instead validates on proxy.tls.acme.address (default :80), letting you keep proxy.address at its non-privileged default - but requires service.http.port (80) to actually reach the pod from the internet. |
+| proxy.tls.acme.directory | string | `""` | Override the ACME directory URL (NB_PROXY_ACME_DIRECTORY), e.g. to use Let's Encrypt's staging environment while testing (to avoid production rate limits) or a different ACME CA. Defaults to the Let's Encrypt production directory when empty. |
+| proxy.tls.acme.eab.existingSecret | string | `""` | Name of an existing Secret containing the ACME EAB HMAC key (NB_PROXY_ACME_EAB_HMAC_KEY). The secret must contain a key named `hmacKey`. Required together with proxy.tls.acme.eab.kid if your ACME CA requires EAB. |
+| proxy.tls.acme.eab.kid | string | `""` | ACME External Account Binding key ID (NB_PROXY_ACME_EAB_KID), required by some ACME CAs (e.g. ZeroSSL, some enterprise CAs). Leave empty if your CA doesn't require EAB. |
+| proxy.tls.certLockMethod | string | `"auto"` | Certificate coordination method for multi-replica deployments (NB_PROXY_CERT_LOCK_METHOD). One of "auto", "flock", or "k8s-lease". "flock" only works with a single replica (it coordinates via a local file lock). "k8s-lease" coordinates across replicas using a Kubernetes Lease object, which could in principle make it safe to run more than one replica with proxy.tls.source=acme - but this chart does not (yet) create the RBAC (Role/RoleBinding for the coordination.k8s.io Lease resource) that mode needs to actually work; you would have to provide that yourself. "auto" lets the proxy pick. |
 | proxy.tls.certificateDirectory | string | `"/certs"` | Directory where TLS certificate files are read from / stored (NB_PROXY_CERTIFICATE_DIRECTORY). The proxy expects tls.crt and tls.key inside this directory (NB_PROXY_CERTIFICATE_FILE / NB_PROXY_CERTIFICATE_KEY_FILE default to those names) - which is also the default key layout of a Kubernetes Secret of type kubernetes.io/tls, so cert-manager output can be mounted as-is. |
+| proxy.tls.certificateFile | string | `"tls.crt"` | TLS certificate filename within proxy.tls.certificateDirectory (NB_PROXY_CERTIFICATE_FILE). Only needs changing if you mount a Secret/volume that uses different filenames. |
+| proxy.tls.certificateKeyFile | string | `"tls.key"` | TLS private key filename within proxy.tls.certificateDirectory (NB_PROXY_CERTIFICATE_KEY_FILE). Only needs changing if you mount a Secret/volume that uses different filenames. |
 | proxy.tls.existingSecret | string | `""` | Name of an existing Secret of type kubernetes.io/tls containing tls.crt and tls.key. Required when proxy.tls.source=secret. |
 | proxy.tls.source | string | `"selfSigned"` | Source of the TLS certificate served to clients. One of: - "selfSigned" (default): the chart generates a self-signed certificate for proxy.domain   (required) and stores it in a Secret it manages itself - no external dependency at all, so   `helm install` works out of the box. The generated certificate is stable across upgrades   (re-used if the Secret already exists) but is not renewed automatically; delete the   generated Secret to force regeneration. Fine for CI/testing or fully private/internal   deployments where clients don't need a publicly-trusted certificate - switch to "secret"   for a production setup with real external clients. - "secret": mount an existing Kubernetes Secret of type kubernetes.io/tls (e.g. issued by a   cert-manager Certificate resource) into proxy.tls.certificateDirectory. The proxy hot-reloads   the certificate when the file changes on disk, so cert-manager renewals (which update the   Secret, which kubelet syncs to the mounted volume) are picked up without restarting the pod.   Recommended for production with real, publicly-trusted certificates. - "acme": the proxy requests and renews its own certificate via ACME (Let's Encrypt) - sets   NB_PROXY_ACME_CERTIFICATES=true. Requires the proxy to be reachable from the internet and   proxy.domain to be set. The default ACME challenge type (tls-alpn-01) always validates on   port 443 regardless of proxy.address - if you use this source, set proxy.address back to   ":443" (the chart defaults it to ":8443" to avoid needing a privileged port otherwise).   Enable persistence.enabled to avoid re-requesting a certificate (and risking Let's Encrypt   rate limits) on every pod restart. |
+| proxy.trustedProxies | string | `""` | Comma-separated list of trusted upstream proxy CIDR ranges (NB_PROXY_TRUSTED_PROXIES), e.g. "10.0.0.0/8,192.168.1.1". Only set this if there is an L4 load balancer or proxy in front of the Service that the proxy should trust for client-IP forwarding headers. Empty by default. |
 | replicaCount | int | `1` | Number of replicas. Note: When using built-in ACME certificates (proxy.tls.source=acme), running more than one replica is not recommended as certificate state is not shared between pods. |
 | resources | object | `{}` | Resource limits and requests for the controller pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |

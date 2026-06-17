@@ -59,6 +59,22 @@
       "title": "extraEnvFrom",
       "type": "array"
     },
+    "extraVolumeMounts": {
+      "description": "additional volume mounts to add to the container, paired with extraVolumes",
+      "items": {
+        "required": []
+      },
+      "title": "extraVolumeMounts",
+      "type": "array"
+    },
+    "extraVolumes": {
+      "description": "additional volumes to add to the pod. Useful for example to mount a pre-populated GeoLite2\ndatabase (proxy.geoDataDir) or a wildcard certificate directory, neither of which this chart\nprovisions directly.",
+      "items": {
+        "required": []
+      },
+      "title": "extraVolumes",
+      "type": "array"
+    },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"netbird-reverse-proxy.fullname\"`",
@@ -262,11 +278,98 @@
           "title": "auth",
           "type": "object"
         },
+        "crowdsec": {
+          "properties": {
+            "apiUrl": {
+              "default": "",
+              "description": "CrowdSec LAPI URL for IP reputation checks (NB_PROXY_CROWDSEC_API_URL). Leave empty to\ndisable the CrowdSec integration entirely.",
+              "title": "apiUrl",
+              "type": "string"
+            },
+            "auth": {
+              "properties": {
+                "apiKey": {
+                  "default": "",
+                  "description": "CrowdSec bouncer API key (NB_PROXY_CROWDSEC_API_KEY).\nIt is strongly recommended to use proxy.crowdsec.auth.existingSecret instead of providing\nthe key here.",
+                  "title": "apiKey",
+                  "type": "string"
+                },
+                "existingSecret": {
+                  "default": "",
+                  "description": "Name of an existing secret containing the CrowdSec bouncer API key.\nIf set, proxy.crowdsec.auth.apiKey will be ignored. The secret must contain a key named `apiKey`.",
+                  "title": "existingSecret",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "existingSecret",
+                "apiKey"
+              ],
+              "title": "auth",
+              "type": "object"
+            }
+          },
+          "required": [
+            "apiUrl",
+            "auth"
+          ],
+          "title": "crowdsec",
+          "type": "object"
+        },
+        "debugEndpoint": {
+          "properties": {
+            "address": {
+              "default": "localhost:8444",
+              "description": "Address for the debug HTTP endpoint (NB_PROXY_DEBUG_ENDPOINT_ADDRESS). Only relevant when\nproxy.debugEndpoint.enabled=true.",
+              "title": "address",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enable the debug HTTP endpoint (NB_PROXY_DEBUG_ENDPOINT), which exposes richer\nintrospection (connected clients, runtime stats, packet capture) than the health endpoint.\nDisabled by default since it's a more sensitive surface; left bound to localhost (not\nexposed via the Service) even when enabled - reach it via `kubectl exec`/port-forward.",
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled",
+            "address"
+          ],
+          "title": "debugEndpoint",
+          "type": "object"
+        },
         "domain": {
           "default": "",
           "description": "Domain name the proxy serves (NB_PROXY_DOMAIN)",
           "title": "domain",
           "type": "string"
+        },
+        "forwardedProto": {
+          "default": "auto",
+          "description": "Value to set for the X-Forwarded-Proto header sent to backends (NB_PROXY_FORWARDED_PROTO).\nOne of \"auto\", \"http\", or \"https\".",
+          "title": "forwardedProto",
+          "type": "string"
+        },
+        "geoDataDir": {
+          "default": "/var/lib/netbird/geolocation",
+          "description": "Directory for the GeoLite2 city database (NB_PROXY_GEO_DATA_DIR), auto-downloaded from\npkgs.netbird.io at startup if missing. Not backed by a volume by default, so it is re-downloaded\non every pod restart; mount a volume here via extraVolumes/extraVolumeMounts (e.g. a small PVC)\nif you want to avoid that, or are running in an environment without egress to pkgs.netbird.io.",
+          "title": "geoDataDir",
+          "type": "string"
+        },
+        "health": {
+          "properties": {
+            "address": {
+              "default": ":8080",
+              "description": "Address for the health probe endpoint (NB_PROXY_HEALTH_ADDRESS), used for this chart's\nliveness/readiness/startup probes. Deliberately overrides the binary's own \"localhost:8080\"\ndefault to bind all interfaces within the pod's network namespace, since the kubelet's\nhttpGet probes connect to the Pod IP and cannot reach a port bound only to 127.0.0.1 inside\nthe container. This is not exposed via the Service, so it stays unreachable from outside the\npod's network namespace regardless.",
+              "title": "address",
+              "type": "string"
+            }
+          },
+          "required": [
+            "address"
+          ],
+          "title": "health",
+          "type": "object"
         },
         "logLevel": {
           "default": "info",
@@ -296,18 +399,112 @@
           "title": "managementServer",
           "type": "object"
         },
+        "maxDialTimeout": {
+          "default": "",
+          "description": "Cap the per-service backend dial timeout (NB_PROXY_MAX_DIAL_TIMEOUT), e.g. \"5s\". Empty means\nno cap (binary default).",
+          "title": "maxDialTimeout",
+          "type": "string"
+        },
+        "maxSessionIdleTimeout": {
+          "default": "",
+          "description": "Cap the per-service session idle timeout (NB_PROXY_MAX_SESSION_IDLE_TIMEOUT), e.g. \"30m\".\nEmpty means no cap (binary default).",
+          "title": "maxSessionIdleTimeout",
+          "type": "string"
+        },
         "private": {
           "default": false,
           "description": "Advertises this proxy cluster's support for \"NetBird-Only\" private services (NB_PROXY_PRIVATE) -\nsee https://netbird.io/knowledge-hub/netbird-only-private-services. This is an opt-in,\nper-service access-control feature configured in the NetBird UI/API, not a network-exposure\nsetting - most deployments don't need it. Enabling it makes the proxy set up an additional,\nhardcoded :80/:443 listener pair for such services regardless of proxy.address, which requires\nNET_BIND_SERVICE for both ports rather than just the one proxy.address points at.",
           "title": "private",
           "type": "boolean"
         },
+        "proxyProtocol": {
+          "default": false,
+          "description": "Enable PROXY protocol on the proxy's TCP listeners to preserve real client IPs behind an L4\nload balancer that supports it, e.g. an AWS NLB with proxy protocol enabled (NB_PROXY_PROXY_PROTOCOL).",
+          "title": "proxyProtocol",
+          "type": "boolean"
+        },
+        "requireSubdomain": {
+          "default": false,
+          "description": "Require a subdomain label in front of proxy.domain for routed services (NB_PROXY_REQUIRE_SUBDOMAIN).",
+          "title": "requireSubdomain",
+          "type": "boolean"
+        },
         "tls": {
           "properties": {
+            "acme": {
+              "properties": {
+                "address": {
+                  "default": ":80",
+                  "description": "HTTP address for ACME http-01 challenges (NB_PROXY_ACME_ADDRESS). Only used when\nproxy.tls.acme.challengeType=http-01.",
+                  "title": "address",
+                  "type": "string"
+                },
+                "challengeType": {
+                  "default": "tls-alpn-01",
+                  "description": "ACME challenge type when proxy.tls.source=acme (NB_PROXY_ACME_CHALLENGE_TYPE).\n\"tls-alpn-01\" (default) is always validated by the CA on port 443 - not configurable -\nwhich is why proxy.address must be set to \":443\" for this mode (see proxy.tls.source\nabove). \"http-01\" instead validates on proxy.tls.acme.address (default :80), letting you\nkeep proxy.address at its non-privileged default - but requires service.http.port (80) to\nactually reach the pod from the internet.",
+                  "title": "challengeType",
+                  "type": "string"
+                },
+                "directory": {
+                  "default": "",
+                  "description": "Override the ACME directory URL (NB_PROXY_ACME_DIRECTORY), e.g. to use Let's Encrypt's\nstaging environment while testing (to avoid production rate limits) or a different ACME CA.\nDefaults to the Let's Encrypt production directory when empty.",
+                  "title": "directory",
+                  "type": "string"
+                },
+                "eab": {
+                  "properties": {
+                    "existingSecret": {
+                      "default": "",
+                      "description": "Name of an existing Secret containing the ACME EAB HMAC key (NB_PROXY_ACME_EAB_HMAC_KEY).\nThe secret must contain a key named `hmacKey`. Required together with proxy.tls.acme.eab.kid\nif your ACME CA requires EAB.",
+                      "title": "existingSecret",
+                      "type": "string"
+                    },
+                    "kid": {
+                      "default": "",
+                      "description": "ACME External Account Binding key ID (NB_PROXY_ACME_EAB_KID), required by some ACME\nCAs (e.g. ZeroSSL, some enterprise CAs). Leave empty if your CA doesn't require EAB.",
+                      "title": "kid",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "kid",
+                    "existingSecret"
+                  ],
+                  "title": "eab",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "challengeType",
+                "address",
+                "directory",
+                "eab"
+              ],
+              "title": "acme",
+              "type": "object"
+            },
+            "certLockMethod": {
+              "default": "auto",
+              "description": "Certificate coordination method for multi-replica deployments (NB_PROXY_CERT_LOCK_METHOD).\nOne of \"auto\", \"flock\", or \"k8s-lease\". \"flock\" only works with a single replica (it\ncoordinates via a local file lock). \"k8s-lease\" coordinates across replicas using a\nKubernetes Lease object, which could in principle make it safe to run more than one\nreplica with proxy.tls.source=acme - but this chart does not (yet) create the RBAC\n(Role/RoleBinding for the coordination.k8s.io Lease resource) that mode needs to actually\nwork; you would have to provide that yourself. \"auto\" lets the proxy pick.",
+              "title": "certLockMethod",
+              "type": "string"
+            },
             "certificateDirectory": {
               "default": "/certs",
               "description": "Directory where TLS certificate files are read from / stored (NB_PROXY_CERTIFICATE_DIRECTORY).\nThe proxy expects tls.crt and tls.key inside this directory (NB_PROXY_CERTIFICATE_FILE /\nNB_PROXY_CERTIFICATE_KEY_FILE default to those names) - which is also the default key layout\nof a Kubernetes Secret of type kubernetes.io/tls, so cert-manager output can be mounted as-is.",
               "title": "certificateDirectory",
+              "type": "string"
+            },
+            "certificateFile": {
+              "default": "tls.crt",
+              "description": "TLS certificate filename within proxy.tls.certificateDirectory (NB_PROXY_CERTIFICATE_FILE).\nOnly needs changing if you mount a Secret/volume that uses different filenames.",
+              "title": "certificateFile",
+              "type": "string"
+            },
+            "certificateKeyFile": {
+              "default": "tls.key",
+              "description": "TLS private key filename within proxy.tls.certificateDirectory (NB_PROXY_CERTIFICATE_KEY_FILE).\nOnly needs changing if you mount a Secret/volume that uses different filenames.",
+              "title": "certificateKeyFile",
               "type": "string"
             },
             "existingSecret": {
@@ -326,10 +523,20 @@
           "required": [
             "source",
             "existingSecret",
-            "certificateDirectory"
+            "certificateDirectory",
+            "certificateFile",
+            "certificateKeyFile",
+            "certLockMethod",
+            "acme"
           ],
           "title": "tls",
           "type": "object"
+        },
+        "trustedProxies": {
+          "default": "",
+          "description": "Comma-separated list of trusted upstream proxy CIDR ranges (NB_PROXY_TRUSTED_PROXIES), e.g.\n\"10.0.0.0/8,192.168.1.1\". Only set this if there is an L4 load balancer or proxy in front of\nthe Service that the proxy should trust for client-IP forwarding headers. Empty by default.",
+          "title": "trustedProxies",
+          "type": "string"
         }
       },
       "required": [
@@ -339,7 +546,17 @@
         "logLevel",
         "managementServer",
         "private",
-        "tls"
+        "tls",
+        "geoDataDir",
+        "requireSubdomain",
+        "forwardedProto",
+        "trustedProxies",
+        "proxyProtocol",
+        "maxDialTimeout",
+        "maxSessionIdleTimeout",
+        "health",
+        "debugEndpoint",
+        "crowdsec"
       ],
       "title": "proxy",
       "type": "object"
@@ -528,6 +745,8 @@
     "affinity",
     "extraEnv",
     "extraEnvFrom",
+    "extraVolumes",
+    "extraVolumeMounts",
     "proxy",
     "persistence"
   ],

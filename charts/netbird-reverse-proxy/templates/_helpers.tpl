@@ -86,6 +86,24 @@ self-signed secret (source=selfSigned). Not used for source=acme.
 {{- end -}}
 
 {{/*
+Get the name of the secret containing the ACME EAB HMAC key
+*/}}
+{{- define "netbird-reverse-proxy.proxy.tls.acme.eabSecretName" -}}
+  {{- printf "%s" (tpl .Values.proxy.tls.acme.eab.existingSecret $) -}}
+{{- end -}}
+
+{{/*
+Get the name of the secret containing the CrowdSec bouncer API key
+*/}}
+{{- define "netbird-reverse-proxy.proxy.crowdsec.secretName" -}}
+  {{- if .Values.proxy.crowdsec.auth.existingSecret -}}
+    {{- printf "%s" (tpl .Values.proxy.crowdsec.auth.existingSecret $) -}}
+  {{- else -}}
+    {{- printf "%s-crowdsec" (include "netbird-reverse-proxy.fullname" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
 Get the name of the PersistentVolumeClaim for certificate storage
 */}}
 {{- define "netbird-reverse-proxy.pvcName" -}}
