@@ -217,10 +217,7 @@ proxy:
   managementServer:
     # -- Address of the NetBird management server (NB_PROXY_MANAGEMENT_ADDRESS)
     address: ""
-    # -- Allow insecure connections to the management server, e.g. when it presents a self-signed
-    # certificate (NB_PROXY_ALLOW_INSECURE).
-    # Note: this flag is not documented on docs.netbird.io as of writing; verify its exact behavior
-    # against `reverse-proxy --help` for your image version if it matters for your setup.
+    # -- Allow an insecure (non-TLS) gRPC connection to the management server (NB_PROXY_ALLOW_INSECURE).
     allowInsecure: true
   # -- Advertises this proxy cluster's support for "NetBird-Only" private services (NB_PROXY_PRIVATE) -
   # see https://netbird.io/knowledge-hub/netbird-only-private-services. This is an opt-in,
