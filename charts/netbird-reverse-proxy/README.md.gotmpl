@@ -18,9 +18,11 @@ The NetBird Reverse Proxy provides reverse proxy functionality for NetBird-manag
 ## Prerequisites
 
 - Kubernetes 1.19+
-- A NetBird management server
-- A valid proxy token (`NB_PROXY_TOKEN`)
-- Either cert-manager (recommended, for the default certificate source) or a public DNS record and internet-reachable proxy (for the built-in ACME alternative)
+- A NetBird management server - either NetBird Cloud, or your own self-hosted instance (which needs a couple of extra considerations, see [Connecting to a self-hosted management server](#connecting-to-a-self-hosted-management-server-proxymanagementserveraddress))
+- A proxy token (`proxy.managementServer.auth.token`), generated via `netbird-server token create` (or your management server's equivalent)
+- A domain name pointed at wherever this chart's Service ends up (`proxy.domain`)
+
+The default certificate source (`proxy.tls.source=selfSigned`) has no further prerequisites - it's meant for getting started quickly, not for production with real external clients. For production, you'll also need either cert-manager (`proxy.tls.source=secret`) or just a public DNS record and an internet-reachable proxy (`proxy.tls.source=acme`, no cert-manager needed) - see [Usage Scenarios](#usage-scenarios) and [Certificate source](#certificate-source-proxytlssource).
 
 ## Installing the Chart
 
@@ -48,6 +50,49 @@ helm uninstall my-release
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+## Usage Scenarios
+
+Quick recipes for common setups. Each builds on the previous one - see [Architecture](#architecture) for the reasoning behind each value if you want it.
+
+**Just evaluating the chart** - see [Installing the Chart](#installing-the-chart) above. The defaults (`proxy.tls.source=selfSigned`, `service.type=LoadBalancer`) need nothing beyond a token and a domain.
+
+**Production, using NetBird Cloud** - leave `proxy.managementServer.address` unset (it defaults to NetBird Cloud), and switch to a real certificate source. `acme` is the simpler option since it needs no cert-manager dependency:
+
+```yaml
+proxy:
+  domain: "my-proxy.example.com"
+  managementServer:
+    auth:
+      token: "my-proxy-token" # or auth.existingSecret, see below
+  tls:
+    source: acme
+
+persistence:
+  enabled: true
+  storageClassName: "my-storage-class"
+```
+
+Prefer `cert-manager` instead? Set `proxy.tls.source: secret` with a **wildcard** `Certificate` (`*.my-proxy.example.com`) instead of the `tls`/`persistence` block above - see [Certificate source](#certificate-source-proxytlssource) for why it needs to be a wildcard.
+
+**Production, using a self-hosted management server** - same as above, plus point `proxy.managementServer.address` at it:
+
+```yaml
+proxy:
+  domain: "my-proxy.example.com"
+  managementServer:
+    address: "https://netbird-grpc.example.com"
+    auth:
+      token: "my-proxy-token"
+  tls:
+    source: acme
+
+persistence:
+  enabled: true
+  storageClassName: "my-storage-class"
+```
+
+If that management server sits behind a Gateway API `GRPCRoute` (or Traefik, or any other gRPC-aware router), double check it routes `management.ProxyService` in addition to the services a "normal" NetBird deployment needs - this is the single most common thing that breaks here, and the proxy's pod will simply stay at `0/1 Ready` with no obvious error if it's missing. See [Connecting to a self-hosted management server](#connecting-to-a-self-hosted-management-server-proxymanagementserveraddress) for the exact symptom and fix.
 
 ## Architecture
 

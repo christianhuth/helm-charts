@@ -219,7 +219,9 @@ proxy:
   # -- Log level for the proxy (NB_PROXY_LOG_LEVEL)
   logLevel: "info"
   managementServer:
-    # -- Address of the NetBird management server (NB_PROXY_MANAGEMENT_ADDRESS)
+    # -- Address of the NetBird management server (NB_PROXY_MANAGEMENT_ADDRESS). Leave empty to
+    # use the binary's own default, NetBird Cloud (https://api.netbird.io:443) - only set this if
+    # you run your own self-hosted management server.
     address: ""
     # -- Allow an insecure (non-TLS) gRPC connection to the management server (NB_PROXY_ALLOW_INSECURE).
     allowInsecure: true
@@ -254,13 +256,16 @@ proxy:
     #   the certificate when the file changes on disk, so cert-manager renewals (which update the
     #   Secret, which kubelet syncs to the mounted volume) are picked up without restarting the pod.
     #   Recommended for production with real, publicly-trusted certificates.
-    # - "acme": the proxy requests and renews its own certificate via ACME (Let's Encrypt) - sets
+    # - "acme": the proxy requests and renews its own certificates via ACME (Let's Encrypt) - sets
     #   NB_PROXY_ACME_CERTIFICATES=true. Requires the proxy to be reachable from the internet and
-    #   proxy.domain to be set. The default ACME challenge type (tls-alpn-01) always validates on
-    #   port 443 regardless of proxy.address - if you use this source, set proxy.address back to
-    #   ":443" (the chart defaults it to ":8443" to avoid needing a privileged port otherwise).
-    #   Enable persistence.enabled to avoid re-requesting a certificate (and risking Let's Encrypt
-    #   rate limits) on every pod restart.
+    #   proxy.domain to be set. Unlike "secret"/"selfSigned", this isn't a single static
+    #   certificate - the proxy obtains one on demand per actual hostname the management server
+    #   reports (including each exposed service's auto-generated subdomain), the first time a
+    #   client connects for it. The default ACME challenge type (tls-alpn-01) validates on
+    #   whatever port is externally reachable as 443 - this chart's Service already forwards
+    #   external 443 to proxy.address internally, so the non-privileged ":8443" default works
+    #   fine; no need to change proxy.address. Enable persistence.enabled to avoid re-requesting
+    #   certificates (and risking Let's Encrypt rate limits) on every pod restart.
     source: selfSigned
     # -- Name of an existing Secret of type kubernetes.io/tls containing tls.crt and tls.key.
     # Required when proxy.tls.source=secret.
@@ -279,18 +284,19 @@ proxy:
     # -- Certificate coordination method for multi-replica deployments (NB_PROXY_CERT_LOCK_METHOD).
     # One of "auto", "flock", or "k8s-lease". "flock" only works with a single replica (it
     # coordinates via a local file lock). "k8s-lease" coordinates across replicas using a
-    # Kubernetes Lease object, which could in principle make it safe to run more than one
-    # replica with proxy.tls.source=acme - but this chart does not (yet) create the RBAC
-    # (Role/RoleBinding for the coordination.k8s.io Lease resource) that mode needs to actually
-    # work; you would have to provide that yourself. "auto" lets the proxy pick.
+    # Kubernetes Lease object - the chart auto-detects and uses this inside Kubernetes (the
+    # default, "auto", resolves to it), and creates the RBAC it needs automatically (see
+    # rbac.create). Note that the Lease only coordinates *issuance timing* (so replicas don't
+    # race to request the same certificate); it does not share already-issued certificate state
+    # between replicas - see the multi-replica note under proxy.tls.source=acme above.
     certLockMethod: "auto"
     acme:
       # -- ACME challenge type when proxy.tls.source=acme (NB_PROXY_ACME_CHALLENGE_TYPE).
-      # "tls-alpn-01" (default) is always validated by the CA on port 443 - not configurable -
-      # which is why proxy.address must be set to ":443" for this mode (see proxy.tls.source
-      # above). "http-01" instead validates on proxy.tls.acme.address (default :80), letting you
-      # keep proxy.address at its non-privileged default - but requires service.http.port (80) to
-      # actually reach the pod from the internet.
+      # "tls-alpn-01" (default) validates on whatever port is externally reachable as 443 - this
+      # chart's Service already forwards that to proxy.address internally, so it works fine at
+      # proxy.address's non-privileged default. "http-01" instead validates on
+      # proxy.tls.acme.address (default :80), requiring service.http.port (80) to actually reach
+      # the pod from the internet.
       challengeType: "tls-alpn-01"
       # -- HTTP address for ACME http-01 challenges (NB_PROXY_ACME_ADDRESS). Only used when
       # proxy.tls.acme.challengeType=http-01.
@@ -362,8 +368,9 @@ proxy:
 
 persistence:
   # -- Enable persistent storage for the certs directory. Only relevant when proxy.tls.source=acme;
-  # recommended in that case to avoid re-requesting a certificate on every pod restart. Has no
-  # effect when proxy.tls.source=secret, since the certificate is mounted directly from the Secret.
+  # recommended in that case to avoid re-requesting certificates on every pod restart. Has no
+  # effect for proxy.tls.source=secret or selfSigned, since both mount the certificate directly
+  # from a Secret rather than writing to the certs directory.
   enabled: false
   # -- Provide an existing PersistentVolumeClaim. If set, no new PVC will be created.
   existingClaim: ""
