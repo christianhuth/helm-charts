@@ -1,9 +1,6 @@
 {{- if and (eq .Values.proxy.tls.source "secret") (not .Values.proxy.tls.existingSecret) }}
 {{- fail "proxy.tls.existingSecret is required when proxy.tls.source=secret" }}
 {{- end }}
-{{- if and (eq .Values.proxy.tls.source "selfSigned") (not .Values.proxy.domain) }}
-{{- fail "proxy.domain is required when proxy.tls.source=selfSigned" }}
-{{- end }}
 ---
 apiVersion: apps/v1
 kind: Deployment
