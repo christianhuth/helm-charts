@@ -34,6 +34,15 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+rbac:
+  # -- Specifies whether a Role/RoleBinding should be created for proxy.tls.certLockMethod=k8s-lease
+  # coordination (only rendered when proxy.tls.source=acme and proxy.tls.certLockMethod is "auto" or
+  # "k8s-lease" - "auto" resolves to "k8s-lease" automatically inside Kubernetes, so this applies to
+  # the default too). Without it, the proxy can't create/update the Lease it uses to coordinate
+  # certificate issuance, and ACME certificate acquisition will silently never complete. Disable
+  # this if you manage this RBAC yourself.
+  create: true
+
 # -- Annotations to be added to the pods
 podAnnotations: {}
 
@@ -202,14 +211,6 @@ proxy:
   # externally - the Service's named targetPort maps it to whatever numeric port is set here.
   # Must be in ":PORT" form (no host part) - the chart derives the container's port from it.
   address: ":8443"
-  auth:
-    # -- Name of an existing secret containing the proxy token.
-    # If set, proxy.auth.token will be ignored.
-    # The secret must contain a key named `token`.
-    existingSecret: ""
-    # -- Proxy authentication token (NB_PROXY_TOKEN).
-    # It is strongly recommended to use proxy.auth.existingSecret instead of providing the token here.
-    token: ""
   # -- Domain name the proxy serves (NB_PROXY_DOMAIN)
   domain: ""
   # -- Log level for the proxy (NB_PROXY_LOG_LEVEL)
@@ -219,6 +220,16 @@ proxy:
     address: ""
     # -- Allow an insecure (non-TLS) gRPC connection to the management server (NB_PROXY_ALLOW_INSECURE).
     allowInsecure: true
+    auth:
+      # -- Name of an existing secret containing the proxy's management server token.
+      # If set, proxy.managementServer.auth.token will be ignored.
+      # The secret must contain a key named `token`.
+      existingSecret: ""
+      # -- Token used to authenticate this proxy against the management server (NB_PROXY_TOKEN),
+      # generated via `netbird-server token create` (or your management server's equivalent).
+      # It is strongly recommended to use proxy.managementServer.auth.existingSecret instead of
+      # providing the token here.
+      token: ""
   # -- Advertises this proxy cluster's support for "NetBird-Only" private services (NB_PROXY_PRIVATE) -
   # see https://netbird.io/knowledge-hub/netbird-only-private-services. This is an opt-in,
   # per-service access-control feature configured in the NetBird UI/API, not a network-exposure

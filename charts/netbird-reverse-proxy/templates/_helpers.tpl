@@ -65,8 +65,8 @@ Create the name of the service account to use
 Get the name of the secret containing the proxy token
 */}}
 {{- define "netbird-reverse-proxy.proxy.secretName" -}}
-  {{- if .Values.proxy.auth.existingSecret -}}
-    {{- printf "%s" (tpl .Values.proxy.auth.existingSecret $) -}}
+  {{- if .Values.proxy.managementServer.auth.existingSecret -}}
+    {{- printf "%s" (tpl .Values.proxy.managementServer.auth.existingSecret $) -}}
   {{- else -}}
       {{- printf "%s" (include "netbird-reverse-proxy.fullname" .) -}}
   {{- end -}}

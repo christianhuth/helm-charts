@@ -1,8 +1,9 @@
 ---
 proxy:
-  auth:
-    token: my-dummy-token
   domain: netbird-proxy.example.com
+  managementServer:
+    auth:
+      token: my-dummy-token
 
 readinessProbe:
   # No real management server is reachable in CI, so /healthz/ready (the chart default) would

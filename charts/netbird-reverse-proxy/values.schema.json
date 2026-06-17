@@ -306,28 +306,6 @@
           "title": "address",
           "type": "string"
         },
-        "auth": {
-          "properties": {
-            "existingSecret": {
-              "default": "",
-              "description": "Name of an existing secret containing the proxy token.\nIf set, proxy.auth.token will be ignored.\nThe secret must contain a key named `token`.",
-              "title": "existingSecret",
-              "type": "string"
-            },
-            "token": {
-              "default": "",
-              "description": "Proxy authentication token (NB_PROXY_TOKEN).\nIt is strongly recommended to use proxy.auth.existingSecret instead of providing the token here.",
-              "title": "token",
-              "type": "string"
-            }
-          },
-          "required": [
-            "existingSecret",
-            "token"
-          ],
-          "title": "auth",
-          "type": "object"
-        },
         "crowdsec": {
           "properties": {
             "apiUrl": {
@@ -437,14 +415,37 @@
             },
             "allowInsecure": {
               "default": true,
-              "description": "Allow insecure connections to the management server, e.g. when it presents a self-signed\ncertificate (NB_PROXY_ALLOW_INSECURE).\nNote: this flag is not documented on docs.netbird.io as of writing; verify its exact behavior\nagainst `reverse-proxy --help` for your image version if it matters for your setup.",
+              "description": "Allow an insecure (non-TLS) gRPC connection to the management server (NB_PROXY_ALLOW_INSECURE).",
               "title": "allowInsecure",
               "type": "boolean"
+            },
+            "auth": {
+              "properties": {
+                "existingSecret": {
+                  "default": "",
+                  "description": "Name of an existing secret containing the proxy's management server token.\nIf set, proxy.managementServer.auth.token will be ignored.\nThe secret must contain a key named `token`.",
+                  "title": "existingSecret",
+                  "type": "string"
+                },
+                "token": {
+                  "default": "",
+                  "description": "Token used to authenticate this proxy against the management server (NB_PROXY_TOKEN),\ngenerated via `netbird-server token create` (or your management server's equivalent).\nIt is strongly recommended to use proxy.managementServer.auth.existingSecret instead of\nproviding the token here.",
+                  "title": "token",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "existingSecret",
+                "token"
+              ],
+              "title": "auth",
+              "type": "object"
             }
           },
           "required": [
             "address",
-            "allowInsecure"
+            "allowInsecure",
+            "auth"
           ],
           "title": "managementServer",
           "type": "object"
@@ -591,7 +592,6 @@
       },
       "required": [
         "address",
-        "auth",
         "domain",
         "logLevel",
         "managementServer",
@@ -609,6 +609,21 @@
         "crowdsec"
       ],
       "title": "proxy",
+      "type": "object"
+    },
+    "rbac": {
+      "properties": {
+        "create": {
+          "default": true,
+          "description": "Specifies whether a Role/RoleBinding should be created for proxy.tls.certLockMethod=k8s-lease\ncoordination (only rendered when proxy.tls.source=acme and proxy.tls.certLockMethod is \"auto\" or\n\"k8s-lease\" - \"auto\" resolves to \"k8s-lease\" automatically inside Kubernetes, so this applies to\nthe default too). Without it, the proxy can't create/update the Lease it uses to coordinate\ncertificate issuance, and ACME certificate acquisition will silently never complete. Disable\nthis if you manage this RBAC yourself.",
+          "title": "create",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "create"
+      ],
+      "title": "rbac",
       "type": "object"
     },
     "readinessProbe": {
@@ -884,6 +899,7 @@
     "replicaCount",
     "revisionHistoryLimit",
     "serviceAccount",
+    "rbac",
     "podAnnotations",
     "podSecurityContext",
     "securityContext",
