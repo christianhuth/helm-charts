@@ -368,7 +368,7 @@
         },
         "domain": {
           "default": "",
-          "description": "Domain name the proxy serves (NB_PROXY_DOMAIN)",
+          "description": "Base domain the proxy serves (NB_PROXY_DOMAIN). Services exposed via the NetBird UI/API\ntypically get their own auto-generated, UUID-prefixed subdomain under this base domain (e.g.\n\"\u003cuuid\u003e.\u003cproxy.domain\u003e\") rather than using proxy.domain itself - see proxy.tls.source for how\nthat affects which domain(s) actually need a valid certificate.",
           "title": "domain",
           "type": "string"
         },

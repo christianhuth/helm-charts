@@ -211,7 +211,10 @@ proxy:
   # externally - the Service's named targetPort maps it to whatever numeric port is set here.
   # Must be in ":PORT" form (no host part) - the chart derives the container's port from it.
   address: ":8443"
-  # -- Domain name the proxy serves (NB_PROXY_DOMAIN)
+  # -- Base domain the proxy serves (NB_PROXY_DOMAIN). Services exposed via the NetBird UI/API
+  # typically get their own auto-generated, UUID-prefixed subdomain under this base domain (e.g.
+  # "<uuid>.<proxy.domain>") rather than using proxy.domain itself - see proxy.tls.source for how
+  # that affects which domain(s) actually need a valid certificate.
   domain: ""
   # -- Log level for the proxy (NB_PROXY_LOG_LEVEL)
   logLevel: "info"

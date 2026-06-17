@@ -92,7 +92,7 @@ For Traefik, see the [reverse proxy migration guide](https://docs.netbird.io/sel
 
 The proxy's container image runs as a non-root user, and binding a port below 1024 (like 443) as non-root requires the `NET_BIND_SERVICE` capability - which may not be grantable on every cluster (some admission policies or sandboxed runtimes block it even when correctly requested). To avoid that dependency entirely, `proxy.address` defaults to the binary's own non-privileged default, `:8443`. This only changes where the proxy listens *inside* the container - `service.https.port` still defaults to the conventional `443` *externally*: the Service's `https` port has a named `targetPort` that always points at whatever port `proxy.address` resolves to, so clients still connect to `https://your-domain` with no port suffix needed.
 
-If you do need the container to bind a privileged port directly (for example, `proxy.tls.source=acme`, see below), set `proxy.address` back to `:443` and add the `NET_BIND_SERVICE` capability under `securityContext.capabilities.add`.
+This also holds for ACME's `tls-alpn-01` challenge (`proxy.tls.source=acme`, see below): the CA only needs port 443 to be reachable on your public IP, and the Service already forwards external 443 to `proxy.address` internally - so the non-privileged default works there too, with no need to bind a privileged port directly. If you do need the container to bind a privileged port itself for some other reason, set `proxy.address` to a privileged port and add the `NET_BIND_SERVICE` capability under `securityContext.capabilities.add`.
 
 ### `proxy.private`: NetBird-Only services
 
@@ -100,7 +100,9 @@ If you do need the container to bind a privileged port directly (for example, `p
 
 ### Certificate source: `proxy.tls.source`
 
-**`selfSigned` (default)** - the chart generates a self-signed certificate for `proxy.domain` and stores it in a Secret it manages itself, with no external dependency at all (no cert-manager, no internet access for ACME) - so `helm install` works out of the box. The generated certificate is re-used across upgrades (the chart looks up the existing Secret before generating a new one), but is never automatically rotated - delete the generated Secret yourself to force regeneration. Fine for CI/testing pipelines or fully private/internal deployments where clients don't need a publicly-trusted certificate. **Switch to `secret` below for a production setup with real external clients.**
+Before choosing a source, it matters what you're actually securing: services you expose through the NetBird UI/API each get their own auto-generated, UUID-prefixed subdomain under `proxy.domain` (e.g. `<uuid>.my-proxy.example.com`) - clients reach *that* hostname, not `proxy.domain` itself. `proxy.domain` only needs its own valid certificate if you expose a service at the bare domain too.
+
+**`selfSigned` (default)** - the chart generates a self-signed certificate for `proxy.domain` and stores it in a Secret it manages itself, with no external dependency at all (no cert-manager, no internet access for ACME) - so `helm install` works out of the box. The generated certificate is re-used across upgrades (the chart looks up the existing Secret before generating a new one), but is never automatically rotated - delete the generated Secret yourself to force regeneration. It only covers `proxy.domain` itself, not the per-service UUID subdomains - fine for CI/testing pipelines or fully private/internal deployments where clients don't need a publicly-trusted certificate. **Switch to `secret` or `acme` below for a production setup with real external clients.**
 
 ```yaml
 proxy:
@@ -109,7 +111,7 @@ proxy:
     source: selfSigned
 ```
 
-**`secret`** (recommended for production) - mount an existing Kubernetes `Secret` of type `kubernetes.io/tls` into the certificate directory. This is the natural fit if you already run cert-manager: a cert-manager `Certificate` issues into a Secret with keys `tls.crt` / `tls.key`, which are exactly the filenames the proxy expects by default. The proxy watches the certificate files and hot-reloads them, so cert-manager's automatic renewals are picked up without restarting the pod - no extra glue required.
+**`secret`** - mount an existing Kubernetes `Secret` of type `kubernetes.io/tls` into the certificate directory. This is the natural fit if you already run cert-manager: a cert-manager `Certificate` issues into a Secret with keys `tls.crt` / `tls.key`, which are exactly the filenames the proxy expects by default. The proxy watches the certificate files and hot-reloads them, so cert-manager's automatic renewals are picked up without restarting the pod - no extra glue required. Since this is a single static certificate, if you're exposing services on their auto-generated UUID subdomains (the common case), it needs to be a **wildcard** certificate (`*.my-proxy.example.com`) to cover them - a certificate for just the bare domain will leave those services with a certificate mismatch.
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -119,7 +121,7 @@ metadata:
 spec:
   secretName: my-proxy-tls
   dnsNames:
-    - my-proxy.example.com
+    - "*.my-proxy.example.com"
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
@@ -132,30 +134,24 @@ proxy:
     existingSecret: my-proxy-tls
 ```
 
-**`acme`** - the proxy requests and renews its own certificate directly from Let's Encrypt (`NB_PROXY_ACME_CERTIFICATES=true`). No cert-manager dependency, but `proxy.domain` must be set, and the proxy must be reachable from the internet for the challenge. The default challenge type, `tls-alpn-01`, is always validated by Let's Encrypt on **port 443** specifically - that's not configurable - so this source requires setting `proxy.address` back to `:443` (and granting `NET_BIND_SERVICE`, see above) rather than using the chart's non-privileged default. Since certificate state lives on local disk inside the pod:
+**`acme` (recommended for production)** - the proxy requests and renews its own certificates directly from Let's Encrypt (`NB_PROXY_ACME_CERTIFICATES=true`). Unlike the other two sources, this isn't a single static certificate: the proxy obtains one **on demand, per actual hostname**, the first time something connects for a domain the management server has told it about (via the mapping sync) - including each service's auto-generated UUID subdomain, automatically, with no wildcard needed. `proxy.domain` itself only gets a certificate this way if it's also an exposed service; connections to the bare domain otherwise correctly fail with `unknown domain` rather than serving a certificate for a domain nothing has authorized. No cert-manager dependency, but `proxy.domain` must be set, and the proxy must be reachable from the internet for the challenge. The default challenge type, `tls-alpn-01`, validates on whatever port is externally reachable as 443 - this chart's Service already forwards external 443 to `proxy.address` internally (see above), so the chart's non-privileged `:8443` default works fine; no need to change `proxy.address`. Since certificate state lives on local disk inside the pod:
 
-- enable `persistence.enabled=true` so the certificate survives pod restarts (otherwise every restart re-requests a certificate and can hit Let's Encrypt rate limits)
-- keep `replicaCount: 1` and leave `autoscaling.enabled=false` - certificate state is not shared between pods, so each replica would request its own certificate independently
-- the proxy auto-detects `proxy.tls.certLockMethod=k8s-lease` when running inside Kubernetes (the default, "auto", resolves to it) and uses a `coordination.k8s.io` Lease to coordinate certificate issuance - even with a single replica. The chart creates the Role/RoleBinding this needs automatically (see `rbac.create`); without it, the proxy can't acquire the Lease and certificate issuance never completes, with no obvious error in the logs beyond repeated `unknown domain` TLS handshake warnings for your own domain.
+- enable `persistence.enabled=true` so certificates survive pod restarts (otherwise every restart re-requests them and can hit Let's Encrypt rate limits)
+- keep `replicaCount: 1` and leave `autoscaling.enabled=false` - certificate state is not shared between pods, so each replica would request its own certificates independently
+- the proxy auto-detects `proxy.tls.certLockMethod=k8s-lease` when running inside Kubernetes (the default, "auto", resolves to it) and uses a `coordination.k8s.io` Lease to coordinate certificate issuance - even with a single replica. The chart creates the Role/RoleBinding this needs automatically (see `rbac.create`); without it, the proxy can never acquire the Lease and certificate issuance never even starts, with no obvious error in the logs beyond repeated `unknown domain` TLS handshake warnings.
 
 ```yaml
 proxy:
-  address: ":443"
   domain: "my-proxy.example.com"
   tls:
     source: acme
-
-securityContext:
-  capabilities:
-    add:
-      - NET_BIND_SERVICE
 
 persistence:
   enabled: true
   storageClassName: "my-storage-class"
 ```
 
-If you'd rather not deal with a privileged port at all, set `proxy.tls.acme.challengeType=http-01` instead - it validates on `proxy.tls.acme.address` (port 80 by default) rather than 443, so `proxy.address` can stay at its non-privileged default. This needs `service.http.port` (80) reachable from the internet instead of 443. Some ACME providers (e.g. ZeroSSL) also require External Account Binding - set `proxy.tls.acme.eab.kid` and `proxy.tls.acme.eab.existingSecret` (a Secret with a `hmacKey` key) for those.
+`proxy.tls.acme.challengeType=http-01` is also available as an alternative to the default `tls-alpn-01` - it validates on `proxy.tls.acme.address` (port 80 by default) instead, needing `service.http.port` (80) reachable from the internet instead of 443. Some ACME providers (e.g. ZeroSSL) also require External Account Binding - set `proxy.tls.acme.eab.kid` and `proxy.tls.acme.eab.existingSecret` (a Secret with a `hmacKey` key) for those.
 
 ### Exposure: `service.type=LoadBalancer`
 
