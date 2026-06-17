@@ -235,8 +235,8 @@
     "proxy": {
       "properties": {
         "address": {
-          "default": ":443",
-          "description": "Address the proxy's TLS listener binds to (NB_PROXY_ADDRESS). The proxy always terminates\nTLS itself for client-facing traffic - there is no plain-HTTP mode for this listener.",
+          "default": ":8443",
+          "description": "Address the proxy's main TLS listener binds to (NB_PROXY_ADDRESS). The proxy always\nterminates TLS itself for client-facing traffic - there is no plain-HTTP mode for this listener.\nDefaults to the binary's own non-privileged default port, so the container never needs to bind\na privileged port (\u003c1024) itself; service.https.port still exposes the conventional 443\nexternally - the Service's named targetPort maps it to whatever numeric port is set here.\nMust be in \":PORT\" form (no host part) - the chart derives the container's port from it.",
           "title": "address",
           "type": "string"
         },
