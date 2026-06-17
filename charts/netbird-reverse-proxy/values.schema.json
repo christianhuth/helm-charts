@@ -437,7 +437,7 @@
             },
             "allowInsecure": {
               "default": true,
-              "description": "Allow insecure connections to the management server, e.g. when it presents a self-signed\ncertificate (NB_PROXY_ALLOW_INSECURE).\nNote: this flag is not documented on docs.netbird.io as of writing; verify its exact behavior\nagainst `reverse-proxy --help` for your image version if it matters for your setup.",
+              "description": "Allow an insecure (non-TLS) gRPC connection to the management server (NB_PROXY_ALLOW_INSECURE).",
               "title": "allowInsecure",
               "type": "boolean"
             }
