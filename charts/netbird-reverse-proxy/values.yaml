@@ -18,7 +18,7 @@ image:
 imagePullSecrets: []
 
 # -- Number of replicas.
-# Note: When using ACME certificates (proxy.acmeCertificates=true), running more than one
+# Note: When using built-in ACME certificates (proxy.tls.source=acme), running more than one
 # replica is not recommended as certificate state is not shared between pods.
 replicaCount: 1
 
@@ -38,24 +38,36 @@ serviceAccount:
 podAnnotations: {}
 
 # -- pod-level security context
-podSecurityContext: {}
-  # fsGroup: 2000
+# @default -- see [values.yaml](./values.yaml)
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
 
 # -- container-level security context.
-# Note: The proxy needs to bind to ports 80 and 443 which may require elevated privileges
-# depending on your cluster configuration.
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# The image's default user is the non-numeric "netbird" user (uid 1000, gid 1000) - runAsUser/
+# runAsGroup must be set explicitly to numeric values, otherwise the kubelet cannot verify
+# runAsNonRoot against a non-numeric image user and refuses to start the container. NET_BIND_SERVICE
+# is required to bind ports 80/443 as that non-root user - without it the container fails at
+# startup with "bind: permission denied".
+# @default -- see [values.yaml](./values.yaml)
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
 
 service:
-  # -- Kubernetes service type
-  type: ClusterIP
-  # -- Additional annotations for the Service resource
+  # -- Kubernetes service type. LoadBalancer exposes the proxy directly with its own external IP;
+  # since a Service always operates at L4, TLS is never terminated by the Service and passes
+  # through to the proxy untouched. Combine with external-dns (see service.annotations) to
+  # automatically publish a DNS record for the assigned IP.
+  type: LoadBalancer
+  # -- Additional annotations for the Service resource. For example, to let external-dns manage
+  # a DNS record pointing at this Service's LoadBalancer IP:
+  # external-dns.alpha.kubernetes.io/hostname: my-proxy.example.com
   annotations: {}
   http:
     # -- Kubernetes service port for HTTP traffic
@@ -64,82 +76,10 @@ service:
     # -- Kubernetes service port for HTTPS traffic
     port: 443
 
-ingress:
-  # -- Enable ingress record generation.
-  # Note: This is typically not needed as the reverse proxy handles TLS termination itself.
-  enabled: false
-  # -- IngressClass that will be be used to implement the Ingress
-  className: ""
-  # -- Additional annotations for the Ingress resource
-  annotations: {}
-    # cert-manager.io/cluster-issuer: cluster-issuer-name
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  # -- An array with hosts and paths
-  # @default -- see [values.yaml](./values.yaml)
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  # -- An array with the tls configuration
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
-# BETA: Configure the gateway routes for the chart here.
-# More routes can be added by adding a dictionary key like the 'main' route.
-# Being BETA this can/will change in the future without notice, do not use unless you want to take that risk
-# [[ref]](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io%2fv1alpha2)
-route:
-  main:
-    # -- Enables or disables the route
-    enabled: false
-
-    # -- Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2
-    apiVersion: gateway.networking.k8s.io/v1
-
-    # -- Set the route kind
-    # Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute
-    kind: HTTPRoute
-
-    # -- Add annotations to the route
-    annotations: {}
-
-    # -- Add labels to the route
-    labels: {}
-
-    # -- Hostnames to be matched
-    hostnames: []
-    # - my-filter.example.com
-
-    # -- Parent references (Gateway)
-    parentRefs: []
-    # - name: acme-gw
-
-    # -- define conditions used for matching the rule against incoming HTTP requests.
-    # @default -- see [values.yaml](./values.yaml)
-    matches:
-      - path:
-          type: PathPrefix
-          value: /
-
-    # -- Filters define the filters that are applied to requests that match this rule.
-    filters: []
-
-    # -- Additional custom rules that can be added to the route
-    additionalRules: []
-
-    # -- adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/
-    httpsRedirect: false
-
-    # -- defines the timeouts that can be configured for an HTTP request
-    timeouts: {}
-
 autoscaling:
   # -- Enable Horizontal POD autoscaling.
-  # Note: Not recommended when using ACME certificates as certificate state is not shared.
+  # Note: Not recommended when using built-in ACME certificates (proxy.tls.source=acme) as
+  # certificate state is not shared between pods.
   enabled: false
   # -- Minimum number of replicas
   minReplicas: 1
@@ -185,13 +125,17 @@ extraEnvFrom: []
   #     name: my-secret
 
 proxy:
-  # -- Address the HTTPS proxy listener binds to (NB_PROXY_ADDRESS)
-  address: ":80"
-  # -- Enable ACME (Let's Encrypt) certificate management (NB_PROXY_ACME_CERTIFICATES).
-  # When enabled, certificates are stored in the directory specified by proxy.certificateDirectory.
-  # Consider enabling persistence.enabled=true to avoid certificate loss on pod restarts.
-  acmeCertificates: false
-  # -- Allow insecure (non-TLS) connections to upstream services (NB_PROXY_ALLOW_INSECURE)
+  # -- Address the proxy's main TLS listener binds to (NB_PROXY_ADDRESS). The proxy always
+  # terminates TLS itself for client-facing traffic - there is no plain-HTTP mode for this listener.
+  # Defaults to the binary's own non-privileged default port, so the container never needs to bind
+  # a privileged port (<1024) itself; service.https.port still exposes the conventional 443
+  # externally - the Service's named targetPort maps it to whatever numeric port is set here.
+  # Must be in ":PORT" form (no host part) - the chart derives the container's port from it.
+  address: ":8443"
+  # -- Allow insecure connections to the upstream NetBird management server, e.g. when it presents
+  # a self-signed certificate (NB_PROXY_ALLOW_INSECURE).
+  # Note: this flag is not documented on docs.netbird.io as of writing; verify its exact behavior
+  # against `reverse-proxy --help` for your image version if it matters for your setup.
   allowInsecure: true
   auth:
     # -- Name of an existing secret containing the proxy token.
@@ -201,7 +145,10 @@ proxy:
     # -- Proxy authentication token (NB_PROXY_TOKEN).
     # It is strongly recommended to use proxy.auth.existingSecret instead of providing the token here.
     token: ""
-  # -- Directory where TLS certificates are stored (NB_PROXY_CERTIFICATE_DIRECTORY)
+  # -- Directory where TLS certificate files are read from / stored (NB_PROXY_CERTIFICATE_DIRECTORY).
+  # The proxy expects tls.crt and tls.key inside this directory (NB_PROXY_CERTIFICATE_FILE /
+  # NB_PROXY_CERTIFICATE_KEY_FILE default to those names) - which is also the default key layout
+  # of a Kubernetes Secret of type kubernetes.io/tls, so cert-manager output can be mounted as-is.
   certificateDirectory: "/certs"
   # -- Domain name the proxy serves (NB_PROXY_DOMAIN)
   domain: ""
@@ -209,12 +156,38 @@ proxy:
   logLevel: "info"
   # -- Address of the NetBird management server (NB_PROXY_MANAGEMENT_ADDRESS)
   managementAddress: ""
-  # -- Whether this is a private proxy (NB_PROXY_PRIVATE)
-  private: true
+  # -- Advertises this proxy cluster's support for "NetBird-Only" private services (NB_PROXY_PRIVATE) -
+  # see https://netbird.io/knowledge-hub/netbird-only-private-services. This is an opt-in,
+  # per-service access-control feature configured in the NetBird UI/API, not a network-exposure
+  # setting - most deployments don't need it. Enabling it makes the proxy set up an additional,
+  # hardcoded :80/:443 listener pair for such services regardless of proxy.address, which requires
+  # NET_BIND_SERVICE for both ports rather than just the one proxy.address points at.
+  private: false
+  tls:
+    # -- Source of the TLS certificate served to clients. One of:
+    # - "secret": mount an existing Kubernetes Secret of type kubernetes.io/tls (e.g. issued by a
+    #   cert-manager Certificate resource) into proxy.certificateDirectory. The proxy hot-reloads
+    #   the certificate when the file changes on disk, so cert-manager renewals (which update the
+    #   Secret, which kubelet syncs to the mounted volume) are picked up without restarting the pod.
+    # - "acme": the proxy requests and renews its own certificate via ACME (Let's Encrypt) - sets
+    #   NB_PROXY_ACME_CERTIFICATES=true. Requires the proxy to be reachable from the internet on
+    #   the challenge port and proxy.domain to be set. Enable persistence.enabled to avoid
+    #   re-requesting a certificate (and risking Let's Encrypt rate limits) on every pod restart.
+    # - "selfSigned": the chart generates a self-signed certificate for proxy.domain (required)
+    #   and stores it in a Secret it manages itself - no external dependency at all. The generated
+    #   certificate is stable across upgrades (re-used if the Secret already exists) but is not
+    #   renewed automatically; delete the generated Secret to force regeneration. Intended for
+    #   CI/testing or fully private/internal deployments where clients don't need a
+    #   publicly-trusted certificate - not a substitute for "secret" in production.
+    source: secret
+    # -- Name of an existing Secret of type kubernetes.io/tls containing tls.crt and tls.key.
+    # Required when proxy.tls.source=secret.
+    existingSecret: ""
 
 persistence:
-  # -- Enable persistent storage for TLS certificates.
-  # Recommended when proxy.acmeCertificates=true to avoid re-requesting certificates on pod restarts.
+  # -- Enable persistent storage for the certs directory. Only relevant when proxy.tls.source=acme;
+  # recommended in that case to avoid re-requesting a certificate on every pod restart. Has no
+  # effect when proxy.tls.source=secret, since the certificate is mounted directly from the Secret.
   enabled: false
   # -- Provide an existing PersistentVolumeClaim. If set, no new PVC will be created.
   existingClaim: ""

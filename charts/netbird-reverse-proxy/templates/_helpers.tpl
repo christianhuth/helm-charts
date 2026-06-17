@@ -73,6 +73,19 @@ Get the name of the secret containing the proxy token
 {{- end -}}
 
 {{/*
+Get the name of the Secret containing the TLS certificate served to clients.
+Resolves to the user-provided secret (source=secret) or the chart-managed
+self-signed secret (source=selfSigned). Not used for source=acme.
+*/}}
+{{- define "netbird-reverse-proxy.proxy.tls.secretName" -}}
+  {{- if eq .Values.proxy.tls.source "secret" -}}
+    {{- printf "%s" (tpl .Values.proxy.tls.existingSecret $) -}}
+  {{- else -}}
+    {{- printf "%s-tls" (include "netbird-reverse-proxy.fullname" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
 Get the name of the PersistentVolumeClaim for certificate storage
 */}}
 {{- define "netbird-reverse-proxy.pvcName" -}}

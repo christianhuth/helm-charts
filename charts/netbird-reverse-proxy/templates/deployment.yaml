@@ -1,3 +1,9 @@
+{{- if and (eq .Values.proxy.tls.source "secret") (not .Values.proxy.tls.existingSecret) }}
+{{- fail "proxy.tls.existingSecret is required when proxy.tls.source=secret" }}
+{{- end }}
+{{- if and (eq .Values.proxy.tls.source "selfSigned") (not .Values.proxy.domain) }}
+{{- fail "proxy.domain is required when proxy.tls.source=selfSigned" }}
+{{- end }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -38,8 +44,10 @@ spec:
           env:
             - name: NB_PROXY_ADDRESS
               value: {{ .Values.proxy.address | quote }}
+            {{- if eq .Values.proxy.tls.source "acme" }}
             - name: NB_PROXY_ACME_CERTIFICATES
-              value: {{ .Values.proxy.acmeCertificates | toString | quote }}
+              value: "true"
+            {{- end }}
             - name: NB_PROXY_ALLOW_INSECURE
               value: {{ .Values.proxy.allowInsecure | toString | quote }}
             - name: NB_PROXY_CERTIFICATE_DIRECTORY
@@ -73,7 +81,7 @@ spec:
               containerPort: 80
               protocol: TCP
             - name: https
-              containerPort: 443
+              containerPort: {{ trimPrefix ":" .Values.proxy.address | int }}
               protocol: TCP
           {{- with .Values.resources }}
           resources:
@@ -88,11 +96,16 @@ spec:
               mountPath: {{ .Values.proxy.certificateDirectory | quote }}
       volumes:
         - name: certs
+          {{- if eq .Values.proxy.tls.source "acme" }}
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
             claimName: {{ include "netbird-reverse-proxy.pvcName" . | quote }}
           {{- else }}
           emptyDir: {}
+          {{- end }}
+          {{- else }}
+          secret:
+            secretName: {{ include "netbird-reverse-proxy.proxy.tls.secretName" . | quote }}
           {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
