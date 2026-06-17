@@ -31,7 +31,7 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/netbird-reverse-proxy \
-  --set proxy.managementAddress="https://my-netbird-management.example.com" \
+  --set proxy.managementServer.address="https://my-netbird-management.example.com" \
   --set proxy.domain="my-proxy.example.com" \
   --set proxy.auth.token="my-proxy-token" \
   --set proxy.tls.existingSecret="my-proxy-tls"
@@ -61,6 +61,16 @@ A plain Kubernetes `Service` (`ClusterIP`, `NodePort`, or `LoadBalancer`) never 
 
 There are therefore two independent choices to make: where the certificate comes from, and how the proxy is reached from outside the cluster.
 
+### Why `proxy.address` defaults to `:8443`, not `:443`
+
+The proxy's container image runs as a non-root user, and binding a port below 1024 (like 443) as non-root requires the `NET_BIND_SERVICE` capability - which may not be grantable on every cluster (some admission policies or sandboxed runtimes block it even when correctly requested). To avoid that dependency entirely, `proxy.address` defaults to the binary's own non-privileged default, `:8443`. This only changes where the proxy listens *inside* the container - `service.https.port` still defaults to the conventional `443` *externally*: the Service's `https` port has a named `targetPort` that always points at whatever port `proxy.address` resolves to, so clients still connect to `https://your-domain` with no port suffix needed.
+
+If you do need the container to bind a privileged port directly (for example, `proxy.tls.source=acme`, see below), set `proxy.address` back to `:443` and add the `NET_BIND_SERVICE` capability under `securityContext.capabilities.add`.
+
+### `proxy.private`: NetBird-Only services
+
+`proxy.private` (`NB_PROXY_PRIVATE`) advertises this proxy cluster's support for ["NetBird-Only" private services](https://netbird.io/knowledge-hub/netbird-only-private-services) - an opt-in, per-service access-control feature you enable per-service in the NetBird UI/API, not a network-exposure setting. Most deployments don't need it, so it defaults to `false`. Enabling it makes the proxy additionally set up a **hardcoded** `:80`/`:443` listener pair for such services, regardless of what `proxy.address` is set to - so if you enable it, both of those ports need to be bindable (see the `NET_BIND_SERVICE` note above).
+
 ### Certificate source: `proxy.tls.source`
 
 **`secret` (default)** - mount an existing Kubernetes `Secret` of type `kubernetes.io/tls` into the certificate directory. This is the natural fit if you already run cert-manager: a cert-manager `Certificate` issues into a Secret with keys `tls.crt` / `tls.key`, which are exactly the filenames the proxy expects by default. The proxy watches the certificate files and hot-reloads them, so cert-manager's automatic renewals are picked up without restarting the pod - no extra glue required.
@@ -86,16 +96,22 @@ proxy:
     existingSecret: my-proxy-tls
 ```
 
-**`acme`** - the proxy requests and renews its own certificate directly from Let's Encrypt (`NB_PROXY_ACME_CERTIFICATES=true`). No cert-manager dependency, but the proxy must be reachable from the internet on the challenge port, and `proxy.domain` must be set. Since certificate state lives on local disk inside the pod:
+**`acme`** - the proxy requests and renews its own certificate directly from Let's Encrypt (`NB_PROXY_ACME_CERTIFICATES=true`). No cert-manager dependency, but `proxy.domain` must be set, and the proxy must be reachable from the internet for the challenge. The default challenge type, `tls-alpn-01`, is always validated by Let's Encrypt on **port 443** specifically - that's not configurable - so this source requires setting `proxy.address` back to `:443` (and granting `NET_BIND_SERVICE`, see above) rather than using the chart's non-privileged default. Since certificate state lives on local disk inside the pod:
 
 - enable `persistence.enabled=true` so the certificate survives pod restarts (otherwise every restart re-requests a certificate and can hit Let's Encrypt rate limits)
 - keep `replicaCount: 1` and leave `autoscaling.enabled=false` - certificate state is not shared between pods, so each replica would request its own certificate independently
 
 ```yaml
 proxy:
+  address: ":443"
   domain: "my-proxy.example.com"
   tls:
     source: acme
+
+securityContext:
+  capabilities:
+    add:
+      - NET_BIND_SERVICE
 
 persistence:
   enabled: true
@@ -167,23 +183,23 @@ helm install my-release christianhuth/netbird-reverse-proxy \
 | podAnnotations | object | `{}` | Annotations to be added to the pods |
 | podSecurityContext | object | see [values.yaml](./values.yaml) | pod-level security context |
 | proxy.address | string | `":8443"` | Address the proxy's main TLS listener binds to (NB_PROXY_ADDRESS). The proxy always terminates TLS itself for client-facing traffic - there is no plain-HTTP mode for this listener. Defaults to the binary's own non-privileged default port, so the container never needs to bind a privileged port (<1024) itself; service.https.port still exposes the conventional 443 externally - the Service's named targetPort maps it to whatever numeric port is set here. Must be in ":PORT" form (no host part) - the chart derives the container's port from it. |
-| proxy.allowInsecure | bool | `true` | Allow insecure connections to the upstream NetBird management server, e.g. when it presents a self-signed certificate (NB_PROXY_ALLOW_INSECURE). Note: this flag is not documented on docs.netbird.io as of writing; verify its exact behavior against `reverse-proxy --help` for your image version if it matters for your setup. |
 | proxy.auth.existingSecret | string | `""` | Name of an existing secret containing the proxy token. If set, proxy.auth.token will be ignored. The secret must contain a key named `token`. |
 | proxy.auth.token | string | `""` | Proxy authentication token (NB_PROXY_TOKEN). It is strongly recommended to use proxy.auth.existingSecret instead of providing the token here. |
-| proxy.certificateDirectory | string | `"/certs"` | Directory where TLS certificate files are read from / stored (NB_PROXY_CERTIFICATE_DIRECTORY). The proxy expects tls.crt and tls.key inside this directory (NB_PROXY_CERTIFICATE_FILE / NB_PROXY_CERTIFICATE_KEY_FILE default to those names) - which is also the default key layout of a Kubernetes Secret of type kubernetes.io/tls, so cert-manager output can be mounted as-is. |
 | proxy.domain | string | `""` | Domain name the proxy serves (NB_PROXY_DOMAIN) |
 | proxy.logLevel | string | `"info"` | Log level for the proxy (NB_PROXY_LOG_LEVEL) |
-| proxy.managementAddress | string | `""` | Address of the NetBird management server (NB_PROXY_MANAGEMENT_ADDRESS) |
+| proxy.managementServer.address | string | `""` | Address of the NetBird management server (NB_PROXY_MANAGEMENT_ADDRESS) |
+| proxy.managementServer.allowInsecure | bool | `true` | Allow insecure connections to the management server, e.g. when it presents a self-signed certificate (NB_PROXY_ALLOW_INSECURE). Note: this flag is not documented on docs.netbird.io as of writing; verify its exact behavior against `reverse-proxy --help` for your image version if it matters for your setup. |
 | proxy.private | bool | `false` | Advertises this proxy cluster's support for "NetBird-Only" private services (NB_PROXY_PRIVATE) - see https://netbird.io/knowledge-hub/netbird-only-private-services. This is an opt-in, per-service access-control feature configured in the NetBird UI/API, not a network-exposure setting - most deployments don't need it. Enabling it makes the proxy set up an additional, hardcoded :80/:443 listener pair for such services regardless of proxy.address, which requires NET_BIND_SERVICE for both ports rather than just the one proxy.address points at. |
+| proxy.tls.certificateDirectory | string | `"/certs"` | Directory where TLS certificate files are read from / stored (NB_PROXY_CERTIFICATE_DIRECTORY). The proxy expects tls.crt and tls.key inside this directory (NB_PROXY_CERTIFICATE_FILE / NB_PROXY_CERTIFICATE_KEY_FILE default to those names) - which is also the default key layout of a Kubernetes Secret of type kubernetes.io/tls, so cert-manager output can be mounted as-is. |
 | proxy.tls.existingSecret | string | `""` | Name of an existing Secret of type kubernetes.io/tls containing tls.crt and tls.key. Required when proxy.tls.source=secret. |
-| proxy.tls.source | string | `"secret"` | Source of the TLS certificate served to clients. One of: - "secret": mount an existing Kubernetes Secret of type kubernetes.io/tls (e.g. issued by a   cert-manager Certificate resource) into proxy.certificateDirectory. The proxy hot-reloads   the certificate when the file changes on disk, so cert-manager renewals (which update the   Secret, which kubelet syncs to the mounted volume) are picked up without restarting the pod. - "acme": the proxy requests and renews its own certificate via ACME (Let's Encrypt) - sets   NB_PROXY_ACME_CERTIFICATES=true. Requires the proxy to be reachable from the internet on   the challenge port and proxy.domain to be set. Enable persistence.enabled to avoid   re-requesting a certificate (and risking Let's Encrypt rate limits) on every pod restart. - "selfSigned": the chart generates a self-signed certificate for proxy.domain (required)   and stores it in a Secret it manages itself - no external dependency at all. The generated   certificate is stable across upgrades (re-used if the Secret already exists) but is not   renewed automatically; delete the generated Secret to force regeneration. Intended for   CI/testing or fully private/internal deployments where clients don't need a   publicly-trusted certificate - not a substitute for "secret" in production. |
+| proxy.tls.source | string | `"selfSigned"` | Source of the TLS certificate served to clients. One of: - "secret": mount an existing Kubernetes Secret of type kubernetes.io/tls (e.g. issued by a   cert-manager Certificate resource) into proxy.tls.certificateDirectory. The proxy hot-reloads   the certificate when the file changes on disk, so cert-manager renewals (which update the   Secret, which kubelet syncs to the mounted volume) are picked up without restarting the pod. - "acme": the proxy requests and renews its own certificate via ACME (Let's Encrypt) - sets   NB_PROXY_ACME_CERTIFICATES=true. Requires the proxy to be reachable from the internet and   proxy.domain to be set. The default ACME challenge type (tls-alpn-01) always validates on   port 443 regardless of proxy.address - if you use this source, set proxy.address back to   ":443" (the chart defaults it to ":8443" to avoid needing a privileged port otherwise).   Enable persistence.enabled to avoid re-requesting a certificate (and risking Let's Encrypt   rate limits) on every pod restart. - "selfSigned": the chart generates a self-signed certificate for proxy.domain (required)   and stores it in a Secret it manages itself - no external dependency at all. The generated   certificate is stable across upgrades (re-used if the Secret already exists) but is not   renewed automatically; delete the generated Secret to force regeneration. Intended for   CI/testing or fully private/internal deployments where clients don't need a   publicly-trusted certificate - not a substitute for "secret" in production. |
 | replicaCount | int | `1` | Number of replicas. Note: When using built-in ACME certificates (proxy.tls.source=acme), running more than one replica is not recommended as certificate state is not shared between pods. |
 | resources | object | `{}` | Resource limits and requests for the controller pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
-| securityContext | object | see [values.yaml](./values.yaml) | container-level security context. The image's default user is the non-numeric "netbird" user (uid 1000, gid 1000) - runAsUser/ runAsGroup must be set explicitly to numeric values, otherwise the kubelet cannot verify runAsNonRoot against a non-numeric image user and refuses to start the container. NET_BIND_SERVICE is required to bind ports 80/443 as that non-root user - without it the container fails at startup with "bind: permission denied". |
+| securityContext | object | see [values.yaml](./values.yaml) | container-level security context. The image's default user is the non-numeric "netbird" user (uid 1000, gid 1000) - runAsUser/ runAsGroup must be set explicitly to numeric values, otherwise the kubelet cannot verify runAsNonRoot against a non-numeric image user and refuses to start the container. No capabilities need to be added by default: proxy.address defaults to the non-privileged ":8443", so the container never binds a port below 1024 itself. If you set proxy.address to a privileged port, enable proxy.private, or otherwise need port 80/443 bound directly inside the container, add the NET_BIND_SERVICE capability here yourself. |
 | service.annotations | object | `{}` | Additional annotations for the Service resource. For example, to let external-dns manage a DNS record pointing at this Service's LoadBalancer IP: external-dns.alpha.kubernetes.io/hostname: my-proxy.example.com |
-| service.http.port | int | `80` | Kubernetes service port for HTTP traffic |
-| service.https.port | int | `443` | Kubernetes service port for HTTPS traffic |
+| service.http.port | int | `80` | Kubernetes service port for HTTP traffic. Not used by the proxy's default configuration (proxy.private=false, proxy.tls.source != "acme" with http-01) - kept for parity with NetBird's own example manifest and for setups that do need it (e.g. proxy.private=true, or HTTP-only services configured in the NetBird management UI). |
+| service.https.port | int | `443` | Kubernetes service port for HTTPS traffic. Always forwards to the container port derived from proxy.address (see there), regardless of this external port number. |
 | service.type | string | `"LoadBalancer"` | Kubernetes service type. LoadBalancer exposes the proxy directly with its own external IP; since a Service always operates at L4, TLS is never terminated by the Service and passes through to the proxy untouched. Combine with external-dns (see service.annotations) to automatically publish a DNS record for the assigned IP. |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
