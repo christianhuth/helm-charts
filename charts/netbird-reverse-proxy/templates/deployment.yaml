@@ -1,0 +1,108 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "netbird-reverse-proxy.labels" . | nindent 4 }}
+  name: {{ include "netbird-reverse-proxy.fullname" . }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "netbird-reverse-proxy.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "netbird-reverse-proxy.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "netbird-reverse-proxy.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: NB_PROXY_ADDRESS
+              value: {{ .Values.proxy.address | quote }}
+            - name: NB_PROXY_ACME_CERTIFICATES
+              value: {{ .Values.proxy.acmeCertificates | toString | quote }}
+            - name: NB_PROXY_ALLOW_INSECURE
+              value: {{ .Values.proxy.allowInsecure | toString | quote }}
+            - name: NB_PROXY_CERTIFICATE_DIRECTORY
+              value: {{ .Values.proxy.certificateDirectory | quote }}
+            {{- if .Values.proxy.domain }}
+            - name: NB_PROXY_DOMAIN
+              value: {{ .Values.proxy.domain | quote }}
+            {{- end }}
+            - name: NB_PROXY_LOG_LEVEL
+              value: {{ .Values.proxy.logLevel | quote }}
+            {{- if .Values.proxy.managementAddress }}
+            - name: NB_PROXY_MANAGEMENT_ADDRESS
+              value: {{ .Values.proxy.managementAddress | quote }}
+            {{- end }}
+            - name: NB_PROXY_PRIVATE
+              value: {{ .Values.proxy.private | toString | quote }}
+            - name: NB_PROXY_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "netbird-reverse-proxy.proxy.secretName" . }}
+                  key: token
+            {{- if .Values.extraEnv }}
+            {{- .Values.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+          {{- if .Values.extraEnvFrom }}
+          envFrom:
+            {{- .Values.extraEnvFrom | toYaml | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: https
+              containerPort: 443
+              protocol: TCP
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: certs
+              mountPath: {{ .Values.proxy.certificateDirectory | quote }}
+      volumes:
+        - name: certs
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "netbird-reverse-proxy.pvcName" . | quote }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

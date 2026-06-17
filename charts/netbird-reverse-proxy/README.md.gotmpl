@@ -1,0 +1,142 @@
+{{ template "chart.header" . }}
+{{ template "chart.description" . }}
+
+## TL;DR;
+
+```console
+helm repo add christianhuth https://charts.christianhuth.de
+helm repo update
+helm install my-release christianhuth/netbird-reverse-proxy
+```
+
+## Introduction
+
+This chart bootstraps the [NetBird Reverse Proxy](https://docs.netbird.io/manage/reverse-proxy) on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+
+The NetBird Reverse Proxy provides reverse proxy functionality for NetBird-managed services. It can be deployed behind an existing Ingress controller or Gateway API route (with cert-manager handling TLS), or exposed directly via a LoadBalancer with built-in ACME (Let's Encrypt) certificate management. See the [Architecture](#architecture) section for guidance on choosing the right topology for your setup.
+
+## Prerequisites
+
+- Kubernetes 1.19+
+- A NetBird management server
+- A valid proxy token (`NB_PROXY_TOKEN`)
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+helm repo add christianhuth https://charts.christianhuth.de
+helm repo update
+helm install my-release christianhuth/netbird-reverse-proxy \
+  --set proxy.managementAddress="https://my-netbird-management.example.com" \
+  --set proxy.domain="my-proxy.example.com" \
+  --set proxy.auth.token="my-proxy-token"
+```
+
+These commands deploy the NetBird Reverse Proxy on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
+
+> **Tip**: List all releases using `helm list`
+
+## Uninstalling the Chart
+
+To uninstall the `my-release` deployment:
+
+```console
+helm uninstall my-release
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+## Architecture
+
+The reverse proxy can be exposed in two ways. Choose the one that fits your infrastructure.
+
+### Topology A: Ingress or HTTPRoute with cert-manager (default)
+
+TLS is terminated by an Ingress controller or Gateway API route. cert-manager issues the certificate. The proxy itself receives plain HTTP from the cluster-internal Ingress backend and forwards it to the NetBird management server. This is the recommended approach if you already operate an Ingress controller.
+
+```
+Client → Ingress / HTTPRoute (cert-manager TLS) → reverse-proxy (HTTP) → management server
+```
+
+Key settings:
+
+```yaml
+proxy:
+  acmeCertificates: false   # cert-manager handles TLS, not the proxy
+  allowInsecure: true        # proxy accepts plain HTTP from the Ingress backend
+  address: ":80"             # listen on HTTP
+
+service:
+  type: ClusterIP            # only reachable inside the cluster; Ingress routes to it
+
+persistence:
+  enabled: false             # no certificates to store
+```
+
+> **Note for gRPC traffic**: The NetBird management server communicates over gRPC (HTTP/2). Make sure your Ingress controller supports it. For nginx, add the annotation `nginx.ingress.kubernetes.io/backend-protocol: "GRPC"`. Gateway API HTTPRoute handles HTTP/2 natively.
+
+### Topology B: LoadBalancer with built-in ACME
+
+The proxy is exposed directly via a cloud LoadBalancer and manages its own TLS certificate using ACME (Let's Encrypt). Port 80 is used for the ACME HTTP-01 challenge; port 443 serves HTTPS traffic. This is the simplest setup when no Ingress controller is available.
+
+```
+Client → LoadBalancer IP → reverse-proxy (ACME TLS, port 443) → management server
+```
+
+Key settings:
+
+```yaml
+proxy:
+  acmeCertificates: true     # proxy requests its own certificate from Let's Encrypt
+  allowInsecure: false        # proxy terminates TLS itself
+  address: ":443"             # listen on HTTPS
+  domain: "my-proxy.example.com"  # required for ACME certificate issuance
+
+service:
+  type: LoadBalancer          # proxy is directly reachable from outside the cluster
+
+persistence:
+  enabled: true               # strongly recommended to avoid hitting Let's Encrypt rate limits
+  storageClassName: "my-storage-class"
+```
+
+> **Note on replicas**: When using ACME, certificate state is stored locally in the pod. Running more than one replica is not recommended as the certificates are not shared between pods, causing each pod to request its own certificate.
+
+## Certificate Persistence
+
+When using ACME certificates (`proxy.acmeCertificates=true`), certificates are stored in the directory defined by `proxy.certificateDirectory`. By default this uses an `emptyDir` volume, meaning certificates are **lost on pod restarts**, which can trigger repeated ACME challenges and potentially hit Let's Encrypt rate limits.
+
+It is strongly recommended to enable persistence in production:
+
+```console
+helm install my-release christianhuth/netbird-reverse-proxy \
+  --set persistence.enabled=true \
+  --set persistence.storageClassName=my-storage-class
+```
+
+## Using an Existing Secret for the Proxy Token
+
+Instead of providing the token in plain text via `proxy.auth.token`, create a Kubernetes Secret first:
+
+```console
+kubectl create secret generic my-netbird-proxy-secret --from-literal=token=my-proxy-token
+```
+
+Then reference it:
+
+```console
+helm install my-release christianhuth/netbird-reverse-proxy \
+  --set proxy.auth.existingSecret=my-netbird-proxy-secret
+```
+
+{{ template "chart.valuesSection" . }}
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
+
+```console
+helm install my-release -f values.yaml christianhuth/netbird-reverse-proxy
+```
