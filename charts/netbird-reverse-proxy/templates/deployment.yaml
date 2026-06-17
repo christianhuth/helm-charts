@@ -1,0 +1,225 @@
+{{- if and (eq .Values.proxy.tls.source "secret") (not .Values.proxy.tls.existingSecret) }}
+{{- fail "proxy.tls.existingSecret is required when proxy.tls.source=secret" }}
+{{- end }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "netbird-reverse-proxy.labels" . | nindent 4 }}
+  name: {{ include "netbird-reverse-proxy.fullname" . }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "netbird-reverse-proxy.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "netbird-reverse-proxy.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "netbird-reverse-proxy.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: NB_PROXY_ADDRESS
+              value: {{ .Values.proxy.address | quote }}
+            {{- if eq .Values.proxy.tls.source "acme" }}
+            - name: NB_PROXY_ACME_CERTIFICATES
+              value: "true"
+            - name: NB_PROXY_ACME_CHALLENGE_TYPE
+              value: {{ .Values.proxy.tls.acme.challengeType | quote }}
+            {{- if eq .Values.proxy.tls.acme.challengeType "http-01" }}
+            - name: NB_PROXY_ACME_ADDRESS
+              value: {{ .Values.proxy.tls.acme.address | quote }}
+            {{- end }}
+            {{- if .Values.proxy.tls.acme.directory }}
+            - name: NB_PROXY_ACME_DIRECTORY
+              value: {{ .Values.proxy.tls.acme.directory | quote }}
+            {{- end }}
+            {{- if .Values.proxy.tls.acme.eab.kid }}
+            - name: NB_PROXY_ACME_EAB_KID
+              value: {{ .Values.proxy.tls.acme.eab.kid | quote }}
+            {{- end }}
+            {{- if .Values.proxy.tls.acme.eab.existingSecret }}
+            - name: NB_PROXY_ACME_EAB_HMAC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "netbird-reverse-proxy.proxy.tls.acme.eabSecretName" . }}
+                  key: hmacKey
+            {{- end }}
+            {{- end }}
+            - name: NB_PROXY_ALLOW_INSECURE
+              value: {{ .Values.proxy.managementServer.allowInsecure | toString | quote }}
+            - name: NB_PROXY_CERTIFICATE_DIRECTORY
+              value: {{ .Values.proxy.tls.certificateDirectory | quote }}
+            - name: NB_PROXY_CERTIFICATE_FILE
+              value: {{ .Values.proxy.tls.certificateFile | quote }}
+            - name: NB_PROXY_CERTIFICATE_KEY_FILE
+              value: {{ .Values.proxy.tls.certificateKeyFile | quote }}
+            - name: NB_PROXY_CERT_LOCK_METHOD
+              value: {{ .Values.proxy.tls.certLockMethod | quote }}
+            {{- if .Values.proxy.crowdsec.apiUrl }}
+            - name: NB_PROXY_CROWDSEC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "netbird-reverse-proxy.proxy.crowdsec.secretName" . }}
+                  key: apiKey
+            - name: NB_PROXY_CROWDSEC_API_URL
+              value: {{ .Values.proxy.crowdsec.apiUrl | quote }}
+            {{- end }}
+            {{- if .Values.proxy.debugEndpoint.enabled }}
+            - name: NB_PROXY_DEBUG_ENDPOINT
+              value: "true"
+            - name: NB_PROXY_DEBUG_ENDPOINT_ADDRESS
+              value: {{ .Values.proxy.debugEndpoint.address | quote }}
+            {{- end }}
+            {{- if .Values.proxy.domain }}
+            - name: NB_PROXY_DOMAIN
+              value: {{ .Values.proxy.domain | quote }}
+            {{- end }}
+            - name: NB_PROXY_FORWARDED_PROTO
+              value: {{ .Values.proxy.forwardedProto | quote }}
+            - name: NB_PROXY_GEO_DATA_DIR
+              value: {{ .Values.proxy.geoDataDir | quote }}
+            - name: NB_PROXY_HEALTH_ADDRESS
+              value: {{ .Values.proxy.health.address | quote }}
+            - name: NB_PROXY_LOG_LEVEL
+              value: {{ .Values.proxy.logLevel | quote }}
+            {{- if .Values.proxy.managementServer.address }}
+            - name: NB_PROXY_MANAGEMENT_ADDRESS
+              value: {{ .Values.proxy.managementServer.address | quote }}
+            {{- end }}
+            {{- if .Values.proxy.maxDialTimeout }}
+            - name: NB_PROXY_MAX_DIAL_TIMEOUT
+              value: {{ .Values.proxy.maxDialTimeout | quote }}
+            {{- end }}
+            {{- if .Values.proxy.maxSessionIdleTimeout }}
+            - name: NB_PROXY_MAX_SESSION_IDLE_TIMEOUT
+              value: {{ .Values.proxy.maxSessionIdleTimeout | quote }}
+            {{- end }}
+            - name: NB_PROXY_PRIVATE
+              value: {{ .Values.proxy.private | toString | quote }}
+            - name: NB_PROXY_PROXY_PROTOCOL
+              value: {{ .Values.proxy.proxyProtocol | toString | quote }}
+            - name: NB_PROXY_REQUIRE_SUBDOMAIN
+              value: {{ .Values.proxy.requireSubdomain | toString | quote }}
+            - name: NB_PROXY_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "netbird-reverse-proxy.proxy.secretName" . }}
+                  key: token
+            {{- if .Values.proxy.trustedProxies }}
+            - name: NB_PROXY_TRUSTED_PROXIES
+              value: {{ .Values.proxy.trustedProxies | quote }}
+            {{- end }}
+            {{- if .Values.extraEnv }}
+            {{- .Values.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+          {{- if .Values.extraEnvFrom }}
+          envFrom:
+            {{- .Values.extraEnvFrom | toYaml | nindent 12 }}
+          {{- end }}
+          ports:
+            {{- if include "netbird-reverse-proxy.needsHttpPort" . }}
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            {{- end }}
+            - name: https
+              containerPort: {{ .Values.proxy.address | splitList ":" | last | int }}
+              protocol: TCP
+            - name: health
+              containerPort: {{ .Values.proxy.health.address | splitList ":" | last | int }}
+              protocol: TCP
+            {{- if .Values.proxy.debugEndpoint.enabled }}
+            - name: debug
+              containerPort: {{ .Values.proxy.debugEndpoint.address | splitList ":" | last | int }}
+              protocol: TCP
+            {{- end }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.livenessProbe.path | quote }}
+              port: health
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | int }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.readinessProbe.path | quote }}
+              port: health
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | int }}
+          startupProbe:
+            httpGet:
+              path: {{ .Values.startupProbe.path | quote }}
+              port: health
+            failureThreshold: {{ .Values.startupProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.startupProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds | int }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: certs
+              mountPath: {{ .Values.proxy.tls.certificateDirectory | quote }}
+            {{- if .Values.extraVolumeMounts }}
+            {{- .Values.extraVolumeMounts | toYaml | nindent 12 }}
+            {{- end }}
+      volumes:
+        - name: certs
+          {{- if eq .Values.proxy.tls.source "acme" }}
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "netbird-reverse-proxy.pvcName" . | quote }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+          {{- else }}
+          secret:
+            secretName: {{ include "netbird-reverse-proxy.proxy.tls.secretName" . | quote }}
+          {{- end }}
+        {{- if .Values.extraVolumes }}
+        {{- .Values.extraVolumes | toYaml | nindent 8 }}
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,0 +1,24 @@
+apiVersion: v2
+name: netbird-reverse-proxy
+description: A Helm chart for deploying the NetBird Reverse Proxy, which provides HTTP and HTTPS reverse proxy functionality for NetBird-managed services.
+type: application
+version: 0.1.0
+appVersion: "0.72.4"
+home: https://github.com/christianhuth/helm-charts
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/netbird-reverse-proxy/icon.svg
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://github.com/netbirdio/netbird
+  - https://docs.netbird.io/manage/reverse-proxy
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: initial release
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key

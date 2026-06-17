@@ -1,0 +1,36 @@
+{{- if and .Values.rbac.create (eq .Values.proxy.tls.source "acme") (ne .Values.proxy.tls.certLockMethod "flock") }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    {{- include "netbird-reverse-proxy.labels" . | nindent 4 }}
+  name: {{ include "netbird-reverse-proxy.fullname" . }}
+rules:
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    {{- include "netbird-reverse-proxy.labels" . | nindent 4 }}
+  name: {{ include "netbird-reverse-proxy.fullname" . }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "netbird-reverse-proxy.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "netbird-reverse-proxy.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end }}

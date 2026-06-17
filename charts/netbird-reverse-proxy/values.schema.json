@@ -1,0 +1,923 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "description": "Affinity settings for pod assignment",
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "autoscaling": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable Horizontal POD autoscaling.\nNote: Not recommended when using built-in ACME certificates (proxy.tls.source=acme) as\ncertificate state is not shared between pods.",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "maxReplicas": {
+          "default": 100,
+          "description": "Maximum number of replicas",
+          "title": "maxReplicas",
+          "type": "integer"
+        },
+        "minReplicas": {
+          "default": 1,
+          "description": "Minimum number of replicas",
+          "title": "minReplicas",
+          "type": "integer"
+        },
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "description": "Target CPU utilization percentage",
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage"
+      ],
+      "title": "autoscaling",
+      "type": "object"
+    },
+    "extraEnv": {
+      "description": "additional environment variables to be added to the pods",
+      "items": {
+        "required": []
+      },
+      "title": "extraEnv",
+      "type": "array"
+    },
+    "extraEnvFrom": {
+      "description": "additional environment variables from ConfigMaps or Secrets",
+      "items": {
+        "required": []
+      },
+      "title": "extraEnvFrom",
+      "type": "array"
+    },
+    "extraVolumeMounts": {
+      "description": "additional volume mounts to add to the container, paired with extraVolumes",
+      "items": {
+        "required": []
+      },
+      "title": "extraVolumeMounts",
+      "type": "array"
+    },
+    "extraVolumes": {
+      "description": "additional volumes to add to the pod. Useful for example to mount a pre-populated GeoLite2\ndatabase (proxy.geoDataDir) or a wildcard certificate directory, neither of which this chart\nprovisions directly.",
+      "items": {
+        "required": []
+      },
+      "title": "extraVolumes",
+      "type": "array"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"netbird-reverse-proxy.fullname\"`",
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "description": "image pull policy",
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "registry": {
+          "default": "docker.io",
+          "description": "image registry",
+          "title": "registry",
+          "type": "string"
+        },
+        "repository": {
+          "default": "netbirdio/reverse-proxy",
+          "description": "image repository",
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "",
+          "description": "Overrides the image tag whose default is the chart appVersion.",
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "registry",
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "livenessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 3,
+          "description": "Failure threshold for livenessProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "initialDelaySeconds": {
+          "default": 0,
+          "description": "Initial delay seconds for livenessProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "path": {
+          "default": "/healthz/live",
+          "description": "HTTP path for livenessProbe, queried against proxy.health.address. Defaults to a pure\nprocess check, independent of the management server connection - see proxy.health in\nREADME.md for the other paths the proxy exposes (e.g. /healthz/ready, /healthz/startup).",
+          "title": "path",
+          "type": "string"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for livenessProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for livenessProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "description": "Timeout seconds for livenessProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "failureThreshold",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "livenessProbe",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `netbird-reverse-proxy`",
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "description": "Node labels for pod assignment",
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "persistence": {
+      "properties": {
+        "accessModes": {
+          "description": "The desired access modes the volume should have",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              }
+            ],
+            "required": []
+          },
+          "title": "accessModes",
+          "type": "array"
+        },
+        "annotations": {
+          "description": "Annotations to be added to the PersistentVolumeClaim",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enable persistent storage for the certs directory. Only relevant when proxy.tls.source=acme;\nrecommended in that case to avoid re-requesting certificates on every pod restart. Has no\neffect for proxy.tls.source=secret or selfSigned, since both mount the certificate directly\nfrom a Secret rather than writing to the certs directory.",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "existingClaim": {
+          "default": "",
+          "description": "Provide an existing PersistentVolumeClaim. If set, no new PVC will be created.",
+          "title": "existingClaim",
+          "type": "string"
+        },
+        "resources": {
+          "description": "Represents the minimum and maximum resources the volume should have",
+          "properties": {
+            "requests": {
+              "properties": {
+                "storage": {
+                  "default": "1Gi",
+                  "title": "storage",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "storage"
+              ],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "requests"
+          ],
+          "title": "resources",
+          "type": "object"
+        },
+        "storageClassName": {
+          "default": "",
+          "description": "Name of the StorageClass required by the claim",
+          "title": "storageClassName",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled",
+        "existingClaim",
+        "storageClassName",
+        "accessModes",
+        "annotations",
+        "resources"
+      ],
+      "title": "persistence",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to the pods",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "description": "pod-level security context",
+      "properties": {
+        "seccompProfile": {
+          "properties": {
+            "type": {
+              "default": "RuntimeDefault",
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "seccompProfile",
+          "type": "object"
+        }
+      },
+      "required": [
+        "seccompProfile"
+      ],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "proxy": {
+      "properties": {
+        "address": {
+          "default": ":8443",
+          "description": "Address the proxy's main TLS listener binds to (NB_PROXY_ADDRESS). The proxy always\nterminates TLS itself for client-facing traffic - there is no plain-HTTP mode for this listener.\nDefaults to the binary's own non-privileged default port, so the container never needs to bind\na privileged port (\u003c1024) itself; service.https.port still exposes the conventional 443\nexternally - the Service's named targetPort maps it to whatever numeric port is set here.\nMust be in \":PORT\" form (no host part) - the chart derives the container's port from it.",
+          "title": "address",
+          "type": "string"
+        },
+        "crowdsec": {
+          "properties": {
+            "apiUrl": {
+              "default": "",
+              "description": "CrowdSec LAPI URL for IP reputation checks (NB_PROXY_CROWDSEC_API_URL). Leave empty to\ndisable the CrowdSec integration entirely.",
+              "title": "apiUrl",
+              "type": "string"
+            },
+            "auth": {
+              "properties": {
+                "apiKey": {
+                  "default": "",
+                  "description": "CrowdSec bouncer API key (NB_PROXY_CROWDSEC_API_KEY).\nIt is strongly recommended to use proxy.crowdsec.auth.existingSecret instead of providing\nthe key here.",
+                  "title": "apiKey",
+                  "type": "string"
+                },
+                "existingSecret": {
+                  "default": "",
+                  "description": "Name of an existing secret containing the CrowdSec bouncer API key.\nIf set, proxy.crowdsec.auth.apiKey will be ignored. The secret must contain a key named `apiKey`.",
+                  "title": "existingSecret",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "existingSecret",
+                "apiKey"
+              ],
+              "title": "auth",
+              "type": "object"
+            }
+          },
+          "required": [
+            "apiUrl",
+            "auth"
+          ],
+          "title": "crowdsec",
+          "type": "object"
+        },
+        "debugEndpoint": {
+          "properties": {
+            "address": {
+              "default": "localhost:8444",
+              "description": "Address for the debug HTTP endpoint (NB_PROXY_DEBUG_ENDPOINT_ADDRESS). Only relevant when\nproxy.debugEndpoint.enabled=true.",
+              "title": "address",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enable the debug HTTP endpoint (NB_PROXY_DEBUG_ENDPOINT), which exposes richer\nintrospection (connected clients, runtime stats, packet capture) than the health endpoint.\nDisabled by default since it's a more sensitive surface; left bound to localhost (not\nexposed via the Service) even when enabled - reach it via `kubectl exec`/port-forward.",
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled",
+            "address"
+          ],
+          "title": "debugEndpoint",
+          "type": "object"
+        },
+        "domain": {
+          "default": "",
+          "description": "Base domain the proxy serves (NB_PROXY_DOMAIN). Services exposed via the NetBird UI/API\ntypically get their own auto-generated, UUID-prefixed subdomain under this base domain (e.g.\n\"\u003cuuid\u003e.\u003cproxy.domain\u003e\") rather than using proxy.domain itself - see proxy.tls.source for how\nthat affects which domain(s) actually need a valid certificate.",
+          "title": "domain",
+          "type": "string"
+        },
+        "forwardedProto": {
+          "default": "auto",
+          "description": "Value to set for the X-Forwarded-Proto header sent to backends (NB_PROXY_FORWARDED_PROTO).\nOne of \"auto\", \"http\", or \"https\".",
+          "title": "forwardedProto",
+          "type": "string"
+        },
+        "geoDataDir": {
+          "default": "/var/lib/netbird/geolocation",
+          "description": "Directory for the GeoLite2 city database (NB_PROXY_GEO_DATA_DIR), auto-downloaded from\npkgs.netbird.io at startup if missing. Not backed by a volume by default, so it is re-downloaded\non every pod restart; mount a volume here via extraVolumes/extraVolumeMounts (e.g. a small PVC)\nif you want to avoid that, or are running in an environment without egress to pkgs.netbird.io.",
+          "title": "geoDataDir",
+          "type": "string"
+        },
+        "health": {
+          "properties": {
+            "address": {
+              "default": ":8080",
+              "description": "Address for the health probe endpoint (NB_PROXY_HEALTH_ADDRESS), used for this chart's\nliveness/readiness/startup probes. Deliberately overrides the binary's own \"localhost:8080\"\ndefault to bind all interfaces within the pod's network namespace, since the kubelet's\nhttpGet probes connect to the Pod IP and cannot reach a port bound only to 127.0.0.1 inside\nthe container. This is not exposed via the Service, so it stays unreachable from outside the\npod's network namespace regardless.",
+              "title": "address",
+              "type": "string"
+            }
+          },
+          "required": [
+            "address"
+          ],
+          "title": "health",
+          "type": "object"
+        },
+        "logLevel": {
+          "default": "info",
+          "description": "Log level for the proxy (NB_PROXY_LOG_LEVEL)",
+          "title": "logLevel",
+          "type": "string"
+        },
+        "managementServer": {
+          "properties": {
+            "address": {
+              "default": "",
+              "description": "Address of the NetBird management server (NB_PROXY_MANAGEMENT_ADDRESS). Leave empty to\nuse the binary's own default, NetBird Cloud (https://api.netbird.io:443) - only set this if\nyou run your own self-hosted management server.",
+              "title": "address",
+              "type": "string"
+            },
+            "allowInsecure": {
+              "default": true,
+              "description": "Allow an insecure (non-TLS) gRPC connection to the management server (NB_PROXY_ALLOW_INSECURE).",
+              "title": "allowInsecure",
+              "type": "boolean"
+            },
+            "auth": {
+              "properties": {
+                "existingSecret": {
+                  "default": "",
+                  "description": "Name of an existing secret containing the proxy's management server token.\nIf set, proxy.managementServer.auth.token will be ignored.\nThe secret must contain a key named `token`.",
+                  "title": "existingSecret",
+                  "type": "string"
+                },
+                "token": {
+                  "default": "",
+                  "description": "Token used to authenticate this proxy against the management server (NB_PROXY_TOKEN),\ngenerated via `netbird-server token create` (or your management server's equivalent).\nIt is strongly recommended to use proxy.managementServer.auth.existingSecret instead of\nproviding the token here.",
+                  "title": "token",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "existingSecret",
+                "token"
+              ],
+              "title": "auth",
+              "type": "object"
+            }
+          },
+          "required": [
+            "address",
+            "allowInsecure",
+            "auth"
+          ],
+          "title": "managementServer",
+          "type": "object"
+        },
+        "maxDialTimeout": {
+          "default": "",
+          "description": "Cap the per-service backend dial timeout (NB_PROXY_MAX_DIAL_TIMEOUT), e.g. \"5s\". Empty means\nno cap (binary default).",
+          "title": "maxDialTimeout",
+          "type": "string"
+        },
+        "maxSessionIdleTimeout": {
+          "default": "",
+          "description": "Cap the per-service session idle timeout (NB_PROXY_MAX_SESSION_IDLE_TIMEOUT), e.g. \"30m\".\nEmpty means no cap (binary default).",
+          "title": "maxSessionIdleTimeout",
+          "type": "string"
+        },
+        "private": {
+          "default": false,
+          "description": "Advertises this proxy cluster's support for \"NetBird-Only\" private services (NB_PROXY_PRIVATE) -\nsee https://netbird.io/knowledge-hub/netbird-only-private-services. This is an opt-in,\nper-service access-control feature configured in the NetBird UI/API, not a network-exposure\nsetting - most deployments don't need it. Enabling it makes the proxy set up an additional,\nhardcoded :80/:443 listener pair for such services regardless of proxy.address, which requires\nNET_BIND_SERVICE for both ports rather than just the one proxy.address points at.",
+          "title": "private",
+          "type": "boolean"
+        },
+        "proxyProtocol": {
+          "default": false,
+          "description": "Enable PROXY protocol on the proxy's TCP listeners to preserve real client IPs behind an L4\nload balancer that supports it, e.g. an AWS NLB with proxy protocol enabled (NB_PROXY_PROXY_PROTOCOL).",
+          "title": "proxyProtocol",
+          "type": "boolean"
+        },
+        "requireSubdomain": {
+          "default": false,
+          "description": "Require a subdomain label in front of proxy.domain for routed services (NB_PROXY_REQUIRE_SUBDOMAIN).",
+          "title": "requireSubdomain",
+          "type": "boolean"
+        },
+        "tls": {
+          "properties": {
+            "acme": {
+              "properties": {
+                "address": {
+                  "default": ":80",
+                  "description": "HTTP address for ACME http-01 challenges (NB_PROXY_ACME_ADDRESS). Only used when\nproxy.tls.acme.challengeType=http-01.",
+                  "title": "address",
+                  "type": "string"
+                },
+                "challengeType": {
+                  "default": "tls-alpn-01",
+                  "description": "ACME challenge type when proxy.tls.source=acme (NB_PROXY_ACME_CHALLENGE_TYPE).\n\"tls-alpn-01\" (default) validates on whatever port is externally reachable as 443 - this\nchart's Service already forwards that to proxy.address internally, so it works fine at\nproxy.address's non-privileged default. \"http-01\" instead validates on\nproxy.tls.acme.address (default :80), requiring service.http.port (80) to actually reach\nthe pod from the internet.",
+                  "title": "challengeType",
+                  "type": "string"
+                },
+                "directory": {
+                  "default": "",
+                  "description": "Override the ACME directory URL (NB_PROXY_ACME_DIRECTORY), e.g. to use Let's Encrypt's\nstaging environment while testing (to avoid production rate limits) or a different ACME CA.\nDefaults to the Let's Encrypt production directory when empty.",
+                  "title": "directory",
+                  "type": "string"
+                },
+                "eab": {
+                  "properties": {
+                    "existingSecret": {
+                      "default": "",
+                      "description": "Name of an existing Secret containing the ACME EAB HMAC key (NB_PROXY_ACME_EAB_HMAC_KEY).\nThe secret must contain a key named `hmacKey`. Required together with proxy.tls.acme.eab.kid\nif your ACME CA requires EAB.",
+                      "title": "existingSecret",
+                      "type": "string"
+                    },
+                    "kid": {
+                      "default": "",
+                      "description": "ACME External Account Binding key ID (NB_PROXY_ACME_EAB_KID), required by some ACME\nCAs (e.g. ZeroSSL, some enterprise CAs). Leave empty if your CA doesn't require EAB.",
+                      "title": "kid",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "kid",
+                    "existingSecret"
+                  ],
+                  "title": "eab",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "challengeType",
+                "address",
+                "directory",
+                "eab"
+              ],
+              "title": "acme",
+              "type": "object"
+            },
+            "certLockMethod": {
+              "default": "auto",
+              "description": "Certificate coordination method for multi-replica deployments (NB_PROXY_CERT_LOCK_METHOD).\nOne of \"auto\", \"flock\", or \"k8s-lease\". \"flock\" only works with a single replica (it\ncoordinates via a local file lock). \"k8s-lease\" coordinates across replicas using a\nKubernetes Lease object - the chart auto-detects and uses this inside Kubernetes (the\ndefault, \"auto\", resolves to it), and creates the RBAC it needs automatically (see\nrbac.create). Note that the Lease only coordinates *issuance timing* (so replicas don't\nrace to request the same certificate); it does not share already-issued certificate state\nbetween replicas - see the multi-replica note under proxy.tls.source=acme above.",
+              "title": "certLockMethod",
+              "type": "string"
+            },
+            "certificateDirectory": {
+              "default": "/certs",
+              "description": "Directory where TLS certificate files are read from / stored (NB_PROXY_CERTIFICATE_DIRECTORY).\nThe proxy expects tls.crt and tls.key inside this directory (NB_PROXY_CERTIFICATE_FILE /\nNB_PROXY_CERTIFICATE_KEY_FILE default to those names) - which is also the default key layout\nof a Kubernetes Secret of type kubernetes.io/tls, so cert-manager output can be mounted as-is.",
+              "title": "certificateDirectory",
+              "type": "string"
+            },
+            "certificateFile": {
+              "default": "tls.crt",
+              "description": "TLS certificate filename within proxy.tls.certificateDirectory (NB_PROXY_CERTIFICATE_FILE).\nOnly needs changing if you mount a Secret/volume that uses different filenames.",
+              "title": "certificateFile",
+              "type": "string"
+            },
+            "certificateKeyFile": {
+              "default": "tls.key",
+              "description": "TLS private key filename within proxy.tls.certificateDirectory (NB_PROXY_CERTIFICATE_KEY_FILE).\nOnly needs changing if you mount a Secret/volume that uses different filenames.",
+              "title": "certificateKeyFile",
+              "type": "string"
+            },
+            "existingSecret": {
+              "default": "",
+              "description": "Name of an existing Secret of type kubernetes.io/tls containing tls.crt and tls.key.\nRequired when proxy.tls.source=secret.",
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "source": {
+              "default": "selfSigned",
+              "description": "Source of the TLS certificate served to clients. One of:\n- \"selfSigned\" (default): the chart generates a self-signed certificate for proxy.domain\n  (required) and stores it in a Secret it manages itself - no external dependency at all, so\n  `helm install` works out of the box. The generated certificate is stable across upgrades\n  (re-used if the Secret already exists) but is not renewed automatically; delete the\n  generated Secret to force regeneration. Fine for CI/testing or fully private/internal\n  deployments where clients don't need a publicly-trusted certificate - switch to \"secret\"\n  for a production setup with real external clients.\n- \"secret\": mount an existing Kubernetes Secret of type kubernetes.io/tls (e.g. issued by a\n  cert-manager Certificate resource) into proxy.tls.certificateDirectory. The proxy hot-reloads\n  the certificate when the file changes on disk, so cert-manager renewals (which update the\n  Secret, which kubelet syncs to the mounted volume) are picked up without restarting the pod.\n  Recommended for production with real, publicly-trusted certificates.\n- \"acme\": the proxy requests and renews its own certificates via ACME (Let's Encrypt) - sets\n  NB_PROXY_ACME_CERTIFICATES=true. Requires the proxy to be reachable from the internet and\n  proxy.domain to be set. Unlike \"secret\"/\"selfSigned\", this isn't a single static\n  certificate - the proxy obtains one on demand per actual hostname the management server\n  reports (including each exposed service's auto-generated subdomain), the first time a\n  client connects for it. The default ACME challenge type (tls-alpn-01) validates on\n  whatever port is externally reachable as 443 - this chart's Service already forwards\n  external 443 to proxy.address internally, so the non-privileged \":8443\" default works\n  fine; no need to change proxy.address. Enable persistence.enabled to avoid re-requesting\n  certificates (and risking Let's Encrypt rate limits) on every pod restart.",
+              "title": "source",
+              "type": "string"
+            }
+          },
+          "required": [
+            "source",
+            "existingSecret",
+            "certificateDirectory",
+            "certificateFile",
+            "certificateKeyFile",
+            "certLockMethod",
+            "acme"
+          ],
+          "title": "tls",
+          "type": "object"
+        },
+        "trustedProxies": {
+          "default": "",
+          "description": "Comma-separated list of trusted upstream proxy CIDR ranges (NB_PROXY_TRUSTED_PROXIES), e.g.\n\"10.0.0.0/8,192.168.1.1\". Only set this if there is an L4 load balancer or proxy in front of\nthe Service that the proxy should trust for client-IP forwarding headers. Empty by default.",
+          "title": "trustedProxies",
+          "type": "string"
+        }
+      },
+      "required": [
+        "address",
+        "domain",
+        "logLevel",
+        "managementServer",
+        "private",
+        "tls",
+        "geoDataDir",
+        "requireSubdomain",
+        "forwardedProto",
+        "trustedProxies",
+        "proxyProtocol",
+        "maxDialTimeout",
+        "maxSessionIdleTimeout",
+        "health",
+        "debugEndpoint",
+        "crowdsec"
+      ],
+      "title": "proxy",
+      "type": "object"
+    },
+    "rbac": {
+      "properties": {
+        "create": {
+          "default": true,
+          "description": "Specifies whether a Role/RoleBinding should be created for proxy.tls.certLockMethod=k8s-lease\ncoordination (only rendered when proxy.tls.source=acme and proxy.tls.certLockMethod is \"auto\" or\n\"k8s-lease\" - \"auto\" resolves to \"k8s-lease\" automatically inside Kubernetes, so this applies to\nthe default too). Without it, the proxy can't create/update the Lease it uses to coordinate\ncertificate issuance, and ACME certificate acquisition will silently never complete. Disable\nthis if you manage this RBAC yourself.",
+          "title": "create",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "create"
+      ],
+      "title": "rbac",
+      "type": "object"
+    },
+    "readinessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 3,
+          "description": "Failure threshold for readinessProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "initialDelaySeconds": {
+          "default": 0,
+          "description": "Initial delay seconds for readinessProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "path": {
+          "default": "/healthz/ready",
+          "description": "HTTP path for readinessProbe, queried against proxy.health.address. Defaults to\n/healthz/ready, which is gated on the management server connection - the pod is taken out of\nthe Service's endpoints while disconnected. Set this to /healthz/live instead (e.g. in a CI\npipeline with no real management server reachable) if you want readiness to ignore management\nconnectivity entirely.",
+          "title": "path",
+          "type": "string"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for readinessProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for readinessProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "description": "Timeout seconds for readinessProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "failureThreshold",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "readinessProbe",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas.\nNote: When using built-in ACME certificates (proxy.tls.source=acme), running more than one\nreplica is not recommended as certificate state is not shared between pods.",
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "description": "Resource limits and requests for the controller pods.",
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "revisionHistoryLimit": {
+      "default": 10,
+      "description": "The number of old ReplicaSets to retain",
+      "title": "revisionHistoryLimit",
+      "type": "integer"
+    },
+    "securityContext": {
+      "description": "container-level security context.\nThe image's default user is the non-numeric \"netbird\" user (uid 1000, gid 1000) - runAsUser/\nrunAsGroup must be set explicitly to numeric values, otherwise the kubelet cannot verify\nrunAsNonRoot against a non-numeric image user and refuses to start the container.\nNo capabilities need to be added by default: proxy.address defaults to the non-privileged\n\":8443\", so the container never binds a port below 1024 itself. If you set proxy.address to a\nprivileged port, enable proxy.private, or otherwise need port 80/443 bound directly inside the\ncontainer, add the NET_BIND_SERVICE capability here yourself.",
+      "properties": {
+        "allowPrivilegeEscalation": {
+          "default": false,
+          "title": "allowPrivilegeEscalation",
+          "type": "boolean"
+        },
+        "capabilities": {
+          "properties": {
+            "drop": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "title": "drop",
+              "type": "array"
+            }
+          },
+          "required": [
+            "drop"
+          ],
+          "title": "capabilities",
+          "type": "object"
+        },
+        "runAsGroup": {
+          "default": 1000,
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 1000,
+          "title": "runAsUser",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "allowPrivilegeEscalation",
+        "capabilities",
+        "runAsNonRoot",
+        "runAsUser",
+        "runAsGroup"
+      ],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "properties": {
+        "annotations": {
+          "description": "Additional annotations for the Service resource. For example, to let external-dns manage\na DNS record pointing at this Service's LoadBalancer IP:\nexternal-dns.alpha.kubernetes.io/hostname: my-proxy.example.com",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "http": {
+          "properties": {
+            "port": {
+              "default": 80,
+              "description": "Kubernetes service port for HTTP traffic. The chart only creates this Service port (and\nthe matching container port) when it's actually needed: proxy.private=true (per-account\n:80/:443 listeners) or proxy.tls.source=acme with proxy.tls.acme.challengeType=http-01.\nIn every other configuration, nothing listens on port 80 at all, so it's omitted entirely.",
+              "title": "port",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "port"
+          ],
+          "title": "http",
+          "type": "object"
+        },
+        "https": {
+          "properties": {
+            "port": {
+              "default": 443,
+              "description": "Kubernetes service port for HTTPS traffic. Always forwards to the container port derived\nfrom proxy.address (see there), regardless of this external port number.",
+              "title": "port",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "port"
+          ],
+          "title": "https",
+          "type": "object"
+        },
+        "type": {
+          "default": "LoadBalancer",
+          "description": "Kubernetes service type. LoadBalancer exposes the proxy directly with its own external IP;\nsince a Service always operates at L4, TLS is never terminated by the Service and passes\nthrough to the proxy untouched. Combine with external-dns (see service.annotations) to\nautomatically publish a DNS record for the assigned IP.",
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "annotations",
+        "http",
+        "https"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "startupProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 60,
+          "description": "Failure threshold for startupProbe.\nDefaults high (60 x periodSeconds=5s = 5 minutes) to comfortably cover the GeoLite2 database\ndownload the proxy performs at startup before it's ready to serve.",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "initialDelaySeconds": {
+          "default": 0,
+          "description": "Initial delay seconds for startupProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "path": {
+          "default": "/healthz/startup",
+          "description": "HTTP path for startupProbe, queried against proxy.health.address. Defaults to\n/healthz/startup, the full check set including initial sync completion.",
+          "title": "path",
+          "type": "string"
+        },
+        "periodSeconds": {
+          "default": 5,
+          "description": "Period seconds for startupProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for startupProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "description": "Timeout seconds for startupProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "failureThreshold",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "startupProbe",
+      "type": "object"
+    },
+    "tolerations": {
+      "description": "Toleration labels for pod assignment",
+      "items": {
+        "required": []
+      },
+      "title": "tolerations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "image",
+    "imagePullSecrets",
+    "replicaCount",
+    "revisionHistoryLimit",
+    "serviceAccount",
+    "rbac",
+    "podAnnotations",
+    "podSecurityContext",
+    "securityContext",
+    "service",
+    "autoscaling",
+    "livenessProbe",
+    "readinessProbe",
+    "startupProbe",
+    "resources",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "extraEnv",
+    "extraEnvFrom",
+    "extraVolumes",
+    "extraVolumeMounts",
+    "proxy",
+    "persistence"
+  ],
+  "type": "object"
+}
