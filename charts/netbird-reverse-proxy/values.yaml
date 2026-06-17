@@ -72,10 +72,10 @@ service:
   # external-dns.alpha.kubernetes.io/hostname: my-proxy.example.com
   annotations: {}
   http:
-    # -- Kubernetes service port for HTTP traffic. Not used by the proxy's default configuration
-    # (proxy.private=false, proxy.tls.source != "acme" with http-01) - kept for parity with
-    # NetBird's own example manifest and for setups that do need it (e.g. proxy.private=true, or
-    # HTTP-only services configured in the NetBird management UI).
+    # -- Kubernetes service port for HTTP traffic. The chart only creates this Service port (and
+    # the matching container port) when it's actually needed: proxy.private=true (per-account
+    # :80/:443 listeners) or proxy.tls.source=acme with proxy.tls.acme.challengeType=http-01.
+    # In every other configuration, nothing listens on port 80 at all, so it's omitted entirely.
     port: 80
   https:
     # -- Kubernetes service port for HTTPS traffic. Always forwards to the container port derived
@@ -95,6 +95,57 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # -- Target Memory utilization percentage
   # targetMemoryUtilizationPercentage: 80
+
+livenessProbe:
+  # -- HTTP path for livenessProbe, queried against proxy.health.address. Defaults to a pure
+  # process check, independent of the management server connection - see proxy.health in
+  # README.md for the other paths the proxy exposes (e.g. /healthz/ready, /healthz/startup).
+  path: /healthz/live
+  # -- Failure threshold for livenessProbe
+  failureThreshold: 3
+  # -- Initial delay seconds for livenessProbe
+  initialDelaySeconds: 0
+  # -- Period seconds for livenessProbe
+  periodSeconds: 10
+  # -- Success threshold for livenessProbe
+  successThreshold: 1
+  # -- Timeout seconds for livenessProbe
+  timeoutSeconds: 1
+
+readinessProbe:
+  # -- HTTP path for readinessProbe, queried against proxy.health.address. Defaults to
+  # /healthz/ready, which is gated on the management server connection - the pod is taken out of
+  # the Service's endpoints while disconnected. Set this to /healthz/live instead (e.g. in a CI
+  # pipeline with no real management server reachable) if you want readiness to ignore management
+  # connectivity entirely.
+  path: /healthz/ready
+  # -- Failure threshold for readinessProbe
+  failureThreshold: 3
+  # -- Initial delay seconds for readinessProbe
+  initialDelaySeconds: 0
+  # -- Period seconds for readinessProbe
+  periodSeconds: 10
+  # -- Success threshold for readinessProbe
+  successThreshold: 1
+  # -- Timeout seconds for readinessProbe
+  timeoutSeconds: 1
+
+startupProbe:
+  # -- HTTP path for startupProbe, queried against proxy.health.address. Defaults to
+  # /healthz/startup, the full check set including initial sync completion.
+  path: /healthz/startup
+  # -- Failure threshold for startupProbe.
+  # Defaults high (60 x periodSeconds=5s = 5 minutes) to comfortably cover the GeoLite2 database
+  # download the proxy performs at startup before it's ready to serve.
+  failureThreshold: 60
+  # -- Initial delay seconds for startupProbe
+  initialDelaySeconds: 0
+  # -- Period seconds for startupProbe
+  periodSeconds: 5
+  # -- Success threshold for startupProbe
+  successThreshold: 1
+  # -- Timeout seconds for startupProbe
+  timeoutSeconds: 1
 
 # -- Resource limits and requests for the controller pods.
 resources: {}

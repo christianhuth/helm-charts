@@ -138,9 +138,11 @@ spec:
             {{- .Values.extraEnvFrom | toYaml | nindent 12 }}
           {{- end }}
           ports:
+            {{- if include "netbird-reverse-proxy.needsHttpPort" . }}
             - name: http
               containerPort: 80
               protocol: TCP
+            {{- end }}
             - name: https
               containerPort: {{ .Values.proxy.address | splitList ":" | last | int }}
               protocol: TCP
@@ -154,22 +156,31 @@ spec:
             {{- end }}
           livenessProbe:
             httpGet:
-              path: /healthz/live
+              path: {{ .Values.livenessProbe.path | quote }}
               port: health
-            periodSeconds: 10
-            failureThreshold: 3
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | int }}
           readinessProbe:
             httpGet:
-              path: /healthz/ready
+              path: {{ .Values.readinessProbe.path | quote }}
               port: health
-            periodSeconds: 10
-            failureThreshold: 3
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | int }}
           startupProbe:
             httpGet:
-              path: /healthz/startup
+              path: {{ .Values.startupProbe.path | quote }}
               port: health
-            periodSeconds: 5
-            failureThreshold: 60
+            failureThreshold: {{ .Values.startupProbe.failureThreshold | int }}
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.startupProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds | int }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}

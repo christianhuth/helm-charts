@@ -68,7 +68,7 @@ If you do need the container to bind a privileged port directly (for example, `p
 
 ### `proxy.private`: NetBird-Only services
 
-`proxy.private` (`NB_PROXY_PRIVATE`) advertises this proxy cluster's support for ["NetBird-Only" private services](https://netbird.io/knowledge-hub/netbird-only-private-services) - an opt-in, per-service access-control feature you enable per-service in the NetBird UI/API, not a network-exposure setting. Most deployments don't need it, so it defaults to `false`. Enabling it makes the proxy additionally set up a **hardcoded** `:80`/`:443` listener pair for such services, regardless of what `proxy.address` is set to - so if you enable it, both of those ports need to be bindable (see the `NET_BIND_SERVICE` note above).
+`proxy.private` (`NB_PROXY_PRIVATE`) advertises this proxy cluster's support for ["NetBird-Only" private services](https://netbird.io/knowledge-hub/netbird-only-private-services) - an opt-in, per-service access-control feature you enable per-service in the NetBird UI/API, not a network-exposure setting. Most deployments don't need it, so it defaults to `false`. Enabling it makes the proxy additionally set up a **hardcoded** `:80`/`:443` listener pair for such services, regardless of what `proxy.address` is set to - so if you enable it, both of those ports need to be bindable (see the `NET_BIND_SERVICE` note above). The chart automatically adds the `http` (80) Service and container port whenever `proxy.private=true` or ACME `http-01` (below) is in use - in every other configuration nothing listens on port 80, so the chart omits it entirely.
 
 ### Certificate source: `proxy.tls.source`
 
@@ -195,6 +195,12 @@ helm install my-release christianhuth/netbird-reverse-proxy \
 | image.repository | string | `"netbirdio/reverse-proxy"` | image repository |
 | image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
+| livenessProbe.failureThreshold | int | `3` | Failure threshold for livenessProbe |
+| livenessProbe.initialDelaySeconds | int | `0` | Initial delay seconds for livenessProbe |
+| livenessProbe.path | string | `"/healthz/live"` | HTTP path for livenessProbe, queried against proxy.health.address. Defaults to a pure process check, independent of the management server connection - see proxy.health in README.md for the other paths the proxy exposes (e.g. /healthz/ready, /healthz/startup). |
+| livenessProbe.periodSeconds | int | `10` | Period seconds for livenessProbe |
+| livenessProbe.successThreshold | int | `1` | Success threshold for livenessProbe |
+| livenessProbe.timeoutSeconds | int | `1` | Timeout seconds for livenessProbe |
 | nameOverride | string | `""` | Provide a name in place of `netbird-reverse-proxy` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | persistence.accessModes | list | `["ReadWriteOnce"]` | The desired access modes the volume should have |
@@ -237,17 +243,29 @@ helm install my-release christianhuth/netbird-reverse-proxy \
 | proxy.tls.existingSecret | string | `""` | Name of an existing Secret of type kubernetes.io/tls containing tls.crt and tls.key. Required when proxy.tls.source=secret. |
 | proxy.tls.source | string | `"selfSigned"` | Source of the TLS certificate served to clients. One of: - "selfSigned" (default): the chart generates a self-signed certificate for proxy.domain   (required) and stores it in a Secret it manages itself - no external dependency at all, so   `helm install` works out of the box. The generated certificate is stable across upgrades   (re-used if the Secret already exists) but is not renewed automatically; delete the   generated Secret to force regeneration. Fine for CI/testing or fully private/internal   deployments where clients don't need a publicly-trusted certificate - switch to "secret"   for a production setup with real external clients. - "secret": mount an existing Kubernetes Secret of type kubernetes.io/tls (e.g. issued by a   cert-manager Certificate resource) into proxy.tls.certificateDirectory. The proxy hot-reloads   the certificate when the file changes on disk, so cert-manager renewals (which update the   Secret, which kubelet syncs to the mounted volume) are picked up without restarting the pod.   Recommended for production with real, publicly-trusted certificates. - "acme": the proxy requests and renews its own certificate via ACME (Let's Encrypt) - sets   NB_PROXY_ACME_CERTIFICATES=true. Requires the proxy to be reachable from the internet and   proxy.domain to be set. The default ACME challenge type (tls-alpn-01) always validates on   port 443 regardless of proxy.address - if you use this source, set proxy.address back to   ":443" (the chart defaults it to ":8443" to avoid needing a privileged port otherwise).   Enable persistence.enabled to avoid re-requesting a certificate (and risking Let's Encrypt   rate limits) on every pod restart. |
 | proxy.trustedProxies | string | `""` | Comma-separated list of trusted upstream proxy CIDR ranges (NB_PROXY_TRUSTED_PROXIES), e.g. "10.0.0.0/8,192.168.1.1". Only set this if there is an L4 load balancer or proxy in front of the Service that the proxy should trust for client-IP forwarding headers. Empty by default. |
+| readinessProbe.failureThreshold | int | `3` | Failure threshold for readinessProbe |
+| readinessProbe.initialDelaySeconds | int | `0` | Initial delay seconds for readinessProbe |
+| readinessProbe.path | string | `"/healthz/ready"` | HTTP path for readinessProbe, queried against proxy.health.address. Defaults to /healthz/ready, which is gated on the management server connection - the pod is taken out of the Service's endpoints while disconnected. Set this to /healthz/live instead (e.g. in a CI pipeline with no real management server reachable) if you want readiness to ignore management connectivity entirely. |
+| readinessProbe.periodSeconds | int | `10` | Period seconds for readinessProbe |
+| readinessProbe.successThreshold | int | `1` | Success threshold for readinessProbe |
+| readinessProbe.timeoutSeconds | int | `1` | Timeout seconds for readinessProbe |
 | replicaCount | int | `1` | Number of replicas. Note: When using built-in ACME certificates (proxy.tls.source=acme), running more than one replica is not recommended as certificate state is not shared between pods. |
 | resources | object | `{}` | Resource limits and requests for the controller pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
 | securityContext | object | see [values.yaml](./values.yaml) | container-level security context. The image's default user is the non-numeric "netbird" user (uid 1000, gid 1000) - runAsUser/ runAsGroup must be set explicitly to numeric values, otherwise the kubelet cannot verify runAsNonRoot against a non-numeric image user and refuses to start the container. No capabilities need to be added by default: proxy.address defaults to the non-privileged ":8443", so the container never binds a port below 1024 itself. If you set proxy.address to a privileged port, enable proxy.private, or otherwise need port 80/443 bound directly inside the container, add the NET_BIND_SERVICE capability here yourself. |
 | service.annotations | object | `{}` | Additional annotations for the Service resource. For example, to let external-dns manage a DNS record pointing at this Service's LoadBalancer IP: external-dns.alpha.kubernetes.io/hostname: my-proxy.example.com |
-| service.http.port | int | `80` | Kubernetes service port for HTTP traffic. Not used by the proxy's default configuration (proxy.private=false, proxy.tls.source != "acme" with http-01) - kept for parity with NetBird's own example manifest and for setups that do need it (e.g. proxy.private=true, or HTTP-only services configured in the NetBird management UI). |
+| service.http.port | int | `80` | Kubernetes service port for HTTP traffic. The chart only creates this Service port (and the matching container port) when it's actually needed: proxy.private=true (per-account :80/:443 listeners) or proxy.tls.source=acme with proxy.tls.acme.challengeType=http-01. In every other configuration, nothing listens on port 80 at all, so it's omitted entirely. |
 | service.https.port | int | `443` | Kubernetes service port for HTTPS traffic. Always forwards to the container port derived from proxy.address (see there), regardless of this external port number. |
 | service.type | string | `"LoadBalancer"` | Kubernetes service type. LoadBalancer exposes the proxy directly with its own external IP; since a Service always operates at L4, TLS is never terminated by the Service and passes through to the proxy untouched. Combine with external-dns (see service.annotations) to automatically publish a DNS record for the assigned IP. |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| startupProbe.failureThreshold | int | `60` | Failure threshold for startupProbe. Defaults high (60 x periodSeconds=5s = 5 minutes) to comfortably cover the GeoLite2 database download the proxy performs at startup before it's ready to serve. |
+| startupProbe.initialDelaySeconds | int | `0` | Initial delay seconds for startupProbe |
+| startupProbe.path | string | `"/healthz/startup"` | HTTP path for startupProbe, queried against proxy.health.address. Defaults to /healthz/startup, the full check set including initial sync completion. |
+| startupProbe.periodSeconds | int | `5` | Period seconds for startupProbe |
+| startupProbe.successThreshold | int | `1` | Success threshold for startupProbe |
+| startupProbe.timeoutSeconds | int | `1` | Timeout seconds for startupProbe |
 | tolerations | list | `[]` | Toleration labels for pod assignment |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.

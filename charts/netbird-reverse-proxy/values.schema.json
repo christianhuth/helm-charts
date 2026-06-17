@@ -131,6 +131,56 @@
       "title": "imagePullSecrets",
       "type": "array"
     },
+    "livenessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 3,
+          "description": "Failure threshold for livenessProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "initialDelaySeconds": {
+          "default": 0,
+          "description": "Initial delay seconds for livenessProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "path": {
+          "default": "/healthz/live",
+          "description": "HTTP path for livenessProbe, queried against proxy.health.address. Defaults to a pure\nprocess check, independent of the management server connection - see proxy.health in\nREADME.md for the other paths the proxy exposes (e.g. /healthz/ready, /healthz/startup).",
+          "title": "path",
+          "type": "string"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for livenessProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for livenessProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "description": "Timeout seconds for livenessProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "failureThreshold",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "livenessProbe",
+      "type": "object"
+    },
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `netbird-reverse-proxy`",
@@ -561,6 +611,56 @@
       "title": "proxy",
       "type": "object"
     },
+    "readinessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 3,
+          "description": "Failure threshold for readinessProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "initialDelaySeconds": {
+          "default": 0,
+          "description": "Initial delay seconds for readinessProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "path": {
+          "default": "/healthz/ready",
+          "description": "HTTP path for readinessProbe, queried against proxy.health.address. Defaults to\n/healthz/ready, which is gated on the management server connection - the pod is taken out of\nthe Service's endpoints while disconnected. Set this to /healthz/live instead (e.g. in a CI\npipeline with no real management server reachable) if you want readiness to ignore management\nconnectivity entirely.",
+          "title": "path",
+          "type": "string"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for readinessProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for readinessProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "description": "Timeout seconds for readinessProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "failureThreshold",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "readinessProbe",
+      "type": "object"
+    },
     "replicaCount": {
       "default": 1,
       "description": "Number of replicas.\nNote: When using built-in ACME certificates (proxy.tls.source=acme), running more than one\nreplica is not recommended as certificate state is not shared between pods.",
@@ -646,7 +746,7 @@
           "properties": {
             "port": {
               "default": 80,
-              "description": "Kubernetes service port for HTTP traffic. Not used by the proxy's default configuration\n(proxy.private=false, proxy.tls.source != \"acme\" with http-01) - kept for parity with\nNetBird's own example manifest and for setups that do need it (e.g. proxy.private=true, or\nHTTP-only services configured in the NetBird management UI).",
+              "description": "Kubernetes service port for HTTP traffic. The chart only creates this Service port (and\nthe matching container port) when it's actually needed: proxy.private=true (per-account\n:80/:443 listeners) or proxy.tls.source=acme with proxy.tls.acme.challengeType=http-01.\nIn every other configuration, nothing listens on port 80 at all, so it's omitted entirely.",
               "title": "port",
               "type": "integer"
             }
@@ -717,6 +817,56 @@
       "title": "serviceAccount",
       "type": "object"
     },
+    "startupProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 60,
+          "description": "Failure threshold for startupProbe.\nDefaults high (60 x periodSeconds=5s = 5 minutes) to comfortably cover the GeoLite2 database\ndownload the proxy performs at startup before it's ready to serve.",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "initialDelaySeconds": {
+          "default": 0,
+          "description": "Initial delay seconds for startupProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "path": {
+          "default": "/healthz/startup",
+          "description": "HTTP path for startupProbe, queried against proxy.health.address. Defaults to\n/healthz/startup, the full check set including initial sync completion.",
+          "title": "path",
+          "type": "string"
+        },
+        "periodSeconds": {
+          "default": 5,
+          "description": "Period seconds for startupProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for startupProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "description": "Timeout seconds for startupProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "failureThreshold",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "startupProbe",
+      "type": "object"
+    },
     "tolerations": {
       "description": "Toleration labels for pod assignment",
       "items": {
@@ -739,6 +889,9 @@
     "securityContext",
     "service",
     "autoscaling",
+    "livenessProbe",
+    "readinessProbe",
+    "startupProbe",
     "resources",
     "nodeSelector",
     "tolerations",

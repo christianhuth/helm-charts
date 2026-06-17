@@ -86,6 +86,17 @@ self-signed secret (source=selfSigned). Not used for source=acme.
 {{- end -}}
 
 {{/*
+Whether the proxy needs its HTTP (port 80) listener: either proxy.private's per-account
+:80/:443 listeners, or ACME http-01 challenges. Outside these cases nothing binds port 80.
+Returns a non-empty string (truthy) or empty string (falsy).
+*/}}
+{{- define "netbird-reverse-proxy.needsHttpPort" -}}
+{{- if or .Values.proxy.private (and (eq .Values.proxy.tls.source "acme") (eq .Values.proxy.tls.acme.challengeType "http-01")) -}}
+true
+{{- end -}}
+{{- end -}}
+
+{{/*
 Get the name of the secret containing the ACME EAB HMAC key
 */}}
 {{- define "netbird-reverse-proxy.proxy.tls.acme.eabSecretName" -}}

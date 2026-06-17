@@ -67,7 +67,7 @@ If you do need the container to bind a privileged port directly (for example, `p
 
 ### `proxy.private`: NetBird-Only services
 
-`proxy.private` (`NB_PROXY_PRIVATE`) advertises this proxy cluster's support for ["NetBird-Only" private services](https://netbird.io/knowledge-hub/netbird-only-private-services) - an opt-in, per-service access-control feature you enable per-service in the NetBird UI/API, not a network-exposure setting. Most deployments don't need it, so it defaults to `false`. Enabling it makes the proxy additionally set up a **hardcoded** `:80`/`:443` listener pair for such services, regardless of what `proxy.address` is set to - so if you enable it, both of those ports need to be bindable (see the `NET_BIND_SERVICE` note above).
+`proxy.private` (`NB_PROXY_PRIVATE`) advertises this proxy cluster's support for ["NetBird-Only" private services](https://netbird.io/knowledge-hub/netbird-only-private-services) - an opt-in, per-service access-control feature you enable per-service in the NetBird UI/API, not a network-exposure setting. Most deployments don't need it, so it defaults to `false`. Enabling it makes the proxy additionally set up a **hardcoded** `:80`/`:443` listener pair for such services, regardless of what `proxy.address` is set to - so if you enable it, both of those ports need to be bindable (see the `NET_BIND_SERVICE` note above). The chart automatically adds the `http` (80) Service and container port whenever `proxy.private=true` or ACME `http-01` (below) is in use - in every other configuration nothing listens on port 80, so the chart omits it entirely.
 
 ### Certificate source: `proxy.tls.source`
 

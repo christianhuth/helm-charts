@@ -12,10 +12,12 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
+    {{- if include "netbird-reverse-proxy.needsHttpPort" . }}
     - name: http
       port: {{ .Values.service.http.port }}
       targetPort: http
       protocol: TCP
+    {{- end }}
     - name: https
       port: {{ .Values.service.https.port }}
       targetPort: https

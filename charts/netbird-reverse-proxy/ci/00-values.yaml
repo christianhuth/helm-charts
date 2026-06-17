@@ -3,5 +3,13 @@ proxy:
   auth:
     token: my-dummy-token
   domain: netbird-proxy.example.com
-service:
-  type: ClusterIP
+
+readinessProbe:
+  # No real management server is reachable in CI, so /healthz/ready (the chart default) would
+  # never succeed and the pod would never become Ready. Fall back to the pure liveness check.
+  path: /healthz/live
+
+startupProbe:
+  # No real management server is reachable in CI, so /healthz/ready (the chart default) would
+  # never succeed and the pod would never become Ready. Fall back to the pure liveness check.
+  path: /healthz/live
