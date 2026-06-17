@@ -1,0 +1,678 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "description": "Affinity settings for pod assignment",
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "autoscaling": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable Horizontal POD autoscaling.\nNote: Not recommended when using ACME certificates as certificate state is not shared.",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "maxReplicas": {
+          "default": 100,
+          "description": "Maximum number of replicas",
+          "title": "maxReplicas",
+          "type": "integer"
+        },
+        "minReplicas": {
+          "default": 1,
+          "description": "Minimum number of replicas",
+          "title": "minReplicas",
+          "type": "integer"
+        },
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "description": "Target CPU utilization percentage",
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage"
+      ],
+      "title": "autoscaling",
+      "type": "object"
+    },
+    "extraEnv": {
+      "description": "additional environment variables to be added to the pods",
+      "items": {
+        "required": []
+      },
+      "title": "extraEnv",
+      "type": "array"
+    },
+    "extraEnvFrom": {
+      "description": "additional environment variables from ConfigMaps or Secrets",
+      "items": {
+        "required": []
+      },
+      "title": "extraEnvFrom",
+      "type": "array"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"netbird-reverse-proxy.fullname\"`",
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "description": "image pull policy",
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "registry": {
+          "default": "docker.io",
+          "description": "image registry",
+          "title": "registry",
+          "type": "string"
+        },
+        "repository": {
+          "default": "netbirdio/reverse-proxy",
+          "description": "image repository",
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "",
+          "description": "Overrides the image tag whose default is the chart appVersion.",
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "registry",
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "description": "If defined, uses a Secret to pull an image from a private Docker registry or repository.",
+      "items": {
+        "required": []
+      },
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "ingress": {
+      "properties": {
+        "annotations": {
+          "description": "Additional annotations for the Ingress resource",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "description": "IngressClass that will be be used to implement the Ingress",
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enable ingress record generation.\nNote: This is typically not needed as the reverse proxy handles TLS termination itself.",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "description": "cert-manager.io/cluster-issuer: cluster-issuer-name\nkubernetes.io/ingress.class: nginx\nkubernetes.io/tls-acme: \"true\"\nAn array with hosts and paths",
+          "items": {
+            "anyOf": [
+              {
+                "properties": {
+                  "host": {
+                    "default": "chart-example.local",
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "ImplementationSpecific",
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "title": "hosts",
+          "type": "array"
+        },
+        "tls": {
+          "description": "An array with the tls configuration",
+          "items": {
+            "required": []
+          },
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `netbird-reverse-proxy`",
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "description": "Node labels for pod assignment",
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "persistence": {
+      "properties": {
+        "accessModes": {
+          "description": "The desired access modes the volume should have",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              }
+            ],
+            "required": []
+          },
+          "title": "accessModes",
+          "type": "array"
+        },
+        "annotations": {
+          "description": "Annotations to be added to the PersistentVolumeClaim",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enable persistent storage for TLS certificates.\nRecommended when proxy.acmeCertificates=true to avoid re-requesting certificates on pod restarts.",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "existingClaim": {
+          "default": "",
+          "description": "Provide an existing PersistentVolumeClaim. If set, no new PVC will be created.",
+          "title": "existingClaim",
+          "type": "string"
+        },
+        "resources": {
+          "description": "Represents the minimum and maximum resources the volume should have",
+          "properties": {
+            "requests": {
+              "properties": {
+                "storage": {
+                  "default": "1Gi",
+                  "title": "storage",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "storage"
+              ],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "requests"
+          ],
+          "title": "resources",
+          "type": "object"
+        },
+        "storageClassName": {
+          "default": "",
+          "description": "Name of the StorageClass required by the claim",
+          "title": "storageClassName",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled",
+        "existingClaim",
+        "storageClassName",
+        "accessModes",
+        "annotations",
+        "resources"
+      ],
+      "title": "persistence",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to the pods",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "description": "pod-level security context",
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "proxy": {
+      "properties": {
+        "acmeCertificates": {
+          "default": false,
+          "description": "Enable ACME (Let's Encrypt) certificate management (NB_PROXY_ACME_CERTIFICATES).\nWhen enabled, certificates are stored in the directory specified by proxy.certificateDirectory.\nConsider enabling persistence.enabled=true to avoid certificate loss on pod restarts.",
+          "title": "acmeCertificates",
+          "type": "boolean"
+        },
+        "address": {
+          "default": ":80",
+          "description": "Address the HTTPS proxy listener binds to (NB_PROXY_ADDRESS)",
+          "title": "address",
+          "type": "string"
+        },
+        "allowInsecure": {
+          "default": true,
+          "description": "Allow insecure (non-TLS) connections to upstream services (NB_PROXY_ALLOW_INSECURE)",
+          "title": "allowInsecure",
+          "type": "boolean"
+        },
+        "auth": {
+          "properties": {
+            "existingSecret": {
+              "default": "",
+              "description": "Name of an existing secret containing the proxy token.\nIf set, proxy.auth.token will be ignored.\nThe secret must contain a key named `token`.",
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "token": {
+              "default": "",
+              "description": "Proxy authentication token (NB_PROXY_TOKEN).\nIt is strongly recommended to use proxy.auth.existingSecret instead of providing the token here.",
+              "title": "token",
+              "type": "string"
+            }
+          },
+          "required": [
+            "existingSecret",
+            "token"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "certificateDirectory": {
+          "default": "/certs",
+          "description": "Directory where TLS certificates are stored (NB_PROXY_CERTIFICATE_DIRECTORY)",
+          "title": "certificateDirectory",
+          "type": "string"
+        },
+        "domain": {
+          "default": "",
+          "description": "Domain name the proxy serves (NB_PROXY_DOMAIN)",
+          "title": "domain",
+          "type": "string"
+        },
+        "logLevel": {
+          "default": "info",
+          "description": "Log level for the proxy (NB_PROXY_LOG_LEVEL)",
+          "title": "logLevel",
+          "type": "string"
+        },
+        "managementAddress": {
+          "default": "",
+          "description": "Address of the NetBird management server (NB_PROXY_MANAGEMENT_ADDRESS)",
+          "title": "managementAddress",
+          "type": "string"
+        },
+        "private": {
+          "default": true,
+          "description": "Whether this is a private proxy (NB_PROXY_PRIVATE)",
+          "title": "private",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "address",
+        "acmeCertificates",
+        "allowInsecure",
+        "auth",
+        "certificateDirectory",
+        "domain",
+        "logLevel",
+        "managementAddress",
+        "private"
+      ],
+      "title": "proxy",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas.\nNote: When using ACME certificates (proxy.acmeCertificates=true), running more than one\nreplica is not recommended as certificate state is not shared between pods.",
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "description": "Resource limits and requests for the controller pods.",
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "revisionHistoryLimit": {
+      "default": 10,
+      "description": "The number of old ReplicaSets to retain",
+      "title": "revisionHistoryLimit",
+      "type": "integer"
+    },
+    "route": {
+      "description": "BETA: Configure the gateway routes for the chart here.\nMore routes can be added by adding a dictionary key like the 'main' route.\nBeing BETA this can/will change in the future without notice, do not use unless you want to take that risk\n[[ref]](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io%2fv1alpha2)",
+      "properties": {
+        "main": {
+          "properties": {
+            "additionalRules": {
+              "description": "Additional custom rules that can be added to the route",
+              "items": {
+                "required": []
+              },
+              "title": "additionalRules",
+              "type": "array"
+            },
+            "annotations": {
+              "description": "Add annotations to the route",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "apiVersion": {
+              "default": "gateway.networking.k8s.io/v1",
+              "description": "Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2",
+              "title": "apiVersion",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enables or disables the route",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "filters": {
+              "description": "Filters define the filters that are applied to requests that match this rule.",
+              "items": {
+                "required": []
+              },
+              "title": "filters",
+              "type": "array"
+            },
+            "hostnames": {
+              "description": "Hostnames to be matched",
+              "items": {
+                "required": []
+              },
+              "title": "hostnames",
+              "type": "array"
+            },
+            "httpsRedirect": {
+              "default": false,
+              "description": "adds a filter for redirecting to https (HTTP 301 Moved Permanently). To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners. Matches and filters do not take effect if enabled. Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/",
+              "title": "httpsRedirect",
+              "type": "boolean"
+            },
+            "kind": {
+              "default": "HTTPRoute",
+              "description": "Set the route kind\nValid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute",
+              "title": "kind",
+              "type": "string"
+            },
+            "labels": {
+              "description": "Add labels to the route",
+              "required": [],
+              "title": "labels",
+              "type": "object"
+            },
+            "matches": {
+              "description": "define conditions used for matching the rule against incoming HTTP requests.",
+              "items": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "path": {
+                        "properties": {
+                          "type": {
+                            "default": "PathPrefix",
+                            "title": "type",
+                            "type": "string"
+                          },
+                          "value": {
+                            "default": "/",
+                            "title": "value",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "value"
+                        ],
+                        "title": "path",
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "path"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "required": []
+              },
+              "title": "matches",
+              "type": "array"
+            },
+            "parentRefs": {
+              "description": "Parent references (Gateway)",
+              "items": {
+                "required": []
+              },
+              "title": "parentRefs",
+              "type": "array"
+            },
+            "timeouts": {
+              "description": "defines the timeouts that can be configured for an HTTP request",
+              "required": [],
+              "title": "timeouts",
+              "type": "object"
+            }
+          },
+          "required": [
+            "enabled",
+            "apiVersion",
+            "kind",
+            "annotations",
+            "labels",
+            "hostnames",
+            "parentRefs",
+            "matches",
+            "filters",
+            "additionalRules",
+            "httpsRedirect",
+            "timeouts"
+          ],
+          "title": "main",
+          "type": "object"
+        }
+      },
+      "required": [
+        "main"
+      ],
+      "title": "route",
+      "type": "object"
+    },
+    "securityContext": {
+      "description": "container-level security context.\nNote: The proxy needs to bind to ports 80 and 443 which may require elevated privileges\ndepending on your cluster configuration.",
+      "required": [],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "properties": {
+        "annotations": {
+          "description": "Additional annotations for the Service resource",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "http": {
+          "properties": {
+            "port": {
+              "default": 80,
+              "description": "Kubernetes service port for HTTP traffic",
+              "title": "port",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "port"
+          ],
+          "title": "http",
+          "type": "object"
+        },
+        "https": {
+          "properties": {
+            "port": {
+              "default": 443,
+              "description": "Kubernetes service port for HTTPS traffic",
+              "title": "port",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "port"
+          ],
+          "title": "https",
+          "type": "object"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "description": "Kubernetes service type",
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "annotations",
+        "http",
+        "https"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "tolerations": {
+      "description": "Toleration labels for pod assignment",
+      "items": {
+        "required": []
+      },
+      "title": "tolerations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "image",
+    "imagePullSecrets",
+    "replicaCount",
+    "revisionHistoryLimit",
+    "serviceAccount",
+    "podAnnotations",
+    "podSecurityContext",
+    "securityContext",
+    "service",
+    "ingress",
+    "route",
+    "autoscaling",
+    "resources",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "extraEnv",
+    "extraEnvFrom",
+    "proxy",
+    "persistence"
+  ],
+  "type": "object"
+}
