@@ -4,4 +4,4 @@
 
 ### Changed
 
-- dependency of mariadb mariadb to 26.1.5
+- dependency of mariadb to 26.1.5
