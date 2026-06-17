@@ -3,3 +3,5 @@ proxy:
   auth:
     token: my-dummy-token
   domain: netbird-proxy.example.com
+service:
+  type: ClusterIP
