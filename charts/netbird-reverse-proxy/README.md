@@ -87,8 +87,6 @@ rules:
           type: Exact
 ```
 
-For Traefik, see the [reverse proxy migration guide](https://docs.netbird.io/selfhosted/migration/enable-reverse-proxy) - it documents adding the same path to your `traefik.http.routers.netbird-grpc`-style router label.
-
 ### Why `proxy.address` defaults to `:8443`, not `:443`
 
 The proxy's container image runs as a non-root user, and binding a port below 1024 (like 443) as non-root requires the `NET_BIND_SERVICE` capability - which may not be grantable on every cluster (some admission policies or sandboxed runtimes block it even when correctly requested). To avoid that dependency entirely, `proxy.address` defaults to the binary's own non-privileged default, `:8443`. This only changes where the proxy listens *inside* the container - `service.https.port` still defaults to the conventional `443` *externally*: the Service's `https` port has a named `targetPort` that always points at whatever port `proxy.address` resolves to, so clients still connect to `https://your-domain` with no port suffix needed.
