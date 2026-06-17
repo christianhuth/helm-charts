@@ -49,18 +49,18 @@ spec:
               value: "true"
             {{- end }}
             - name: NB_PROXY_ALLOW_INSECURE
-              value: {{ .Values.proxy.allowInsecure | toString | quote }}
+              value: {{ .Values.proxy.managementServer.allowInsecure | toString | quote }}
             - name: NB_PROXY_CERTIFICATE_DIRECTORY
-              value: {{ .Values.proxy.certificateDirectory | quote }}
+              value: {{ .Values.proxy.tls.certificateDirectory | quote }}
             {{- if .Values.proxy.domain }}
             - name: NB_PROXY_DOMAIN
               value: {{ .Values.proxy.domain | quote }}
             {{- end }}
             - name: NB_PROXY_LOG_LEVEL
               value: {{ .Values.proxy.logLevel | quote }}
-            {{- if .Values.proxy.managementAddress }}
+            {{- if .Values.proxy.managementServer.address }}
             - name: NB_PROXY_MANAGEMENT_ADDRESS
-              value: {{ .Values.proxy.managementAddress | quote }}
+              value: {{ .Values.proxy.managementServer.address | quote }}
             {{- end }}
             - name: NB_PROXY_PRIVATE
               value: {{ .Values.proxy.private | toString | quote }}
@@ -93,7 +93,7 @@ spec:
           {{- end }}
           volumeMounts:
             - name: certs
-              mountPath: {{ .Values.proxy.certificateDirectory | quote }}
+              mountPath: {{ .Values.proxy.tls.certificateDirectory | quote }}
       volumes:
         - name: certs
           {{- if eq .Values.proxy.tls.source "acme" }}

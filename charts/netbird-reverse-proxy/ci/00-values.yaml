@@ -3,5 +3,3 @@ proxy:
   auth:
     token: my-dummy-token
   domain: netbird-proxy.example.com
-  tls:
-    source: selfSigned

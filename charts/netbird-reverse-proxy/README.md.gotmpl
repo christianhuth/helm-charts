@@ -30,7 +30,7 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/netbird-reverse-proxy \
-  --set proxy.managementAddress="https://my-netbird-management.example.com" \
+  --set proxy.managementServer.address="https://my-netbird-management.example.com" \
   --set proxy.domain="my-proxy.example.com" \
   --set proxy.auth.token="my-proxy-token" \
   --set proxy.tls.existingSecret="my-proxy-tls"
@@ -60,6 +60,16 @@ A plain Kubernetes `Service` (`ClusterIP`, `NodePort`, or `LoadBalancer`) never 
 
 There are therefore two independent choices to make: where the certificate comes from, and how the proxy is reached from outside the cluster.
 
+### Why `proxy.address` defaults to `:8443`, not `:443`
+
+The proxy's container image runs as a non-root user, and binding a port below 1024 (like 443) as non-root requires the `NET_BIND_SERVICE` capability - which may not be grantable on every cluster (some admission policies or sandboxed runtimes block it even when correctly requested). To avoid that dependency entirely, `proxy.address` defaults to the binary's own non-privileged default, `:8443`. This only changes where the proxy listens *inside* the container - `service.https.port` still defaults to the conventional `443` *externally*: the Service's `https` port has a named `targetPort` that always points at whatever port `proxy.address` resolves to, so clients still connect to `https://your-domain` with no port suffix needed.
+
+If you do need the container to bind a privileged port directly (for example, `proxy.tls.source=acme`, see below), set `proxy.address` back to `:443` and add the `NET_BIND_SERVICE` capability under `securityContext.capabilities.add`.
+
+### `proxy.private`: NetBird-Only services
+
+`proxy.private` (`NB_PROXY_PRIVATE`) advertises this proxy cluster's support for ["NetBird-Only" private services](https://netbird.io/knowledge-hub/netbird-only-private-services) - an opt-in, per-service access-control feature you enable per-service in the NetBird UI/API, not a network-exposure setting. Most deployments don't need it, so it defaults to `false`. Enabling it makes the proxy additionally set up a **hardcoded** `:80`/`:443` listener pair for such services, regardless of what `proxy.address` is set to - so if you enable it, both of those ports need to be bindable (see the `NET_BIND_SERVICE` note above).
+
 ### Certificate source: `proxy.tls.source`
 
 **`secret` (default)** - mount an existing Kubernetes `Secret` of type `kubernetes.io/tls` into the certificate directory. This is the natural fit if you already run cert-manager: a cert-manager `Certificate` issues into a Secret with keys `tls.crt` / `tls.key`, which are exactly the filenames the proxy expects by default. The proxy watches the certificate files and hot-reloads them, so cert-manager's automatic renewals are picked up without restarting the pod - no extra glue required.
@@ -85,16 +95,22 @@ proxy:
     existingSecret: my-proxy-tls
 ```
 
-**`acme`** - the proxy requests and renews its own certificate directly from Let's Encrypt (`NB_PROXY_ACME_CERTIFICATES=true`). No cert-manager dependency, but the proxy must be reachable from the internet on the challenge port, and `proxy.domain` must be set. Since certificate state lives on local disk inside the pod:
+**`acme`** - the proxy requests and renews its own certificate directly from Let's Encrypt (`NB_PROXY_ACME_CERTIFICATES=true`). No cert-manager dependency, but `proxy.domain` must be set, and the proxy must be reachable from the internet for the challenge. The default challenge type, `tls-alpn-01`, is always validated by Let's Encrypt on **port 443** specifically - that's not configurable - so this source requires setting `proxy.address` back to `:443` (and granting `NET_BIND_SERVICE`, see above) rather than using the chart's non-privileged default. Since certificate state lives on local disk inside the pod:
 
 - enable `persistence.enabled=true` so the certificate survives pod restarts (otherwise every restart re-requests a certificate and can hit Let's Encrypt rate limits)
 - keep `replicaCount: 1` and leave `autoscaling.enabled=false` - certificate state is not shared between pods, so each replica would request its own certificate independently
 
 ```yaml
 proxy:
+  address: ":443"
   domain: "my-proxy.example.com"
   tls:
     source: acme
+
+securityContext:
+  capabilities:
+    add:
+      - NET_BIND_SERVICE
 
 persistence:
   enabled: true
