@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 11.7.4
+## 11.7.5
 
 ### Changed
 
-- App Version to 5.1.3
+- App Version to 5.1.4
