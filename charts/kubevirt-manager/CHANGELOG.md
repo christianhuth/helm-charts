@@ -1,7 +1,7 @@
 # kubevirt-manager
 
-## 0.6.0
+## 0.6.1
 
 ### Added
 
-- option to define route timeouts
+- Added scrapeTimeout value to serviceMonitor

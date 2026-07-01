@@ -29,6 +29,9 @@ spec:
       metricRelabelings:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .Values.prometheus.scrapeTimeout }}
+      scrapeTimeout: {{ . | quote }}
+      {{- end }}
   jobLabel: prometheus.kubevirt.io
   namespaceSelector:
     matchNames:

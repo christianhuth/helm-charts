@@ -1,7 +1,7 @@
 # dns-exporter
 
-## 2.5.1
+## 2.5.2
 
-### Changed
+### Added
 
-- App Version to 1.2.3
+- Added scrapeTimeout value to pod and service monitors
