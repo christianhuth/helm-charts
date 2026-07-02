@@ -1,7 +1,7 @@
 # github-exporter
 
-## 2.5.1
+## 2.5.2
 
-### Changed
+### Added
 
-- App Version to v2.3.1
+- Added scrapeTimeout value to the serviceMonitor.
