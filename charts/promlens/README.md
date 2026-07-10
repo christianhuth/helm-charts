@@ -75,7 +75,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registory |
 | image.repository | string | `"prom/promlens"` | image repository |
-| image.tag | string | `"v0.3.0"` | Overrides the image tag |
+| image.tag | string | `"v0.4.0"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` | Annotations to add to the ingress |
 | ingress.className | string | `""` | Ingress class name |
