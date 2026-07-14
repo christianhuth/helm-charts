@@ -61,6 +61,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | crds.tcproutes | bool | `true` | Installs the TCPRoute CRD. Experimental channel only. |
 | crds.tlsroutes | bool | `true` | Installs the TLSRoute CRD. Experimental channel only. |
 | crds.udproutes | bool | `true` | Installs the UDPRoute CRD. Experimental channel only. |
+| crds.xbackends | bool | `true` | Installs the XBackend CRD. Experimental channel only. |
 | crds.xbackendtrafficpolicies | bool | `true` | Installs the XBackendTrafficPolicy CRD. Experimental channel only. |
 | crds.xlistenersets | bool | `true` | Installs the XListenerSet CRD. Experimental channel only. |
 | crds.xmeshes | bool | `true` | Installs the XMesh CRD. Experimental channel only. |

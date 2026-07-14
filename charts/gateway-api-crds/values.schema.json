@@ -74,6 +74,12 @@
           "title": "udproutes",
           "type": "boolean"
         },
+        "xbackends": {
+          "default": true,
+          "description": "Installs the XBackend CRD. Experimental channel only.",
+          "title": "xbackends",
+          "type": "boolean"
+        },
         "xbackendtrafficpolicies": {
           "default": true,
           "description": "Installs the XBackendTrafficPolicy CRD. Experimental channel only.",
@@ -104,6 +110,7 @@
         "tcproutes",
         "tlsroutes",
         "udproutes",
+        "xbackends",
         "xbackendtrafficpolicies",
         "xlistenersets",
         "xmeshes"
