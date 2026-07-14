@@ -11,8 +11,9 @@ UPDATE_TYPE="$1"
 GW_VERSION_OLD="$2"
 GW_VERSION_NEW="$3"
 
-CHART="gateway-api-crds"
-CHART_DIR="charts/${CHART}"
+CHART_DIR="charts/gateway-api-crds"
+STANDARD_DIR="${CHART_DIR}/charts/standard"
+EXPERIMENTAL_DIR="${CHART_DIR}/charts/experimental"
 
 echo "Old gateway-api version is ${GW_VERSION_OLD}"
 echo "New gateway-api version is ${GW_VERSION_NEW}"
@@ -33,54 +34,16 @@ for channel in standard experimental; do
     "${WORKDIR}/${channel}-install.yaml"
 done
 
-# Discover the union of CRD plural names across both channels. Never hardcode
-# this list -- it must reflect whatever upstream ships in this release.
-mapfile -t PLURALS < <(
-  { ls "${WORKDIR}/split/standard" 2>/dev/null; ls "${WORKDIR}/split/experimental" 2>/dev/null; } \
-    | sed 's/\.yml$//' | sort -u
-)
-
-# Renders one channel's CRD body: drops the yq document-separator line and
-# injects the (conditional) resource-policy annotation include.
+# Renders a CRD body: drops the yq document-separator line and injects the
+# (conditional) resource-policy annotation include.
 render_body() {
   local file="$1"
   sed '1{/^---$/d}' "${file}" \
     | awk '{ print } /^  annotations:$/ { print "{{- include \"gateway-api-crds.resourcePolicyAnnotation\" $ }}" }'
 }
 
-# Regenerate templates/crds/ from scratch every run -- this is what makes
-# upstream additions/removals of CRD kinds safe to handle without diffing.
-rm -rf "${CHART_DIR}/templates/crds"
-mkdir -p "${CHART_DIR}/templates/crds"
-
-for plural in "${PLURALS[@]}"; do
-  STANDARD_FILE="${WORKDIR}/split/standard/${plural}.yml"
-  EXPERIMENTAL_FILE="${WORKDIR}/split/experimental/${plural}.yml"
-  OUT_FILE="${CHART_DIR}/templates/crds/${plural}.yaml"
-
-  {
-    echo "{{- if .Values.crds.${plural} }}"
-    if [[ -f "${STANDARD_FILE}" && -f "${EXPERIMENTAL_FILE}" ]]; then
-      # Present in both channels, but schemas can differ between them.
-      echo "{{- if eq .Values.channel \"experimental\" }}"
-      render_body "${EXPERIMENTAL_FILE}"
-      echo "{{- else }}"
-      render_body "${STANDARD_FILE}"
-      echo "{{- end }}"
-    elif [[ -f "${EXPERIMENTAL_FILE}" ]]; then
-      # Experimental-channel-only kind.
-      echo "{{- if eq .Values.channel \"experimental\" }}"
-      render_body "${EXPERIMENTAL_FILE}"
-      echo "{{- end }}"
-    else
-      render_body "${STANDARD_FILE}"
-    fi
-    echo "{{- end }}"
-  } >"${OUT_FILE}"
-done
-
 # Insert two lines (a "-- description" helm-docs comment, then the key)
-# right after an existing line in values.yaml. yq's headComment/footComment
+# right after an existing line in a values.yaml. yq's headComment/footComment
 # operators don't reliably place a comment *before* a freshly-appended map
 # key (it ends up attached to whatever follows instead), so this is done as
 # plain text insertion.
@@ -90,41 +53,55 @@ insert_after_line() {
   mv "${file}.tmp" "${file}"
 }
 
-# Add values.yaml crds.* keys for newly-introduced CRD kinds, with a
-# helm-docs "-- description" comment so they show up in the generated README.
-# Never remove a key for a kind that disappeared upstream -- that's a manual,
-# changelog-noted step, since users may already have that key set in their
-# own values. PLURALS is sorted, and so is the existing crds: block, so each
-# new key is inserted right after the previous plural in iteration order.
-PREV_PLURAL=""
-for plural in "${PLURALS[@]}"; do
-  if yq -e ".crds | has(\"${plural}\")" "${CHART_DIR}/values.yaml" >/dev/null 2>&1; then
-    PREV_PLURAL="${plural}"
-    continue
-  fi
+# Regenerates one subchart's templates/crds/ from scratch (single body per
+# kind, no channel conditional -- each subchart is exactly one channel now)
+# and adds (never removes) values.yaml crds.* keys for newly-introduced
+# kinds. Regenerating templates/crds/ from scratch every run is what makes
+# upstream additions/removals of CRD kinds safe to handle without diffing.
+regenerate_subchart() {
+  local subchart_dir="$1" channel="$2"
 
-  STANDARD_FILE="${WORKDIR}/split/standard/${plural}.yml"
-  EXPERIMENTAL_FILE="${WORKDIR}/split/experimental/${plural}.yml"
-  if [[ -f "${STANDARD_FILE}" ]]; then
-    KIND="$(yq '.spec.names.kind' "${STANDARD_FILE}")"
-    NOTE=""
-  else
-    KIND="$(yq '.spec.names.kind' "${EXPERIMENTAL_FILE}")"
-    NOTE=" Experimental channel only."
-  fi
-  echo "New CRD kind detected: ${plural} (${KIND}) -- adding to values.yaml (default true)"
+  rm -rf "${subchart_dir}/templates/crds"
+  mkdir -p "${subchart_dir}/templates/crds"
 
-  NEW_LINES="  # -- Installs the ${KIND} CRD.${NOTE}
+  mapfile -t plurals < <(ls "${WORKDIR}/split/${channel}" | sed 's/\.yml$//' | sort -u)
+
+  for plural in "${plurals[@]}"; do
+    { echo "{{- if .Values.crds.${plural} }}"
+      render_body "${WORKDIR}/split/${channel}/${plural}.yml"
+      echo "{{- end }}"
+    } >"${subchart_dir}/templates/crds/${plural}.yaml"
+  done
+
+  local prev_plural=""
+  for plural in "${plurals[@]}"; do
+    if yq -e ".crds | has(\"${plural}\")" "${subchart_dir}/values.yaml" >/dev/null 2>&1; then
+      prev_plural="${plural}"
+      continue
+    fi
+
+    kind="$(yq '.spec.names.kind' "${WORKDIR}/split/${channel}/${plural}.yml")"
+    echo "New CRD kind detected in ${channel}: ${plural} (${kind}) -- adding to values.yaml (default true)"
+
+    new_lines="  # -- Installs the ${kind} CRD.
   ${plural}: true"
-  if [[ -z "${PREV_PLURAL}" ]]; then
-    insert_after_line "^crds:" "${NEW_LINES}" "${CHART_DIR}/values.yaml"
-  else
-    insert_after_line "^  ${PREV_PLURAL}: " "${NEW_LINES}" "${CHART_DIR}/values.yaml"
-  fi
-  PREV_PLURAL="${plural}"
-done
+    if [[ -z "${prev_plural}" ]]; then
+      insert_after_line "^crds:" "${new_lines}" "${subchart_dir}/values.yaml"
+    else
+      insert_after_line "^  ${prev_plural}: " "${new_lines}" "${subchart_dir}/values.yaml"
+    fi
+    prev_plural="${plural}"
+  done
+}
 
-# Bump the chart version (semver, independent from the appVersion)
+regenerate_subchart "${STANDARD_DIR}" standard
+regenerate_subchart "${EXPERIMENTAL_DIR}" experimental
+
+# Bump the chart version (semver, independent from the appVersion). Parent
+# and both subcharts always move in lockstep -- the parent's
+# dependencies[].version must stay compatible with each subchart's own
+# Chart.yaml version, or Helm silently stops condition-gating that subchart
+# instead of erroring.
 CHART_VERSION_OLD="$(awk '/^version:/ {print $2}' "${CHART_DIR}/Chart.yaml")"
 CHART_VERSION_MAJOR="$(echo "${CHART_VERSION_OLD}" | cut -d. -f1)"
 CHART_VERSION_MINOR="$(echo "${CHART_VERSION_OLD}" | cut -d. -f2)"
@@ -144,16 +121,26 @@ fi
 CHART_VERSION_NEW="${CHART_VERSION_MAJOR}.${CHART_VERSION_MINOR}.${CHART_VERSION_PATCH}"
 echo "New chart version is ${CHART_VERSION_NEW}"
 
-# change version/appVersion in Chart.yaml
-sed -i "s/^version:.*/version: ${CHART_VERSION_NEW}/g" "${CHART_DIR}/Chart.yaml"
-sed -i "s/^appVersion:.*/appVersion: \"${GW_VERSION_NEW}\"/g" "${CHART_DIR}/Chart.yaml"
+for dir in "${CHART_DIR}" "${STANDARD_DIR}" "${EXPERIMENTAL_DIR}"; do
+  sed -i "s/^version:.*/version: ${CHART_VERSION_NEW}/g" "${dir}/Chart.yaml"
+  sed -i "s/^appVersion:.*/appVersion: \"${GW_VERSION_NEW}\"/g" "${dir}/Chart.yaml"
+done
 
-# repoint the vendored source links at the new release tag
+# keep the parent's dependency version pins in lockstep with the subcharts
+yq -i "(.dependencies[] | select(.name == \"standard\" or .name == \"experimental\").version) = \"${CHART_VERSION_NEW}\"" \
+  "${CHART_DIR}/Chart.yaml"
+
+# repoint the parent's vendored source links at the new release tag
 sed -i "s#/releases/download/${GW_VERSION_OLD}/#/releases/download/${GW_VERSION_NEW}/#g" "${CHART_DIR}/Chart.yaml"
 
-# replace changes annotation for artifacthub in Chart.yaml
+# replace changes annotation for artifacthub in the parent Chart.yaml
 changes=$"- kind: changed\n  description: Gateway API CRDs to ${GW_VERSION_NEW}\n"
 yq eval ".annotations.\"artifacthub.io/changes\" = \"${changes}\"" -i "${CHART_DIR}/Chart.yaml"
+
+# refresh Chart.lock / dependency state (no-op network-wise: both
+# dependencies have no `repository:`, so this only verifies charts/<name>
+# exists locally and re-locks -- see internal/resolver/resolver.go)
+helm dependency update "${CHART_DIR}"
 
 # update CHANGELOG.md
 .github/generate-chart-changelogs.sh

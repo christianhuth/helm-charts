@@ -1,0 +1,15 @@
+# -- Enable/disable individual CRDs. Keys match each CRD's plural name
+# (`spec.names.plural`).
+crds:
+  # -- Installs the BackendTLSPolicy CRD.
+  backendtlspolicies: true
+  # -- Installs the GatewayClass CRD.
+  gatewayclasses: true
+  # -- Installs the Gateway CRD.
+  gateways: true
+  # -- Installs the GRPCRoute CRD.
+  grpcroutes: true
+  # -- Installs the HTTPRoute CRD.
+  httproutes: true
+  # -- Installs the ReferenceGrant CRD.
+  referencegrants: true
