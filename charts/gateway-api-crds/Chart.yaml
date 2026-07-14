@@ -13,10 +13,10 @@ sources:
   - https://github.com/kubernetes-sigs/gateway-api
 dependencies:
   - name: standard
-    version: 1.2.0
+    version: 1.1.1
     condition: standard.enabled
   - name: experimental
-    version: 1.2.0
+    version: 1.1.1
     condition: experimental.enabled
 annotations:
   artifacthub.io/changes: |
