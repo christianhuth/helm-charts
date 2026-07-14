@@ -56,6 +56,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | crds.gateways | bool | `true` | Installs the Gateway CRD. |
 | crds.grpcroutes | bool | `true` | Installs the GRPCRoute CRD. |
 | crds.httproutes | bool | `true` | Installs the HTTPRoute CRD. |
+| crds.listenersets | bool | `true` | Installs the ListenerSet CRD. |
 | crds.referencegrants | bool | `true` | Installs the ReferenceGrant CRD. |
 | crds.tcproutes | bool | `true` | Installs the TCPRoute CRD. Experimental channel only. |
 | crds.tlsroutes | bool | `true` | Installs the TLSRoute CRD. Experimental channel only. |

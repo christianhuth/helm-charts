@@ -44,6 +44,12 @@
           "title": "httproutes",
           "type": "boolean"
         },
+        "listenersets": {
+          "default": true,
+          "description": "Installs the ListenerSet CRD.",
+          "title": "listenersets",
+          "type": "boolean"
+        },
         "referencegrants": {
           "default": true,
           "description": "Installs the ReferenceGrant CRD.",
@@ -93,6 +99,7 @@
         "gateways",
         "grpcroutes",
         "httproutes",
+        "listenersets",
         "referencegrants",
         "tcproutes",
         "tlsroutes",

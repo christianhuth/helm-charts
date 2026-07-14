@@ -8,8 +8,8 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
 {{- include "gateway-api-crds.resourcePolicyAnnotation" $ }}
-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
-    gateway.networking.k8s.io/bundle-version: v1.4.1
+    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+    gateway.networking.k8s.io/bundle-version: v1.5.0
     gateway.networking.k8s.io/channel: experimental
   name: grpcroutes.gateway.networking.k8s.io
 spec:
@@ -530,9 +530,14 @@ spec:
                                               pattern: ^[A-Za-z0-9!#$%&'*+\-.^_\x60|~]+$
                                               type: string
                                             value:
-                                              description: Value is the value of HTTP Header to be matched.
+                                              description: |-
+                                                Value is the value of HTTP Header to be matched.
+
+                                                Must consist of printable US-ASCII characters, optionally separated
+                                                by single tabs or spaces. See: https://tools.ietf.org/html/rfc7230#section-3.2
                                               maxLength: 4096
                                               minLength: 1
+                                              pattern: ^[!-~]+([\t ]?[!-~]+)*$
                                               type: string
                                           required:
                                             - name
@@ -602,9 +607,14 @@ spec:
                                               pattern: ^[A-Za-z0-9!#$%&'*+\-.^_\x60|~]+$
                                               type: string
                                             value:
-                                              description: Value is the value of HTTP Header to be matched.
+                                              description: |-
+                                                Value is the value of HTTP Header to be matched.
+
+                                                Must consist of printable US-ASCII characters, optionally separated
+                                                by single tabs or spaces. See: https://tools.ietf.org/html/rfc7230#section-3.2
                                               maxLength: 4096
                                               minLength: 1
+                                              pattern: ^[!-~]+([\t ]?[!-~]+)*$
                                               type: string
                                           required:
                                             - name
@@ -804,9 +814,14 @@ spec:
                                               pattern: ^[A-Za-z0-9!#$%&'*+\-.^_\x60|~]+$
                                               type: string
                                             value:
-                                              description: Value is the value of HTTP Header to be matched.
+                                              description: |-
+                                                Value is the value of HTTP Header to be matched.
+
+                                                Must consist of printable US-ASCII characters, optionally separated
+                                                by single tabs or spaces. See: https://tools.ietf.org/html/rfc7230#section-3.2
                                               maxLength: 4096
                                               minLength: 1
+                                              pattern: ^[!-~]+([\t ]?[!-~]+)*$
                                               type: string
                                           required:
                                             - name
@@ -876,9 +891,14 @@ spec:
                                               pattern: ^[A-Za-z0-9!#$%&'*+\-.^_\x60|~]+$
                                               type: string
                                             value:
-                                              description: Value is the value of HTTP Header to be matched.
+                                              description: |-
+                                                Value is the value of HTTP Header to be matched.
+
+                                                Must consist of printable US-ASCII characters, optionally separated
+                                                by single tabs or spaces. See: https://tools.ietf.org/html/rfc7230#section-3.2
                                               maxLength: 4096
                                               minLength: 1
+                                              pattern: ^[!-~]+([\t ]?[!-~]+)*$
                                               type: string
                                           required:
                                             - name
@@ -1151,9 +1171,14 @@ spec:
                                         pattern: ^[A-Za-z0-9!#$%&'*+\-.^_\x60|~]+$
                                         type: string
                                       value:
-                                        description: Value is the value of HTTP Header to be matched.
+                                        description: |-
+                                          Value is the value of HTTP Header to be matched.
+
+                                          Must consist of printable US-ASCII characters, optionally separated
+                                          by single tabs or spaces. See: https://tools.ietf.org/html/rfc7230#section-3.2
                                         maxLength: 4096
                                         minLength: 1
+                                        pattern: ^[!-~]+([\t ]?[!-~]+)*$
                                         type: string
                                     required:
                                       - name
@@ -1223,9 +1248,14 @@ spec:
                                         pattern: ^[A-Za-z0-9!#$%&'*+\-.^_\x60|~]+$
                                         type: string
                                       value:
-                                        description: Value is the value of HTTP Header to be matched.
+                                        description: |-
+                                          Value is the value of HTTP Header to be matched.
+
+                                          Must consist of printable US-ASCII characters, optionally separated
+                                          by single tabs or spaces. See: https://tools.ietf.org/html/rfc7230#section-3.2
                                         maxLength: 4096
                                         minLength: 1
+                                        pattern: ^[!-~]+([\t ]?[!-~]+)*$
                                         type: string
                                     required:
                                       - name
@@ -1425,9 +1455,14 @@ spec:
                                         pattern: ^[A-Za-z0-9!#$%&'*+\-.^_\x60|~]+$
                                         type: string
                                       value:
-                                        description: Value is the value of HTTP Header to be matched.
+                                        description: |-
+                                          Value is the value of HTTP Header to be matched.
+
+                                          Must consist of printable US-ASCII characters, optionally separated
+                                          by single tabs or spaces. See: https://tools.ietf.org/html/rfc7230#section-3.2
                                         maxLength: 4096
                                         minLength: 1
+                                        pattern: ^[!-~]+([\t ]?[!-~]+)*$
                                         type: string
                                     required:
                                       - name
@@ -1497,9 +1532,14 @@ spec:
                                         pattern: ^[A-Za-z0-9!#$%&'*+\-.^_\x60|~]+$
                                         type: string
                                       value:
-                                        description: Value is the value of HTTP Header to be matched.
+                                        description: |-
+                                          Value is the value of HTTP Header to be matched.
+
+                                          Must consist of printable US-ASCII characters, optionally separated
+                                          by single tabs or spaces. See: https://tools.ietf.org/html/rfc7230#section-3.2
                                         maxLength: 4096
                                         minLength: 1
+                                        pattern: ^[!-~]+([\t ]?[!-~]+)*$
                                         type: string
                                     required:
                                       - name
@@ -1636,8 +1676,8 @@ spec:
                               - method:
                                 type: Exact
                                 service: "foo"
-                                headers:
-                              - name: "version"
+                              - headers:
+                                name: "version"
                                 value "v1"
 
                             ```
@@ -1814,7 +1854,7 @@ spec:
                             default: Cookie
                             description: |-
                               Type defines the type of session persistence such as through
-                              the use a header or cookie. Defaults to cookie based session
+                              the use of a header or cookie. Defaults to cookie based session
                               persistence.
 
                               Support: Core for "Cookie" type
@@ -1828,6 +1868,8 @@ spec:
                         x-kubernetes-validations:
                           - message: AbsoluteTimeout must be specified when cookie lifetimeType is Permanent
                             rule: '!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != ''Permanent'' || has(self.absoluteTimeout)'
+                          - message: cookieConfig can only be set with type Cookie
+                            rule: '!has(self.cookieConfig) || self.type == ''Cookie'''
                     type: object
                   maxItems: 16
                   type: array
@@ -1900,7 +1942,7 @@ spec:
 
                           * The Route refers to a nonexistent parent.
                           * The Route is of a type that the controller does not support.
-                          * The Route is in a namespace the controller does not have access to.
+                          * The Route is in a namespace to which the controller does not have access.
                         items:
                           description: Condition contains details for one aspect of the current state of this API Resource.
                           properties:
@@ -2149,8 +2191,8 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
 {{- include "gateway-api-crds.resourcePolicyAnnotation" $ }}
-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
-    gateway.networking.k8s.io/bundle-version: v1.4.1
+    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
+    gateway.networking.k8s.io/bundle-version: v1.5.0
     gateway.networking.k8s.io/channel: standard
   name: grpcroutes.gateway.networking.k8s.io
 spec:
@@ -3733,8 +3775,8 @@ spec:
                               - method:
                                 type: Exact
                                 service: "foo"
-                                headers:
-                              - name: "version"
+                              - headers:
+                                name: "version"
                                 value "v1"
 
                             ```
@@ -3890,7 +3932,7 @@ spec:
 
                           * The Route refers to a nonexistent parent.
                           * The Route is of a type that the controller does not support.
-                          * The Route is in a namespace the controller does not have access to.
+                          * The Route is in a namespace to which the controller does not have access.
                         items:
                           description: Condition contains details for one aspect of the current state of this API Resource.
                           properties:
