@@ -2,7 +2,7 @@ apiVersion: v2
 name: gateway-api-crds
 description: Kubernetes Gateway API CustomResourceDefinitions (standard and experimental channel)
 type: application
-version: 1.2.0
+version: 1.1.1
 appVersion: "v1.5.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/gateway-api-crds/icon.svg
