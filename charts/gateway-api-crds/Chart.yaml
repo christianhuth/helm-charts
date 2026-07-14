@@ -2,8 +2,8 @@ apiVersion: v2
 name: gateway-api-crds
 description: Kubernetes Gateway API CustomResourceDefinitions (standard and experimental channel)
 type: application
-version: 1.1.0
-appVersion: "v1.5.0"
+version: 1.1.1
+appVersion: "v1.5.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/gateway-api-crds/icon.svg
 maintainers:
@@ -13,15 +13,15 @@ sources:
   - https://github.com/kubernetes-sigs/gateway-api
 dependencies:
   - name: standard
-    version: 1.1.0
+    version: 1.1.1
     condition: standard.enabled
   - name: experimental
-    version: 1.1.0
+    version: 1.1.1
     condition: experimental.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: Gateway API CRDs to v1.5.0
+      description: Gateway API CRDs to v1.5.1
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
