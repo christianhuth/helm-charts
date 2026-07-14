@@ -1,0 +1,6 @@
+{{- if and .Values.standard.enabled .Values.experimental.enabled }}
+{{- fail "gateway-api-crds: enable only one of standard.enabled / experimental.enabled at a time" }}
+{{- end }}
+{{- if not (or .Values.standard.enabled .Values.experimental.enabled) }}
+{{- fail "gateway-api-crds: enable exactly one of standard.enabled / experimental.enabled" }}
+{{- end }}

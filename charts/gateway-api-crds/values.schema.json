@@ -1,141 +1,65 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "properties": {
-    "channel": {
-      "default": "standard",
-      "description": "Which Gateway API release channel to install CRDs from. `standard` is the stable/production channel; `experimental` additionally includes newer, less stable resource kinds, plus extra experimental fields on some of the standard-channel kinds.",
-      "enum": [
-        "standard",
-        "experimental"
-      ],
-      "required": [],
-      "title": "channel"
-    },
-    "crds": {
-      "description": "Enable/disable individual CRDs. Keys match each CRD's plural name (`spec.names.plural`). Kinds only present in the experimental channel are never installed while `channel` is `standard`, regardless of their flag here.",
+    "experimental": {
       "properties": {
-        "backendtlspolicies": {
-          "default": true,
-          "description": "Installs the BackendTLSPolicy CRD.",
-          "title": "backendtlspolicies",
-          "type": "boolean"
-        },
-        "gatewayclasses": {
-          "default": true,
-          "description": "Installs the GatewayClass CRD.",
-          "title": "gatewayclasses",
-          "type": "boolean"
-        },
-        "gateways": {
-          "default": true,
-          "description": "Installs the Gateway CRD.",
-          "title": "gateways",
-          "type": "boolean"
-        },
-        "grpcroutes": {
-          "default": true,
-          "description": "Installs the GRPCRoute CRD.",
-          "title": "grpcroutes",
-          "type": "boolean"
-        },
-        "httproutes": {
-          "default": true,
-          "description": "Installs the HTTPRoute CRD.",
-          "title": "httproutes",
-          "type": "boolean"
-        },
-        "listenersets": {
-          "default": true,
-          "description": "Installs the ListenerSet CRD.",
-          "title": "listenersets",
-          "type": "boolean"
-        },
-        "referencegrants": {
-          "default": true,
-          "description": "Installs the ReferenceGrant CRD.",
-          "title": "referencegrants",
-          "type": "boolean"
-        },
-        "tcproutes": {
-          "default": true,
-          "description": "Installs the TCPRoute CRD. Experimental channel only.",
-          "title": "tcproutes",
-          "type": "boolean"
-        },
-        "tlsroutes": {
-          "default": true,
-          "description": "Installs the TLSRoute CRD. Experimental channel only.",
-          "title": "tlsroutes",
-          "type": "boolean"
-        },
-        "udproutes": {
-          "default": true,
-          "description": "Installs the UDPRoute CRD. Experimental channel only.",
-          "title": "udproutes",
-          "type": "boolean"
-        },
-        "xbackendtrafficpolicies": {
-          "default": true,
-          "description": "Installs the XBackendTrafficPolicy CRD. Experimental channel only.",
-          "title": "xbackendtrafficpolicies",
-          "type": "boolean"
-        },
-        "xlistenersets": {
-          "default": true,
-          "description": "Installs the XListenerSet CRD. Experimental channel only.",
-          "title": "xlistenersets",
-          "type": "boolean"
-        },
-        "xmeshes": {
-          "default": true,
-          "description": "Installs the XMesh CRD. Experimental channel only.",
-          "title": "xmeshes",
+        "enabled": {
+          "default": false,
+          "description": "Installs the experimental-channel Gateway API CRDs (includes\neverything in the standard channel plus newer, less stable resource\nkinds and fields).",
+          "title": "enabled",
           "type": "boolean"
         }
       },
       "required": [
-        "backendtlspolicies",
-        "gatewayclasses",
-        "gateways",
-        "grpcroutes",
-        "httproutes",
-        "listenersets",
-        "referencegrants",
-        "tcproutes",
-        "tlsroutes",
-        "udproutes",
-        "xbackendtrafficpolicies",
-        "xlistenersets",
-        "xmeshes"
+        "enabled"
       ],
-      "title": "crds",
+      "title": "experimental",
       "type": "object"
     },
     "global": {
-      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
-      "required": [],
+      "properties": {
+        "resourcePolicy": {
+          "properties": {
+            "keep": {
+              "default": false,
+              "description": "When `true`, adds the `helm.sh/resource-policy: keep` annotation to\nevery CRD so `helm uninstall` (and rollbacks) won't delete them.",
+              "title": "keep",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "keep"
+          ],
+          "title": "resourcePolicy",
+          "type": "object"
+        }
+      },
+      "required": [
+        "resourcePolicy"
+      ],
       "title": "global",
       "type": "object"
     },
-    "resourcePolicy": {
+    "standard": {
       "properties": {
-        "keep": {
-          "default": false,
-          "description": "When `true`, adds the `helm.sh/resource-policy: keep` annotation to every CRD so `helm uninstall` (and rollbacks) won't delete them.",
-          "title": "keep",
+        "enabled": {
+          "default": true,
+          "description": "Installs the standard-channel Gateway API CRDs. Enable exactly one of\n`standard.enabled`/`experimental.enabled` -- enabling both or neither\nfails the install with a clear error.",
+          "title": "enabled",
           "type": "boolean"
         }
       },
       "required": [
-        "keep"
+        "enabled"
       ],
-      "title": "resourcePolicy",
+      "title": "standard",
       "type": "object"
     }
   },
   "required": [
-    "resourcePolicy",
-    "crds"
+    "standard",
+    "experimental",
+    "global"
   ],
   "type": "object"
 }

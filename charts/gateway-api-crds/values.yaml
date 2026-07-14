@@ -1,38 +1,17 @@
-# @schema
-# enum: [standard, experimental]
-# @schema
-# -- Which Gateway API release channel to install CRDs from. `standard` is the stable/production channel; `experimental` additionally includes newer, less stable resource kinds, plus extra experimental fields on some of the standard-channel kinds.
-channel: standard
+standard:
+  # -- Installs the standard-channel Gateway API CRDs. Enable exactly one of
+  # `standard.enabled`/`experimental.enabled` -- enabling both or neither
+  # fails the install with a clear error.
+  enabled: true
 
-resourcePolicy:
-  # -- When `true`, adds the `helm.sh/resource-policy: keep` annotation to every CRD so `helm uninstall` (and rollbacks) won't delete them.
-  keep: false
+experimental:
+  # -- Installs the experimental-channel Gateway API CRDs (includes
+  # everything in the standard channel plus newer, less stable resource
+  # kinds and fields).
+  enabled: false
 
-# Enable/disable individual CRDs. Keys match each CRD's plural name (`spec.names.plural`). Kinds only present in the experimental channel are never installed while `channel` is `standard`, regardless of their flag here.
-crds:
-  # -- Installs the BackendTLSPolicy CRD.
-  backendtlspolicies: true
-  # -- Installs the GatewayClass CRD.
-  gatewayclasses: true
-  # -- Installs the Gateway CRD.
-  gateways: true
-  # -- Installs the GRPCRoute CRD.
-  grpcroutes: true
-  # -- Installs the HTTPRoute CRD.
-  httproutes: true
-  # -- Installs the ListenerSet CRD.
-  listenersets: true
-  # -- Installs the ReferenceGrant CRD.
-  referencegrants: true
-  # -- Installs the TCPRoute CRD. Experimental channel only.
-  tcproutes: true
-  # -- Installs the TLSRoute CRD. Experimental channel only.
-  tlsroutes: true
-  # -- Installs the UDPRoute CRD. Experimental channel only.
-  udproutes: true
-  # -- Installs the XBackendTrafficPolicy CRD. Experimental channel only.
-  xbackendtrafficpolicies: true
-  # -- Installs the XListenerSet CRD. Experimental channel only.
-  xlistenersets: true
-  # -- Installs the XMesh CRD. Experimental channel only.
-  xmeshes: true
+global:
+  resourcePolicy:
+    # -- When `true`, adds the `helm.sh/resource-policy: keep` annotation to
+    # every CRD so `helm uninstall` (and rollbacks) won't delete them.
+    keep: false

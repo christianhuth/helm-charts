@@ -1,7 +1,7 @@
 # gateway-api-crds
 
-## 1.1.1
+## 1.0.0
 
-### Changed
+### Added
 
-- Gateway API CRDs to v1.5.1
+- Initial chart release, tracking Gateway API v1.4.1
