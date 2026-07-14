@@ -1,7 +1,7 @@
 # netcupscp-exporter
 
-## 1.6.1
+## 1.6.2
 
-### Changed
+### Added
 
-- App Version to v0.5.1
+- Added scrapeTimeout value to serviceMonitor

@@ -1,7 +1,7 @@
 # goldpinger
 
-## 1.3.0
+## 1.3.1
 
 ### Added
 
-- option to define route timeouts
+- Added scrapeTimeout value to serviceMonitor

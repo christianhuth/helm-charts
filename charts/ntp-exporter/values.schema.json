@@ -278,7 +278,6 @@
           "type": "string"
         },
         "relabelings": {
-          "description": "Prometheus [RelabelConfigs] to apply to samples before scraping",
           "items": {
             "anyOf": [
               {
@@ -319,6 +318,12 @@
           "title": "relabelings",
           "type": "array"
         },
+        "scrapeTimeout": {
+          "default": "",
+          "description": "Prometheus [RelabelConfigs] to apply to samples before scraping\nPrometheus PodMonitor scrapeTimeout, cannot be longer than the scrape interval",
+          "title": "scrapeTimeout",
+          "type": "string"
+        },
         "selector": {
           "description": "release: prometheus\nPrometheus PodMonitor selector",
           "required": [],
@@ -333,6 +338,7 @@
         "interval",
         "namespace",
         "metricRelabelings",
+        "scrapeTimeout",
         "relabelings"
       ],
       "title": "podMonitor",

@@ -169,3 +169,5 @@ serviceMonitor:
   metricRelabelings: []
   # -- Prometheus [RelabelConfigs] to apply to samples before scraping
   relabelings: []
+  # -- Prometheus ServiceMonitor scrapeTimeout, cannot be longer than the scrape interval
+  scrapeTimeout: ""

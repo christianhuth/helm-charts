@@ -276,6 +276,12 @@
               "title": "namespace",
               "type": "string"
             },
+            "scrapeTimeout": {
+              "default": "",
+              "description": "Prometheus PodMonitor scrapeTimeout, cannot be longer than the scrape interval",
+              "title": "scrapeTimeout",
+              "type": "string"
+            },
             "selector": {
               "description": "release: prometheus\nPrometheus PodMonitor selector",
               "required": [],
@@ -289,7 +295,8 @@
             "selector",
             "interval",
             "namespace",
-            "metricRelabelings"
+            "metricRelabelings",
+            "scrapeTimeout"
           ],
           "title": "selfMonitor",
           "type": "object"
@@ -328,6 +335,12 @@
               "title": "namespace",
               "type": "string"
             },
+            "scrapeTimeout": {
+              "default": "",
+              "description": "Prometheus PodMonitor scrapeTimeout, cannot be longer than the scrape interval",
+              "title": "scrapeTimeout",
+              "type": "string"
+            },
             "selector": {
               "description": "release: prometheus\nPrometheus PodMonitor selector",
               "required": [],
@@ -350,6 +363,7 @@
             "interval",
             "namespace",
             "metricRelabelings",
+            "scrapeTimeout",
             "targets"
           ],
           "title": "targetsMonitor",
@@ -650,6 +664,12 @@
               "title": "relabelings",
               "type": "array"
             },
+            "scrapeTimeout": {
+              "default": "",
+              "description": "Prometheus ServiceMonitor scrapeTimeout, cannot be longer than the scrape interval",
+              "title": "scrapeTimeout",
+              "type": "string"
+            },
             "selector": {
               "description": "release: prometheus\nPrometheus ServiceMonitor selector",
               "required": [],
@@ -664,7 +684,8 @@
             "interval",
             "namespace",
             "metricRelabelings",
-            "relabelings"
+            "relabelings",
+            "scrapeTimeout"
           ],
           "title": "selfMonitor",
           "type": "object"
@@ -711,6 +732,12 @@
               "title": "relabelings",
               "type": "array"
             },
+            "scrapeTimeout": {
+              "default": "",
+              "description": "Prometheus ServiceMonitor scrapeTimeout, cannot be longer than the scrape interval",
+              "title": "scrapeTimeout",
+              "type": "string"
+            },
             "selector": {
               "description": "release: prometheus\nPrometheus ServiceMonitor selector",
               "required": [],
@@ -734,7 +761,8 @@
             "namespace",
             "metricRelabelings",
             "relabelings",
-            "targets"
+            "targets",
+            "scrapeTimeout"
           ],
           "title": "targetsMonitor",
           "type": "object"

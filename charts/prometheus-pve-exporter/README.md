@@ -106,6 +106,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceMonitor.namespace | string | `""` | Prometheus ServiceMonitor namespace |
 | serviceMonitor.pveTargets | list | `[]` | Prometheus |
 | serviceMonitor.relabelings | list | `[]` | Prometheus [RelabelConfigs] to apply to samples before scraping |
+| serviceMonitor.scrapeTimeout | string | `""` | Prometheus ServiceMonitor scrapeTimeout, cannot be longer than the scrape interval |
 | serviceMonitor.selector | object | `{}` | Prometheus ServiceMonitor selector |
 | tolerations | list | `[]` | Toleration labels for pod assignment |
 

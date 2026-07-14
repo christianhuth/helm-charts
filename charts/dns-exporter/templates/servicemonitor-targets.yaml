@@ -32,6 +32,9 @@ spec:
       metricRelabelings:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .Values.serviceMonitor.targetsMonitor.scrapeTimeout }}
+      scrapeTimeout: {{ . | quote}}
+      {{- end }}
     {{- end }}
   namespaceSelector:
     matchNames:
