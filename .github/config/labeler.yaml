@@ -56,6 +56,9 @@ fathom:
 freshrss:
 - changed-files:
   - any-glob-to-any-file: charts/freshrss/*
+gateway-api-crds:
+- changed-files:
+  - any-glob-to-any-file: 'charts/gateway-api-crds/*'
 github-exporter:
 - changed-files:
   - any-glob-to-any-file: 'charts/github-exporter/*'

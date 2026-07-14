@@ -8,6 +8,15 @@
   "assignees": ["christianhuth"],
   "bumpVersion": "patch",
   "labels": ["renovate"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^charts/gateway-api-crds/Chart\\.yaml$/"],
+      "matchStrings": ["appVersion:\\s*\"(?<currentValue>v[\\d.]+)\""],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "kubernetes-sigs/gateway-api"
+    }
+  ],
   "packageRules": [
     {
       "matchManagers": ["helmv3"],
@@ -20,6 +29,14 @@
       "matchManagers": ["helm-values"],
       "postUpgradeTasks": {
         "commands": ["bash ./renovate-update-chart-values.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{currentValue}}}' '{{{newValue}}}'"],
+        "executionMode": "branch"
+      }
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["kubernetes-sigs/gateway-api"],
+      "postUpgradeTasks": {
+        "commands": ["bash ./renovate-update-gateway-api-crds.sh '{{{updateType}}}' '{{{currentValue}}}' '{{{newValue}}}'"],
         "executionMode": "branch"
       }
     },
