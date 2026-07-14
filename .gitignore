@@ -6,6 +6,11 @@
 charts/**/charts/*
 charts/**/Chart.lock
 
+# Exception: gateway-api-crds' subcharts are local, hand/automation-maintained
+# source (not fetched remote dependencies), so they must stay tracked.
+!charts/gateway-api-crds/charts/
+!charts/gateway-api-crds/charts/**
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
