@@ -9,7 +9,7 @@ metadata:
   annotations:
 {{- include "gateway-api-crds.resourcePolicyAnnotation" $ }}
     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-    gateway.networking.k8s.io/bundle-version: v1.5.1
+    gateway.networking.k8s.io/bundle-version: v1.6.0
     gateway.networking.k8s.io/channel: experimental
   name: tlsroutes.gateway.networking.k8s.io
 spec:
@@ -87,7 +87,7 @@ spec:
                     minLength: 1
                     pattern: ^(\*\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
                     type: string
-                  maxItems: 16
+                  maxItems: 1024
                   minItems: 1
                   type: array
                   x-kubernetes-list-type: atomic
@@ -332,6 +332,9 @@ spec:
                           weight; if an invalid backend is requested to have 80% of requests, then
                           80% of requests must be rejected instead.
 
+                          When a TLSRoute is attached to a listener in Terminate mode, a BackendTLSPolicy
+                          can be used to enable re-encryption of the traffic to the backends.
+
                           Support: Core for Kubernetes Service
 
                           Support: Extended for Kubernetes ServiceImport
@@ -339,6 +342,8 @@ spec:
                           Support: Implementation-specific for any other resource
 
                           Support for weight: Extended
+
+                          Support for BackendTLSPolicy: Extended
                         items:
                           description: |-
                             BackendRef defines how a Route should forward a request to a Kubernetes
@@ -861,7 +866,7 @@ spec:
                     minLength: 1
                     pattern: ^(\*\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
                     type: string
-                  maxItems: 16
+                  maxItems: 1024
                   type: array
                   x-kubernetes-list-type: atomic
                 parentRefs:
@@ -1098,6 +1103,9 @@ spec:
                           weight; if an invalid backend is requested to have 80% of requests, then
                           80% of requests must be rejected instead.
 
+                          When a TLSRoute is attached to a listener in Terminate mode, a BackendTLSPolicy
+                          can be used to enable re-encryption of the traffic to the backends.
+
                           Support: Core for Kubernetes Service
 
                           Support: Extended for Kubernetes ServiceImport
@@ -1105,6 +1113,8 @@ spec:
                           Support: Implementation-specific for any other resource
 
                           Support for weight: Extended
+
+                          Support for BackendTLSPolicy: Extended
                         items:
                           description: |-
                             BackendRef defines how a Route should forward a request to a Kubernetes
@@ -1606,7 +1616,7 @@ spec:
                     minLength: 1
                     pattern: ^(\*\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
                     type: string
-                  maxItems: 16
+                  maxItems: 1024
                   minItems: 1
                   type: array
                   x-kubernetes-list-type: atomic
@@ -1851,6 +1861,9 @@ spec:
                           weight; if an invalid backend is requested to have 80% of requests, then
                           80% of requests must be rejected instead.
 
+                          When a TLSRoute is attached to a listener in Terminate mode, a BackendTLSPolicy
+                          can be used to enable re-encryption of the traffic to the backends.
+
                           Support: Core for Kubernetes Service
 
                           Support: Extended for Kubernetes ServiceImport
@@ -1858,6 +1871,8 @@ spec:
                           Support: Implementation-specific for any other resource
 
                           Support for weight: Extended
+
+                          Support for BackendTLSPolicy: Extended
                         items:
                           description: |-
                             BackendRef defines how a Route should forward a request to a Kubernetes
@@ -2291,12 +2306,6 @@ spec:
       storage: false
       subresources:
         status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: null
-  storedVersions: null
 {{- else }}
 #
 # config/crd/standard/gateway.networking.k8s.io_tlsroutes.yaml
@@ -2307,7 +2316,7 @@ metadata:
   annotations:
 {{- include "gateway-api-crds.resourcePolicyAnnotation" $ }}
     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-    gateway.networking.k8s.io/bundle-version: v1.5.1
+    gateway.networking.k8s.io/bundle-version: v1.6.0
     gateway.networking.k8s.io/channel: standard
   name: tlsroutes.gateway.networking.k8s.io
 spec:
@@ -2385,7 +2394,7 @@ spec:
                     minLength: 1
                     pattern: ^(\*\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
                     type: string
-                  maxItems: 16
+                  maxItems: 1024
                   minItems: 1
                   type: array
                   x-kubernetes-list-type: atomic
@@ -2601,6 +2610,9 @@ spec:
                           weight; if an invalid backend is requested to have 80% of requests, then
                           80% of requests must be rejected instead.
 
+                          When a TLSRoute is attached to a listener in Terminate mode, a BackendTLSPolicy
+                          can be used to enable re-encryption of the traffic to the backends.
+
                           Support: Core for Kubernetes Service
 
                           Support: Extended for Kubernetes ServiceImport
@@ -2608,6 +2620,8 @@ spec:
                           Support: Implementation-specific for any other resource
 
                           Support for weight: Extended
+
+                          Support for BackendTLSPolicy: Extended
                         items:
                           description: |-
                             BackendRef defines how a Route should forward a request to a Kubernetes
@@ -3078,7 +3092,7 @@ spec:
                     minLength: 1
                     pattern: ^(\*\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
                     type: string
-                  maxItems: 16
+                  maxItems: 1024
                   type: array
                   x-kubernetes-list-type: atomic
                 parentRefs:
@@ -3286,6 +3300,9 @@ spec:
                           weight; if an invalid backend is requested to have 80% of requests, then
                           80% of requests must be rejected instead.
 
+                          When a TLSRoute is attached to a listener in Terminate mode, a BackendTLSPolicy
+                          can be used to enable re-encryption of the traffic to the backends.
+
                           Support: Core for Kubernetes Service
 
                           Support: Extended for Kubernetes ServiceImport
@@ -3293,6 +3310,8 @@ spec:
                           Support: Implementation-specific for any other resource
 
                           Support for weight: Extended
+
+                          Support for BackendTLSPolicy: Extended
                         items:
                           description: |-
                             BackendRef defines how a Route should forward a request to a Kubernetes
@@ -3739,7 +3758,7 @@ spec:
                     minLength: 1
                     pattern: ^(\*\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
                     type: string
-                  maxItems: 16
+                  maxItems: 1024
                   minItems: 1
                   type: array
                   x-kubernetes-list-type: atomic
@@ -3955,6 +3974,9 @@ spec:
                           weight; if an invalid backend is requested to have 80% of requests, then
                           80% of requests must be rejected instead.
 
+                          When a TLSRoute is attached to a listener in Terminate mode, a BackendTLSPolicy
+                          can be used to enable re-encryption of the traffic to the backends.
+
                           Support: Core for Kubernetes Service
 
                           Support: Extended for Kubernetes ServiceImport
@@ -3962,6 +3984,8 @@ spec:
                           Support: Implementation-specific for any other resource
 
                           Support for weight: Extended
+
+                          Support for BackendTLSPolicy: Extended
                         items:
                           description: |-
                             BackendRef defines how a Route should forward a request to a Kubernetes
@@ -4343,11 +4367,5 @@ spec:
       storage: false
       subresources:
         status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: null
-  storedVersions: null
 {{- end }}
 {{- end }}

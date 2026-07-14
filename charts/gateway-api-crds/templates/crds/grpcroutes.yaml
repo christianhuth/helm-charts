@@ -9,7 +9,7 @@ metadata:
   annotations:
 {{- include "gateway-api-crds.resourcePolicyAnnotation" $ }}
     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-    gateway.networking.k8s.io/bundle-version: v1.5.1
+    gateway.networking.k8s.io/bundle-version: v1.6.0
     gateway.networking.k8s.io/channel: experimental
   name: grpcroutes.gateway.networking.k8s.io
 spec:
@@ -663,6 +663,10 @@ spec:
                                           Support: Extended for Kubernetes Service
 
                                           Support: Implementation-specific for any other resource
+
+                                          If the backend service requires TLS, use BackendTLSPolicy to tell the
+                                          implementation to supply the TLS details to be used to connect to that
+                                          backend.
                                         properties:
                                           group:
                                             default: ""
@@ -1304,6 +1308,10 @@ spec:
                                     Support: Extended for Kubernetes Service
 
                                     Support: Implementation-specific for any other resource
+
+                                    If the backend service requires TLS, use BackendTLSPolicy to tell the
+                                    implementation to supply the TLS details to be used to connect to that
+                                    backend.
                                   properties:
                                     group:
                                       default: ""
@@ -1831,15 +1839,6 @@ spec:
                                   - Session
                                 type: string
                             type: object
-                          idleTimeout:
-                            description: |-
-                              IdleTimeout defines the idle timeout of the persistent session.
-                              Once the session has been idle for more than the specified
-                              IdleTimeout duration, the session becomes invalid.
-
-                              Support: Extended
-                            pattern: ^([0-9]{1,5}(h|m|s|ms)){1,4}$
-                            type: string
                           sessionName:
                             description: |-
                               SessionName defines the name of the persistent session token
@@ -2176,12 +2175,6 @@ spec:
       storage: true
       subresources:
         status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: null
-  storedVersions: null
 {{- else }}
 #
 # config/crd/standard/gateway.networking.k8s.io_grpcroutes.yaml
@@ -2192,7 +2185,7 @@ metadata:
   annotations:
 {{- include "gateway-api-crds.resourcePolicyAnnotation" $ }}
     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-    gateway.networking.k8s.io/bundle-version: v1.5.1
+    gateway.networking.k8s.io/bundle-version: v1.6.0
     gateway.networking.k8s.io/channel: standard
   name: grpcroutes.gateway.networking.k8s.io
 spec:
@@ -2792,6 +2785,10 @@ spec:
                                           Support: Extended for Kubernetes Service
 
                                           Support: Implementation-specific for any other resource
+
+                                          If the backend service requires TLS, use BackendTLSPolicy to tell the
+                                          implementation to supply the TLS details to be used to connect to that
+                                          backend.
                                         properties:
                                           group:
                                             default: ""
@@ -3413,6 +3410,10 @@ spec:
                                     Support: Extended for Kubernetes Service
 
                                     Support: Implementation-specific for any other resource
+
+                                    If the backend service requires TLS, use BackendTLSPolicy to tell the
+                                    implementation to supply the TLS details to be used to connect to that
+                                    backend.
                                   properties:
                                     group:
                                       default: ""
@@ -4148,11 +4149,5 @@ spec:
       storage: true
       subresources:
         status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: null
-  storedVersions: null
 {{- end }}
 {{- end }}

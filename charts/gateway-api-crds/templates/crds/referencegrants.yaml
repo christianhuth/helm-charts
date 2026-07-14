@@ -9,7 +9,7 @@ metadata:
   annotations:
 {{- include "gateway-api-crds.resourcePolicyAnnotation" $ }}
     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-    gateway.networking.k8s.io/bundle-version: v1.5.1
+    gateway.networking.k8s.io/bundle-version: v1.6.0
     gateway.networking.k8s.io/channel: experimental
   name: referencegrants.gateway.networking.k8s.io
 spec:
@@ -183,6 +183,8 @@ spec:
                 - from
                 - to
               type: object
+          required:
+            - spec
           type: object
       served: true
       storage: false
@@ -345,16 +347,12 @@ spec:
                 - from
                 - to
               type: object
+          required:
+            - spec
           type: object
       served: true
       storage: true
       subresources: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: null
-  storedVersions: null
 {{- else }}
 #
 # config/crd/standard/gateway.networking.k8s.io_referencegrants.yaml
@@ -365,7 +363,7 @@ metadata:
   annotations:
 {{- include "gateway-api-crds.resourcePolicyAnnotation" $ }}
     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-    gateway.networking.k8s.io/bundle-version: v1.5.1
+    gateway.networking.k8s.io/bundle-version: v1.6.0
     gateway.networking.k8s.io/channel: standard
   name: referencegrants.gateway.networking.k8s.io
 spec:
@@ -539,6 +537,8 @@ spec:
                 - from
                 - to
               type: object
+          required:
+            - spec
           type: object
       served: true
       storage: false
@@ -701,15 +701,11 @@ spec:
                 - from
                 - to
               type: object
+          required:
+            - spec
           type: object
       served: true
       storage: true
       subresources: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: null
-  storedVersions: null
 {{- end }}
 {{- end }}

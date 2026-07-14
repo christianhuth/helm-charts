@@ -30,6 +30,8 @@ crds:
   tlsroutes: true
   # -- Installs the UDPRoute CRD. Experimental channel only.
   udproutes: true
+  # -- Installs the XBackend CRD. Experimental channel only.
+  xbackends: true
   # -- Installs the XBackendTrafficPolicy CRD. Experimental channel only.
   xbackendtrafficpolicies: true
   # -- Installs the XListenerSet CRD. Experimental channel only.

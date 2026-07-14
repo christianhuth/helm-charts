@@ -1,7 +1,7 @@
 # gateway-api-crds
 
-## 1.1.1
+## 1.2.0
 
 ### Changed
 
-- Gateway API CRDs to v1.5.1
+- Gateway API CRDs to v1.6.0
