@@ -1,6 +1,6 @@
 # experimental
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.4.1](https://img.shields.io/badge/AppVersion-v1.4.1-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.5.0](https://img.shields.io/badge/AppVersion-v1.5.0-informational?style=flat-square)
 
 Gateway API CRDs (experimental channel) -- internal subchart of gateway-api-crds, not independently published
 
@@ -8,12 +8,13 @@ Gateway API CRDs (experimental channel) -- internal subchart of gateway-api-crds
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| crds | object | `{"backendtlspolicies":true,"gatewayclasses":true,"gateways":true,"grpcroutes":true,"httproutes":true,"referencegrants":true,"tcproutes":true,"tlsroutes":true,"udproutes":true,"xbackendtrafficpolicies":true,"xlistenersets":true,"xmeshes":true}` | Enable/disable individual CRDs. Keys match each CRD's plural name (`spec.names.plural`). |
+| crds | object | `{"backendtlspolicies":true,"gatewayclasses":true,"gateways":true,"grpcroutes":true,"httproutes":true,"listenersets":true,"referencegrants":true,"tcproutes":true,"tlsroutes":true,"udproutes":true,"xbackendtrafficpolicies":true,"xlistenersets":true,"xmeshes":true}` | Enable/disable individual CRDs. Keys match each CRD's plural name (`spec.names.plural`). |
 | crds.backendtlspolicies | bool | `true` | Installs the BackendTLSPolicy CRD. |
 | crds.gatewayclasses | bool | `true` | Installs the GatewayClass CRD. |
 | crds.gateways | bool | `true` | Installs the Gateway CRD. |
 | crds.grpcroutes | bool | `true` | Installs the GRPCRoute CRD. |
 | crds.httproutes | bool | `true` | Installs the HTTPRoute CRD. |
+| crds.listenersets | bool | `true` | Installs the ListenerSet CRD. |
 | crds.referencegrants | bool | `true` | Installs the ReferenceGrant CRD. |
 | crds.tcproutes | bool | `true` | Installs the TCPRoute CRD. |
 | crds.tlsroutes | bool | `true` | Installs the TLSRoute CRD. |

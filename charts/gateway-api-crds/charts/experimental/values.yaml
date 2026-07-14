@@ -11,6 +11,8 @@ crds:
   grpcroutes: true
   # -- Installs the HTTPRoute CRD.
   httproutes: true
+  # -- Installs the ListenerSet CRD.
+  listenersets: true
   # -- Installs the ReferenceGrant CRD.
   referencegrants: true
   # -- Installs the TCPRoute CRD.
