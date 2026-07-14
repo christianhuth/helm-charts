@@ -8,7 +8,7 @@ metadata:
   annotations:
 {{- include "gateway-api-crds.resourcePolicyAnnotation" $ }}
     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-    gateway.networking.k8s.io/bundle-version: v1.5.1
+    gateway.networking.k8s.io/bundle-version: v1.6.0
     gateway.networking.k8s.io/channel: standard
   name: grpcroutes.gateway.networking.k8s.io
 spec:
@@ -608,6 +608,10 @@ spec:
                                           Support: Extended for Kubernetes Service
 
                                           Support: Implementation-specific for any other resource
+
+                                          If the backend service requires TLS, use BackendTLSPolicy to tell the
+                                          implementation to supply the TLS details to be used to connect to that
+                                          backend.
                                         properties:
                                           group:
                                             default: ""
@@ -1229,6 +1233,10 @@ spec:
                                     Support: Extended for Kubernetes Service
 
                                     Support: Implementation-specific for any other resource
+
+                                    If the backend service requires TLS, use BackendTLSPolicy to tell the
+                                    implementation to supply the TLS details to be used to connect to that
+                                    backend.
                                   properties:
                                     group:
                                       default: ""
@@ -1964,10 +1972,4 @@ spec:
       storage: true
       subresources:
         status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: null
-  storedVersions: null
 {{- end }}

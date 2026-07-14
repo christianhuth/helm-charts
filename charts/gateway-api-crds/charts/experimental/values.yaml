@@ -21,6 +21,8 @@ crds:
   tlsroutes: true
   # -- Installs the UDPRoute CRD.
   udproutes: true
+  # -- Installs the XBackend CRD.
+  xbackends: true
   # -- Installs the XBackendTrafficPolicy CRD.
   xbackendtrafficpolicies: true
   # -- Installs the XListenerSet CRD.

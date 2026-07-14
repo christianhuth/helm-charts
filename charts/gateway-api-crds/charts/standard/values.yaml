@@ -15,5 +15,9 @@ crds:
   listenersets: true
   # -- Installs the ReferenceGrant CRD.
   referencegrants: true
+  # -- Installs the TCPRoute CRD.
+  tcproutes: true
   # -- Installs the TLSRoute CRD.
   tlsroutes: true
+  # -- Installs the UDPRoute CRD.
+  udproutes: true
