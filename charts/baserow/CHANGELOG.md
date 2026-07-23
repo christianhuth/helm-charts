@@ -1,7 +1,7 @@
 # baserow
 
-## 7.5.0
+## 7.6.0
 
 ### Changed
 
-- App Version to 2.2.2
+- App Version to 2.3.3
