@@ -1,7 +1,7 @@
 # freshrss
 
-## 2.13.0
+## 2.13.1
 
 ### Changed
 
-- dependency of postgresql to 18.8.0
+- dependency of postgresql to 18.8.1
