@@ -1,6 +1,6 @@
 # kube-ops-view
 
-## 8.3.3
+## 9.0.0
 
 ### Changed
 
