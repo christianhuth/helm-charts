@@ -42,6 +42,17 @@ helm uninstall my-release
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
+## Configuration ownership: Helm values vs. runtime admin changes
+
+ProxySQL can be configured two ways: through the config file this chart renders from Helm values (`/etc/proxysql.cnf`), and at runtime through the admin interface (`LOAD ... TO RUNTIME; SAVE ... TO DISK`), which persists to the config database (`/var/lib/proxysql/proxysql.db`).
+
+The `proxysql.config.reloadOnRestart` value controls which side wins after a restart:
+
+- `true` (default): ProxySQL starts with the `--reload` flag. On **every** container start the rendered config file is merged over the persisted config database — every key present in the config file is reset to its Helm-values state, silently reverting runtime admin changes to those keys, even with persistence enabled. Use this when Helm values are your single source of truth (e.g. GitOps). Note that ProxySQL's startup message "Ignoring configuration file ... as the config DB has higher precedence" is printed even when `--reload` has just merged the file, so do not rely on it.
+- `false`: the config file is only read when no config database exists yet (first boot). Runtime admin changes are durable across restarts — this matches ProxySQL's documented operating model. The trade-off: with persistence enabled, later changes to Helm values are **not** applied to an existing config database; reconfigure through the admin interface, or delete `/var/lib/proxysql/proxysql.db` (or the PVC) to re-bootstrap from the config file.
+
+If you manage ProxySQL configuration at runtime through the admin interface, set `reloadOnRestart: false` — otherwise a full restart of all replicas (node pool upgrade, StatefulSet recreation, scale-from-zero) reverts your runtime configuration. With multiple clustered replicas this revert is masked by peer-sync during rolling restarts and only surfaces when all pods boot fresh simultaneously.
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -81,6 +92,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | proxysql.cluster.password | string | `"cluster"` |  |
 | proxysql.cluster.user | string | `"cluster"` |  |
 | proxysql.config.existingSecret | string | `""` | Use an existing Secret containing the proxysql.cnf config. The secret has to contain the key `proxysql.cnf`. When it's set the chart will not generate a Secret. |
+| proxysql.config.reloadOnRestart | bool | `true` | Start ProxySQL with the `--reload` flag. When true, the rendered proxysql.cnf is merged into the persisted config DB on every container start, overwriting runtime admin changes (LOAD ... TO RUNTIME; SAVE ... TO DISK) for every key present in the config file. When false, the config file is only read when no config DB exists yet (first boot), making runtime admin changes durable across restarts, but Helm values changes to the config then no longer apply over an existing config DB. |
 | proxysql.monitor.enabled | bool | `false` |  |
 | proxysql.monitor.replicationLagInterval | int | `10000` |  |
 | proxysql.monitor.replicationLagTimeout | int | `1500` |  |

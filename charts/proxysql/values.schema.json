@@ -356,12 +356,34 @@
             }
           },
           "required": [
+            "enabled",
             "user",
             "password",
-            "enabled",
             "claim"
           ],
           "title": "cluster",
+          "type": "object"
+        },
+        "config": {
+          "properties": {
+            "existingSecret": {
+              "default": "",
+              "description": "Use an existing Secret containing the proxysql.cnf config. The secret has to contain the key `proxysql.cnf`. When it's set the chart will not generate a Secret.",
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "reloadOnRestart": {
+              "default": true,
+              "description": "Start ProxySQL with the `--reload` flag. When true, the rendered proxysql.cnf is merged into the persisted config DB on every container start, overwriting runtime admin changes (LOAD ... TO RUNTIME; SAVE ... TO DISK) for every key present in the config file. When false, the config file is only read when no config DB exists yet (first boot), making runtime admin changes durable across restarts, but Helm values changes to the config then no longer apply over an existing config DB.",
+              "title": "reloadOnRestart",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "existingSecret",
+            "reloadOnRestart"
+          ],
+          "title": "config",
           "type": "object"
         },
         "monitor": {
@@ -535,12 +557,6 @@
           "title": "port",
           "type": "integer"
         },
-        "existingSecret": {
-          "default": "",
-          "description": "Use an existing Secret containing the proxysql.cnf config. The secret has to contain the key `proxysql.cnf`. When it's set the chart will not generate a Secret.",
-          "title": "existingSecret",
-          "type": "string"
-        },
         "web": {
           "properties": {
             "enabled": {
@@ -574,7 +590,15 @@
           "type": "object"
         }
       },
-      "required": [],
+      "required": [
+        "config",
+        "web",
+        "admin",
+        "port",
+        "cluster",
+        "mysql",
+        "monitor"
+      ],
       "title": "proxysql",
       "type": "object"
     },
@@ -706,6 +730,12 @@
               },
               "title": "parentRefs",
               "type": "array"
+            },
+            "timeouts": {
+              "description": "defines the timeouts that can be configured for an HTTP request",
+              "required": [],
+              "title": "timeouts",
+              "type": "object"
             }
           },
           "required": [
@@ -719,7 +749,8 @@
             "matches",
             "filters",
             "additionalRules",
-            "httpsRedirect"
+            "httpsRedirect",
+            "timeouts"
           ],
           "title": "main",
           "type": "object"

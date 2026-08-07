@@ -156,6 +156,8 @@ proxysql:
   config:
     # -- Use an existing Secret containing the proxysql.cnf config. The secret has to contain the key `proxysql.cnf`. When it's set the chart will not generate a Secret.
     existingSecret: ""
+    # -- Start ProxySQL with the `--reload` flag. When true, the rendered proxysql.cnf is merged into the persisted config DB on every container start, overwriting runtime admin changes (LOAD ... TO RUNTIME; SAVE ... TO DISK) for every key present in the config file. When false, the config file is only read when no config DB exists yet (first boot), making runtime admin changes durable across restarts, but Helm values changes to the config then no longer apply over an existing config DB.
+    reloadOnRestart: true
   web:
     enabled: true
     port: 443
