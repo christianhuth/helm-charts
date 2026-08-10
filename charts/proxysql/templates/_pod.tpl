@@ -26,7 +26,9 @@ spec:
         - "--idle-threads"
         - "-D"
         - "/var/lib/proxysql"
+        {{- if .Values.proxysql.config.reloadOnRestart }}
         - "--reload"
+        {{- end }}
       ports:
         - name: mysql
           containerPort: {{ .Values.proxysql.mysql.port }}
