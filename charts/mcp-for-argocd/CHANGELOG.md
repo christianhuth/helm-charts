@@ -1,7 +1,7 @@
 # mcp-for-argocd
 
-## 1.4.0
+## 1.5.0
 
 ### Changed
 
-- App Version to v0.8.0
+- App Version to v0.9.0
