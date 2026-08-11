@@ -24,9 +24,6 @@ jobs:
 
       - name: Install helm
         run: |
-          curl -fsSL -o /tmp/get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-          chmod 700 /tmp/get_helm.sh
-          /tmp/get_helm.sh
           which helm
 
       - name: Install yq
@@ -44,5 +41,5 @@ jobs:
           docker-volumes: |
             /tmp/gomplate:/usr/local/bin/gomplate ;
             /tmp/yq:/usr/local/bin/yq ;
-            /tmp/helm:/usr/local/bin/helm ;
+            /usr/local/bin/helm:/usr/local/bin/helm ;
           token: ${{ secrets.RENOVATE_TOKEN }}
