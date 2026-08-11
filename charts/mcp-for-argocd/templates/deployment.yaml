@@ -35,6 +35,8 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - --allow-unauthenticated
           env:
             - name: ARGOCD_BASE_URL
               value: {{ .Values.argocd.baseUrl | quote }}
@@ -43,6 +45,8 @@ spec:
                 secretKeyRef:
                   name: {{ (include "mcp-for-argocd.auth.secretName" .) | quote }}
                   key: {{ (include "mcp-for-argocd.auth.apiToken.secretKey" .) | quote }}
+            - name: MCP_BIND_ADDRESS
+              value: "0.0.0.0"
             {{- if .Values.argocd.readOnly }}
             - name: MCP_READ_ONLY
               value: "true"
