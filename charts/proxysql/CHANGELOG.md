@@ -1,7 +1,7 @@
 # proxysql
 
-## 3.0.1
+## 3.1.0
 
-### Changed
+### Added
 
-- App Version to 3.0.9
+- proxysql.config.reloadOnRestart value to control the --reload startup flag

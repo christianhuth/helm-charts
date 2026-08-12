@@ -2,8 +2,8 @@ apiVersion: v2
 name: promlens
 description: PromLens is a tool that makes learning and using PromQL easier and more productive
 type: application
-version: 1.5.0
-appVersion: "v0.3.0"
+version: 1.6.0
+appVersion: "v0.4.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/promlens/icon.svg
 maintainers:
@@ -15,8 +15,8 @@ sources:
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
-    - kind: added
-      description: option to define route timeouts
+    - kind: changed
+      description: App Version to v0.4.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

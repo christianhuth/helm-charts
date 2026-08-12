@@ -60,3 +60,14 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create the name of the secret containing the auth details
+*/}}
+{{- define "netcupscp-exporter.auth.secretName" -}}
+    {{- if .Values.auth.existingSecret }}
+        {{- .Values.auth.existingSecret }}
+    {{- else }}
+        {{- include "netcupscp-exporter.fullname" . }}
+    {{- end }}
+{{- end }}

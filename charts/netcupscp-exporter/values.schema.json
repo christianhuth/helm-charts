@@ -7,6 +7,28 @@
       "title": "affinity",
       "type": "object"
     },
+    "auth": {
+      "properties": {
+        "existingSecret": {
+          "default": "",
+          "description": "Use existing secret for the Refresh Token. The secret has to contain the key `SCP_REFRESHTOKEN`. When it's set the auth.refreshToken is ignored.",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "refreshToken": {
+          "default": "",
+          "description": "Refresh Token for authentication",
+          "title": "refreshToken",
+          "type": "string"
+        }
+      },
+      "required": [
+        "existingSecret",
+        "refreshToken"
+      ],
+      "title": "auth",
+      "type": "object"
+    },
     "autoscaling": {
       "properties": {
         "enabled": {
@@ -39,31 +61,21 @@
       "title": "autoscaling",
       "type": "object"
     },
-    "env": {
-      "properties": {
-        "existingSecret": {
-          "default": "",
-          "title": "existingSecret",
-          "type": "string"
-        },
-        "loginName": {
-          "default": "admin",
-          "title": "loginName",
-          "type": "string"
-        },
-        "password": {
-          "default": "password",
-          "title": "password",
-          "type": "string"
-        }
+    "extraEnv": {
+      "description": "additional environment variables to be added to the pods",
+      "items": {
+        "required": []
       },
-      "required": [
-        "existingSecret",
-        "loginName",
-        "password"
-      ],
-      "title": "env",
-      "type": "object"
+      "title": "extraEnv",
+      "type": "array"
+    },
+    "extraEnvFrom": {
+      "description": "additional environment variables from ConfigMaps or Secrets",
+      "items": {
+        "required": []
+      },
+      "title": "extraEnvFrom",
+      "type": "array"
     },
     "fullnameOverride": {
       "default": "",
@@ -98,7 +110,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "v0.5.1",
+          "default": "v0.5.2",
           "description": "Overrides the image tag",
           "title": "tag",
           "type": "string"
@@ -545,7 +557,9 @@
     "nodeSelector",
     "tolerations",
     "affinity",
-    "env",
+    "extraEnv",
+    "extraEnvFrom",
+    "auth",
     "serviceMonitor"
   ],
   "type": "object"

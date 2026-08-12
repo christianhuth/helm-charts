@@ -50,3 +50,11 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```console
 helm install my-release -f values.yaml christianhuth/netcupscp-exporter
 ```
+
+## Upgrading the Chart
+
+### To 2.0.0
+
+This major removes the old way of authenticating against Netcup SCP with username and password, that was defined through the `.Values.env.username`, `.Values.env.password` and `.Values.env.existingSecret` variables.
+You can define your authentication details (a refresh token) now through `.Values.auth.refreshToken` and `.Values.auth.existingSecret`.
+See [this](https://github.com/mrueg/netcupscp-exporter#usage) documentation on how to obtain the Refresh Token.

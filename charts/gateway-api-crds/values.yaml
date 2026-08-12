@@ -1,0 +1,17 @@
+standard:
+  # -- Installs the standard-channel Gateway API CRDs. Enable exactly one of
+  # `standard.enabled`/`experimental.enabled` -- enabling both or neither
+  # fails the install with a clear error.
+  enabled: true
+
+experimental:
+  # -- Installs the experimental-channel Gateway API CRDs (includes
+  # everything in the standard channel plus newer, less stable resource
+  # kinds and fields).
+  enabled: false
+
+global:
+  resourcePolicy:
+    # -- When `true`, adds the `helm.sh/resource-policy: keep` annotation to
+    # every CRD so `helm uninstall` (and rollbacks) won't delete them.
+    keep: false

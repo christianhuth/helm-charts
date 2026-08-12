@@ -1,7 +1,15 @@
 # netcupscp-exporter
 
-## 1.6.2
+## 2.0.0
 
 ### Added
 
-- Added scrapeTimeout value to serviceMonitor
+- authentication through refresh-token
+
+### Added
+
+- App Version to v0.5.2
+
+### Removed
+
+- authentication through username and password

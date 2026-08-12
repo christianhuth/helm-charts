@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "experimental": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Installs the experimental-channel Gateway API CRDs (includes\neverything in the standard channel plus newer, less stable resource\nkinds and fields).",
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "experimental",
+      "type": "object"
+    },
+    "global": {
+      "properties": {
+        "resourcePolicy": {
+          "properties": {
+            "keep": {
+              "default": false,
+              "description": "When `true`, adds the `helm.sh/resource-policy: keep` annotation to\nevery CRD so `helm uninstall` (and rollbacks) won't delete them.",
+              "title": "keep",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "keep"
+          ],
+          "title": "resourcePolicy",
+          "type": "object"
+        }
+      },
+      "required": [
+        "resourcePolicy"
+      ],
+      "title": "global",
+      "type": "object"
+    },
+    "standard": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "description": "Installs the standard-channel Gateway API CRDs. Enable exactly one of\n`standard.enabled`/`experimental.enabled` -- enabling both or neither\nfails the install with a clear error.",
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "standard",
+      "type": "object"
+    }
+  },
+  "required": [
+    "standard",
+    "experimental",
+    "global"
+  ],
+  "type": "object"
+}

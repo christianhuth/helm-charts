@@ -47,18 +47,19 @@ The command removes all the Kubernetes components associated with the chart and 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity settings for pod assignment |
+| auth.existingSecret | string | `""` | Use existing secret for the Refresh Token. The secret has to contain the key `SCP_REFRESHTOKEN`. When it's set the auth.refreshToken is ignored. |
+| auth.refreshToken | string | `""` | Refresh Token for authentication |
 | autoscaling.enabled | bool | `false` |  |
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| env.existingSecret | string | `""` |  |
-| env.loginName | string | `"admin"` |  |
-| env.password | string | `"password"` |  |
+| extraEnv | list | `[]` | additional environment variables to be added to the pods |
+| extraEnvFrom | list | `[]` | additional environment variables from ConfigMaps or Secrets |
 | fullnameOverride | string | `""` | String to fully override `"netcupscp-exporter.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"ghcr.io"` | image registry |
 | image.repository | string | `"mrueg/netcupscp-exporter"` | image repository |
-| image.tag | string | `"v0.5.1"` | Overrides the image tag |
+| image.tag | string | `"v0.5.2"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
@@ -109,3 +110,11 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```console
 helm install my-release -f values.yaml christianhuth/netcupscp-exporter
 ```
+
+## Upgrading the Chart
+
+### To 2.0.0
+
+This major removes the old way of authenticating against Netcup SCP with username and password, that was defined through the `.Values.env.username`, `.Values.env.password` and `.Values.env.existingSecret` variables.
+You can define your authentication details (a refresh token) now through `.Values.auth.refreshToken` and `.Values.auth.existingSecret`.
+See [this](https://github.com/mrueg/netcupscp-exporter#usage) documentation on how to obtain the Refresh Token.
