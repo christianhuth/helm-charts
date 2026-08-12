@@ -39,14 +39,21 @@ spec:
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
-            - "/netcupscp-exporter"
+            - "--refresh-token"
+            - "${SCP_REFRESHTOKEN}"
+          env:
+            - name: SCP_REFRESHTOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "netcupscp-exporter.auth.secretName" . }}
+                  key: SCP_REFRESHTOKEN
+            {{- if .Values.extraEnv }}
+              {{- .Values.extraEnv | toYaml | nindent 12 }}
+            {{- end }}
+          {{- if .Values.extraEnvFrom }}
           envFrom:
-            - secretRef:
-                {{- if .Values.env.existingSecret }}
-                name: {{ .Values.env.existingSecret }}
-                {{- else }}
-                name: {{ include "netcupscp-exporter.fullname" . }}
-                {{- end }}
+            {{- .Values.extraEnvFrom | toYaml | nindent 12 }}
+          {{- end }}
           ports:
             - name: http
               containerPort: 9757
