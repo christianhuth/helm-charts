@@ -11,11 +11,13 @@
       "properties": {
         "existingSecret": {
           "default": "",
+          "description": "Use existing secret for the Refresh Token. The secret has to contain the key `SCP_REFRESHTOKEN`. When it's set the auth.refreshToken is ignored.",
           "title": "existingSecret",
           "type": "string"
         },
         "refreshToken": {
           "default": "",
+          "description": "Refresh Token for authentication",
           "title": "refreshToken",
           "type": "string"
         }

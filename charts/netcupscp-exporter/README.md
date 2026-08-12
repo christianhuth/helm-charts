@@ -47,8 +47,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity settings for pod assignment |
-| auth.existingSecret | string | `""` |  |
-| auth.refreshToken | string | `""` |  |
+| auth.existingSecret | string | `""` | Use existing secret for the Refresh Token. The secret has to contain the key `SCP_REFRESHTOKEN`. When it's set the auth.refreshToken is ignored. |
+| auth.refreshToken | string | `""` | Refresh Token for authentication |
 | autoscaling.enabled | bool | `false` |  |
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
@@ -109,3 +109,11 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```console
 helm install my-release -f values.yaml christianhuth/netcupscp-exporter
 ```
+
+## Upgrading the Chart
+
+### To 2.0.0
+
+This major removes the old way of authenticating against Netcup SCP with username and password, that was defined through the `.Values.env.username`, `.Values.env.password` and `.Values.env.existingSecret` variables.
+You can define your authentication details (a refresh token) now through `.Values.auth.refreshToken` and `.Values.auth.existingSecret`.
+See [this](https://github.com/mrueg/netcupscp-exporter#usage) documentation on how to obtain the Refresh Token.
