@@ -1,6 +1,6 @@
 # dns-exporter
 
-## 2.5.2
+## 2.6.0
 
 ### Added
 
