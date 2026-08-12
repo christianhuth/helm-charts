@@ -7,6 +7,7 @@
   "additionalBranchPrefix": "{{parentDir}}-",
   "assignees": ["christianhuth"],
   "bumpVersion": "patch",
+  "ignorePaths": ["charts/baserow/**"],
   "labels": ["renovate"],
   "customManagers": [
     {
