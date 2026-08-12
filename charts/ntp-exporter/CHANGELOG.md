@@ -1,6 +1,6 @@
 # ntp-exporter
 
-## 1.3.1
+## 1.4.0
 
 ### Added
 
