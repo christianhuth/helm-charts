@@ -2,7 +2,7 @@ apiVersion: v2
 name: mailcow-exporter
 description: Prometheus exporter for information about a mailcow instance
 type: application
-version: 1.4.1
+version: 1.5.0
 appVersion: "2.1.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/mailcow-exporter/icon.svg
