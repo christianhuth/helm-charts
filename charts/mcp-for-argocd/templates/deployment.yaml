@@ -36,6 +36,8 @@ spec:
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
+            - argocd-mcp@latest
+            - stdio
             - --allow-unauthenticated
           env:
             - name: ARGOCD_BASE_URL
