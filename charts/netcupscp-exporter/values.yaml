@@ -160,7 +160,9 @@ extraEnvFrom: []
   #     name: my-secret
 
 auth:
+  # -- Use existing secret for the Refresh Token. The secret has to contain the key `SCP_REFRESHTOKEN`. When it's set the auth.refreshToken is ignored.
   existingSecret: ""
+  # -- Refresh Token for authentication
   refreshToken: ""
 
 serviceMonitor:
