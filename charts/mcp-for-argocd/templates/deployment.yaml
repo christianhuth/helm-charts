@@ -35,10 +35,6 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args:
-            - argocd-mcp@latest
-            - stdio
-            - --allow-unauthenticated
           env:
             - name: ARGOCD_BASE_URL
               value: {{ .Values.argocd.baseUrl | quote }}
@@ -47,8 +43,6 @@ spec:
                 secretKeyRef:
                   name: {{ (include "mcp-for-argocd.auth.secretName" .) | quote }}
                   key: {{ (include "mcp-for-argocd.auth.apiToken.secretKey" .) | quote }}
-            - name: MCP_BIND_ADDRESS
-              value: "0.0.0.0"
             {{- if .Values.argocd.readOnly }}
             - name: MCP_READ_ONLY
               value: "true"
@@ -75,6 +69,7 @@ spec:
           livenessProbe:
             failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
             tcpSocket:
+              host: 127.0.0.1
               port: http
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds | int }}
@@ -83,6 +78,7 @@ spec:
           readinessProbe:
             failureThreshold: {{ .Values.readinessProbe.failureThreshold | int }}
             tcpSocket:
+              host: 127.0.0.1
               port: http
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds | int }}
@@ -91,6 +87,7 @@ spec:
           startupProbe:
             failureThreshold: {{ .Values.startupProbe.failureThreshold | int }}
             tcpSocket:
+              host: 127.0.0.1
               port: http
             initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.startupProbe.periodSeconds | int }}
