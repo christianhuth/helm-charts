@@ -603,6 +603,12 @@
           "title": "relabelings",
           "type": "array"
         },
+        "scrapeTimeout": {
+          "default": "",
+          "description": "- source_labels: [__address__]\n  target_label: __param_target\n- source_labels: [__param_target]\n  target_label: instance\n- target_label: __address__\n  replacement: prometheus-pve-exporter:9221  # PVE exporter service.\nPrometheus ServiceMonitor scrapeTimeout, cannot be longer than the scrape interval",
+          "title": "scrapeTimeout",
+          "type": "string"
+        },
         "selector": {
           "description": "release: prometheus\nPrometheus ServiceMonitor selector",
           "required": [],
@@ -617,7 +623,8 @@
         "interval",
         "namespace",
         "metricRelabelings",
-        "relabelings"
+        "relabelings",
+        "scrapeTimeout"
       ],
       "title": "serviceMonitor",
       "type": "object"

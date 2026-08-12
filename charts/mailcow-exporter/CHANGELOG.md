@@ -1,7 +1,7 @@
 # mailcow-exporter
 
-## 1.4.0
+## 1.5.0
 
 ### Added
 
-- option to define route timeouts
+- Added scrapeTimeout value to serviceMonitor

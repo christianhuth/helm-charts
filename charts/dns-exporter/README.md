@@ -131,12 +131,14 @@ The command removes all the Kubernetes components associated with the chart and 
 | podMonitor.selfMonitor.interval | string | `"30s"` | Prometheus PodMonitor interval |
 | podMonitor.selfMonitor.metricRelabelings | list | `[]` | Prometheus [MetricRelabelConfigs] to apply to samples before ingestion |
 | podMonitor.selfMonitor.namespace | string | `""` | Prometheus PodMonitor namespace |
+| podMonitor.selfMonitor.scrapeTimeout | string | `""` | Prometheus PodMonitor scrapeTimeout, cannot be longer than the scrape interval |
 | podMonitor.selfMonitor.selector | object | `{}` | Prometheus PodMonitor selector |
 | podMonitor.targetsMonitor.additionalLabels | object | `{}` | Prometheus PodMonitor labels |
 | podMonitor.targetsMonitor.enabled | bool | `true` | Enable a prometheus PodMonitor to monitor the Targets of the DNS Exporter |
 | podMonitor.targetsMonitor.interval | string | `"30s"` | Prometheus PodMonitor interval |
 | podMonitor.targetsMonitor.metricRelabelings | list | `[]` | Prometheus [MetricRelabelConfigs] to apply to samples before ingestion |
 | podMonitor.targetsMonitor.namespace | string | `""` | Prometheus PodMonitor namespace |
+| podMonitor.targetsMonitor.scrapeTimeout | string | `""` | Prometheus PodMonitor scrapeTimeout, cannot be longer than the scrape interval |
 | podMonitor.targetsMonitor.selector | object | `{}` | Prometheus PodMonitor selector |
 | podMonitor.targetsMonitor.targets | list | `[]` | Targets that should be scraped by the DNS-Exporter |
 | podMonitor.type | string | `"prometheus"` | Which api version for the podmonitor should be used. Valid values are google and prometheus |
@@ -170,6 +172,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceMonitor.selfMonitor.metricRelabelings | list | `[]` | Prometheus [MetricRelabelConfigs] to apply to samples before ingestion |
 | serviceMonitor.selfMonitor.namespace | string | `""` | Prometheus ServiceMonitor namespace |
 | serviceMonitor.selfMonitor.relabelings | list | `[]` | Prometheus [RelabelConfigs] to apply to samples before scraping |
+| serviceMonitor.selfMonitor.scrapeTimeout | string | `""` | Prometheus ServiceMonitor scrapeTimeout, cannot be longer than the scrape interval |
 | serviceMonitor.selfMonitor.selector | object | `{}` | Prometheus ServiceMonitor selector |
 | serviceMonitor.targetsMonitor.additionalLabels | object | `{}` | Prometheus ServiceMonitor labels |
 | serviceMonitor.targetsMonitor.enabled | bool | `true` | Enable a prometheus ServiceMonitor to monitor the Targets of the DNS Exporter |
@@ -177,6 +180,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceMonitor.targetsMonitor.metricRelabelings | list | `[]` | Prometheus [MetricRelabelConfigs] to apply to samples before ingestion |
 | serviceMonitor.targetsMonitor.namespace | string | `""` | Prometheus ServiceMonitor namespace |
 | serviceMonitor.targetsMonitor.relabelings | list | `[]` | Prometheus [RelabelConfigs] to apply to samples before scraping |
+| serviceMonitor.targetsMonitor.scrapeTimeout | string | `""` | Prometheus ServiceMonitor scrapeTimeout, cannot be longer than the scrape interval |
 | serviceMonitor.targetsMonitor.selector | object | `{}` | Prometheus ServiceMonitor selector |
 | serviceMonitor.targetsMonitor.targets | list | `[]` | Targets that should be scraped by the DNS-Exporter |
 | tolerations | list | `[]` | Toleration labels for pod assignment |

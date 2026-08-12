@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.9.0
+## 2.10.0
 
-### Changed
+### Added
 
-- App Version to 3.10.0
+- Added scrapeTimeout value to serviceMonitor

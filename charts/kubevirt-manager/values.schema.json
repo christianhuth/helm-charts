@@ -301,6 +301,12 @@
           "title": "relabelings",
           "type": "array"
         },
+        "scrapeTimeout": {
+          "default": "",
+          "description": "Prometheus ServiceMonitor scrapeTimeout, cannot be longer than the scrape interval",
+          "title": "scrapeTimeout",
+          "type": "string"
+        },
         "selector": {
           "description": "release: prometheus\nPrometheus ServiceMonitor selector",
           "required": [],
@@ -345,6 +351,7 @@
         "namespace",
         "metricRelabelings",
         "relabelings",
+        "scrapeTimeout",
         "service"
       ],
       "title": "prometheus",

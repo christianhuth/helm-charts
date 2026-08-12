@@ -41,6 +41,9 @@ spec:
       metricRelabelings:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with $.Values.podMonitor.targetsMonitor.scrapeTimeout }}
+      scrapeTimeout: {{ . | quote }}
+      {{- end }}
     {{- end }}
   selector:
     matchLabels:

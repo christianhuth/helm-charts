@@ -34,6 +34,9 @@ spec:
       metricRelabelings:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .Values.podMonitor.selfMonitor.scrapeTimeout }}
+      scrapeTimeout: {{ . | quote }}
+      {{- end }}
   selector:
     matchLabels:
       {{- include "dns-exporter.selectorLabels" . | nindent 6 }}

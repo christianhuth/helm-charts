@@ -203,3 +203,5 @@ serviceMonitor:
     #   target_label: instance
     # - target_label: __address__
     #   replacement: prometheus-pve-exporter:9221  # PVE exporter service.
+  # -- Prometheus ServiceMonitor scrapeTimeout, cannot be longer than the scrape interval
+  scrapeTimeout: ""
