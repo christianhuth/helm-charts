@@ -47,13 +47,14 @@ The command removes all the Kubernetes components associated with the chart and 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity settings for pod assignment |
+| auth.existingSecret | string | `""` |  |
+| auth.refreshToken | string | `""` |  |
 | autoscaling.enabled | bool | `false` |  |
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| env.existingSecret | string | `""` |  |
-| env.loginName | string | `"admin"` |  |
-| env.password | string | `"password"` |  |
+| extraEnv | list | `[]` | additional environment variables to be added to the pods |
+| extraEnvFrom | list | `[]` | additional environment variables from ConfigMaps or Secrets |
 | fullnameOverride | string | `""` | String to fully override `"netcupscp-exporter.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"ghcr.io"` | image registry |

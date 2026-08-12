@@ -7,6 +7,26 @@
       "title": "affinity",
       "type": "object"
     },
+    "auth": {
+      "properties": {
+        "existingSecret": {
+          "default": "",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "refreshToken": {
+          "default": "",
+          "title": "refreshToken",
+          "type": "string"
+        }
+      },
+      "required": [
+        "existingSecret",
+        "refreshToken"
+      ],
+      "title": "auth",
+      "type": "object"
+    },
     "autoscaling": {
       "properties": {
         "enabled": {
@@ -39,31 +59,21 @@
       "title": "autoscaling",
       "type": "object"
     },
-    "env": {
-      "properties": {
-        "existingSecret": {
-          "default": "",
-          "title": "existingSecret",
-          "type": "string"
-        },
-        "loginName": {
-          "default": "admin",
-          "title": "loginName",
-          "type": "string"
-        },
-        "password": {
-          "default": "password",
-          "title": "password",
-          "type": "string"
-        }
+    "extraEnv": {
+      "description": "additional environment variables to be added to the pods",
+      "items": {
+        "required": []
       },
-      "required": [
-        "existingSecret",
-        "loginName",
-        "password"
-      ],
-      "title": "env",
-      "type": "object"
+      "title": "extraEnv",
+      "type": "array"
+    },
+    "extraEnvFrom": {
+      "description": "additional environment variables from ConfigMaps or Secrets",
+      "items": {
+        "required": []
+      },
+      "title": "extraEnvFrom",
+      "type": "array"
     },
     "fullnameOverride": {
       "default": "",
@@ -538,7 +548,9 @@
     "nodeSelector",
     "tolerations",
     "affinity",
-    "env",
+    "extraEnv",
+    "extraEnvFrom",
+    "auth",
     "serviceMonitor"
   ],
   "type": "object"
