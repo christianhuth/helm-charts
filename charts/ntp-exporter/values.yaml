@@ -173,6 +173,8 @@ podMonitor:
   metricRelabelings: []
   # -- Prometheus [RelabelConfigs] to apply to samples before scraping
   # @default -- see [values.yaml](./values.yaml)
+  # -- Prometheus PodMonitor scrapeTimeout, cannot be longer than the scrape interval
+  scrapeTimeout: ""
   relabelings:
     - action: replace
       sourceLabels: [__meta_kubernetes_pod_node_name]

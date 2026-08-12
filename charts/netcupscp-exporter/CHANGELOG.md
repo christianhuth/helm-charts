@@ -6,7 +6,7 @@
 
 - authentication through refresh-token
 
-### Changed
+### Added
 
 - App Version to v0.5.2
 

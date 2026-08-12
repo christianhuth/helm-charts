@@ -76,7 +76,10 @@ The command removes all the Kubernetes components associated with the chart and 
 | podMonitor.interval | string | `"30s"` | Prometheus PodMonitor interval |
 | podMonitor.metricRelabelings | list | `[]` | Prometheus [MetricRelabelConfigs] to apply to samples before ingestion |
 | podMonitor.namespace | string | `""` | Prometheus PodMonitor namespace |
-| podMonitor.relabelings | list | see [values.yaml](./values.yaml) | Prometheus [RelabelConfigs] to apply to samples before scraping |
+| podMonitor.relabelings[0].action | string | `"replace"` |  |
+| podMonitor.relabelings[0].sourceLabels[0] | string | `"__meta_kubernetes_pod_node_name"` |  |
+| podMonitor.relabelings[0].targetLabel | string | `"node"` |  |
+| podMonitor.scrapeTimeout | string | `""` | Prometheus PodMonitor scrapeTimeout, cannot be longer than the scrape interval |
 | podMonitor.selector | object | `{}` | Prometheus PodMonitor selector |
 | podSecurityContext | object | see [values.yaml](./values.yaml) | pod-level security context |
 | prometheusRule.defaultRules.absence.enabled | bool | `true` | Enable the rule that alerts if no metrics are scraped from ntp-exporter |

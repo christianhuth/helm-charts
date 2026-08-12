@@ -2,6 +2,6 @@
 
 ## 2.9.0
 
-### Changed
+### Added
 
 - App Version to 3.10.0

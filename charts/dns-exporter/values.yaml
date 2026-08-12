@@ -197,6 +197,8 @@ serviceMonitor:
     metricRelabelings: []
     # -- Prometheus [RelabelConfigs] to apply to samples before scraping
     relabelings: []
+    # -- Prometheus ServiceMonitor scrapeTimeout, cannot be longer than the scrape interval
+    scrapeTimeout: ""
 
   targetsMonitor:
     # -- Enable a prometheus ServiceMonitor to monitor the Targets of the DNS Exporter
@@ -217,6 +219,8 @@ serviceMonitor:
     relabelings: []
     # -- Targets that should be scraped by the DNS-Exporter
     targets: []
+    # -- Prometheus ServiceMonitor scrapeTimeout, cannot be longer than the scrape interval
+    scrapeTimeout: ""
 
 podMonitor:
   # -- Enable a prometheus PodMonitor CR
@@ -238,6 +242,8 @@ podMonitor:
     namespace: ""
     # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
     metricRelabelings: []
+    # -- Prometheus PodMonitor scrapeTimeout, cannot be longer than the scrape interval
+    scrapeTimeout: ""
 
   targetsMonitor:
     # -- Enable a prometheus PodMonitor to monitor the Targets of the DNS Exporter
@@ -254,5 +260,7 @@ podMonitor:
     namespace: ""
     # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
     metricRelabelings: []
+    # -- Prometheus PodMonitor scrapeTimeout, cannot be longer than the scrape interval
+    scrapeTimeout: ""
     # -- Targets that should be scraped by the DNS-Exporter
     targets: []

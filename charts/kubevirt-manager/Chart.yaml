@@ -2,7 +2,7 @@ apiVersion: v2
 name: kubevirt-manager
 description: KubeVirt Web UI to manage the lifecycle of Virtual Machines and more
 type: application
-version: 0.6.0
+version: 0.6.1
 appVersion: "1.5.4"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kubevirt-manager/icon.svg
@@ -14,7 +14,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: option to define route timeouts
+      description: Added scrapeTimeout value to serviceMonitor
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
