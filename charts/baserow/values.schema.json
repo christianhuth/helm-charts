@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"baserow.fullname\"`",
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `baserow`",
+      "title": "nameOverride",
+      "type": "string"
+    }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride"
+  ],
+  "type": "object"
+}
