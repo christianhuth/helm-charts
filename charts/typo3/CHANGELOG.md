@@ -1,7 +1,7 @@
 # typo3
 
-## 7.5.0
+## 8.0.0
 
 ### Changed
 
-- dependency of postgresql to 18.8.8
+- App Version to 13.4
