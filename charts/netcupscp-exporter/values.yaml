@@ -147,10 +147,21 @@ tolerations: []
 # -- Affinity settings for pod assignment
 affinity: {}
 
-env:
+# -- additional environment variables to be added to the pods
+extraEnv: []
+  # - name: FOO
+  #   value: BAR
+
+# -- additional environment variables from ConfigMaps or Secrets
+extraEnvFrom: []
+  # - configMapRef:
+  #     name: my-configmap
+  # - secretRef:
+  #     name: my-secret
+
+auth:
   existingSecret: ""
-  loginName: "admin"
-  password: "password"
+  refreshToken: ""
 
 serviceMonitor:
    # -- Enable a prometheus ServiceMonitor

@@ -40,13 +40,21 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
             - "/netcupscp-exporter"
+            - "--refresh-token ${SCP_REFRESHTOKEN}"
+          {{- if .Values.extraEnv }}
+          env:
+            {{- .Values.extraEnv | toYaml | nindent 12 }}
+          {{- end }}
           envFrom:
             - secretRef:
-                {{- if .Values.env.existingSecret }}
-                name: {{ .Values.env.existingSecret }}
+                {{- if .Values.auth.existingSecret }}
+                name: {{ .Values.auth.existingSecret }}
                 {{- else }}
                 name: {{ include "netcupscp-exporter.fullname" . }}
                 {{- end }}
+          {{- if .Values.extraEnvFrom }}
+            {{- .Values.extraEnvFrom | toYaml | nindent 12 }}
+          {{- end }}
           ports:
             - name: http
               containerPort: 9757
