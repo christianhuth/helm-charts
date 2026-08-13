@@ -66,6 +66,43 @@
       "title": "argocd",
       "type": "object"
     },
+    "auth": {
+      "description": "Inbound authentication for the MCP server's own HTTP listener (separate from argocd.auth, which authenticates this server to Argo CD, not callers of it)",
+      "properties": {
+        "allowUnauthenticated": {
+          "default": false,
+          "description": "Allow unauthenticated inbound access to the listener. Only enable this when something else (a service mesh, reverse proxy, or NetworkPolicy) already authenticates callers; the underlying app logs a warning if this is set on a non-loopback bind",
+          "title": "allowUnauthenticated",
+          "type": "boolean"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Kubernetes Secret that contains the inbound bearer token, instead of having the chart create one from `token`",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "existingSecretKey": {
+          "default": "mcp-auth-token",
+          "description": "Key within the existing secret that contains the inbound bearer token",
+          "title": "existingSecretKey",
+          "type": "string"
+        },
+        "token": {
+          "default": "",
+          "description": "Inbound bearer token callers must send as `Authorization: Bearer \u003ctoken\u003e`. Required unless allowUnauthenticated is true or existingSecret is set",
+          "title": "token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "allowUnauthenticated",
+        "token",
+        "existingSecret",
+        "existingSecretKey"
+      ],
+      "title": "auth",
+      "type": "object"
+    },
     "autoscaling": {
       "properties": {
         "enabled": {
@@ -778,7 +815,8 @@
     "affinity",
     "extraEnv",
     "extraEnvFrom",
-    "argocd"
+    "argocd",
+    "auth"
   ],
   "type": "object"
 }

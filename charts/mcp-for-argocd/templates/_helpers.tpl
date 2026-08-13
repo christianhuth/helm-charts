@@ -82,3 +82,25 @@ Get the name of the secret containing the api token for authentication against a
     {{- printf "%s" "argocd-api-token" -}}
   {{- end -}}
 {{- end -}}
+
+{{/*
+Get the name of the secret containing the inbound bearer token for the MCP server's own HTTP listener
+*/}}
+{{- define "mcp-for-argocd.inboundAuth.secretName" -}}
+  {{- if .Values.auth.existingSecret -}}
+    {{- printf "%s" (tpl .Values.auth.existingSecret $) -}}
+  {{- else -}}
+    {{- printf "%s-auth-token" (include "mcp-for-argocd.fullname" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Get the key within the secret that contains the inbound bearer token for the MCP server's own HTTP listener
+*/}}
+{{- define "mcp-for-argocd.inboundAuth.secretKey" -}}
+  {{- if .Values.auth.existingSecretKey -}}
+    {{- printf "%s" (tpl .Values.auth.existingSecretKey $) -}}
+  {{- else -}}
+    {{- printf "%s" "mcp-auth-token" -}}
+  {{- end -}}
+{{- end -}}

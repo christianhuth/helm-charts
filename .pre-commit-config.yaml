@@ -40,7 +40,7 @@ repos:
       - id: markdownlint
         name: Markdownlint
         args: [--config=.github/config/markdownlint.yaml]
-        language_version: lts
+        language_version: 20.18.1
 
   - repo: local
     hooks:

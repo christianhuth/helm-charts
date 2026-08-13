@@ -53,6 +53,10 @@ The command removes all the Kubernetes components associated with the chart and 
 | argocd.baseUrl | string | `""` | Base URL of the Argo CD instance to connect to |
 | argocd.readOnly | bool | `false` | Run the MCP Server in a ReadOnly mode to avoid resource or application modifications |
 | argocd.skipTlsVerify | bool | `false` | Disables TLS certificate validation when connecting to Argo CD instances using self-signed certificates or certificates from private CAs that aren't trusted by your system's certificate store |
+| auth.allowUnauthenticated | bool | `false` | Allow unauthenticated inbound access to the listener. Only enable this when something else (a service mesh, reverse proxy, or NetworkPolicy) already authenticates callers; the underlying app logs a warning if this is set on a non-loopback bind |
+| auth.existingSecret | string | `""` | Name of an existing Kubernetes Secret that contains the inbound bearer token, instead of having the chart create one from `token` |
+| auth.existingSecretKey | string | `"mcp-auth-token"` | Key within the existing secret that contains the inbound bearer token |
+| auth.token | string | `""` | Inbound bearer token callers must send as `Authorization: Bearer <token>`. Required unless allowUnauthenticated is true or existingSecret is set |
 | autoscaling.enabled | bool | `false` |  |
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |

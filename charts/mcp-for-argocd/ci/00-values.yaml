@@ -1,0 +1,3 @@
+---
+auth:
+  token: "ci-test-token"

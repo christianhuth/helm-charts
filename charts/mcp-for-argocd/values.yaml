@@ -211,3 +211,14 @@ argocd:
   readOnly: false
   # -- Disables TLS certificate validation when connecting to Argo CD instances using self-signed certificates or certificates from private CAs that aren't trusted by your system's certificate store
   skipTlsVerify: false
+
+# Inbound authentication for the MCP server's own HTTP listener (separate from argocd.auth, which authenticates this server to Argo CD, not callers of it)
+auth:
+  # -- Allow unauthenticated inbound access to the listener. Only enable this when something else (a service mesh, reverse proxy, or NetworkPolicy) already authenticates callers; the underlying app logs a warning if this is set on a non-loopback bind
+  allowUnauthenticated: false
+  # -- Inbound bearer token callers must send as `Authorization: Bearer <token>`. Required unless allowUnauthenticated is true or existingSecret is set
+  token: ""
+  # -- Name of an existing Kubernetes Secret that contains the inbound bearer token, instead of having the chart create one from `token`
+  existingSecret: ""
+  # -- Key within the existing secret that contains the inbound bearer token
+  existingSecretKey: "mcp-auth-token"
