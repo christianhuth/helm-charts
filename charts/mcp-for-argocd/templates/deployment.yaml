@@ -82,7 +82,7 @@ spec:
               protocol: TCP
           livenessProbe:
             failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
-            tcpSocket:
+            httpGet:
               port: http
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds | int }}
@@ -90,7 +90,7 @@ spec:
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | int }}
           readinessProbe:
             failureThreshold: {{ .Values.readinessProbe.failureThreshold | int }}
-            tcpSocket:
+            httpGet:
               port: http
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds | int }}
@@ -98,7 +98,7 @@ spec:
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | int }}
           startupProbe:
             failureThreshold: {{ .Values.startupProbe.failureThreshold | int }}
-            tcpSocket:
+            httpGet:
               port: http
             initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.startupProbe.periodSeconds | int }}
