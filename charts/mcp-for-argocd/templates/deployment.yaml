@@ -83,6 +83,7 @@ spec:
           livenessProbe:
             failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
             httpGet:
+              path: /healthz
               port: http
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds | int }}
@@ -91,6 +92,7 @@ spec:
           readinessProbe:
             failureThreshold: {{ .Values.readinessProbe.failureThreshold | int }}
             httpGet:
+              path: /healthz
               port: http
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds | int }}
@@ -99,6 +101,7 @@ spec:
           startupProbe:
             failureThreshold: {{ .Values.startupProbe.failureThreshold | int }}
             httpGet:
+              path: /healthz
               port: http
             initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.startupProbe.periodSeconds | int }}
