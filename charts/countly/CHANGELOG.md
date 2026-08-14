@@ -1,7 +1,7 @@
 # countly
 
-## 5.1.19
+## 5.1.20
 
 ### Changed
 
-- dependency of mongodb to 19.1.29
+- dependency of mongodb to 19.1.30
