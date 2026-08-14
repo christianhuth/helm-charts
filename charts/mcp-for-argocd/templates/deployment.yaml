@@ -35,6 +35,11 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - http
+            {{- if .Values.auth.allowUnauthenticated }}
+            - --allow-unauthenticated
+            {{- end }}
           env:
             - name: ARGOCD_BASE_URL
               value: {{ .Values.argocd.baseUrl | quote }}
@@ -43,6 +48,15 @@ spec:
                 secretKeyRef:
                   name: {{ (include "mcp-for-argocd.auth.secretName" .) | quote }}
                   key: {{ (include "mcp-for-argocd.auth.apiToken.secretKey" .) | quote }}
+            - name: MCP_BIND_ADDRESS
+              value: "0.0.0.0"
+            {{- if not .Values.auth.allowUnauthenticated }}
+            - name: MCP_AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ (include "mcp-for-argocd.inboundAuth.secretName" .) | quote }}
+                  key: {{ (include "mcp-for-argocd.inboundAuth.secretKey" .) | quote }}
+            {{- end }}
             {{- if .Values.argocd.readOnly }}
             - name: MCP_READ_ONLY
               value: "true"
@@ -68,7 +82,8 @@ spec:
               protocol: TCP
           livenessProbe:
             failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
-            tcpSocket:
+            httpGet:
+              path: /healthz
               port: http
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds | int }}
@@ -76,7 +91,8 @@ spec:
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | int }}
           readinessProbe:
             failureThreshold: {{ .Values.readinessProbe.failureThreshold | int }}
-            tcpSocket:
+            httpGet:
+              path: /healthz
               port: http
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds | int }}
@@ -84,7 +100,8 @@ spec:
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | int }}
           startupProbe:
             failureThreshold: {{ .Values.startupProbe.failureThreshold | int }}
-            tcpSocket:
+            httpGet:
+              path: /healthz
               port: http
             initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds | int }}
             periodSeconds: {{ .Values.startupProbe.periodSeconds | int }}
