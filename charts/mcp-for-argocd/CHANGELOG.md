@@ -1,6 +1,6 @@
 # mcp-for-argocd
 
-## 1.6.0
+## 2.0.0
 
 ### Added
 
