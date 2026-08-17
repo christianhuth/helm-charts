@@ -21763,6 +21763,43 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: generation of the README to include the subchart values as well
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v1.6.1
+    created: "2026-08-17T13:03:53.106341599Z"
+    dependencies:
+    - condition: standard.enabled
+      name: standard
+      repository: ""
+      version: 1.2.1
+    - condition: experimental.enabled
+      name: experimental
+      repository: ""
+      version: 1.2.1
+    description: Kubernetes Gateway API CustomResourceDefinitions (standard and experimental
+      channel)
+    digest: f1ae23643e162dd7fb725d3159369aa9e46d74762adda56eb35fd6c4a1b5f27f
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/gateway-api-crds/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: gateway-api-crds
+    sources:
+    - https://github.com/kubernetes-sigs/gateway-api
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/gateway-api-crds-1.2.2/gateway-api-crds-1.2.2.tgz
+    version: 1.2.2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: Gateway API CRDs to v1.6.1
       artifacthub.io/links: |
         - name: support
@@ -109655,4 +109692,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-08-15T01:21:08.024058895Z"
+generated: "2026-08-17T13:03:53.109157261Z"
