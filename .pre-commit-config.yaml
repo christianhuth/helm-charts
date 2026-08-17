@@ -22,6 +22,7 @@ repos:
         entry: jnorwood/helm-docs:v1.14.2
         args:
           - --chart-search-root=charts
+          - --document-dependency-values
 
   - repo: https://github.com/dadav/helm-schema
     rev: ""
