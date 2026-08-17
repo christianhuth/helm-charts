@@ -1,7 +1,7 @@
 # gateway-api-crds
 
-## 1.2.1
+## 1.2.2
 
 ### Changed
 
-- Gateway API CRDs to v1.6.1
+- generation of the README to include the subchart values as well
