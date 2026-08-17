@@ -2,7 +2,7 @@ apiVersion: v2
 name: gateway-api-crds
 description: Kubernetes Gateway API CustomResourceDefinitions (standard and experimental channel)
 type: application
-version: 1.2.2
+version: 1.2.3
 appVersion: "v1.6.1"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/gateway-api-crds/icon.svg
@@ -21,7 +21,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: generation of the README to include the subchart values as well
+      description: helm-docs annotation on subcharts values-files
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

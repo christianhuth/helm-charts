@@ -53,7 +53,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | global.resourcePolicy.keep | bool | `false` | When `true`, adds the `helm.sh/resource-policy: keep` annotation to every CRD so `helm uninstall` (and rollbacks) won't delete them. |
 | experimental.enabled | bool | `false` | Installs the experimental-channel Gateway API CRDs (includes everything in the standard channel plus newer, less stable resource kinds and fields). |
 | standard.enabled | bool | `true` | Installs the standard-channel Gateway API CRDs. Enable exactly one of `standard.enabled`/`experimental.enabled` -- enabling both or neither fails the install with a clear error. |
-| experimental.crds | object | `{"backendtlspolicies":true,"gatewayclasses":true,"gateways":true,"grpcroutes":true,"httproutes":true,"listenersets":true,"referencegrants":true,"tcproutes":true,"tlsroutes":true,"udproutes":true,"xbackends":true,"xbackendtrafficpolicies":true,"xlistenersets":true,"xmeshes":true}` | Enable/disable individual CRDs. Keys match each CRD's plural name (`spec.names.plural`). |
 | experimental.crds.backendtlspolicies | bool | `true` | Installs the BackendTLSPolicy CRD. |
 | experimental.crds.gatewayclasses | bool | `true` | Installs the GatewayClass CRD. |
 | experimental.crds.gateways | bool | `true` | Installs the Gateway CRD. |
@@ -68,7 +67,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | experimental.crds.xbackendtrafficpolicies | bool | `true` | Installs the XBackendTrafficPolicy CRD. |
 | experimental.crds.xlistenersets | bool | `true` | Installs the XListenerSet CRD. |
 | experimental.crds.xmeshes | bool | `true` | Installs the XMesh CRD. |
-| standard.crds | object | `{"backendtlspolicies":true,"gatewayclasses":true,"gateways":true,"grpcroutes":true,"httproutes":true,"listenersets":true,"referencegrants":true,"tcproutes":true,"tlsroutes":true,"udproutes":true}` | Enable/disable individual CRDs. Keys match each CRD's plural name (`spec.names.plural`). |
 | standard.crds.backendtlspolicies | bool | `true` | Installs the BackendTLSPolicy CRD. |
 | standard.crds.gatewayclasses | bool | `true` | Installs the GatewayClass CRD. |
 | standard.crds.gateways | bool | `true` | Installs the Gateway CRD. |
