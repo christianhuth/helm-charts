@@ -8,7 +8,6 @@ Gateway API CRDs (experimental channel) -- internal subchart of gateway-api-crds
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| crds | object | `{"backendtlspolicies":true,"gatewayclasses":true,"gateways":true,"grpcroutes":true,"httproutes":true,"listenersets":true,"referencegrants":true,"tcproutes":true,"tlsroutes":true,"udproutes":true,"xbackends":true,"xbackendtrafficpolicies":true,"xlistenersets":true,"xmeshes":true}` | Enable/disable individual CRDs. Keys match each CRD's plural name (`spec.names.plural`). |
 | crds.backendtlspolicies | bool | `true` | Installs the BackendTLSPolicy CRD. |
 | crds.gatewayclasses | bool | `true` | Installs the GatewayClass CRD. |
 | crds.gateways | bool | `true` | Installs the Gateway CRD. |

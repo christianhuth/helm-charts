@@ -1,4 +1,4 @@
-# -- Enable/disable individual CRDs. Keys match each CRD's plural name
+# Enable/disable individual CRDs. Keys match each CRD's plural name
 # (`spec.names.plural`).
 crds:
   # -- Installs the BackendTLSPolicy CRD.
