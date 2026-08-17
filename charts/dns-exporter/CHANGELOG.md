@@ -1,7 +1,7 @@
 # dns-exporter
 
-## 2.6.0
+## 2.6.1
 
-### Added
+### Fixed
 
-- Added scrapeTimeout value to pod and service monitors
+- broken servicemonitor template
