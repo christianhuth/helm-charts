@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 11.8.1
+## 11.8.2
 
 ### Changed
 
-- dependency of postgresql to 18.8.9
+- dependency of postgresql to 18.8.11
