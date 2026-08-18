@@ -1,7 +1,7 @@
 # keycloak-mcp-server
 
-## 1.1.0
+## 1.2.0
 
-### Added
+### Changed
 
-- option to define route timeouts
+- App Version to 0.4.0
