@@ -29745,6 +29745,36 @@ entries:
   - annotations:
       artifacthub.io/category: ai-machine-learning
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to 0.4.0
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 0.4.0
+    created: "2026-08-18T16:34:01.95103718Z"
+    description: An MCP server for Keycloak, designed to work with Keycloak for identity
+      and access management, covering, Users, Realms, Clients, Roles, Groups, IDPs,
+      Authentication
+    digest: 4104a5869ff380b982a8e777f7e6e6528ffb4383d8e5f1e365d75bacf68d7d7d
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/keycloak-mcp-server/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: keycloak-mcp-server
+    sources:
+    - https://github.com/sshaaf/keycloak-mcp-server
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/keycloak-mcp-server-1.2.0/keycloak-mcp-server-1.2.0.tgz
+    version: 1.2.0
+  - annotations:
+      artifacthub.io/category: ai-machine-learning
+      artifacthub.io/changes: |
         - kind: added
           description: option to define route timeouts
       artifacthub.io/links: |
@@ -110290,4 +110320,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-08-18T02:44:59.747150697Z"
+generated: "2026-08-18T16:34:01.954696653Z"
