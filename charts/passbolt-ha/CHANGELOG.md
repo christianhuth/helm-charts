@@ -1,7 +1,7 @@
 # passbolt-ha
 
-## 6.0.0
+## 6.0.1
 
 ### Changed
 
-- dependency of proxysql to 3.1.0
+- dependency of proxysql to 3.1.1
