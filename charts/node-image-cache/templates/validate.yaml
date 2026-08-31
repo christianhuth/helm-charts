@@ -1,0 +1,14 @@
+{{- $allowed := list "enabled" "image" "name" "pullPolicy" }}
+{{- range $image := .Values.images }}
+  {{- if not $image.name }}
+    {{- fail "node-image-cache: every entry in .Values.images needs a `name`" }}
+  {{- end }}
+  {{- if not $image.image }}
+    {{- fail (printf "node-image-cache: the images entry %q needs an `image`" $image.name) }}
+  {{- end }}
+  {{- range $key, $_ := $image }}
+    {{- if not (has $key $allowed) }}
+      {{- fail (printf "node-image-cache: the images entry %q sets the unknown key %q. Supported keys are: %s. Everything else is a pod-level setting shared by all images and belongs at the top level of the values." $image.name $key (join ", " $allowed)) }}
+    {{- end }}
+  {{- end }}
+{{- end }}

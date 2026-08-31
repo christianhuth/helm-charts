@@ -1,0 +1,107 @@
+# -- Provide a name in place of `node-image-cache`
+nameOverride: ""
+# -- String to fully override `"node-image-cache.fullname"`
+fullnameOverride: ""
+
+# @schema
+# required: false
+# @schema
+# -- Images to cache on every node. Each entry becomes a read-only image volume
+# on the single DaemonSet pod, and takes a `name` (used as the volume name, must
+# be a valid DNS-1123 label and unique within the list), an `image` (the full
+# reference to pull), an optional `enabled` to skip it without deleting the
+# entry, and an optional `pullPolicy` overriding the chart-wide default.
+images: []
+# - name: nginx
+#   image: nginx:1.29.2
+# - name: cuda
+#   image: nvidia/cuda:12.6.3-runtime-ubuntu24.04
+
+# -- Pull policy for the cached images. Keep this at `IfNotPresent` when using immutable tags: `Always` forces a registry round-trip on every pod start that can only ever confirm what is already on disk, and counts against registry rate limits.
+pullPolicy: IfNotPresent
+
+# The key has to end in `image` for Renovate's helm-values manager to pick it up.
+pauseImage:
+  # -- image registry of the pause container that keeps the DaemonSet pods alive
+  registry: registry.k8s.io
+  # -- image repository of the pause container
+  repository: pause
+  # -- image pull policy of the pause container
+  pullPolicy: IfNotPresent
+  # -- image tag of the pause container
+  tag: "3.10"
+
+# @schema
+# required: false
+# @schema
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
+imagePullSecrets: []
+
+# -- The number of old ControllerRevisions to retain
+revisionHistoryLimit: 10
+
+# @schema
+# required: false
+# @schema
+# -- Update strategy for the DaemonSets
+updateStrategy: {}
+  # rollingUpdate:
+  #   maxUnavailable: 1
+  # type: RollingUpdate
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Annotations to be added to pods
+podAnnotations: {}
+
+# -- Labels to be added to pods
+podLabels: {}
+
+# -- pod-level security context
+# @default -- see [values.yaml](./values.yaml)
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 65534
+  runAsGroup: 65534
+  seccompProfile:
+    type: RuntimeDefault
+
+# -- container-level security context
+# @default -- see [values.yaml](./values.yaml)
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+
+# -- Resource requests and limits, set equal so the pods end up in the Guaranteed QoS class. Pulling and unpacking happens inside containerd rather than inside these pods, so nothing set here makes a pull faster, and once the pull is done only `pause` runs, which idles well below a megabyte. There is one pod per node regardless of how many images are cached, and its requests are reserved on every node, so keep them minimal.
+# @default -- see [values.yaml](./values.yaml)
+resources:
+  limits:
+    cpu: 1m
+    memory: 8Mi
+  requests:
+    cpu: 1m
+    memory: 8Mi
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Affinity for pod assignment
+affinity: {}
+
+# -- Tolerations for pod assignment. Defaults to tolerating every taint, because a node that is skipped is a node that keeps pulling images at pod start. Narrow this down to keep the cache off control-plane or otherwise reserved nodes.
+tolerations:
+  - operator: Exists
+
+# -- PriorityClass for the pods. Point this at a low- or negative-priority class so warming the cache can never preempt real workloads.
+priorityClassName: ""

@@ -1,0 +1,87 @@
+{{- $root := . }}
+{{- $enabledImages := list }}
+{{- range $image := .Values.images }}
+{{- if ne (dig "enabled" true $image) false }}
+{{- $enabledImages = append $enabledImages $image }}
+{{- end }}
+{{- end }}
+{{- if $enabledImages }}
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    {{- include "node-image-cache.labels" . | nindent 4 }}
+  name: {{ include "node-image-cache.fullname" . }}
+spec:
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "node-image-cache.selectorLabels" . | nindent 6 }}
+  {{- with .Values.updateStrategy }}
+  updateStrategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "node-image-cache.selectorLabels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      automountServiceAccountToken: false
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "node-image-cache.serviceAccountName" . }}
+      containers:
+        - name: pause
+          image: "{{ .Values.pauseImage.registry }}/{{ .Values.pauseImage.repository }}:{{ .Values.pauseImage.tag }}"
+          imagePullPolicy: {{ .Values.pauseImage.pullPolicy }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            {{- range $image := $enabledImages }}
+            - name: {{ $image.name }}
+              mountPath: /images/{{ $image.name }}
+              readOnly: true
+            {{- end }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.priorityClassName }}
+      priorityClassName: {{ . }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        {{- range $image := $enabledImages }}
+        - name: {{ $image.name }}
+          image:
+            reference: {{ $image.image | quote }}
+            pullPolicy: {{ $image.pullPolicy | default $root.Values.pullPolicy }}
+        {{- end }}
+{{- end }}

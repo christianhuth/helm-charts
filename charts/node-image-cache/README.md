@@ -1,0 +1,165 @@
+# node-image-cache
+
+Pre-pulls a fixed list of container images onto every node, so that pods using them start without waiting for an image pull.
+
+## TL;DR;
+
+```console
+helm repo add christianhuth https://charts.christianhuth.de
+helm repo update
+helm install my-release christianhuth/node-image-cache --set images[0].name=nginx --set images[0].image=nginx:1.29.2
+```
+
+## Introduction
+
+Pulling a container image the first time it is scheduled onto a node can dominate
+pod startup, especially for large images or on nodes that were just added by the
+cluster autoscaler. This chart keeps a fixed list of images present on every node
+by mounting them into a DaemonSet, so the kubelet finds them in its local
+content store instead of going to the registry.
+
+Every entry in `images` becomes a read-only [image
+volume](https://kubernetes.io/blog/2025/04/29/kubernetes-v1-33-image-volume-beta/)
+on a single DaemonSet pod. Nothing from the images is ever executed, so
+distroless and `scratch` images work exactly like any other, and the kubelet
+treats an image behind an image volume as in use and will not garbage collect it.
+
+## Prerequisites
+
+- Kubernetes 1.33+, for image volume support
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+helm repo add christianhuth https://charts.christianhuth.de
+helm repo update
+helm install my-release christianhuth/node-image-cache -f values.yaml
+```
+
+With a `values.yaml` along these lines:
+
+```yaml
+images:
+  - name: nginx
+    image: nginx:1.29.2
+  - name: cuda
+    image: nvidia/cuda:12.6.3-runtime-ubuntu24.04
+```
+
+`nodeSelector`, `tolerations`, `affinity`, `resources`, `priorityClassName` and
+`imagePullSecrets` apply to the one pod and therefore to every image, so they are
+set at the top level rather than per entry. To cache a different set of images on
+a different node pool, install the chart a second time with its own selector.
+
+The [Values](#values) section lists the values that can be configured during installation.
+
+> **Tip**: List all releases using `helm list`
+
+## One pod, all images
+
+All images share one DaemonSet pod per node, so caching twenty images costs one
+pod slot rather than twenty, and one set of resource requests rather than twenty.
+
+> **Caution**: The pod does not start until *every* image volume is ready. A typo,
+> a deleted tag or a missing pull secret in any single entry leaves that node with
+> no cache at all — not merely without that one image.
+
+Treat the list as something that has to stay correct. `kubectl describe pod` names
+the reference that failed, and `enabled: false` parks an entry without deleting
+it. If you need one image to be able to fail independently of the others, give it
+its own release of this chart.
+
+## Use immutable tags
+
+The chart defaults to `pullPolicy: IfNotPresent`, which is the right choice for
+immutable tags and avoids a pointless registry round-trip on every pod start.
+
+An image that has already been pulled is never re-pulled while the DaemonSet pod
+keeps running, so a **mutable tag will silently go stale** and drift apart
+between nodes depending on when each pod happened to start. Pin a digest or an
+immutable tag. Because the image reference lives in the pod template, changing it
+rolls the DaemonSet on its own and no checksum annotation is needed.
+
+## Budget the disk
+
+Cached images count as "in use" for the kubelet and are therefore **never
+reclaimed by image garbage collection**. They permanently reduce the headroom
+that the kubelet has to work with.
+
+Add up the on-disk size of the images you plan to cache and compare it against
+the image filesystem of your *smallest* node. As a rule of thumb, stay below
+roughly half of it, so the kubelet still has something it is allowed to evict
+when it reaches `imageGCHighThresholdPercent` (85 by default). Cache too much and
+the node ends up in `DiskPressure` with nothing to free, and starts evicting real
+workloads.
+
+## Known limitations
+
+- **A new node is not accelerated for its first pod.** The DaemonSet pod and your
+  workload are scheduled onto a fresh node at the same time, with no ordering
+  between them. containerd shares the in-flight download rather than fetching
+  twice, so nothing is slower than before, but the first pod does not benefit
+  either. Every pod after it on that node does.
+- **The initial rollout hits your registry once per node.** On a large cluster
+  that is a thundering herd, and on Docker Hub it will hit rate limits. Pair the
+  chart with a pull-through cache or with [Spegel](https://spegel.dev/) if that
+  is a concern.
+- **One unpullable image disables the whole cache on every node.** See
+  [One pod, all images](#one-pod-all-images).
+- **An image on a node can be used without credentials.** Any pod with
+  `imagePullPolicy: IfNotPresent` can start from a cached image, even without the
+  pull secret it would normally need. Consider that before caching private images
+  on a multi-tenant cluster.
+- **`AlwaysPullImages` makes the chart pointless.** If that admission plugin is
+  enabled, every pod re-pulls regardless of what is on the node.
+
+## Uninstalling the Chart
+
+To uninstall the `my-release` deployment:
+
+```console
+helm uninstall my-release
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+Removing the DaemonSet unpins the images. They stay on the nodes until the
+kubelet reclaims them under disk pressure.
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| affinity | object | `{}` | Affinity for pod assignment |
+| fullnameOverride | string | `""` | String to fully override `"node-image-cache.fullname"` |
+| imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
+| images | list | `[]` | Images to cache on every node. Each entry becomes a read-only image volume on the single DaemonSet pod, and takes a `name` (used as the volume name, must be a valid DNS-1123 label and unique within the list), an `image` (the full reference to pull), an optional `enabled` to skip it without deleting the entry, and an optional `pullPolicy` overriding the chart-wide default. |
+| nameOverride | string | `""` | Provide a name in place of `node-image-cache` |
+| nodeSelector | object | `{}` | Node labels for pod assignment |
+| pauseImage.pullPolicy | string | `"IfNotPresent"` | image pull policy of the pause container |
+| pauseImage.registry | string | `"registry.k8s.io"` | image registry of the pause container that keeps the DaemonSet pods alive |
+| pauseImage.repository | string | `"pause"` | image repository of the pause container |
+| pauseImage.tag | string | `"3.10"` | image tag of the pause container |
+| podAnnotations | object | `{}` | Annotations to be added to pods |
+| podLabels | object | `{}` | Labels to be added to pods |
+| podSecurityContext | object | see [values.yaml](./values.yaml) | pod-level security context |
+| priorityClassName | string | `""` | PriorityClass for the pods. Point this at a low- or negative-priority class so warming the cache can never preempt real workloads. |
+| pullPolicy | string | `"IfNotPresent"` | Pull policy for the cached images. Keep this at `IfNotPresent` when using immutable tags: `Always` forces a registry round-trip on every pod start that can only ever confirm what is already on disk, and counts against registry rate limits. |
+| resources | object | see [values.yaml](./values.yaml) | Resource requests and limits, set equal so the pods end up in the Guaranteed QoS class. Pulling and unpacking happens inside containerd rather than inside these pods, so nothing set here makes a pull faster, and once the pull is done only `pause` runs, which idles well below a megabyte. There is one pod per node regardless of how many images are cached, and its requests are reserved on every node, so keep them minimal. |
+| revisionHistoryLimit | int | `10` | The number of old ControllerRevisions to retain |
+| securityContext | object | see [values.yaml](./values.yaml) | container-level security context |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| tolerations | list | `[{"operator":"Exists"}]` | Tolerations for pod assignment. Defaults to tolerating every taint, because a node that is skipped is a node that keeps pulling images at pod start. Narrow this down to keep the cache off control-plane or otherwise reserved nodes. |
+| updateStrategy | object | `{}` | Update strategy for the DaemonSets |
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
+
+```console
+helm install my-release -f values.yaml christianhuth/node-image-cache
+```
