@@ -67,6 +67,8 @@ jobs:
 
       - name: Create kind cluster
         uses: helm/kind-action@v1.14.0
+        with:
+          node_image: kindest/node:v1.34.0
 
       - name: Run chart-testing (install)
         run: "ct install --charts ${{ matrix.chart }} --config .github/config/chart-testing.yaml"

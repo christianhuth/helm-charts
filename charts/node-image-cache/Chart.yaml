@@ -1,0 +1,30 @@
+apiVersion: v2
+name: node-image-cache
+description: Pre-pulls a fixed list of container images onto every node, so that pods using them start without waiting for an image pull.
+type: application
+version: 1.0.0
+kubeVersion: ">=1.33.0-0"
+home: https://github.com/christianhuth/helm-charts
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/node-image-cache/icon.svg
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+keywords:
+  - prepull
+  - prepull-daemonset
+  - image-cache
+  - image-pull
+  - autoscaling
+  - startup
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial release
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+    - name: upstream-docs
+      url: https://kubernetes.io/docs/concepts/storage/volumes/#image
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key

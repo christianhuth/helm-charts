@@ -1,0 +1,33 @@
+{{- if not .Values.images }}
+No images are configured, so this release does not cache anything yet.
+
+Add the images you want on every node to `.Values.images`:
+
+  images:
+    - name: nginx
+      image: nginx:1.29.2
+
+{{- else }}
+{{ len .Values.images }} image(s) are being cached on every node.
+
+1. Watch the DaemonSet converge:
+
+  kubectl rollout status --namespace {{ .Release.Namespace }} daemonset/{{ include "node-image-cache.fullname" . }}
+
+2. Confirm the images are on a node:
+
+  kubectl debug node/<node> -it --image=busybox -- chroot /host crictl images
+
+If the pods stay in ContainerCreating, one of the images cannot be pulled. The
+pod only starts once every image volume is ready, so check the events:
+
+  kubectl describe pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/instance={{ .Release.Name }}"
+{{ end }}
+Keep in mind:
+
+- Cached images are pinned as "in use" and are never reclaimed by the kubelet
+  image garbage collector. Make sure the total size stays well below the image
+  filesystem of your smallest node, or the kubelet will run out of images it is
+  allowed to evict and the node goes into DiskPressure.
+- A node that joins the cluster starts its cache pod at the same time as your
+  workload, so the very first pod on a new node is not accelerated.

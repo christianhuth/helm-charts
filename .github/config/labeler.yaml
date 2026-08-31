@@ -128,15 +128,18 @@ mcp-for-argocd:
 netbird-reverse-proxy:
 - changed-files:
   - any-glob-to-any-file: 'charts/netbird-reverse-proxy/*'
-node-access:
-- changed-files:
-  - any-glob-to-any-file: charts/node-access/*
 netcupscp-exporter:
 - changed-files:
   - any-glob-to-any-file: charts/netcupscp-exporter/*
 nextcloud-exporter:
 - changed-files:
   - any-glob-to-any-file: charts/nextcloud-exporter/*
+node-access:
+- changed-files:
+  - any-glob-to-any-file: charts/node-access/*
+node-image-cache:
+- changed-files:
+  - any-glob-to-any-file: charts/node-image-cache/*
 ntp-exporter:
 - changed-files:
   - any-glob-to-any-file: charts/ntp-exporter/*

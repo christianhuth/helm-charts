@@ -1,0 +1,11 @@
+---
+images:
+  - name: pause
+    image: registry.k8s.io/pause:3.10
+  - name: busybox
+    image: busybox:1.37.0
+
+# The kind node in CI is a single control-plane node, which the default
+# tolerations already cover. Kept explicit so a narrower default would be caught.
+tolerations:
+  - operator: Exists
