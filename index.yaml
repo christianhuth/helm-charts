@@ -50159,6 +50159,42 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/node-access-1.0.0/node-access-1.0.0.tgz
     version: 1.0.0
+  node-image-cache:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial release
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+        - name: upstream-docs
+          url: https://kubernetes.io/docs/concepts/storage/volumes/#image
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    created: "2026-08-31T10:42:28.30799874Z"
+    description: Pre-pulls a fixed list of container images onto every node, so that
+      pods using them start without waiting for an image pull.
+    digest: a231b8778efb5da627f210ad00cf39dedb06ae47b9f96c3c4f2d9b7c1fe57bab
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/node-image-cache/icon.svg
+    keywords:
+    - prepull
+    - prepull-daemonset
+    - image-cache
+    - image-pull
+    - autoscaling
+    - startup
+    kubeVersion: '>=1.33.0-0'
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: node-image-cache
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/node-image-cache-1.0.0/node-image-cache-1.0.0.tgz
+    version: 1.0.0
   ntp-exporter:
   - annotations:
       artifacthub.io/category: monitoring-logging
@@ -111135,4 +111171,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-08-28T21:49:10.597432467Z"
+generated: "2026-08-31T10:42:28.312774246Z"
