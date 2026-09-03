@@ -1,7 +1,7 @@
 # gateway-api-crds
 
-## 1.2.3
+## 1.2.4
 
 ### Changed
 
-- helm-docs annotation on subcharts values-files
+- Gateway API CRDs to v1.6.2
