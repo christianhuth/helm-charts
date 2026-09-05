@@ -1,7 +1,7 @@
 # typo3
 
-## 7.5.6
+## 8.0.0
 
 ### Changed
 
-- dependency of postgresql to 18.8.17
+- dependency of mariadb to 27.0.8
