@@ -762,7 +762,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "5.1.5",
+          "default": "5.1.6",
           "description": "Overrides the image tag",
           "title": "tag",
           "type": "string"
