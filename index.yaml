@@ -11024,6 +11024,34 @@ entries:
   bindy:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to v0.6.3
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v0.6.3
+    created: "2026-09-08T06:20:58.740039757Z"
+    description: Bindy is a Kubernetes operator that manages BIND9 DNS infrastructure
+      declaratively
+    digest: a286af2dfe6e4c545b392613a19843fa64f31c733b64e42bc6dd9d8f649f301e
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/bindy/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: bindy
+    sources:
+    - https://github.com/firestoned/bindy
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/bindy-1.7.1/bindy-1.7.1.tgz
+    version: 1.7.1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Added scrapeTimeout value to serviceMonitor
       artifacthub.io/links: |
@@ -112045,4 +112073,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-09-08T01:27:41.871113264Z"
+generated: "2026-09-08T06:20:58.746863311Z"
