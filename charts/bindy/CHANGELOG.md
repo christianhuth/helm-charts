@@ -1,7 +1,7 @@
 # bindy
 
-## 1.7.0
+## 1.7.1
 
-### Added
+### Changed
 
-- Added scrapeTimeout value to serviceMonitor
+- App Version to v0.6.3
