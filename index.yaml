@@ -23286,6 +23286,34 @@ entries:
   goldpinger:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to 3.11.3
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 3.11.3
+    created: "2026-09-14T22:41:50.958069029Z"
+    description: Debugging tool for Kubernetes which tests and displays connectivity
+      between nodes in the cluster.
+    digest: d35a119e3f9b92f8efa2c0bda3a11a33ab860ab891d51652573e1cc43d95f9b3
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/goldpinger/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: goldpinger
+    sources:
+    - https://github.com/bloomberg/goldpinger
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/goldpinger-1.4.1/goldpinger-1.4.1.tgz
+    version: 1.4.1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Added scrapeTimeout value to serviceMonitor
       artifacthub.io/links: |
@@ -113017,4 +113045,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-09-14T19:13:16.79463223Z"
+generated: "2026-09-14T22:41:50.96243407Z"
