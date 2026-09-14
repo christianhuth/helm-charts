@@ -1,7 +1,7 @@
 # goldpinger
 
-## 1.4.0
+## 1.4.1
 
-### Added
+### Changed
 
-- Added scrapeTimeout value to serviceMonitor
+- App Version to 3.11.3
