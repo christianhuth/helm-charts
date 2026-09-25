@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 11.11.5
+## 11.12.0
 
 ### Changed
 
-- App Version to 5.1.7
+- dependency of postgresql to 18.12.1
