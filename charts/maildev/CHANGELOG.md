@@ -1,7 +1,7 @@
 # maildev
 
-## 1.6.0
+## 2.0.0
 
-### Added
+### Changed
 
-- option to define route timeouts
+- App Version to 3.0.0
