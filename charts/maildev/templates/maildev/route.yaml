@@ -35,8 +35,8 @@ spec:
             statusCode: 301
     {{- else }}
     - backendRefs:
-        - name: {{ include "maildev.fullname" $ }}
-          port: {{ $.Values.service.port }}
+        - name: {{ include "maildev.web.serviceName" $ }}
+          port: {{ $.Values.services.web.port }}
           group: ''
           kind: Service
           weight: 1
