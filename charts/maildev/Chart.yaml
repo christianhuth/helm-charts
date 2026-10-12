@@ -15,8 +15,8 @@ sources:
   - https://hub.docker.com/r/maildev/maildev
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: option to define route timeouts
+    - kind: fixed
+      description: broken HTTPRoute for maildev backend
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
