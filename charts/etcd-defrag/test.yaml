@@ -17,8 +17,8 @@ kind: Secret
 metadata:
   name: release-name-etcd-defrag-pki
 data:
-  ca: 
-  cert: 
+  ca:
+  cert:
   key:
 ---
 # Source: etcd-defrag/templates/cronjob.yaml
