@@ -1,7 +1,7 @@
 # etcd-defrag
 
-## 1.6.2
+## 1.6.3
 
-### Changed
+### Fixed
 
-- App Version to v3.7.2
+- broken command args for cronjob
