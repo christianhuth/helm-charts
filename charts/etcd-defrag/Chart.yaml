@@ -2,7 +2,7 @@ apiVersion: v2
 name: etcd-defrag
 description: A Helm chart for running a defragmentation CronJob for ETCD
 type: application
-version: 1.6.3
+version: 1.7.0
 appVersion: "v3.7.2"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/etcd-defrag/icon.svg
@@ -15,7 +15,9 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: fixed
-      description: broken command args for cronjob
+      description: way command and args are defined for cronjob
+    - kind: added
+      description: tolerations for control-plane taint
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
