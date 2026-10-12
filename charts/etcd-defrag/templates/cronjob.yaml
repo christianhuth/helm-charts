@@ -65,8 +65,6 @@ spec:
               image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               args:
-                - /bin/sh
-                - -c
                 - {{ include "etcd-defrag.defrag.command" . }}
               {{- if or (.Values.extraEnv) (.Values.defrag.config.auth.enabled) }}
               env:
