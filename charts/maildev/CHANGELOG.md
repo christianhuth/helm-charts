@@ -2,6 +2,6 @@
 
 ## 1.6.1
 
-### Added
+### Fixed
 
-- option to define route timeouts
+- broken HTTPRoute for maildev backend
