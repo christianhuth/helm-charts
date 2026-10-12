@@ -64,10 +64,10 @@ spec:
             - name: {{ include "etcd-defrag.fullname" . }}
               image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
+              command:
+                - etcdctl
               args:
-                - /bin/sh
-                - -c
-                - {{ include "etcd-defrag.defrag.command" . }}
+                {{- include "etcd-defrag.defrag.args" . | nindent 16 }}
               {{- if or (.Values.extraEnv) (.Values.defrag.config.auth.enabled) }}
               env:
                 {{- if .Values.defrag.config.auth.enabled }}

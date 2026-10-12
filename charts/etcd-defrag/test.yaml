@@ -1,0 +1,85 @@
+---
+# Source: etcd-defrag/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: release-name-etcd-defrag
+  labels:
+    helm.sh/chart: etcd-defrag-1.6.3
+    app.kubernetes.io/name: etcd-defrag
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: "v3.7.2"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: etcd-defrag/templates/pki-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: release-name-etcd-defrag-pki
+data:
+  ca:
+  cert:
+  key:
+---
+# Source: etcd-defrag/templates/cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: release-name-etcd-defrag
+  labels:
+    helm.sh/chart: etcd-defrag-1.6.3
+    app.kubernetes.io/name: etcd-defrag
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: "v3.7.2"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  concurrencyPolicy: "Forbid"
+  failedJobsHistoryLimit: 1
+  schedule: "0 */1 * * *"
+  startingDeadlineSeconds: 30
+  successfulJobsHistoryLimit: 3
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: release-name-etcd-defrag
+          containers:
+            - name: release-name-etcd-defrag
+              image: "quay.io/coreos/etcd:v3.7.2"
+              imagePullPolicy: Always
+              command:
+                - etcdctl
+              args:
+                - --endpoints=localhost:2379
+                - --cacert=/tmp/kubernetes/pki/etcd/ca.crt
+                - --cert=/tmp/kubernetes/pki/etcd/server.crt
+                - --key=/tmp/kubernetes/pki/etcd/server.key
+                - --insecure-transport=true
+                - --write-out=table
+                - defrag
+                - --cluster
+              env:
+                - name: ETCDCTL_API
+                  value: "3"
+              volumeMounts:
+                - name: "release-name-etcd-defrag-pki"
+                  mountPath: "/tmp/kubernetes/pki/etcd"
+                  readOnly: true
+          restartPolicy: "OnFailure"
+          nodeSelector:
+            node-role.kubernetes.io/control-plane: ""
+          tolerations:
+            - effect: NoSchedule
+              key: node-role.kubernetes.io/control-plane
+          volumes:
+            - name: "release-name-etcd-defrag-pki"
+              secret:
+                secretName: "release-name-etcd-defrag-pki"
+                items:
+                  - key: ca
+                    path: ca.crt
+                  - key: cert
+                    path: server.crt
+                  - key: key
+                    path: server.key

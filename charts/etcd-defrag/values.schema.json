@@ -488,6 +488,27 @@
     "tolerations": {
       "description": "Toleration labels for pod assignment",
       "items": {
+        "anyOf": [
+          {
+            "properties": {
+              "effect": {
+                "default": "NoSchedule",
+                "title": "effect",
+                "type": "string"
+              },
+              "key": {
+                "default": "node-role.kubernetes.io/control-plane",
+                "title": "key",
+                "type": "string"
+              }
+            },
+            "required": [
+              "effect",
+              "key"
+            ],
+            "type": "object"
+          }
+        ],
         "required": []
       },
       "title": "tolerations",

@@ -84,105 +84,45 @@ Get the name of the secret containing the keys and certificates
 {{- end -}}
 
 {{/*
-Determine the etcd flag --endpoints
+Create the etcdctl args used to defrag etcd.
+The etcd image is distroless (no shell), so every flag must be its own list item without
+shell quoting, and env vars must use the Kubernetes $(VAR) syntax instead of $VAR.
 */}}
-{{- define "etcd-defrag.defrag.endpoints" -}}
-{{- if .Values.defrag.config.endpoints -}}
-  --endpoints={{ join "," .Values.defrag.config.endpoints | quote }}
+{{- define "etcd-defrag.defrag.args" -}}
+{{- $config := .Values.defrag.config -}}
+{{- $args := list -}}
+{{- if $config.endpoints -}}
+  {{- $args = append $args (printf "--endpoints=%s" (join "," $config.endpoints)) -}}
 {{- else -}}
-  --endpoints="localhost:2379"
+  {{- $args = append $args "--endpoints=localhost:2379" -}}
 {{- end -}}
+{{- $args = append $args "--cacert=/tmp/kubernetes/pki/etcd/ca.crt" -}}
+{{- $args = append $args "--cert=/tmp/kubernetes/pki/etcd/server.crt" -}}
+{{- $args = append $args "--key=/tmp/kubernetes/pki/etcd/server.key" -}}
+{{- if $config.commandTimeout -}}
+  {{- $args = append $args (printf "--command-timeout=%s" $config.commandTimeout) -}}
 {{- end -}}
-
-{{/*
-Define the etcd flags --cacert, --cert and --key
-*/}}
-{{- define "etcd-defrag.defrag.certificates" -}}
-  --cacert="/tmp/kubernetes/pki/etcd/ca.crt" --cert="/tmp/kubernetes/pki/etcd/server.crt" --key="/tmp/kubernetes/pki/etcd/server.key"
+{{- if $config.debug -}}
+  {{- $args = append $args "--debug=true" -}}
 {{- end -}}
-
-{{/*
-Determine the etcd flag cluster
-*/}}
-{{- define "etcd-defrag.defrag.flag.clusterWide" -}}
-  {{- if .Values.defrag.config.clusterWide -}}
-    --cluster
-  {{- end -}}
+{{- if $config.dialTimeout -}}
+  {{- $args = append $args (printf "--dial-timeout=%s" $config.dialTimeout) -}}
 {{- end -}}
-
-{{/*
-Determine the etcd flag command-timeout
-*/}}
-{{- define "etcd-defrag.defrag.flag.commandTimeout" -}}
-  {{- if .Values.defrag.config.commandTimeout -}}
-    --command-timeout={{ .Values.defrag.config.commandTimeout | quote }}
-  {{- end -}}
+{{- if $config.insecureSkipTlsVerify -}}
+  {{- $args = append $args (printf "--insecure-skip-tls-verify=%v" $config.insecureSkipTlsVerify) -}}
 {{- end -}}
-
-{{/*
-Determine the etcd flag debug
-*/}}
-{{- define "etcd-defrag.defrag.flag.debug" -}}
-  {{- if .Values.defrag.config.debug -}}
-    --debug=true
-  {{- end -}}
+{{- if $config.insecureTransport -}}
+  {{- $args = append $args (printf "--insecure-transport=%v" $config.insecureTransport) -}}
 {{- end -}}
-
-{{/*
-Determine the etcd flag dial-timeout
-*/}}
-{{- define "etcd-defrag.defrag.flag.dialTimeout" -}}
-  {{- if .Values.defrag.config.dialTimeout -}}
-    --dial-timeout={{ .Values.defrag.config.dialTimeout | quote }}
-  {{- end -}}
+{{- if $config.auth.enabled -}}
+  {{- $args = append $args (printf "--user=%s:$(ETCD_PASSWORD)" $config.auth.user) -}}
 {{- end -}}
-
-{{/*
-Determine the etcd flag insecure-skip-tls-verify
-*/}}
-{{- define "etcd-defrag.defrag.flag.insecureSkipTlsVerify" -}}
-  {{- if .Values.defrag.config.insecureSkipTlsVerify -}}
-    --insecure-skip-tls-verify={{ .Values.defrag.config.insecureSkipTlsVerify | quote }}
-  {{- end -}}
+{{- if $config.writeOut -}}
+  {{- $args = append $args (printf "--write-out=%s" $config.writeOut) -}}
 {{- end -}}
-
-{{/*
-Determine the etcd flag insecure-transport
-*/}}
-{{- define "etcd-defrag.defrag.flag.insecureTransport" -}}
-  {{- if .Values.defrag.config.insecureTransport -}}
-    --insecure-transport={{ .Values.defrag.config.insecureTransport | quote }}
-  {{- end -}}
+{{- $args = append $args "defrag" -}}
+{{- if $config.clusterWide -}}
+  {{- $args = append $args "--cluster" -}}
 {{- end -}}
-
-{{/*
-Determine the etcd flag user
-*/}}
-{{- define "etcd-defrag.defrag.flag.user" -}}
-  {{- if .Values.defrag.config.auth.enabled -}}
-    --user="{{ .Values.defrag.config.auth.user }}:$ETCD_PASSWORD"
-  {{- end -}}
-{{- end -}}
-
-{{/*
-Determine the etcd flag write-out
-*/}}
-{{- define "etcd-defrag.defrag.flag.writeOut" -}}
-  {{- if .Values.defrag.config.writeOut -}}
-    --write-out={{ .Values.defrag.config.writeOut | quote }}
-  {{- end -}}
-{{- end -}}
-
-{{/*
-Determine the etcd flags
-*/}}
-{{- define "etcd-defrag.defrag.flags" -}}
-  {{ include "etcd-defrag.defrag.endpoints" . }} {{ include "etcd-defrag.defrag.certificates" . }} {{ include "etcd-defrag.defrag.flag.commandTimeout" . }} {{ include "etcd-defrag.defrag.flag.debug" . }} {{ include "etcd-defrag.defrag.flag.dialTimeout" . }} {{ include "etcd-defrag.defrag.flag.insecureSkipTlsVerify" . }} {{ include "etcd-defrag.defrag.flag.insecureTransport" . }} {{ include "etcd-defrag.defrag.flag.user" . }} {{ include "etcd-defrag.defrag.flag.writeOut" . }}
-{{- end -}}
-
-{{/*
-Create the command used to defrag etcd
-*/}}
-{{- define "etcd-defrag.defrag.command" -}}
-ETCDCTL_API=3 etcdctl {{ include "etcd-defrag.defrag.flags" . }} defrag {{ include "etcd-defrag.defrag.flag.clusterWide" . }}
+{{- toYaml $args -}}
 {{- end -}}

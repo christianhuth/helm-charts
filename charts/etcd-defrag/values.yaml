@@ -63,7 +63,9 @@ nodeSelector:
   node-role.kubernetes.io/control-plane: ""
 
 # -- Toleration labels for pod assignment
-tolerations: []
+tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
 
 # -- Affinity settings for pod assignment
 affinity: {}
