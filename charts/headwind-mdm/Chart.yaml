@@ -2,7 +2,7 @@ apiVersion: v2
 name: headwind-mdm
 description: Headwind MDM - an open source mobile device management software for Android
 type: application
-version: 5.11.2
+version: 6.0.0
 appVersion: "0.1.9"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/headwind-mdm/icon.svg
@@ -14,14 +14,19 @@ sources:
   - https://github.com/h-mdm
   - https://hub.docker.com/r/headwindmdm/hmdm
 dependencies:
-  - name: postgresql
-    repository: oci://registry-1.docker.io/bitnamicharts
-    version: 18.12.4
+  - name: cluster
+    alias: postgresql
+    repository: https://cloudnative-pg.github.io/charts
+    version: 0.9.0
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of postgresql to 18.12.4
+      description: "BREAKING: replaced the Bitnami PostgreSQL subchart with a PostgreSQL cluster managed by the CloudNativePG operator (upstream chart cnpg/cluster). See the upgrade notes in the README."
+    - kind: changed
+      description: "BREAKING: renamed externalPostgresql to externalDatabase and flattened its auth.* keys"
+    - kind: removed
+      description: "BREAKING: inline password for the bundled PostgreSQL. The operator generates the password or uses the Secret given in postgresql.cluster.initdb.secret.name"
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

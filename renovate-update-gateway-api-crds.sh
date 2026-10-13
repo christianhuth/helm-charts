@@ -143,4 +143,4 @@ yq eval ".annotations.\"artifacthub.io/changes\" = \"${changes}\"" -i "${CHART_D
 helm dependency update "${CHART_DIR}"
 
 # update CHANGELOG.md
-.github/generate-chart-changelogs.sh
+.github/scripts/generate-chart-changelogs.sh

@@ -1,0 +1,12 @@
+---
+syncserver-db:
+  mariadb:
+    replicas: 1
+    galera:
+      enabled: false
+
+tokenserver-db:
+  mariadb:
+    replicas: 1
+    galera:
+      enabled: false

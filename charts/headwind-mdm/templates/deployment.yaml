@@ -47,18 +47,18 @@ spec:
           env:
             # Database Settings
             - name: SQL_HOST
-              value: {{ include "headwind-mdm.postgresql.hostname" . | quote }}
+              value: {{ include "headwind-mdm.database.hostname" . | quote }}
             - name: SQL_PORT
-              value: {{ include "headwind-mdm.postgresql.port" . | quote }}
+              value: {{ include "headwind-mdm.database.port" . | quote }}
             - name: SQL_BASE
-              value: {{ include "headwind-mdm.postgresql.database" . | quote }}
+              value: {{ include "headwind-mdm.database.database" . | quote }}
             - name: SQL_USER
-              value: {{ include "headwind-mdm.postgresql.username" . | quote }}
+              value: {{ include "headwind-mdm.database.username" . | quote }}
             - name: SQL_PASS
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "headwind-mdm.postgresql.secretName" . | quote }}
-                  key: {{ include "headwind-mdm.postgresql.userPasswordKey" . | quote }}
+                  name: {{ include "headwind-mdm.database.secretName" . | quote }}
+                  key: {{ include "headwind-mdm.database.passwordKey" . | quote }}
             # Headwind Settings
             {{ if .Values.headwind.adminEmail -}}
             - name: ADMIN_EMAIL

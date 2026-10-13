@@ -14,6 +14,15 @@ repos:
         args: [--allow-multiple-documents]
         exclude: ^charts/.*/templates/
 
+  - repo: local
+    hooks:
+      - id: sync-shared-templates
+        name: .github/scripts/sync-shared-templates.sh
+        entry: bash .github/scripts/sync-shared-templates.sh
+        language: system
+        pass_filenames: false
+        always_run: true
+
   - repo: https://github.com/norwoodj/helm-docs
     rev: ""
     hooks:
@@ -46,8 +55,8 @@ repos:
   - repo: local
     hooks:
       - id: generate-changelogs
-        name: .github/generate-chart-changelogs.sh
-        entry: bash .github/generate-chart-changelogs.sh
+        name: .github/scripts/generate-chart-changelogs.sh
+        entry: bash .github/scripts/generate-chart-changelogs.sh
         language: system
 
   - repo: https://github.com/renovatebot/pre-commit-hooks

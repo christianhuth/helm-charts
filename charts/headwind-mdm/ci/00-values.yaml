@@ -1,0 +1,4 @@
+---
+postgresql:
+  cluster:
+    instances: 1

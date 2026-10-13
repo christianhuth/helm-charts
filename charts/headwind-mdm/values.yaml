@@ -182,38 +182,43 @@ persistence:
   size: 10Gi
 
 postgresql:
-  # -- enable PostgreSQL™ subchart from Bitnami
+  # -- Enable a PostgreSQL cluster managed by the CloudNativePG operator. Requires the operator to be installed in the cluster (see README).
   enabled: true
-  ## Authentication parameters
-  auth:
-    # -- Name for a custom database to create
-    database: mychart
-    # -- Name of existing secret to use for PostgreSQL credentials
-    existingSecret: ""
-    # -- Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided
-    password: mychart
-    # -- Name for a custom user to create
-    username: mychart
-  image:
-    # -- image repository for PostgreSQL™ subchart from Bitnami
-    repository: bitnamilegacy/postgresql
-    # -- image tag for PostgreSQL™ subchart from Bitnami
-    tag: 17.6.0-debian-12-r4
+  version:
+    # -- PostgreSQL major version. Has to match the major version of `postgresql.cluster.imageName`.
+    postgresql: "18"
+  cluster:
+    # -- PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version.
+    imageName: ghcr.io/cloudnative-pg/postgresql:18-standard-trixie
+    # -- Pull the image on every start to get the latest minor version of the major version
+    imagePullPolicy: Always
+    # -- Number of PostgreSQL instances (one primary, the others are replicas)
+    instances: 3
+    initdb:
+      # -- Name of the database to create
+      database: hmdm
+      # -- Name of the user owning the database
+      owner: hmdm
+      # Use an existing Secret of type `kubernetes.io/basic-auth` (keys `username` and `password`) for the owner.
+      # If not set, the operator generates the Secret `<release>-postgresql-app`.
+      # secret:
+      #   name: ""
+    storage:
+      # -- Size of the PVC of each instance
+      size: 8Gi
 
-externalPostgresql:
-  ## Authentication parameters
-  auth:
-    # -- Name of the database to use
-    database: mychart
-    # -- Name of existing secret to use for PostgreSQL credentials
-    existingSecret: ""
-    # -- Password to use
-    password: mychart
-    # -- Name of the user to use
-    username: mychart
-    # -- Key in the secret containing the password
-    userPasswordKey: ""
-  # -- Hostname of the PostgreSQL database
+externalDatabase:
+  # -- Hostname of the external PostgreSQL database. Used if `postgresql.enabled` is false.
   hostname: ""
-  # -- Port used to connect to PostgreSQL database
+  # -- Port of the external PostgreSQL database
   port: 5432
+  # -- Name of the database to use
+  database: hmdm
+  # -- Name of the user to use
+  username: hmdm
+  # -- Password of the user. Ignored if `externalDatabase.existingSecret` is set.
+  password: ""
+  # -- Name of an existing Secret containing the password of the user
+  existingSecret: ""
+  # -- Key in the existing Secret containing the password of the user
+  existingSecretPasswordKey: password

@@ -18,7 +18,18 @@ This chart bootstraps the [Headwind MDM](https://github.com/h-mdm) on a [Kuberne
 
 ## Prerequisites
 
-- Kubernetes 1.19+
+- Kubernetes 1.29+
+- The [CloudNativePG operator](https://cloudnative-pg.io) if the bundled PostgreSQL database is used (`postgresql.enabled: true`, the default)
+
+### Installing the CloudNativePG operator
+
+The chart bundles a PostgreSQL cluster as a custom resource of the CloudNativePG operator (via the upstream chart [cnpg/cluster](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster)). The operator itself is not part of this chart, as it is installed once per Kubernetes cluster:
+
+```console
+helm repo add cnpg https://cloudnative-pg.github.io/charts
+helm repo update
+helm upgrade --install cnpg cnpg/cloudnative-pg --namespace cnpg-system --create-namespace --wait
+```
 
 ## Installing the Chart
 
@@ -44,6 +55,53 @@ helm uninstall my-release
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
+## Configuring the Database
+
+### Bundled PostgreSQL with an existing Secret (recommended)
+
+Create a Secret of type `kubernetes.io/basic-auth` containing the credentials of the database owner. The `username` has to match `postgresql.cluster.initdb.owner`:
+
+```console
+kubectl create secret generic headwind-mdm-database \
+  --type=kubernetes.io/basic-auth \
+  --from-literal=username=hmdm \
+  --from-literal=password='<password>'
+```
+
+Reference the Secret in your values:
+
+```yaml
+postgresql:
+  enabled: true
+  cluster:
+    initdb:
+      database: hmdm
+      owner: hmdm
+      secret:
+        name: headwind-mdm-database
+```
+
+If no Secret is referenced, the operator generates a random password and stores the credentials in the Secret `<release>-postgresql-app`.
+
+All other settings of the PostgreSQL cluster (e.g. `postgresql.cluster.instances`, `postgresql.cluster.storage`, backups) are passed to the upstream chart. See its [values](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster#values) for all options.
+
+### External PostgreSQL
+
+```yaml
+postgresql:
+  enabled: false
+
+externalDatabase:
+  hostname: postgresql.example.com
+  port: 5432
+  database: hmdm
+  username: hmdm
+  existingSecret: headwind-mdm-database
+  existingSecretPasswordKey: password
+```
+
+Instead of `externalDatabase.existingSecret` you can set `externalDatabase.password`, which lets the chart create the Secret.
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -53,13 +111,13 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| externalPostgresql.auth.database | string | `"mychart"` | Name of the database to use |
-| externalPostgresql.auth.existingSecret | string | `""` | Name of existing secret to use for PostgreSQL credentials |
-| externalPostgresql.auth.password | string | `"mychart"` | Password to use |
-| externalPostgresql.auth.userPasswordKey | string | `""` | Key in the secret containing the password |
-| externalPostgresql.auth.username | string | `"mychart"` | Name of the user to use |
-| externalPostgresql.hostname | string | `""` | Hostname of the PostgreSQL database |
-| externalPostgresql.port | int | `5432` | Port used to connect to PostgreSQL database |
+| externalDatabase.database | string | `"hmdm"` | Name of the database to use |
+| externalDatabase.existingSecret | string | `""` | Name of an existing Secret containing the password of the user |
+| externalDatabase.existingSecretPasswordKey | string | `"password"` | Key in the existing Secret containing the password of the user |
+| externalDatabase.hostname | string | `""` | Hostname of the external PostgreSQL database. Used if `postgresql.enabled` is false. |
+| externalDatabase.password | string | `""` | Password of the user. Ignored if `externalDatabase.existingSecret` is set. |
+| externalDatabase.port | int | `5432` | Port of the external PostgreSQL database |
+| externalDatabase.username | string | `"hmdm"` | Name of the user to use |
 | fullnameOverride | string | `""` | String to fully override `"headwind-mdm.fullname"` |
 | headwind.adminEmail | string | `""` | Email of admin user |
 | headwind.baseDomain | string | `""` | URL under which Headwind will be available |
@@ -90,13 +148,14 @@ The command removes all the Kubernetes components associated with the chart and 
 | persistence.storageClass | string | `""` |  |
 | podAnnotations | object | `{}` | Annotations to be added to exporter pods |
 | podSecurityContext | object | `{}` | pod-level security context |
-| postgresql.auth.database | string | `"mychart"` | Name for a custom database to create |
-| postgresql.auth.existingSecret | string | `""` | Name of existing secret to use for PostgreSQL credentials |
-| postgresql.auth.password | string | `"mychart"` | Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided |
-| postgresql.auth.username | string | `"mychart"` | Name for a custom user to create |
-| postgresql.enabled | bool | `true` | enable PostgreSQL™ subchart from Bitnami |
-| postgresql.image.repository | string | `"bitnamilegacy/postgresql"` | image repository for PostgreSQL™ subchart from Bitnami |
-| postgresql.image.tag | string | `"17.6.0-debian-12-r4"` | image tag for PostgreSQL™ subchart from Bitnami |
+| postgresql.cluster.imageName | string | `"ghcr.io/cloudnative-pg/postgresql:18-standard-trixie"` | PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version. |
+| postgresql.cluster.imagePullPolicy | string | `"Always"` | Pull the image on every start to get the latest minor version of the major version |
+| postgresql.cluster.initdb.database | string | `"hmdm"` | Name of the database to create |
+| postgresql.cluster.initdb.owner | string | `"hmdm"` | Name of the user owning the database |
+| postgresql.cluster.instances | int | `3` | Number of PostgreSQL instances (one primary, the others are replicas) |
+| postgresql.cluster.storage.size | string | `"8Gi"` | Size of the PVC of each instance |
+| postgresql.enabled | bool | `true` | Enable a PostgreSQL cluster managed by the CloudNativePG operator. Requires the operator to be installed in the cluster (see README). |
+| postgresql.version.postgresql | string | `"18"` | PostgreSQL major version. Has to match the major version of `postgresql.cluster.imageName`. |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the headwind pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
@@ -129,6 +188,44 @@ helm install my-release -f values.yaml christianhuth/headwind-mdm
 ```
 
 ## Upgrading the Chart
+
+### To 6.0.0
+
+This major replaces the Bitnami PostgreSQL subchart with a PostgreSQL cluster managed by the [CloudNativePG operator](https://cloudnative-pg.io). Install the operator first (see [Prerequisites](#prerequisites)). The values changed as follows:
+
+- `postgresql.auth.*` and `postgresql.image.*` are replaced by the values of the upstream chart [cnpg/cluster](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster), e.g. `postgresql.cluster.initdb.database` and `postgresql.cluster.initdb.owner`
+- an inline password for the bundled database is no longer supported. Use an existing Secret or let the operator generate one (see [Configuring the Database](#configuring-the-database))
+- `externalPostgresql.*` is renamed to `externalDatabase.*`, `externalPostgresql.auth.*` moved one level up and `userPasswordKey` is renamed to `existingSecretPasswordKey`
+
+The upgrade creates a new, empty database. The Bitnami StatefulSet is removed, but its PersistentVolumeClaim `data-<release>-postgresql-0` is kept. To take your data along:
+
+1. Dump the database before upgrading:
+
+   ```console
+   kubectl exec <release>-postgresql-0 -- sh -c 'PGPASSWORD="$(cat "$POSTGRES_PASSWORD_FILE")" pg_dump --no-owner --no-acl -U "$POSTGRES_USER" -d "$POSTGRES_DATABASE"' > hmdm.sql
+   ```
+
+2. Upgrade the chart with the application scaled down, so it does not initialize the new database:
+
+   ```console
+   helm upgrade <release> christianhuth/headwind-mdm --version 6.0.0 -f values.yaml --set replicaCount=0 --wait
+   kubectl wait --for=condition=Ready cluster/<release>-postgresql --timeout=10m
+   ```
+
+3. Restore the dump as the database owner. Use the Secret from `postgresql.cluster.initdb.secret.name` or the generated `<release>-postgresql-app`:
+
+   ```console
+   PASSWORD=$(kubectl get secret <release>-postgresql-app -o jsonpath='{.data.password}' | base64 -d)
+   kubectl exec -i <release>-postgresql-1 -c postgres -- env PGPASSWORD="$PASSWORD" psql -v ON_ERROR_STOP=1 -h localhost -U hmdm -d hmdm < hmdm.sql
+   ```
+
+4. Scale the application up again:
+
+   ```console
+   helm upgrade <release> christianhuth/headwind-mdm --version 6.0.0 -f values.yaml --wait
+   ```
+
+5. Once everything works, delete the old PersistentVolumeClaim `data-<release>-postgresql-0`.
 
 ### To 4.0.0
 

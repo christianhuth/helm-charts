@@ -1,0 +1,37 @@
+# Prerequisites of the charts in this repository, e.g. operators managing the custom resources rendered by a chart.
+#
+# A prerequisite applies to a chart if
+#   - the chart depends on the chart given in `dependency` (matched by name and repository in Chart.yaml), or
+#   - `always` is true.
+#
+# For every chart, the applying prerequisites are used to
+#   - install `releases` (in the given order) into the cluster before testing the chart: .github/scripts/install-prerequisites.sh
+#   - sync the shared named templates `template` from .github/templates/ into the chart: .github/scripts/sync-shared-templates.sh
+#
+# Releases are installed in their latest version.
+prerequisites:
+  - name: cloudnative-pg
+    dependency:
+      name: cluster
+      repository: https://cloudnative-pg.github.io/charts
+    template: _postgresql.tpl
+    releases:
+      - release: cnpg
+        chart: cloudnative-pg
+        repository: https://cloudnative-pg.github.io/charts
+        namespace: cnpg-system
+
+  - name: mariadb-operator
+    dependency:
+      name: mariadb-cluster
+      repository: https://helm.mariadb.com/mariadb-operator
+    template: _mariadb.tpl
+    releases:
+      - release: mariadb-operator-crds
+        chart: mariadb-operator-crds
+        repository: https://helm.mariadb.com/mariadb-operator
+        namespace: mariadb-operator
+      - release: mariadb-operator
+        chart: mariadb-operator
+        repository: https://helm.mariadb.com/mariadb-operator
+        namespace: mariadb-operator

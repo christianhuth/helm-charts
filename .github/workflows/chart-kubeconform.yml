@@ -68,6 +68,9 @@ jobs:
       - name: Set up kubeconform-helm plugin
         run: helm plugin install --verify=false https://github.com/jtyr/kubeconform-helm
 
+      - name: add helm repositories
+        run: .github/scripts/add-helm-repos.sh
+
       - name: helm dependency update on changed chart
         run : helm dependency update ${{ matrix.chart }}
 

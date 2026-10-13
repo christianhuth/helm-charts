@@ -40,19 +40,20 @@ spec:
             - "/db_init.sh"
           env:
             # Database Settings
+            {{- $tokenserver := dict "root" . "name" "tokenserver" }}
             - name: MARIADB_SERVER
-              value: {{ include "syncstorage-rs.tokenserver-db.host" . | quote }}
+              value: {{ include "syncstorage-rs.database.hostname" $tokenserver | quote }}
             - name: MARIADB_SERVER_PORT
-              value: {{ include "syncstorage-rs.tokenserver-db.port" . | quote }}
+              value: {{ include "syncstorage-rs.database.port" $tokenserver | quote }}
             - name: MARIADB_DATABASE
-              value: {{ include "syncstorage-rs.tokenserver-db.auth.database" . | quote }}
+              value: {{ include "syncstorage-rs.database.database" $tokenserver | quote }}
             - name: MARIADB_USER
-              value: {{ include "syncstorage-rs.tokenserver-db.auth.username" . | quote }}
+              value: {{ include "syncstorage-rs.database.username" $tokenserver | quote }}
             - name: MARIADB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "syncstorage-rs.tokenserver-db.auth.secretName" . | quote }}
-                  key: database-password
+                  name: {{ include "syncstorage-rs.database.secretName" $tokenserver | quote }}
+                  key: {{ include "syncstorage-rs.database.passwordKey" $tokenserver | quote }}
             # General Settings
             {{- if .Values.ingress.enabled }}
             {{- with (index .Values.ingress.hosts 0) }}
@@ -80,21 +81,13 @@ spec:
                   key: master-key
             {{- end }}
             # Syncserver DB Settings
-            - name: SYNC_SYNCSTORAGE__DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "syncstorage-rs.syncserver-db.auth.secretName" . }}
-                  key: database-url
+            {{- include "syncstorage-rs.database.urlEnv" (dict "root" . "name" "syncserver" "env" "SYNC_SYNCSTORAGE__DATABASE_URL") | nindent 12 }}
             # Tokenserver DB Settings
             - name: SYNC_TOKENSERVER__ENABLED
               value: "true"
             - name: SYNC_TOKENSERVER__NODE_TYPE
               value: mysql
-            - name: SYNC_TOKENSERVER__DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "syncstorage-rs.tokenserver-db.auth.secretName" . }}
-                  key: database-url
+            {{- include "syncstorage-rs.database.urlEnv" (dict "root" . "name" "tokenserver" "env" "SYNC_TOKENSERVER__DATABASE_URL") | nindent 12 }}
             - name: SYNC_TOKENSERVER__RUN_MIGRATIONS
               value: {{ .Values.syncstorage.config.runTokenserverDbMigrations | quote }}
             {{- if .Values.extraEnv }}
