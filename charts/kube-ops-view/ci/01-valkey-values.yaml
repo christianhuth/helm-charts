@@ -1,0 +1,11 @@
+---
+replicaCount: 2
+
+valkey:
+  enabled: true
+  auth:
+    enabled: true
+    aclUsers:
+      default:
+        permissions: "~* &* +@all"
+        password: ci-password

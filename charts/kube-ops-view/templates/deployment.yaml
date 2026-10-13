@@ -33,14 +33,13 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if or .Values.args .Values.redis.enabled }}
+          {{- with .Values.args }}
           args:
-            {{- if .Values.redis.enabled }}
-            - --redis-url=redis://{{ .Release.Name }}-redis-master:6379
-            {{- end }}
-            {{- with .Values.args }}
             {{- toYaml . | nindent 12 }}
-            {{- end }}
+          {{- end }}
+          {{- if include "kube-ops-view.redis.enabled" . }}
+          env:
+            {{- include "kube-ops-view.redis.env" . | nindent 12 }}
           {{- end }}
           #          env:
           #            - name: AUTHORIZE_URL

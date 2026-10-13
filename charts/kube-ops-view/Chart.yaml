@@ -3,7 +3,7 @@ apiVersion: v2
 name: kube-ops-view
 description: A Helm chart for bootstrapping kube-ops-view.
 type: application
-version: 8.3.3
+version: 9.0.0
 appVersion: "23.5.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kube-ops-view/icon.svg
@@ -13,15 +13,17 @@ maintainers:
 sources:
   - https://codeberg.org/hjacobs/kube-ops-view
 dependencies:
-  - name: redis
-    repository: oci://registry-1.docker.io/bitnamicharts
-    version: 25.5.3
-    condition: redis.enabled
+  - name: valkey
+    repository: https://valkey.io/valkey-helm/
+    version: 0.12.0
+    condition: valkey.enabled
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of redis to 25.5.3
+      description: "BREAKING: replaced the Bitnami Redis subchart with the official Valkey chart (valkey/valkey). The values moved from redis.* to valkey.*, see the upgrade notes in the README."
+    - kind: added
+      description: support for an external Redis/Valkey server (externalRedis.*) and for password authentication
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

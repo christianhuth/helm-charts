@@ -12,6 +12,8 @@ prerequisites=$(.github/scripts/chart-prerequisites.sh "$@")
 declare -A installed=()
 
 while IFS=$'\t' read -r release chart repository namespace; do
+    # prerequisites without releases (e.g. charts without operator) yield empty lines
+    [[ -n "${release}" ]] || continue
     [[ -n "${installed[${release}]:-}" ]] && continue
     echo "Installing ${chart} from ${repository} as ${release} into namespace ${namespace}"
     helm upgrade --install "${release}" "${chart}" \

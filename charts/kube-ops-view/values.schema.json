@@ -21,6 +21,56 @@
       "title": "deploymentStrategy",
       "type": "object"
     },
+    "externalRedis": {
+      "properties": {
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Secret containing the password. The password must only contain URL-safe characters.",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "existingSecretPasswordKey": {
+          "default": "password",
+          "description": "Key in the existing Secret containing the password",
+          "title": "existingSecretPasswordKey",
+          "type": "string"
+        },
+        "hostname": {
+          "default": "",
+          "description": "Hostname of an external Redis or Valkey server. Used if `valkey.enabled` is false.",
+          "title": "hostname",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Password of the user. Ignored if `externalRedis.existingSecret` is set. Must only contain URL-safe characters.",
+          "title": "password",
+          "type": "string"
+        },
+        "port": {
+          "default": 6379,
+          "description": "Port of the external server",
+          "title": "port",
+          "type": "integer"
+        },
+        "username": {
+          "default": "",
+          "description": "Name of the user. Leave empty to authenticate with a password only.",
+          "title": "username",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostname",
+        "port",
+        "username",
+        "password",
+        "existingSecret",
+        "existingSecretPasswordKey"
+      ],
+      "title": "externalRedis",
+      "type": "object"
+    },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"kube-ops-view.fullname\"`",
@@ -180,44 +230,6 @@
       "description": "Annotations to be added to exporter pods",
       "required": [],
       "title": "podAnnotations",
-      "type": "object"
-    },
-    "redis": {
-      "properties": {
-        "architecture": {
-          "default": "standalone",
-          "description": "Redis™ architecture. Allowed values: standalone or replication",
-          "title": "architecture",
-          "type": "string"
-        },
-        "auth": {
-          "properties": {
-            "enabled": {
-              "default": false,
-              "description": "Disable password authentication as the kube-ops-view container has no support for password authentication",
-              "title": "enabled",
-              "type": "boolean"
-            }
-          },
-          "required": [
-            "enabled"
-          ],
-          "title": "auth",
-          "type": "object"
-        },
-        "enabled": {
-          "default": false,
-          "description": "enable Redis™ subchart from Bitnami",
-          "title": "enabled",
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "architecture",
-        "auth",
-        "enabled"
-      ],
-      "title": "redis",
       "type": "object"
     },
     "replicaCount": {
@@ -487,6 +499,51 @@
       },
       "title": "tolerations",
       "type": "array"
+    },
+    "valkey": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "aclUsers": {
+              "description": "ACL users. kube-ops-view authenticates as the user `default`.",
+              "required": [],
+              "title": "aclUsers",
+              "type": "object"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enable password authentication. Requires the user `default` in `valkey.auth.aclUsers`. Note that kube-ops-view logs the Redis URL including the password on startup.",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "usersExistingSecret": {
+              "default": "",
+              "description": "Name of an existing Secret containing the passwords of the users (key `\u003cuser\u003e` or `aclUsers.\u003cuser\u003e.passwordKey`)",
+              "title": "usersExistingSecret",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "usersExistingSecret",
+            "aclUsers"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enable a Valkey instance (official chart valkey/valkey) used by kube-ops-view for pub/sub and job locking. Required if `replicaCount` is greater than 1.",
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth"
+      ],
+      "title": "valkey",
+      "type": "object"
     }
   },
   "required": [
@@ -508,7 +565,8 @@
     "serviceAccount",
     "ingress",
     "route",
-    "redis"
+    "valkey",
+    "externalRedis"
   ],
   "type": "object"
 }
