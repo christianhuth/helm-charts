@@ -82,6 +82,12 @@ syncserver-db:
 
 If no Secret is referenced, the operator generates a random password and stores it in the Secret `<release>-syncserver-db-password`. The connection URL used by syncstorage-rs is created by the operator in the Secret `<release>-syncserver-db` (key `database-url`), with the password URL-encoded.
 
+### Updating MariaDB
+
+The image tags only pin the MariaDB release series (by default the long-term support release 12.3), so restarted instances get the latest patch version of the series. To upgrade to another release series (e.g. the next long-term support release), change the tag of `<db>.mariadb.image`. The operator rolls out the instances one by one and migrates the system schema (`updateStrategy.mariadbAutoUpgradeEnabled`). Downgrades to a previous release series are not supported by MariaDB, so take a backup before upgrading.
+
+### Further settings
+
 By default each database runs as a Galera cluster with 3 instances. All other settings (e.g. `mariadb.replicas`, `mariadb.storage`, backups) are passed to the upstream chart. See its [values](https://github.com/mariadb-operator/mariadb-operator/tree/main/deploy/charts/mariadb-cluster) and the [MariaDB API reference](https://github.com/mariadb-operator/mariadb-operator/blob/main/docs/api_reference.md#mariadbspec) for all options.
 
 ### External MariaDB or MySQL

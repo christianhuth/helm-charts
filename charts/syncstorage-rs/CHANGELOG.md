@@ -2,6 +2,10 @@
 
 ## 7.0.0
 
+### Added
+
+- automatic migration of the system schema when changing the MariaDB release series (updateStrategy.mariadbAutoUpgradeEnabled)
+
 ### Changed
 
 - BREAKING: replaced the Bitnami MariaDB subcharts with MariaDB instances managed by the mariadb-operator (upstream chart mariadb-cluster). See the upgrade notes in the README.

@@ -709,7 +709,7 @@
             },
             "image": {
               "default": "mariadb:12.3",
-              "description": "MariaDB image. The tag only pins the release series, so restarted instances get its latest patch version.",
+              "description": "MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.",
               "title": "image",
               "type": "string"
             },
@@ -769,6 +769,21 @@
               "title": "storage",
               "type": "object"
             },
+            "updateStrategy": {
+              "properties": {
+                "mariadbAutoUpgradeEnabled": {
+                  "default": true,
+                  "description": "Run `mariadb-upgrade` on start, so that changing the release series in `image` migrates the system schema. It is a no-op if there is nothing to migrate.",
+                  "title": "mariadbAutoUpgradeEnabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "mariadbAutoUpgradeEnabled"
+              ],
+              "title": "updateStrategy",
+              "type": "object"
+            },
             "username": {
               "default": "syncserver",
               "description": "Name of the user to create",
@@ -779,6 +794,7 @@
           "required": [
             "image",
             "imagePullPolicy",
+            "updateStrategy",
             "replicas",
             "galera",
             "database",
@@ -999,7 +1015,7 @@
             },
             "image": {
               "default": "mariadb:12.3",
-              "description": "MariaDB image. The tag only pins the release series, so restarted instances get its latest patch version.",
+              "description": "MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.",
               "title": "image",
               "type": "string"
             },
@@ -1059,6 +1075,21 @@
               "title": "storage",
               "type": "object"
             },
+            "updateStrategy": {
+              "properties": {
+                "mariadbAutoUpgradeEnabled": {
+                  "default": true,
+                  "description": "Run `mariadb-upgrade` on start, so that changing the release series in `image` migrates the system schema. It is a no-op if there is nothing to migrate.",
+                  "title": "mariadbAutoUpgradeEnabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "mariadbAutoUpgradeEnabled"
+              ],
+              "title": "updateStrategy",
+              "type": "object"
+            },
             "username": {
               "default": "tokenserver",
               "description": "Name of the user to create",
@@ -1069,6 +1100,7 @@
           "required": [
             "image",
             "imagePullPolicy",
+            "updateStrategy",
             "replicas",
             "galera",
             "database",

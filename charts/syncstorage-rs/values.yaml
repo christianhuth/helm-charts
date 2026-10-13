@@ -210,10 +210,13 @@ syncserver-db:
   # -- Enable a MariaDB instance managed by the mariadb-operator for the Syncserver database. Requires the operator to be installed in the cluster (see README).
   enabled: true
   mariadb:
-    # -- MariaDB image. The tag only pins the release series, so restarted instances get its latest patch version.
+    # -- MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.
     image: mariadb:12.3
     # -- Pull the image on every start to get the latest patch version of the release series
     imagePullPolicy: Always
+    updateStrategy:
+      # -- Run `mariadb-upgrade` on start, so that changing the release series in `image` migrates the system schema. It is a no-op if there is nothing to migrate.
+      mariadbAutoUpgradeEnabled: true
     # -- Number of MariaDB instances. More than one instance requires Galera or replication.
     replicas: 3
     galera:
@@ -244,10 +247,13 @@ tokenserver-db:
   # -- Enable a MariaDB instance managed by the mariadb-operator for the Tokenserver database. Requires the operator to be installed in the cluster (see README).
   enabled: true
   mariadb:
-    # -- MariaDB image. The tag only pins the release series, so restarted instances get its latest patch version.
+    # -- MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.
     image: mariadb:12.3
     # -- Pull the image on every start to get the latest patch version of the release series
     imagePullPolicy: Always
+    updateStrategy:
+      # -- Run `mariadb-upgrade` on start, so that changing the release series in `image` migrates the system schema. It is a no-op if there is nothing to migrate.
+      mariadbAutoUpgradeEnabled: true
     # -- Number of MariaDB instances. More than one instance requires Galera or replication.
     replicas: 3
     galera:

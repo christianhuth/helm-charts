@@ -33,6 +33,8 @@ annotations:
       description: "BREAKING: moved syncstorage.syncserver-db and syncstorage.tokenserver-db to externalSyncserverDatabase and externalTokenserverDatabase with a standardized structure"
     - kind: removed
       description: "BREAKING: inline passwords for the bundled MariaDB instances. The operator generates the passwords or uses the Secrets given in <db>.mariadb.passwordSecretKeyRef"
+    - kind: added
+      description: automatic migration of the system schema when changing the MariaDB release series (updateStrategy.mariadbAutoUpgradeEnabled)
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

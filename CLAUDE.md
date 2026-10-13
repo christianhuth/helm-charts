@@ -103,6 +103,7 @@ Pattern for charts using them (see `headwind-mdm` and `syncstorage-rs`):
 - `templates/_dependencies.tpl`: chart-specific interface (`<chart>.database.*`) that dispatches between the bundled database and `externalDatabase.*`. Deployments only use this interface.
 - No inline passwords for bundled databases: the operator generates them or an existing Secret is referenced through the upstream values.
 - `values.yaml` defaults to 3 instances; `ci/*-values.yaml` reduces them to 1.
+- Images only pin the major version (PostgreSQL: `version.postgresql` plus `cluster.imageName`, bumped by Renovate as major PRs) or the release series (MariaDB: current LTS, bumped manually, with `updateStrategy.mariadbAutoUpgradeEnabled: true`), combined with `imagePullPolicy: Always`.
 
 Prerequisites of charts (operators, CRD charts) are registered in `.github/config/prerequisites.yaml`, either for charts with a given dependency or for all charts (`always: true`). Each entry lists the Helm releases to install and optionally the shared template a chart needs. Supporting a new upstream CR chart only requires a new entry there. The scripts in `.github/scripts/` take `--chart-search-root=<dir>` (a single chart or a directory of charts, default `charts`):
 - `chart-prerequisites.sh`: prints the prerequisites applying to each chart (JSON lines)
