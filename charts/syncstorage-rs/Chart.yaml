@@ -3,7 +3,7 @@ apiVersion: v2
 name: syncstorage-rs
 description: A Helm chart for deploying Mozilla's Firefox Sync Storage server to Kubernetes
 type: application
-version: 6.1.1
+version: 7.0.0
 appVersion: "syncstorage-rs-mysql-0.18.2"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncstorage-rs/icon.svg
@@ -15,20 +15,26 @@ sources:
   - https://github.com/porelli/firefox-sync
   - https://github.com/porelli/firefox-sync/pkgs/container/firefox-sync
 dependencies:
-  - name: mariadb
-    repository: oci://registry-1.docker.io/bitnamicharts
-    version: 26.2.1
+  - name: mariadb-cluster
+    repository: https://helm.mariadb.com/mariadb-operator
+    version: 26.10.1
     alias: syncserver-db
     condition: syncserver-db.enabled
-  - name: mariadb
-    repository: oci://registry-1.docker.io/bitnamicharts
-    version: 26.2.1
+  - name: mariadb-cluster
+    repository: https://helm.mariadb.com/mariadb-operator
+    version: 26.10.1
     alias: tokenserver-db
     condition: tokenserver-db.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of mariadb mariadb to 26.2.1
+      description: "BREAKING: replaced the Bitnami MariaDB subcharts with MariaDB instances managed by the mariadb-operator (upstream chart mariadb-cluster). See the upgrade notes in the README."
+    - kind: changed
+      description: "BREAKING: moved syncstorage.syncserver-db and syncstorage.tokenserver-db to externalSyncserverDatabase and externalTokenserverDatabase with a standardized structure"
+    - kind: removed
+      description: "BREAKING: inline passwords for the bundled MariaDB instances. The operator generates the passwords or uses the Secrets given in <db>.mariadb.passwordSecretKeyRef"
+    - kind: added
+      description: automatic migration of the system schema when changing the MariaDB release series (updateStrategy.mariadbAutoUpgradeEnabled)
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

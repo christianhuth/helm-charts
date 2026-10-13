@@ -39,6 +39,120 @@
       "title": "autoscaling",
       "type": "object"
     },
+    "externalSyncserverDatabase": {
+      "properties": {
+        "database": {
+          "default": "syncserver",
+          "description": "Name of the database to use",
+          "title": "database",
+          "type": "string"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Secret containing the password of the user. The password must only contain URL-safe characters.",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "existingSecretPasswordKey": {
+          "default": "password",
+          "description": "Key in the existing Secret containing the password of the user",
+          "title": "existingSecretPasswordKey",
+          "type": "string"
+        },
+        "hostname": {
+          "default": "",
+          "description": "Hostname of the external Syncserver database. Used if `syncserver-db.enabled` is false.",
+          "title": "hostname",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Password of the user. Ignored if `externalSyncserverDatabase.existingSecret` is set. Must only contain URL-safe characters.",
+          "title": "password",
+          "type": "string"
+        },
+        "port": {
+          "default": 3306,
+          "description": "Port of the external Syncserver database",
+          "title": "port",
+          "type": "integer"
+        },
+        "username": {
+          "default": "syncserver",
+          "description": "Name of the user to use",
+          "title": "username",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostname",
+        "port",
+        "database",
+        "username",
+        "password",
+        "existingSecret",
+        "existingSecretPasswordKey"
+      ],
+      "title": "externalSyncserverDatabase",
+      "type": "object"
+    },
+    "externalTokenserverDatabase": {
+      "properties": {
+        "database": {
+          "default": "tokenserver",
+          "description": "Name of the database to use",
+          "title": "database",
+          "type": "string"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Secret containing the password of the user. The password must only contain URL-safe characters.",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "existingSecretPasswordKey": {
+          "default": "password",
+          "description": "Key in the existing Secret containing the password of the user",
+          "title": "existingSecretPasswordKey",
+          "type": "string"
+        },
+        "hostname": {
+          "default": "",
+          "description": "Hostname of the external Tokenserver database. Used if `tokenserver-db.enabled` is false.",
+          "title": "hostname",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Password of the user. Ignored if `externalTokenserverDatabase.existingSecret` is set. Must only contain URL-safe characters.",
+          "title": "password",
+          "type": "string"
+        },
+        "port": {
+          "default": 3306,
+          "description": "Port of the external Tokenserver database",
+          "title": "port",
+          "type": "integer"
+        },
+        "username": {
+          "default": "tokenserver",
+          "description": "Name of the user to use",
+          "title": "username",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostname",
+        "port",
+        "database",
+        "username",
+        "password",
+        "existingSecret",
+        "existingSecretPasswordKey"
+      ],
+      "title": "externalTokenserverDatabase",
+      "type": "object"
+    },
     "extraEnv": {
       "description": "additional environment variables to be added to the pods",
       "items": {
@@ -533,45 +647,169 @@
     },
     "syncserver-db": {
       "properties": {
-        "auth": {
+        "enabled": {
+          "default": true,
+          "description": "Enable a MariaDB instance managed by the mariadb-operator for the Syncserver database. Requires the operator to be installed in the cluster (see README).",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "mariadb": {
           "properties": {
+            "connection": {
+              "properties": {
+                "secretTemplate": {
+                  "properties": {
+                    "format": {
+                      "default": "mysql://{{ .Username }}:{{ urlquery .Password }}@{{ .Host }}:{{ .Port }}/{{ .Database }}",
+                      "description": "Format of the connection URL used by syncstorage-rs. The password is URL-encoded.",
+                      "title": "format",
+                      "type": "string"
+                    },
+                    "key": {
+                      "default": "database-url",
+                      "description": "Key of the connection URL inside the Secret `\u003crelease\u003e-syncserver-db` generated by the operator",
+                      "title": "key",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "format"
+                  ],
+                  "title": "secretTemplate",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "secretTemplate"
+              ],
+              "title": "connection",
+              "type": "object"
+            },
             "database": {
               "default": "syncserver",
-              "description": "The database name to be used when using the integrated MariaDB database.",
+              "description": "Name of the database to create",
               "title": "database",
               "type": "string"
             },
-            "password": {
-              "default": "syncserver",
-              "description": "The password credential to be used when using the integrated MariaDB database.",
-              "title": "password",
+            "galera": {
+              "properties": {
+                "enabled": {
+                  "default": true,
+                  "description": "Enable Galera to run multiple instances",
+                  "title": "enabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled"
+              ],
+              "title": "galera",
+              "type": "object"
+            },
+            "image": {
+              "default": "mariadb:12.3",
+              "description": "MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.",
+              "title": "image",
               "type": "string"
+            },
+            "imagePullPolicy": {
+              "default": "Always",
+              "description": "Pull the image on every start to get the latest patch version of the release series",
+              "title": "imagePullPolicy",
+              "type": "string"
+            },
+            "passwordSecretKeyRef": {
+              "properties": {
+                "generate": {
+                  "default": true,
+                  "description": "Let the operator generate the Secret with a random password if it does not exist",
+                  "title": "generate",
+                  "type": "boolean"
+                },
+                "key": {
+                  "default": "password",
+                  "description": "Key of the password inside the Secret",
+                  "title": "key",
+                  "type": "string"
+                },
+                "name": {
+                  "default": "",
+                  "description": "Name of an existing Secret containing the password of the user. If empty, the Secret `\u003crelease\u003e-syncserver-db-password` is used.",
+                  "title": "name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "key",
+                "generate"
+              ],
+              "title": "passwordSecretKeyRef",
+              "type": "object"
+            },
+            "replicas": {
+              "default": 3,
+              "description": "Number of MariaDB instances. More than one instance requires Galera or replication.",
+              "title": "replicas",
+              "type": "integer"
+            },
+            "storage": {
+              "properties": {
+                "size": {
+                  "default": "8Gi",
+                  "description": "Size of the PVC of each instance",
+                  "title": "size",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "size"
+              ],
+              "title": "storage",
+              "type": "object"
+            },
+            "updateStrategy": {
+              "properties": {
+                "mariadbAutoUpgradeEnabled": {
+                  "default": true,
+                  "description": "Run `mariadb-upgrade` on start, so that changing the release series in `image` migrates the system schema. It is a no-op if there is nothing to migrate.",
+                  "title": "mariadbAutoUpgradeEnabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "mariadbAutoUpgradeEnabled"
+              ],
+              "title": "updateStrategy",
+              "type": "object"
             },
             "username": {
               "default": "syncserver",
-              "description": "The username credential to be used when using the integrated MariaDB database.",
+              "description": "Name of the user to create",
               "title": "username",
               "type": "string"
             }
           },
           "required": [
+            "image",
+            "imagePullPolicy",
+            "updateStrategy",
+            "replicas",
+            "galera",
             "database",
-            "password",
-            "username"
+            "username",
+            "passwordSecretKeyRef",
+            "storage",
+            "connection"
           ],
-          "title": "auth",
+          "title": "mariadb",
           "type": "object"
-        },
-        "enabled": {
-          "default": true,
-          "description": "enable integrated MariaDB™ subchart from Bitnami for the Syncserver database",
-          "title": "enabled",
-          "type": "boolean"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "mariadb"
       ],
       "title": "syncserver-db",
       "type": "object"
@@ -634,124 +872,6 @@
             "value"
           ],
           "title": "masterKey",
-          "type": "object"
-        },
-        "syncserver-db": {
-          "properties": {
-            "auth": {
-              "properties": {
-                "database": {
-                  "default": "",
-                  "description": "The database name to be used when using an external database for the Syncserver. Will be ignored when you activate the integrated database with syncserver-db.enabled.",
-                  "title": "database",
-                  "type": "string"
-                },
-                "existingSecret": {
-                  "default": "",
-                  "description": "Use existing secret for connection url. The secret has to contain the key `database-url`.",
-                  "title": "existingSecret",
-                  "type": "string"
-                },
-                "password": {
-                  "default": "",
-                  "description": "The password credential to be used when using an external database driver. Will be ignored when you activate the integrated database with syncserver-db.enabled.",
-                  "title": "password",
-                  "type": "string"
-                },
-                "username": {
-                  "default": "",
-                  "description": "The username credential to be used when using an external database driver. Will be ignored when you activate the integrated database with syncserver-db.enabled.",
-                  "title": "username",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "database",
-                "existingSecret",
-                "password",
-                "username"
-              ],
-              "title": "auth",
-              "type": "object"
-            },
-            "host": {
-              "default": "",
-              "description": "The host name of the database server when using an external database driver. Will be ignored when you activate the integrated database with syncserver-db.enabled.",
-              "title": "host",
-              "type": "string"
-            },
-            "port": {
-              "default": 3306,
-              "description": "The port in which the database service is running when using an external database driver. Will be ignored when you activate the integrated database with syncserver-db.enabled.",
-              "title": "port",
-              "type": "integer"
-            }
-          },
-          "required": [
-            "auth",
-            "host",
-            "port"
-          ],
-          "title": "syncserver-db",
-          "type": "object"
-        },
-        "tokenserver-db": {
-          "properties": {
-            "auth": {
-              "properties": {
-                "database": {
-                  "default": "",
-                  "description": "The database name to be used when using an external database for the Tokenserver. Will be ignored when you activate the integrated database with tokenserver-db.enabled.",
-                  "title": "database",
-                  "type": "string"
-                },
-                "existingSecret": {
-                  "default": "",
-                  "description": "Use existing secret for connection url. The secret has to contain the keys `database-password` and `database-url`.",
-                  "title": "existingSecret",
-                  "type": "string"
-                },
-                "password": {
-                  "default": "",
-                  "description": "The password credential to be used when using an external database driver. Will be ignored when you activate the integrated database with tokenserver-db.enabled.",
-                  "title": "password",
-                  "type": "string"
-                },
-                "username": {
-                  "default": "",
-                  "description": "The username credential to be used when using an external database driver. Will be ignored when you activate the integrated database with tokenserver-db.enabled.",
-                  "title": "username",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "database",
-                "existingSecret",
-                "password",
-                "username"
-              ],
-              "title": "auth",
-              "type": "object"
-            },
-            "host": {
-              "default": "",
-              "description": "The host name of the database server when using an external database driver. Will be ignored when you activate the integrated database with tokenserver-db.enabled.",
-              "title": "host",
-              "type": "string"
-            },
-            "port": {
-              "default": 3306,
-              "description": "The port in which the database service is running when using an external database driver. Will be ignored when you activate the integrated database with tokenserver-db.enabled.",
-              "title": "port",
-              "type": "integer"
-            }
-          },
-          "required": [
-            "auth",
-            "host",
-            "port"
-          ],
-          "title": "tokenserver-db",
           "type": "object"
         },
         "tokenserver-db-lock": {
@@ -826,8 +946,6 @@
       "required": [
         "config",
         "masterKey",
-        "syncserver-db",
-        "tokenserver-db",
         "tokenserver-db-lock"
       ],
       "title": "syncstorage",
@@ -835,45 +953,169 @@
     },
     "tokenserver-db": {
       "properties": {
-        "auth": {
+        "enabled": {
+          "default": true,
+          "description": "Enable a MariaDB instance managed by the mariadb-operator for the Tokenserver database. Requires the operator to be installed in the cluster (see README).",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "mariadb": {
           "properties": {
+            "connection": {
+              "properties": {
+                "secretTemplate": {
+                  "properties": {
+                    "format": {
+                      "default": "mysql://{{ .Username }}:{{ urlquery .Password }}@{{ .Host }}:{{ .Port }}/{{ .Database }}",
+                      "description": "Format of the connection URL used by syncstorage-rs. The password is URL-encoded.",
+                      "title": "format",
+                      "type": "string"
+                    },
+                    "key": {
+                      "default": "database-url",
+                      "description": "Key of the connection URL inside the Secret `\u003crelease\u003e-tokenserver-db` generated by the operator",
+                      "title": "key",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "format"
+                  ],
+                  "title": "secretTemplate",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "secretTemplate"
+              ],
+              "title": "connection",
+              "type": "object"
+            },
             "database": {
               "default": "tokenserver",
-              "description": "The database name to be used when using the integrated MariaDB database.",
+              "description": "Name of the database to create",
               "title": "database",
               "type": "string"
             },
-            "password": {
-              "default": "tokenserver",
-              "description": "The password credential to be used when using the integrated MariaDB database.",
-              "title": "password",
+            "galera": {
+              "properties": {
+                "enabled": {
+                  "default": true,
+                  "description": "Enable Galera to run multiple instances",
+                  "title": "enabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled"
+              ],
+              "title": "galera",
+              "type": "object"
+            },
+            "image": {
+              "default": "mariadb:12.3",
+              "description": "MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.",
+              "title": "image",
               "type": "string"
+            },
+            "imagePullPolicy": {
+              "default": "Always",
+              "description": "Pull the image on every start to get the latest patch version of the release series",
+              "title": "imagePullPolicy",
+              "type": "string"
+            },
+            "passwordSecretKeyRef": {
+              "properties": {
+                "generate": {
+                  "default": true,
+                  "description": "Let the operator generate the Secret with a random password if it does not exist",
+                  "title": "generate",
+                  "type": "boolean"
+                },
+                "key": {
+                  "default": "password",
+                  "description": "Key of the password inside the Secret",
+                  "title": "key",
+                  "type": "string"
+                },
+                "name": {
+                  "default": "",
+                  "description": "Name of an existing Secret containing the password of the user. If empty, the Secret `\u003crelease\u003e-tokenserver-db-password` is used.",
+                  "title": "name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "key",
+                "generate"
+              ],
+              "title": "passwordSecretKeyRef",
+              "type": "object"
+            },
+            "replicas": {
+              "default": 3,
+              "description": "Number of MariaDB instances. More than one instance requires Galera or replication.",
+              "title": "replicas",
+              "type": "integer"
+            },
+            "storage": {
+              "properties": {
+                "size": {
+                  "default": "8Gi",
+                  "description": "Size of the PVC of each instance",
+                  "title": "size",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "size"
+              ],
+              "title": "storage",
+              "type": "object"
+            },
+            "updateStrategy": {
+              "properties": {
+                "mariadbAutoUpgradeEnabled": {
+                  "default": true,
+                  "description": "Run `mariadb-upgrade` on start, so that changing the release series in `image` migrates the system schema. It is a no-op if there is nothing to migrate.",
+                  "title": "mariadbAutoUpgradeEnabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "mariadbAutoUpgradeEnabled"
+              ],
+              "title": "updateStrategy",
+              "type": "object"
             },
             "username": {
               "default": "tokenserver",
-              "description": "The username credential to be used when using the integrated MariaDB database.",
+              "description": "Name of the user to create",
               "title": "username",
               "type": "string"
             }
           },
           "required": [
+            "image",
+            "imagePullPolicy",
+            "updateStrategy",
+            "replicas",
+            "galera",
             "database",
-            "password",
-            "username"
+            "username",
+            "passwordSecretKeyRef",
+            "storage",
+            "connection"
           ],
-          "title": "auth",
+          "title": "mariadb",
           "type": "object"
-        },
-        "enabled": {
-          "default": true,
-          "description": "enable integrated MariaDB™ subchart from Bitnami for the Tokenserver database",
-          "title": "enabled",
-          "type": "boolean"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "mariadb"
       ],
       "title": "tokenserver-db",
       "type": "object"
@@ -911,7 +1153,9 @@
     "extraEnv",
     "syncstorage",
     "syncserver-db",
-    "tokenserver-db"
+    "tokenserver-db",
+    "externalSyncserverDatabase",
+    "externalTokenserverDatabase"
   ],
   "type": "object"
 }

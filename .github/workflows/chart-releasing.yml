@@ -35,10 +35,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add Helm repositories
-        run: |
-          helm repo add bitnami https://charts.bitnami.com/bitnami
-          helm repo add christianhuth https://charts.christianhuth.de
-          helm repo add cnieg https://cnieg.github.io/helm-charts
+        run: .github/scripts/add-helm-repos.sh
 
       - name: Import GPG key
         run: |

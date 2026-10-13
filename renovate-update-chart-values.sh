@@ -59,4 +59,4 @@ sed -i "s/${IMAGE_VERSION_OLD}/${IMAGE_VERSION_NEW}/g" "charts/${CHART}/values.s
 sed -i "s/${IMAGE_VERSION_OLD}/${IMAGE_VERSION_NEW}/g" "charts/${CHART}/README.md"
 
 # update CHANGELOG.md
-.github/generate-chart-changelogs.sh
+.github/scripts/generate-chart-changelogs.sh

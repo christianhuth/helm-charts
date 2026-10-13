@@ -70,5 +70,8 @@ jobs:
         with:
           node_image: kindest/node:v1.34.0
 
+      - name: Install chart prerequisites
+        run: .github/scripts/install-prerequisites.sh --chart-search-root=${{ matrix.chart }}
+
       - name: Run chart-testing (install)
         run: "ct install --charts ${{ matrix.chart }} --config .github/config/chart-testing.yaml"

@@ -16,6 +16,17 @@
       "matchStrings": ["appVersion:\\s*\"(?<currentValue>v[\\d.]+)\""],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "kubernetes-sigs/gateway-api"
+    },
+    {
+      "description": "PostgreSQL major version of CloudNativePG clusters (postgresql.version.postgresql and postgresql.cluster.imageName)",
+      "customType": "regex",
+      "managerFilePatterns": ["/^charts/[^/]+/values\\.yaml$/"],
+      "matchStrings": [
+        "\\n\\s+version:\\n(?:\\s*#.*\\n)*\\s+postgresql: \"?(?<currentValue>\\d+)\"?\\n",
+        "imageName: \"?(?<depName>ghcr\\.io/cloudnative-pg/postgresql):(?<currentValue>[^\"\\s]+)\"?"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "ghcr.io/cloudnative-pg/postgresql"
     }
   ],
   "packageRules": [
@@ -38,6 +49,14 @@
       "matchDepNames": ["kubernetes-sigs/gateway-api"],
       "postUpgradeTasks": {
         "commands": ["bash ./renovate-update-gateway-api-crds.sh '{{{updateType}}}' '{{{currentValue}}}' '{{{newValue}}}'"],
+        "executionMode": "branch"
+      }
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["ghcr.io/cloudnative-pg/postgresql"],
+      "postUpgradeTasks": {
+        "commands": ["bash ./renovate-update-chart-values.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{currentValue}}}' '{{{newValue}}}'"],
         "executionMode": "branch"
       }
     },

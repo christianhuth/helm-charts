@@ -94,11 +94,20 @@ The chart pipeline (`.github/workflows/chart-pipeline.yml`) runs on changes to `
 
 ## Key Dependencies
 
-Charts commonly use Bitnami subcharts for databases:
-- PostgreSQL: `oci://registry-1.docker.io/bitnamicharts/postgresql`
-- MySQL: `oci://registry-1.docker.io/bitnamicharts/mysql`
+Databases are being migrated from Bitnami subcharts to operator-managed databases. The operator itself is never a dependency; charts depend on the upstream chart that only renders the custom resource, aliased to the database type:
+- PostgreSQL: `cluster` from https://cloudnative-pg.github.io/charts (alias `postgresql`), operator: CloudNativePG
+- MariaDB: `mariadb-cluster` from https://helm.mariadb.com/mariadb-operator (alias `mariadb`), operator: mariadb-operator
 
-External chart repos configured for chart-testing:
-- bitnami: https://charts.bitnami.com/bitnami
-- cnieg: https://cnieg.github.io/helm-charts
-- christianhuth: https://charts.christianhuth.de
+Pattern for charts using them (see `headwind-mdm` and `syncstorage-rs`):
+- `templates/_postgresql.tpl` / `templates/_mariadb.tpl`: shared named templates (`christianhuth.<db>.*`) taking the subchart context. Never edit the copies, edit the masters in `.github/templates/`; `.github/scripts/sync-shared-templates.sh` (pre-commit hook) copies them into every chart requiring them and removes copies no longer required.
+- `templates/_dependencies.tpl`: chart-specific interface (`<chart>.database.*`) that dispatches between the bundled database and `externalDatabase.*`. Deployments only use this interface.
+- No inline passwords for bundled databases: the operator generates them or an existing Secret is referenced through the upstream values.
+- `values.yaml` defaults to 3 instances; `ci/*-values.yaml` reduces them to 1.
+- Images only pin the major version (PostgreSQL: `version.postgresql` plus `cluster.imageName`, bumped by Renovate as major PRs) or the release series (MariaDB: current LTS, bumped manually, with `updateStrategy.mariadbAutoUpgradeEnabled: true`), combined with `imagePullPolicy: Always`.
+
+Prerequisites of charts (operators, CRD charts) are registered in `.github/config/prerequisites.yaml`, either for charts with a given dependency or for all charts (`always: true`). Each entry lists the Helm releases to install and optionally the shared template a chart needs. Supporting a new upstream CR chart only requires a new entry there. The scripts in `.github/scripts/` take `--chart-search-root=<dir>` (a single chart or a directory of charts, default `charts`):
+- `chart-prerequisites.sh`: prints the prerequisites applying to each chart (JSON lines)
+- `install-prerequisites.sh`: installs them into the current cluster (used by CI before `ct install`)
+- `sync-shared-templates.sh`: syncs the required shared templates into the charts
+
+Chart repos used by CI are configured in `.github/config/chart-testing.yaml` (`chart-repos`) and added outside of chart-testing via `.github/scripts/add-helm-repos.sh`.

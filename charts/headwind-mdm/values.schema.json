@@ -39,71 +39,61 @@
       "title": "autoscaling",
       "type": "object"
     },
-    "externalPostgresql": {
+    "externalDatabase": {
       "properties": {
-        "auth": {
-          "description": "# Authentication parameters",
-          "properties": {
-            "database": {
-              "default": "mychart",
-              "description": "Name of the database to use",
-              "title": "database",
-              "type": "string"
-            },
-            "existingSecret": {
-              "default": "",
-              "description": "Name of existing secret to use for PostgreSQL credentials",
-              "title": "existingSecret",
-              "type": "string"
-            },
-            "password": {
-              "default": "mychart",
-              "description": "Password to use",
-              "title": "password",
-              "type": "string"
-            },
-            "userPasswordKey": {
-              "default": "",
-              "description": "Key in the secret containing the password",
-              "title": "userPasswordKey",
-              "type": "string"
-            },
-            "username": {
-              "default": "mychart",
-              "description": "Name of the user to use",
-              "title": "username",
-              "type": "string"
-            }
-          },
-          "required": [
-            "database",
-            "existingSecret",
-            "password",
-            "username",
-            "userPasswordKey"
-          ],
-          "title": "auth",
-          "type": "object"
+        "database": {
+          "default": "hmdm",
+          "description": "Name of the database to use",
+          "title": "database",
+          "type": "string"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Secret containing the password of the user",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "existingSecretPasswordKey": {
+          "default": "password",
+          "description": "Key in the existing Secret containing the password of the user",
+          "title": "existingSecretPasswordKey",
+          "type": "string"
         },
         "hostname": {
           "default": "",
-          "description": "Hostname of the PostgreSQL database",
+          "description": "Hostname of the external PostgreSQL database. Used if `postgresql.enabled` is false.",
           "title": "hostname",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Password of the user. Ignored if `externalDatabase.existingSecret` is set.",
+          "title": "password",
           "type": "string"
         },
         "port": {
           "default": 5432,
-          "description": "Port used to connect to PostgreSQL database",
+          "description": "Port of the external PostgreSQL database",
           "title": "port",
           "type": "integer"
+        },
+        "username": {
+          "default": "hmdm",
+          "description": "Name of the user to use",
+          "title": "username",
+          "type": "string"
         }
       },
       "required": [
-        "auth",
         "hostname",
-        "port"
+        "port",
+        "database",
+        "username",
+        "password",
+        "existingSecret",
+        "existingSecretPasswordKey"
       ],
-      "title": "externalPostgresql",
+      "title": "externalDatabase",
       "type": "object"
     },
     "fullnameOverride": {
@@ -416,76 +406,100 @@
     },
     "postgresql": {
       "properties": {
-        "auth": {
-          "description": "# Authentication parameters",
+        "cluster": {
           "properties": {
-            "database": {
-              "default": "mychart",
-              "description": "Name for a custom database to create",
-              "title": "database",
+            "imageName": {
+              "default": "ghcr.io/cloudnative-pg/postgresql:18-standard-trixie",
+              "description": "PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version.",
+              "title": "imageName",
               "type": "string"
             },
-            "existingSecret": {
-              "default": "",
-              "description": "Name of existing secret to use for PostgreSQL credentials",
-              "title": "existingSecret",
+            "imagePullPolicy": {
+              "default": "Always",
+              "description": "Pull the image on every start to get the latest minor version of the major version",
+              "title": "imagePullPolicy",
               "type": "string"
             },
-            "password": {
-              "default": "mychart",
-              "description": "Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided",
-              "title": "password",
-              "type": "string"
+            "initdb": {
+              "properties": {
+                "database": {
+                  "default": "hmdm",
+                  "description": "Name of the database to create",
+                  "title": "database",
+                  "type": "string"
+                },
+                "owner": {
+                  "default": "hmdm",
+                  "description": "Name of the user owning the database",
+                  "title": "owner",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "database",
+                "owner"
+              ],
+              "title": "initdb",
+              "type": "object"
             },
-            "username": {
-              "default": "mychart",
-              "description": "Name for a custom user to create",
-              "title": "username",
-              "type": "string"
+            "instances": {
+              "default": 3,
+              "description": "Number of PostgreSQL instances (one primary, the others are replicas)",
+              "title": "instances",
+              "type": "integer"
+            },
+            "storage": {
+              "properties": {
+                "size": {
+                  "default": "8Gi",
+                  "description": "Size of the PVC of each instance",
+                  "title": "size",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "size"
+              ],
+              "title": "storage",
+              "type": "object"
             }
           },
           "required": [
-            "database",
-            "existingSecret",
-            "password",
-            "username"
+            "imageName",
+            "imagePullPolicy",
+            "instances",
+            "initdb",
+            "storage"
           ],
-          "title": "auth",
+          "title": "cluster",
           "type": "object"
         },
         "enabled": {
           "default": true,
-          "description": "enable PostgreSQL™ subchart from Bitnami",
+          "description": "Enable a PostgreSQL cluster managed by the CloudNativePG operator. Requires the operator to be installed in the cluster (see README).",
           "title": "enabled",
           "type": "boolean"
         },
-        "image": {
+        "version": {
           "properties": {
-            "repository": {
-              "default": "bitnamilegacy/postgresql",
-              "description": "image repository for PostgreSQL™ subchart from Bitnami",
-              "title": "repository",
-              "type": "string"
-            },
-            "tag": {
-              "default": "17.6.0-debian-12-r4",
-              "description": "image tag for PostgreSQL™ subchart from Bitnami",
-              "title": "tag",
+            "postgresql": {
+              "default": "18",
+              "description": "PostgreSQL major version. Has to match the major version of `postgresql.cluster.imageName`.",
+              "title": "postgresql",
               "type": "string"
             }
           },
           "required": [
-            "repository",
-            "tag"
+            "postgresql"
           ],
-          "title": "image",
+          "title": "version",
           "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth",
-        "image"
+        "version",
+        "cluster"
       ],
       "title": "postgresql",
       "type": "object"
@@ -738,7 +752,7 @@
     "headwind",
     "persistence",
     "postgresql",
-    "externalPostgresql"
+    "externalDatabase"
   ],
   "type": "object"
 }
