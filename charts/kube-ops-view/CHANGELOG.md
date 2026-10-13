@@ -1,7 +1,11 @@
 # kube-ops-view
 
-## 8.3.3
+## 9.0.0
+
+### Added
+
+- support for an external Redis/Valkey server (externalRedis.*) and for password authentication
 
 ### Changed
 
-- dependency of redis to 25.5.3
+- BREAKING: replaced the Bitnami Redis subchart with the official Valkey chart (valkey/valkey). The values moved from redis.* to valkey.*, see the upgrade notes in the README.

@@ -153,11 +153,30 @@ route:
     # -- defines the timeouts that can be configured for an HTTP request
     timeouts: {}
 
-redis:
-  # -- Redis™ architecture. Allowed values: standalone or replication
-  architecture: standalone
-  auth:
-    # -- Disable password authentication as the kube-ops-view container has no support for password authentication
-    enabled: false
-  # -- enable Redis™ subchart from Bitnami
+valkey:
+  # -- Enable a Valkey instance (official chart valkey/valkey) used by kube-ops-view for pub/sub and job locking. Required if `replicaCount` is greater than 1.
   enabled: false
+  auth:
+    # -- Enable password authentication. Requires the user `default` in `valkey.auth.aclUsers`. Note that kube-ops-view logs the Redis URL including the password on startup.
+    enabled: false
+    # -- Name of an existing Secret containing the passwords of the users (key `<user>` or `aclUsers.<user>.passwordKey`)
+    usersExistingSecret: ""
+    # -- ACL users. kube-ops-view authenticates as the user `default`.
+    aclUsers: {}
+    #   default:
+    #     permissions: "~* &* +@all"
+    #     passwordKey: password
+
+externalRedis:
+  # -- Hostname of an external Redis or Valkey server. Used if `valkey.enabled` is false.
+  hostname: ""
+  # -- Port of the external server
+  port: 6379
+  # -- Name of the user. Leave empty to authenticate with a password only.
+  username: ""
+  # -- Password of the user. Ignored if `externalRedis.existingSecret` is set. Must only contain URL-safe characters.
+  password: ""
+  # -- Name of an existing Secret containing the password. The password must only contain URL-safe characters.
+  existingSecret: ""
+  # -- Key in the existing Secret containing the password
+  existingSecretPasswordKey: password

@@ -5,7 +5,7 @@
 #   - `always` is true.
 #
 # For every chart, the applying prerequisites are used to
-#   - install `releases` (in the given order) into the cluster before testing the chart: .github/scripts/install-prerequisites.sh
+#   - install `releases` (optional, in the given order) into the cluster before testing the chart: .github/scripts/install-prerequisites.sh
 #   - sync the shared named templates `template` from .github/templates/ into the chart: .github/scripts/sync-shared-templates.sh
 #
 # Releases are installed in their latest version.
@@ -35,3 +35,10 @@ prerequisites:
         chart: mariadb-operator
         repository: https://helm.mariadb.com/mariadb-operator
         namespace: mariadb-operator
+
+  - name: valkey
+    # official Valkey chart without operator, so there is nothing to install beforehand
+    dependency:
+      name: valkey
+      repository: https://valkey.io/valkey-helm/
+    template: _valkey.tpl

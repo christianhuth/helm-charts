@@ -97,9 +97,10 @@ The chart pipeline (`.github/workflows/chart-pipeline.yml`) runs on changes to `
 Databases are being migrated from Bitnami subcharts to operator-managed databases. The operator itself is never a dependency; charts depend on the upstream chart that only renders the custom resource, aliased to the database type:
 - PostgreSQL: `cluster` from https://cloudnative-pg.github.io/charts (alias `postgresql`), operator: CloudNativePG
 - MariaDB: `mariadb-cluster` from https://helm.mariadb.com/mariadb-operator (alias `mariadb`), operator: mariadb-operator
+- Redis: `valkey` from https://valkey.io/valkey-helm/ (official Valkey chart without operator, as the Valkey operator only supports cluster mode so far; switch to `valkey-resources` once it supports standalone mode). Interface `<chart>.redis.*`, external server via `externalRedis.*`
 
-Pattern for charts using them (see `headwind-mdm` and `syncstorage-rs`):
-- `templates/_postgresql.tpl` / `templates/_mariadb.tpl`: shared named templates (`christianhuth.<db>.*`) taking the subchart context. Never edit the copies, edit the masters in `.github/templates/`; `.github/scripts/sync-shared-templates.sh` (pre-commit hook) copies them into every chart requiring them and removes copies no longer required.
+Pattern for charts using them (see `headwind-mdm`, `syncstorage-rs` and `kube-ops-view`):
+- `templates/_postgresql.tpl` / `templates/_mariadb.tpl` / `templates/_valkey.tpl`: shared named templates (`christianhuth.<db>.*`) taking the subchart context. Never edit the copies, edit the masters in `.github/templates/`; `.github/scripts/sync-shared-templates.sh` (pre-commit hook) copies them into every chart requiring them and removes copies no longer required.
 - `templates/_dependencies.tpl`: chart-specific interface (`<chart>.database.*`) that dispatches between the bundled database and `externalDatabase.*`. Deployments only use this interface.
 - No inline passwords for bundled databases: the operator generates them or an existing Secret is referenced through the upstream values.
 - `values.yaml` defaults to 3 instances; `ci/*-values.yaml` reduces them to 1.

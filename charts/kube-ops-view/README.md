@@ -44,6 +44,60 @@ helm uninstall my-release
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
+## Configuring Redis
+
+kube-ops-view only needs a Redis-compatible server for pub/sub and job locking if it runs with more than one replica (`replicaCount`). Otherwise it keeps its state in memory.
+
+### Bundled Valkey
+
+```yaml
+replicaCount: 2
+
+valkey:
+  enabled: true
+```
+
+This deploys a standalone [Valkey](https://valkey.io) instance with the official chart [valkey/valkey](https://github.com/valkey-io/valkey-helm/tree/main/valkey). No operator or other prerequisite is required. All its settings are available under `valkey.*`, see the [values](https://github.com/valkey-io/valkey-helm/tree/main/valkey#values) of the upstream chart.
+
+### Bundled Valkey with authentication
+
+Create a Secret containing the password of the user `default`, which kube-ops-view authenticates as:
+
+```console
+kubectl create secret generic kube-ops-view-valkey \
+  --from-literal=password='<password>'
+```
+
+Reference the Secret in your values:
+
+```yaml
+valkey:
+  enabled: true
+  auth:
+    enabled: true
+    usersExistingSecret: kube-ops-view-valkey
+    aclUsers:
+      default:
+        permissions: "~* &* +@all"
+        passwordKey: password
+```
+
+kube-ops-view receives the password as part of its Redis URL, so it must only contain URL-safe characters (`A-Z`, `a-z`, `0-9`, `-`, `.`, `_`, `~`). Note that kube-ops-view logs the Redis URL including the password on startup.
+
+### External Redis or Valkey
+
+```yaml
+replicaCount: 2
+
+externalRedis:
+  hostname: redis.example.com
+  port: 6379
+  existingSecret: kube-ops-view-redis
+  existingSecretPasswordKey: password
+```
+
+Leave `existingSecret` and `password` empty if the server does not require authentication, and set `username` if kube-ops-view should authenticate as an ACL user other than `default`.
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -51,6 +105,12 @@ The command removes all the Kubernetes components associated with the chart and 
 | affinity | object | `{}` | Affinity settings for pod assignment |
 | args | list | `[]` |  |
 | deploymentStrategy | object | `{}` | Update strategy for the deployment |
+| externalRedis.existingSecret | string | `""` | Name of an existing Secret containing the password. The password must only contain URL-safe characters. |
+| externalRedis.existingSecretPasswordKey | string | `"password"` | Key in the existing Secret containing the password |
+| externalRedis.hostname | string | `""` | Hostname of an external Redis or Valkey server. Used if `valkey.enabled` is false. |
+| externalRedis.password | string | `""` | Password of the user. Ignored if `externalRedis.existingSecret` is set. Must only contain URL-safe characters. |
+| externalRedis.port | int | `6379` | Port of the external server |
+| externalRedis.username | string | `""` | Name of the user. Leave empty to authenticate with a password only. |
 | fullnameOverride | string | `""` | String to fully override `"kube-ops-view.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registory |
@@ -67,9 +127,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | nameOverride | string | `""` | Provide a name in place of `kube-ops-view` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to exporter pods |
-| redis.architecture | string | `"standalone"` | Redis™ architecture. Allowed values: standalone or replication |
-| redis.auth.enabled | bool | `false` | Disable password authentication as the kube-ops-view container has no support for password authentication |
-| redis.enabled | bool | `false` | enable Redis™ subchart from Bitnami |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the controller pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
@@ -92,6 +149,10 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
 | tolerations | list | `[]` | Toleration labels for pod assignment |
+| valkey.auth.aclUsers | object | `{}` | ACL users. kube-ops-view authenticates as the user `default`. |
+| valkey.auth.enabled | bool | `false` | Enable password authentication. Requires the user `default` in `valkey.auth.aclUsers`. Note that kube-ops-view logs the Redis URL including the password on startup. |
+| valkey.auth.usersExistingSecret | string | `""` | Name of an existing Secret containing the passwords of the users (key `<user>` or `aclUsers.<user>.passwordKey`) |
+| valkey.enabled | bool | `false` | Enable a Valkey instance (official chart valkey/valkey) used by kube-ops-view for pub/sub and job locking. Required if `replicaCount` is greater than 1. |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 
@@ -102,6 +163,15 @@ helm install my-release -f values.yaml christianhuth/kube-ops-view
 ```
 
 ## Upgrading the Chart
+
+### To 9.0.0
+
+This major replaces the Bitnami Redis subchart with the official Valkey chart [valkey/valkey](https://github.com/valkey-io/valkey-helm/tree/main/valkey). Valkey is a fork of Redis and fully compatible with kube-ops-view. The values changed as follows:
+
+- `redis.*` is replaced by `valkey.*` with the values of the upstream chart, e.g. `redis.enabled` is now `valkey.enabled`
+- an external server can be configured with `externalRedis.*` instead of passing `--redis-url` via `args`
+
+kube-ops-view only uses Redis for pub/sub and job locking, so no data has to be migrated. The new Valkey instance starts empty.
 
 ### To 7.0.0
 
