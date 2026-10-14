@@ -85,7 +85,7 @@ If no Secret is referenced, the operator generates a random password and stores 
 
 ### Updating MariaDB
 
-The image tags only pin the MariaDB release series (by default the long-term support release 13.0), so restarted instances get the latest patch version of the series. To upgrade to another release series (e.g. the next long-term support release), change the tag of `<db>.mariadb.image`. The operator rolls out the instances one by one and migrates the system schema (`updateStrategy.mariadbAutoUpgradeEnabled`). Downgrades to a previous release series are not supported by MariaDB, so take a backup before upgrading.
+The image tags only pin the MariaDB release series (by default the long-term support release 12.3), so restarted instances get the latest patch version of the series. To upgrade to another release series (e.g. the next long-term support release), change the tag of `<db>.mariadb.image`. The operator rolls out the instances one by one and migrates the system schema (`updateStrategy.mariadbAutoUpgradeEnabled`). Downgrades to a previous release series are not supported by MariaDB, so take a backup before upgrading.
 
 ### Further settings
 
