@@ -1,16 +1,7 @@
 # syncstorage-rs
 
-## 7.0.0
+## 7.0.1
 
-### Added
+### Fixed
 
-- automatic migration of the system schema when changing the MariaDB release series (updateStrategy.mariadbAutoUpgradeEnabled)
-
-### Changed
-
-- BREAKING: replaced the Bitnami MariaDB subcharts with MariaDB instances managed by the mariadb-operator (upstream chart mariadb-cluster). See the upgrade notes in the README.
-- BREAKING: moved syncstorage.syncserver-db and syncstorage.tokenserver-db to externalSyncserverDatabase and externalTokenserverDatabase with a standardized structure
-
-### Removed
-
-- BREAKING: inline passwords for the bundled MariaDB instances. The operator generates the passwords or uses the Secrets given in <db>.mariadb.passwordSecretKeyRef
+- upgrade notes for 7.0.0 wait for each resource of the operator separately, as kubectl wait --for=create only supports a single resource

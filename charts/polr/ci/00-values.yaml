@@ -1,0 +1,6 @@
+---
+mariadb:
+  mariadb:
+    replicas: 1
+    galera:
+      enabled: false
