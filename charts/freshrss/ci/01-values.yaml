@@ -9,7 +9,5 @@ freshrss:
 
 postgresql:
   enabled: true
-  auth:
-    database: freshrss
-    password: freshrss
-    username: freshrss
+  cluster:
+    instances: 1

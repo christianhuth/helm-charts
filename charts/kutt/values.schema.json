@@ -43,134 +43,102 @@
       "title": "autoscaling",
       "type": "object"
     },
-    "externalPostgresql": {
+    "externalDatabase": {
       "properties": {
-        "auth": {
-          "properties": {
-            "database": {
-              "default": "kutt",
-              "description": "Name of the database to use",
-              "title": "database",
-              "type": "string"
-            },
-            "existingSecret": {
-              "default": "",
-              "description": "Name of existing secret to use for PostgreSQL credentials",
-              "title": "existingSecret",
-              "type": "string"
-            },
-            "password": {
-              "default": "kutt",
-              "description": "Password to use",
-              "title": "password",
-              "type": "string"
-            },
-            "userPasswordKey": {
-              "default": "",
-              "description": "Key in the secret containing the password",
-              "title": "userPasswordKey",
-              "type": "string"
-            },
-            "username": {
-              "default": "kutt",
-              "description": "Name of the user to use",
-              "title": "username",
-              "type": "string"
-            }
-          },
-          "required": [
-            "database",
-            "existingSecret",
-            "password",
-            "username",
-            "userPasswordKey"
-          ],
-          "title": "auth",
-          "type": "object"
+        "database": {
+          "default": "kutt",
+          "description": "Name of the database to use",
+          "title": "database",
+          "type": "string"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Secret containing the password of the user",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "existingSecretPasswordKey": {
+          "default": "password",
+          "description": "Key in the existing Secret containing the password",
+          "title": "existingSecretPasswordKey",
+          "type": "string"
         },
         "hostname": {
           "default": "",
-          "description": "Hostname of the PostgreSQL database",
+          "description": "Hostname of the external PostgreSQL database. Used if `postgresql.enabled` is false.",
           "title": "hostname",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Password of the user. Ignored if `externalDatabase.existingSecret` is set.",
+          "title": "password",
           "type": "string"
         },
         "port": {
           "default": 5432,
-          "description": "Port used to connect to PostgreSQL database",
+          "description": "Port of the external PostgreSQL database",
           "title": "port",
           "type": "integer"
+        },
+        "username": {
+          "default": "kutt",
+          "description": "Name of the user to use",
+          "title": "username",
+          "type": "string"
         }
       },
       "required": [
-        "auth",
         "hostname",
-        "port"
+        "port",
+        "database",
+        "username",
+        "password",
+        "existingSecret",
+        "existingSecretPasswordKey"
       ],
-      "title": "externalPostgresql",
+      "title": "externalDatabase",
       "type": "object"
     },
     "externalRedis": {
       "properties": {
-        "auth": {
-          "properties": {
-            "enabled": {
-              "default": true,
-              "description": "if authentication should be used with external Redis™",
-              "title": "enabled",
-              "type": "boolean"
-            },
-            "existingSecret": {
-              "default": "",
-              "description": "Name of existing secret to use for Redis™ credentials",
-              "title": "existingSecret",
-              "type": "string"
-            },
-            "password": {
-              "default": "",
-              "description": "Password to use",
-              "title": "password",
-              "type": "string"
-            },
-            "userPasswordKey": {
-              "default": "",
-              "description": "Key in the secret containing the password",
-              "title": "userPasswordKey",
-              "type": "string"
-            }
-          },
-          "required": [
-            "enabled",
-            "existingSecret",
-            "password",
-            "userPasswordKey"
-          ],
-          "title": "auth",
-          "type": "object"
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Secret containing the password",
+          "title": "existingSecret",
+          "type": "string"
         },
-        "enabled": {
-          "default": true,
-          "description": "enable the Redis integration for an external Redis™",
-          "title": "enabled",
-          "type": "boolean"
+        "existingSecretPasswordKey": {
+          "default": "password",
+          "description": "Key in the existing Secret containing the password",
+          "title": "existingSecretPasswordKey",
+          "type": "string"
         },
         "hostname": {
           "default": "",
-          "description": "Hostname of Redis™",
+          "description": "Hostname of an external Redis or Valkey server. Used if `valkey.enabled` is false.",
           "title": "hostname",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Password of the user `default`. Ignored if `externalRedis.existingSecret` is set. Leave empty if the server does not require authentication.",
+          "title": "password",
           "type": "string"
         },
         "port": {
           "default": 6379,
-          "description": "Port used to connect to Redis",
+          "description": "Port of the external server",
           "title": "port",
           "type": "integer"
         }
       },
       "required": [
-        "enabled",
-        "auth",
         "hostname",
-        "port"
+        "port",
+        "password",
+        "existingSecret",
+        "existingSecretPasswordKey"
       ],
       "title": "externalRedis",
       "type": "object"
@@ -647,99 +615,102 @@
     },
     "postgresql": {
       "properties": {
-        "auth": {
+        "cluster": {
           "properties": {
-            "database": {
-              "default": "kutt",
-              "description": "Name for a custom database to create",
-              "title": "database",
+            "imageName": {
+              "default": "ghcr.io/cloudnative-pg/postgresql:18-standard-trixie",
+              "description": "PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version.",
+              "title": "imageName",
               "type": "string"
             },
-            "existingSecret": {
-              "default": "",
-              "description": "Name of existing secret to use for PostgreSQL credentials",
-              "title": "existingSecret",
+            "imagePullPolicy": {
+              "default": "Always",
+              "description": "Pull the image on every start to get the latest minor version of the major version",
+              "title": "imagePullPolicy",
               "type": "string"
             },
-            "password": {
-              "default": "kutt",
-              "description": "Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided",
-              "title": "password",
-              "type": "string"
+            "initdb": {
+              "properties": {
+                "database": {
+                  "default": "kutt",
+                  "description": "Name of the database to create",
+                  "title": "database",
+                  "type": "string"
+                },
+                "owner": {
+                  "default": "kutt",
+                  "description": "Name of the user owning the database",
+                  "title": "owner",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "database",
+                "owner"
+              ],
+              "title": "initdb",
+              "type": "object"
             },
-            "username": {
-              "default": "kutt",
-              "description": "Name for a custom user to create",
-              "title": "username",
-              "type": "string"
+            "instances": {
+              "default": 3,
+              "description": "Number of PostgreSQL instances (one primary, the others are replicas)",
+              "title": "instances",
+              "type": "integer"
+            },
+            "storage": {
+              "properties": {
+                "size": {
+                  "default": "8Gi",
+                  "description": "Size of the PVC of each instance",
+                  "title": "size",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "size"
+              ],
+              "title": "storage",
+              "type": "object"
             }
           },
           "required": [
-            "database",
-            "existingSecret",
-            "password",
-            "username"
+            "imageName",
+            "imagePullPolicy",
+            "instances",
+            "initdb",
+            "storage"
           ],
-          "title": "auth",
+          "title": "cluster",
           "type": "object"
         },
         "enabled": {
           "default": true,
-          "description": "enable PostgreSQL™ subchart from Bitnami",
+          "description": "Enable a PostgreSQL cluster managed by the CloudNativePG operator. Requires the operator to be installed in the cluster (see README).",
           "title": "enabled",
           "type": "boolean"
+        },
+        "version": {
+          "properties": {
+            "postgresql": {
+              "default": "18",
+              "description": "PostgreSQL major version. Has to match the major version of `postgresql.cluster.imageName`.",
+              "title": "postgresql",
+              "type": "string"
+            }
+          },
+          "required": [
+            "postgresql"
+          ],
+          "title": "version",
+          "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "version",
+        "cluster"
       ],
       "title": "postgresql",
-      "type": "object"
-    },
-    "redis": {
-      "properties": {
-        "architecture": {
-          "default": "standalone",
-          "description": "Redis® architecture. Allowed values: standalone or replication",
-          "title": "architecture",
-          "type": "string"
-        },
-        "auth": {
-          "properties": {
-            "enabled": {
-              "default": true,
-              "description": "Enable password authentication",
-              "title": "enabled",
-              "type": "boolean"
-            },
-            "password": {
-              "default": "kutt",
-              "description": "Redis™ password",
-              "title": "password",
-              "type": "string"
-            }
-          },
-          "required": [
-            "enabled",
-            "password"
-          ],
-          "title": "auth",
-          "type": "object"
-        },
-        "enabled": {
-          "default": true,
-          "description": "enable Redis™ subchart from Bitnami",
-          "title": "enabled",
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "enabled",
-        "architecture",
-        "auth"
-      ],
-      "title": "redis",
       "type": "object"
     },
     "replicaCount": {
@@ -966,6 +937,76 @@
       },
       "title": "tolerations",
       "type": "array"
+    },
+    "valkey": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "aclUsers": {
+              "properties": {
+                "default": {
+                  "properties": {
+                    "password": {
+                      "default": "kutt",
+                      "description": "Inline password of the user `default`. Use `valkey.auth.usersExistingSecret` instead for production.",
+                      "title": "password",
+                      "type": "string"
+                    },
+                    "permissions": {
+                      "default": "~* \u0026* +@all",
+                      "description": "ACL permissions of the user `default`",
+                      "title": "permissions",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "permissions",
+                    "password"
+                  ],
+                  "title": "default",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "default"
+              ],
+              "title": "aclUsers",
+              "type": "object"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Enable password authentication. Kutt authenticates with a password only, i.e. as the user `default`.",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "usersExistingSecret": {
+              "default": "",
+              "description": "Name of an existing Secret containing the passwords of the users (key `\u003cuser\u003e` or `aclUsers.\u003cuser\u003e.passwordKey`). Takes precedence over inline passwords.",
+              "title": "usersExistingSecret",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "usersExistingSecret",
+            "aclUsers"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "Enable a Valkey instance (official chart valkey/valkey) used by Kutt as cache",
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth"
+      ],
+      "title": "valkey",
+      "type": "object"
     }
   },
   "required": [
@@ -991,8 +1032,8 @@
     "extraEnvFrom",
     "kutt",
     "postgresql",
-    "externalPostgresql",
-    "redis",
+    "externalDatabase",
+    "valkey",
     "externalRedis"
   ],
   "type": "object"

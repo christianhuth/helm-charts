@@ -16,7 +16,20 @@ This chart bootstraps the free modern URL shortener called [Kutt](https://kutt.i
 
 ## Prerequisites
 
-- Kubernetes 1.19+
+- Kubernetes 1.29+
+- The [CloudNativePG operator](https://cloudnative-pg.io) if the bundled PostgreSQL database is used (`postgresql.enabled: true`, the default)
+
+### Installing the CloudNativePG operator
+
+The chart bundles a PostgreSQL cluster as a custom resource of the CloudNativePG operator (via the upstream chart [cnpg/cluster](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster)). The operator itself is not part of this chart, as it is installed once per Kubernetes cluster:
+
+```console
+helm repo add cnpg https://cloudnative-pg.github.io/charts
+helm repo update
+helm upgrade --install cnpg cnpg/cloudnative-pg --namespace cnpg-system --create-namespace --wait
+```
+
+Valkey ([valkey/valkey](https://github.com/valkey-io/valkey-helm/tree/main/valkey)) is bundled as a regular subchart and doesn't need an operator.
 
 ## Installing the Chart
 
@@ -42,6 +55,81 @@ helm uninstall my-release
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
+## Configuring the Dependencies
+
+Kutt needs a PostgreSQL database and optionally uses a Redis-compatible cache. Both are either bundled with the chart or provided externally. Passwords are read from Secrets, using existing Secrets is recommended for production.
+
+### PostgreSQL
+
+Create a Secret of type `kubernetes.io/basic-auth` containing the credentials of the database owner. The `username` has to match `postgresql.cluster.initdb.owner`:
+
+```console
+kubectl create secret generic kutt-database \
+  --type=kubernetes.io/basic-auth \
+  --from-literal=username=kutt \
+  --from-literal=password='<password>'
+```
+
+```yaml
+postgresql:
+  cluster:
+    initdb:
+      database: kutt
+      owner: kutt
+      secret:
+        name: kutt-database
+```
+
+If no Secret is referenced, the operator generates a random password and stores the credentials in the Secret `<release>-postgresql-app`. All other settings of the PostgreSQL cluster (e.g. `postgresql.cluster.instances`, `postgresql.cluster.storage`, backups) are passed to the upstream chart. See its [values](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster#values) for all options.
+
+### Valkey
+
+By default Valkey requires the inline password `kutt` for the user `default`, which Kutt authenticates as. For production, create a Secret containing the password and reference it in your values:
+
+```console
+kubectl create secret generic kutt-valkey --from-literal=password='<password>'
+```
+
+```yaml
+valkey:
+  auth:
+    enabled: true
+    usersExistingSecret: kutt-valkey
+    aclUsers:
+      default:
+        permissions: "~* &* +@all"
+        passwordKey: password
+        password: ""
+```
+
+All other settings are passed to the upstream chart, see its [values](https://github.com/valkey-io/valkey-helm/tree/main/valkey#values). Set `valkey.enabled: false` (and leave `externalRedis.hostname` empty) to run Kutt without a cache.
+
+### External Services
+
+```yaml
+postgresql:
+  enabled: false
+
+externalDatabase:
+  hostname: postgresql.example.com
+  port: 5432
+  database: kutt
+  username: kutt
+  existingSecret: kutt-database
+  existingSecretPasswordKey: password
+
+valkey:
+  enabled: false
+
+externalRedis:
+  hostname: redis.example.com
+  port: 6379
+  existingSecret: kutt-redis
+  existingSecretPasswordKey: password
+```
+
+Instead of `existingSecret` you can set `password`, which lets the chart create the Secret.
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -51,20 +139,18 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` | Maximum number of replicas |
 | autoscaling.minReplicas | int | `1` | Minimum number of replicas |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
-| externalPostgresql.auth.database | string | `"kutt"` | Name of the database to use |
-| externalPostgresql.auth.existingSecret | string | `""` | Name of existing secret to use for PostgreSQL credentials |
-| externalPostgresql.auth.password | string | `"kutt"` | Password to use |
-| externalPostgresql.auth.userPasswordKey | string | `""` | Key in the secret containing the password |
-| externalPostgresql.auth.username | string | `"kutt"` | Name of the user to use |
-| externalPostgresql.hostname | string | `""` | Hostname of the PostgreSQL database |
-| externalPostgresql.port | int | `5432` | Port used to connect to PostgreSQL database |
-| externalRedis.auth.enabled | bool | `true` | if authentication should be used with external Redis™ |
-| externalRedis.auth.existingSecret | string | `""` | Name of existing secret to use for Redis™ credentials |
-| externalRedis.auth.password | string | `""` | Password to use |
-| externalRedis.auth.userPasswordKey | string | `""` | Key in the secret containing the password |
-| externalRedis.enabled | bool | `true` | enable the Redis integration for an external Redis™ |
-| externalRedis.hostname | string | `""` | Hostname of Redis™ |
-| externalRedis.port | int | `6379` | Port used to connect to Redis |
+| externalDatabase.database | string | `"kutt"` | Name of the database to use |
+| externalDatabase.existingSecret | string | `""` | Name of an existing Secret containing the password of the user |
+| externalDatabase.existingSecretPasswordKey | string | `"password"` | Key in the existing Secret containing the password |
+| externalDatabase.hostname | string | `""` | Hostname of the external PostgreSQL database. Used if `postgresql.enabled` is false. |
+| externalDatabase.password | string | `""` | Password of the user. Ignored if `externalDatabase.existingSecret` is set. |
+| externalDatabase.port | int | `5432` | Port of the external PostgreSQL database |
+| externalDatabase.username | string | `"kutt"` | Name of the user to use |
+| externalRedis.existingSecret | string | `""` | Name of an existing Secret containing the password |
+| externalRedis.existingSecretPasswordKey | string | `"password"` | Key in the existing Secret containing the password |
+| externalRedis.hostname | string | `""` | Hostname of an external Redis or Valkey server. Used if `valkey.enabled` is false. |
+| externalRedis.password | string | `""` | Password of the user `default`. Ignored if `externalRedis.existingSecret` is set. Leave empty if the server does not require authentication. |
+| externalRedis.port | int | `6379` | Port of the external server |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | extraEnvFrom | list | `[]` | load additional environment variables from ConfigMaps or Secrets |
 | fullnameOverride | string | `""` | String to fully override `"kutt.fullname"` |
@@ -111,15 +197,14 @@ The command removes all the Kubernetes components associated with the chart and 
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to exporter pods |
 | podSecurityContext | object | `{}` | pod-level security context |
-| postgresql.auth.database | string | `"kutt"` | Name for a custom database to create |
-| postgresql.auth.existingSecret | string | `""` | Name of existing secret to use for PostgreSQL credentials |
-| postgresql.auth.password | string | `"kutt"` | Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided |
-| postgresql.auth.username | string | `"kutt"` | Name for a custom user to create |
-| postgresql.enabled | bool | `true` | enable PostgreSQL™ subchart from Bitnami |
-| redis.architecture | string | `"standalone"` | Redis® architecture. Allowed values: standalone or replication |
-| redis.auth.enabled | bool | `true` | Enable password authentication |
-| redis.auth.password | string | `"kutt"` | Redis™ password |
-| redis.enabled | bool | `true` | enable Redis™ subchart from Bitnami |
+| postgresql.cluster.imageName | string | `"ghcr.io/cloudnative-pg/postgresql:18-standard-trixie"` | PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version. |
+| postgresql.cluster.imagePullPolicy | string | `"Always"` | Pull the image on every start to get the latest minor version of the major version |
+| postgresql.cluster.initdb.database | string | `"kutt"` | Name of the database to create |
+| postgresql.cluster.initdb.owner | string | `"kutt"` | Name of the user owning the database |
+| postgresql.cluster.instances | int | `3` | Number of PostgreSQL instances (one primary, the others are replicas) |
+| postgresql.cluster.storage.size | string | `"8Gi"` | Size of the PVC of each instance |
+| postgresql.enabled | bool | `true` | Enable a PostgreSQL cluster managed by the CloudNativePG operator. Requires the operator to be installed in the cluster (see README). |
+| postgresql.version.postgresql | string | `"18"` | PostgreSQL major version. Has to match the major version of `postgresql.cluster.imageName`. |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
@@ -142,6 +227,11 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
 | tolerations | list | `[]` | Toleration labels for pod assignment |
+| valkey.auth.aclUsers.default.password | string | `"kutt"` | Inline password of the user `default`. Use `valkey.auth.usersExistingSecret` instead for production. |
+| valkey.auth.aclUsers.default.permissions | string | `"~* &* +@all"` | ACL permissions of the user `default` |
+| valkey.auth.enabled | bool | `true` | Enable password authentication. Kutt authenticates with a password only, i.e. as the user `default`. |
+| valkey.auth.usersExistingSecret | string | `""` | Name of an existing Secret containing the passwords of the users (key `<user>` or `aclUsers.<user>.passwordKey`). Takes precedence over inline passwords. |
+| valkey.enabled | bool | `true` | Enable a Valkey instance (official chart valkey/valkey) used by Kutt as cache |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 
@@ -152,6 +242,51 @@ helm install my-release -f values.yaml christianhuth/kutt
 ```
 
 ## Upgrading the Chart
+
+### To 10.0.0
+
+This major replaces the Bitnami subcharts:
+
+- PostgreSQL is managed by the [CloudNativePG operator](https://cloudnative-pg.io) (upstream chart [cnpg/cluster](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster)). Install the operator first (see [Prerequisites](#prerequisites)).
+- Redis is replaced by [Valkey](https://valkey.io) with the official chart [valkey/valkey](https://github.com/valkey-io/valkey-helm/tree/main/valkey).
+
+The values changed as follows:
+
+- `postgresql.auth.*` is replaced by the values of the upstream chart, e.g. `postgresql.cluster.initdb.database` and `postgresql.cluster.initdb.owner`
+- an inline password for the bundled database is no longer supported. Use an existing Secret or let the operator generate one (see [Configuring the Dependencies](#configuring-the-dependencies))
+- `redis.*` is replaced by `valkey.*` with the values of the upstream chart
+- `externalPostgresql.*` is renamed to `externalDatabase.*` and `externalRedis.*` is restructured: the `auth.*` keys moved one level up, `userPasswordKey` is renamed to `existingSecretPasswordKey`, and `externalRedis.enabled` / `externalRedis.auth.enabled` are removed (an external server is used if `externalRedis.hostname` is set, authentication if a password or Secret is given)
+
+The upgrade creates a new, empty database. Valkey (cache) starts empty as well, which is fine for Kutt. The Bitnami StatefulSet is removed, but its PersistentVolumeClaim `data-<release>-postgresql-0` is kept. To take your data along:
+
+1. Dump the database before upgrading:
+
+   ```console
+   kubectl exec <release>-postgresql-0 -- sh -c 'PGPASSWORD="$(cat "$POSTGRES_PASSWORD_FILE")" pg_dump --no-owner --no-acl -U "$POSTGRES_USER" -d "$POSTGRES_DATABASE"' > kutt.sql
+   ```
+
+2. Upgrade the chart with Kutt scaled down, so it does not initialize the new database:
+
+   ```console
+   helm upgrade <release> christianhuth/kutt --version 10.0.0 -f values.yaml --set replicaCount=0 --wait
+   kubectl wait --for=condition=Ready cluster/<release>-postgresql --timeout=10m
+   ```
+
+3. Restore the dump as the database owner. Use the Secret from `postgresql.cluster.initdb.secret.name` or the generated `<release>-postgresql-app`:
+
+   ```console
+   PASSWORD=$(kubectl get secret <release>-postgresql-app -o jsonpath='{.data.password}' | base64 -d)
+   PRIMARY=$(kubectl get cluster <release>-postgresql -o jsonpath='{.status.currentPrimary}')
+   kubectl exec -i $PRIMARY -c postgres -- env PGPASSWORD="$PASSWORD" psql -v ON_ERROR_STOP=1 -h localhost -U kutt -d kutt < kutt.sql
+   ```
+
+4. Scale Kutt up again:
+
+   ```console
+   helm upgrade <release> christianhuth/kutt --version 10.0.0 -f values.yaml --wait
+   ```
+
+5. Once everything works, delete the old PersistentVolumeClaims `data-<release>-postgresql-0` and `redis-data-<release>-redis-master-0`.
 
 ### To 8.0.0
 
