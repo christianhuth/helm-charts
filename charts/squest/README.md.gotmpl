@@ -15,7 +15,21 @@ This chart bootstraps [Squest](https://hewlettpackard.github.io/squest) using th
 
 ## Prerequisites
 
-- Kubernetes 1.19+
+- Kubernetes 1.26+
+- The [mariadb-operator](https://github.com/mariadb-operator/mariadb-operator) if the bundled MariaDB database is used (`mariadb.enabled: true`, the default)
+
+### Installing the mariadb-operator
+
+The chart bundles the database as a custom resource of the mariadb-operator (via the upstream chart [mariadb-cluster](https://github.com/mariadb-operator/mariadb-operator/tree/main/deploy/charts/mariadb-cluster)). The operator itself is not part of this chart, as it is installed once per Kubernetes cluster:
+
+```console
+helm repo add mariadb-operator https://helm.mariadb.com/mariadb-operator
+helm repo update
+helm upgrade --install mariadb-operator-crds mariadb-operator/mariadb-operator-crds --namespace mariadb-operator --create-namespace
+helm upgrade --install mariadb-operator mariadb-operator/mariadb-operator --namespace mariadb-operator --wait
+```
+
+RabbitMQ ([cloudpirates/rabbitmq](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq)) and Valkey ([valkey/valkey](https://github.com/valkey-io/valkey-helm/tree/main/valkey)) are bundled as regular subcharts and don't need an operator.
 
 ## Installing the Chart
 
@@ -41,6 +55,92 @@ helm uninstall my-release
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
+## Configuring the Dependencies
+
+Squest needs a MariaDB (or MySQL) database, a RabbitMQ message broker and a Redis-compatible cache. Each of them is either bundled with the chart or provided externally. Passwords are read from Secrets, using existing Secrets is recommended for production.
+
+### MariaDB
+
+Create a Secret containing the password of the database user and reference it in your values:
+
+```console
+kubectl create secret generic squest-database --from-literal=password='<password>'
+```
+
+```yaml
+mariadb:
+  mariadb:
+    passwordSecretKeyRef:
+      name: squest-database
+      key: password
+      generate: false
+```
+
+If no Secret is referenced, the operator generates a random password and stores it in the Secret `<release>-mariadb-password`. By default the database runs as a Galera cluster with 3 instances. All other settings are passed to the upstream chart, see its [values](https://github.com/mariadb-operator/mariadb-operator/tree/main/deploy/charts/mariadb-cluster) and the [MariaDB API reference](https://github.com/mariadb-operator/mariadb-operator/blob/main/docs/api_reference.md#mariadbspec).
+
+The image tag only pins the MariaDB release series (by default the long-term support release 12.3). To upgrade to another release series, change the tag of `mariadb.mariadb.image`. The operator migrates the system schema on the rollout (`updateStrategy.mariadbAutoUpgradeEnabled`). Downgrades are not supported by MariaDB, so take a backup before upgrading.
+
+### RabbitMQ
+
+Create a Secret containing the password of the RabbitMQ user and reference it in your values. Squest builds its broker URL from the password without encoding it, so it must only contain URL-safe characters (`A-Z`, `a-z`, `0-9`, `-`, `.`, `_`, `~`):
+
+```console
+kubectl create secret generic squest-rabbitmq \
+  --from-literal=password='<password>' \
+  --from-literal=erlang-cookie='<random string>'
+```
+
+```yaml
+rabbitmq:
+  auth:
+    username: squest
+    existingSecret: squest-rabbitmq
+    existingPasswordKey: password
+```
+
+If no Secret is referenced, the chart generates a random password and Erlang cookie and stores them in the Secret `<release>-rabbitmq`. By default RabbitMQ runs as a cluster of 3 instances. All other settings are passed to the upstream chart, see its [values](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq#parameters).
+
+### Valkey
+
+By default Valkey requires the inline password `squest` for the user `default`. For production, create a Secret containing the password and reference it in your values:
+
+```console
+kubectl create secret generic squest-valkey --from-literal=password='<password>'
+```
+
+```yaml
+valkey:
+  auth:
+    enabled: true
+    usersExistingSecret: squest-valkey
+    aclUsers:
+      default:
+        permissions: "~* &* +@all"
+        passwordKey: password
+        password: ""
+```
+
+Like for RabbitMQ, the password must only contain URL-safe characters. All other settings are passed to the upstream chart, see its [values](https://github.com/valkey-io/valkey-helm/tree/main/valkey#values).
+
+### External Services
+
+Disable the bundled service and configure the external one with `externalDatabase.*`, `externalRabbitmq.*` or `externalRedis.*`, e.g.:
+
+```yaml
+mariadb:
+  enabled: false
+
+externalDatabase:
+  hostname: mariadb.example.com
+  port: 3306
+  database: squest
+  username: squest
+  existingSecret: squest-database
+  existingSecretPasswordKey: password
+```
+
+Instead of `existingSecret` you can set `password`, which lets the chart create the Secret.
+
 {{ template "chart.valuesSection" . }}
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
@@ -52,6 +152,60 @@ helm install my-release -f values.yaml christianhuth/squest
 ```
 
 ## Upgrading the Chart
+
+### To 7.0.0
+
+This major replaces the Bitnami subcharts:
+
+- MariaDB is managed by the [mariadb-operator](https://github.com/mariadb-operator/mariadb-operator) (upstream chart [mariadb-cluster](https://github.com/mariadb-operator/mariadb-operator/tree/main/deploy/charts/mariadb-cluster)). Install the operator first (see [Prerequisites](#prerequisites)).
+- RabbitMQ is deployed with the chart [cloudpirates/rabbitmq](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq) and updated to RabbitMQ 4.3.
+- Redis is replaced by [Valkey](https://valkey.io) with the official chart [valkey/valkey](https://github.com/valkey-io/valkey-helm/tree/main/valkey).
+
+The values changed as follows:
+
+- `mariadb.*`, `rabbitmq.*` and `redis.*` are replaced by the values of the new upstream charts, `redis.*` moved to `valkey.*` (see [Configuring the Dependencies](#configuring-the-dependencies))
+- an inline password for the bundled MariaDB is no longer supported. Use an existing Secret or let the operator generate one
+- `squest.config.database.*`, `squest.config.rabbitmq.*` and `squest.config.redis.*` are replaced by `externalDatabase.*`, `externalRabbitmq.*` and `externalRedis.*`
+- Squest receives the RabbitMQ settings as `RABBITMQ_*` instead of `CELERY_BROKER_URL`, and `DB_ROOT_PASSWORD` is no longer set
+
+The upgrade creates a new, empty database. Valkey (cache) and RabbitMQ (pending tasks) start empty as well, which is fine for Squest. To take your database along:
+
+1. Dump the database before upgrading:
+
+   ```console
+   kubectl exec <release>-mariadb-0 -- sh -c 'mariadb-dump -u"$MARIADB_USER" -p"$(cat "$MARIADB_PASSWORD_FILE")" "$MARIADB_DATABASE"' > squest.sql
+   ```
+
+2. Remove the Bitnami RabbitMQ StatefulSet and its volume. The new RabbitMQ uses the same names, so Helm would otherwise try to patch the StatefulSet (which fails) and RabbitMQ would mount the old volume:
+
+   ```console
+   kubectl delete statefulset <release>-rabbitmq
+   kubectl delete pvc data-<release>-rabbitmq-0
+   ```
+
+3. Upgrade the chart with Squest scaled down, so it does not initialize the new database. Then wait until the operator has created the database and its user:
+
+   ```console
+   helm upgrade <release> christianhuth/squest --version 7.0.0 -f values.yaml \
+     --set squest.replicaCount=0 --set celery.worker.replicaCount=0 --set celery.beat.replicaCount=0 --wait
+   kubectl wait --for=create user/<release>-mariadb-user grant/<release>-mariadb-user-all --timeout=10m
+   kubectl wait --for=condition=Ready user/<release>-mariadb-user grant/<release>-mariadb-user-all --timeout=10m
+   ```
+
+4. Restore the dump. Use the Secret from `mariadb.mariadb.passwordSecretKeyRef` or the generated `<release>-mariadb-password`:
+
+   ```console
+   PASSWORD=$(kubectl get secret <release>-mariadb-password -o jsonpath='{.data.password}' | base64 -d)
+   kubectl exec -i <release>-mariadb-0 -c mariadb -- mariadb -u squest --password="$PASSWORD" squest < squest.sql
+   ```
+
+5. Scale Squest up again:
+
+   ```console
+   helm upgrade <release> christianhuth/squest --version 7.0.0 -f values.yaml --wait
+   ```
+
+6. Once everything works, delete the old PersistentVolumeClaims `data-<release>-mariadb-0` and `redis-data-<release>-redis-master-0`.
 
 ### To 4.0.0
 

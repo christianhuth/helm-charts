@@ -42,3 +42,10 @@ prerequisites:
       name: valkey
       repository: https://valkey.io/valkey-helm/
     template: _valkey.tpl
+
+  - name: rabbitmq
+    # chart without operator, so there is nothing to install beforehand
+    dependency:
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/cloudpirates
+    template: _rabbitmq.tpl

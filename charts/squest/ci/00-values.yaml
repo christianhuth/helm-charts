@@ -1,0 +1,11 @@
+---
+mariadb:
+  mariadb:
+    replicas: 1
+    galera:
+      enabled: false
+
+rabbitmq:
+  replicaCount: 1
+  peerDiscoveryK8sPlugin:
+    enabled: false

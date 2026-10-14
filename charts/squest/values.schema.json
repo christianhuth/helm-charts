@@ -535,6 +535,170 @@
       "title": "celery",
       "type": "object"
     },
+    "externalDatabase": {
+      "properties": {
+        "database": {
+          "default": "squest",
+          "description": "Name of the database to use",
+          "title": "database",
+          "type": "string"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Secret containing the password of the user",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "existingSecretPasswordKey": {
+          "default": "password",
+          "description": "Key in the existing Secret containing the password",
+          "title": "existingSecretPasswordKey",
+          "type": "string"
+        },
+        "hostname": {
+          "default": "",
+          "description": "Hostname of the external MariaDB or MySQL database. Used if `mariadb.enabled` is false.",
+          "title": "hostname",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Password of the user. Ignored if `externalDatabase.existingSecret` is set.",
+          "title": "password",
+          "type": "string"
+        },
+        "port": {
+          "default": 3306,
+          "description": "Port of the external database",
+          "title": "port",
+          "type": "integer"
+        },
+        "username": {
+          "default": "squest",
+          "description": "Name of the user to use",
+          "title": "username",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostname",
+        "port",
+        "database",
+        "username",
+        "password",
+        "existingSecret",
+        "existingSecretPasswordKey"
+      ],
+      "title": "externalDatabase",
+      "type": "object"
+    },
+    "externalRabbitmq": {
+      "properties": {
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Secret containing the password. The password must only contain URL-safe characters.",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "existingSecretPasswordKey": {
+          "default": "password",
+          "description": "Key in the existing Secret containing the password",
+          "title": "existingSecretPasswordKey",
+          "type": "string"
+        },
+        "hostname": {
+          "default": "",
+          "description": "Hostname of the external RabbitMQ server. Used if `rabbitmq.enabled` is false.",
+          "title": "hostname",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Password of the user. Ignored if `externalRabbitmq.existingSecret` is set. Must only contain URL-safe characters.",
+          "title": "password",
+          "type": "string"
+        },
+        "port": {
+          "default": 5672,
+          "description": "AMQP port of the external RabbitMQ server",
+          "title": "port",
+          "type": "integer"
+        },
+        "username": {
+          "default": "squest",
+          "description": "Name of the user to use",
+          "title": "username",
+          "type": "string"
+        },
+        "vhost": {
+          "default": "/",
+          "description": "Virtual host to use",
+          "title": "vhost",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostname",
+        "port",
+        "vhost",
+        "username",
+        "password",
+        "existingSecret",
+        "existingSecretPasswordKey"
+      ],
+      "title": "externalRabbitmq",
+      "type": "object"
+    },
+    "externalRedis": {
+      "properties": {
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Secret containing the password. The password must only contain URL-safe characters.",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "existingSecretPasswordKey": {
+          "default": "password",
+          "description": "Key in the existing Secret containing the password",
+          "title": "existingSecretPasswordKey",
+          "type": "string"
+        },
+        "hostname": {
+          "default": "",
+          "description": "Hostname of the external Redis or Valkey server. Used if `valkey.enabled` is false.",
+          "title": "hostname",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Password of the user. Ignored if `externalRedis.existingSecret` is set. Must only contain URL-safe characters.",
+          "title": "password",
+          "type": "string"
+        },
+        "port": {
+          "default": 6379,
+          "description": "Port of the external server",
+          "title": "port",
+          "type": "integer"
+        },
+        "username": {
+          "default": "default",
+          "description": "Name of the user to use",
+          "title": "username",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hostname",
+        "port",
+        "username",
+        "password",
+        "existingSecret",
+        "existingSecretPasswordKey"
+      ],
+      "title": "externalRedis",
+      "type": "object"
+    },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"squest.fullname\"`",
@@ -557,75 +721,137 @@
     },
     "mariadb": {
       "properties": {
-        "auth": {
+        "enabled": {
+          "default": true,
+          "description": "Enable a MariaDB instance managed by the mariadb-operator. Requires the operator to be installed in the cluster (see README).",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "mariadb": {
           "properties": {
             "database": {
               "default": "squest",
-              "description": "The database name to be used when using the integrated MariaDB database.",
+              "description": "Name of the database to create",
               "title": "database",
               "type": "string"
             },
-            "password": {
-              "default": "squest",
-              "description": "The password credential to be used when using the integrated MariaDB database.",
-              "title": "password",
+            "galera": {
+              "properties": {
+                "enabled": {
+                  "default": true,
+                  "description": "Enable Galera to run multiple instances",
+                  "title": "enabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled"
+              ],
+              "title": "galera",
+              "type": "object"
+            },
+            "image": {
+              "default": "mariadb:12.3",
+              "description": "MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.",
+              "title": "image",
               "type": "string"
             },
-            "rootPassword": {
-              "default": "squest",
-              "description": "The root password credential to be used when using the integrated MariaDB database.",
-              "title": "rootPassword",
+            "imagePullPolicy": {
+              "default": "Always",
+              "description": "Pull the image on every start to get the latest patch version of the release series",
+              "title": "imagePullPolicy",
               "type": "string"
+            },
+            "passwordSecretKeyRef": {
+              "properties": {
+                "generate": {
+                  "default": true,
+                  "description": "Let the operator generate the Secret with a random password if it does not exist",
+                  "title": "generate",
+                  "type": "boolean"
+                },
+                "key": {
+                  "default": "password",
+                  "description": "Key of the password inside the Secret",
+                  "title": "key",
+                  "type": "string"
+                },
+                "name": {
+                  "default": "",
+                  "description": "Name of an existing Secret containing the password of the user. If empty, the Secret `\u003crelease\u003e-mariadb-password` is used.",
+                  "title": "name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "key",
+                "generate"
+              ],
+              "title": "passwordSecretKeyRef",
+              "type": "object"
+            },
+            "replicas": {
+              "default": 3,
+              "description": "Number of MariaDB instances. More than one instance requires Galera or replication.",
+              "title": "replicas",
+              "type": "integer"
+            },
+            "storage": {
+              "properties": {
+                "size": {
+                  "default": "8Gi",
+                  "description": "Size of the PVC of each instance",
+                  "title": "size",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "size"
+              ],
+              "title": "storage",
+              "type": "object"
+            },
+            "updateStrategy": {
+              "properties": {
+                "mariadbAutoUpgradeEnabled": {
+                  "default": true,
+                  "description": "Run `mariadb-upgrade` on start, so that changing the release series in `image` migrates the system schema. It is a no-op if there is nothing to migrate.",
+                  "title": "mariadbAutoUpgradeEnabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "mariadbAutoUpgradeEnabled"
+              ],
+              "title": "updateStrategy",
+              "type": "object"
             },
             "username": {
               "default": "squest",
-              "description": "The username credential to be used when using the integrated MariaDB database.",
+              "description": "Name of the user to create",
               "title": "username",
               "type": "string"
             }
           },
           "required": [
+            "image",
+            "imagePullPolicy",
+            "updateStrategy",
+            "replicas",
+            "galera",
             "database",
-            "password",
-            "rootPassword",
-            "username"
+            "username",
+            "passwordSecretKeyRef",
+            "storage"
           ],
-          "title": "auth",
-          "type": "object"
-        },
-        "enabled": {
-          "default": true,
-          "description": "enable integrated MariaDB™ subchart from Bitnami",
-          "title": "enabled",
-          "type": "boolean"
-        },
-        "image": {
-          "properties": {
-            "repository": {
-              "default": "bitnamilegacy/mariadb",
-              "description": "image repository for the MariaDB™ subchart from Bitnami",
-              "title": "repository",
-              "type": "string"
-            },
-            "tag": {
-              "default": "12.0.2-debian-12-r0",
-              "description": "image tag for the MariaDB™ subchart from Bitnami",
-              "title": "tag",
-              "type": "string"
-            }
-          },
-          "required": [
-            "repository",
-            "tag"
-          ],
-          "title": "image",
+          "title": "mariadb",
           "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth",
-        "image"
+        "mariadb"
       ],
       "title": "mariadb",
       "type": "object"
@@ -640,143 +866,91 @@
       "properties": {
         "auth": {
           "properties": {
-            "erlangCookie": {
-              "default": "abcdefghijklmnopqrstuvwxyz",
-              "description": "The Erlang cookie to determine whether different nodes are allowed to communicate with each other",
-              "title": "erlangCookie",
+            "existingPasswordKey": {
+              "default": "password",
+              "description": "Key in the existing Secret containing the password",
+              "title": "existingPasswordKey",
+              "type": "string"
+            },
+            "existingSecret": {
+              "default": "",
+              "description": "Name of an existing Secret containing the password of the default user (and the Erlang cookie)",
+              "title": "existingSecret",
               "type": "string"
             },
             "password": {
-              "default": "squest",
-              "description": "The password credential to be used when using the integrated RabbitMQ.",
+              "default": "",
+              "description": "Password of the default user. A random password is generated if empty. Ignored if `rabbitmq.auth.existingSecret` is set.",
               "title": "password",
               "type": "string"
             },
             "username": {
               "default": "squest",
-              "description": "The username credential to be used when using the integrated RabbitMQ.",
+              "description": "Name of the default user, used by Squest",
               "title": "username",
               "type": "string"
             }
           },
           "required": [
-            "password",
             "username",
-            "erlangCookie"
+            "password",
+            "existingSecret",
+            "existingPasswordKey"
           ],
           "title": "auth",
           "type": "object"
         },
-        "enabled": {
-          "default": true,
-          "description": "enable integrated RabbitMQ™ subchart from Bitnami",
-          "title": "enabled",
-          "type": "boolean"
-        },
-        "image": {
+        "config": {
           "properties": {
-            "repository": {
-              "default": "bitnamilegacy/rabbitmq",
-              "description": "image repository for the RabbitMQ™ subchart from Bitnami",
-              "title": "repository",
-              "type": "string"
-            },
-            "tag": {
-              "default": "4.1.3-debian-12-r1",
-              "description": "image tag for the RabbitMQ™ subchart from Bitnami",
-              "title": "tag",
+            "extraConfiguration": {
+              "default": "deprecated_features.permit.transient_nonexcl_queues = true\n",
+              "description": "Additional RabbitMQ configuration. Celery uses transient non-exclusive queues (remote control, events), which RabbitMQ denies by default since 4.3.",
+              "title": "extraConfiguration",
               "type": "string"
             }
           },
           "required": [
-            "repository",
-            "tag"
+            "extraConfiguration"
           ],
-          "title": "image",
+          "title": "config",
           "type": "object"
-        }
-      },
-      "required": [
-        "enabled",
-        "auth",
-        "image"
-      ],
-      "title": "rabbitmq",
-      "type": "object"
-    },
-    "redis": {
-      "properties": {
-        "architecture": {
-          "default": "standalone",
-          "description": "Redis™ architecture. Allowed values: `standalone` or `replication`",
-          "title": "architecture",
-          "type": "string"
         },
-        "auth": {
+        "enabled": {
+          "default": true,
+          "description": "Enable a RabbitMQ instance (chart cloudpirates/rabbitmq)",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "peerDiscoveryK8sPlugin": {
           "properties": {
             "enabled": {
               "default": true,
-              "description": "Enable password authentication",
+              "description": "Enable the Kubernetes peer discovery plugin to form a cluster of multiple instances",
               "title": "enabled",
               "type": "boolean"
-            },
-            "password": {
-              "default": "squest",
-              "description": "The password credential to be used when using the integrated Redis.",
-              "title": "password",
-              "type": "string"
-            },
-            "username": {
-              "default": "squest",
-              "description": "The username credential to be used when using the integrated Redis.",
-              "title": "username",
-              "type": "string"
             }
           },
           "required": [
-            "enabled",
-            "password",
-            "username"
+            "enabled"
           ],
-          "title": "auth",
+          "title": "peerDiscoveryK8sPlugin",
           "type": "object"
         },
-        "enabled": {
-          "default": true,
-          "description": "enable integrated Redis™ subchart from Bitnami",
-          "title": "enabled",
-          "type": "boolean"
-        },
-        "image": {
-          "properties": {
-            "repository": {
-              "default": "bitnamilegacy/redis",
-              "description": "image repository for the Redis™ subchart from Bitnami",
-              "title": "repository",
-              "type": "string"
-            },
-            "tag": {
-              "default": "8.2.1-debian-12-r0",
-              "description": "image tag for the Redis™ subchart from Bitnami",
-              "title": "tag",
-              "type": "string"
-            }
-          },
-          "required": [
-            "repository",
-            "tag"
-          ],
-          "title": "image",
-          "type": "object"
+        "replicaCount": {
+          "default": 3,
+          "description": "Number of RabbitMQ instances. More than one instance requires `rabbitmq.peerDiscoveryK8sPlugin.enabled`.",
+          "title": "replicaCount",
+          "type": "integer"
         }
       },
       "required": [
         "enabled",
-        "architecture",
-        "auth",
-        "image"
+        "replicaCount",
+        "peerDiscoveryK8sPlugin",
+        "config",
+        "auth"
       ],
-      "title": "redis",
+      "title": "rabbitmq",
       "type": "object"
     },
     "squest": {
@@ -821,72 +995,6 @@
         },
         "config": {
           "properties": {
-            "database": {
-              "properties": {
-                "auth": {
-                  "properties": {
-                    "database": {
-                      "default": "",
-                      "description": "The database name to be used when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.",
-                      "title": "database",
-                      "type": "string"
-                    },
-                    "existingSecret": {
-                      "default": "",
-                      "description": "Use existing secret for password details (`squest.config.database.auth.password` and `squest.config.database.auth.rootPassword` will be ignored and picked up from this secret). The secret has to contain the keys `mariadb-password` and `mariadb-root-password`.",
-                      "title": "existingSecret",
-                      "type": "string"
-                    },
-                    "password": {
-                      "default": "",
-                      "description": "The password credential to be used when using an external MariaDB database.",
-                      "title": "password",
-                      "type": "string"
-                    },
-                    "rootPassword": {
-                      "default": "",
-                      "description": "The root password credential to be used when using an external MariaDB database.",
-                      "title": "rootPassword",
-                      "type": "string"
-                    },
-                    "username": {
-                      "default": "",
-                      "description": "The username credential to be used when using an external MariaDB database.",
-                      "title": "username",
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "database",
-                    "existingSecret",
-                    "password",
-                    "rootPassword",
-                    "username"
-                  ],
-                  "title": "auth",
-                  "type": "object"
-                },
-                "host": {
-                  "default": "",
-                  "description": "The host name of the database server when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.",
-                  "title": "host",
-                  "type": "string"
-                },
-                "port": {
-                  "default": 3306,
-                  "description": "The port in which the database service is running when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.",
-                  "title": "port",
-                  "type": "integer"
-                }
-              },
-              "required": [
-                "auth",
-                "host",
-                "port"
-              ],
-              "title": "database",
-              "type": "object"
-            },
             "django": {
               "properties": {
                 "debug": {
@@ -958,96 +1066,6 @@
                 "surveyValidatorPath"
               ],
               "title": "plugins",
-              "type": "object"
-            },
-            "rabbitmq": {
-              "properties": {
-                "auth": {
-                  "properties": {
-                    "existingSecret": {
-                      "default": "",
-                      "description": "Use existing secret for password details (`squest.config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.",
-                      "title": "existingSecret",
-                      "type": "string"
-                    },
-                    "password": {
-                      "default": "",
-                      "description": "The password credential to be used when using an external database driver.",
-                      "title": "password",
-                      "type": "string"
-                    },
-                    "username": {
-                      "default": "",
-                      "description": "The username credential to be used when using an external database driver.",
-                      "title": "username",
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "existingSecret",
-                    "password",
-                    "username"
-                  ],
-                  "title": "auth",
-                  "type": "object"
-                },
-                "host": {
-                  "default": "",
-                  "description": "The RabbitMQ server host name",
-                  "title": "host",
-                  "type": "string"
-                },
-                "vhost": {
-                  "default": "",
-                  "description": "The RabbitMQ server VHost",
-                  "title": "vhost",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "auth",
-                "host",
-                "vhost"
-              ],
-              "title": "rabbitmq",
-              "type": "object"
-            },
-            "redis": {
-              "properties": {
-                "auth": {
-                  "properties": {
-                    "existingSecret": {
-                      "default": "",
-                      "description": "Use existing secret for password details (`squest.config.redis.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `redis-password`.",
-                      "title": "existingSecret",
-                      "type": "string"
-                    },
-                    "password": {
-                      "default": "",
-                      "description": "The password credential to be used when using an external redis server.",
-                      "title": "password",
-                      "type": "string"
-                    },
-                    "username": {
-                      "default": "",
-                      "description": "The username credential to be used when using an external redis server.",
-                      "title": "username",
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "existingSecret",
-                    "password",
-                    "username"
-                  ],
-                  "title": "auth",
-                  "type": "object"
-                }
-              },
-              "required": [
-                "auth"
-              ],
-              "title": "redis",
               "type": "object"
             },
             "smtp": {
@@ -1161,12 +1179,9 @@
             }
           },
           "required": [
-            "database",
             "django",
             "localization",
             "plugins",
-            "rabbitmq",
-            "redis",
             "smtp",
             "squest"
           ],
@@ -1724,6 +1739,76 @@
       ],
       "title": "squest",
       "type": "object"
+    },
+    "valkey": {
+      "properties": {
+        "auth": {
+          "properties": {
+            "aclUsers": {
+              "properties": {
+                "default": {
+                  "properties": {
+                    "password": {
+                      "default": "squest",
+                      "description": "Inline password of the user `default`. Use `valkey.auth.usersExistingSecret` instead for production.",
+                      "title": "password",
+                      "type": "string"
+                    },
+                    "permissions": {
+                      "default": "~* \u0026* +@all",
+                      "description": "ACL permissions of the user `default`",
+                      "title": "permissions",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "permissions",
+                    "password"
+                  ],
+                  "title": "default",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "default"
+              ],
+              "title": "aclUsers",
+              "type": "object"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Enable password authentication. Squest authenticates as the user `default`.",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "usersExistingSecret": {
+              "default": "",
+              "description": "Name of an existing Secret containing the passwords of the users (key `\u003cuser\u003e` or `aclUsers.\u003cuser\u003e.passwordKey`). Takes precedence over inline passwords.",
+              "title": "usersExistingSecret",
+              "type": "string"
+            }
+          },
+          "required": [
+            "enabled",
+            "usersExistingSecret",
+            "aclUsers"
+          ],
+          "title": "auth",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "description": "Enable a Valkey instance (official chart valkey/valkey) used by Squest as cache",
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "auth"
+      ],
+      "title": "valkey",
+      "type": "object"
     }
   },
   "required": [
@@ -1734,7 +1819,10 @@
     "celery",
     "mariadb",
     "rabbitmq",
-    "redis"
+    "valkey",
+    "externalDatabase",
+    "externalRabbitmq",
+    "externalRedis"
   ],
   "type": "object"
 }
