@@ -1,7 +1,7 @@
 # passbolt-ha
 
-## 6.0.1
+## 6.1.0
 
-### Changed
+### Deprecated
 
-- dependency of proxysql to 3.1.1
+- the chart is deprecated in favor of the official Passbolt chart (https://download.passbolt.com/charts/passbolt), which deploys a current Passbolt version and supports HA itself. See the README for migration hints.

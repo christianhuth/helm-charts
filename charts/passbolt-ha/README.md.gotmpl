@@ -1,6 +1,14 @@
 {{ template "chart.header" . }}
 {{ template "chart.description" . }}
 
+> [!WARNING]
+> **This chart is deprecated** and will be removed in the future. Please use the [official Passbolt chart](https://github.com/passbolt/charts-passbolt) instead:
+>
+> - it deploys a current Passbolt version, whereas this chart is bound to Passbolt 3.4.0 by the unmaintained [cnieg/passbolt](https://github.com/cnieg/helm-charts/tree/master/charts/passbolt) chart
+> - it supports multiple Passbolt replicas with Redis, and MariaDB or PostgreSQL as database (bundled or external), so this chart doesn't add anything on top
+>
+> See [Migrating to the official Passbolt chart](#migrating-to-the-official-passbolt-chart).
+
 ## TL;DR;
 
 ```console
@@ -83,6 +91,36 @@ proxysql:
         - username: passbolt
           password: $NEW_PASSWORD
 ```
+
+## Migrating to the official Passbolt chart
+
+The official chart is available at:
+
+```console
+helm repo add passbolt https://download.passbolt.com/charts/passbolt
+helm repo update
+```
+
+To take your data along:
+
+1. Dump the database:
+
+   ```console
+   kubectl exec passbolt-mysql-primary-0 -- sh -c 'mysqldump -u"$MYSQL_USER" -p"$(cat "$MYSQL_PASSWORD_FILE")" --no-tablespaces "$MYSQL_DATABASE"' > passbolt.sql
+   ```
+
+2. Copy the GPG server keys from the Passbolt volume and store them in a Secret for the official chart (keys `serverkey.asc` and `serverkey_private.asc`, used with `gpgExistingSecret`):
+
+   ```console
+   POD=$(kubectl get pods -l app.kubernetes.io/name=passbolt -o jsonpath='{.items[0].metadata.name}')
+   kubectl cp $POD:/etc/passbolt/gpg/serverkey.asc serverkey.asc
+   kubectl cp $POD:/etc/passbolt/gpg/serverkey_private.asc serverkey_private.asc
+   kubectl create secret generic passbolt-gpg --from-file=serverkey.asc --from-file=serverkey_private.asc
+   ```
+
+3. Install the official chart with `gpgExistingSecret: passbolt-gpg` and restore the dump into its database (or into your own database, e.g. a MariaDB instance managed by the [mariadb-operator](https://github.com/mariadb-operator/mariadb-operator)). A MySQL dump can be restored into MariaDB without changes.
+
+4. Passbolt migrates the database from 3.4.0 to the current version on startup. Read the [Passbolt upgrade notes](https://www.passbolt.com/docs/hosting/update/) before, as this skips several major versions.
 
 ## Upgrading the Chart
 
