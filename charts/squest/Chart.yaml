@@ -2,8 +2,8 @@ apiVersion: v2
 name: squest
 description: Squest is a self-service portal that works on top of Red Hat Ansible Automation Platform/AWX.
 type: application
-version: 7.0.1
-appVersion: "2.8.4"
+version: 7.0.2
+appVersion: "1.31.7-alpine"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
 maintainers:
@@ -28,8 +28,8 @@ dependencies:
     condition: valkey.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: fixed
-      description: upgrade notes for 7.0.0 wait for each resource of the operator separately, as kubectl wait --for=create only supports a single resource
+    - kind: changed
+      description: App Version to 1.31.7-alpine
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
