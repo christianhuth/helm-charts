@@ -194,8 +194,8 @@ mariadb:
   # -- Enable a MariaDB instance managed by the mariadb-operator. Requires the operator to be installed in the cluster (see README).
   enabled: true
   mariadb:
-    # -- MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.
-    image: mariadb:12.3
+    # -- MariaDB image. The tag only pins the release series (13.0 is the current long-term support release), so restarted instances get its latest patch version.
+    image: mariadb:13.0
     # -- Pull the image on every start to get the latest patch version of the release series
     imagePullPolicy: Always
     updateStrategy:

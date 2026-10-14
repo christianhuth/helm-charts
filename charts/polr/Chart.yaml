@@ -2,8 +2,8 @@ apiVersion: v2
 name: polr
 description: Polr is a quick, modern, and open-source link shortener
 type: application
-version: 5.0.0
-appVersion: "2.3.0"
+version: 6.0.0
+appVersion: "13.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/polr/icon.svg
 maintainers:
@@ -21,13 +21,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: "BREAKING: replaced the Bitnami MySQL subchart with a MariaDB instance managed by the mariadb-operator (upstream chart mariadb-cluster). See the upgrade notes in the README."
-    - kind: changed
-      description: "BREAKING: restructured externalDatabase (host renamed to hostname, existingSecretPasswordKey instead of the fixed key mysql-password)"
-    - kind: removed
-      description: "BREAKING: inline password for the bundled database. The operator generates the password or uses the Secret given in mariadb.mariadb.passwordSecretKeyRef"
-    - kind: fixed
-      description: the bundled database is only deployed if mariadb.enabled is true, and the database password is always read from a Secret
+      description: App Version to 13.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

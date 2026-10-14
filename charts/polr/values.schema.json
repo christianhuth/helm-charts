@@ -409,8 +409,8 @@
               "type": "object"
             },
             "image": {
-              "default": "mariadb:12.3",
-              "description": "MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.",
+              "default": "mariadb:13.0",
+              "description": "MariaDB image. The tag only pins the release series (13.0 is the current long-term support release), so restarted instances get its latest patch version.",
               "title": "image",
               "type": "string"
             },
