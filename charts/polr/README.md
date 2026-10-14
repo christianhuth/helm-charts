@@ -75,7 +75,7 @@ mariadb:
 
 If no Secret is referenced, the operator generates a random password and stores it in the Secret `<release>-mariadb-password`. Polr writes the password into its `.env` file on startup, so it must not contain spaces, quotes, `#` or `$`. By default the database runs as a Galera cluster with 3 instances. All other settings are passed to the upstream chart, see its [values](https://github.com/mariadb-operator/mariadb-operator/tree/main/deploy/charts/mariadb-cluster) and the [MariaDB API reference](https://github.com/mariadb-operator/mariadb-operator/blob/main/docs/api_reference.md#mariadbspec).
 
-The image tag only pins the MariaDB release series (by default the long-term support release 12.3). To upgrade to another release series, change the tag of `mariadb.mariadb.image`. The operator migrates the system schema on the rollout (`updateStrategy.mariadbAutoUpgradeEnabled`). Downgrades are not supported by MariaDB, so take a backup before upgrading.
+The image tag only pins the MariaDB release series (by default the long-term support release 13.0). To upgrade to another release series, change the tag of `mariadb.mariadb.image`. The operator migrates the system schema on the rollout (`updateStrategy.mariadbAutoUpgradeEnabled`). Downgrades are not supported by MariaDB, so take a backup before upgrading.
 
 ### External MariaDB or MySQL
 
@@ -142,7 +142,7 @@ Instead of `externalDatabase.existingSecret` you can set `externalDatabase.passw
 | mariadb.enabled | bool | `true` | Enable a MariaDB instance managed by the mariadb-operator. Requires the operator to be installed in the cluster (see README). |
 | mariadb.mariadb.database | string | `"polr"` | Name of the database to create |
 | mariadb.mariadb.galera.enabled | bool | `true` | Enable Galera to run multiple instances |
-| mariadb.mariadb.image | string | `"mariadb:12.3"` | MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version. |
+| mariadb.mariadb.image | string | `"mariadb:13.0"` | MariaDB image. The tag only pins the release series (13.0 is the current long-term support release), so restarted instances get its latest patch version. |
 | mariadb.mariadb.imagePullPolicy | string | `"Always"` | Pull the image on every start to get the latest patch version of the release series |
 | mariadb.mariadb.passwordSecretKeyRef.generate | bool | `true` | Let the operator generate the Secret with a random password if it does not exist |
 | mariadb.mariadb.passwordSecretKeyRef.key | string | `"password"` | Key of the password inside the Secret |
