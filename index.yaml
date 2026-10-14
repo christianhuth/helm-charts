@@ -57808,6 +57808,53 @@ entries:
   polr:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: "BREAKING: replaced the Bitnami MySQL subchart with a MariaDB instance managed by the mariadb-operator (upstream chart mariadb-cluster). See the upgrade notes in the README."
+        - kind: changed
+          description: "BREAKING: restructured externalDatabase (host renamed to hostname, existingSecretPasswordKey instead of the fixed key mysql-password)"
+        - kind: removed
+          description: "BREAKING: inline password for the bundled database. The operator generates the password or uses the Secret given in mariadb.mariadb.passwordSecretKeyRef"
+        - kind: fixed
+          description: the bundled database is only deployed if mariadb.enabled is true, and the database password is always read from a Secret
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Polr converts some long links into shorter ones.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/shortit-1024x346.png
+        - title: Polr provides a dashboard overview containing all the links ever created.
+          url: https://assets.hongkiat.com/uploads/polr-url-shorterner/02-polr-links-table.jpg
+        - title: Polr provides some statistical data about the shortened link.
+          url: https://selfhostedweb.org/wp-content/uploads/2017/02/Screenshot-2018-1-31-Shorts-1024x1024.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.3.0
+    created: "2026-10-14T10:00:44.091318415Z"
+    dependencies:
+    - alias: mariadb
+      condition: mariadb.enabled
+      name: mariadb-cluster
+      repository: https://helm.mariadb.com/mariadb-operator
+      version: 26.10.1
+    description: Polr is a quick, modern, and open-source link shortener
+    digest: 4234a4b889f250d79137023c3918f9f5f6c299628bffb10c7d0ca34a45a8cbd5
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/polr/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: polr
+    sources:
+    - https://github.com/cydrobolt/polr
+    - https://github.com/ajanvier/docker-polr
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/polr-5.0.0/polr-5.0.0.tgz
+    version: 5.0.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: option to define route timeouts
       artifacthub.io/links: |
@@ -84757,6 +84804,49 @@ entries:
   squest:
   - annotations:
       artifacthub.io/changes: |
+        - kind: fixed
+          description: upgrade notes for 7.0.0 wait for each resource of the operator separately, as kubectl wait --for=create only supports a single resource
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.8.4
+    created: "2026-10-14T10:00:44.427767177Z"
+    dependencies:
+    - alias: mariadb
+      condition: mariadb.enabled
+      name: mariadb-cluster
+      repository: https://helm.mariadb.com/mariadb-operator
+      version: 26.10.1
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.21.31
+    - condition: valkey.enabled
+      name: valkey
+      repository: https://valkey.io/valkey-helm/
+      version: 0.12.0
+    description: Squest is a self-service portal that works on top of Red Hat Ansible
+      Automation Platform/AWX.
+    digest: 045699e9dd9ffa98f1bbea1bd5ebe1cbc9d485c249dcb69bacb2eab809ffdf37
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: squest
+    sources:
+    - https://github.com/HewlettPackard/squest
+    - https://hewlettpackard.github.io/squest
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/squest-7.0.1/squest-7.0.1.tgz
+    version: 7.0.1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: "BREAKING: replaced the Bitnami MariaDB subchart with a MariaDB instance managed by the mariadb-operator (upstream chart mariadb-cluster). See the upgrade notes in the README."
         - kind: changed
@@ -89561,6 +89651,47 @@ entries:
     - https://github.com/christianknell/helm-charts/releases/download/syncserver-1.0.0/syncserver-1.0.0.tgz
     version: 1.0.0
   syncstorage-rs:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fixed
+          description: upgrade notes for 7.0.0 wait for each resource of the operator separately, as kubectl wait --for=create only supports a single resource
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: syncstorage-rs-mysql-0.18.2
+    created: "2026-10-14T10:00:44.639041208Z"
+    dependencies:
+    - alias: syncserver-db
+      condition: syncserver-db.enabled
+      name: mariadb-cluster
+      repository: https://helm.mariadb.com/mariadb-operator
+      version: 26.10.1
+    - alias: tokenserver-db
+      condition: tokenserver-db.enabled
+      name: mariadb-cluster
+      repository: https://helm.mariadb.com/mariadb-operator
+      version: 26.10.1
+    description: A Helm chart for deploying Mozilla's Firefox Sync Storage server
+      to Kubernetes
+    digest: b47563aa7647f61655cc367e46b9c0b2120cf2609a996560da38303a7e72a479
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncstorage-rs/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: syncstorage-rs
+    sources:
+    - https://github.com/mozilla-services/syncstorage-rs
+    - https://github.com/porelli/firefox-sync
+    - https://github.com/porelli/firefox-sync/pkgs/container/firefox-sync
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/syncstorage-rs-7.0.1/syncstorage-rs-7.0.1.tgz
+    version: 7.0.1
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
@@ -115855,4 +115986,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-14T09:22:01.436449118Z"
+generated: "2026-10-14T10:00:44.64157886Z"
