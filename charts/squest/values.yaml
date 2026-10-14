@@ -175,22 +175,6 @@ squest:
   extraEnvFrom: []
 
   config:
-    database:
-      auth:
-        # -- The database name to be used when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.
-        database: ""
-        # -- Use existing secret for password details (`squest.config.database.auth.password` and `squest.config.database.auth.rootPassword` will be ignored and picked up from this secret). The secret has to contain the keys `mariadb-password` and `mariadb-root-password`.
-        existingSecret: ""
-        # -- The password credential to be used when using an external MariaDB database.
-        password: ""
-        # -- The root password credential to be used when using an external MariaDB database.
-        rootPassword: ""
-        # -- The username credential to be used when using an external MariaDB database.
-        username: ""
-      # -- The host name of the database server when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.
-      host: ""
-      # -- The port in which the database service is running when using an external MariaDB database. Will be ignored when you activate the integrated database with mariadb.enabled.
-      port: 3306
     django:
       # -- Django DEBUG mode.
       debug: false
@@ -208,26 +192,6 @@ squest:
       fieldValidatorPath: ""
       # -- Path to SurveyValidator modules.
       surveyValidatorPath: "plugins/survey_validators"
-    rabbitmq:
-      auth:
-        # -- Use existing secret for password details (`squest.config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.
-        existingSecret: ""
-        # -- The password credential to be used when using an external database driver.
-        password: ""
-        # -- The username credential to be used when using an external database driver.
-        username: ""
-      # -- The RabbitMQ server host name
-      host: ""
-      # -- The RabbitMQ server VHost
-      vhost: ""
-    redis:
-      auth:
-        # -- Use existing secret for password details (`squest.config.redis.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `redis-password`.
-        existingSecret: ""
-        # -- The password credential to be used when using an external redis server.
-        password: ""
-        # -- The username credential to be used when using an external redis server.
-        username: ""
     smtp:
       auth:
         # -- Use existing secret for password details (`squest.config.smtp.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `smtp-password`.
@@ -485,53 +449,115 @@ celery:
         gunicornWorkers: 4
 
 mariadb:
-  # -- enable integrated MariaDB™ subchart from Bitnami
+  # -- Enable a MariaDB instance managed by the mariadb-operator. Requires the operator to be installed in the cluster (see README).
   enabled: true
-  auth:
-    # -- The database name to be used when using the integrated MariaDB database.
+  mariadb:
+    # -- MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.
+    image: mariadb:12.3
+    # -- Pull the image on every start to get the latest patch version of the release series
+    imagePullPolicy: Always
+    updateStrategy:
+      # -- Run `mariadb-upgrade` on start, so that changing the release series in `image` migrates the system schema. It is a no-op if there is nothing to migrate.
+      mariadbAutoUpgradeEnabled: true
+    # -- Number of MariaDB instances. More than one instance requires Galera or replication.
+    replicas: 3
+    galera:
+      # -- Enable Galera to run multiple instances
+      enabled: true
+    # -- Name of the database to create
     database: squest
-    # -- The password credential to be used when using the integrated MariaDB database.
-    password: squest
-    # -- The root password credential to be used when using the integrated MariaDB database.
-    rootPassword: squest
-    # -- The username credential to be used when using the integrated MariaDB database.
+    # -- Name of the user to create
     username: squest
-  image:
-    # -- image repository for the MariaDB™ subchart from Bitnami
-    repository: bitnamilegacy/mariadb
-    # -- image tag for the MariaDB™ subchart from Bitnami
-    tag: 12.0.2-debian-12-r0
+    passwordSecretKeyRef:
+      # -- Name of an existing Secret containing the password of the user. If empty, the Secret `<release>-mariadb-password` is used.
+      name: ""
+      # -- Key of the password inside the Secret
+      key: password
+      # -- Let the operator generate the Secret with a random password if it does not exist
+      generate: true
+    storage:
+      # -- Size of the PVC of each instance
+      size: 8Gi
 
 rabbitmq:
-  # -- enable integrated RabbitMQ™ subchart from Bitnami
+  # -- Enable a RabbitMQ instance (chart cloudpirates/rabbitmq)
   enabled: true
-  auth:
-    # -- The password credential to be used when using the integrated RabbitMQ.
-    password: squest
-    # -- The username credential to be used when using the integrated RabbitMQ.
-    username: squest
-    # -- The Erlang cookie to determine whether different nodes are allowed to communicate with each other
-    erlangCookie: abcdefghijklmnopqrstuvwxyz
-  image:
-    # -- image repository for the RabbitMQ™ subchart from Bitnami
-    repository: bitnamilegacy/rabbitmq
-    # -- image tag for the RabbitMQ™ subchart from Bitnami
-    tag: 4.1.3-debian-12-r1
-
-redis:
-  # -- enable integrated Redis™ subchart from Bitnami
-  enabled: true
-  # -- Redis™ architecture. Allowed values: `standalone` or `replication`
-  architecture: standalone
-  auth:
-    # -- Enable password authentication
+  # -- Number of RabbitMQ instances. More than one instance requires `rabbitmq.peerDiscoveryK8sPlugin.enabled`.
+  replicaCount: 3
+  peerDiscoveryK8sPlugin:
+    # -- Enable the Kubernetes peer discovery plugin to form a cluster of multiple instances
     enabled: true
-    # -- The password credential to be used when using the integrated Redis.
-    password: squest
-    # -- The username credential to be used when using the integrated Redis.
+  config:
+    # -- Additional RabbitMQ configuration. Celery uses transient non-exclusive queues (remote control, events), which RabbitMQ denies by default since 4.3.
+    extraConfiguration: |
+      deprecated_features.permit.transient_nonexcl_queues = true
+  auth:
+    # -- Name of the default user, used by Squest
     username: squest
-  image:
-    # -- image repository for the Redis™ subchart from Bitnami
-    repository: bitnamilegacy/redis
-    # -- image tag for the Redis™ subchart from Bitnami
-    tag: 8.2.1-debian-12-r0
+    # -- Password of the default user. A random password is generated if empty. Ignored if `rabbitmq.auth.existingSecret` is set.
+    password: ""
+    # -- Name of an existing Secret containing the password of the default user (and the Erlang cookie)
+    existingSecret: ""
+    # -- Key in the existing Secret containing the password
+    existingPasswordKey: password
+
+valkey:
+  # -- Enable a Valkey instance (official chart valkey/valkey) used by Squest as cache
+  enabled: true
+  auth:
+    # -- Enable password authentication. Squest authenticates as the user `default`.
+    enabled: true
+    # -- Name of an existing Secret containing the passwords of the users (key `<user>` or `aclUsers.<user>.passwordKey`). Takes precedence over inline passwords.
+    usersExistingSecret: ""
+    aclUsers:
+      default:
+        # -- ACL permissions of the user `default`
+        permissions: "~* &* +@all"
+        # -- Inline password of the user `default`. Use `valkey.auth.usersExistingSecret` instead for production.
+        password: squest
+
+externalDatabase:
+  # -- Hostname of the external MariaDB or MySQL database. Used if `mariadb.enabled` is false.
+  hostname: ""
+  # -- Port of the external database
+  port: 3306
+  # -- Name of the database to use
+  database: squest
+  # -- Name of the user to use
+  username: squest
+  # -- Password of the user. Ignored if `externalDatabase.existingSecret` is set.
+  password: ""
+  # -- Name of an existing Secret containing the password of the user
+  existingSecret: ""
+  # -- Key in the existing Secret containing the password
+  existingSecretPasswordKey: password
+
+externalRabbitmq:
+  # -- Hostname of the external RabbitMQ server. Used if `rabbitmq.enabled` is false.
+  hostname: ""
+  # -- AMQP port of the external RabbitMQ server
+  port: 5672
+  # -- Virtual host to use
+  vhost: /
+  # -- Name of the user to use
+  username: squest
+  # -- Password of the user. Ignored if `externalRabbitmq.existingSecret` is set. Must only contain URL-safe characters.
+  password: ""
+  # -- Name of an existing Secret containing the password. The password must only contain URL-safe characters.
+  existingSecret: ""
+  # -- Key in the existing Secret containing the password
+  existingSecretPasswordKey: password
+
+externalRedis:
+  # -- Hostname of the external Redis or Valkey server. Used if `valkey.enabled` is false.
+  hostname: ""
+  # -- Port of the external server
+  port: 6379
+  # -- Name of the user to use
+  username: default
+  # -- Password of the user. Ignored if `externalRedis.existingSecret` is set. Must only contain URL-safe characters.
+  password: ""
+  # -- Name of an existing Secret containing the password. The password must only contain URL-safe characters.
+  existingSecret: ""
+  # -- Key in the existing Secret containing the password
+  existingSecretPasswordKey: password

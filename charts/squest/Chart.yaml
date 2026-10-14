@@ -2,8 +2,8 @@ apiVersion: v2
 name: squest
 description: Squest is a self-service portal that works on top of Red Hat Ansible Automation Platform/AWX.
 type: application
-version: 6.6.8
-appVersion: "1.31.6-alpine"
+version: 7.0.0
+appVersion: "2.8.4"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
 maintainers:
@@ -13,22 +13,35 @@ sources:
   - https://github.com/HewlettPackard/squest
   - https://hewlettpackard.github.io/squest
 dependencies:
-  - name: mariadb
-    repository: oci://registry-1.docker.io/bitnamicharts
-    version: 25.1.4
+  - name: mariadb-cluster
+    alias: mariadb
+    repository: https://helm.mariadb.com/mariadb-operator
+    version: 26.10.1
     condition: mariadb.enabled
   - name: rabbitmq
-    repository: oci://registry-1.docker.io/bitnamicharts
-    version: 16.0.14
+    repository: oci://registry-1.docker.io/cloudpirates
+    version: 0.21.31
     condition: rabbitmq.enabled
-  - name: redis
-    repository: oci://registry-1.docker.io/bitnamicharts
-    version: 25.5.3
-    condition: redis.enabled
+  - name: valkey
+    repository: https://valkey.io/valkey-helm/
+    version: 0.12.0
+    condition: valkey.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: App Version to 1.31.6-alpine
+      description: "BREAKING: replaced the Bitnami MariaDB subchart with a MariaDB instance managed by the mariadb-operator (upstream chart mariadb-cluster). See the upgrade notes in the README."
+    - kind: changed
+      description: "BREAKING: replaced the Bitnami RabbitMQ subchart with the CloudPirates RabbitMQ chart and the Bitnami Redis subchart with the official Valkey chart (valkey/valkey)"
+    - kind: changed
+      description: "BREAKING: moved squest.config.database, squest.config.rabbitmq and squest.config.redis to externalDatabase, externalRabbitmq and externalRedis with a standardized structure"
+    - kind: changed
+      description: RabbitMQ settings are passed with RABBITMQ_* instead of CELERY_BROKER_URL, so the password is read from a Secret
+    - kind: added
+      description: RabbitMQ permits transient non-exclusive queues, which Celery uses for remote control and events and which RabbitMQ denies by default since 4.3
+    - kind: removed
+      description: DB_ROOT_PASSWORD, which is not used by Squest
+    - kind: fixed
+      description: appVersion now reflects the Squest version instead of the nginx version
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
