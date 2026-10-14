@@ -162,16 +162,21 @@ admin:
   # expected key is ADMIN_PASSWORD
   existingSecret: ""
 
-# will be used if mysql.enabled is false
 externalDatabase:
-  host: "polr-mysql"
-  port: "3306"
-  database: "polr"
-  username: "polr"
-  password: "polr"
-  ## @param externalDatabase.existingSecret Use existing secret for password details. The secret has to contain the key `mysql-password`
-  ## NOTE: When it's set the externalDatabase.password is ignored.
+  # -- Hostname of the external MariaDB or MySQL database. Used if `mariadb.enabled` is false.
+  hostname: ""
+  # -- Port of the external database
+  port: 3306
+  # -- Name of the database to use
+  database: polr
+  # -- Name of the user to use
+  username: polr
+  # -- Password of the user. Ignored if `externalDatabase.existingSecret` is set.
+  password: ""
+  # -- Name of an existing Secret containing the password of the user
   existingSecret: ""
+  # -- Key in the existing Secret containing the password
+  existingSecretPasswordKey: password
 
 mail:
   enabled: false
@@ -185,18 +190,33 @@ mail:
   ## NOTE: When it's set the mail.password is ignored.
   existingSecret: ""
 
-mysql:
-  # if disabled please provide db-attributes via externalDatabase attributes
+mariadb:
+  # -- Enable a MariaDB instance managed by the mariadb-operator. Requires the operator to be installed in the cluster (see README).
   enabled: true
-  auth:
+  mariadb:
+    # -- MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.
+    image: mariadb:12.3
+    # -- Pull the image on every start to get the latest patch version of the release series
+    imagePullPolicy: Always
+    updateStrategy:
+      # -- Run `mariadb-upgrade` on start, so that changing the release series in `image` migrates the system schema. It is a no-op if there is nothing to migrate.
+      mariadbAutoUpgradeEnabled: true
+    # -- Number of MariaDB instances. More than one instance requires Galera or replication.
+    replicas: 3
+    galera:
+      # -- Enable Galera to run multiple instances
+      enabled: true
+    # -- Name of the database to create
     database: polr
-    password: polr
+    # -- Name of the user to create
     username: polr
-    ## @param mysql.auth.existingSecret Use existing secret for password details. The secret has to contain the keys `mysql-root-password`, `mysql-replication-password` and `mysql-password`
-    ## NOTE: When it's set the mysql.auth.rootPassword, mysql.auth.password, mysql.auth.replicationPassword are ignored.
-    existingSecret: ""
-  image:
-    # -- image repository for MySQL™ subchart from Bitnami
-    repository: bitnamilegacy/mysql
-    # -- image tag for MySQL™ subchart from Bitnami
-    tag: 9.4.0-debian-12-r1
+    passwordSecretKeyRef:
+      # -- Name of an existing Secret containing the password of the user. If empty, the Secret `<release>-mariadb-password` is used.
+      name: ""
+      # -- Key of the password inside the Secret
+      key: password
+      # -- Let the operator generate the Secret with a random password if it does not exist
+      generate: true
+    storage:
+      # -- Size of the PVC of each instance
+      size: 8Gi

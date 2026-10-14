@@ -44,43 +44,19 @@ spec:
             {{- else }}
               value: "http://"
             {{- end }}
-          {{- if .Values.mysql.enabled }}
             - name: DB_HOST
-              value: "{{- include "mysql.primary.fullname" .Subcharts.mysql -}}"
+              value: {{ include "polr.database.hostname" . | quote }}
             - name: DB_PORT
-              value: {{ .Values.mysql.primary.service.ports.mysql | quote }}
+              value: {{ include "polr.database.port" . | quote }}
             - name: DB_DATABASE
-              value: {{ .Values.mysql.auth.database }}
+              value: {{ include "polr.database.database" . | quote }}
             - name: DB_USERNAME
-              value: {{ .Values.mysql.auth.username }}
+              value: {{ include "polr.database.username" . | quote }}
             - name: DB_PASSWORD
-            {{- if .Values.mysql.auth.existingSecret -}}
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "mysql.secretName" .Subcharts.mysql }}
-                  key: mysql-password
-            {{- else }}
-              value: {{ .Values.mysql.auth.password }}
-            {{- end }}
-          {{- else }}
-            - name: DB_HOST
-              value: {{ .Values.externalDatabase.host }}
-            - name: DB_PORT
-              value: {{ .Values.externalDatabase.port | quote }}
-            - name: DB_DATABASE
-              value: {{ .Values.externalDatabase.database }}
-            - name: DB_USERNAME
-              value: {{ .Values.externalDatabase.username }}
-            - name: DB_PASSWORD
-            {{- if .Values.externalDatabase.existingSecret -}}
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.externalDatabase.existingSecret }}
-                  key: mysql-password
-            {{- else }}
-              value: {{ .Values.externalDatabase.password }}
-            {{- end }}
-          {{- end }}
+                  name: {{ include "polr.database.secretName" . | quote }}
+                  key: {{ include "polr.database.passwordKey" . | quote }}
             - name: ADMIN_PASSWORD
             {{- if not .Values.admin.existingSecret }}
               value: {{ .Values.admin.password }}

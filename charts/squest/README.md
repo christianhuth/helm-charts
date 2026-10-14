@@ -372,7 +372,8 @@ The upgrade creates a new, empty database. Valkey (cache) and RabbitMQ (pending 
    ```console
    helm upgrade <release> christianhuth/squest --version 7.0.0 -f values.yaml \
      --set squest.replicaCount=0 --set celery.worker.replicaCount=0 --set celery.beat.replicaCount=0 --wait
-   kubectl wait --for=create user/<release>-mariadb-user grant/<release>-mariadb-user-all --timeout=10m
+   kubectl wait --for=create user/<release>-mariadb-user --timeout=10m
+   kubectl wait --for=create grant/<release>-mariadb-user-all --timeout=10m
    kubectl wait --for=condition=Ready user/<release>-mariadb-user grant/<release>-mariadb-user-all --timeout=10m
    ```
 

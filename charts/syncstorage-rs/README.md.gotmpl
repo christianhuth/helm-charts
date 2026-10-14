@@ -141,7 +141,8 @@ The upgrade creates new, empty databases. The Bitnami StatefulSets are removed, 
 
    ```console
    helm upgrade <release> christianhuth/syncstorage-rs --version 7.0.0 -f values.yaml --set replicaCount=0 --wait
-   kubectl wait --for=create connection/<release>-syncserver-db connection/<release>-tokenserver-db --timeout=10m
+   kubectl wait --for=create connection/<release>-syncserver-db --timeout=10m
+   kubectl wait --for=create connection/<release>-tokenserver-db --timeout=10m
    kubectl wait --for=condition=Ready connection/<release>-syncserver-db connection/<release>-tokenserver-db --timeout=10m
    ```
 
