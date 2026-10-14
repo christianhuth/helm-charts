@@ -7,7 +7,7 @@
   "additionalBranchPrefix": "{{parentDir}}-",
   "assignees": ["christianhuth"],
   "bumpVersion": "patch",
-  "ignorePaths": ["charts/baserow/**"],
+  "ignorePaths": ["charts/baserow/**", "charts/passbolt-ha/**"],
   "labels": ["renovate"],
   "customManagers": [
     {

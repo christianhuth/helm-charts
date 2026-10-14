@@ -1,14 +1,14 @@
 ---
 apiVersion: v2
 name: passbolt-ha
-description: A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA
+description: "DEPRECATED: use the official Passbolt chart instead. A Helm chart to deploy Passbolt with MySQL and ProxySQL for HA"
 type: application
-version: 6.0.1
+version: 6.1.0
+deprecated: true
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/passbolt-ha/icon.svg
-maintainers:
-  - name: christianhuth
-    email: christian@knell.it
+# deprecated charts must not have maintainers (chart-testing)
+maintainers: []
 sources:
   - https://github.com/bitnami/charts/tree/master/bitnami/mysql
   - https://github.com/cnieg/helm-charts/tree/master/charts/passbolt
@@ -26,8 +26,8 @@ dependencies:
 annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
-    - kind: changed
-      description: dependency of proxysql to 3.1.1
+    - kind: deprecated
+      description: the chart is deprecated in favor of the official Passbolt chart (https://download.passbolt.com/charts/passbolt), which deploys a current Passbolt version and supports HA itself. See the README for migration hints.
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
