@@ -75,7 +75,7 @@ mariadb:
 
 If no Secret is referenced, the operator generates a random password and stores it in the Secret `<release>-mariadb-password`. Polr writes the password into its `.env` file on startup, so it must not contain spaces, quotes, `#` or `$`. By default the database runs as a Galera cluster with 3 instances. All other settings are passed to the upstream chart, see its [values](https://github.com/mariadb-operator/mariadb-operator/tree/main/deploy/charts/mariadb-cluster) and the [MariaDB API reference](https://github.com/mariadb-operator/mariadb-operator/blob/main/docs/api_reference.md#mariadbspec).
 
-The image tag only pins the MariaDB release series (by default the long-term support release 13.0). To upgrade to another release series, change the tag of `mariadb.mariadb.image`. The operator migrates the system schema on the rollout (`updateStrategy.mariadbAutoUpgradeEnabled`). Downgrades are not supported by MariaDB, so take a backup before upgrading.
+The image tag only pins the MariaDB release series (by default the long-term support release 12.3). To upgrade to another release series, change the tag of `mariadb.mariadb.image`. The operator migrates the system schema on the rollout (`updateStrategy.mariadbAutoUpgradeEnabled`). Downgrades are not supported by MariaDB, so take a backup before upgrading.
 
 ### External MariaDB or MySQL
 
