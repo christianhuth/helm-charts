@@ -3,8 +3,8 @@ apiVersion: v2
 name: syncstorage-rs
 description: A Helm chart for deploying Mozilla's Firefox Sync Storage server to Kubernetes
 type: application
-version: 7.0.0
-appVersion: "syncstorage-rs-mysql-0.18.2"
+version: 8.0.0
+appVersion: "13.0"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncstorage-rs/icon.svg
 maintainers:
@@ -28,13 +28,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: "BREAKING: replaced the Bitnami MariaDB subcharts with MariaDB instances managed by the mariadb-operator (upstream chart mariadb-cluster). See the upgrade notes in the README."
-    - kind: changed
-      description: "BREAKING: moved syncstorage.syncserver-db and syncstorage.tokenserver-db to externalSyncserverDatabase and externalTokenserverDatabase with a standardized structure"
-    - kind: removed
-      description: "BREAKING: inline passwords for the bundled MariaDB instances. The operator generates the passwords or uses the Secrets given in <db>.mariadb.passwordSecretKeyRef"
-    - kind: added
-      description: automatic migration of the system schema when changing the MariaDB release series (updateStrategy.mariadbAutoUpgradeEnabled)
+      description: App Version to 13.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
