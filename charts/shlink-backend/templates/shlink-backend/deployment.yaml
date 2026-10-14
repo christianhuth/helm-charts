@@ -230,23 +230,24 @@ spec:
             # Redis Settings
             - name: REDIS_PUB_SUB_ENABLED
               value: {{ .Values.config.redis.pubSubEnabled | quote }}
-            {{- if and (not .Values.valkey.enabled) .Values.externalRedis.sentinelService }}
+            {{- with include "shlink-backend.redis.sentinelService" . }}
             - name: REDIS_SENTINEL_SERVICE
-              value: {{ .Values.externalRedis.sentinelService | quote }}
+              value: {{ . | quote }}
             {{- end }}
-            - name: REDIS_SERVERS
-              value: {{ include "shlink-backend.redis.servers" . | quote }}
             {{- if include "shlink-backend.redis.authEnabled" . }}
             {{- with include "shlink-backend.redis.username" . }}
             - name: REDIS_SERVERS_USER
               value: {{ . | quote }}
             {{- end }}
+            # defined before REDIS_SERVERS, which references it with variable expansion
             - name: REDIS_SERVERS_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "shlink-backend.redis.secretName" . | quote }}
                   key: {{ include "shlink-backend.redis.passwordKey" . | quote }}
             {{- end }}
+            - name: REDIS_SERVERS
+              value: {{ include "shlink-backend.redis.servers" . | quote }}
             {{- end }}
 
             # Robot.txt Settings

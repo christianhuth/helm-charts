@@ -132,7 +132,7 @@ valkey:
         passwordKey: password
 ```
 
-See the [values](https://github.com/valkey-io/valkey-helm/tree/main/valkey#values) of the upstream chart for all options.
+Shlink receives the password as part of its Redis server URL, so it must only contain URL-safe characters (`A-Z`, `a-z`, `0-9`, `-`, `.`, `_`, `~`). See the [values](https://github.com/valkey-io/valkey-helm/tree/main/valkey#values) of the upstream chart for all options.
 
 ### RabbitMQ
 
@@ -177,7 +177,7 @@ externalRabbitmq:
   existingSecretPasswordKey: password
 ```
 
-Instead of `existingSecret` you can set `password`, which lets the chart create the Secret. For Redis Sentinel, point `externalRedis.hostname` to a Sentinel instance and set `externalRedis.sentinelService`.
+Instead of `existingSecret` you can set `password`, which lets the chart create the Secret. As for Valkey, the Redis password must only contain URL-safe characters. For Redis Sentinel, point `externalRedis.hostname` to a Sentinel instance and set `externalRedis.sentinelService`.
 
 ## Values
 

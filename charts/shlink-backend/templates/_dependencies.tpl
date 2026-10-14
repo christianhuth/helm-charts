@@ -104,11 +104,28 @@ Redis
   {{- end -}}
 {{- end -}}
 
+{{- define "shlink-backend.redis.sentinelService" -}}
+  {{- if not .Values.valkey.enabled -}}
+    {{- .Values.externalRedis.sentinelService -}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Return REDIS_SERVERS. Shlink only uses REDIS_SERVERS_USER and REDIS_SERVERS_PASSWORD for Sentinel, otherwise the
+credentials have to be part of the server URL. The password is inserted from REDIS_SERVERS_PASSWORD with Kubernetes
+variable expansion, so it must only contain URL-safe characters.
+*/}}
 {{- define "shlink-backend.redis.servers" -}}
+  {{- $hostPort := "" -}}
   {{- if .Values.valkey.enabled -}}
-    {{- printf "%s:%s" (include "christianhuth.valkey.hostname" .Subcharts.valkey) (include "christianhuth.valkey.port" .Subcharts.valkey) -}}
+    {{- $hostPort = printf "%s:%s" (include "christianhuth.valkey.hostname" .Subcharts.valkey) (include "christianhuth.valkey.port" .Subcharts.valkey) -}}
   {{- else -}}
-    {{- printf "%s:%v" (tpl .Values.externalRedis.hostname $) (.Values.externalRedis.port | default 6379) -}}
+    {{- $hostPort = printf "%s:%v" (tpl .Values.externalRedis.hostname $) (.Values.externalRedis.port | default 6379) -}}
+  {{- end -}}
+  {{- if and (include "shlink-backend.redis.authEnabled" .) (not (include "shlink-backend.redis.sentinelService" .)) -}}
+    {{- printf "tcp://%s:$(REDIS_SERVERS_PASSWORD)@%s" (include "shlink-backend.redis.username" .) $hostPort -}}
+  {{- else -}}
+    {{- $hostPort -}}
   {{- end -}}
 {{- end -}}
 
