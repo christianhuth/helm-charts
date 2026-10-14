@@ -2,7 +2,7 @@ apiVersion: v2
 name: kutt
 description: Kutt is a free modern URL shortener.
 type: application
-version: 9.11.2
+version: 10.0.0
 appVersion: "v3.2.6"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.svg
@@ -12,18 +12,25 @@ maintainers:
 sources:
   - https://github.com/thedevs-network/kutt
 dependencies:
-  - name: postgresql
-    repository: oci://registry-1.docker.io/bitnamicharts
-    version: 18.12.4
+  - name: cluster
+    alias: postgresql
+    repository: https://cloudnative-pg.github.io/charts
+    version: 0.9.0
     condition: postgresql.enabled
-  - name: redis
-    repository: oci://registry-1.docker.io/bitnamicharts
-    version: 25.5.3
-    condition: redis.enabled
+  - name: valkey
+    repository: https://valkey.io/valkey-helm/
+    version: 0.12.0
+    condition: valkey.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of postgresql to 18.12.4
+      description: "BREAKING: replaced the Bitnami PostgreSQL subchart with a PostgreSQL cluster managed by the CloudNativePG operator (upstream chart cnpg/cluster). See the upgrade notes in the README."
+    - kind: changed
+      description: "BREAKING: replaced the Bitnami Redis subchart with the official Valkey chart (valkey/valkey), the values moved from redis.* to valkey.*"
+    - kind: changed
+      description: "BREAKING: renamed externalPostgresql to externalDatabase and restructured externalRedis, both with a standardized structure"
+    - kind: removed
+      description: "BREAKING: inline password for the bundled PostgreSQL. The operator generates the password or uses the Secret given in postgresql.cluster.initdb.secret.name"
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

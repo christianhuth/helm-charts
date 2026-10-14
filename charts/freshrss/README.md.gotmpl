@@ -17,7 +17,18 @@ This chart bootstraps [FreshRSS](https://freshrss.org) on a [Kubernetes](http://
 
 ## Prerequisites
 
-- Kubernetes 1.19+
+- Kubernetes 1.29+
+- The [CloudNativePG operator](https://cloudnative-pg.io) if the bundled PostgreSQL database is used (`freshrss.database.type: postgresql` and `postgresql.enabled: true`)
+
+### Installing the CloudNativePG operator
+
+The chart bundles a PostgreSQL cluster as a custom resource of the CloudNativePG operator (via the upstream chart [cnpg/cluster](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster)). The operator itself is not part of this chart, as it is installed once per Kubernetes cluster:
+
+```console
+helm repo add cnpg https://cloudnative-pg.github.io/charts
+helm repo update
+helm upgrade --install cnpg cnpg/cloudnative-pg --namespace cnpg-system --create-namespace --wait
+```
 
 ## Installing the Chart
 
@@ -53,7 +64,100 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 helm install my-release -f values.yaml christianhuth/freshrss
 ```
 
+## Configuring the Database
+
+FreshRSS uses SQLite by default. To use PostgreSQL, set `freshrss.database.type: postgresql` and either enable the bundled PostgreSQL cluster or configure an external database.
+
+### Bundled PostgreSQL with an existing Secret (recommended)
+
+Create a Secret of type `kubernetes.io/basic-auth` containing the credentials of the database owner. The `username` has to match `postgresql.cluster.initdb.owner`:
+
+```console
+kubectl create secret generic freshrss-database \
+  --type=kubernetes.io/basic-auth \
+  --from-literal=username=freshrss \
+  --from-literal=password='<password>'
+```
+
+Reference the Secret in your values:
+
+```yaml
+freshrss:
+  database:
+    type: postgresql
+
+postgresql:
+  enabled: true
+  cluster:
+    initdb:
+      database: freshrss
+      owner: freshrss
+      secret:
+        name: freshrss-database
+```
+
+If no Secret is referenced, the operator generates a random password and stores the credentials in the Secret `<release>-postgresql-app`. All other settings of the PostgreSQL cluster (e.g. `postgresql.cluster.instances`, `postgresql.cluster.storage`, backups) are passed to the upstream chart. See its [values](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster#values) for all options.
+
+The password is passed to the auto-install (see [Initialization](#initialization)) through the environment variable `FRESHRSS_DB_PASSWORD`, which the FreshRSS entrypoint evaluates with the shell. It must therefore not contain spaces, quotes, backslashes, `$` or backticks.
+
+### External PostgreSQL
+
+```yaml
+freshrss:
+  database:
+    type: postgresql
+
+externalDatabase:
+  hostname: postgresql.example.com
+  port: 5432
+  database: freshrss
+  username: freshrss
+  existingSecret: freshrss-database
+  existingSecretPasswordKey: password
+```
+
+Instead of `externalDatabase.existingSecret` you can set `externalDatabase.password`, which lets the chart create the Secret.
+
 ## Upgrading
+
+### To 3.0.0
+
+This major replaces the Bitnami PostgreSQL subchart with a PostgreSQL cluster managed by the [CloudNativePG operator](https://cloudnative-pg.io). Install the operator first (see [Prerequisites](#prerequisites)). The values changed as follows:
+
+- `postgresql.auth.*` is replaced by the values of the upstream chart [cnpg/cluster](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster), e.g. `postgresql.cluster.initdb.database` and `postgresql.cluster.initdb.owner`
+- an inline password for the bundled database is no longer supported. Use an existing Secret or let the operator generate one (see [Configuring the Database](#configuring-the-database))
+- `externalPostgresql.*` is renamed to `externalDatabase.*`, `externalPostgresql.auth.*` moved one level up and `userPasswordKey` is renamed to `existingSecretPasswordKey`
+
+Releases using SQLite (the default) are not affected. If you use the bundled PostgreSQL, the upgrade creates a new, empty database. The Bitnami StatefulSet is removed, but its PersistentVolumeClaim `data-<release>-postgresql-0` is kept. FreshRSS stores its database connection in `data/config.php` on its own volume, so it has to be pointed to the new database as well. To take your data along:
+
+1. Dump the database before upgrading:
+
+   ```console
+   kubectl exec <release>-postgresql-0 -- sh -c 'PGPASSWORD="$(cat "$POSTGRES_PASSWORD_FILE")" pg_dump --no-owner --no-acl -U "$POSTGRES_USER" -d "$POSTGRES_DATABASE"' > freshrss.sql
+   ```
+
+2. Upgrade the chart and wait for the new database. FreshRSS keeps using the connection from its `data/config.php` and skips the auto-install, so it does not initialize the new database:
+
+   ```console
+   helm upgrade <release> christianhuth/freshrss --version 3.0.0 -f values.yaml --wait
+   kubectl wait --for=condition=Ready cluster/<release>-postgresql --timeout=10m
+   ```
+
+3. Restore the dump as the database owner. Use the Secret from `postgresql.cluster.initdb.secret.name` or the generated `<release>-postgresql-app`:
+
+   ```console
+   PASSWORD=$(kubectl get secret <release>-postgresql-app -o jsonpath='{.data.password}' | base64 -d)
+   PRIMARY=$(kubectl get cluster <release>-postgresql -o jsonpath='{.status.currentPrimary}')
+   kubectl exec -i $PRIMARY -c postgres -- env PGPASSWORD="$PASSWORD" psql -v ON_ERROR_STOP=1 -h localhost -U freshrss -d freshrss < freshrss.sql
+   ```
+
+4. Point FreshRSS to the new database:
+
+   ```console
+   kubectl exec deploy/<release>-freshrss -- sh -c "cd /var/www/FreshRSS && php cli/reconfigure.php --db-host <release>-postgresql-rw --db-base freshrss --db-user freshrss --db-password '$PASSWORD' && ./cli/access-permissions.sh"
+   ```
+
+5. Once everything works, delete the old PersistentVolumeClaim `data-<release>-postgresql-0`.
 
 ### To 2.0.0
 
@@ -66,10 +170,12 @@ The initialization will configure the database connection and create the admin u
 
 This approach however has two downsides:
 
-  1. Confidential information like admin and database password have to be added to the environment variables `FRESHRSS_INSTALL` and `FRESHRSS_USER` of the Container
-  2. Therefore you have to define these passwords using the attributes `freshrss.initialization.admin.apiPassword`, `freshrss.initialization.admin.password`, `postgresql.auth.password` or `externalPostgresql.auth.password` and cannot use existing Kubernetes Secrets to define these values like you would in a GitOps based setup
+  1. Confidential information like the admin password has to be added to the environment variable `FRESHRSS_USER` of the Container
+  2. Therefore you have to define these passwords using the attributes `freshrss.initialization.admin.apiPassword` and `freshrss.initialization.admin.password` and cannot use existing Kubernetes Secrets to define these values like you would in a GitOps based setup
 
-Make sure to set `freshrss.initialization.enabled=false` after the initialization has finished to remove the environment variables `FRESHRSS_INSTALL` and `FRESHRSS_USER` containing the confidential information again.
+The database password is not affected: it is read from its Secret and only inserted into `FRESHRSS_INSTALL` by Kubernetes when the container starts.
+
+Make sure to set `freshrss.initialization.enabled=false` after the initialization has finished to remove the environment variables `FRESHRSS_INSTALL` and `FRESHRSS_USER` again.
 
 The Logs should contain something like the following:
 

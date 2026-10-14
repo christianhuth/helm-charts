@@ -116,20 +116,20 @@ spec:
               {{- end }}
             # Database Settings
             - name: DB_CLIENT
-              value: {{ include "kutt.postgresql.client" . | quote }}
+              value: {{ include "kutt.database.client" . | quote }}
             - name: DB_HOST
-              value: {{ include "kutt.postgresql.hostname" . | quote }}
+              value: {{ include "kutt.database.hostname" . | quote }}
             - name: DB_PORT
-              value: {{ include "kutt.postgresql.port" . | quote }}
+              value: {{ include "kutt.database.port" . | quote }}
             - name: DB_NAME
-              value: {{ include "kutt.postgresql.database" . | quote }}
+              value: {{ include "kutt.database.database" . | quote }}
             - name: DB_USER
-              value: {{ include "kutt.postgresql.username" . | quote }}
+              value: {{ include "kutt.database.username" . | quote }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "kutt.postgresql.secretName" . | quote }}
-                  key: {{ include "kutt.postgresql.userPasswordKey" . | quote }}
+                  name: {{ include "kutt.database.secretName" . | quote }}
+                  key: {{ include "kutt.database.passwordKey" . | quote }}
             - name: DB_POOL_MAX
               value: {{ .Values.kutt.database.pool.max | quote }}
             - name: DB_POOL_MIN
@@ -137,19 +137,19 @@ spec:
             - name: DB_SSL
               value: {{ .Values.kutt.database.useSsl | quote }}
             # Redis Settings
-            {{- if (or .Values.redis.enabled .Values.externalRedis.enabled) }}
+            {{- if include "kutt.redis.enabled" . }}
             - name: REDIS_ENABLED
               value: "true"
             - name: REDIS_HOST
               value: {{ include "kutt.redis.hostname" . | quote }}
             - name: REDIS_PORT
               value: {{ include "kutt.redis.port" . | quote }}
-            {{- if eq (include "kutt.redis.auth.enabled" .) "true" }}
+            {{- if include "kutt.redis.authEnabled" . }}
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "kutt.redis.secretName" . | quote }}
-                  key: {{ include "kutt.redis.userPasswordKey" . | quote }}
+                  key: {{ include "kutt.redis.passwordKey" . | quote }}
             {{- end }}
             {{- end }}
             {{- range .Values.extraEnv }}

@@ -240,59 +240,70 @@ kutt:
     secretKey: ""
 
 postgresql:
-  # -- enable PostgreSQL™ subchart from Bitnami
+  # -- Enable a PostgreSQL cluster managed by the CloudNativePG operator. Requires the operator to be installed in the cluster (see README).
   enabled: true
-  auth:
-    # -- Name for a custom database to create
-    database: kutt
-    # -- Name of existing secret to use for PostgreSQL credentials
-    existingSecret: ""
-    # -- Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided
-    password: kutt
-    # -- Name for a custom user to create
-    username: kutt
+  version:
+    # -- PostgreSQL major version. Has to match the major version of `postgresql.cluster.imageName`.
+    postgresql: "18"
+  cluster:
+    # -- PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version.
+    imageName: ghcr.io/cloudnative-pg/postgresql:18-standard-trixie
+    # -- Pull the image on every start to get the latest minor version of the major version
+    imagePullPolicy: Always
+    # -- Number of PostgreSQL instances (one primary, the others are replicas)
+    instances: 3
+    initdb:
+      # -- Name of the database to create
+      database: kutt
+      # -- Name of the user owning the database
+      owner: kutt
+      # Use an existing Secret of type `kubernetes.io/basic-auth` (keys `username` and `password`) for the owner.
+      # If not set, the operator generates the Secret `<release>-postgresql-app`.
+      # secret:
+      #   name: ""
+    storage:
+      # -- Size of the PVC of each instance
+      size: 8Gi
 
-externalPostgresql:
-  auth:
-    # -- Name of the database to use
-    database: kutt
-    # -- Name of existing secret to use for PostgreSQL credentials
-    existingSecret: ""
-    # -- Password to use
-    password: kutt
-    # -- Name of the user to use
-    username: kutt
-    # -- Key in the secret containing the password
-    userPasswordKey: ""
-  # -- Hostname of the PostgreSQL database
+externalDatabase:
+  # -- Hostname of the external PostgreSQL database. Used if `postgresql.enabled` is false.
   hostname: ""
-  # -- Port used to connect to PostgreSQL database
+  # -- Port of the external PostgreSQL database
   port: 5432
+  # -- Name of the database to use
+  database: kutt
+  # -- Name of the user to use
+  username: kutt
+  # -- Password of the user. Ignored if `externalDatabase.existingSecret` is set.
+  password: ""
+  # -- Name of an existing Secret containing the password of the user
+  existingSecret: ""
+  # -- Key in the existing Secret containing the password
+  existingSecretPasswordKey: password
 
-redis:
-  # -- enable Redis™ subchart from Bitnami
+valkey:
+  # -- Enable a Valkey instance (official chart valkey/valkey) used by Kutt as cache
   enabled: true
-  # -- Redis® architecture. Allowed values: standalone or replication
-  architecture: standalone
   auth:
-    # -- Enable password authentication
+    # -- Enable password authentication. Kutt authenticates with a password only, i.e. as the user `default`.
     enabled: true
-    # -- Redis™ password
-    password: kutt
+    # -- Name of an existing Secret containing the passwords of the users (key `<user>` or `aclUsers.<user>.passwordKey`). Takes precedence over inline passwords.
+    usersExistingSecret: ""
+    aclUsers:
+      default:
+        # -- ACL permissions of the user `default`
+        permissions: "~* &* +@all"
+        # -- Inline password of the user `default`. Use `valkey.auth.usersExistingSecret` instead for production.
+        password: kutt
 
 externalRedis:
-  # -- enable the Redis integration for an external Redis™
-  enabled: true
-  auth:
-    # -- if authentication should be used with external Redis™
-    enabled: true
-    # -- Name of existing secret to use for Redis™ credentials
-    existingSecret: ""
-    # -- Password to use
-    password: ""
-    # -- Key in the secret containing the password
-    userPasswordKey: ""
-  # -- Hostname of Redis™
+  # -- Hostname of an external Redis or Valkey server. Used if `valkey.enabled` is false.
   hostname: ""
-  # -- Port used to connect to Redis
+  # -- Port of the external server
   port: 6379
+  # -- Password of the user `default`. Ignored if `externalRedis.existingSecret` is set. Leave empty if the server does not require authentication.
+  password: ""
+  # -- Name of an existing Secret containing the password
+  existingSecret: ""
+  # -- Key in the existing Secret containing the password
+  existingSecretPasswordKey: password

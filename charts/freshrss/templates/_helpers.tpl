@@ -152,29 +152,8 @@ Define the parameters used to install FreshRSS on initialization
     {{- $baseUrl := .Values.freshrss.initialization.baseUrl -}}
     {{- $installParameters = (printf "%s --base-url %s" $installParameters $baseUrl) -}}
   {{- end }}
-  {{- if (eq .Values.freshrss.database.type "postgresql") -}}
-    {{- $dbBase := (include "freshrss.postgresql.database" .) -}}
-    {{- if $dbBase }}
-      {{- $installParameters = (printf "%s --db-base %s" $installParameters $dbBase) -}}
-    {{- end }}
-    {{- $dbHost := (include "freshrss.postgresql.hostname" .) -}}
-    {{- if $dbHost }}
-      {{- $installParameters = (printf "%s --db-host %s" $installParameters $dbHost) -}}
-    {{- end }}
-    {{- $dbPassword := "" }}
-    {{- if and .Values.postgresql.enabled .Values.postgresql.auth.password }}
-      {{- $dbPassword = .Values.postgresql.auth.password }}
-    {{- else if .Values.externalPostgresql.auth.password -}}
-      {{- $dbPassword = .Values.externalPostgresql.auth.password }}
-    {{- end -}}
-    {{- if $dbPassword }}
-      {{- $installParameters = (printf "%s --db-password %s" $installParameters $dbPassword) -}}
-    {{- end }}
-    {{- $installParameters = (printf "%s --db-type %s" $installParameters "pgsql") -}}
-    {{- $dbUser := (include "freshrss.postgresql.username" .) -}}
-    {{- if $dbUser }}
-      {{- $installParameters = (printf "%s --db-user %s" $installParameters $dbUser) -}}
-    {{- end }}
+  {{- if (include "freshrss.database.enabled" .) -}}
+    {{- $installParameters = (printf "%s %s" $installParameters (include "freshrss.database.installParameters" .)) -}}
   {{- end }}
   {{- if .Values.freshrss.initialization.admin.username }}
     {{- $adminUsername := .Values.freshrss.initialization.admin.username -}}

@@ -23,6 +23,6 @@ while IFS=$'\t' read -r release chart repository namespace; do
         --wait \
         --timeout 10m
     installed[${release}]=1
-done < <(yq -p=json -oy '.prerequisites[].releases[] | [.release, .chart, .repository, .namespace] | @tsv' <<< "${prerequisites}")
+done < <(yq -p=json -oy -N '.prerequisites[].releases[] | [.release, .chart, .repository, .namespace] | @tsv' <<< "${prerequisites}")
 
 echo "Installed prerequisites: ${!installed[*]}"

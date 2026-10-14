@@ -51,8 +51,16 @@ spec:
               value: {{ .Values.freshrss.environment | quote }}
             {{- end }}
             {{- if .Values.freshrss.initialization.enabled }}
+            {{- if include "freshrss.database.enabled" . }}
+            # Database password, inserted into FRESHRSS_INSTALL with variable expansion
+            - name: FRESHRSS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "freshrss.database.secretName" . | quote }}
+                  key: {{ include "freshrss.database.passwordKey" . | quote }}
+            {{- end }}
             - name: FRESHRSS_INSTALL
-              value: {{ (include "freshrss.initialization.installParameters" .) }}
+              value: {{ (include "freshrss.initialization.installParameters" .) | quote }}
             - name: FRESHRSS_USER
               value: {{ (include "freshrss.initialization.adminParameters" .) }}
             {{- end }}
