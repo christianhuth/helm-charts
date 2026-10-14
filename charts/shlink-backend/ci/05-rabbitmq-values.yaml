@@ -1,5 +1,6 @@
 ---
 rabbitmq:
   enabled: true
-  auth:
-    password: my-test-password
+  replicaCount: 1
+  peerDiscoveryK8sPlugin:
+    enabled: false

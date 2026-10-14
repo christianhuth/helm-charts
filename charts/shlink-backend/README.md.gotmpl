@@ -15,7 +15,26 @@ This chart bootstraps a self-hosted URL shortener called [Shlink](https://shlink
 
 ## Prerequisites
 
-- Kubernetes 1.19+
+- Kubernetes 1.29+
+- The [CloudNativePG operator](https://cloudnative-pg.io) if the bundled PostgreSQL database is used (`postgresql.enabled: true`)
+- The [mariadb-operator](https://github.com/mariadb-operator/mariadb-operator) if the bundled MariaDB database is used (`mariadb.enabled: true`)
+
+Shlink uses SQLite by default, which needs neither of them. RabbitMQ ([cloudpirates/rabbitmq](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq)) and Valkey ([valkey/valkey](https://github.com/valkey-io/valkey-helm/tree/main/valkey)) are bundled as regular subcharts and don't need an operator.
+
+### Installing the operators
+
+The operators are not part of this chart, as they are installed once per Kubernetes cluster:
+
+```console
+# CloudNativePG, for postgresql.enabled
+helm repo add cnpg https://cloudnative-pg.github.io/charts
+helm upgrade --install cnpg cnpg/cloudnative-pg --namespace cnpg-system --create-namespace --wait
+
+# mariadb-operator, for mariadb.enabled
+helm repo add mariadb-operator https://helm.mariadb.com/mariadb-operator
+helm upgrade --install mariadb-operator-crds mariadb-operator/mariadb-operator-crds --namespace mariadb-operator --create-namespace
+helm upgrade --install mariadb-operator mariadb-operator/mariadb-operator --namespace mariadb-operator --wait
+```
 
 ## Installing the Chart
 
@@ -41,6 +60,124 @@ helm uninstall my-release
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
+## Configuring the Dependencies
+
+Shlink uses SQLite by default and optionally a database server, a Redis-compatible cache and RabbitMQ for real-time updates. Each of them is either bundled with the chart or provided externally. Passwords are read from Secrets, using existing Secrets is recommended for production.
+
+### PostgreSQL
+
+```console
+kubectl create secret generic shlink-database \
+  --type=kubernetes.io/basic-auth \
+  --from-literal=username=shlink \
+  --from-literal=password='<password>'
+```
+
+```yaml
+postgresql:
+  enabled: true
+  cluster:
+    initdb:
+      database: shlink
+      owner: shlink
+      secret:
+        name: shlink-database
+```
+
+The `username` in the Secret has to match `postgresql.cluster.initdb.owner`. If no Secret is referenced, the operator generates the Secret `<release>-postgresql-app`. See the [values](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster#values) of the upstream chart for all options.
+
+### MariaDB
+
+```console
+kubectl create secret generic shlink-database --from-literal=password='<password>'
+```
+
+```yaml
+mariadb:
+  enabled: true
+  mariadb:
+    passwordSecretKeyRef:
+      name: shlink-database
+      key: password
+      generate: false
+```
+
+If no Secret is referenced, the operator generates the Secret `<release>-mariadb-password`. By default the database runs as a Galera cluster with 3 instances. To upgrade to another MariaDB release series, change the tag of `mariadb.mariadb.image`; the operator migrates the system schema, but downgrades are not supported. See the [values](https://github.com/mariadb-operator/mariadb-operator/tree/main/deploy/charts/mariadb-cluster) of the upstream chart for all options.
+
+Only one bundled database can be enabled at a time.
+
+### Valkey
+
+```yaml
+valkey:
+  enabled: true
+```
+
+Valkey runs without authentication by default. To require a password for the user `default`, which Shlink authenticates as:
+
+```console
+kubectl create secret generic shlink-valkey --from-literal=password='<password>'
+```
+
+```yaml
+valkey:
+  enabled: true
+  auth:
+    enabled: true
+    usersExistingSecret: shlink-valkey
+    aclUsers:
+      default:
+        permissions: "~* &* +@all"
+        passwordKey: password
+```
+
+See the [values](https://github.com/valkey-io/valkey-helm/tree/main/valkey#values) of the upstream chart for all options.
+
+### RabbitMQ
+
+```console
+kubectl create secret generic shlink-rabbitmq \
+  --from-literal=password='<password>' \
+  --from-literal=erlang-cookie='<random string>'
+```
+
+```yaml
+rabbitmq:
+  enabled: true
+  auth:
+    username: shlink
+    existingSecret: shlink-rabbitmq
+    existingPasswordKey: password
+```
+
+If no Secret is referenced, the chart generates a random password and Erlang cookie in the Secret `<release>-rabbitmq`. By default RabbitMQ runs as a cluster of 3 instances. See the [values](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq#parameters) of the upstream chart for all options.
+
+### External Services
+
+```yaml
+externalDatabase:
+  type: postgres # mysql, maria, postgres or mssql
+  hostname: postgresql.example.com
+  database: shlink
+  username: shlink
+  existingSecret: shlink-database
+  existingSecretPasswordKey: password
+
+externalRedis:
+  hostname: redis.example.com
+  port: 6379
+  existingSecret: shlink-redis
+  existingSecretPasswordKey: password
+
+externalRabbitmq:
+  hostname: rabbitmq.example.com
+  username: shlink
+  existingSecret: shlink-rabbitmq
+  existingSecretPasswordKey: password
+```
+
+Instead of `existingSecret` you can set `password`, which lets the chart create the Secret. For Redis Sentinel, point `externalRedis.hostname` to a Sentinel instance and set `externalRedis.sentinelService`.
+
 {{ template "chart.valuesSection" . }}
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
@@ -52,6 +189,77 @@ helm install my-release -f values.yaml christianhuth/shlink-backend
 ```
 
 ## Upgrading the Chart
+
+### To 12.0.0
+
+This major replaces the Bitnami subcharts:
+
+- PostgreSQL is managed by the [CloudNativePG operator](https://cloudnative-pg.io) and MariaDB by the [mariadb-operator](https://github.com/mariadb-operator/mariadb-operator). Install the operator for your database first (see [Prerequisites](#prerequisites)).
+- RabbitMQ is deployed with the chart [cloudpirates/rabbitmq](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq) and updated to RabbitMQ 4.3, Redis is replaced by [Valkey](https://valkey.io) with the official chart [valkey/valkey](https://github.com/valkey-io/valkey-helm/tree/main/valkey).
+- The bundled MySQL database is removed. Migrate to the bundled MariaDB (a MySQL dump can be restored into MariaDB without changes) or use an external MySQL database with `externalDatabase.type: mysql`.
+
+The values changed as follows:
+
+- `postgresql.auth.*`, `mariadb.auth.*`, `rabbitmq.*` and `redis.*` are replaced by the values of the new upstream charts, `redis.*` moved to `valkey.*` (see [Configuring the Dependencies](#configuring-the-dependencies))
+- inline passwords for the bundled databases are no longer supported. Use an existing Secret or let the operator generate one
+- `config.database.*` (except `useEncryption`), `config.rabbitmq.*` and `config.redis.*` (except `pubSubEnabled`) are replaced by `externalDatabase.*`, `externalRabbitmq.*` and `externalRedis.*`. `config.database.driver` is now `externalDatabase.type`, and an external service is used if its `hostname` is set
+- enabling more than one bundled database now fails instead of silently using the first one
+
+Releases using SQLite (the default) keep their data. If you use a bundled database, the upgrade creates a new, empty one. Valkey (cache) and RabbitMQ (real-time updates) start empty as well, which is fine for Shlink. To take your database along:
+
+1. Dump the database before upgrading. For PostgreSQL:
+
+   ```console
+   kubectl exec <release>-postgresql-0 -- sh -c 'PGPASSWORD="$(cat "$POSTGRES_PASSWORD_FILE")" pg_dump --no-owner --no-acl -U "$POSTGRES_USER" -d "$POSTGRES_DATABASE"' > shlink.sql
+   ```
+
+   For MariaDB (or MySQL, with `mysqldump` and `MYSQL_*` instead):
+
+   ```console
+   kubectl exec <release>-mariadb-0 -- sh -c 'mariadb-dump -u"$MARIADB_USER" -p"$(cat "$MARIADB_PASSWORD_FILE")" "$MARIADB_DATABASE"' > shlink.sql
+   ```
+
+2. If you use the bundled RabbitMQ, remove its StatefulSet and volume. The new RabbitMQ uses the same names, so Helm would otherwise try to patch the StatefulSet (which fails) and RabbitMQ would mount the old volume:
+
+   ```console
+   kubectl delete statefulset <release>-rabbitmq
+   kubectl delete pvc data-<release>-rabbitmq-0
+   ```
+
+3. Upgrade the chart with Shlink scaled down, so it does not initialize the new database. Then wait for the database:
+
+   ```console
+   helm upgrade <release> christianhuth/shlink-backend --version 12.0.0 -f values.yaml --set replicaCount=0 --wait
+   # PostgreSQL
+   kubectl wait --for=condition=Ready cluster/<release>-postgresql --timeout=10m
+   # MariaDB
+   kubectl wait --for=create user/<release>-mariadb-user --timeout=10m
+   kubectl wait --for=create grant/<release>-mariadb-user-all --timeout=10m
+   kubectl wait --for=condition=Ready user/<release>-mariadb-user grant/<release>-mariadb-user-all --timeout=10m
+   ```
+
+4. Restore the dump. For PostgreSQL (use the Secret from `postgresql.cluster.initdb.secret.name` or the generated `<release>-postgresql-app`):
+
+   ```console
+   PASSWORD=$(kubectl get secret <release>-postgresql-app -o jsonpath='{.data.password}' | base64 -d)
+   PRIMARY=$(kubectl get cluster <release>-postgresql -o jsonpath='{.status.currentPrimary}')
+   kubectl exec -i $PRIMARY -c postgres -- env PGPASSWORD="$PASSWORD" psql -v ON_ERROR_STOP=1 -h localhost -U shlink -d shlink < shlink.sql
+   ```
+
+   For MariaDB (use the Secret from `mariadb.mariadb.passwordSecretKeyRef` or the generated `<release>-mariadb-password`):
+
+   ```console
+   PASSWORD=$(kubectl get secret <release>-mariadb-password -o jsonpath='{.data.password}' | base64 -d)
+   kubectl exec -i <release>-mariadb-0 -c mariadb -- mariadb -u shlink --password="$PASSWORD" shlink < shlink.sql
+   ```
+
+5. Scale Shlink up again:
+
+   ```console
+   helm upgrade <release> christianhuth/shlink-backend --version 12.0.0 -f values.yaml --wait
+   ```
+
+6. Once everything works, delete the old PersistentVolumeClaims of the Bitnami database (`data-<release>-postgresql-0`, `data-<release>-mariadb-0` or `data-<release>-mysql-0`) and of Redis (`redis-data-<release>-redis-master-0`).
 
 ### To 9.0.0
 
