@@ -1,3 +1,5 @@
 ---
 postgresql:
   enabled: true
+  cluster:
+    instances: 1

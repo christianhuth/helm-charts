@@ -16,7 +16,26 @@ This chart bootstraps a self-hosted URL shortener called [Shlink](https://shlink
 
 ## Prerequisites
 
-- Kubernetes 1.19+
+- Kubernetes 1.29+
+- The [CloudNativePG operator](https://cloudnative-pg.io) if the bundled PostgreSQL database is used (`postgresql.enabled: true`)
+- The [mariadb-operator](https://github.com/mariadb-operator/mariadb-operator) if the bundled MariaDB database is used (`mariadb.enabled: true`)
+
+Shlink uses SQLite by default, which needs neither of them. RabbitMQ ([cloudpirates/rabbitmq](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq)) and Valkey ([valkey/valkey](https://github.com/valkey-io/valkey-helm/tree/main/valkey)) are bundled as regular subcharts and don't need an operator.
+
+### Installing the operators
+
+The operators are not part of this chart, as they are installed once per Kubernetes cluster:
+
+```console
+# CloudNativePG, for postgresql.enabled
+helm repo add cnpg https://cloudnative-pg.github.io/charts
+helm upgrade --install cnpg cnpg/cloudnative-pg --namespace cnpg-system --create-namespace --wait
+
+# mariadb-operator, for mariadb.enabled
+helm repo add mariadb-operator https://helm.mariadb.com/mariadb-operator
+helm upgrade --install mariadb-operator-crds mariadb-operator/mariadb-operator-crds --namespace mariadb-operator --create-namespace
+helm upgrade --install mariadb-operator mariadb-operator/mariadb-operator --namespace mariadb-operator --wait
+```
 
 ## Installing the Chart
 
@@ -42,6 +61,124 @@ helm uninstall my-release
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
+## Configuring the Dependencies
+
+Shlink uses SQLite by default and optionally a database server, a Redis-compatible cache and RabbitMQ for real-time updates. Each of them is either bundled with the chart or provided externally. Passwords are read from Secrets, using existing Secrets is recommended for production.
+
+### PostgreSQL
+
+```console
+kubectl create secret generic shlink-database \
+  --type=kubernetes.io/basic-auth \
+  --from-literal=username=shlink \
+  --from-literal=password='<password>'
+```
+
+```yaml
+postgresql:
+  enabled: true
+  cluster:
+    initdb:
+      database: shlink
+      owner: shlink
+      secret:
+        name: shlink-database
+```
+
+The `username` in the Secret has to match `postgresql.cluster.initdb.owner`. If no Secret is referenced, the operator generates the Secret `<release>-postgresql-app`. See the [values](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster#values) of the upstream chart for all options.
+
+### MariaDB
+
+```console
+kubectl create secret generic shlink-database --from-literal=password='<password>'
+```
+
+```yaml
+mariadb:
+  enabled: true
+  mariadb:
+    passwordSecretKeyRef:
+      name: shlink-database
+      key: password
+      generate: false
+```
+
+If no Secret is referenced, the operator generates the Secret `<release>-mariadb-password`. By default the database runs as a Galera cluster with 3 instances. To upgrade to another MariaDB release series, change the tag of `mariadb.mariadb.image`; the operator migrates the system schema, but downgrades are not supported. See the [values](https://github.com/mariadb-operator/mariadb-operator/tree/main/deploy/charts/mariadb-cluster) of the upstream chart for all options.
+
+Only one bundled database can be enabled at a time.
+
+### Valkey
+
+```yaml
+valkey:
+  enabled: true
+```
+
+Valkey runs without authentication by default. To require a password for the user `default`, which Shlink authenticates as:
+
+```console
+kubectl create secret generic shlink-valkey --from-literal=password='<password>'
+```
+
+```yaml
+valkey:
+  enabled: true
+  auth:
+    enabled: true
+    usersExistingSecret: shlink-valkey
+    aclUsers:
+      default:
+        permissions: "~* &* +@all"
+        passwordKey: password
+```
+
+Shlink receives the password as part of its Redis server URL, so it must only contain URL-safe characters (`A-Z`, `a-z`, `0-9`, `-`, `.`, `_`, `~`). See the [values](https://github.com/valkey-io/valkey-helm/tree/main/valkey#values) of the upstream chart for all options.
+
+### RabbitMQ
+
+```console
+kubectl create secret generic shlink-rabbitmq \
+  --from-literal=password='<password>' \
+  --from-literal=erlang-cookie='<random string>'
+```
+
+```yaml
+rabbitmq:
+  enabled: true
+  auth:
+    username: shlink
+    existingSecret: shlink-rabbitmq
+    existingPasswordKey: password
+```
+
+If no Secret is referenced, the chart generates a random password and Erlang cookie in the Secret `<release>-rabbitmq`. By default RabbitMQ runs as a cluster of 3 instances. See the [values](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq#parameters) of the upstream chart for all options.
+
+### External Services
+
+```yaml
+externalDatabase:
+  type: postgres # mysql, maria, postgres or mssql
+  hostname: postgresql.example.com
+  database: shlink
+  username: shlink
+  existingSecret: shlink-database
+  existingSecretPasswordKey: password
+
+externalRedis:
+  hostname: redis.example.com
+  port: 6379
+  existingSecret: shlink-redis
+  existingSecretPasswordKey: password
+
+externalRabbitmq:
+  hostname: rabbitmq.example.com
+  username: shlink
+  existingSecret: shlink-rabbitmq
+  existingSecretPasswordKey: password
+```
+
+Instead of `existingSecret` you can set `password`, which lets the chart create the Secret. As for Valkey, the Redis password must only contain URL-safe characters. For Redis Sentinel, point `externalRedis.hostname` to a Sentinel instance and set `externalRedis.sentinelService`.
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -51,13 +188,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| config.database.auth.database | string | `""` | The database name to be used when using an external database driver. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled |
-| config.database.auth.existingSecret | string | `""` | Use existing secret for password details (`config.database.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `database-password`. |
-| config.database.auth.password | string | `""` | The password credential to be used when using an external database driver. |
-| config.database.auth.username | string | `""` | The username credential to be used when using an external database driver. |
-| config.database.driver | string | `"sqlite"` | mysql, maria, postgres or sqlite. Will be set automatically when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled |
-| config.database.host | string | `""` | The host name of the database server when using an external database driver. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled |
-| config.database.port | int | `0` | The port in which the database service is running when using an external database driver. Default value is based on the value provided for DB_DRIVER. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled |
 | config.database.useEncryption | bool | `false` | Whether it is desired to use an encrypted connection with the database or not |
 | config.general.basePath | string | `""` | The base path from which you plan to serve Shlink, in case you don’t want to serve it from the root of the domain. It has to start with a bar, like /shlink. Defaults to ''. |
 | config.general.cacheNamespace | string | `""` | A prefix used for all cache keys generated by Shlink. It’s important to set a unique value here if you have multiple Shlink instances sharing the same cache store (same server when not using redis, or same redis cluster), otherwise there could be collisions. Defaults to Shlink. |
@@ -87,24 +217,13 @@ The command removes all the Kubernetes components associated with the chart and 
 | config.qrCodes.defaultMargin | int | `0` | A value greater than 0 to determine the default margin of generated QR codes when the margin query param is not provided. |
 | config.qrCodes.defaultRoundBlockSize | bool | `true` | Tells if the block size should be round on QR codes, making it more readable, but potentially adding some extra margin as a side effect. |
 | config.qrCodes.defaultSize | int | `300` | A value between 50 and 1000 to determine the default size of generated QR codes when the size query param is not provided. |
-| config.rabbitmq.auth.existingSecret | string | `""` | Use existing secret for password details (`config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`. |
-| config.rabbitmq.auth.password | string | `""` | The password credential to be used when using an external database driver. |
-| config.rabbitmq.auth.username | string | `""` | The username credential to be used when using an external database driver. |
-| config.rabbitmq.enabled | bool | `false` | enable RabbitMQ™ Integration |
-| config.rabbitmq.host | string | `""` | The RabbitMQ server host name |
-| config.rabbitmq.useSsl | bool | `false` | Whether connection is encrypted with SSL/TLS or not. |
-| config.rabbitmq.vhost | string | `"/"` | The RabbitMQ server VHost |
 | config.redirects.cacheLifetime | int | `30` | Allows to set the amount of seconds that redirects should be cached when redirect status is 301 or 308. |
 | config.redirects.defaultBaseUrlRedirect | string | `""` | If a URL is provided here, when a user tries to access Shlink’s base URL, and the visited domain does not have a redirect URL of its own, he/she will be redirected to this value. If this env var is not provided, the user will see a generic 404 - not found page. |
 | config.redirects.defaultInvalidShortUrlRedirect | string | `""` | If a URL is provided here, when a user tries to access an invalid short URL, and the visited domain does not have a redirect URL of its own, he/she will be redirected to this value. If this env var is not provided, the user will see a generic 404 - not found page. |
 | config.redirects.defaultRegular404Redirect | string | `""` | If a URL is provided here, when a user tries to access a URL not matching any supported by the router, and the visited domain does not have a redirect URL of its own, he/she will be redirected to this value. If this env var is not provided, the user will see a generic 404 - not found page. |
 | config.redirects.extraPathMode | string | `"default"` | Determines how Shlink should match short URLs when they start with a known short code. Valid values are default, append and ignore. (See [Extra path forwarding](https://shlink.io/documentation/some-features/#extra-path-forwarding) for more info). |
 | config.redirects.statusCode | int | `302` | 301, 302, 308 or 307 (last two since v3.5.0). Determines the status code that should be used on redirects from short to long URLs. Setting 308 or 307 implicitly makes requests to short URLs work regardless the HTTP method. |
-| config.redis.enabled | bool | `false` | enable Redis™ Integration |
-| config.redis.pubSubEnabled | bool | `false` | Tells if the configured redis instance/cluster should also be used to publish real-time updates via redis pub/sub. |
-| config.redis.sentinal.enabled | bool | `false` |  |
-| config.redis.sentinal.service | string | `""` | The name of the sentinel service if you want to use redis sentinel. If this value is provided, the servers provided in config.redis.servers will be considered sentinel instances. |
-| config.redis.servers | string | `""` | The comma-separated list of Redis servers when using external Redis servers. Will be ignored when you activate one of the integrated Redis subchart with redis.enabled |
+| config.redis.pubSubEnabled | bool | `false` | Tells if the configured Redis-compatible server should also be used to publish real-time updates via pub/sub |
 | config.robots.allowAllShortUrls | bool | `false` | Whether all short URLs should be allowed via robots.txt or not. If set to true, the crawlable option set in individual short URLs will be ignored. |
 | config.robots.userAgents | string | `"*"` | A comma-separated list of allowed user agents via robots.txt. |
 | config.trackingVisits.anonymizeRemoteAddr | bool | `true` | Tells if IP addresses from visitors should be obfuscated before storing them in the database. See [Tracking visits](https://shlink.io/documentation/tracking-visits/) for more info. |
@@ -122,6 +241,29 @@ The command removes all the Kubernetes components associated with the chart and 
 | config.urlShortening.shortUrlMode | string | `"strict"` | Determines how to match short URLs. Valid values are strict or loose. See [short URLs mode](https://shlink.io/documentation/some-features/#short-urls-mode) for more information. |
 | config.urlShortening.shortUrlTrailingSlash | bool | `false` | Allows to enable support for trailing slashes in short URLs when true is provided. See [short URLs trailing slash](https://shlink.io/documentation/some-features/#short-urls-trailing-slash) for more information. |
 | deploymentStrategy | object | `{}` | Update strategy for the deployment |
+| externalDatabase.database | string | `"shlink"` | Name of the database to use |
+| externalDatabase.existingSecret | string | `""` | Name of an existing Secret containing the password of the user |
+| externalDatabase.existingSecretPasswordKey | string | `"password"` | Key in the existing Secret containing the password |
+| externalDatabase.hostname | string | `""` | Hostname of the external database. Used if `mariadb.enabled` and `postgresql.enabled` are false. |
+| externalDatabase.password | string | `""` | Password of the user. Ignored if `externalDatabase.existingSecret` is set. |
+| externalDatabase.port | string | `""` | Port of the external database. Defaults to the default port of the driver. |
+| externalDatabase.type | string | `""` | Driver of the external database: `mysql`, `maria`, `postgres` or `mssql`. Shlink uses SQLite if neither a bundled nor an external database is configured. |
+| externalDatabase.username | string | `"shlink"` | Name of the user to use |
+| externalRabbitmq.existingSecret | string | `""` | Name of an existing Secret containing the password |
+| externalRabbitmq.existingSecretPasswordKey | string | `"password"` | Key in the existing Secret containing the password |
+| externalRabbitmq.hostname | string | `""` | Hostname of the external RabbitMQ server. Used if `rabbitmq.enabled` is false. |
+| externalRabbitmq.password | string | `""` | Password of the user. Ignored if `externalRabbitmq.existingSecret` is set. |
+| externalRabbitmq.port | int | `5672` | AMQP port of the external RabbitMQ server |
+| externalRabbitmq.useSsl | bool | `false` | Whether the connection is encrypted with SSL/TLS |
+| externalRabbitmq.username | string | `"shlink"` | Name of the user to use |
+| externalRabbitmq.vhost | string | `"/"` | Virtual host to use |
+| externalRedis.existingSecret | string | `""` | Name of an existing Secret containing the password |
+| externalRedis.existingSecretPasswordKey | string | `"password"` | Key in the existing Secret containing the password |
+| externalRedis.hostname | string | `""` | Hostname of an external Redis or Valkey server. Used if `valkey.enabled` is false. |
+| externalRedis.password | string | `""` | Password of the user. Ignored if `externalRedis.existingSecret` is set. Leave empty if the server does not require authentication. |
+| externalRedis.port | int | `6379` | Port of the external server |
+| externalRedis.sentinelService | string | `""` | Name of a Redis Sentinel service. If set, `externalRedis.hostname` and `externalRedis.port` point to a Sentinel instance. |
+| externalRedis.username | string | `""` | Name of the user to use. Leave empty to authenticate with a password only. |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods. See https://shlink.io/documentation/environment-variables for a complete list. |
 | fullnameOverride | string | `""` | String to fully override `"shlink-backend.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
@@ -136,39 +278,38 @@ The command removes all the Kubernetes components associated with the chart and 
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | ingress.tls | list | `[]` |  |
-| mariadb.auth.database | string | `"shlink"` | The database name to be used when using the integrated MariaDB database. |
-| mariadb.auth.password | string | `"shlink"` | The password credential to be used when using the integrated MariaDB database. |
-| mariadb.auth.username | string | `"shlink"` | The username credential to be used when using the integrated MariaDB database. |
-| mariadb.enabled | bool | `false` | enable integrated MariaDB™ subchart from Bitnami |
-| mariadb.image.repository | string | `"bitnamilegacy/mariadb"` | image repository for MariaDB™ subchart from Bitnami |
-| mariadb.image.tag | string | `"12.0.2-debian-12-r0"` | image tag for MariaDB™ subchart from Bitnami |
-| mysql.auth.database | string | `"shlink"` | The database name to be used when using the integrated MySQL database. |
-| mysql.auth.password | string | `"shlink"` | The password credential to be used when using the integrated MySQL database. |
-| mysql.auth.username | string | `"shlink"` | The username credential to be used when using the integrated MySQL database. |
-| mysql.enabled | bool | `false` | enable integrated MySQL™ subchart from Bitnami |
-| mysql.image.repository | string | `"bitnamilegacy/mysql"` | image repository for MySQL™ subchart from Bitnami |
-| mysql.image.tag | string | `"9.4.0-debian-12-r1"` | image tag for MySQL™ subchart from Bitnami |
+| mariadb.enabled | bool | `false` | Enable a MariaDB instance managed by the mariadb-operator. Requires the operator to be installed in the cluster (see README). |
+| mariadb.mariadb.database | string | `"shlink"` | Name of the database to create |
+| mariadb.mariadb.galera.enabled | bool | `true` | Enable Galera to run multiple instances |
+| mariadb.mariadb.image | string | `"mariadb:12.3"` | MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version. |
+| mariadb.mariadb.imagePullPolicy | string | `"Always"` | Pull the image on every start to get the latest patch version of the release series |
+| mariadb.mariadb.passwordSecretKeyRef.generate | bool | `true` | Let the operator generate the Secret with a random password if it does not exist |
+| mariadb.mariadb.passwordSecretKeyRef.key | string | `"password"` | Key of the password inside the Secret |
+| mariadb.mariadb.passwordSecretKeyRef.name | string | `""` | Name of an existing Secret containing the password of the user. If empty, the Secret `<release>-mariadb-password` is used. |
+| mariadb.mariadb.replicas | int | `3` | Number of MariaDB instances. More than one instance requires Galera or replication. |
+| mariadb.mariadb.storage.size | string | `"8Gi"` | Size of the PVC of each instance |
+| mariadb.mariadb.updateStrategy.mariadbAutoUpgradeEnabled | bool | `true` | Run `mariadb-upgrade` on start, so that changing the release series in `image` migrates the system schema. It is a no-op if there is nothing to migrate. |
+| mariadb.mariadb.username | string | `"shlink"` | Name of the user to create |
 | nameOverride | string | `""` | Provide a name in place of `shlink-backend` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Annotations to be added to pods |
 | podLabels | object | `{}` | Labels to be added to pods |
 | podSecurityContext | object | `{}` | pod-level security context |
-| postgresql.auth.database | string | `"shlink"` | The database name to be used when using the integrated PostgreSQL database. |
-| postgresql.auth.password | string | `"shlink"` | The password credential to be used when using the integrated PostgreSQL database. |
-| postgresql.auth.username | string | `"shlink"` | The username credential to be used when using the integrated PostgreSQL database. |
-| postgresql.enabled | bool | `false` | enable integrated PostgreSQL™ subchart from Bitnami |
-| postgresql.image.repository | string | `"bitnamilegacy/postgresql"` | image repository for PostgreSQL™ subchart from Bitnami |
-| postgresql.image.tag | string | `"17.6.0-debian-12-r4"` | image tag for PostgreSQL™ subchart from Bitnami |
-| rabbitmq.enabled | bool | `false` | enable integrated RabbitMQ™ subchart from Bitnami |
-| rabbitmq.image.repository | string | `"bitnamilegacy/rabbitmq"` | image repository for RabbitMQ™ subchart from Bitnami |
-| rabbitmq.image.tag | string | `"4.1.3-debian-12-r1"` | image tag for RabbitMQ™ subchart from Bitnami |
-| redis.architecture | string | `"standalone"` | Redis™ architecture. Allowed values: `standalone` or `replication` |
-| redis.auth.enabled | bool | `false` | Enable password authentication |
-| redis.auth.sentinel | bool | `false` | Enable password authentication on Redis™ Sentinels |
-| redis.enabled | bool | `false` | enable integrated Redis™ subchart from Bitnami |
-| redis.image.repository | string | `"bitnamilegacy/redis"` | image repository for Redis™ subchart from Bitnami |
-| redis.image.tag | string | `"8.2.1-debian-12-r0"` | image tag for Redis™ subchart from Bitnami |
-| redis.sentinel.enabled | bool | `false` | Use Redis™ Sentinel on Redis™ pods |
+| postgresql.cluster.imageName | string | `"ghcr.io/cloudnative-pg/postgresql:18-standard-trixie"` | PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version. |
+| postgresql.cluster.imagePullPolicy | string | `"Always"` | Pull the image on every start to get the latest minor version of the major version |
+| postgresql.cluster.initdb.database | string | `"shlink"` | Name of the database to create |
+| postgresql.cluster.initdb.owner | string | `"shlink"` | Name of the user owning the database |
+| postgresql.cluster.instances | int | `3` | Number of PostgreSQL instances (one primary, the others are replicas) |
+| postgresql.cluster.storage.size | string | `"8Gi"` | Size of the PVC of each instance |
+| postgresql.enabled | bool | `false` | Enable a PostgreSQL cluster managed by the CloudNativePG operator. Requires the operator to be installed in the cluster (see README). |
+| postgresql.version.postgresql | string | `"18"` | PostgreSQL major version. Has to match the major version of `postgresql.cluster.imageName`. |
+| rabbitmq.auth.existingPasswordKey | string | `"password"` | Key in the existing Secret containing the password |
+| rabbitmq.auth.existingSecret | string | `""` | Name of an existing Secret containing the password of the default user (and the Erlang cookie) |
+| rabbitmq.auth.password | string | `""` | Password of the default user. A random password is generated if empty. Ignored if `rabbitmq.auth.existingSecret` is set. |
+| rabbitmq.auth.username | string | `"shlink"` | Name of the default user, used by Shlink |
+| rabbitmq.enabled | bool | `false` | Enable a RabbitMQ instance (chart cloudpirates/rabbitmq) to publish real-time updates |
+| rabbitmq.peerDiscoveryK8sPlugin.enabled | bool | `true` | Enable the Kubernetes peer discovery plugin to form a cluster of multiple instances |
+| rabbitmq.replicaCount | int | `3` | Number of RabbitMQ instances. More than one instance requires `rabbitmq.peerDiscoveryK8sPlugin.enabled`. |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | Resource limits and requests for the headwind pods. |
 | revisionHistoryLimit | int | `10` | The number of old ReplicaSets to retain |
@@ -191,6 +332,10 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
 | tolerations | list | `[]` | Toleration labels for pod assignment |
+| valkey.auth.aclUsers | object | `{}` | ACL users. Shlink authenticates as the user `default`, which is required if authentication is enabled. |
+| valkey.auth.enabled | bool | `false` | Enable password authentication. Shlink authenticates as the user `default`. |
+| valkey.auth.usersExistingSecret | string | `""` | Name of an existing Secret containing the passwords of the users (key `<user>` or `aclUsers.<user>.passwordKey`). Takes precedence over inline passwords. |
+| valkey.enabled | bool | `false` | Enable a Valkey instance (official chart valkey/valkey) used by Shlink as cache and for locks |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 
@@ -201,6 +346,77 @@ helm install my-release -f values.yaml christianhuth/shlink-backend
 ```
 
 ## Upgrading the Chart
+
+### To 12.0.0
+
+This major replaces the Bitnami subcharts:
+
+- PostgreSQL is managed by the [CloudNativePG operator](https://cloudnative-pg.io) and MariaDB by the [mariadb-operator](https://github.com/mariadb-operator/mariadb-operator). Install the operator for your database first (see [Prerequisites](#prerequisites)).
+- RabbitMQ is deployed with the chart [cloudpirates/rabbitmq](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq) and updated to RabbitMQ 4.3, Redis is replaced by [Valkey](https://valkey.io) with the official chart [valkey/valkey](https://github.com/valkey-io/valkey-helm/tree/main/valkey).
+- The bundled MySQL database is removed. Migrate to the bundled MariaDB (a MySQL dump can be restored into MariaDB without changes) or use an external MySQL database with `externalDatabase.type: mysql`.
+
+The values changed as follows:
+
+- `postgresql.auth.*`, `mariadb.auth.*`, `rabbitmq.*` and `redis.*` are replaced by the values of the new upstream charts, `redis.*` moved to `valkey.*` (see [Configuring the Dependencies](#configuring-the-dependencies))
+- inline passwords for the bundled databases are no longer supported. Use an existing Secret or let the operator generate one
+- `config.database.*` (except `useEncryption`), `config.rabbitmq.*` and `config.redis.*` (except `pubSubEnabled`) are replaced by `externalDatabase.*`, `externalRabbitmq.*` and `externalRedis.*`. `config.database.driver` is now `externalDatabase.type`, and an external service is used if its `hostname` is set
+- enabling more than one bundled database now fails instead of silently using the first one
+
+Releases using SQLite (the default) keep their data. If you use a bundled database, the upgrade creates a new, empty one. Valkey (cache) and RabbitMQ (real-time updates) start empty as well, which is fine for Shlink. To take your database along:
+
+1. Dump the database before upgrading. For PostgreSQL:
+
+   ```console
+   kubectl exec <release>-postgresql-0 -- sh -c 'PGPASSWORD="$(cat "$POSTGRES_PASSWORD_FILE")" pg_dump --no-owner --no-acl -U "$POSTGRES_USER" -d "$POSTGRES_DATABASE"' > shlink.sql
+   ```
+
+   For MariaDB (or MySQL, with `mysqldump` and `MYSQL_*` instead):
+
+   ```console
+   kubectl exec <release>-mariadb-0 -- sh -c 'mariadb-dump -u"$MARIADB_USER" -p"$(cat "$MARIADB_PASSWORD_FILE")" "$MARIADB_DATABASE"' > shlink.sql
+   ```
+
+2. If you use the bundled RabbitMQ, remove its StatefulSet and volume. The new RabbitMQ uses the same names, so Helm would otherwise try to patch the StatefulSet (which fails) and RabbitMQ would mount the old volume:
+
+   ```console
+   kubectl delete statefulset <release>-rabbitmq
+   kubectl delete pvc data-<release>-rabbitmq-0
+   ```
+
+3. Upgrade the chart with Shlink scaled down, so it does not initialize the new database. Then wait for the database:
+
+   ```console
+   helm upgrade <release> christianhuth/shlink-backend --version 12.0.0 -f values.yaml --set replicaCount=0 --wait
+   # PostgreSQL
+   kubectl wait --for=condition=Ready cluster/<release>-postgresql --timeout=10m
+   # MariaDB
+   kubectl wait --for=create user/<release>-mariadb-user --timeout=10m
+   kubectl wait --for=create grant/<release>-mariadb-user-all --timeout=10m
+   kubectl wait --for=condition=Ready user/<release>-mariadb-user grant/<release>-mariadb-user-all --timeout=10m
+   ```
+
+4. Restore the dump. For PostgreSQL (use the Secret from `postgresql.cluster.initdb.secret.name` or the generated `<release>-postgresql-app`):
+
+   ```console
+   PASSWORD=$(kubectl get secret <release>-postgresql-app -o jsonpath='{.data.password}' | base64 -d)
+   PRIMARY=$(kubectl get cluster <release>-postgresql -o jsonpath='{.status.currentPrimary}')
+   kubectl exec -i $PRIMARY -c postgres -- env PGPASSWORD="$PASSWORD" psql -v ON_ERROR_STOP=1 -h localhost -U shlink -d shlink < shlink.sql
+   ```
+
+   For MariaDB (use the Secret from `mariadb.mariadb.passwordSecretKeyRef` or the generated `<release>-mariadb-password`):
+
+   ```console
+   PASSWORD=$(kubectl get secret <release>-mariadb-password -o jsonpath='{.data.password}' | base64 -d)
+   kubectl exec -i <release>-mariadb-0 -c mariadb -- mariadb -u shlink --password="$PASSWORD" shlink < shlink.sql
+   ```
+
+5. Scale Shlink up again:
+
+   ```console
+   helm upgrade <release> christianhuth/shlink-backend --version 12.0.0 -f values.yaml --wait
+   ```
+
+6. Once everything works, delete the old PersistentVolumeClaims of the Bitnami database (`data-<release>-postgresql-0`, `data-<release>-mariadb-0` or `data-<release>-mysql-0`) and of Redis (`redis-data-<release>-redis-master-0`).
 
 ### To 9.0.0
 

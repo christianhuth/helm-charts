@@ -167,21 +167,6 @@ extraEnv: []
 
 config:
   database:
-    auth:
-      # -- The database name to be used when using an external database driver. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled
-      database: ""
-      # -- Use existing secret for password details (`config.database.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `database-password`.
-      existingSecret: ""
-      # -- The password credential to be used when using an external database driver.
-      password: ""
-      # -- The username credential to be used when using an external database driver.
-      username: ""
-    # -- mysql, maria, postgres or sqlite. Will be set automatically when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled
-    driver: sqlite
-    # -- The host name of the database server when using an external database driver. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled
-    host: ""
-    # -- The port in which the database service is running when using an external database driver. Default value is based on the value provided for DB_DRIVER. Will be ignored when you activate one of the integrated databases with mariadb.enabled, mysql.enabled or postgresql.enabled
-    port: 0
     # -- Whether it is desired to use an encrypted connection with the database or not
     useEncryption: false
   general:
@@ -248,22 +233,6 @@ config:
     defaultRoundBlockSize: true
     # -- A value between 50 and 1000 to determine the default size of generated QR codes when the size query param is not provided.
     defaultSize: 300
-  rabbitmq:
-    # -- enable RabbitMQ™ Integration
-    enabled: false
-    auth:
-      # -- Use existing secret for password details (`config.rabbitmq.auth.password` will be ignored and picked up from this secret). The secret has to contain the key `rabbitmq-password`.
-      existingSecret: ""
-      # -- The password credential to be used when using an external database driver.
-      password: ""
-      # -- The username credential to be used when using an external database driver.
-      username: ""
-    # -- The RabbitMQ server host name
-    host: ""
-    # -- Whether connection is encrypted with SSL/TLS or not.
-    useSsl: false
-    # -- The RabbitMQ server VHost
-    vhost: "/"
   redirects:
     # -- Allows to set the amount of seconds that redirects should be cached when redirect status is 301 or 308.
     cacheLifetime: 30
@@ -278,16 +247,8 @@ config:
     # -- 301, 302, 308 or 307 (last two since v3.5.0). Determines the status code that should be used on redirects from short to long URLs. Setting 308 or 307 implicitly makes requests to short URLs work regardless the HTTP method.
     statusCode: 302
   redis:
-    # -- enable Redis™ Integration
-    enabled: false
-    # -- Tells if the configured redis instance/cluster should also be used to publish real-time updates via redis pub/sub.
+    # -- Tells if the configured Redis-compatible server should also be used to publish real-time updates via pub/sub
     pubSubEnabled: false
-    sentinal:
-      enabled: false
-      # -- The name of the sentinel service if you want to use redis sentinel. If this value is provided, the servers provided in config.redis.servers will be considered sentinel instances.
-      service: ""
-    # -- The comma-separated list of Redis servers when using external Redis servers. Will be ignored when you activate one of the integrated Redis subchart with redis.enabled
-    servers: ""
   robots:
     # -- Whether all short URLs should be allowed via robots.txt or not. If set to true, the crawlable option set in individual short URLs will be ignored.
     allowAllShortUrls: false
@@ -324,78 +285,143 @@ config:
     # -- Allows to enable support for trailing slashes in short URLs when true is provided. See [short URLs trailing slash](https://shlink.io/documentation/some-features/#short-urls-trailing-slash) for more information.
     shortUrlTrailingSlash: false
 
-mariadb:
-  # -- enable integrated MariaDB™ subchart from Bitnami
-  enabled: false
-  auth:
-    # -- The database name to be used when using the integrated MariaDB database.
-    database: shlink
-    # -- The password credential to be used when using the integrated MariaDB database.
-    password: shlink
-    # -- The username credential to be used when using the integrated MariaDB database.
-    username: shlink
-  image:
-    # -- image repository for MariaDB™ subchart from Bitnami
-    repository: bitnamilegacy/mariadb
-    # -- image tag for MariaDB™ subchart from Bitnami
-    tag: 12.0.2-debian-12-r0
-
-mysql:
-  # -- enable integrated MySQL™ subchart from Bitnami
-  enabled: false
-  auth:
-    # -- The database name to be used when using the integrated MySQL database.
-    database: shlink
-    # -- The password credential to be used when using the integrated MySQL database.
-    password: shlink
-    # -- The username credential to be used when using the integrated MySQL database.
-    username: shlink
-  image:
-    # -- image repository for MySQL™ subchart from Bitnami
-    repository: bitnamilegacy/mysql
-    # -- image tag for MySQL™ subchart from Bitnami
-    tag: 9.4.0-debian-12-r1
-
 postgresql:
-  # -- enable integrated PostgreSQL™ subchart from Bitnami
+  # -- Enable a PostgreSQL cluster managed by the CloudNativePG operator. Requires the operator to be installed in the cluster (see README).
   enabled: false
-  auth:
-    # -- The database name to be used when using the integrated PostgreSQL database.
+  version:
+    # -- PostgreSQL major version. Has to match the major version of `postgresql.cluster.imageName`.
+    postgresql: "18"
+  cluster:
+    # -- PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version.
+    imageName: ghcr.io/cloudnative-pg/postgresql:18-standard-trixie
+    # -- Pull the image on every start to get the latest minor version of the major version
+    imagePullPolicy: Always
+    # -- Number of PostgreSQL instances (one primary, the others are replicas)
+    instances: 3
+    initdb:
+      # -- Name of the database to create
+      database: shlink
+      # -- Name of the user owning the database
+      owner: shlink
+      # Use an existing Secret of type `kubernetes.io/basic-auth` (keys `username` and `password`) for the owner.
+      # If not set, the operator generates the Secret `<release>-postgresql-app`.
+      # secret:
+      #   name: ""
+    storage:
+      # -- Size of the PVC of each instance
+      size: 8Gi
+
+mariadb:
+  # -- Enable a MariaDB instance managed by the mariadb-operator. Requires the operator to be installed in the cluster (see README).
+  enabled: false
+  mariadb:
+    # -- MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.
+    image: mariadb:12.3
+    # -- Pull the image on every start to get the latest patch version of the release series
+    imagePullPolicy: Always
+    updateStrategy:
+      # -- Run `mariadb-upgrade` on start, so that changing the release series in `image` migrates the system schema. It is a no-op if there is nothing to migrate.
+      mariadbAutoUpgradeEnabled: true
+    # -- Number of MariaDB instances. More than one instance requires Galera or replication.
+    replicas: 3
+    galera:
+      # -- Enable Galera to run multiple instances
+      enabled: true
+    # -- Name of the database to create
     database: shlink
-    # -- The password credential to be used when using the integrated PostgreSQL database.
-    password: shlink
-    # -- The username credential to be used when using the integrated PostgreSQL database.
+    # -- Name of the user to create
     username: shlink
-  image:
-    # -- image repository for PostgreSQL™ subchart from Bitnami
-    repository: bitnamilegacy/postgresql
-    # -- image tag for PostgreSQL™ subchart from Bitnami
-    tag: 17.6.0-debian-12-r4
+    passwordSecretKeyRef:
+      # -- Name of an existing Secret containing the password of the user. If empty, the Secret `<release>-mariadb-password` is used.
+      name: ""
+      # -- Key of the password inside the Secret
+      key: password
+      # -- Let the operator generate the Secret with a random password if it does not exist
+      generate: true
+    storage:
+      # -- Size of the PVC of each instance
+      size: 8Gi
 
 rabbitmq:
-  # -- enable integrated RabbitMQ™ subchart from Bitnami
+  # -- Enable a RabbitMQ instance (chart cloudpirates/rabbitmq) to publish real-time updates
   enabled: false
-  image:
-    # -- image repository for RabbitMQ™ subchart from Bitnami
-    repository: bitnamilegacy/rabbitmq
-    # -- image tag for RabbitMQ™ subchart from Bitnami
-    tag: 4.1.3-debian-12-r1
-
-redis:
-  # -- enable integrated Redis™ subchart from Bitnami
-  enabled: false
-  # -- Redis™ architecture. Allowed values: `standalone` or `replication`
-  architecture: standalone
+  # -- Number of RabbitMQ instances. More than one instance requires `rabbitmq.peerDiscoveryK8sPlugin.enabled`.
+  replicaCount: 3
+  peerDiscoveryK8sPlugin:
+    # -- Enable the Kubernetes peer discovery plugin to form a cluster of multiple instances
+    enabled: true
   auth:
-    # -- Enable password authentication
+    # -- Name of the default user, used by Shlink
+    username: shlink
+    # -- Password of the default user. A random password is generated if empty. Ignored if `rabbitmq.auth.existingSecret` is set.
+    password: ""
+    # -- Name of an existing Secret containing the password of the default user (and the Erlang cookie)
+    existingSecret: ""
+    # -- Key in the existing Secret containing the password
+    existingPasswordKey: password
+
+valkey:
+  # -- Enable a Valkey instance (official chart valkey/valkey) used by Shlink as cache and for locks
+  enabled: false
+  auth:
+    # -- Enable password authentication. Shlink authenticates as the user `default`.
     enabled: false
-    # -- Enable password authentication on Redis™ Sentinels
-    sentinel: false
-  sentinel:
-    # -- Use Redis™ Sentinel on Redis™ pods
-    enabled: false
-  image:
-    # -- image repository for Redis™ subchart from Bitnami
-    repository: bitnamilegacy/redis
-    # -- image tag for Redis™ subchart from Bitnami
-    tag: 8.2.1-debian-12-r0
+    # -- Name of an existing Secret containing the passwords of the users (key `<user>` or `aclUsers.<user>.passwordKey`). Takes precedence over inline passwords.
+    usersExistingSecret: ""
+    # -- ACL users. Shlink authenticates as the user `default`, which is required if authentication is enabled.
+    aclUsers: {}
+    #   default:
+    #     permissions: "~* &* +@all"
+    #     passwordKey: password
+
+externalDatabase:
+  # -- Driver of the external database: `mysql`, `maria`, `postgres` or `mssql`. Shlink uses SQLite if neither a bundled nor an external database is configured.
+  type: ""
+  # -- Hostname of the external database. Used if `mariadb.enabled` and `postgresql.enabled` are false.
+  hostname: ""
+  # -- Port of the external database. Defaults to the default port of the driver.
+  port: ""
+  # -- Name of the database to use
+  database: shlink
+  # -- Name of the user to use
+  username: shlink
+  # -- Password of the user. Ignored if `externalDatabase.existingSecret` is set.
+  password: ""
+  # -- Name of an existing Secret containing the password of the user
+  existingSecret: ""
+  # -- Key in the existing Secret containing the password
+  existingSecretPasswordKey: password
+
+externalRabbitmq:
+  # -- Hostname of the external RabbitMQ server. Used if `rabbitmq.enabled` is false.
+  hostname: ""
+  # -- AMQP port of the external RabbitMQ server
+  port: 5672
+  # -- Virtual host to use
+  vhost: /
+  # -- Whether the connection is encrypted with SSL/TLS
+  useSsl: false
+  # -- Name of the user to use
+  username: shlink
+  # -- Password of the user. Ignored if `externalRabbitmq.existingSecret` is set.
+  password: ""
+  # -- Name of an existing Secret containing the password
+  existingSecret: ""
+  # -- Key in the existing Secret containing the password
+  existingSecretPasswordKey: password
+
+externalRedis:
+  # -- Hostname of an external Redis or Valkey server. Used if `valkey.enabled` is false.
+  hostname: ""
+  # -- Port of the external server
+  port: 6379
+  # -- Name of a Redis Sentinel service. If set, `externalRedis.hostname` and `externalRedis.port` point to a Sentinel instance.
+  sentinelService: ""
+  # -- Name of the user to use. Leave empty to authenticate with a password only.
+  username: ""
+  # -- Password of the user. Ignored if `externalRedis.existingSecret` is set. Leave empty if the server does not require authentication.
+  password: ""
+  # -- Name of an existing Secret containing the password
+  existingSecret: ""
+  # -- Key in the existing Secret containing the password
+  existingSecretPasswordKey: password

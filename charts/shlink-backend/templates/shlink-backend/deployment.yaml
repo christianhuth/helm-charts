@@ -49,20 +49,20 @@ spec:
               value: {{ include "shlink-backend.database.driver" . | quote }}
             {{- if not (eq (include "shlink-backend.database.driver" .) "sqlite") }}
             - name: DB_HOST
-              value: {{ include "shlink-backend.database.host" . | quote }}
+              value: {{ include "shlink-backend.database.hostname" . | quote }}
             - name: DB_NAME
-              value: {{ include "shlink-backend.database.auth.database" . | quote }}
+              value: {{ include "shlink-backend.database.database" . | quote }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "shlink-backend.database.auth.secretName" . | quote }}
-                  key: {{ include "shlink-backend.database.auth.secretKey" . | quote }}
+                  name: {{ include "shlink-backend.database.secretName" . | quote }}
+                  key: {{ include "shlink-backend.database.passwordKey" . | quote }}
             - name: DB_PORT
               value: {{ include "shlink-backend.database.port" . | quote }}
             - name: DB_USE_ENCRYPTION
               value: {{ .Values.config.database.useEncryption | quote }}
             - name: DB_USER
-              value: {{ include "shlink-backend.database.auth.username" . | quote }}
+              value: {{ include "shlink-backend.database.username" . | quote }}
             {{- end }}
 
             # Docker Settings
@@ -182,24 +182,22 @@ spec:
             {{- if (include "shlink-backend.rabbitmq.enabled" .) }}
             # RabbitMQ Settings
             - name: RABBITMQ_ENABLED
-              value: {{ (include "shlink-backend.rabbitmq.enabled" .) | quote }}
+              value: "true"
             - name: RABBITMQ_HOST
-              value: {{ (include "shlink-backend.rabbitmq.host" .) | quote }}
+              value: {{ include "shlink-backend.rabbitmq.hostname" . | quote }}
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "shlink-backend.rabbitmq.auth.secretName" . }}
-                  key: rabbitmq-password
+                  name: {{ include "shlink-backend.rabbitmq.secretName" . | quote }}
+                  key: {{ include "shlink-backend.rabbitmq.passwordKey" . | quote }}
             - name: RABBITMQ_PORT
-              value: {{ (include "shlink-backend.rabbitmq.port" .) | quote }}
+              value: {{ include "shlink-backend.rabbitmq.port" . | quote }}
             - name: RABBITMQ_USER
-              value: {{ (include "shlink-backend.rabbitmq.auth.username" .) | quote }}
+              value: {{ include "shlink-backend.rabbitmq.username" . | quote }}
             - name: RABBITMQ_USE_SSL
-              value: {{ .Values.config.rabbitmq.useSsl | quote }}
-            {{- if .Values.config.rabbitmq.vhost }}
+              value: {{ include "shlink-backend.rabbitmq.useSsl" . | quote }}
             - name: RABBITMQ_VHOST
-              value: {{ .Values.config.rabbitmq.vhost | quote }}
-            {{- end }}
+              value: {{ include "shlink-backend.rabbitmq.vhost" . | quote }}
             {{- end }}
 
             # Redirects Settings
@@ -232,9 +230,21 @@ spec:
             # Redis Settings
             - name: REDIS_PUB_SUB_ENABLED
               value: {{ .Values.config.redis.pubSubEnabled | quote }}
-            {{- if (include "shlink-backend.redis.sentinal.enabled" .) }}
+            {{- with include "shlink-backend.redis.sentinelService" . }}
             - name: REDIS_SENTINEL_SERVICE
-              value: {{ include "shlink-backend.redis.sentinal.service" . | quote }}
+              value: {{ . | quote }}
+            {{- end }}
+            {{- if include "shlink-backend.redis.authEnabled" . }}
+            {{- with include "shlink-backend.redis.username" . }}
+            - name: REDIS_SERVERS_USER
+              value: {{ . | quote }}
+            {{- end }}
+            # defined before REDIS_SERVERS, which references it with variable expansion
+            - name: REDIS_SERVERS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "shlink-backend.redis.secretName" . | quote }}
+                  key: {{ include "shlink-backend.redis.passwordKey" . | quote }}
             {{- end }}
             - name: REDIS_SERVERS
               value: {{ include "shlink-backend.redis.servers" . | quote }}
