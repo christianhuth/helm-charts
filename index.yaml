@@ -64577,6 +64577,62 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: "BREAKING: replaced the Bitnami PostgreSQL and MariaDB subcharts with databases managed by the CloudNativePG operator and the mariadb-operator. See the upgrade notes in the README."
+        - kind: changed
+          description: "BREAKING: replaced the Bitnami RabbitMQ subchart with the CloudPirates RabbitMQ chart and the Bitnami Redis subchart with the official Valkey chart (valkey/valkey)"
+        - kind: changed
+          description: "BREAKING: moved config.database, config.rabbitmq and config.redis to externalDatabase, externalRabbitmq and externalRedis with a standardized structure"
+        - kind: removed
+          description: "BREAKING: the bundled MySQL database. Use the bundled MariaDB or an external MySQL database"
+        - kind: fixed
+          description: enabling more than one bundled database fails with a clear error, the Secret for an external RabbitMQ is created when no existing Secret is given, and Redis passwords are passed with REDIS_SERVERS_PASSWORD
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 5.1.7
+    created: "2026-10-15T06:35:23.382910548Z"
+    dependencies:
+    - alias: postgresql
+      condition: postgresql.enabled
+      name: cluster
+      repository: https://cloudnative-pg.github.io/charts
+      version: 0.9.0
+    - alias: mariadb
+      condition: mariadb.enabled
+      name: mariadb-cluster
+      repository: https://helm.mariadb.com/mariadb-operator
+      version: 26.10.1
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.21.31
+    - condition: valkey.enabled
+      name: valkey
+      repository: https://valkey.io/valkey-helm/
+      version: 0.12.0
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 07cd06cecb8d29ad0909b1588991ac87865bd923deb4ef2bffbfadf671c8c486
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/shlink-backend/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-backend-12.0.0/shlink-backend-12.0.0.tgz
+    version: 12.0.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of postgresql to 18.12.4
       artifacthub.io/links: |
         - name: support
@@ -116082,4 +116138,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-14T23:12:21.841674971Z"
+generated: "2026-10-15T06:35:23.385337158Z"
