@@ -60,7 +60,7 @@
         },
         "existingSecret": {
           "default": "",
-          "description": "use an existing secret containing the database url. If none given, we will generate the database url by using the other values. The password for the database has to be set using `.Values.postgresql.auth.password`, `.Values.mysql.auth.password` or `.Values.externalDatabase.auth.password`.",
+          "description": "Name of an existing Secret containing the complete database URL (`postgresql://...`). Takes precedence over `postgresql.*` and `externalDatabase.*`.",
           "title": "existingSecret",
           "type": "string"
         }
@@ -74,59 +74,57 @@
     },
     "externalDatabase": {
       "properties": {
-        "auth": {
-          "properties": {
-            "database": {
-              "default": "mychart",
-              "description": "Name of the database to use",
-              "title": "database",
-              "type": "string"
-            },
-            "password": {
-              "default": "mychart",
-              "description": "Password to use",
-              "title": "password",
-              "type": "string"
-            },
-            "username": {
-              "default": "mychart",
-              "description": "Name of the user to use",
-              "title": "username",
-              "type": "string"
-            }
-          },
-          "required": [
-            "database",
-            "password",
-            "username"
-          ],
-          "title": "auth",
-          "type": "object"
+        "database": {
+          "default": "umami",
+          "description": "Name of the database to use",
+          "title": "database",
+          "type": "string"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Secret containing the password of the user. The password must only contain URL-safe characters.",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "existingSecretPasswordKey": {
+          "default": "password",
+          "description": "Key in the existing Secret containing the password",
+          "title": "existingSecretPasswordKey",
+          "type": "string"
         },
         "hostname": {
           "default": "",
-          "description": "Hostname of the database",
+          "description": "Hostname of the external PostgreSQL database. Used if `postgresql.enabled` is false.",
           "title": "hostname",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Password of the user. Ignored if `externalDatabase.existingSecret` is set. Must only contain URL-safe characters.",
+          "title": "password",
           "type": "string"
         },
         "port": {
           "default": 5432,
-          "description": "Port used to connect to database",
+          "description": "Port of the external PostgreSQL database",
           "title": "port",
           "type": "integer"
         },
-        "type": {
-          "default": "postgresql",
-          "description": "Type of database",
-          "title": "type",
+        "username": {
+          "default": "umami",
+          "description": "Name of the user to use",
+          "title": "username",
           "type": "string"
         }
       },
       "required": [
-        "auth",
         "hostname",
         "port",
-        "type"
+        "database",
+        "username",
+        "password",
+        "existingSecret",
+        "existingSecretPasswordKey"
       ],
       "title": "externalDatabase",
       "type": "object"
@@ -172,7 +170,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "postgresql-v2.20.1",
+          "default": "3.4.0",
           "description": "Overrides the image tag",
           "title": "tag",
           "type": "string"
@@ -351,51 +349,6 @@
       "title": "livenessProbe",
       "type": "object"
     },
-    "mysql": {
-      "properties": {
-        "auth": {
-          "properties": {
-            "database": {
-              "default": "mychart",
-              "description": "Name for a custom database to create",
-              "title": "database",
-              "type": "string"
-            },
-            "password": {
-              "default": "mychart",
-              "description": "Password for the custom user to create",
-              "title": "password",
-              "type": "string"
-            },
-            "username": {
-              "default": "mychart",
-              "description": "Name for a custom user to create",
-              "title": "username",
-              "type": "string"
-            }
-          },
-          "required": [
-            "database",
-            "password",
-            "username"
-          ],
-          "title": "auth",
-          "type": "object"
-        },
-        "enabled": {
-          "default": false,
-          "description": "enable MySQL™ subchart from Bitnami",
-          "title": "enabled",
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "enabled",
-        "auth"
-      ],
-      "title": "mysql",
-      "type": "object"
-    },
     "nameOverride": {
       "default": "",
       "description": "Provide a name in place of `umami`",
@@ -428,45 +381,100 @@
     },
     "postgresql": {
       "properties": {
-        "auth": {
+        "cluster": {
           "properties": {
-            "database": {
-              "default": "mychart",
-              "description": "Name for a custom database to create",
-              "title": "database",
+            "imageName": {
+              "default": "ghcr.io/cloudnative-pg/postgresql:18-standard-trixie",
+              "description": "PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version.",
+              "title": "imageName",
               "type": "string"
             },
-            "password": {
-              "default": "mychart",
-              "description": "Password for the custom user to create",
-              "title": "password",
+            "imagePullPolicy": {
+              "default": "Always",
+              "description": "Pull the image on every start to get the latest minor version of the major version",
+              "title": "imagePullPolicy",
               "type": "string"
             },
-            "username": {
-              "default": "mychart",
-              "description": "Name for a custom user to create",
-              "title": "username",
-              "type": "string"
+            "initdb": {
+              "properties": {
+                "database": {
+                  "default": "umami",
+                  "description": "Name of the database to create",
+                  "title": "database",
+                  "type": "string"
+                },
+                "owner": {
+                  "default": "umami",
+                  "description": "Name of the user owning the database",
+                  "title": "owner",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "database",
+                "owner"
+              ],
+              "title": "initdb",
+              "type": "object"
+            },
+            "instances": {
+              "default": 3,
+              "description": "Number of PostgreSQL instances (one primary, the others are replicas)",
+              "title": "instances",
+              "type": "integer"
+            },
+            "storage": {
+              "properties": {
+                "size": {
+                  "default": "8Gi",
+                  "description": "Size of the PVC of each instance",
+                  "title": "size",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "size"
+              ],
+              "title": "storage",
+              "type": "object"
             }
           },
           "required": [
-            "database",
-            "password",
-            "username"
+            "imageName",
+            "imagePullPolicy",
+            "instances",
+            "initdb",
+            "storage"
           ],
-          "title": "auth",
+          "title": "cluster",
           "type": "object"
         },
         "enabled": {
           "default": true,
-          "description": "enable PostgreSQL™ subchart from Bitnami",
+          "description": "Enable a PostgreSQL cluster managed by the CloudNativePG operator. Requires the operator to be installed in the cluster (see README).",
           "title": "enabled",
           "type": "boolean"
+        },
+        "version": {
+          "properties": {
+            "postgresql": {
+              "default": "18",
+              "description": "PostgreSQL major version. Has to match the major version of `postgresql.cluster.imageName`.",
+              "title": "postgresql",
+              "type": "string"
+            }
+          },
+          "required": [
+            "postgresql"
+          ],
+          "title": "version",
+          "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth"
+        "version",
+        "cluster"
       ],
       "title": "postgresql",
       "type": "object"
@@ -921,7 +929,7 @@
         },
         "debug": {
           "default": "",
-          "description": "Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`.",
+          "description": "Console logging for specific areas of the application (`DEBUG`). Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`.",
           "title": "debug",
           "type": "string"
         },
@@ -950,8 +958,8 @@
           "type": "string"
         },
         "enableTestConsole": {
-          "default": "1",
-          "description": "Enables the internal test page, {host}/console. Admin access is required. Users can manually fire pageviews and events to their websites.",
+          "default": "0",
+          "description": "Set to \"1\" to enable the internal test page, {host}/console. Admin access is required. Users can manually fire pageviews and events to their websites.",
           "title": "enableTestConsole",
           "type": "string"
         },
@@ -967,16 +975,16 @@
           "title": "hostname",
           "type": "string"
         },
-        "ignoreHostname": {
-          "default": "",
-          "description": "This will do a DNS lookup on a hostname and the resulting IP address will be ignored. This can be a comma delimited list of hostnames.",
-          "title": "ignoreHostname",
-          "type": "string"
-        },
         "ignoredIpAddresses": {
           "default": "",
           "description": "You can provide a comma-delimited list of IP address to exclude from data collection.",
           "title": "ignoredIpAddresses",
+          "type": "string"
+        },
+        "linksUrl": {
+          "default": "",
+          "description": "URL of the links feature (short links), e.g. https://links.example.com",
+          "title": "linksUrl",
           "type": "string"
         },
         "logQuery": {
@@ -985,29 +993,17 @@
           "title": "logQuery",
           "type": "string"
         },
-        "migration": {
-          "properties": {
-            "v1v2": {
-              "properties": {
-                "enabled": {
-                  "default": false,
-                  "description": "enable a job that migrates database structure from v1 to v2",
-                  "title": "enabled",
-                  "type": "boolean"
-                }
-              },
-              "required": [
-                "enabled"
-              ],
-              "title": "v1v2",
-              "type": "object"
-            }
-          },
-          "required": [
-            "v1v2"
-          ],
-          "title": "migration",
-          "type": "object"
+        "mcpEnabled": {
+          "default": "",
+          "description": "Set to \"1\" to enable the MCP endpoint (`/mcp`) for AI assistants",
+          "title": "mcpEnabled",
+          "type": "string"
+        },
+        "pixelsUrl": {
+          "default": "",
+          "description": "URL of the pixels feature (tracking pixels), e.g. https://pixels.example.com",
+          "title": "pixelsUrl",
+          "type": "string"
         },
         "removeDisableLoginEnv": {
           "default": true,
@@ -1021,10 +1017,51 @@
           "title": "removeTrailingSlash",
           "type": "string"
         },
+        "saltRotation": {
+          "default": "",
+          "description": "Rotation period of the salt used to anonymize sessions, e.g. `day` or `month`. Defaults to `month`.",
+          "title": "saltRotation",
+          "type": "string"
+        },
         "trackerScriptName": {
           "default": "umami",
           "description": "Allows you to assign a custom name to the tracker script different from the default umami. This is to help you avoid some ad-blockers.",
           "title": "trackerScriptName",
+          "type": "string"
+        },
+        "twoFactor": {
+          "properties": {
+            "encryptionKey": {
+              "default": "",
+              "description": "64 hexadecimal characters (256-bit key) to encrypt the two-factor authentication secrets, e.g. generated with `openssl rand -hex 32`. Two-factor authentication is unavailable without a key. Ignored if `umami.twoFactor.existingSecret` is set.",
+              "title": "encryptionKey",
+              "type": "string"
+            },
+            "existingSecret": {
+              "default": "",
+              "description": "Name of an existing Secret containing the key",
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "existingSecretKey": {
+              "default": "two-factor-encryption-key",
+              "description": "Key in the existing Secret containing the key",
+              "title": "existingSecretKey",
+              "type": "string"
+            }
+          },
+          "required": [
+            "encryptionKey",
+            "existingSecret",
+            "existingSecretKey"
+          ],
+          "title": "twoFactor",
+          "type": "object"
+        },
+        "useUuidV7": {
+          "default": "",
+          "description": "Set to \"1\" to use UUIDv7 instead of UUIDv4 for new IDs",
+          "title": "useUuidV7",
           "type": "string"
         }
       },
@@ -1043,10 +1080,14 @@
         "enableTestConsole",
         "forceSSL",
         "hostname",
-        "ignoreHostname",
         "ignoredIpAddresses",
         "logQuery",
-        "migration",
+        "mcpEnabled",
+        "linksUrl",
+        "pixelsUrl",
+        "saltRotation",
+        "twoFactor",
+        "useUuidV7",
         "removeDisableLoginEnv",
         "removeTrailingSlash",
         "trackerScriptName"
@@ -1082,7 +1123,6 @@
     "initContainers",
     "umami",
     "postgresql",
-    "mysql",
     "externalDatabase",
     "database"
   ],

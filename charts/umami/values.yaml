@@ -12,7 +12,7 @@ image:
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag
-  tag: "postgresql-v2.20.1"
+  tag: "3.4.0"
 
 # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
 imagePullSecrets: []
@@ -234,7 +234,7 @@ umami:
     key: "script.js"
     # -- The path to mount the custom script to
     mountPath: "/app/public/script.js"
-  # -- Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`.
+  # -- Console logging for specific areas of the application (`DEBUG`). Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`.
   debug: ""
   # -- By default bots are excluded from statistics. This disables checking for bots.
   disableBotCheck: "1"
@@ -244,22 +244,33 @@ umami:
   disableTelemetry: "1"
   # -- Disables the check for new versions of Umami
   disableUpdates: "1"
-  # -- Enables the internal test page, {host}/console. Admin access is required. Users can manually fire pageviews and events to their websites.
-  enableTestConsole: "1"
+  # -- Set to "1" to enable the internal test page, {host}/console. Admin access is required. Users can manually fire pageviews and events to their websites.
+  enableTestConsole: "0"
   # -- This will redirect all requests from http to https in the Umami application. Note, this does not apply to the tracking script.
   forceSSL: "1"
   # -- hostname under which Umami will be reached
   hostname: "0.0.0.0"
-  # -- This will do a DNS lookup on a hostname and the resulting IP address will be ignored. This can be a comma delimited list of hostnames.
-  ignoreHostname: ""
   # -- You can provide a comma-delimited list of IP address to exclude from data collection.
   ignoredIpAddresses: ""
   # -- If you are running in development mode, this will log database queries to the console for debugging.
   logQuery: "1"
-  migration:
-    v1v2:
-      # -- enable a job that migrates database structure from v1 to v2
-      enabled: false
+  # -- Set to "1" to enable the MCP endpoint (`/mcp`) for AI assistants
+  mcpEnabled: ""
+  # -- URL of the links feature (short links), e.g. https://links.example.com
+  linksUrl: ""
+  # -- URL of the pixels feature (tracking pixels), e.g. https://pixels.example.com
+  pixelsUrl: ""
+  # -- Rotation period of the salt used to anonymize sessions, e.g. `day` or `month`. Defaults to `month`.
+  saltRotation: ""
+  twoFactor:
+    # -- 64 hexadecimal characters (256-bit key) to encrypt the two-factor authentication secrets, e.g. generated with `openssl rand -hex 32`. Two-factor authentication is unavailable without a key. Ignored if `umami.twoFactor.existingSecret` is set.
+    encryptionKey: ""
+    # -- Name of an existing Secret containing the key
+    existingSecret: ""
+    # -- Key in the existing Secret containing the key
+    existingSecretKey: two-factor-encryption-key
+  # -- Set to "1" to use UUIDv7 instead of UUIDv4 for new IDs
+  useUuidV7: ""
   # -- setting this to true removes the environment variable DISABLE_LOGIN defined in `umami.disableLogin` from the deployment as this caused errors in some setups
   removeDisableLoginEnv: true
   # -- Removes the trailing slash from all incoming urls.
@@ -268,44 +279,49 @@ umami:
   trackerScriptName: "umami"
 
 postgresql:
-  # -- enable PostgreSQL™ subchart from Bitnami
+  # -- Enable a PostgreSQL cluster managed by the CloudNativePG operator. Requires the operator to be installed in the cluster (see README).
   enabled: true
-  auth:
-    # -- Name for a custom database to create
-    database: mychart
-    # -- Password for the custom user to create
-    password: mychart
-    # -- Name for a custom user to create
-    username: mychart
-
-mysql:
-  # -- enable MySQL™ subchart from Bitnami
-  enabled: false
-  auth:
-    # -- Name for a custom database to create
-    database: mychart
-    # -- Password for the custom user to create
-    password: mychart
-    # -- Name for a custom user to create
-    username: mychart
+  version:
+    # -- PostgreSQL major version. Has to match the major version of `postgresql.cluster.imageName`.
+    postgresql: "18"
+  cluster:
+    # -- PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version.
+    imageName: ghcr.io/cloudnative-pg/postgresql:18-standard-trixie
+    # -- Pull the image on every start to get the latest minor version of the major version
+    imagePullPolicy: Always
+    # -- Number of PostgreSQL instances (one primary, the others are replicas)
+    instances: 3
+    initdb:
+      # -- Name of the database to create
+      database: umami
+      # -- Name of the user owning the database
+      owner: umami
+      # Use an existing Secret of type `kubernetes.io/basic-auth` (keys `username` and `password`) for the owner.
+      # If not set, the operator generates the Secret `<release>-postgresql-app`.
+      # secret:
+      #   name: ""
+    storage:
+      # -- Size of the PVC of each instance
+      size: 8Gi
 
 externalDatabase:
-  auth:
-    # -- Name of the database to use
-    database: mychart
-    # -- Password to use
-    password: mychart
-    # -- Name of the user to use
-    username: mychart
-  # -- Hostname of the database
+  # -- Hostname of the external PostgreSQL database. Used if `postgresql.enabled` is false.
   hostname: ""
-  # -- Port used to connect to database
+  # -- Port of the external PostgreSQL database
   port: 5432
-  # -- Type of database
-  type: postgresql
+  # -- Name of the database to use
+  database: umami
+  # -- Name of the user to use
+  username: umami
+  # -- Password of the user. Ignored if `externalDatabase.existingSecret` is set. Must only contain URL-safe characters.
+  password: ""
+  # -- Name of an existing Secret containing the password of the user. The password must only contain URL-safe characters.
+  existingSecret: ""
+  # -- Key in the existing Secret containing the password
+  existingSecretPasswordKey: password
 
 database:
   # -- Key in the existing secret containing the database url
   databaseUrlKey: ""
-  # -- use an existing secret containing the database url. If none given, we will generate the database url by using the other values. The password for the database has to be set using `.Values.postgresql.auth.password`, `.Values.mysql.auth.password` or `.Values.externalDatabase.auth.password`.
+  # -- Name of an existing Secret containing the complete database URL (`postgresql://...`). Takes precedence over `postgresql.*` and `externalDatabase.*`.
   existingSecret: ""
