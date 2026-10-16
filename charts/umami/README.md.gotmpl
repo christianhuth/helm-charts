@@ -17,7 +17,18 @@ This chart bootstraps [Umami](https://github.com/umami-software/umami) on a [Kub
 
 ## Prerequisites
 
-- Kubernetes 1.19+
+- Kubernetes 1.29+
+- The [CloudNativePG operator](https://cloudnative-pg.io) if the bundled PostgreSQL database is used (`postgresql.enabled: true`, the default)
+
+### Installing the CloudNativePG operator
+
+The chart bundles a PostgreSQL cluster as a custom resource of the CloudNativePG operator (via the upstream chart [cnpg/cluster](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster)). The operator itself is not part of this chart, as it is installed once per Kubernetes cluster:
+
+```console
+helm repo add cnpg https://cloudnative-pg.github.io/charts
+helm repo update
+helm upgrade --install cnpg cnpg/cloudnative-pg --namespace cnpg-system --create-namespace --wait
+```
 
 ## Installing the Chart
 
@@ -43,6 +54,66 @@ helm uninstall my-release
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
+## Configuring the Database
+
+Umami (since v3) only supports PostgreSQL.
+
+### Bundled PostgreSQL with an existing Secret (recommended)
+
+Create a Secret of type `kubernetes.io/basic-auth` containing the credentials of the database owner. The `username` has to match `postgresql.cluster.initdb.owner`:
+
+```console
+kubectl create secret generic umami-database \
+  --type=kubernetes.io/basic-auth \
+  --from-literal=username=umami \
+  --from-literal=password='<password>'
+```
+
+```yaml
+postgresql:
+  cluster:
+    initdb:
+      database: umami
+      owner: umami
+      secret:
+        name: umami-database
+```
+
+Umami receives the password as part of its database URL, so it must only contain URL-safe characters (`A-Z`, `a-z`, `0-9`, `-`, `.`, `_`, `~`). If no Secret is referenced, the operator generates a random password and Umami uses the connection URI from the generated Secret `<release>-postgresql-app`. All other settings of the PostgreSQL cluster (e.g. `postgresql.cluster.instances`, `postgresql.cluster.storage`, backups) are passed to the upstream chart. See its [values](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster#values) for all options.
+
+### External PostgreSQL
+
+```yaml
+postgresql:
+  enabled: false
+
+externalDatabase:
+  hostname: postgresql.example.com
+  port: 5432
+  database: umami
+  username: umami
+  existingSecret: umami-database
+  existingSecretPasswordKey: password
+```
+
+Instead of `externalDatabase.existingSecret` you can set `externalDatabase.password`, which lets the chart create the Secret. As for the bundled database, the password must only contain URL-safe characters. Alternatively, provide the complete database URL (e.g. with additional connection parameters) in a Secret referenced by `database.existingSecret` (key `database.databaseUrlKey`, default `database-url`).
+
+## Two-Factor Authentication
+
+Umami v3 supports two-factor authentication, which requires a 256-bit key to encrypt the secrets of the users:
+
+```console
+kubectl create secret generic umami-two-factor --from-literal=two-factor-encryption-key="$(openssl rand -hex 32)"
+```
+
+```yaml
+umami:
+  twoFactor:
+    existingSecret: umami-two-factor
+```
+
+Keep the key: without it, the two-factor secrets of the users can no longer be decrypted.
+
 {{ template "chart.valuesSection" . }}
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
@@ -54,6 +125,48 @@ helm install my-release -f values.yaml christianhuth/umami
 ```
 
 ## Upgrading the Chart
+
+### To 8.0.0
+
+This major updates Umami to v3 and replaces the Bitnami PostgreSQL subchart with a PostgreSQL cluster managed by the [CloudNativePG operator](https://cloudnative-pg.io). Install the operator first (see [Prerequisites](#prerequisites)). Read the [release notes of Umami v3](https://github.com/umami-software/umami/releases/tag/v3.0.0) as well.
+
+- **Umami v3 only supports PostgreSQL.** MySQL support (`mysql.*`, `externalDatabase.type`) is removed. If you use MySQL, migrate your data to PostgreSQL with the [official guide](https://umami.is/docs/guides/migrate-mysql-postgresql) before upgrading.
+- `postgresql.auth.*` is replaced by the values of the upstream chart [cnpg/cluster](https://github.com/cloudnative-pg/charts/tree/main/charts/cluster), e.g. `postgresql.cluster.initdb.database` and `postgresql.cluster.initdb.owner`. An inline password for the bundled database is no longer supported. Use an existing Secret or let the operator generate one (see [Configuring the Database](#configuring-the-database))
+- `externalDatabase.auth.*` moved one level up, and the password is read from a Secret (`externalDatabase.existingSecret` or a Secret created from `externalDatabase.password`)
+- the job migrating from Umami v1 to v2 (`umami.migration.v1v2`) and `umami.ignoreHostname` (never read by Umami) are removed
+- `umami.debug` and `umami.enableTestConsole` are now passed to Umami. `umami.enableTestConsole` defaults to `"0"`, set it to `"1"` to enable the test console
+- new settings of Umami v3: `umami.twoFactor`, `umami.saltRotation`, `umami.useUuidV7`, `umami.mcpEnabled`, `umami.linksUrl` and `umami.pixelsUrl`
+
+Umami migrates the database schema from v2 to v3 on startup. If you use the bundled PostgreSQL, the upgrade creates a new, empty database. The Bitnami StatefulSet is removed, but its PersistentVolumeClaim `data-<release>-postgresql-0` is kept. To take your data along:
+
+1. Dump the database before upgrading:
+
+   ```console
+   kubectl exec <release>-postgresql-0 -- sh -c 'PGPASSWORD="$(cat "$POSTGRES_PASSWORD_FILE")" pg_dump --no-owner --no-acl -U "$POSTGRES_USER" -d "$POSTGRES_DATABASE"' > umami.sql
+   ```
+
+2. Upgrade the chart with Umami scaled down, so it does not initialize the new database:
+
+   ```console
+   helm upgrade <release> christianhuth/umami --version 8.0.0 -f values.yaml --set replicaCount=0 --wait
+   kubectl wait --for=condition=Ready cluster/<release>-postgresql --timeout=10m
+   ```
+
+3. Restore the dump as the database owner. Use the Secret from `postgresql.cluster.initdb.secret.name` or the generated `<release>-postgresql-app`:
+
+   ```console
+   PASSWORD=$(kubectl get secret <release>-postgresql-app -o jsonpath='{.data.password}' | base64 -d)
+   PRIMARY=$(kubectl get cluster <release>-postgresql -o jsonpath='{.status.currentPrimary}')
+   kubectl exec -i $PRIMARY -c postgres -- env PGPASSWORD="$PASSWORD" psql -v ON_ERROR_STOP=1 -h localhost -U umami -d umami < umami.sql
+   ```
+
+4. Scale Umami up again. It applies the v3 migrations to the restored v2 database on startup:
+
+   ```console
+   helm upgrade <release> christianhuth/umami --version 8.0.0 -f values.yaml --wait
+   ```
+
+5. Once everything works, delete the old PersistentVolumeClaim `data-<release>-postgresql-0`.
 
 ### To 7.0.0
 

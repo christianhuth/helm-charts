@@ -40,11 +40,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             # Database Settings
-            - name: DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "umami.database.secretName" . | quote }}
-                  key: {{ include "umami.database.databaseUrlKey" . | quote }}
+            {{- include "umami.database.env" . | nindent 12 }}
             # Umami Settings
             - name: APP_SECRET
               valueFrom:
@@ -63,6 +59,10 @@ spec:
             - name: COLLECT_API_ENDPOINT
               value: {{ .Values.umami.collectApiEndpoint | quote }}
             {{- end }}
+            {{- if .Values.umami.debug }}
+            - name: DEBUG
+              value: {{ .Values.umami.debug | quote }}
+            {{- end }}
             {{- if .Values.umami.corsMaxAge }}
             - name: CORS_MAX_AGE
               value: {{ .Values.umami.corsMaxAge | quote }}
@@ -79,15 +79,15 @@ spec:
               value: {{ .Values.umami.disableTelemetry | quote }}
             - name: DISABLE_UPDATES
               value: {{ .Values.umami.disableUpdates | quote }}
+            {{- if eq (toString .Values.umami.enableTestConsole) "1" }}
+            - name: ENABLE_TEST_CONSOLE
+              value: "1"
+            {{- end }}
             - name: FORCE_SSL
               value: {{ .Values.umami.forceSSL | quote }}
             {{- if .Values.umami.hostname }}
             - name: HOSTNAME
               value: {{ .Values.umami.hostname | quote }}
-            {{- end }}
-            {{- if .Values.umami.ignoreHostname }}
-            - name: IGNORE_HOSTNAME
-              value: {{ .Values.umami.ignoreHostname | quote }}
             {{- end }}
             {{- if .Values.umami.ignoredIpAddresses }}
             - name: IGNORE_IP
@@ -103,6 +103,34 @@ spec:
               value: {{ .Values.umami.removeTrailingSlash | quote }}
             - name: TRACKER_SCRIPT_NAME
               value: {{ .Values.umami.trackerScriptName | quote }}
+            # Settings introduced with Umami v3
+            {{- if .Values.umami.linksUrl }}
+            - name: LINKS_URL
+              value: {{ .Values.umami.linksUrl | quote }}
+            {{- end }}
+            {{- if eq (toString .Values.umami.mcpEnabled) "1" }}
+            - name: MCP_ENABLED
+              value: "1"
+            {{- end }}
+            {{- if .Values.umami.pixelsUrl }}
+            - name: PIXELS_URL
+              value: {{ .Values.umami.pixelsUrl | quote }}
+            {{- end }}
+            {{- if .Values.umami.saltRotation }}
+            - name: SALT_ROTATION
+              value: {{ .Values.umami.saltRotation | quote }}
+            {{- end }}
+            {{- if or .Values.umami.twoFactor.encryptionKey .Values.umami.twoFactor.existingSecret }}
+            - name: TWO_FACTOR_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "umami.twoFactor.secretName" . | quote }}
+                  key: {{ include "umami.twoFactor.secretKey" . | quote }}
+            {{- end }}
+            {{- if eq (toString .Values.umami.useUuidV7) "1" }}
+            - name: USE_UUIDV7
+              value: "1"
+            {{- end }}
             # Extra environment variables
             {{- range .Values.extraEnv }}
             {{- if and (.name) (.value) }}
