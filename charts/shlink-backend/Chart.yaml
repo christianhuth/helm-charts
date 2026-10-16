@@ -2,8 +2,8 @@ apiVersion: v2
 name: shlink-backend
 description: A PHP-based self-hosted URL shortener that can be used to serve shortened URLs under your own domain.
 type: application
-version: 12.0.0
-appVersion: "5.1.7"
+version: 13.0.0
+appVersion: "13.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/shlink-backend/icon.svg
 maintainers:
@@ -34,15 +34,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: "BREAKING: replaced the Bitnami PostgreSQL and MariaDB subcharts with databases managed by the CloudNativePG operator and the mariadb-operator. See the upgrade notes in the README."
-    - kind: changed
-      description: "BREAKING: replaced the Bitnami RabbitMQ subchart with the CloudPirates RabbitMQ chart and the Bitnami Redis subchart with the official Valkey chart (valkey/valkey)"
-    - kind: changed
-      description: "BREAKING: moved config.database, config.rabbitmq and config.redis to externalDatabase, externalRabbitmq and externalRedis with a standardized structure"
-    - kind: removed
-      description: "BREAKING: the bundled MySQL database. Use the bundled MariaDB or an external MySQL database"
-    - kind: fixed
-      description: enabling more than one bundled database fails with a clear error, the Secret for an external RabbitMQ is created when no existing Secret is given, and Redis passwords are passed with REDIS_SERVERS_PASSWORD
+      description: App Version to 13.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
