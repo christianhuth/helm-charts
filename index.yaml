@@ -52496,6 +52496,34 @@ entries:
   - annotations:
       artifacthub.io/category: monitoring-logging
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to 0.9.2
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 0.9.2
+    created: "2026-10-18T18:51:43.431633526Z"
+    description: Prometheus exporter for Nextcloud servers
+    digest: 92365041a144435a2e35e1b31b50d6e5c928ffbd1d4abd1d428a0714cb1de8ce
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/nextcloud-exporter/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: nextcloud-exporter
+    sources:
+    - https://github.com/xperimental/nextcloud-exporter
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/nextcloud-exporter-1.5.1/nextcloud-exporter-1.5.1.tgz
+    version: 1.5.1
+  - annotations:
+      artifacthub.io/category: monitoring-logging
+      artifacthub.io/changes: |
         - kind: added
           description: Added scrapeTimeout value to serviceMonitor
       artifacthub.io/links: |
@@ -116206,4 +116234,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-16T11:37:53.030708643Z"
+generated: "2026-10-18T18:51:43.434811721Z"
