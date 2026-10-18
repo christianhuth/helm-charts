@@ -1,7 +1,7 @@
 # nextcloud-exporter
 
-## 1.5.0
+## 1.5.1
 
-### Added
+### Changed
 
-- Added scrapeTimeout value to serviceMonitor
+- App Version to 0.9.2
