@@ -133,7 +133,7 @@ Instead of `externalDatabase.existingSecret` you can set `externalDatabase.passw
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"crinis/typo3"` | image repository |
-| image.tag | string | `"legacy-13.4"` | Overrides the image tag |
+| image.tag | string | `"legacy-13.4.34"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
@@ -175,7 +175,7 @@ Instead of `externalDatabase.existingSecret` you can set `externalDatabase.passw
 | persistence.typo3conf.resources | object | `{"requests":{"storage":"1Gi"}}` | represents the minimum and maximum resources the volume should have. |
 | persistence.typo3conf.storageClassName | string | `""` | Name of the StorageClass required by the claim. |
 | podAnnotations | object | `{}` | Annotations to be added to exporter pods |
-| podSecurityContext | object | `{"fsGroup":33,"runAsGroup":33,"runAsNonRoot":true,"runAsUser":33,"seccompProfile":{"type":"RuntimeDefault"},"supplementalGroups":[0]}` | pod-level security context. TYPO3 runs rootless as `www-data` (33) and listens on port 8080. The image expects the user to be a member of the root group (`supplementalGroups`), as `/var/www/html` belongs to it. |
+| podSecurityContext | object | see [values.yaml](./values.yaml) | pod-level security context. TYPO3 runs rootless as `www-data` (33) and listens on port 8080. The image expects the user to be a member of the root group (`supplementalGroups`), as `/var/www/html` belongs to it. |
 | readinessProbe.failureThreshold | int | `3` | Failure threshold for readinessProbe |
 | readinessProbe.httpGet.path | string | `"/typo3/"` | Path for readinessProbe |
 | readinessProbe.initialDelaySeconds | int | `0` | Initial delay seconds for readinessProbe |
@@ -197,7 +197,7 @@ Instead of `externalDatabase.existingSecret` you can set `externalDatabase.passw
 | route.main.matches | list | see [values.yaml](./values.yaml) | define conditions used for matching the rule against incoming HTTP requests. |
 | route.main.parentRefs | list | `[]` | Parent references (Gateway) |
 | route.main.timeouts | object | `{}` | defines the timeouts that can be configured for an HTTP request |
-| securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]}}` | container-level security context |
+| securityContext | object | see [values.yaml](./values.yaml) | container-level security context |
 | service.port | int | `8080` | Kubernetes port where service is exposed |
 | service.type | string | `"ClusterIP"` | Kubernetes service type |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |

@@ -61,6 +61,12 @@
       }
     },
     {
+      "description": "crinis/typo3 prefixes its tags with the image variant (legacy-13.4.34), which docker versioning does not support",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["docker.io/crinis/typo3"],
+      "versioning": "regex:^(?:(?<compatibility>legacy)-)?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
       "automergeType": "pr",

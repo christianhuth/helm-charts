@@ -11,7 +11,7 @@ image:
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag
-  tag: "legacy-13.4"
+  tag: "legacy-13.4.34"
 
 # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
 imagePullSecrets: []
@@ -35,6 +35,7 @@ serviceAccount:
 podAnnotations: {} # +doc-gen:ignore
 
 # -- pod-level security context. TYPO3 runs rootless as `www-data` (33) and listens on port 8080. The image expects the user to be a member of the root group (`supplementalGroups`), as `/var/www/html` belongs to it.
+# @default -- see [values.yaml](./values.yaml)
 podSecurityContext:
   runAsNonRoot: true
   runAsUser: 33
@@ -46,6 +47,7 @@ podSecurityContext:
     type: RuntimeDefault
 
 # -- container-level security context
+# @default -- see [values.yaml](./values.yaml)
 securityContext:
   allowPrivilegeEscalation: false
   capabilities:
