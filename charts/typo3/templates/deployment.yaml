@@ -34,6 +34,61 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      initContainers:
+        # Prepares the public directory, which is an emptyDir apart from the persisted fileadmin and typo3conf:
+        # restores the .htaccess file of TYPO3 and updates the database connection in settings.php from the chart
+        # values. The image can update the latter itself (MODIFY_CONFIGURATION), but it needs a working connection
+        # with the old settings to change them.
+        - name: prepare
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - php
+            - -r
+            - |
+              $public = '/var/www/html/public';
+              if (!is_file("$public/.htaccess")) {
+                  copy('/typo3/typo3_src-' . getenv('TYPO3_VERSION') . '/typo3/sysext/install/Resources/Private/FolderStructureTemplateFiles/root-htaccess', "$public/.htaccess");
+              }
+              {{- if .Values.typo3.modifyConfiguration }}
+              $file = "$public/typo3conf/system/settings.php";
+              if (!is_file($file)) {
+                  exit(0);
+              }
+              $settings = require $file;
+              $connection = $settings['DB']['Connections']['Default'] ?? [];
+              $desired = [
+                  'host' => getenv('TYPO3_DB_HOST'),
+                  'port' => (int) getenv('TYPO3_DB_PORT'),
+                  'dbname' => getenv('TYPO3_DBNAME'),
+                  'user' => getenv('TYPO3_DB_USERNAME'),
+                  'password' => getenv('TYPO3_DB_PASSWORD'),
+              ];
+              $current = array_intersect_key($connection, $desired);
+              ksort($current);
+              ksort($desired);
+              if ($current === $desired) {
+                  exit(0);
+              }
+              echo "Updating the database connection in $file.\n";
+              $settings['DB']['Connections']['Default'] = array_merge($connection, $desired);
+              file_put_contents("$file.tmp", "<?php\nreturn " . var_export($settings, true) . ";\n");
+              rename("$file.tmp", $file);
+              {{- end }}
+          {{- if .Values.typo3.modifyConfiguration }}
+          env:
+            {{- include "typo3.databaseEnv" . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            {{- include "typo3.volumeMounts" . | nindent 12 }}
       containers:
         - name: {{ .Chart.Name }}
           {{- with .Values.securityContext }}
@@ -42,25 +97,89 @@ spec:
           {{- end }}
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            # TYPO3 Settings
+            - name: TYPO3_CONTEXT
+              value: {{ .Values.typo3.context | quote }}
+            - name: TYPO3_PROJECT_NAME
+              value: {{ .Values.typo3.projectName | quote }}
+            - name: SETUP_TYPO3
+              value: {{ .Values.typo3.setup.enabled | quote }}
+            {{- with .Values.typo3.setup.createSite }}
+            - name: TYPO3_SETUP_CREATE_SITE
+              value: {{ . | quote }}
+            {{- end }}
+            - name: TYPO3_SETUP_ADMIN_USERNAME
+              value: {{ .Values.typo3.admin.username | quote }}
+            - name: TYPO3_SETUP_ADMIN_EMAIL
+              value: {{ .Values.typo3.admin.email | quote }}
+            - name: TYPO3_SETUP_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "typo3.admin.secretName" . | quote }}
+                  key: {{ include "typo3.admin.passwordKey" . | quote }}
+            # the database connection is updated by the init container prepare instead
+            - name: MODIFY_CONFIGURATION
+              value: "false"
+            - name: SETUP_EXTENSIONS
+              value: {{ .Values.typo3.setupExtensions | quote }}
+            - name: FIX_FILE_PERMISSIONS
+              value: {{ .Values.typo3.fixFilePermissions | quote }}
+            # Database Settings
+            {{- include "typo3.databaseEnv" . | nindent 12 }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
+          livenessProbe:
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
+            httpGet:
+              path: {{ .Values.livenessProbe.httpGet.path | quote }}
+              port: http
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | int }}
+          readinessProbe:
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold | int }}
+            httpGet:
+              path: {{ .Values.readinessProbe.httpGet.path | quote }}
+              port: http
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | int }}
+          startupProbe:
+            failureThreshold: {{ .Values.startupProbe.failureThreshold | int }}
+            httpGet:
+              path: {{ .Values.startupProbe.httpGet.path | quote }}
+              port: http
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds | int }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds | int }}
+            successThreshold: {{ .Values.startupProbe.successThreshold | int }}
+            timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds | int }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if or (.Values.persistence.fileadmin.enabled) (.Values.persistence.typo3conf.enabled) }}
           volumeMounts:
-          {{- if .Values.persistence.fileadmin.enabled }}
-            - name: fileadmin
-              mountPath: /var/www/html/fileadmin
+            {{- include "typo3.volumeMounts" . | nindent 12 }}
+        {{- if .Values.typo3.scheduler.enabled }}
+        - name: scheduler
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if .Values.persistence.typo3conf.enabled }}
-            - name: typo3conf
-              mountPath: /var/www/html/typo3conf
-          {{- end }}
-          {{- end }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # runs the TYPO3 scheduler every five minutes, see /typo3/crontab in the image
+          command: ["/usr/local/bin/supercronic", "/typo3/crontab"]
+          env:
+            - name: TYPO3_CONTEXT
+              value: {{ .Values.typo3.context | quote }}
+          volumeMounts:
+            {{- include "typo3.volumeMounts" . | nindent 12 }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -73,8 +192,10 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if or (.Values.persistence.fileadmin.enabled) (.Values.persistence.typo3conf.enabled) }}
       volumes:
+        # public directory with the TYPO3 source links created on startup and typo3temp
+        - name: public
+          emptyDir: {}
         {{- if .Values.persistence.fileadmin.enabled }}
         - name: fileadmin
           persistentVolumeClaim:
@@ -85,4 +206,3 @@ spec:
           persistentVolumeClaim:
             claimName: {{ include "typo3.pvcName.typo3conf" . }}
         {{- end }}
-      {{- end }}

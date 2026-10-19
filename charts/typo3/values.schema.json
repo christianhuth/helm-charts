@@ -47,73 +47,57 @@
     },
     "externalDatabase": {
       "properties": {
-        "auth": {
-          "properties": {
-            "database": {
-              "default": "typo3",
-              "description": "Name of the database to use",
-              "title": "database",
-              "type": "string"
-            },
-            "existingSecret": {
-              "default": "",
-              "description": "Name of existing secret to use for database credentials",
-              "title": "existingSecret",
-              "type": "string"
-            },
-            "password": {
-              "default": "typo3",
-              "description": "Password to use",
-              "title": "password",
-              "type": "string"
-            },
-            "userPasswordKey": {
-              "default": "",
-              "description": "Key in the secret containing the password",
-              "title": "userPasswordKey",
-              "type": "string"
-            },
-            "username": {
-              "default": "typo3",
-              "description": "Name of the user to use",
-              "title": "username",
-              "type": "string"
-            }
-          },
-          "required": [
-            "database",
-            "existingSecret",
-            "password",
-            "username",
-            "userPasswordKey"
-          ],
-          "title": "auth",
-          "type": "object"
+        "database": {
+          "default": "typo3",
+          "description": "Name of the database to use",
+          "title": "database",
+          "type": "string"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Secret containing the password of the user",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "existingSecretPasswordKey": {
+          "default": "password",
+          "description": "Key in the existing Secret containing the password",
+          "title": "existingSecretPasswordKey",
+          "type": "string"
         },
         "hostname": {
           "default": "",
-          "description": "Hostname of the database",
+          "description": "Hostname of the external MariaDB or MySQL database. Used if `mariadb.enabled` is false.",
           "title": "hostname",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Password of the user. Ignored if `externalDatabase.existingSecret` is set.",
+          "title": "password",
           "type": "string"
         },
         "port": {
           "default": 3306,
-          "description": "Port used to connect to database",
+          "description": "Port of the external database",
           "title": "port",
           "type": "integer"
         },
-        "type": {
-          "default": "mysql",
-          "description": "Type of database",
-          "title": "type",
+        "username": {
+          "default": "typo3",
+          "description": "Name of the user to use",
+          "title": "username",
           "type": "string"
         }
       },
       "required": [
-        "auth",
         "hostname",
         "port",
-        "type"
+        "database",
+        "username",
+        "password",
+        "existingSecret",
+        "existingSecretPasswordKey"
       ],
       "title": "externalDatabase",
       "type": "object"
@@ -145,13 +129,13 @@
           "type": "string"
         },
         "repository": {
-          "default": "martinhelmich/typo3",
+          "default": "crinis/typo3",
           "description": "image repository",
           "title": "repository",
           "type": "string"
         },
         "tag": {
-          "default": "12.4",
+          "default": "legacy-13.4",
           "description": "Overrides the image tag",
           "title": "tag",
           "type": "string"
@@ -261,154 +245,200 @@
       "title": "ingress",
       "type": "object"
     },
-    "mariadb": {
+    "livenessProbe": {
       "properties": {
-        "auth": {
+        "failureThreshold": {
+          "default": 3,
+          "description": "Failure threshold for livenessProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "httpGet": {
           "properties": {
-            "database": {
-              "default": "typo3",
-              "description": "Name for a custom database to create",
-              "title": "database",
-              "type": "string"
-            },
-            "existingSecret": {
-              "default": "",
-              "description": "Name of existing secret to use for MariaDB credentials",
-              "title": "existingSecret",
-              "type": "string"
-            },
-            "password": {
-              "default": "typo3",
-              "description": "Password for the custom user to create. Ignored if mariadb.auth.existingSecret is provided",
-              "title": "password",
-              "type": "string"
-            },
-            "username": {
-              "default": "typo3",
-              "description": "Name for a custom user to create",
-              "title": "username",
+            "path": {
+              "default": "/typo3/",
+              "description": "Path for livenessProbe",
+              "title": "path",
               "type": "string"
             }
           },
           "required": [
-            "database",
-            "existingSecret",
-            "password",
-            "username"
+            "path"
           ],
-          "title": "auth",
+          "title": "httpGet",
           "type": "object"
         },
-        "enabled": {
-          "default": false,
-          "description": "enable MariaDB™ subchart from Bitnami",
-          "title": "enabled",
-          "type": "boolean"
+        "initialDelaySeconds": {
+          "default": 0,
+          "description": "Initial delay seconds for livenessProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
         },
-        "image": {
-          "properties": {
-            "repository": {
-              "default": "bitnamilegacy/mariadb",
-              "description": "image repository for MariaDB™ subchart from Bitnami",
-              "title": "repository",
-              "type": "string"
-            },
-            "tag": {
-              "default": "12.0.2-debian-12-r0",
-              "description": "image tag for MariaDB™ subchart from Bitnami",
-              "title": "tag",
-              "type": "string"
-            }
-          },
-          "required": [
-            "repository",
-            "tag"
-          ],
-          "title": "image",
-          "type": "object"
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for livenessProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for livenessProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 5,
+          "description": "Timeout seconds for livenessProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
         }
       },
       "required": [
-        "enabled",
-        "auth",
-        "image"
+        "failureThreshold",
+        "httpGet",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
       ],
-      "title": "mariadb",
+      "title": "livenessProbe",
       "type": "object"
     },
-    "mysql": {
+    "mariadb": {
       "properties": {
-        "auth": {
+        "enabled": {
+          "default": true,
+          "description": "Enable a MariaDB instance managed by the mariadb-operator. Requires the operator to be installed in the cluster (see README).",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "mariadb": {
           "properties": {
             "database": {
               "default": "typo3",
-              "description": "Name for a custom database to create",
+              "description": "Name of the database to create",
               "title": "database",
               "type": "string"
             },
-            "existingSecret": {
-              "default": "",
-              "description": "Name of existing secret to use for MySQL credentials",
-              "title": "existingSecret",
+            "galera": {
+              "properties": {
+                "enabled": {
+                  "default": true,
+                  "description": "Enable Galera to run multiple instances",
+                  "title": "enabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled"
+              ],
+              "title": "galera",
+              "type": "object"
+            },
+            "image": {
+              "default": "mariadb:12.3",
+              "description": "MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.",
+              "title": "image",
               "type": "string"
             },
-            "password": {
-              "default": "typo3",
-              "description": "Password for the custom user to create. Ignored if mysql.auth.existingSecret is provided",
-              "title": "password",
+            "imagePullPolicy": {
+              "default": "Always",
+              "description": "Pull the image on every start to get the latest patch version of the release series",
+              "title": "imagePullPolicy",
               "type": "string"
+            },
+            "passwordSecretKeyRef": {
+              "properties": {
+                "generate": {
+                  "default": true,
+                  "description": "Let the operator generate the Secret with a random password if it does not exist",
+                  "title": "generate",
+                  "type": "boolean"
+                },
+                "key": {
+                  "default": "password",
+                  "description": "Key of the password inside the Secret",
+                  "title": "key",
+                  "type": "string"
+                },
+                "name": {
+                  "default": "",
+                  "description": "Name of an existing Secret containing the password of the user. If empty, the Secret `\u003crelease\u003e-mariadb-password` is used.",
+                  "title": "name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "key",
+                "generate"
+              ],
+              "title": "passwordSecretKeyRef",
+              "type": "object"
+            },
+            "replicas": {
+              "default": 3,
+              "description": "Number of MariaDB instances. More than one instance requires Galera or replication.",
+              "title": "replicas",
+              "type": "integer"
+            },
+            "storage": {
+              "properties": {
+                "size": {
+                  "default": "8Gi",
+                  "description": "Size of the PVC of each instance",
+                  "title": "size",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "size"
+              ],
+              "title": "storage",
+              "type": "object"
+            },
+            "updateStrategy": {
+              "properties": {
+                "mariadbAutoUpgradeEnabled": {
+                  "default": true,
+                  "description": "Run `mariadb-upgrade` on start, so that changing the release series in `image` migrates the system schema. It is a no-op if there is nothing to migrate.",
+                  "title": "mariadbAutoUpgradeEnabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "mariadbAutoUpgradeEnabled"
+              ],
+              "title": "updateStrategy",
+              "type": "object"
             },
             "username": {
               "default": "typo3",
-              "description": "Name for a custom user to create",
+              "description": "Name of the user to create",
               "title": "username",
               "type": "string"
             }
           },
           "required": [
+            "image",
+            "imagePullPolicy",
+            "updateStrategy",
+            "replicas",
+            "galera",
             "database",
-            "existingSecret",
-            "password",
-            "username"
+            "username",
+            "passwordSecretKeyRef",
+            "storage"
           ],
-          "title": "auth",
-          "type": "object"
-        },
-        "enabled": {
-          "default": true,
-          "description": "enable MySQL™ subchart from Bitnami",
-          "title": "enabled",
-          "type": "boolean"
-        },
-        "image": {
-          "properties": {
-            "repository": {
-              "default": "bitnamilegacy/mysql",
-              "description": "image repository for MySQL™ subchart from Bitnami",
-              "title": "repository",
-              "type": "string"
-            },
-            "tag": {
-              "default": "9.4.0-debian-12-r1",
-              "description": "image tag for MySQL™ subchart from Bitnami",
-              "title": "tag",
-              "type": "string"
-            }
-          },
-          "required": [
-            "repository",
-            "tag"
-          ],
-          "title": "image",
+          "title": "mariadb",
           "type": "object"
         }
       },
       "required": [
         "enabled",
-        "auth",
-        "image"
+        "mariadb"
       ],
-      "title": "mysql",
+      "title": "mariadb",
       "type": "object"
     },
     "nameOverride": {
@@ -447,7 +477,7 @@
               "type": "object"
             },
             "enabled": {
-              "default": false,
+              "default": true,
               "description": "use a PVC to persist fileadmin data",
               "title": "enabled",
               "type": "boolean"
@@ -460,7 +490,25 @@
             },
             "resources": {
               "description": "represents the minimum and maximum resources the volume should have.",
-              "required": [],
+              "properties": {
+                "requests": {
+                  "properties": {
+                    "storage": {
+                      "default": "5Gi",
+                      "title": "storage",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "storage"
+                  ],
+                  "title": "requests",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "requests"
+              ],
               "title": "resources",
               "type": "object"
             },
@@ -504,7 +552,7 @@
               "type": "object"
             },
             "enabled": {
-              "default": false,
+              "default": true,
               "description": "use a PVC to persist typo3conf data",
               "title": "enabled",
               "type": "boolean"
@@ -517,7 +565,25 @@
             },
             "resources": {
               "description": "represents the minimum and maximum resources the volume should have.",
-              "required": [],
+              "properties": {
+                "requests": {
+                  "properties": {
+                    "storage": {
+                      "default": "1Gi",
+                      "title": "storage",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "storage"
+                  ],
+                  "title": "requests",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "requests"
+              ],
               "title": "resources",
               "type": "object"
             },
@@ -554,84 +620,123 @@
       "type": "object"
     },
     "podSecurityContext": {
-      "description": "pod-level security context",
-      "required": [],
-      "title": "podSecurityContext",
-      "type": "object"
-    },
-    "postgresql": {
+      "description": "pod-level security context. TYPO3 runs rootless as `www-data` (33) and listens on port 8080. The image expects the user to be a member of the root group (`supplementalGroups`), as `/var/www/html` belongs to it.",
       "properties": {
-        "auth": {
-          "properties": {
-            "database": {
-              "default": "typo3",
-              "description": "Name for a custom database to create",
-              "title": "database",
-              "type": "string"
-            },
-            "existingSecret": {
-              "default": "",
-              "description": "Name of existing secret to use for PostgreSQL credentials",
-              "title": "existingSecret",
-              "type": "string"
-            },
-            "password": {
-              "default": "typo3",
-              "description": "Password for the custom user to create. Ignored if postgresql.auth.existingSecret is provided",
-              "title": "password",
-              "type": "string"
-            },
-            "username": {
-              "default": "typo3",
-              "description": "Name for a custom user to create",
-              "title": "username",
-              "type": "string"
-            }
-          },
-          "required": [
-            "database",
-            "existingSecret",
-            "password",
-            "username"
-          ],
-          "title": "auth",
-          "type": "object"
+        "fsGroup": {
+          "default": 33,
+          "title": "fsGroup",
+          "type": "integer"
         },
-        "enabled": {
-          "default": false,
-          "description": "enable PostgreSQL™ subchart from Bitnami",
-          "title": "enabled",
+        "runAsGroup": {
+          "default": 33,
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "title": "runAsNonRoot",
           "type": "boolean"
         },
-        "image": {
+        "runAsUser": {
+          "default": 33,
+          "title": "runAsUser",
+          "type": "integer"
+        },
+        "seccompProfile": {
           "properties": {
-            "repository": {
-              "default": "bitnamilegacy/postgresql",
-              "description": "image repository for PostgreSQL™ subchart from Bitnami",
-              "title": "repository",
-              "type": "string"
-            },
-            "tag": {
-              "default": "17.6.0-debian-12-r4",
-              "description": "image tag for PostgreSQL™ subchart from Bitnami",
-              "title": "tag",
+            "type": {
+              "default": "RuntimeDefault",
+              "title": "type",
               "type": "string"
             }
           },
           "required": [
-            "repository",
-            "tag"
+            "type"
           ],
-          "title": "image",
+          "title": "seccompProfile",
           "type": "object"
+        },
+        "supplementalGroups": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "integer"
+              }
+            ],
+            "required": []
+          },
+          "title": "supplementalGroups",
+          "type": "array"
         }
       },
       "required": [
-        "enabled",
-        "auth",
-        "image"
+        "runAsNonRoot",
+        "runAsUser",
+        "runAsGroup",
+        "fsGroup",
+        "supplementalGroups",
+        "seccompProfile"
       ],
-      "title": "postgresql",
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "readinessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "default": 3,
+          "description": "Failure threshold for readinessProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/typo3/",
+              "description": "Path for readinessProbe",
+              "title": "path",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        },
+        "initialDelaySeconds": {
+          "default": 0,
+          "description": "Initial delay seconds for readinessProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for readinessProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for readinessProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 5,
+          "description": "Timeout seconds for readinessProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "failureThreshold",
+        "httpGet",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "readinessProbe",
       "type": "object"
     },
     "replicaCount": {
@@ -796,7 +901,38 @@
     },
     "securityContext": {
       "description": "container-level security context",
-      "required": [],
+      "properties": {
+        "allowPrivilegeEscalation": {
+          "default": false,
+          "title": "allowPrivilegeEscalation",
+          "type": "boolean"
+        },
+        "capabilities": {
+          "properties": {
+            "drop": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "title": "drop",
+              "type": "array"
+            }
+          },
+          "required": [
+            "drop"
+          ],
+          "title": "capabilities",
+          "type": "object"
+        }
+      },
+      "required": [
+        "allowPrivilegeEscalation",
+        "capabilities"
+      ],
       "title": "securityContext",
       "type": "object"
     },
@@ -851,6 +987,66 @@
       "title": "serviceAccount",
       "type": "object"
     },
+    "startupProbe": {
+      "description": "Apache only starts after the initial setup (or upgrade) of TYPO3 is done, which may take several minutes",
+      "properties": {
+        "failureThreshold": {
+          "default": 60,
+          "description": "Failure threshold for startupProbe",
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "httpGet": {
+          "properties": {
+            "path": {
+              "default": "/typo3/",
+              "description": "Path for startupProbe",
+              "title": "path",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        },
+        "initialDelaySeconds": {
+          "default": 10,
+          "description": "Initial delay seconds for startupProbe",
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "description": "Period seconds for startupProbe",
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "default": 1,
+          "description": "Success threshold for startupProbe",
+          "title": "successThreshold",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 5,
+          "description": "Timeout seconds for startupProbe",
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "failureThreshold",
+        "httpGet",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "successThreshold",
+        "timeoutSeconds"
+      ],
+      "title": "startupProbe",
+      "type": "object"
+    },
     "tolerations": {
       "description": "Toleration labels for pod assignment",
       "items": {
@@ -858,6 +1054,132 @@
       },
       "title": "tolerations",
       "type": "array"
+    },
+    "typo3": {
+      "properties": {
+        "admin": {
+          "properties": {
+            "email": {
+              "default": "admin@example.com",
+              "description": "Email address of the admin user created during the initial setup",
+              "title": "email",
+              "type": "string"
+            },
+            "existingSecret": {
+              "default": "",
+              "description": "Name of an existing Secret containing the password of the admin user",
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "existingSecretPasswordKey": {
+              "default": "password",
+              "description": "Key in the existing Secret containing the password",
+              "title": "existingSecretPasswordKey",
+              "type": "string"
+            },
+            "password": {
+              "default": "",
+              "description": "Password of the admin user. It has to satisfy the password policy of TYPO3 (at least 8 characters with upper and lower case letters, a digit and a special character). A random password is generated if empty. Ignored if `typo3.admin.existingSecret` is set.",
+              "title": "password",
+              "type": "string"
+            },
+            "username": {
+              "default": "admin",
+              "description": "Username of the admin user created during the initial setup",
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [
+            "username",
+            "email",
+            "password",
+            "existingSecret",
+            "existingSecretPasswordKey"
+          ],
+          "title": "admin",
+          "type": "object"
+        },
+        "context": {
+          "default": "Production",
+          "description": "TYPO3 context, `Production` or `Development`",
+          "title": "context",
+          "type": "string"
+        },
+        "fixFilePermissions": {
+          "default": true,
+          "description": "Set sensible file permissions below `/var/www/html` on every start (`FIX_FILE_PERMISSIONS`). Can take a while with many files.",
+          "title": "fixFilePermissions",
+          "type": "boolean"
+        },
+        "modifyConfiguration": {
+          "default": true,
+          "description": "Update the database connection in `typo3conf/system/settings.php` from the chart values on every start (init container `prepare`)",
+          "title": "modifyConfiguration",
+          "type": "boolean"
+        },
+        "projectName": {
+          "default": "New TYPO3 Project",
+          "description": "Name of the TYPO3 project. Only used for the initial setup.",
+          "title": "projectName",
+          "type": "string"
+        },
+        "scheduler": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "Run the TYPO3 scheduler every five minutes in a sidecar container",
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "title": "scheduler",
+          "type": "object"
+        },
+        "setup": {
+          "properties": {
+            "createSite": {
+              "default": "",
+              "description": "URL of a site to create during the initial setup, e.g. `https://www.example.com/`. No site is created if empty.",
+              "title": "createSite",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Set up TYPO3 on the first start, i.e. if `typo3conf/system/settings.php` does not exist yet (`SETUP_TYPO3`)",
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled",
+            "createSite"
+          ],
+          "title": "setup",
+          "type": "object"
+        },
+        "setupExtensions": {
+          "default": false,
+          "description": "Set up extensions on every start, e.g. apply database schema changes (`SETUP_EXTENSIONS`)",
+          "title": "setupExtensions",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "context",
+        "projectName",
+        "setup",
+        "admin",
+        "modifyConfiguration",
+        "setupExtensions",
+        "fixFilePermissions",
+        "scheduler"
+      ],
+      "title": "typo3",
+      "type": "object"
     }
   },
   "required": [
@@ -875,15 +1197,17 @@
     "ingress",
     "route",
     "resources",
+    "livenessProbe",
+    "readinessProbe",
+    "startupProbe",
     "autoscaling",
     "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",
     "persistence",
-    "mysql",
+    "typo3",
     "mariadb",
-    "postgresql",
     "externalDatabase"
   ],
   "type": "object"
