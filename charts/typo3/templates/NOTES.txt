@@ -24,3 +24,7 @@
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
 {{- end }}
+
+2. Log in to the TYPO3 backend at /typo3/ with the admin user created during the initial setup:
+  Username: {{ .Values.typo3.admin.username }}
+  Password: kubectl get secret --namespace {{ .Release.Namespace }} {{ include "typo3.admin.secretName" . }} -o jsonpath="{.data.{{ include "typo3.admin.passwordKey" . }}}" | base64 -d

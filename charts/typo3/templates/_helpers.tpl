@@ -62,111 +62,24 @@ Create the name of the service account to use
 {{- end }}
 
 {{/*
-Return the hostname of the database to use
+Get the name of the Secret containing the password of the admin user
 */}}
-{{- define "typo3.database.hostname" -}}
-  {{- if .Values.mysql.enabled -}}
-    {{- printf "%s" (include "mysql.primary.fullname" .Subcharts.mysql) -}}
-  {{- else if .Values.mariadb.enabled -}}
-    {{- printf "%s" (include "mariadb.primary.fullname" .Subcharts.mariadb) -}}
-  {{- else if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.v1.primary.fullname" .Subcharts.postgresql) -}}
+{{- define "typo3.admin.secretName" -}}
+  {{- if .Values.typo3.admin.existingSecret -}}
+    {{- tpl .Values.typo3.admin.existingSecret $ -}}
   {{- else -}}
-    {{- printf "%s" (tpl .Values.externalDatabase.hostname $) -}}
+    {{- printf "%s-admin" (include "typo3.fullname" .) -}}
   {{- end -}}
 {{- end -}}
 
 {{/*
-Return database service port
+Get the key of the password of the admin user inside its Secret
 */}}
-{{- define "typo3.database.port" -}}
-  {{- if .Values.mysql.enabled -}}
-    {{- printf "%s" (tpl (toString .Values.mysql.primary.service.ports.mysql) $) -}}
-  {{- else if .Values.mariadb.enabled -}}
-    {{- printf "%s" (tpl (toString .Values.mariadb.primary.service.ports.mysql) $) -}}
-  {{- else if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.v1.service.port" .Subcharts.postgresql) -}}
-  {{- else -}}
-    {{- printf "%s" (tpl (toString .Values.externalDatabase.port) $) -}}
-  {{- end -}}
-{{- end -}}
-
-{{/*
-Return the name for the database to use
-*/}}
-{{- define "typo3.database.database" -}}
-  {{- if .Values.mysql.enabled -}}
-    {{- printf "%s" (tpl .Values.mysql.auth.database $) -}}
-  {{- else if .Values.mariadb.enabled -}}
-    {{- printf "%s" (tpl .Values.mariadb.auth.database $) -}}
-  {{- else if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.v1.database" .Subcharts.postgresql) -}}
-  {{- else -}}
-    {{- printf "%s" (tpl .Values.externalDatabase.auth.database $) -}}
-  {{- end -}}
-{{- end -}}
-
-{{/*
-Return the name for the user to use
-*/}}
-{{- define "typo3.database.username" -}}
-  {{- if .Values.mysql.enabled -}}
-    {{- printf "%s" (tpl .Values.mysql.auth.username $) -}}
-  {{- else if .Values.mariadb.enabled -}}
-    {{- printf "%s" (tpl .Values.mariadb.auth.username $) -}}
-  {{- else if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.v1.username" .Subcharts.postgresql) -}}
-  {{- else -}}
-    {{- printf "%s" (tpl .Values.externalDatabase.auth.username $) -}}
-  {{- end -}}
-{{- end -}}
-
-{{/*
-Get the name of the secret containing the database user password
-*/}}
-{{- define "typo3.database.secretName" -}}
-  {{- if .Values.mysql.enabled -}}
-    {{- printf "%s" (include "mysql.secretName" .Subcharts.mysql) -}}
-  {{- else if .Values.mariadb.enabled -}}
-    {{- printf "%s" (include "mariadb.secretName" .Subcharts.mariadb) -}}
-  {{- else if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.v1.secretName" .Subcharts.postgresql) -}}
-  {{- else if .Values.externalDatabase.auth.existingSecret -}}
-    {{- printf "%s" (tpl .Values.externalDatabase.auth.existingSecret $) -}}
-  {{- else -}}
-      {{- printf "%s" (include "typo3.fullname" .) -}}-database
-  {{- end -}}
-{{- end -}}
-
-{{/*
-Get the user-password key for the database password
-*/}}
-{{- define "typo3.database.userPasswordKey" -}}
-  {{- if .Values.mysql.enabled -}}
-    {{- "mysql-password" -}}
-  {{- else if .Values.mariadb.enabled -}}
-    {{- "mariadb-password" -}}
-  {{- else if .Values.postgresql.enabled -}}
-    {{- printf "%s" (include "postgresql.v1.userPasswordKey" .Subcharts.postgresql) -}}
-  {{- else if .Values.externalDatabase.auth.userPasswordKey -}}
-    {{- printf "%s" (tpl .Values.externalDatabase.auth.userPasswordKey $) -}}
+{{- define "typo3.admin.passwordKey" -}}
+  {{- if .Values.typo3.admin.existingSecret -}}
+    {{- .Values.typo3.admin.existingSecretPasswordKey | default "password" -}}
   {{- else -}}
     {{- "password" -}}
-  {{- end -}}
-{{- end -}}
-
-{{/*
-Get the type of the external database
-*/}}
-{{- define "typo3.database.type" -}}
-  {{- if .Values.mysql.enabled -}}
-    {{- "mysql" -}}
-  {{- else if .Values.mariadb.enabled -}}
-    {{- "mariadb" -}}
-  {{- else if .Values.postgresql.enabled -}}
-    {{- "postgresql" -}}
-  {{- else if .Values.externalDatabase.type -}}
-    {{- printf "%s" (tpl .Values.externalDatabase.type $) -}}
   {{- end -}}
 {{- end -}}
 
@@ -190,4 +103,41 @@ Get the name of the persistent volume claim for the typo3conf folder
   {{- else -}}
       {{- printf "%s" (include "typo3.fullname" .) -}}-typo3conf
   {{- end -}}
+{{- end -}}
+
+{{/*
+Volume mounts of the TYPO3 containers. The legacy image serves TYPO3 from /var/www/html/public.
+*/}}
+{{- define "typo3.volumeMounts" -}}
+- name: public
+  mountPath: /var/www/html/public
+{{- if .Values.persistence.fileadmin.enabled }}
+- name: fileadmin
+  mountPath: /var/www/html/public/fileadmin
+{{- end }}
+{{- if .Values.persistence.typo3conf.enabled }}
+- name: typo3conf
+  mountPath: /var/www/html/public/typo3conf
+{{- end }}
+{{- end -}}
+
+{{/*
+Environment variables with the database connection of the TYPO3 containers
+*/}}
+{{- define "typo3.databaseEnv" -}}
+- name: TYPO3_DB_DRIVER
+  value: pdoMysql
+- name: TYPO3_DB_HOST
+  value: {{ include "typo3.database.hostname" . | quote }}
+- name: TYPO3_DB_PORT
+  value: {{ include "typo3.database.port" . | quote }}
+- name: TYPO3_DBNAME
+  value: {{ include "typo3.database.database" . | quote }}
+- name: TYPO3_DB_USERNAME
+  value: {{ include "typo3.database.username" . | quote }}
+- name: TYPO3_DB_PASSWORD
+  valueFrom:
+    secretKeyRef:
+      name: {{ include "typo3.database.secretName" . | quote }}
+      key: {{ include "typo3.database.passwordKey" . | quote }}
 {{- end -}}

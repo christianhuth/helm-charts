@@ -1,0 +1,12 @@
+---
+mariadb:
+  mariadb:
+    replicas: 1
+    galera:
+      enabled: false
+
+typo3:
+  setup:
+    createSite: http://localhost/
+  scheduler:
+    enabled: true
