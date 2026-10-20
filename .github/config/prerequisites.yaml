@@ -1,14 +1,15 @@
 # Prerequisites of the charts in this repository, e.g. operators managing the custom resources rendered by a chart.
 #
 # A prerequisite applies to a chart if
-#   - the chart depends on the chart given in `dependency` (matched by name and repository in Chart.yaml), or
+#   - the chart depends on the chart given in `dependency` (matched by name and repository in Chart.yaml),
+#   - the chart is listed in `charts` (matched by name in Chart.yaml), or
 #   - `always` is true.
 #
 # For every chart, the applying prerequisites are used to
 #   - install `releases` (optional, in the given order) into the cluster before testing the chart: .github/scripts/install-prerequisites.sh
 #   - sync the shared named templates `template` from .github/templates/ into the chart: .github/scripts/sync-shared-templates.sh
 #
-# Releases are installed in their latest version.
+# Releases are installed in their latest version, configured with their optional `values`.
 prerequisites:
   - name: cloudnative-pg
     dependency:
@@ -49,3 +50,20 @@ prerequisites:
       name: rabbitmq
       repository: oci://registry-1.docker.io/cloudpirates
     template: _rabbitmq.tpl
+
+  - name: mongodb-kubernetes
+    # the chart rendering the MongoDBCommunity resource ships its own named templates
+    dependency:
+      name: mongodb-community
+      repository: https://charts.christianhuth.de
+    charts:
+      - mongodb-community
+    releases:
+      - release: mongodb-kubernetes
+        chart: mongodb-kubernetes
+        repository: https://mongodb.github.io/helm-charts
+        namespace: mongodb-operator
+        values:
+          operator:
+            # watch the namespaces of all charts instead of only the namespace of the operator
+            watchNamespace: "*"

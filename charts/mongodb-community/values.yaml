@@ -1,0 +1,60 @@
+# -- Provide a name in place of `mongodb-community`
+nameOverride: ""
+# -- String to fully override `"mongodb-community.fullname"`. It is the name of the MongoDBCommunity resource and of its replica set.
+fullnameOverride: ""
+
+# Spec of the MongoDBCommunity resource, rendered as is. All fields of the
+# [CRD](https://github.com/mongodb/mongodb-kubernetes/blob/master/helm_chart/crds/mongodbcommunity.mongodb.com_mongodbcommunity.yaml) are supported,
+# see the [documentation](https://github.com/mongodb/mongodb-kubernetes/tree/master/docs/mongodbcommunity) of the operator.
+mongodb:
+  # -- Type of the deployment. MongoDB Community only supports replica sets.
+  type: ReplicaSet
+  # -- Number of members of the replica set
+  members: 3
+  # -- MongoDB version. The operator requires the exact version and runs the image `quay.io/mongodb/mongodb-community-server:<version>-ubi8`.
+  version: "8.0.34"
+  security:
+    authentication:
+      # -- Authentication mechanisms. `SCRAM` enables SCRAM-SHA-256 and SCRAM-SHA-1, `X509` requires TLS.
+      modes:
+        - SCRAM
+  # -- Users of the database. If a user has no `passwordSecretRef`, the chart generates a password and stores it in the Secret `<fullname>-<name>-password` (key `password`). `scramCredentialsSecretName` defaults to `<fullname>-<name>`.
+  users: []
+    # - name: app
+    #   db: admin
+    #   roles:
+    #     - name: readWrite
+    #       db: app
+
+serviceAccount:
+  # -- Create the ServiceAccount, Role and RoleBinding for the database pods, which need access to their Secrets and Pods
+  create: true
+  # -- Name of the ServiceAccount. If empty, `<fullname>-database` is used if `serviceAccount.create` is true, otherwise the operator's default `mongodb-kubernetes-appdb`.
+  name: ""
+  # -- Annotations of the ServiceAccount
+  annotations: {}
+
+search:
+  # -- Deploy MongoDB Search (MongoDBSearch resource) for full-text and vector search. Adds the user `search-sync-source` used by the search nodes to the replica set.
+  enabled: false
+  # -- Spec of the MongoDBSearch resource, rendered as is. See the [CRD](https://github.com/mongodb/mongodb-kubernetes/blob/master/helm_chart/crds/mongodb.com_mongodbsearch.yaml) for all options.
+  # @default -- see [values.yaml](./values.yaml)
+  spec:
+    clusters:
+      # one search node (mongot); more require a load balancer
+      - replicas: 1
+
+serviceMonitor:
+  # -- Create a ServiceMonitor for the Prometheus Operator. Requires `mongodb.prometheus` to be configured.
+  enabled: false
+  # -- Additional labels of the ServiceMonitor, e.g. to match the `serviceMonitorSelector` of Prometheus
+  labels: {}
+  # -- Interval at which metrics are scraped
+  interval: 30s
+  # -- Timeout of a scrape
+  scrapeTimeout: 10s
+  # -- TLS configuration of the scrapes, used if `mongodb.prometheus.tlsSecretKeyRef` is set
+  tlsConfig: {}
+
+# -- Additional manifests to deploy. Strings are rendered with `tpl`.
+extraManifests: []

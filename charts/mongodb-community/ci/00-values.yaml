@@ -1,0 +1,9 @@
+---
+mongodb:
+  members: 1
+  users:
+    - name: app
+      db: admin
+      roles:
+        - name: readWrite
+          db: app

@@ -1,0 +1,232 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "extraManifests": {
+      "description": "Additional manifests to deploy. Strings are rendered with `tpl`.",
+      "items": {
+        "required": []
+      },
+      "title": "extraManifests",
+      "type": "array"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "String to fully override `\"mongodb-community.fullname\"`. It is the name of the MongoDBCommunity resource and of its replica set.",
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "mongodb": {
+      "description": "Spec of the MongoDBCommunity resource, rendered as is. All fields of the\n[CRD](https://github.com/mongodb/mongodb-kubernetes/blob/master/helm_chart/crds/mongodbcommunity.mongodb.com_mongodbcommunity.yaml) are supported,\nsee the [documentation](https://github.com/mongodb/mongodb-kubernetes/tree/master/docs/mongodbcommunity) of the operator.",
+      "properties": {
+        "members": {
+          "default": 3,
+          "description": "Number of members of the replica set",
+          "title": "members",
+          "type": "integer"
+        },
+        "security": {
+          "properties": {
+            "authentication": {
+              "properties": {
+                "modes": {
+                  "description": "Authentication mechanisms. `SCRAM` enables SCRAM-SHA-256 and SCRAM-SHA-1, `X509` requires TLS.",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "title": "modes",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "modes"
+              ],
+              "title": "authentication",
+              "type": "object"
+            }
+          },
+          "required": [
+            "authentication"
+          ],
+          "title": "security",
+          "type": "object"
+        },
+        "type": {
+          "default": "ReplicaSet",
+          "description": "Type of the deployment. MongoDB Community only supports replica sets.",
+          "title": "type",
+          "type": "string"
+        },
+        "users": {
+          "description": "Users of the database. If a user has no `passwordSecretRef`, the chart generates a password and stores it in the Secret `\u003cfullname\u003e-\u003cname\u003e-password` (key `password`). `scramCredentialsSecretName` defaults to `\u003cfullname\u003e-\u003cname\u003e`.",
+          "items": {
+            "required": []
+          },
+          "title": "users",
+          "type": "array"
+        },
+        "version": {
+          "default": "8.0.34",
+          "description": "MongoDB version. The operator requires the exact version and runs the image `quay.io/mongodb/mongodb-community-server:\u003cversion\u003e-ubi8`.",
+          "title": "version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "members",
+        "version",
+        "security",
+        "users"
+      ],
+      "title": "mongodb",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Provide a name in place of `mongodb-community`",
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "search": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Deploy MongoDB Search (MongoDBSearch resource) for full-text and vector search. Adds the user `search-sync-source` used by the search nodes to the replica set.",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "spec": {
+          "description": "Spec of the MongoDBSearch resource, rendered as is. See the [CRD](https://github.com/mongodb/mongodb-kubernetes/blob/master/helm_chart/crds/mongodb.com_mongodbsearch.yaml) for all options.",
+          "properties": {
+            "clusters": {
+              "items": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "replicas": {
+                        "default": 1,
+                        "title": "replicas",
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "replicas"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "required": []
+              },
+              "title": "clusters",
+              "type": "array"
+            }
+          },
+          "required": [
+            "clusters"
+          ],
+          "title": "spec",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "spec"
+      ],
+      "title": "search",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Annotations of the ServiceAccount",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "description": "Create the ServiceAccount, Role and RoleBinding for the database pods, which need access to their Secrets and Pods",
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "Name of the ServiceAccount. If empty, `\u003cfullname\u003e-database` is used if `serviceAccount.create` is true, otherwise the operator's default `mongodb-kubernetes-appdb`.",
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "name",
+        "annotations"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "serviceMonitor": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Create a ServiceMonitor for the Prometheus Operator. Requires `mongodb.prometheus` to be configured.",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "interval": {
+          "default": "30s",
+          "description": "Interval at which metrics are scraped",
+          "title": "interval",
+          "type": "string"
+        },
+        "labels": {
+          "description": "Additional labels of the ServiceMonitor, e.g. to match the `serviceMonitorSelector` of Prometheus",
+          "required": [],
+          "title": "labels",
+          "type": "object"
+        },
+        "scrapeTimeout": {
+          "default": "10s",
+          "description": "Timeout of a scrape",
+          "title": "scrapeTimeout",
+          "type": "string"
+        },
+        "tlsConfig": {
+          "description": "TLS configuration of the scrapes, used if `mongodb.prometheus.tlsSecretKeyRef` is set",
+          "required": [],
+          "title": "tlsConfig",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "labels",
+        "interval",
+        "scrapeTimeout",
+        "tlsConfig"
+      ],
+      "title": "serviceMonitor",
+      "type": "object"
+    }
+  },
+  "required": [
+    "nameOverride",
+    "fullnameOverride",
+    "mongodb",
+    "serviceAccount",
+    "search",
+    "serviceMonitor",
+    "extraManifests"
+  ],
+  "type": "object"
+}

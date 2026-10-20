@@ -1,0 +1,51 @@
+{{- /* connects to the replica set with the connection string of the first user, once the operator created it */}}
+{{- with (include "mongodb-community.users" . | fromYamlArray) }}
+{{- $user := first . }}
+{{- $tls := dig "security" "tls" dict $.Values.mongodb }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "mongodb-community.fullname" $ }}-test-connection
+  labels:
+    {{- include "mongodb-community.labels" $ | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  restartPolicy: Never
+  containers:
+    - name: mongosh
+      image: "quay.io/mongodb/mongodb-community-server:{{ $.Values.mongodb.version }}-ubi8"
+      command:
+        - sh
+        - -c
+        - |
+          for i in $(seq 1 60); do
+            mongosh --quiet "${CONNECTION_STRING}" {{ if $tls.enabled }}--tlsCAFile /ca/ca.crt {{ end }}--eval 'db.runCommand({ ping: 1 }).ok' && exit 0
+            sleep 10
+          done
+          exit 1
+      env:
+        - name: HOME
+          value: /tmp
+        - name: CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "mongodb-community.userConnectionStringSecretName" (dict "context" $ "user" $user.name) }}
+              key: connectionString.standard
+      {{- if $tls.enabled }}
+      volumeMounts:
+        - name: ca
+          mountPath: /ca
+          readOnly: true
+  volumes:
+    - name: ca
+      {{- if $tls.caConfigMapRef }}
+      configMap:
+        name: {{ $tls.caConfigMapRef.name }}
+      {{- else }}
+      secret:
+        secretName: {{ dig "caCertificateSecretRef" "name" "" $tls }}
+      {{- end }}
+      {{- end }}
+{{- end }}
