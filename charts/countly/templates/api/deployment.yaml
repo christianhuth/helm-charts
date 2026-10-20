@@ -30,6 +30,10 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.mongodb.enabled }}
+      initContainers:
+        {{- include "countly.mongodb.waitInitContainer" (dict "context" . "component" .Values.api) | nindent 8 }}
+      {{- end }}
       containers:
         - name: {{ include "countly.api.name" . }}
           image: "{{ .Values.api.image.registry }}/{{ .Values.api.image.repository }}:{{ .Values.api.image.tag | default .Chart.AppVersion }}"
@@ -42,8 +46,8 @@ spec:
               value: {{ .Values.config.api.filestorage | quote }}
             - name: COUNTLY_CONFIG_API_API_WORKERS
               value: {{ .Values.config.api.workerCount | quote }}
-            - name: COUNTLY_CONFIG__MONGODB
-              value: {{ (include "countly.mongodb.url" .) | quote }}
+            # MongoDB Settings
+            {{- include "countly.mongodb.env" . | nindent 12 }}
             {{- if .Values.ingress.enabled }}
             - name: COUNTLY_CONFIG_HOSTNAME
               value : {{ .Values.ingress.hostname | quote }}

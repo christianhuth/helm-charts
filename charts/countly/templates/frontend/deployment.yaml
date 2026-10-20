@@ -30,6 +30,10 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.mongodb.enabled }}
+      initContainers:
+        {{- include "countly.mongodb.waitInitContainer" (dict "context" . "component" .Values.frontend) | nindent 8 }}
+      {{- end }}
       containers:
         - name: {{ include "countly.frontend.name" . }}
           image: "{{ .Values.frontend.image.registry }}/{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}"
@@ -42,21 +46,21 @@ spec:
               value: {{ .Values.config.api.filestorage | quote }}
             - name: COUNTLY_CONFIG_API_API_WORKERS
               value: {{ .Values.config.api.workerCount | quote }}
-            - name: COUNTLY_CONFIG__MONGODB
-              value: {{ (include "countly.mongodb.url" .) | quote }}
+            # MongoDB Settings
+            {{- include "countly.mongodb.env" . | nindent 12 }}
             {{- if .Values.ingress.enabled }}
             - name: COUNTLY_CONFIG_HOSTNAME
               value : {{ .Values.ingress.hostname | quote }}
             {{- end }}
             - name: NODE_OPTIONS
               value: {{ .Values.config.nodeOptions | quote }}
-          {{- if or .Values.extraEnv .Values.api.extraEnv }}
+          {{- if or .Values.extraEnv .Values.frontend.extraEnv }}
             # Additional Settings
             {{- if .Values.extraEnv }}
               {{- .Values.extraEnv | toYaml | nindent 12 }}
             {{- end }}
-            {{- if .Values.api.extraEnv }}
-              {{- .Values.api.extraEnv | toYaml | nindent 12 }}
+            {{- if .Values.frontend.extraEnv }}
+              {{- .Values.frontend.extraEnv | toYaml | nindent 12 }}
             {{- end }}
           {{- end }}
           ports:
