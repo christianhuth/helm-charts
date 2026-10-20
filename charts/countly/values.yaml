@@ -383,27 +383,44 @@ ingress:
   #      - chart-example.local
 
 mongodb:
-  # -- enable MongoDB™ subchart from Bitnami
+  # -- Deploy a MongoDB replica set with the chart [mongodb-community](https://github.com/christianhuth/helm-charts/tree/main/charts/mongodb-community). Requires the MongoDB Controllers for Kubernetes (see README).
   enabled: true
-  # -- MongoDB™ architecture. Currently only standalone is supported by this Chart.
-  architecture: standalone
-  auth:
-    # -- Enable authentication
-    enabled: false
-    # -- Name for a custom database to create
-    database: countly
-    # @ignored this is only required for the Bitnami MongoDB Subchart
-    password: countly
-    # @ignored this is only required for the Bitnami MongoDB Subchart
-    username: countly
-  # -- Set to true to use a StatefulSet instead of a Deployment (only when `architecture=standalone`)
-  useStatefulSet: true
+  # Spec of the MongoDBCommunity resource, see the chart mongodb-community for all options
+  mongodb:
+    # -- Users of the replica set. Countly connects with the first user, which needs access to all databases of Countly.
+    # @default -- see [values.yaml](./values.yaml)
+    users:
+      - name: countly
+        db: admin
+        roles:
+          - name: readWrite
+            db: countly
+          - name: readWrite
+            db: countly_drill
+          - name: readWrite
+            db: countly_fs
+          - name: readWrite
+            db: countly_out
+          # list and stop long-running operations in the task manager of Countly
+          - name: clusterMonitor
+            db: admin
 
 externalMongodb:
-  auth:
-    # -- Name for a custom database to use
-    database: countly
-  # -- Hostname of the MongoDB database
+  # -- Hostname of the external MongoDB server or of a member of its replica set
   hostname: ""
-  # -- Port used to connect to MongoDB database
+  # -- Port of the external MongoDB server
   port: 27017
+  # -- Name of the replica set of the external MongoDB server, if any
+  replicaSet: ""
+  # -- Name of the database. Countly stores further data in the databases `countly_drill`, `countly_fs` and `countly_out`.
+  database: countly
+  # -- Username to connect with. Leave empty if the server does not require authentication.
+  username: ""
+  # -- Password of the user. Ignored if `externalMongodb.existingSecret` is set.
+  password: ""
+  # -- Name of an existing Secret containing the password of the user
+  existingSecret: ""
+  # -- Key in the existing Secret containing the password
+  existingSecretPasswordKey: password
+  # -- Additional options of the MongoDB driver, e.g. `authSource: admin` or `tls: true`
+  options: {}

@@ -6,18 +6,27 @@
 ```console
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
-helm install my-release christianhuth/baserow
+helm install my-release christianhuth/countly
 ```
 
 ## Introduction
 
-Baserow is an open source no-code database and Airtable alternative.
-
-This chart bootstraps [Baserow](https://gitlab.com/bramw/baserow) on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart bootstraps the product analytics platform [Countly](https://github.com/Countly/countly-server) with its API and frontend on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
 
-- Kubernetes 1.19+
+- Kubernetes 1.26+
+- The [MongoDB Controllers for Kubernetes](https://github.com/mongodb/mongodb-kubernetes) if the bundled MongoDB is used (`mongodb.enabled: true`, the default)
+
+### Installing the MongoDB Controllers for Kubernetes
+
+The chart bundles MongoDB as a replica set managed by the operator (via the chart [mongodb-community](https://github.com/christianhuth/helm-charts/tree/main/charts/mongodb-community)). The operator itself is not part of this chart, as it is installed once per Kubernetes cluster. By default it only watches its own namespace, so set `operator.watchNamespace` to `*` or to a comma-separated list of namespaces:
+
+```console
+helm repo add mongodb https://mongodb.github.io/helm-charts
+helm repo update
+helm upgrade --install mongodb-kubernetes mongodb/mongodb-kubernetes --namespace mongodb-operator --create-namespace --set operator.watchNamespace="*" --wait
+```
 
 ## Installing the Chart
 
@@ -26,10 +35,10 @@ To install the chart with the release name `my-release`:
 ```console
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
-helm install my-release christianhuth/baserow
+helm install my-release christianhuth/countly
 ```
 
-These commands deploys Baserow on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
+These commands deploy Countly on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation. On the first visit of the frontend, Countly asks to create the first admin user.
 
 > **Tip**: List all releases using `helm list`
 
@@ -43,6 +52,56 @@ helm uninstall my-release
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
+## Configuring MongoDB
+
+Countly stores its data in the databases `countly`, `countly_drill`, `countly_fs` and `countly_out`.
+
+### Bundled Replica Set
+
+`mongodb.mongodb` is the spec of the `MongoDBCommunity` resource, see the chart [mongodb-community](https://github.com/christianhuth/helm-charts/tree/main/charts/mongodb-community) for all options. Countly connects with the first user in `mongodb.mongodb.users`, whose password is generated if it has no `passwordSecretRef`. To use an existing Secret instead, repeat the user with the reference:
+
+```console
+kubectl create secret generic countly-mongodb --from-literal=password='<password>'
+```
+
+```yaml
+mongodb:
+  mongodb:
+    users:
+      - name: countly
+        db: admin
+        passwordSecretRef:
+          name: countly-mongodb
+          key: password
+        roles:
+          - {name: readWrite, db: countly}
+          - {name: readWrite, db: countly_drill}
+          - {name: readWrite, db: countly_fs}
+          - {name: readWrite, db: countly_out}
+          - {name: clusterMonitor, db: admin}
+```
+
+By default the replica set has 3 members.
+
+### External MongoDB
+
+```yaml
+mongodb:
+  enabled: false
+
+externalMongodb:
+  hostname: mongodb.example.com
+  port: 27017
+  replicaSet: rs0
+  username: countly
+  existingSecret: countly-mongodb
+  existingSecretPasswordKey: password
+  options:
+    authSource: admin
+```
+
+Instead of `externalMongodb.existingSecret` you can set `externalMongodb.password`, which lets the chart create the Secret. Without `externalMongodb.username`, Countly connects without authentication.
+
 {{ template "chart.valuesSection" . }}
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
@@ -50,10 +109,50 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianhuth/baserow
+helm install my-release -f values.yaml christianhuth/countly
 ```
 
 ## Upgrading the Chart
+
+### To 6.0.0
+
+This major replaces the Bitnami MongoDB subchart with a replica set managed by the [MongoDB Controllers for Kubernetes](https://github.com/mongodb/mongodb-kubernetes) (chart [mongodb-community](https://github.com/christianhuth/helm-charts/tree/main/charts/mongodb-community)). Install the operator first (see [Prerequisites](#prerequisites)). The values changed as follows:
+
+- `mongodb.*` is replaced by the values of the chart mongodb-community, `mongodb.mongodb` is the spec of the `MongoDBCommunity` resource. `mongodb.architecture`, `mongodb.auth.*` and `mongodb.useStatefulSet` are removed.
+- the bundled MongoDB requires authentication. Countly connects with the first user in `mongodb.mongodb.users`, whose password is generated (see [Bundled Replica Set](#bundled-replica-set))
+- `externalMongodb.auth.database` moved to `externalMongodb.database`. Authentication (`externalMongodb.username`, `password`, `existingSecret`, `existingSecretPasswordKey`), `externalMongodb.replicaSet` and further driver options (`externalMongodb.options`) can be configured.
+- `frontend.extraEnv` is applied to the frontend, which previously received `api.extraEnv`
+
+The upgrade creates a new, empty replica set. The Bitnami StatefulSet is removed, but its PersistentVolumeClaim `datadir-<release>-mongodb-0` is kept. To take your data along:
+
+1. Dump the databases before upgrading (with `mongodb.useStatefulSet: false`, use `deploy/<release>-mongodb` instead of `<release>-mongodb-0`):
+
+   ```console
+   kubectl exec <release>-mongodb-0 -- mongodump --archive --gzip > countly.archive.gz
+   ```
+
+2. Upgrade the chart with Countly scaled down, so it does not initialize the new databases. Then wait until the replica set is running:
+
+   ```console
+   helm upgrade <release> christianhuth/countly --version 6.0.0 -f values.yaml --set api.replicaCount=0 --set frontend.replicaCount=0 --wait
+   kubectl wait --for=jsonpath='{.status.phase}'=Running mongodbcommunity/<release>-mongodb --timeout=10m
+   ```
+
+3. Restore the databases of Countly with its user. Use the Secret from its `passwordSecretRef` or the generated `<release>-mongodb-countly-password`:
+
+   ```console
+   PASSWORD=$(kubectl get secret <release>-mongodb-countly-password -o jsonpath='{.data.password}' | base64 -d)
+   kubectl exec -i <release>-mongodb-0 -c mongod -- mongorestore --archive --gzip --host <release>-mongodb/<release>-mongodb-svc:27017 \
+     --username countly --password "$PASSWORD" --authenticationDatabase admin --nsInclude='countly*.*' < countly.archive.gz
+   ```
+
+4. Scale Countly up again:
+
+   ```console
+   helm upgrade <release> christianhuth/countly --version 6.0.0 -f values.yaml --wait
+   ```
+
+5. Once everything works, delete the old PersistentVolumeClaim `datadir-<release>-mongodb-0`.
 
 ### To 5.0.0
 

@@ -2,7 +2,7 @@ apiVersion: v2
 name: countly
 description: Countly is a product analytics platform that helps teams track, analyze and act-on their user actions and behaviour on mobile, web and desktop applications.
 type: application
-version: 5.3.3
+version: 6.0.0
 appVersion: "25.05.4"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/countly/icon.svg
@@ -13,14 +13,21 @@ sources:
   - https://github.com/Countly/countly-server
   - https://countly.com/
 dependencies:
-  - name: mongodb
-    repository: oci://registry-1.docker.io/bitnamicharts
-    version: 19.3.3
+  - name: mongodb-community
+    alias: mongodb
+    repository: https://charts.christianhuth.de
+    version: 1.0.0
     condition: mongodb.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of mongodb to 19.3.3
+      description: "BREAKING: replaced the Bitnami MongoDB subchart with a replica set managed by the MongoDB Controllers for Kubernetes (chart mongodb-community). The database now requires authentication. See the upgrade notes in the README."
+    - kind: changed
+      description: "BREAKING: restructured externalMongodb (auth.database moved to database) and added authentication, replica set and driver options"
+    - kind: added
+      description: init container wait-for-mongodb, which lets the api and frontend wait for the bundled replica set instead of restarting
+    - kind: fixed
+      description: frontend.extraEnv is applied to the frontend instead of api.extraEnv
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

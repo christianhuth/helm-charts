@@ -705,38 +705,71 @@
     },
     "externalMongodb": {
       "properties": {
-        "auth": {
-          "properties": {
-            "database": {
-              "default": "countly",
-              "description": "Name for a custom database to use",
-              "title": "database",
-              "type": "string"
-            }
-          },
-          "required": [
-            "database"
-          ],
-          "title": "auth",
-          "type": "object"
+        "database": {
+          "default": "countly",
+          "description": "Name of the database. Countly stores further data in the databases `countly_drill`, `countly_fs` and `countly_out`.",
+          "title": "database",
+          "type": "string"
+        },
+        "existingSecret": {
+          "default": "",
+          "description": "Name of an existing Secret containing the password of the user",
+          "title": "existingSecret",
+          "type": "string"
+        },
+        "existingSecretPasswordKey": {
+          "default": "password",
+          "description": "Key in the existing Secret containing the password",
+          "title": "existingSecretPasswordKey",
+          "type": "string"
         },
         "hostname": {
           "default": "",
-          "description": "Hostname of the MongoDB database",
+          "description": "Hostname of the external MongoDB server or of a member of its replica set",
           "title": "hostname",
+          "type": "string"
+        },
+        "options": {
+          "description": "Additional options of the MongoDB driver, e.g. `authSource: admin` or `tls: true`",
+          "required": [],
+          "title": "options",
+          "type": "object"
+        },
+        "password": {
+          "default": "",
+          "description": "Password of the user. Ignored if `externalMongodb.existingSecret` is set.",
+          "title": "password",
           "type": "string"
         },
         "port": {
           "default": 27017,
-          "description": "Port used to connect to MongoDB database",
+          "description": "Port of the external MongoDB server",
           "title": "port",
           "type": "integer"
+        },
+        "replicaSet": {
+          "default": "",
+          "description": "Name of the replica set of the external MongoDB server, if any",
+          "title": "replicaSet",
+          "type": "string"
+        },
+        "username": {
+          "default": "",
+          "description": "Username to connect with. Leave empty if the server does not require authentication.",
+          "title": "username",
+          "type": "string"
         }
       },
       "required": [
-        "auth",
         "hostname",
-        "port"
+        "port",
+        "replicaSet",
+        "database",
+        "username",
+        "password",
+        "existingSecret",
+        "existingSecretPasswordKey",
+        "options"
       ],
       "title": "externalMongodb",
       "type": "object"
@@ -1358,64 +1391,160 @@
     },
     "mongodb": {
       "properties": {
-        "architecture": {
-          "default": "standalone",
-          "description": "MongoDB™ architecture. Currently only standalone is supported by this Chart.",
-          "title": "architecture",
-          "type": "string"
-        },
-        "auth": {
-          "properties": {
-            "database": {
-              "default": "countly",
-              "description": "Name for a custom database to create",
-              "title": "database",
-              "type": "string"
-            },
-            "enabled": {
-              "default": false,
-              "description": "Enable authentication",
-              "title": "enabled",
-              "type": "boolean"
-            },
-            "password": {
-              "default": "countly",
-              "title": "password",
-              "type": "string"
-            },
-            "username": {
-              "default": "countly",
-              "title": "username",
-              "type": "string"
-            }
-          },
-          "required": [
-            "enabled",
-            "database",
-            "password",
-            "username"
-          ],
-          "title": "auth",
-          "type": "object"
-        },
         "enabled": {
           "default": true,
-          "description": "enable MongoDB™ subchart from Bitnami",
+          "description": "Deploy a MongoDB replica set with the chart [mongodb-community](https://github.com/christianhuth/helm-charts/tree/main/charts/mongodb-community). Requires the MongoDB Controllers for Kubernetes (see README).",
           "title": "enabled",
           "type": "boolean"
         },
-        "useStatefulSet": {
-          "default": true,
-          "description": "Set to true to use a StatefulSet instead of a Deployment (only when `architecture=standalone`)",
-          "title": "useStatefulSet",
-          "type": "boolean"
+        "mongodb": {
+          "description": "Spec of the MongoDBCommunity resource, see the chart mongodb-community for all options",
+          "properties": {
+            "users": {
+              "description": "Users of the replica set. Countly connects with the first user, which needs access to all databases of Countly.",
+              "items": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "db": {
+                        "default": "admin",
+                        "title": "db",
+                        "type": "string"
+                      },
+                      "name": {
+                        "default": "countly",
+                        "title": "name",
+                        "type": "string"
+                      },
+                      "roles": {
+                        "items": {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "db": {
+                                  "default": "countly",
+                                  "title": "db",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "default": "readWrite",
+                                  "title": "name",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "db"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "properties": {
+                                "db": {
+                                  "default": "countly_drill",
+                                  "title": "db",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "default": "readWrite",
+                                  "title": "name",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "db"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "properties": {
+                                "db": {
+                                  "default": "countly_fs",
+                                  "title": "db",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "default": "readWrite",
+                                  "title": "name",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "db"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "properties": {
+                                "db": {
+                                  "default": "countly_out",
+                                  "title": "db",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "default": "readWrite",
+                                  "title": "name",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "db"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "properties": {
+                                "db": {
+                                  "default": "admin",
+                                  "title": "db",
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "default": "clusterMonitor",
+                                  "title": "name",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "db"
+                              ],
+                              "type": "object"
+                            }
+                          ],
+                          "required": []
+                        },
+                        "title": "roles",
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "db",
+                      "roles"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "required": []
+              },
+              "title": "users",
+              "type": "array"
+            }
+          },
+          "required": [
+            "users"
+          ],
+          "title": "mongodb",
+          "type": "object"
         }
       },
       "required": [
         "enabled",
-        "architecture",
-        "auth",
-        "useStatefulSet"
+        "mongodb"
       ],
       "title": "mongodb",
       "type": "object"

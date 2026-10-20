@@ -1,0 +1,4 @@
+---
+mongodb:
+  mongodb:
+    members: 1
