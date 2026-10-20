@@ -51484,6 +51484,47 @@ entries:
     urls:
     - https://github.com/christianhuth/helm-charts/releases/download/mcp-for-argocd-1.0.0/mcp-for-argocd-1.0.0.tgz
     version: 1.0.0
+  mongodb-community:
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
+        - kind: added
+          description: initial release of the chart for the MongoDBCommunity resource of the MongoDB Controllers for Kubernetes
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+        - name: MongoDBCommunity documentation
+          url: https://github.com/mongodb/mongodb-kubernetes/tree/master/docs/mongodbcommunity
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/mongodb-helm-charts/mongodb-kubernetes
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 8.0.34
+    created: "2026-10-20T07:24:52.106965004Z"
+    description: MongoDB Community replica sets managed by the MongoDB Controllers
+      for Kubernetes (mongodb-kubernetes)
+    digest: 044f94d715115ef0ddf95b37a2147ba5a1cd52acd88857fa411b82630a495c5c
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/mongodb-community/icon.svg
+    keywords:
+    - mongodb
+    - mongodb-kubernetes
+    - mongodbcommunity
+    - replicaset
+    - database
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: mongodb-community
+    sources:
+    - https://github.com/mongodb/mongodb-kubernetes
+    - https://github.com/mongodb/mongo
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/mongodb-community-1.0.0/mongodb-community-1.0.0.tgz
+    version: 1.0.0
   netbird-reverse-proxy:
   - annotations:
       artifacthub.io/changes: |
@@ -116330,4 +116371,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-20T03:42:56.785236523Z"
+generated: "2026-10-20T07:24:52.111352397Z"
