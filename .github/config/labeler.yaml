@@ -125,6 +125,9 @@ maildev:
 mcp-for-argocd:
 - changed-files:
   - any-glob-to-any-file: charts/mcp-for-argocd/*
+mongodb-community:
+- changed-files:
+  - any-glob-to-any-file: charts/mongodb-community/*
 netbird-reverse-proxy:
 - changed-files:
   - any-glob-to-any-file: 'charts/netbird-reverse-proxy/*'
