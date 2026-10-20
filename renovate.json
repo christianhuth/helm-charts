@@ -27,6 +27,15 @@
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "ghcr.io/cloudnative-pg/postgresql"
+    },
+    {
+      "description": "MongoDB version of the MongoDBCommunity resource (mongodb.version), the operator runs the image <version>-ubi8",
+      "customType": "regex",
+      "managerFilePatterns": ["/^charts/mongodb-community/values\\.yaml$/"],
+      "matchStrings": ["\\n  version: \"(?<currentValue>\\d+\\.\\d+\\.\\d+)\"\\n"],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "quay.io/mongodb/mongodb-community-server",
+      "extractVersionTemplate": "^(?<version>\\d+\\.\\d+\\.\\d+)-ubi8$"
     }
   ],
   "packageRules": [
@@ -67,10 +76,25 @@
       "versioning": "regex:^(?:(?<compatibility>legacy)-)?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
     },
     {
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["quay.io/mongodb/mongodb-community-server"],
+      "separateMinorPatch": true,
+      "postUpgradeTasks": {
+        "commands": ["bash ./renovate-update-chart-values.sh '{{{parentDir}}}' '{{{updateType}}}' '{{{currentValue}}}' '{{{newValue}}}'"],
+        "executionMode": "branch"
+      }
+    },
+    {
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": false
+    },
+    {
+      "description": "MongoDB minor releases (e.g. 8.0 to 8.3) are feature releases changing the feature compatibility version, so they are not merged automatically",
+      "matchDepNames": ["quay.io/mongodb/mongodb-community-server"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": false
     }
   ],
   "prHourlyLimit": 0,

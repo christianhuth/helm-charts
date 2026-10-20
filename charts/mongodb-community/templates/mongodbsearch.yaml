@@ -1,0 +1,22 @@
+{{- if .Values.search.enabled }}
+{{- $spec := deepCopy .Values.search.spec }}
+{{- /* the search pods use the ServiceAccount of this release instead of the operator's fixed default */}}
+{{- $serviceAccountName := include "mongodb-community.serviceAccountName" . }}
+{{- if $serviceAccountName }}
+{{- $clusters := list }}
+{{- range $spec.clusters }}
+{{- $statefulSet := dict "spec" (dict "template" (dict "spec" (dict "serviceAccountName" $serviceAccountName))) }}
+{{- $clusters = append $clusters (merge (dict "statefulSet" (mergeOverwrite $statefulSet (.statefulSet | default dict))) .) }}
+{{- end }}
+{{- $_ := set $spec "clusters" $clusters }}
+{{- end }}
+apiVersion: mongodb.com/v1
+kind: MongoDBSearch
+metadata:
+  # the operator connects MongoDBSearch to the MongoDBCommunity resource of the same name
+  name: {{ include "mongodb-community.fullname" . }}
+  labels:
+    {{- include "mongodb-community.labels" . | nindent 4 }}
+spec:
+  {{- toYaml $spec | nindent 2 }}
+{{- end }}

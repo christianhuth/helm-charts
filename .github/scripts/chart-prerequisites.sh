@@ -36,7 +36,10 @@ for chart in "${charts[@]}"; do
     # shellcheck disable=SC2016 # the expression is evaluated by yq, not by the shell
     CHART="${chart}" REGISTRY="${REGISTRY}" yq -o=json -I=0 '
         (.dependencies // []) as $deps
+        | .name as $name
         | {"chart": strenv(CHART), "prerequisites": [load(strenv(REGISTRY)).prerequisites[]
-            | select(.always == true or (.dependency as $d | $deps | any_c(.name == $d.name and .repository == $d.repository)))]}
+            | select(.always == true
+                or ((.charts // []) | any_c(. == $name))
+                or (.dependency != null and (.dependency as $d | $deps | any_c(.name == $d.name and .repository == $d.repository))))]}
     ' "${chart}/Chart.yaml"
 done

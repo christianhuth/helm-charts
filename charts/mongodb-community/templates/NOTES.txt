@@ -1,0 +1,13 @@
+The MongoDB Community replica set {{ include "mongodb-community.fullname" . }} is being deployed by the MongoDB Controllers for Kubernetes. Watch its status with:
+
+  kubectl get mongodbcommunity --namespace {{ .Release.Namespace }} {{ include "mongodb-community.fullname" . }} -w
+
+If the status stays empty, the operator does not watch the namespace {{ .Release.Namespace }} (see `operator.watchNamespace` in the README).
+{{- with (include "mongodb-community.users" . | fromYamlArray) }}
+
+The operator stores the connection strings of each user in a Secret, e.g.:
+{{- range . }}
+
+  kubectl get secret --namespace {{ $.Release.Namespace }} {{ include "mongodb-community.userConnectionStringSecretName" (dict "context" $ "user" .name) }} -o jsonpath="{.data.connectionString\.standard}" | base64 -d
+{{- end }}
+{{- end }}

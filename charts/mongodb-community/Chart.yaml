@@ -1,0 +1,35 @@
+apiVersion: v2
+name: mongodb-community
+description: MongoDB Community replica sets managed by the MongoDB Controllers for Kubernetes (mongodb-kubernetes)
+type: application
+version: 1.0.0
+appVersion: "8.0.34"
+home: https://github.com/christianhuth/helm-charts
+icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/mongodb-community/icon.svg
+keywords:
+  - mongodb
+  - mongodb-kubernetes
+  - mongodbcommunity
+  - replicaset
+  - database
+maintainers:
+  - name: christianhuth
+    email: christian@knell.it
+sources:
+  - https://github.com/mongodb/mongodb-kubernetes
+  - https://github.com/mongodb/mongo
+annotations:
+  artifacthub.io/category: database
+  artifacthub.io/changes: |
+    - kind: added
+      description: initial release of the chart for the MongoDBCommunity resource of the MongoDB Controllers for Kubernetes
+  artifacthub.io/links: |
+    - name: support
+      url: https://github.com/christianhuth/helm-charts/issues
+    - name: MongoDBCommunity documentation
+      url: https://github.com/mongodb/mongodb-kubernetes/tree/master/docs/mongodbcommunity
+  artifacthub.io/recommendations: |
+    - url: https://artifacthub.io/packages/helm/mongodb-helm-charts/mongodb-kubernetes
+  artifacthub.io/signKey: |
+    fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+    url: https://charts.christianhuth.de/public.key

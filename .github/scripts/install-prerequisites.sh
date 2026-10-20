@@ -11,18 +11,25 @@ prerequisites=$(.github/scripts/chart-prerequisites.sh "$@")
 
 declare -A installed=()
 
-while IFS=$'\t' read -r release chart repository namespace; do
-    # prerequisites without releases (e.g. charts without operator) yield empty lines
-    [[ -n "${release}" ]] || continue
+values=$(mktemp)
+trap 'rm -f "${values}"' EXIT
+
+while read -r entry; do
+    release=$(yq -p=json '.release' <<< "${entry}")
     [[ -n "${installed[${release}]:-}" ]] && continue
+    chart=$(yq -p=json '.chart' <<< "${entry}")
+    repository=$(yq -p=json '.repository' <<< "${entry}")
+    namespace=$(yq -p=json '.namespace' <<< "${entry}")
+    yq -p=json -oy '.values // {}' <<< "${entry}" > "${values}"
     echo "Installing ${chart} from ${repository} as ${release} into namespace ${namespace}"
     helm upgrade --install "${release}" "${chart}" \
         --repo "${repository}" \
         --namespace "${namespace}" \
         --create-namespace \
+        --values "${values}" \
         --wait \
         --timeout 10m
     installed[${release}]=1
-done < <(yq -p=json -oy -N '.prerequisites[].releases[] | [.release, .chart, .repository, .namespace] | @tsv' <<< "${prerequisites}")
+done < <(yq -p=json -o=json -I=0 -N '.prerequisites[] | (.releases // [])[]' <<< "${prerequisites}")
 
 echo "Installed prerequisites: ${!installed[*]}"
