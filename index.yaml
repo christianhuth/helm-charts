@@ -12276,6 +12276,50 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: "BREAKING: replaced the Bitnami MongoDB subchart with a replica set managed by the MongoDB Controllers for Kubernetes (chart mongodb-community). The database now requires authentication. See the upgrade notes in the README."
+        - kind: changed
+          description: "BREAKING: restructured externalMongodb (auth.database moved to database) and added authentication, replica set and driver options"
+        - kind: added
+          description: init container wait-for-mongodb, which lets the api and frontend wait for the bundled replica set instead of restarting
+        - kind: fixed
+          description: frontend.extraEnv is applied to the frontend instead of api.extraEnv
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: From analytics to surveys, everything you need to build delightful customer experiences on mobile, web, and desktop. Your dedicated product analytics server awaits you.
+          url: https://cdn.prod.website-files.com/61c1b7c3e2f3805325be4594/646ca75af762159d03f456f1_mycountlyhero.svg
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 25.05.4
+    created: "2026-10-20T09:09:04.496090721Z"
+    dependencies:
+    - alias: mongodb
+      condition: mongodb.enabled
+      name: mongodb-community
+      repository: https://charts.christianhuth.de
+      version: 1.0.0
+    description: Countly is a product analytics platform that helps teams track, analyze
+      and act-on their user actions and behaviour on mobile, web and desktop applications.
+    digest: 761d4111dd2f16e031537c3daaa7001c3494647ac44eaddb2cd4bd036fadd085
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/countly/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: countly
+    sources:
+    - https://github.com/Countly/countly-server
+    - https://countly.com/
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/countly-6.0.0/countly-6.0.0.tgz
+    version: 6.0.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of mongodb to 19.3.3
       artifacthub.io/links: |
         - name: support
@@ -116371,4 +116415,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-20T07:24:52.111352397Z"
+generated: "2026-10-20T09:09:04.503950543Z"
