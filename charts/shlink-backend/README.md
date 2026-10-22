@@ -269,7 +269,7 @@ Instead of `existingSecret` you can set `password`, which lets the chart create 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"shlinkio/shlink"` | image repository |
-| image.tag | string | `"5.1.7"` | Overrides the image tag |
+| image.tag | string | `"5.1.8"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
