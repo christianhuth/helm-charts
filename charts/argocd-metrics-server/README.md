@@ -127,7 +127,7 @@ server:
       - name: extension-metrics
         env:
           - name: EXTENSION_URL
-            value: https://github.com/argoproj-labs/argocd-extension-metrics/releases/download/v1.1.1/extension.tar.gz
+            value: https://github.com/argoproj-labs/argocd-extension-metrics/releases/download/v1.0.3/extension.tar.gz
           - name: EXTENSION_CHECKSUM_URL
-            value: https://github.com/argoproj-labs/argocd-extension-metrics/releases/download/v1.1.1/extension_checksums.txt
+            value: https://github.com/argoproj-labs/argocd-extension-metrics/releases/download/v1.0.3/extension_checksums.txt
 ```
