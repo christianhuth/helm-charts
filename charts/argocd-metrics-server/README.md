@@ -55,7 +55,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"quay.io"` | image registory |
 | image.repository | string | `"argoprojlabs/argocd-extension-metrics"` | image repository |
-| image.tag | string | `"v1.0.3"` | Overrides the image tag |
+| image.tag | string | `"v1.1.1"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | nameOverride | string | `""` | Provide a name in place of `argocd-extension-metrics` |
 | networkPolicy.additionalAnnotations | object | `{}` | Annotations to be added to the NetworkPolicies |
@@ -127,7 +127,7 @@ server:
       - name: extension-metrics
         env:
           - name: EXTENSION_URL
-            value: https://github.com/argoproj-labs/argocd-extension-metrics/releases/download/v1.0.3/extension.tar.gz
+            value: https://github.com/argoproj-labs/argocd-extension-metrics/releases/download/v1.1.1/extension.tar.gz
           - name: EXTENSION_CHECKSUM_URL
-            value: https://github.com/argoproj-labs/argocd-extension-metrics/releases/download/v1.0.3/extension_checksums.txt
+            value: https://github.com/argoproj-labs/argocd-extension-metrics/releases/download/v1.1.1/extension_checksums.txt
 ```
