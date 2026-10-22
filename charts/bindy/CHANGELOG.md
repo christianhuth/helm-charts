@@ -1,7 +1,7 @@
 # bindy
 
-## 1.9.0
+## 1.9.1
 
 ### Changed
 
-- App Version to v0.8.0
+- App Version to v0.8.1
