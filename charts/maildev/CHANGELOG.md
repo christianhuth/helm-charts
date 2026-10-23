@@ -1,7 +1,7 @@
 # maildev
 
-## 1.6.1
+## 2.0.0
 
-### Fixed
+### Changed
 
-- broken HTTPRoute for maildev backend
+- App Version to 3.0.0
