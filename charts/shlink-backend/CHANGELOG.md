@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 12.0.2
+## 13.0.0
 
 ### Changed
 
-- dependency of rabbitmq to 0.21.32
+- App Version to 13.0
