@@ -151,7 +151,7 @@ Instead of `externalDatabase.existingSecret` you can set `externalDatabase.passw
 | mariadb.enabled | bool | `true` | Enable a MariaDB instance managed by the mariadb-operator. Requires the operator to be installed in the cluster (see README). |
 | mariadb.mariadb.database | string | `"typo3"` | Name of the database to create |
 | mariadb.mariadb.galera.enabled | bool | `true` | Enable Galera to run multiple instances |
-| mariadb.mariadb.image | string | `"mariadb:12.3"` | MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version. |
+| mariadb.mariadb.image | string | `"mariadb:13.0"` | MariaDB image. The tag only pins the release series (13.0 is the current long-term support release), so restarted instances get its latest patch version. |
 | mariadb.mariadb.imagePullPolicy | string | `"Always"` | Pull the image on every start to get the latest patch version of the release series |
 | mariadb.mariadb.passwordSecretKeyRef.generate | bool | `true` | Let the operator generate the Secret with a random password if it does not exist |
 | mariadb.mariadb.passwordSecretKeyRef.key | string | `"password"` | Key of the password inside the Secret |
