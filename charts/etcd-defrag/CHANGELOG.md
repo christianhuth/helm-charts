@@ -1,11 +1,7 @@
 # etcd-defrag
 
-## 1.7.0
+## 1.7.1
 
-### Added
+### Changed
 
-- tolerations for control-plane taint
-
-### Fixed
-
-- way command and args are defined for cronjob
+- App Version to v3.7.3
