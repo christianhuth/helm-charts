@@ -1,7 +1,7 @@
 # mongodb-community
 
-## 1.0.0
+## 1.1.0
 
-### Added
+### Changed
 
-- initial release of the chart for the MongoDBCommunity resource of the MongoDB Controllers for Kubernetes
+- App Version to 8.3.13
