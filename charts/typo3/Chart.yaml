@@ -2,7 +2,7 @@ apiVersion: v2
 name: typo3
 description: TYPO3 — the Professional, Flexible Content Management System
 type: application
-version: 8.0.1
+version: 8.0.2
 appVersion: "legacy-13.4.36"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/typo3/icon.svg
@@ -16,12 +16,12 @@ dependencies:
   - name: mariadb-cluster
     alias: mariadb
     repository: https://helm.mariadb.com/mariadb-operator
-    version: 26.10.1
+    version: 26.10.2
     condition: mariadb.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: App Version to legacy-13.4.36
+      description: dependency of mariadb-cluster to 26.10.2
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
