@@ -3,7 +3,7 @@ apiVersion: v2
 name: syncstorage-rs
 description: A Helm chart for deploying Mozilla's Firefox Sync Storage server to Kubernetes
 type: application
-version: 7.0.2
+version: 7.0.3
 appVersion: "syncstorage-rs-mysql-0.18.2"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncstorage-rs/icon.svg
@@ -16,19 +16,21 @@ sources:
   - https://github.com/porelli/firefox-sync/pkgs/container/firefox-sync
 dependencies:
   - name: mariadb-cluster
-    repository: https://helm.mariadb.com/mariadb-operator
+    repository: oci://ghcr.io/mariadb-operator/charts
     version: 26.10.2
     alias: syncserver-db
     condition: syncserver-db.enabled
   - name: mariadb-cluster
-    repository: https://helm.mariadb.com/mariadb-operator
+    repository: oci://ghcr.io/mariadb-operator/charts
     version: 26.10.2
     alias: tokenserver-db
     condition: tokenserver-db.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of mariadb-cluster mariadb-cluster to 26.10.2
+      description: get the mariadb-cluster dependency from the OCI registry oci://ghcr.io/mariadb-operator/charts, as the Helm repository helm.mariadb.com is deprecated
+    - kind: changed
+      description: install the mariadb-operator from the OCI registry in the README
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
