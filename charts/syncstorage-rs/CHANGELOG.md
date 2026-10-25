@@ -1,7 +1,7 @@
 # syncstorage-rs
 
-## 7.0.1
+## 7.0.2
 
-### Fixed
+### Changed
 
-- upgrade notes for 7.0.0 wait for each resource of the operator separately, as kubectl wait --for=create only supports a single resource
+- dependency of mariadb-cluster mariadb-cluster to 26.10.2
