@@ -16,7 +16,7 @@ dependencies:
   - name: mariadb-cluster
     alias: mariadb
     repository: oci://ghcr.io/mariadb-operator/charts
-    version: 26.10.2
+    version: 26.10.1
     condition: mariadb.enabled
 annotations:
   artifacthub.io/changes: |
