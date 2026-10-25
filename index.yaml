@@ -64932,6 +64932,54 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: dependency of mariadb-cluster to 26.10.2
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 5.1.8
+    created: "2026-10-25T03:31:14.263815957Z"
+    dependencies:
+    - alias: postgresql
+      condition: postgresql.enabled
+      name: cluster
+      repository: https://cloudnative-pg.github.io/charts
+      version: 0.9.0
+    - alias: mariadb
+      condition: mariadb.enabled
+      name: mariadb-cluster
+      repository: https://helm.mariadb.com/mariadb-operator
+      version: 26.10.2
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.21.32
+    - condition: valkey.enabled
+      name: valkey
+      repository: https://valkey.io/valkey-helm/
+      version: 0.12.0
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: b00b22777c380be0035444b812bf211ef33ff76673c5fb3b293aadb54b28b087
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/shlink-backend/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-backend-12.0.3/shlink-backend-12.0.3.tgz
+    version: 12.0.3
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: dependency of rabbitmq to 0.21.32
       artifacthub.io/links: |
         - name: support
@@ -116903,4 +116951,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-24T23:36:19.735155722Z"
+generated: "2026-10-25T03:31:14.26650339Z"
