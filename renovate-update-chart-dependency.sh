@@ -9,7 +9,9 @@ set -o pipefail
 
 CHART="$1"
 UPDATE_TYPE="$2"
-DEP_NAME="$3"
+# Renovate passes the names of all updates in the branch separated by spaces, e.g. "mariadb-cluster mariadb-cluster"
+# for a chart depending on the same chart twice (with different aliases), so every name is only used once
+DEP_NAME="$(awk -v RS=' ' 'NF && !seen[$1]++ { printf "%s%s", sep, $1; sep = ", " }' <<< "$3")"
 DEP_VERSION_NEW="$4"
 
 version="$(awk '/^version:/ {print $2}' "charts/${CHART}/Chart.yaml")"
