@@ -1,7 +1,7 @@
 # typo3
 
-## 8.0.1
+## 8.0.2
 
 ### Changed
 
-- App Version to legacy-13.4.36
+- dependency of mariadb-cluster to 26.10.2
