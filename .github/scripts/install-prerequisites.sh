@@ -21,9 +21,14 @@ while read -r entry; do
     repository=$(yq -p=json '.repository' <<< "${entry}")
     namespace=$(yq -p=json '.namespace' <<< "${entry}")
     yq -p=json -oy '.values // {}' <<< "${entry}" > "${values}"
+    # OCI registries are referenced by the chart URL, as helm does not support --repo for them
+    if [[ "${repository}" == oci://* ]]; then
+        source=("${repository%/}/${chart}")
+    else
+        source=("${chart}" --repo "${repository}")
+    fi
     echo "Installing ${chart} from ${repository} as ${release} into namespace ${namespace}"
-    helm upgrade --install "${release}" "${chart}" \
-        --repo "${repository}" \
+    helm upgrade --install "${release}" "${source[@]}" \
         --namespace "${namespace}" \
         --create-namespace \
         --values "${values}" \
