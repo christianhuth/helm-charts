@@ -11,3 +11,6 @@ ingress:
     - secretName: sync.knell.it-tls
       hosts:
         - sync.knell.it
+syncstorage:
+  masterKey:
+    value: dev-master-key

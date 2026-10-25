@@ -13,12 +13,12 @@ revisionHistoryLimit: 0
 image:
   # -- image registry
   registry: ghcr.io
-  # -- image repository
-  repository: porelli/firefox-sync
+  # -- image repository. Mozilla publishes one image per database type: `mozilla-services/syncstorage-rs/syncserver-mysql` for MariaDB and MySQL, `mozilla-services/syncstorage-rs/syncserver-postgres` for PostgreSQL. Both are only available for `linux/amd64`.
+  repository: mozilla-services/syncstorage-rs/syncserver-mysql
   # -- image pull policy
   pullPolicy: Always
   # -- Overrides the image tag
-  tag: "syncstorage-rs-mysql-0.18.2"
+  tag: "0.24.0"
 
 # -- If defined, uses a Secret to pull an image from a private Docker registry or repository.
 imagePullSecrets: []
@@ -136,7 +136,7 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 livenessProbe:
-  # -- Enable the livenessProbe
+  # -- Enable the livenessProbe. It uses `/__lbheartbeat__`, which does not check the databases.
   enabled: true
   # -- Failure threshold for livenessProbe
   failureThreshold: 6
@@ -150,7 +150,7 @@ livenessProbe:
   timeoutSeconds: 2
 
 readinessProbe:
-  # -- Enable the readinessProbe
+  # -- Enable the readinessProbe. It uses `/__heartbeat__`, which also checks the databases.
   enabled: true
   # -- Failure threshold for readinessProbe
   failureThreshold: 6
@@ -185,29 +185,25 @@ syncstorage:
     port: 8000
     # -- run migrations for the tokenserver database
     runTokenserverDbMigrations: true
+    # -- Public URL of the sync server, scheme and host (e.g. `https://sync.example.com`). syncstorage-rs registers it as storage node in the Tokenserver database on startup and the clients sync against it. Defaults to the first host of the Ingress (`https` if it has TLS) or of the HTTPRoute (`https`).
+    publicUrl: ""
+    # -- Maximum number of accounts the storage node (`publicUrl`) accepts. Only used when syncstorage-rs creates the node, see [Limiting the number of users](#limiting-the-number-of-users).
+    nodeCapacity: 100000
+    # -- Allow new accounts to register. When disabled, only accounts that already synced with this server can use it.
+    allowNewUsers: true
+    fxa:
+      # -- Email domain of the Mozilla accounts environment the clients log in to
+      emailDomain: api.accounts.firefox.com
+      # -- OAuth server of the Mozilla accounts environment, used to verify the tokens of the clients
+      oauthServerUrl: https://oauth.accounts.firefox.com
   masterKey:
     # -- Use existing secret for the sync master key (`syncstorage.masterKey.value` will be ignored and picked up from this secret). The secret has to contain the key `master-key`.
     existingSecret: ""
-    # -- The sync master key value
+    # -- The sync master key value. Required if `syncstorage.masterKey.existingSecret` is not set.
     value: ""
-  tokenserver-db-lock:
-    # -- enable an init container that locks the tokenserver db from accepting new users if the maximum number of users are registered already
-    enabled: false
-    config:
-      # -- maximum number of users that are allowed to user your server
-      maxUsers: 1
-    image:
-      # -- image registry
-      registry: ghcr.io
-      # -- image repository
-      repository: porelli/firefox-sync
-      # -- image pull policy
-      pullPolicy: Always
-      # -- Overrides the image tag
-      tag: "syncstorage-rs-mysql-init-0.18.2"
 
 syncserver-db:
-  # -- Enable a MariaDB instance managed by the mariadb-operator for the Syncserver database. Requires the operator to be installed in the cluster (see README).
+  # -- Enable a MariaDB instance managed by the mariadb-operator for the Syncserver database. Requires the operator to be installed in the cluster (see README). Disable it if `postgresql.enabled` is true.
   enabled: true
   mariadb:
     # -- MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.
@@ -244,7 +240,7 @@ syncserver-db:
         format: "mysql://{{ .Username }}:{{ urlquery .Password }}@{{ .Host }}:{{ .Port }}/{{ .Database }}"
 
 tokenserver-db:
-  # -- Enable a MariaDB instance managed by the mariadb-operator for the Tokenserver database. Requires the operator to be installed in the cluster (see README).
+  # -- Enable a MariaDB instance managed by the mariadb-operator for the Tokenserver database. Requires the operator to be installed in the cluster (see README). Disable it if `postgresql.enabled` is true.
   enabled: true
   mariadb:
     # -- MariaDB image. The tag only pins the release series (12.3 is the current long-term support release), so restarted instances get its latest patch version.
@@ -280,11 +276,42 @@ tokenserver-db:
         # -- Format of the connection URL used by syncstorage-rs. The password is URL-encoded.
         format: "mysql://{{ .Username }}:{{ urlquery .Password }}@{{ .Host }}:{{ .Port }}/{{ .Database }}"
 
+postgresql:
+  # -- Enable a PostgreSQL cluster managed by the CloudNativePG operator for the Syncserver and the Tokenserver database, which share one database (like in the setup of Mozilla). Requires the operator to be installed in the cluster and the image `mozilla-services/syncstorage-rs/syncserver-postgres` (see README).
+  enabled: false
+  version:
+    # -- PostgreSQL major version. Has to match the major version of `postgresql.cluster.imageName`.
+    postgresql: "18"
+  cluster:
+    # -- PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version.
+    imageName: ghcr.io/cloudnative-pg/postgresql:18-standard-trixie
+    # -- Pull the image on every start to get the latest minor version of the major version
+    imagePullPolicy: Always
+    # -- Number of PostgreSQL instances (one primary, the others are replicas)
+    instances: 3
+    initdb:
+      # -- Name of the database to create
+      database: syncserver
+      # -- Name of the user owning the database
+      owner: syncserver
+      # Use an existing Secret of type `kubernetes.io/basic-auth` (keys `username` and `password`) for the owner.
+      # If not set, the operator generates the Secret `<release>-postgresql-app`. The password must only contain URL-safe characters.
+      # secret:
+      #   name: ""
+    storage:
+      # -- Size of the PVC of each instance
+      size: 8Gi
+
 externalSyncserverDatabase:
-  # -- Hostname of the external Syncserver database. Used if `syncserver-db.enabled` is false.
+  # -- Type of the external Syncserver database: `mysql` (MariaDB or MySQL) or `postgres`. Has to match the type of the Tokenserver database and the image.
+  type: mysql
+  # -- Hostname of the external Syncserver database. Used if neither `syncserver-db.enabled` nor `postgresql.enabled` is true.
   hostname: ""
-  # -- Port of the external Syncserver database
-  port: 3306
+  # @schema
+  # type: [string, integer]
+  # @schema
+  # -- Port of the external Syncserver database. Defaults to 3306 for `mysql` and 5432 for `postgres`.
+  port: ""
   # -- Name of the database to use
   database: syncserver
   # -- Name of the user to use
@@ -297,10 +324,15 @@ externalSyncserverDatabase:
   existingSecretPasswordKey: password
 
 externalTokenserverDatabase:
-  # -- Hostname of the external Tokenserver database. Used if `tokenserver-db.enabled` is false.
+  # -- Type of the external Tokenserver database: `mysql` (MariaDB or MySQL) or `postgres`. Has to match the type of the Syncserver database and the image.
+  type: mysql
+  # -- Hostname of the external Tokenserver database. Used if neither `tokenserver-db.enabled` nor `postgresql.enabled` is true. It may be the same database as the Syncserver database.
   hostname: ""
-  # -- Port of the external Tokenserver database
-  port: 3306
+  # @schema
+  # type: [string, integer]
+  # @schema
+  # -- Port of the external Tokenserver database. Defaults to 3306 for `mysql` and 5432 for `postgres`.
+  port: ""
   # -- Name of the database to use
   database: tokenserver
   # -- Name of the user to use

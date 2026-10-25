@@ -24,3 +24,12 @@
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
 {{- end }}
+{{- if not (include "syncstorage-rs.publicUrl" .) }}
+
+WARNING: No public URL is configured (syncstorage.config.publicUrl, ingress or route), so syncstorage-rs does not
+register a storage node in the Tokenserver database and the clients can't sync. Set syncstorage.config.publicUrl
+to the URL the clients use to reach the server, e.g. https://sync.example.com
+{{- end }}
+
+2. Configure Firefox to use this server: open about:config and set identity.sync.tokenserver.uri to
+  {{ include "syncstorage-rs.publicUrl" . | default "<public URL>" }}/1.0/sync/1.5

@@ -3,8 +3,8 @@ apiVersion: v2
 name: syncstorage-rs
 description: A Helm chart for deploying Mozilla's Firefox Sync Storage server to Kubernetes
 type: application
-version: 7.0.2
-appVersion: "syncstorage-rs-mysql-0.18.2"
+version: 8.0.0
+appVersion: "0.24.0"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncstorage-rs/icon.svg
 maintainers:
@@ -12,8 +12,8 @@ maintainers:
     email: christian@knell.it
 sources:
   - https://github.com/mozilla-services/syncstorage-rs
-  - https://github.com/porelli/firefox-sync
-  - https://github.com/porelli/firefox-sync/pkgs/container/firefox-sync
+  - https://github.com/mozilla-services/syncstorage-rs/pkgs/container/syncstorage-rs%2Fsyncserver-mysql
+  - https://github.com/mozilla-services/syncstorage-rs/pkgs/container/syncstorage-rs%2Fsyncserver-postgres
 dependencies:
   - name: mariadb-cluster
     repository: https://helm.mariadb.com/mariadb-operator
@@ -25,10 +25,27 @@ dependencies:
     version: 26.10.2
     alias: tokenserver-db
     condition: tokenserver-db.enabled
+  - name: cluster
+    alias: postgresql
+    repository: https://cloudnative-pg.github.io/charts
+    version: 0.9.0
+    condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of mariadb-cluster mariadb-cluster to 26.10.2
+      description: "BREAKING: switched the image from porelli/firefox-sync to the official images of Mozilla (ghcr.io/mozilla-services/syncstorage-rs/syncserver-mysql and syncserver-postgres) and updated syncstorage-rs from 0.18.2 to 0.24.0. The official images are only available for linux/amd64. See the upgrade notes in the README."
+    - kind: removed
+      description: "BREAKING: syncstorage.tokenserver-db-lock, as its init image only exists for porelli/firefox-sync. Limit the number of users with syncstorage.config.nodeCapacity or syncstorage.config.allowNewUsers instead"
+    - kind: changed
+      description: "BREAKING: a master key (syncstorage.masterKey.value or syncstorage.masterKey.existingSecret) is required, as syncstorage-rs otherwise signs its tokens with an empty secret"
+    - kind: added
+      description: optional PostgreSQL database managed by the CloudNativePG operator (postgresql.enabled) and external PostgreSQL databases (external*Database.type)
+    - kind: added
+      description: syncstorage.config.publicUrl registers the storage node in the Tokenserver database on startup (defaults to the host of the Ingress or HTTPRoute), plus syncstorage.config.nodeCapacity and syncstorage.config.allowNewUsers
+    - kind: fixed
+      description: the Tokenserver verifies the tokens of the production Mozilla accounts by default (syncstorage.config.fxa.*) instead of the stage environment, and SYNC_PORT is set from syncstorage.config.port
+    - kind: changed
+      description: the livenessProbe uses /__lbheartbeat__, so database outages no longer restart the pods
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

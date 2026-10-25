@@ -1,3 +1,5 @@
+{{- include "syncstorage-rs.database.validate" . }}
+{{- include "syncstorage-rs.masterKey.validate" . }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -31,39 +33,6 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if (index .Values "syncstorage" "tokenserver-db-lock" "enabled") }}
-      initContainers:
-        - name: {{ .Chart.Name }}-db-lock
-          image: "{{ (index .Values "syncstorage" "tokenserver-db-lock" "image" "registry") }}/{{ (index .Values "syncstorage" "tokenserver-db-lock" "image" "repository") }}:{{ (index .Values "syncstorage" "tokenserver-db-lock" "image" "tag") | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ (index .Values "syncstorage" "tokenserver-db-lock" "image" "pullPolicy") }}
-          command:
-            - "/db_init.sh"
-          env:
-            # Database Settings
-            {{- $tokenserver := dict "root" . "name" "tokenserver" }}
-            - name: MARIADB_SERVER
-              value: {{ include "syncstorage-rs.database.hostname" $tokenserver | quote }}
-            - name: MARIADB_SERVER_PORT
-              value: {{ include "syncstorage-rs.database.port" $tokenserver | quote }}
-            - name: MARIADB_DATABASE
-              value: {{ include "syncstorage-rs.database.database" $tokenserver | quote }}
-            - name: MARIADB_USER
-              value: {{ include "syncstorage-rs.database.username" $tokenserver | quote }}
-            - name: MARIADB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "syncstorage-rs.database.secretName" $tokenserver | quote }}
-                  key: {{ include "syncstorage-rs.database.passwordKey" $tokenserver | quote }}
-            # General Settings
-            {{- if .Values.ingress.enabled }}
-            {{- with (index .Values.ingress.hosts 0) }}
-            - name: DOMAIN
-              value: {{ .host | quote }}
-            {{- end }}
-            {{- end }}
-            - name: MAX_USERS
-              value: {{ (index .Values "syncstorage" "tokenserver-db-lock" "config" "maxUsers") | quote }}
-      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -73,23 +42,36 @@ spec:
               value: {{ .Values.syncstorage.config.logLevel | quote }}
             - name: SYNC_HOST
               value: {{ .Values.syncstorage.config.host | quote }}
-            {{ if or (.Values.syncstorage.masterKey.existingSecret) (.Values.syncstorage.masterKey.value) }}
+            - name: SYNC_PORT
+              value: {{ .Values.syncstorage.config.port | quote }}
             - name: SYNC_MASTER_SECRET
               valueFrom:
                 secretKeyRef:
                   name: {{ include "syncstorage-rs.masterKey.secretName" . }}
-                  key: master-key
-            {{- end }}
+                  key: {{ include "syncstorage-rs.masterKey.secretKey" . }}
             # Syncserver DB Settings
             {{- include "syncstorage-rs.database.urlEnv" (dict "root" . "name" "syncserver" "env" "SYNC_SYNCSTORAGE__DATABASE_URL") | nindent 12 }}
             # Tokenserver DB Settings
             - name: SYNC_TOKENSERVER__ENABLED
               value: "true"
             - name: SYNC_TOKENSERVER__NODE_TYPE
-              value: mysql
+              value: {{ include "syncstorage-rs.database.type" (dict "root" . "name" "tokenserver") | quote }}
             {{- include "syncstorage-rs.database.urlEnv" (dict "root" . "name" "tokenserver" "env" "SYNC_TOKENSERVER__DATABASE_URL") | nindent 12 }}
             - name: SYNC_TOKENSERVER__RUN_MIGRATIONS
               value: {{ .Values.syncstorage.config.runTokenserverDbMigrations | quote }}
+            # Tokenserver Settings
+            {{- with include "syncstorage-rs.publicUrl" . }}
+            - name: SYNC_TOKENSERVER__INIT_NODE_URL
+              value: {{ . | quote }}
+            - name: SYNC_TOKENSERVER__INIT_NODE_CAPACITY
+              value: {{ $.Values.syncstorage.config.nodeCapacity | int | quote }}
+            {{- end }}
+            - name: SYNC_TOKENSERVER__ALLOW_NEW_USERS
+              value: {{ .Values.syncstorage.config.allowNewUsers | quote }}
+            - name: SYNC_TOKENSERVER__FXA_EMAIL_DOMAIN
+              value: {{ .Values.syncstorage.config.fxa.emailDomain | quote }}
+            - name: SYNC_TOKENSERVER__FXA_OAUTH_SERVER_URL
+              value: {{ .Values.syncstorage.config.fxa.oauthServerUrl | quote }}
             {{- if .Values.extraEnv }}
               # Additional Settings
               {{ .Values.extraEnv | toYaml | nindent 12 }}
@@ -101,7 +83,7 @@ spec:
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
-              path: /__heartbeat__
+              path: /__lbheartbeat__
               port: http
             failureThreshold: {{ .Values.livenessProbe.failureThreshold | int }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | int }}

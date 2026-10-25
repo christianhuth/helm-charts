@@ -61,7 +61,7 @@
         },
         "hostname": {
           "default": "",
-          "description": "Hostname of the external Syncserver database. Used if `syncserver-db.enabled` is false.",
+          "description": "Hostname of the external Syncserver database. Used if neither `syncserver-db.enabled` nor `postgresql.enabled` is true.",
           "title": "hostname",
           "type": "string"
         },
@@ -72,10 +72,20 @@
           "type": "string"
         },
         "port": {
-          "default": 3306,
-          "description": "Port of the external Syncserver database",
+          "default": "",
+          "description": "Port of the external Syncserver database. Defaults to 3306 for `mysql` and 5432 for `postgres`.",
+          "required": [],
           "title": "port",
-          "type": "integer"
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "type": {
+          "default": "mysql",
+          "description": "Type of the external Syncserver database: `mysql` (MariaDB or MySQL) or `postgres`. Has to match the type of the Tokenserver database and the image.",
+          "title": "type",
+          "type": "string"
         },
         "username": {
           "default": "syncserver",
@@ -85,8 +95,8 @@
         }
       },
       "required": [
+        "type",
         "hostname",
-        "port",
         "database",
         "username",
         "password",
@@ -118,7 +128,7 @@
         },
         "hostname": {
           "default": "",
-          "description": "Hostname of the external Tokenserver database. Used if `tokenserver-db.enabled` is false.",
+          "description": "Hostname of the external Tokenserver database. Used if neither `tokenserver-db.enabled` nor `postgresql.enabled` is true. It may be the same database as the Syncserver database.",
           "title": "hostname",
           "type": "string"
         },
@@ -129,10 +139,20 @@
           "type": "string"
         },
         "port": {
-          "default": 3306,
-          "description": "Port of the external Tokenserver database",
+          "default": "",
+          "description": "Port of the external Tokenserver database. Defaults to 3306 for `mysql` and 5432 for `postgres`.",
+          "required": [],
           "title": "port",
-          "type": "integer"
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "type": {
+          "default": "mysql",
+          "description": "Type of the external Tokenserver database: `mysql` (MariaDB or MySQL) or `postgres`. Has to match the type of the Syncserver database and the image.",
+          "title": "type",
+          "type": "string"
         },
         "username": {
           "default": "tokenserver",
@@ -142,8 +162,8 @@
         }
       },
       "required": [
+        "type",
         "hostname",
-        "port",
         "database",
         "username",
         "password",
@@ -188,13 +208,13 @@
           "type": "string"
         },
         "repository": {
-          "default": "porelli/firefox-sync",
-          "description": "image repository",
+          "default": "mozilla-services/syncstorage-rs/syncserver-mysql",
+          "description": "image repository. Mozilla publishes one image per database type: `mozilla-services/syncstorage-rs/syncserver-mysql` for MariaDB and MySQL, `mozilla-services/syncstorage-rs/syncserver-postgres` for PostgreSQL. Both are only available for `linux/amd64`.",
           "title": "repository",
           "type": "string"
         },
         "tag": {
-          "default": "syncstorage-rs-mysql-0.18.2",
+          "default": "0.24.0",
           "description": "Overrides the image tag",
           "title": "tag",
           "type": "string"
@@ -308,7 +328,7 @@
       "properties": {
         "enabled": {
           "default": true,
-          "description": "Enable the livenessProbe",
+          "description": "Enable the livenessProbe. It uses `/__lbheartbeat__`, which does not check the databases.",
           "title": "enabled",
           "type": "boolean"
         },
@@ -378,11 +398,111 @@
       "title": "podSecurityContext",
       "type": "object"
     },
+    "postgresql": {
+      "properties": {
+        "cluster": {
+          "properties": {
+            "imageName": {
+              "default": "ghcr.io/cloudnative-pg/postgresql:18-standard-trixie",
+              "description": "PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version.",
+              "title": "imageName",
+              "type": "string"
+            },
+            "imagePullPolicy": {
+              "default": "Always",
+              "description": "Pull the image on every start to get the latest minor version of the major version",
+              "title": "imagePullPolicy",
+              "type": "string"
+            },
+            "initdb": {
+              "properties": {
+                "database": {
+                  "default": "syncserver",
+                  "description": "Name of the database to create",
+                  "title": "database",
+                  "type": "string"
+                },
+                "owner": {
+                  "default": "syncserver",
+                  "description": "Name of the user owning the database",
+                  "title": "owner",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "database",
+                "owner"
+              ],
+              "title": "initdb",
+              "type": "object"
+            },
+            "instances": {
+              "default": 3,
+              "description": "Number of PostgreSQL instances (one primary, the others are replicas)",
+              "title": "instances",
+              "type": "integer"
+            },
+            "storage": {
+              "properties": {
+                "size": {
+                  "default": "8Gi",
+                  "description": "Size of the PVC of each instance",
+                  "title": "size",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "size"
+              ],
+              "title": "storage",
+              "type": "object"
+            }
+          },
+          "required": [
+            "imageName",
+            "imagePullPolicy",
+            "instances",
+            "initdb",
+            "storage"
+          ],
+          "title": "cluster",
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enable a PostgreSQL cluster managed by the CloudNativePG operator for the Syncserver and the Tokenserver database, which share one database (like in the setup of Mozilla). Requires the operator to be installed in the cluster and the image `mozilla-services/syncstorage-rs/syncserver-postgres` (see README).",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "version": {
+          "properties": {
+            "postgresql": {
+              "default": "18",
+              "description": "PostgreSQL major version. Has to match the major version of `postgresql.cluster.imageName`.",
+              "title": "postgresql",
+              "type": "string"
+            }
+          },
+          "required": [
+            "postgresql"
+          ],
+          "title": "version",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "version",
+        "cluster"
+      ],
+      "title": "postgresql",
+      "type": "object"
+    },
     "readinessProbe": {
       "properties": {
         "enabled": {
           "default": true,
-          "description": "Enable the readinessProbe",
+          "description": "Enable the readinessProbe. It uses `/__heartbeat__`, which also checks the databases.",
           "title": "enabled",
           "type": "boolean"
         },
@@ -649,7 +769,7 @@
       "properties": {
         "enabled": {
           "default": true,
-          "description": "Enable a MariaDB instance managed by the mariadb-operator for the Syncserver database. Requires the operator to be installed in the cluster (see README).",
+          "description": "Enable a MariaDB instance managed by the mariadb-operator for the Syncserver database. Requires the operator to be installed in the cluster (see README). Disable it if `postgresql.enabled` is true.",
           "title": "enabled",
           "type": "boolean"
         },
@@ -818,6 +938,34 @@
       "properties": {
         "config": {
           "properties": {
+            "allowNewUsers": {
+              "default": true,
+              "description": "Allow new accounts to register. When disabled, only accounts that already synced with this server can use it.",
+              "title": "allowNewUsers",
+              "type": "boolean"
+            },
+            "fxa": {
+              "properties": {
+                "emailDomain": {
+                  "default": "api.accounts.firefox.com",
+                  "description": "Email domain of the Mozilla accounts environment the clients log in to",
+                  "title": "emailDomain",
+                  "type": "string"
+                },
+                "oauthServerUrl": {
+                  "default": "https://oauth.accounts.firefox.com",
+                  "description": "OAuth server of the Mozilla accounts environment, used to verify the tokens of the clients",
+                  "title": "oauthServerUrl",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "emailDomain",
+                "oauthServerUrl"
+              ],
+              "title": "fxa",
+              "type": "object"
+            },
             "host": {
               "default": "0.0.0.0",
               "description": "host to listen for connections",
@@ -830,11 +978,23 @@
               "title": "logLevel",
               "type": "string"
             },
+            "nodeCapacity": {
+              "default": 100000,
+              "description": "Maximum number of accounts the storage node (`publicUrl`) accepts. Only used when syncstorage-rs creates the node, see [Limiting the number of users](#limiting-the-number-of-users).",
+              "title": "nodeCapacity",
+              "type": "integer"
+            },
             "port": {
               "default": 8000,
               "description": "connection port",
               "title": "port",
               "type": "integer"
+            },
+            "publicUrl": {
+              "default": "",
+              "description": "Public URL of the sync server, scheme and host (e.g. `https://sync.example.com`). syncstorage-rs registers it as storage node in the Tokenserver database on startup and the clients sync against it. Defaults to the first host of the Ingress (`https` if it has TLS) or of the HTTPRoute (`https`).",
+              "title": "publicUrl",
+              "type": "string"
             },
             "runTokenserverDbMigrations": {
               "default": true,
@@ -847,7 +1007,11 @@
             "host",
             "logLevel",
             "port",
-            "runTokenserverDbMigrations"
+            "runTokenserverDbMigrations",
+            "publicUrl",
+            "nodeCapacity",
+            "allowNewUsers",
+            "fxa"
           ],
           "title": "config",
           "type": "object"
@@ -862,7 +1026,7 @@
             },
             "value": {
               "default": "",
-              "description": "The sync master key value",
+              "description": "The sync master key value. Required if `syncstorage.masterKey.existingSecret` is not set.",
               "title": "value",
               "type": "string"
             }
@@ -873,80 +1037,11 @@
           ],
           "title": "masterKey",
           "type": "object"
-        },
-        "tokenserver-db-lock": {
-          "properties": {
-            "config": {
-              "properties": {
-                "maxUsers": {
-                  "default": 1,
-                  "description": "maximum number of users that are allowed to user your server",
-                  "title": "maxUsers",
-                  "type": "integer"
-                }
-              },
-              "required": [
-                "maxUsers"
-              ],
-              "title": "config",
-              "type": "object"
-            },
-            "enabled": {
-              "default": false,
-              "description": "enable an init container that locks the tokenserver db from accepting new users if the maximum number of users are registered already",
-              "title": "enabled",
-              "type": "boolean"
-            },
-            "image": {
-              "properties": {
-                "pullPolicy": {
-                  "default": "Always",
-                  "description": "image pull policy",
-                  "title": "pullPolicy",
-                  "type": "string"
-                },
-                "registry": {
-                  "default": "ghcr.io",
-                  "description": "image registry",
-                  "title": "registry",
-                  "type": "string"
-                },
-                "repository": {
-                  "default": "porelli/firefox-sync",
-                  "description": "image repository",
-                  "title": "repository",
-                  "type": "string"
-                },
-                "tag": {
-                  "default": "syncstorage-rs-mysql-init-0.18.2",
-                  "description": "Overrides the image tag",
-                  "title": "tag",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "registry",
-                "repository",
-                "pullPolicy",
-                "tag"
-              ],
-              "title": "image",
-              "type": "object"
-            }
-          },
-          "required": [
-            "enabled",
-            "config",
-            "image"
-          ],
-          "title": "tokenserver-db-lock",
-          "type": "object"
         }
       },
       "required": [
         "config",
-        "masterKey",
-        "tokenserver-db-lock"
+        "masterKey"
       ],
       "title": "syncstorage",
       "type": "object"
@@ -955,7 +1050,7 @@
       "properties": {
         "enabled": {
           "default": true,
-          "description": "Enable a MariaDB instance managed by the mariadb-operator for the Tokenserver database. Requires the operator to be installed in the cluster (see README).",
+          "description": "Enable a MariaDB instance managed by the mariadb-operator for the Tokenserver database. Requires the operator to be installed in the cluster (see README). Disable it if `postgresql.enabled` is true.",
           "title": "enabled",
           "type": "boolean"
         },
@@ -1154,6 +1249,7 @@
     "syncstorage",
     "syncserver-db",
     "tokenserver-db",
+    "postgresql",
     "externalSyncserverDatabase",
     "externalTokenserverDatabase"
   ],

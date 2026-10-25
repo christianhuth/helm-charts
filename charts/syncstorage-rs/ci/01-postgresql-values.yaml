@@ -1,0 +1,18 @@
+---
+image:
+  repository: mozilla-services/syncstorage-rs/syncserver-postgres
+
+syncstorage:
+  masterKey:
+    value: ci-master-key
+
+syncserver-db:
+  enabled: false
+
+tokenserver-db:
+  enabled: false
+
+postgresql:
+  enabled: true
+  cluster:
+    instances: 1
