@@ -90433,6 +90433,47 @@ entries:
   syncstorage-rs:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: dependency of mariadb-cluster mariadb-cluster to 26.10.2
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: syncstorage-rs-mysql-0.18.2
+    created: "2026-10-25T13:39:02.399333719Z"
+    dependencies:
+    - alias: syncserver-db
+      condition: syncserver-db.enabled
+      name: mariadb-cluster
+      repository: https://helm.mariadb.com/mariadb-operator
+      version: 26.10.2
+    - alias: tokenserver-db
+      condition: tokenserver-db.enabled
+      name: mariadb-cluster
+      repository: https://helm.mariadb.com/mariadb-operator
+      version: 26.10.2
+    description: A Helm chart for deploying Mozilla's Firefox Sync Storage server
+      to Kubernetes
+    digest: 184c3aeadd7efc8878848c7b7e50be3d1a346c8d7869335a16200436632434ee
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncstorage-rs/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: syncstorage-rs
+    sources:
+    - https://github.com/mozilla-services/syncstorage-rs
+    - https://github.com/porelli/firefox-sync
+    - https://github.com/porelli/firefox-sync/pkgs/container/firefox-sync
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/syncstorage-rs-7.0.2/syncstorage-rs-7.0.2.tgz
+    version: 7.0.2
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: upgrade notes for 7.0.0 wait for each resource of the operator separately, as kubectl wait --for=create only supports a single resource
       artifacthub.io/links: |
@@ -116994,4 +117035,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-25T08:43:41.86935855Z"
+generated: "2026-10-25T13:39:02.40216272Z"
