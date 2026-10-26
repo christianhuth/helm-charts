@@ -1,4 +1,8 @@
 ---
+syncstorage:
+  masterKey:
+    value: ci-master-key
+
 syncserver-db:
   mariadb:
     replicas: 1
