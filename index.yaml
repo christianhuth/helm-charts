@@ -3,6 +3,34 @@ entries:
   argocd-metrics-server:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to v1.1.1
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v1.1.1
+    created: "2026-10-26T08:18:12.469487858Z"
+    description: A Helm chart for installing the Argo CD Metrics Server, which connects
+      to Prometheus and can be used to display Metrics in the Argo CD UI
+    digest: 937e976d5a723afb4cdbc71e3c09df0ebb3403002fbb4cc0c10d53a3532292fd
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/argocd-metrics-server/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: argocd-metrics-server
+    sources:
+    - https://github.com/argoproj-labs/argocd-extension-metrics
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/argocd-metrics-server-1.2.0/argocd-metrics-server-1.2.0.tgz
+    version: 1.2.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: doc for deployment strategy
       artifacthub.io/links: |
@@ -117370,4 +117398,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-26T08:12:08.954044143Z"
+generated: "2026-10-26T08:18:12.47197862Z"
