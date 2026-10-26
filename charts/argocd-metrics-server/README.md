@@ -55,7 +55,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"quay.io"` | image registory |
 | image.repository | string | `"argoprojlabs/argocd-extension-metrics"` | image repository |
-| image.tag | string | `"v1.0.3"` | Overrides the image tag |
+| image.tag | string | `"v1.1.1"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | nameOverride | string | `""` | Provide a name in place of `argocd-extension-metrics` |
 | networkPolicy.additionalAnnotations | object | `{}` | Annotations to be added to the NetworkPolicies |

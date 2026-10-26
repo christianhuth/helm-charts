@@ -1,7 +1,7 @@
 # argocd-metrics-server
 
-## 1.1.1
+## 1.2.0
 
-### Fixed
+### Changed
 
-- doc for deployment strategy
+- App Version to v1.1.1
