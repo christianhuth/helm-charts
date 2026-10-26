@@ -25,16 +25,16 @@ prerequisites:
   - name: mariadb-operator
     dependency:
       name: mariadb-cluster
-      repository: https://helm.mariadb.com/mariadb-operator
+      repository: oci://ghcr.io/mariadb-operator/charts
     template: _mariadb.tpl
     releases:
       - release: mariadb-operator-crds
         chart: mariadb-operator-crds
-        repository: https://helm.mariadb.com/mariadb-operator
+        repository: oci://ghcr.io/mariadb-operator/charts
         namespace: mariadb-operator
       - release: mariadb-operator
         chart: mariadb-operator
-        repository: https://helm.mariadb.com/mariadb-operator
+        repository: oci://ghcr.io/mariadb-operator/charts
         namespace: mariadb-operator
 
   - name: valkey

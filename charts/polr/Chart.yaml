@@ -2,7 +2,7 @@ apiVersion: v2
 name: polr
 description: Polr is a quick, modern, and open-source link shortener
 type: application
-version: 5.0.1
+version: 5.0.2
 appVersion: "2.3.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/polr/icon.svg
@@ -15,13 +15,15 @@ sources:
 dependencies:
   - name: mariadb-cluster
     alias: mariadb
-    repository: https://helm.mariadb.com/mariadb-operator
+    repository: oci://ghcr.io/mariadb-operator/charts
     version: 26.10.2
     condition: mariadb.enabled
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: dependency of mariadb-cluster to 26.10.2
+      description: get the mariadb-cluster dependency from the OCI registry oci://ghcr.io/mariadb-operator/charts, as the Helm repository helm.mariadb.com is deprecated
+    - kind: changed
+      description: install the mariadb-operator from the OCI registry in the README
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

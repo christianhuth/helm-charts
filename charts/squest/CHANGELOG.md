@@ -1,7 +1,8 @@
 # squest
 
-## 7.0.5
+## 7.0.6
 
 ### Changed
 
-- dependency of mariadb-cluster to 26.10.2
+- get the mariadb-cluster dependency from the OCI registry oci://ghcr.io/mariadb-operator/charts, as the Helm repository helm.mariadb.com is deprecated
+- install the mariadb-operator from the OCI registry in the README
