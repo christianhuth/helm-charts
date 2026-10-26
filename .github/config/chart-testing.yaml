@@ -16,6 +16,5 @@ chart-repos:
   - cnieg=https://cnieg.github.io/helm-charts
   - christianhuth=https://charts.christianhuth.de
   - cnpg=https://cloudnative-pg.github.io/charts
-  - mariadb-operator=https://helm.mariadb.com/mariadb-operator
   - valkey=https://valkey.io/valkey-helm/
 helm-extra-args: "--timeout 900s"

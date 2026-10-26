@@ -16,12 +16,12 @@ sources:
   - https://github.com/mozilla-services/syncstorage-rs/pkgs/container/syncstorage-rs%2Fsyncserver-postgres
 dependencies:
   - name: mariadb-cluster
-    repository: https://helm.mariadb.com/mariadb-operator
+    repository: oci://ghcr.io/mariadb-operator/charts
     version: 26.10.2
     alias: syncserver-db
     condition: syncserver-db.enabled
   - name: mariadb-cluster
-    repository: https://helm.mariadb.com/mariadb-operator
+    repository: oci://ghcr.io/mariadb-operator/charts
     version: 26.10.2
     alias: tokenserver-db
     condition: tokenserver-db.enabled
