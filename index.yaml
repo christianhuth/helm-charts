@@ -90572,6 +90572,64 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: "BREAKING: switched the image from porelli/firefox-sync to the official images of Mozilla (ghcr.io/mozilla-services/syncstorage-rs/syncserver-mysql and syncserver-postgres) and updated syncstorage-rs from 0.18.2 to 0.24.0. The official images are only available for linux/amd64. See the upgrade notes in the README."
+        - kind: removed
+          description: "BREAKING: syncstorage.tokenserver-db-lock, as its init image only exists for porelli/firefox-sync. Limit the number of users with syncstorage.config.nodeCapacity or syncstorage.config.allowNewUsers instead"
+        - kind: changed
+          description: "BREAKING: a master key (syncstorage.masterKey.value or syncstorage.masterKey.existingSecret) is required, as syncstorage-rs otherwise signs its tokens with an empty secret"
+        - kind: added
+          description: optional PostgreSQL database managed by the CloudNativePG operator (postgresql.enabled) and external PostgreSQL databases (external*Database.type)
+        - kind: added
+          description: syncstorage.config.publicUrl registers the storage node in the Tokenserver database on startup (defaults to the host of the Ingress or HTTPRoute), plus syncstorage.config.nodeCapacity and syncstorage.config.allowNewUsers
+        - kind: fixed
+          description: the Tokenserver verifies the tokens of the production Mozilla accounts by default (syncstorage.config.fxa.*) instead of the stage environment, and SYNC_PORT is set from syncstorage.config.port
+        - kind: changed
+          description: the livenessProbe uses /__lbheartbeat__, so database outages no longer restart the pods
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 0.24.0
+    created: "2026-10-26T08:12:08.950729071Z"
+    dependencies:
+    - alias: syncserver-db
+      condition: syncserver-db.enabled
+      name: mariadb-cluster
+      repository: oci://ghcr.io/mariadb-operator/charts
+      version: 26.10.2
+    - alias: tokenserver-db
+      condition: tokenserver-db.enabled
+      name: mariadb-cluster
+      repository: oci://ghcr.io/mariadb-operator/charts
+      version: 26.10.2
+    - alias: postgresql
+      condition: postgresql.enabled
+      name: cluster
+      repository: https://cloudnative-pg.github.io/charts
+      version: 0.9.0
+    description: A Helm chart for deploying Mozilla's Firefox Sync Storage server
+      to Kubernetes
+    digest: d5ffd8e2dfa00a89e5d069c675696eecbd4307b2f5c7faa99731d1917f0b3db5
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncstorage-rs/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: syncstorage-rs
+    sources:
+    - https://github.com/mozilla-services/syncstorage-rs
+    - https://github.com/mozilla-services/syncstorage-rs/pkgs/container/syncstorage-rs%2Fsyncserver-mysql
+    - https://github.com/mozilla-services/syncstorage-rs/pkgs/container/syncstorage-rs%2Fsyncserver-postgres
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/syncstorage-rs-8.0.0/syncstorage-rs-8.0.0.tgz
+    version: 8.0.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: get the mariadb-cluster dependency from the OCI registry oci://ghcr.io/mariadb-operator/charts, as the Helm repository helm.mariadb.com is deprecated
         - kind: changed
           description: install the mariadb-operator from the OCI registry in the README
@@ -117312,4 +117370,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-26T07:05:01.43574284Z"
+generated: "2026-10-26T08:12:08.954044143Z"
