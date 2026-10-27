@@ -6,6 +6,10 @@ metadata:
   labels:
     {{- include "ntp-exporter.labels" . | nindent 4 }}
 spec:
+  {{- with .Values.updateStrategy }}
+  updateStrategy:
+    {{- . | toYaml | nindent 4 }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "ntp-exporter.selectorLabels" . | nindent 6 }}

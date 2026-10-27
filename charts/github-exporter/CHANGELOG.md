@@ -1,7 +1,7 @@
 # github-exporter
 
-## 2.6.0
+## 2.7.0
 
 ### Added
 
-- Added scrapeTimeout value to the serviceMonitor.
+- support for deployment strategy

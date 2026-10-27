@@ -143,6 +143,19 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+# -- Update strategy for the deployment, used if `proxysql.cluster.enabled` is false
+deploymentStrategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxSurge: 25%
+  #   maxUnavailable: 25%
+
+# -- Update strategy for the StatefulSet, used if `proxysql.cluster.enabled` is true
+updateStrategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   partition: 0
+
 # -- Node labels for pod assignment
 nodeSelector: {}
 

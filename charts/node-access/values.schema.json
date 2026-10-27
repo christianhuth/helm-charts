@@ -1,6 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "properties": {
+    "deploymentStrategy": {
+      "description": "Update strategy for the deployment, used if `nodeAccess.accessMode` is `deployment`",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"node-access.fullname\"`",
@@ -299,6 +305,12 @@
       ],
       "title": "serviceAccount",
       "type": "object"
+    },
+    "updateStrategy": {
+      "description": "Update strategy for the DaemonSet, used if `nodeAccess.accessMode` is `daemonset`",
+      "required": [],
+      "title": "updateStrategy",
+      "type": "object"
     }
   },
   "required": [
@@ -308,6 +320,8 @@
     "imagePullSecrets",
     "replicaCount",
     "revisionHistoryLimit",
+    "deploymentStrategy",
+    "updateStrategy",
     "podAnnotations",
     "podSecurityContext",
     "resources",

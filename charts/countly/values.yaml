@@ -155,6 +155,13 @@ api:
     # -- Timeout in seconds for readinessProbe
     timeoutSeconds: 2
 
+  # -- Update strategy for the API deployment
+  deploymentStrategy: {}
+    # type: RollingUpdate
+    # rollingUpdate:
+    #   maxSurge: 25%
+    #   maxUnavailable: 25%
+
   # -- Node labels for pod assignment
   nodeSelector: {}
 
@@ -315,6 +322,13 @@ frontend:
     successThreshold: 1
     # -- Timeout in seconds for readinessProbe
     timeoutSeconds: 2
+
+  # -- Update strategy for the frontend deployment
+  deploymentStrategy: {}
+    # type: RollingUpdate
+    # rollingUpdate:
+    #   maxSurge: 25%
+    #   maxUnavailable: 25%
 
   # -- Node labels for pod assignment
   nodeSelector: {}

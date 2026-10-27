@@ -139,6 +139,7 @@ Instead of `existingSecret` you can set `password`, which lets the chart create 
 | autoscaling.maxReplicas | int | `100` | Maximum number of replicas |
 | autoscaling.minReplicas | int | `1` | Minimum number of replicas |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | externalDatabase.database | string | `"kutt"` | Name of the database to use |
 | externalDatabase.existingSecret | string | `""` | Name of an existing Secret containing the password of the user |
 | externalDatabase.existingSecretPasswordKey | string | `"password"` | Key in the existing Secret containing the password |

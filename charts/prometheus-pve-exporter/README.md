@@ -54,6 +54,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | env.pveAuthType | string | `"token"` |  |
 | env.pveExistingSecretName | string | `""` |  |
 | env.pvePassword | string | `"password"` |  |

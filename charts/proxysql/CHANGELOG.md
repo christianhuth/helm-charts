@@ -1,7 +1,7 @@
 # proxysql
 
-## 3.1.1
+## 3.2.0
 
-### Changed
+### Added
 
-- App Version to 3.0.11
+- support for deployment strategy and update strategy

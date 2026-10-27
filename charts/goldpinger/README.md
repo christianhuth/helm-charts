@@ -129,6 +129,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceMonitor.scrapeTimeout | string | `""` | Prometheus ServiceMonitor scrapeTimeout, cannot be longer than the scrape interval |
 | serviceMonitor.selector | object | `{}` | Prometheus ServiceMonitor selector |
 | tolerations | list | `[]` | Toleration labels for pod assignment |
+| updateStrategy | object | `{}` | Update strategy for the DaemonSet |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 

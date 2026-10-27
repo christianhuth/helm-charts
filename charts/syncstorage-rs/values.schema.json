@@ -39,6 +39,12 @@
       "title": "autoscaling",
       "type": "object"
     },
+    "deploymentStrategy": {
+      "description": "Update strategy for the deployment",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "externalSyncserverDatabase": {
       "properties": {
         "database": {
@@ -1242,6 +1248,7 @@
     "autoscaling",
     "livenessProbe",
     "readinessProbe",
+    "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",

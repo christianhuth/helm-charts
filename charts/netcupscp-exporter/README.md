@@ -53,6 +53,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | extraEnvFrom | list | `[]` | additional environment variables from ConfigMaps or Secrets |
 | fullnameOverride | string | `""` | String to fully override `"netcupscp-exporter.fullname"` |

@@ -47,6 +47,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity settings for pod assignment |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | fullnameOverride | string | `""` | String to fully override `"github-exporter.fullname"` |
 | github.auth.app.enabled | bool | `false` | Enable authentication using a GitHub App. |

@@ -52,6 +52,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | clusterRoleBinding.clusterRole | string | `"edit"` | Define which ClusterRole to bind to: cluster-admin, edit, view |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | fullnameOverride | string | `""` | String to fully override `"skooner.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"ghcr.io"` | image registory |

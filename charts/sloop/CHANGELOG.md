@@ -1,7 +1,7 @@
 # sloop
 
-## 0.4.0
+## 0.5.0
 
 ### Added
 
-- option to define route timeouts
+- support for deployment strategy

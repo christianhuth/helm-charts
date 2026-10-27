@@ -151,6 +151,7 @@ Instead of `existingSecret` you can set `password`, which lets the chart create 
 | celery.beat.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | celery.beat.config.django.debug | bool | `false` | Django DEBUG mode. |
 | celery.beat.config.django.gunicornWorkers | int | `4` | Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently |
+| celery.beat.deploymentStrategy | object | `{"type":"Recreate"}` | Update strategy for the Celery beat deployment. Defaults to `Recreate`, so that two schedulers never run at the same time. |
 | celery.beat.extraEnv | list | `[]` | additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list. |
 | celery.beat.extraVolumeMounts | list | `[]` | additional volumeMounts to be added to the pods |
 | celery.beat.extraVolumes | list | `[]` | additional volumes to be added to the pods |
@@ -179,6 +180,7 @@ Instead of `existingSecret` you can set `password`, which lets the chart create 
 | celery.worker.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | celery.worker.config.django.debug | bool | `false` | Django DEBUG mode. |
 | celery.worker.config.django.gunicornWorkers | int | `4` | Number of workers used by Gunicorn process in charge of serving client connection. Increase the number of worker threads to serve more clients concurrently |
+| celery.worker.deploymentStrategy | object | `{}` | Update strategy for the Celery worker deployment |
 | celery.worker.extraEnv | list | `[]` | additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list. |
 | celery.worker.extraVolumeMounts | list | `[]` | additional volumeMounts to be added to the pods |
 | celery.worker.extraVolumes | list | `[]` | additional volumes to be added to the pods |
@@ -267,6 +269,7 @@ Instead of `existingSecret` you can set `password`, which lets the chart create 
 | squest.config.squest.host | string | `"http://squest.domain.local"` | Address of the Squest portal instance. Used in email templates and in metadata sent to Red Hat Ansible Automation Platform/AWX job templates. |
 | squest.config.squest.isDevServer | bool | `false` | Set to True to change the navbar and footer color to visually identify a testing instance of Squest. |
 | squest.config.squest.maintenanceModeEnabled | bool | `false` | When enabled, only administrators can access squest UI and API. This can be used for example to block new requests by end users from the service catalog. So an administrator can perform operations against the API like migrating instance specs. |
+| squest.deploymentStrategy | object | `{}` | Update strategy for the Squest deployment. Falls back to `squest.strategy` if empty. Set `type: Recreate` if the persistence uses `ReadWriteOnce` volumes, as a rolling update starts the new Pod before stopping the old one and it can't mount the volume on another node. |
 | squest.extraEnv | list | `[]` | additional environment variables to be added to the squest container. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables. |
 | squest.extraEnvFrom | list | `[]` | load additional environment variables in the squest container from configMaps or secrets. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables. |
 | squest.extraVolumeMounts | list | `[]` | additional volumeMounts to be added to the squest container (nginx and init container have separate extraVolumeMounts) |
@@ -317,7 +320,7 @@ Instead of `existingSecret` you can set `password`, which lets the chart create 
 | squest.serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | squest.serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | squest.serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
-| squest.strategy | string | `"Recreate"` | Upgrade strategy For Deployments, valid values are Recreate (default) and RollingUpdate |
+| squest.strategy | string | `"Recreate"` | Deprecated, use `squest.deploymentStrategy` instead. Update strategy type of the Squest deployment (`Recreate` or `RollingUpdate`), used if `squest.deploymentStrategy` is empty. |
 | squest.tolerations | list | `[]` | Toleration labels for pod assignment |
 | valkey.auth.aclUsers.default.password | string | `"squest"` | Inline password of the user `default`. Use `valkey.auth.usersExistingSecret` instead for production. |
 | valkey.auth.aclUsers.default.permissions | string | `"~* &* +@all"` | ACL permissions of the user `default` |

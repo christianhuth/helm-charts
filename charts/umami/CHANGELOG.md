@@ -1,7 +1,7 @@
 # umami
 
-## 8.0.1
+## 8.1.0
 
-### Changed
+### Added
 
-- App Version to 3.4.1
+- support for deployment strategy

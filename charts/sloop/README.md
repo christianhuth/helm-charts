@@ -53,6 +53,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | clusterRole.additionalApiGroups | list | `[]` |  |
 | clusterRole.additionalPermissions | list | `[]` |  |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment. Set `type: Recreate` if the persistence uses `ReadWriteOnce` volumes, as a rolling update starts the new Pod before stopping the old one and it can't mount the volume on another node. |
 | fullnameOverride | string | `""` | String to fully override `"sloop.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"ghcr.io"` | image registory |

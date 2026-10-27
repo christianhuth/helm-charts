@@ -74,6 +74,21 @@
               "title": "config",
               "type": "object"
             },
+            "deploymentStrategy": {
+              "description": "Update strategy for the Celery beat deployment. Defaults to `Recreate`, so that two schedulers never run at the same time.",
+              "properties": {
+                "type": {
+                  "default": "Recreate",
+                  "title": "type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "title": "deploymentStrategy",
+              "type": "object"
+            },
             "extraEnv": {
               "description": "additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.",
               "items": {
@@ -254,6 +269,7 @@
             "service",
             "resources",
             "autoscaling",
+            "deploymentStrategy",
             "nodeSelector",
             "tolerations",
             "affinity",
@@ -336,6 +352,12 @@
               "title": "config",
               "type": "object"
             },
+            "deploymentStrategy": {
+              "description": "Update strategy for the Celery worker deployment",
+              "required": [],
+              "title": "deploymentStrategy",
+              "type": "object"
+            },
             "extraEnv": {
               "description": "additional environment variables to be added to the pods. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list.",
               "items": {
@@ -516,6 +538,7 @@
             "service",
             "resources",
             "autoscaling",
+            "deploymentStrategy",
             "nodeSelector",
             "tolerations",
             "affinity",
@@ -1188,6 +1211,12 @@
           "title": "config",
           "type": "object"
         },
+        "deploymentStrategy": {
+          "description": "Update strategy for the Squest deployment. Falls back to `squest.strategy` if empty. Set `type: Recreate` if the persistence uses `ReadWriteOnce` volumes, as a rolling update starts the new Pod before stopping the old one and it can't mount the volume on another node.",
+          "required": [],
+          "title": "deploymentStrategy",
+          "type": "object"
+        },
         "extraEnv": {
           "description": "additional environment variables to be added to the squest container. See https://hewlettpackard.github.io/squest/latest/configuration/squest_settings for a complete list of available environment variables.",
           "items": {
@@ -1699,7 +1728,7 @@
         },
         "strategy": {
           "default": "Recreate",
-          "description": "Upgrade strategy For Deployments, valid values are Recreate (default) and RollingUpdate",
+          "description": "Deprecated, use `squest.deploymentStrategy` instead. Update strategy type of the Squest deployment (`Recreate` or `RollingUpdate`), used if `squest.deploymentStrategy` is empty.",
           "title": "strategy",
           "type": "string"
         },
@@ -1715,6 +1744,7 @@
       "required": [
         "image",
         "strategy",
+        "deploymentStrategy",
         "replicaCount",
         "revisionHistoryLimit",
         "serviceAccount",

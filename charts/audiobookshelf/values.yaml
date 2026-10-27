@@ -136,7 +136,7 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-# -- Update strategy for the deployment
+# -- Update strategy for the deployment. Set `type: Recreate` if the persistence uses `ReadWriteOnce` volumes, as a rolling update starts the new Pod before stopping the old one and it can't mount the volume on another node.
 deploymentStrategy: {}
   # type: RollingUpdate
   # rollingUpdate:

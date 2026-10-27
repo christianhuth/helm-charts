@@ -10,11 +10,17 @@ spec:
   replicas: {{ .Values.squest.replicaCount }}
   {{- end }}
   revisionHistoryLimit: {{ .Values.squest.revisionHistoryLimit }}
+  {{- $strategy := .Values.squest.deploymentStrategy }}
+  {{- if and (not $strategy) .Values.squest.strategy }}
+  {{- $strategy = dict "type" .Values.squest.strategy }}
+  {{- end }}
+  {{- with $strategy }}
+  strategy:
+    {{- . | toYaml | nindent 4 }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "squest.squest.selectorLabels" . | nindent 6 }}
-  strategy:
-    type: {{ .Values.squest.strategy }}
   template:
     metadata:
       {{- with .Values.squest.podAnnotations }}

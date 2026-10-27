@@ -2,7 +2,7 @@ apiVersion: v2
 name: kutt
 description: Kutt is a free modern URL shortener.
 type: application
-version: 10.0.0
+version: 10.1.0
 appVersion: "v3.2.6"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.svg
@@ -23,14 +23,8 @@ dependencies:
     condition: valkey.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: "BREAKING: replaced the Bitnami PostgreSQL subchart with a PostgreSQL cluster managed by the CloudNativePG operator (upstream chart cnpg/cluster). See the upgrade notes in the README."
-    - kind: changed
-      description: "BREAKING: replaced the Bitnami Redis subchart with the official Valkey chart (valkey/valkey), the values moved from redis.* to valkey.*"
-    - kind: changed
-      description: "BREAKING: renamed externalPostgresql to externalDatabase and restructured externalRedis, both with a standardized structure"
-    - kind: removed
-      description: "BREAKING: inline password for the bundled PostgreSQL. The operator generates the password or uses the Secret given in postgresql.cluster.initdb.secret.name"
+    - kind: added
+      description: support for deployment strategy
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

@@ -1,7 +1,7 @@
 # kubevirt-cloud-controller-manager
 
-## 0.0.2
+## 0.1.0
 
-### Fixed
+### Added
 
-- wrong calculation of cluster name when including Chart as Sub-Chart
+- support for deployment strategy

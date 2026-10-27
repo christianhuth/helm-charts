@@ -1,7 +1,7 @@
 # keycloak-mcp-server
 
-## 1.2.0
+## 1.3.0
 
-### Changed
+### Added
 
-- App Version to 0.4.0
+- support for deployment strategy

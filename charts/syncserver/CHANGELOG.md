@@ -1,7 +1,7 @@
 # syncserver
 
-## 1.3.0
+## 1.4.0
 
 ### Added
 
-- option to define route timeouts
+- support for deployment strategy

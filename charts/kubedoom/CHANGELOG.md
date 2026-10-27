@@ -1,7 +1,7 @@
 # kubedoom
 
-## 1.1.2
+## 1.2.0
 
-### Fixed
+### Added
 
-- problem in hpa template
+- support for deployment strategy

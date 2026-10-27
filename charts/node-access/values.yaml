@@ -23,6 +23,19 @@ replicaCount: 1
 # -- The number of old ReplicaSets to retain
 revisionHistoryLimit: 10
 
+# -- Update strategy for the deployment, used if `nodeAccess.accessMode` is `deployment`
+deploymentStrategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxSurge: 25%
+  #   maxUnavailable: 25%
+
+# -- Update strategy for the DaemonSet, used if `nodeAccess.accessMode` is `daemonset`
+updateStrategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxUnavailable: 1
+
 # -- Annotations to be added to the pods
 podAnnotations: {}
 

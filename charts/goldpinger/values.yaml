@@ -152,6 +152,12 @@ resources:
     cpu: 1m
     memory: 40Mi
 
+# -- Update strategy for the DaemonSet
+updateStrategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxUnavailable: 1
+
 # -- Node labels for pod assignment
 nodeSelector: {}
 

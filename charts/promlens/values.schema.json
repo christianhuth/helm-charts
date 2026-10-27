@@ -241,6 +241,12 @@
       "title": "config",
       "type": "object"
     },
+    "deploymentStrategy": {
+      "description": "Update strategy for the deployment",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"promlens.fullname\"`",
@@ -659,6 +665,7 @@
     "route",
     "resources",
     "autoscaling",
+    "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",

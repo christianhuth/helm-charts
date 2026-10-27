@@ -113,6 +113,7 @@ Instead of `externalMongodb.existingSecret` you can set `externalMongodb.passwor
 | api.autoscaling.minReplicas | int | `1` | Minimum number of replicas |
 | api.autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
 | api.autoscaling.targetMemoryUtilizationPercentage | int | `80` | Target Memory utilization percentage |
+| api.deploymentStrategy | object | `{}` | Update strategy for the API deployment |
 | api.extraEnv | list | `[]` | additional environment variables to be added to the api pods |
 | api.image.pullPolicy | string | `"Always"` | image pull policy |
 | api.image.registry | string | `"docker.io"` | image registry |
@@ -179,6 +180,7 @@ Instead of `externalMongodb.existingSecret` you can set `externalMongodb.passwor
 | frontend.autoscaling.minReplicas | int | `1` | Minimum number of replicas |
 | frontend.autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
 | frontend.autoscaling.targetMemoryUtilizationPercentage | int | `80` | Target Memory utilization percentage |
+| frontend.deploymentStrategy | object | `{}` | Update strategy for the frontend deployment |
 | frontend.extraEnv | list | `[]` | additional environment variables to be added to the frontend pods |
 | frontend.image.pullPolicy | string | `"Always"` | image pull policy |
 | frontend.image.registry | string | `"docker.io"` | image registry |

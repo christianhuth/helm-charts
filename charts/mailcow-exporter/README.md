@@ -60,6 +60,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | config.mailcow.auth.existingSecret | string | `""` | Name of existing secret to use for Mailcow authentication. Key in secret needs to be `mailcow-api-key`. |
 | config.mailcow.host | string | `""` | Hostname under which the mailcow instance is hosted |
 | config.mailcow.scheme | string | `"https"` | The scheme to use when accessing the API (must be "http" or "https") |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | fullnameOverride | string | `""` | String to fully override `"mailcow-exporter.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |

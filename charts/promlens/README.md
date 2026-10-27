@@ -71,6 +71,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | config.web.defaultPrometheusUrl | string | `""` | The default Prometheus URL to load PromLens with. |
 | config.web.externalUrl | string | `""` | The URL under which PromLens is externally reachable (for example, if PromLens is served via a reverse proxy). Used for generating relative and absolute links back to PromLens itself. If the URL has a path portion, it will be used to prefix all HTTP endpoints served by PromLens. If omitted, relevant URL components will be derived automatically. |
 | config.web.routePrefix | string | `""` |  |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | fullnameOverride | string | `""` | String to fully override `"promlens.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registory |

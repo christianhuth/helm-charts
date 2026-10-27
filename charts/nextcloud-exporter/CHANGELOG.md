@@ -1,7 +1,7 @@
 # nextcloud-exporter
 
-## 1.5.1
+## 1.6.0
 
-### Changed
+### Added
 
-- App Version to 0.9.2
+- support for deployment strategy

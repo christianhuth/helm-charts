@@ -72,6 +72,12 @@
       "title": "autoscaling",
       "type": "object"
     },
+    "deploymentStrategy": {
+      "description": "Update strategy for the deployment",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "env": {
       "description": "Please see https://github.com/ajanvier/docker-polr#environment-variables for complete list of environment variables.\nAdmin account and mail settings are provided through their own values.",
       "items": {
@@ -780,6 +786,7 @@
     "route",
     "resources",
     "autoscaling",
+    "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",

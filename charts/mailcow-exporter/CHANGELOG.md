@@ -1,7 +1,7 @@
 # mailcow-exporter
 
-## 1.5.0
+## 1.6.0
 
 ### Added
 
-- Added scrapeTimeout value to serviceMonitor
+- support for deployment strategy

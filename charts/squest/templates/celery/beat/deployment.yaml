@@ -7,6 +7,10 @@ metadata:
   name: {{ include "squest.celery.beat.fullname" . }}
 spec:
   replicas: {{ .Values.celery.beat.replicaCount }}
+  {{- with .Values.celery.beat.deploymentStrategy }}
+  strategy:
+    {{- . | toYaml | nindent 4 }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "squest.celery.beat.selectorLabels" . | nindent 6 }}

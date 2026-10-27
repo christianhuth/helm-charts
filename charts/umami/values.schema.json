@@ -72,6 +72,12 @@
       "title": "database",
       "type": "object"
     },
+    "deploymentStrategy": {
+      "description": "Update strategy for the deployment",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "externalDatabase": {
       "properties": {
         "database": {
@@ -1116,6 +1122,7 @@
     "livenessProbe",
     "readinessProbe",
     "startupProbe",
+    "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",

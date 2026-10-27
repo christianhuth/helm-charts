@@ -106,6 +106,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.minReplicas | int | `1` | Minimum number of replicas |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
 | autoscaling.targetMemoryUtilizationPercentage | int | `80` | Target Memory utilization percentage |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment. Set `type: Recreate` if the persistence uses `ReadWriteOnce` volumes, as a rolling update starts the new Pod before stopping the old one and it can't mount the volume on another node. |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | fullnameOverride | string | `""` | String to fully override `"maildev.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |

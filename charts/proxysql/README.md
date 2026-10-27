@@ -62,6 +62,7 @@ If you manage ProxySQL configuration at runtime through the admin interface, set
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment, used if `proxysql.cluster.enabled` is false |
 | fullnameOverride | string | `""` | String to fully override `"proxysql.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registory |
@@ -140,6 +141,7 @@ If you manage ProxySQL configuration at runtime through the admin interface, set
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
 | tolerations | list | `[]` | Toleration labels for pod assignment |
+| updateStrategy | object | `{}` | Update strategy for the StatefulSet, used if `proxysql.cluster.enabled` is true |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 
