@@ -135,7 +135,7 @@
           "type": "string"
         },
         "tag": {
-          "default": "legacy-13.4.36",
+          "default": "legacy-13.4.37",
           "description": "Overrides the image tag",
           "title": "tag",
           "type": "string"
