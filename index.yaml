@@ -39042,6 +39042,52 @@ entries:
   kutt:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: dependency of valkey to 0.12.1
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: Simply shorten your link using the Web UI.
+          url: https://d4.alternativeto.net/v9sHosD3RiPblfBOOHZi0gwU1M0pRL6Jn53oiobJi9k/rs:fit:1200:1200:0/g:ce:0:0/YWJzOi8vZGlzdC9zL2t1dHQtaXRfNzY3MjMzX2Z1bGwucG5n.jpg
+        - title: You can see a list of the most recent created links and some statistical data about them.
+          url: https://docs.cloudron.io/img/kutt-admin.png
+        - title: View detailed statistics about each created link.
+          url: https://kutt.it/images/callout.png
+        - title: Kutt supports having more than one domain.
+          url: https://docs.cloudron.io/img/kutt-custom-domain.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: v3.2.6
+    created: "2026-10-28T17:07:07.577215266Z"
+    dependencies:
+    - alias: postgresql
+      condition: postgresql.enabled
+      name: cluster
+      repository: https://cloudnative-pg.github.io/charts
+      version: 0.9.0
+    - condition: valkey.enabled
+      name: valkey
+      repository: https://valkey.io/valkey-helm/
+      version: 0.12.1
+    description: Kutt is a free modern URL shortener.
+    digest: 81cff411428d212eec5044c592628e11d3379d3c3a3c62293b53e9ff13e6cbc0
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: kutt
+    sources:
+    - https://github.com/thedevs-network/kutt
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/kutt-10.1.1/kutt-10.1.1.tgz
+    version: 10.1.1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: support for deployment strategy
       artifacthub.io/links: |
@@ -118674,4 +118720,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-28T09:06:33.066739456Z"
+generated: "2026-10-28T17:07:07.58078564Z"
