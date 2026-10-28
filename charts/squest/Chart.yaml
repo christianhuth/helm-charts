@@ -2,7 +2,7 @@ apiVersion: v2
 name: squest
 description: Squest is a self-service portal that works on top of Red Hat Ansible Automation Platform/AWX.
 type: application
-version: 7.1.0
+version: 7.1.1
 appVersion: "1.31.8-alpine"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
@@ -24,16 +24,12 @@ dependencies:
     condition: rabbitmq.enabled
   - name: valkey
     repository: https://valkey.io/valkey-helm/
-    version: 0.12.0
+    version: 0.12.1
     condition: valkey.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: support for deployment strategy (squest.deploymentStrategy, celery.worker.deploymentStrategy and celery.beat.deploymentStrategy)
     - kind: changed
-      description: the Celery beat deployment uses the update strategy Recreate by default, so that two schedulers never run at the same time
-    - kind: deprecated
-      description: squest.strategy, use squest.deploymentStrategy instead
+      description: dependency of valkey to 0.12.1
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
