@@ -105,6 +105,7 @@ Instead of `externalDatabase.existingSecret` you can set `externalDatabase.passw
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | env[0].name | string | `"APP_ADDRESS"` |  |
 | env[0].value | string | `"polr.local"` |  |
 | env[1].name | string | `"APP_NAME"` |  |

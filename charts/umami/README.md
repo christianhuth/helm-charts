@@ -127,6 +127,7 @@ Keep the key: without it, the two-factor secrets of the users can no longer be d
 | autoscaling.targetMemoryUtilizationPercentage | int | `80` | Target Memory utilization percentage |
 | database.databaseUrlKey | string | `""` | Key in the existing secret containing the database url |
 | database.existingSecret | string | `""` | Name of an existing Secret containing the complete database URL (`postgresql://...`). Takes precedence over `postgresql.*` and `externalDatabase.*`. |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | externalDatabase.database | string | `"umami"` | Name of the database to use |
 | externalDatabase.existingSecret | string | `""` | Name of an existing Secret containing the password of the user. The password must only contain URL-safe characters. |
 | externalDatabase.existingSecretPasswordKey | string | `"password"` | Key in the existing Secret containing the password |

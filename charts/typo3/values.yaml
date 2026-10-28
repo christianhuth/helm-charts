@@ -191,7 +191,7 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-# -- Update strategy for the deployment
+# -- Update strategy for the deployment. Set `type: Recreate` if the persistence uses `ReadWriteOnce` volumes, as a rolling update starts the new Pod before stopping the old one and it can't mount the volume on another node.
 deploymentStrategy: {}
   # type: RollingUpdate
   # rollingUpdate:

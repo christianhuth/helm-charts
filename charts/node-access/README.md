@@ -46,6 +46,7 @@ The command removes all the Kubernetes components associated with the chart and 
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| deploymentStrategy | object | `{}` | Update strategy for the deployment, used if `nodeAccess.accessMode` is `deployment` |
 | fullnameOverride | string | `""` | String to fully override `"node-access.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registory |
@@ -69,6 +70,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| updateStrategy | object | `{}` | Update strategy for the DaemonSet, used if `nodeAccess.accessMode` is `daemonset` |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 

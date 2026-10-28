@@ -9,6 +9,10 @@ spec:
   replicas: {{ .Values.api.replicaCount }}
   {{- end }}
   revisionHistoryLimit: {{ .Values.api.revisionHistoryLimit }}
+  {{- with .Values.api.deploymentStrategy }}
+  strategy:
+    {{- . | toYaml | nindent 4 }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "countly.api.selectorLabels" . | nindent 6 }}

@@ -10,6 +10,10 @@ spec:
   replicas: {{ .Values.replicaCount }}
 {{- end }}
   serviceName: {{ include "proxysql.fullname" . }}
+  {{- with .Values.updateStrategy }}
+  updateStrategy:
+    {{- . | toYaml | nindent 4 }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "proxysql.selectorLabels" . | nindent 6 }}

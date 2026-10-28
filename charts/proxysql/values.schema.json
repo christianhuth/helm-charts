@@ -39,6 +39,12 @@
       "title": "autoscaling",
       "type": "object"
     },
+    "deploymentStrategy": {
+      "description": "Update strategy for the deployment, used if `proxysql.cluster.enabled` is false",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "fullnameOverride": {
       "default": "",
       "description": "String to fully override `\"proxysql.fullname\"`",
@@ -819,6 +825,12 @@
       },
       "title": "tolerations",
       "type": "array"
+    },
+    "updateStrategy": {
+      "description": "Update strategy for the StatefulSet, used if `proxysql.cluster.enabled` is true",
+      "required": [],
+      "title": "updateStrategy",
+      "type": "object"
     }
   },
   "required": [
@@ -837,6 +849,8 @@
     "route",
     "resources",
     "autoscaling",
+    "deploymentStrategy",
+    "updateStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",

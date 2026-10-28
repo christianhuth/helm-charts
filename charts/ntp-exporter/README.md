@@ -109,6 +109,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
 | tolerations | list | see [values.yaml](./values.yaml) | Toleration labels for pod assignment |
+| updateStrategy | object | `{}` | Update strategy for the DaemonSet |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 

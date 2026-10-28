@@ -1,7 +1,7 @@
 # maildev
 
-## 1.6.1
+## 1.7.0
 
-### Fixed
+### Added
 
-- broken HTTPRoute for maildev backend
+- support for deployment strategy

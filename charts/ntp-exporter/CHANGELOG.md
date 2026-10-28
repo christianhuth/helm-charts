@@ -1,7 +1,7 @@
 # ntp-exporter
 
-## 1.4.0
+## 1.5.0
 
 ### Added
 
-- Added scrapeTimeout value to podMonitor
+- support for update strategy

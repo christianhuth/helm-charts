@@ -1,8 +1,7 @@
 # polr
 
-## 5.0.2
+## 5.1.0
 
-### Changed
+### Added
 
-- get the mariadb-cluster dependency from the OCI registry oci://ghcr.io/mariadb-operator/charts, as the Helm repository helm.mariadb.com is deprecated
-- install the mariadb-operator from the OCI registry in the README
+- support for deployment strategy

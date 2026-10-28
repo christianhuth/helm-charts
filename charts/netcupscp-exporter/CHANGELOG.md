@@ -1,7 +1,7 @@
 # netcupscp-exporter
 
-## 2.1.0
+## 2.2.0
 
 ### Added
 
-- Added scrapeTimeout value to serviceMonitor
+- support for deployment strategy

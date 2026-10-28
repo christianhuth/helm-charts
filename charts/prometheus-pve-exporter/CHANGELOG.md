@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.10.2
+## 2.11.0
 
-### Changed
+### Added
 
-- App Version to 3.10.2
+- support for deployment strategy

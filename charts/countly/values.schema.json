@@ -52,6 +52,12 @@
           "title": "autoscaling",
           "type": "object"
         },
+        "deploymentStrategy": {
+          "description": "Update strategy for the API deployment",
+          "required": [],
+          "title": "deploymentStrategy",
+          "type": "object"
+        },
         "extraEnv": {
           "description": "additional environment variables to be added to the api pods",
           "items": {
@@ -585,6 +591,7 @@
         "autoscaling",
         "livenessProbe",
         "readinessProbe",
+        "deploymentStrategy",
         "nodeSelector",
         "tolerations",
         "affinity",
@@ -831,6 +838,12 @@
             "targetMemoryUtilizationPercentage"
           ],
           "title": "autoscaling",
+          "type": "object"
+        },
+        "deploymentStrategy": {
+          "description": "Update strategy for the frontend deployment",
+          "required": [],
+          "title": "deploymentStrategy",
           "type": "object"
         },
         "extraEnv": {
@@ -1316,6 +1329,7 @@
         "autoscaling",
         "livenessProbe",
         "readinessProbe",
+        "deploymentStrategy",
         "nodeSelector",
         "tolerations",
         "affinity",

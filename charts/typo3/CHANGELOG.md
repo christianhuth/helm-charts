@@ -1,7 +1,7 @@
 # typo3
 
-## 8.0.4
+## 8.0.5
 
 ### Changed
 
-- App Version to legacy-13.4.37
+- the description of deploymentStrategy recommends `type: Recreate` for ReadWriteOnce volumes

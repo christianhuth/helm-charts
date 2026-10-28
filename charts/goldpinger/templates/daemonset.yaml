@@ -7,6 +7,10 @@ metadata:
   name: {{ include "goldpinger.fullname" . }}
 spec:
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  {{- with .Values.updateStrategy }}
+  updateStrategy:
+    {{- . | toYaml | nindent 4 }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "goldpinger.selectorLabels" . | nindent 6 }}

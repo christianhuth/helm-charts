@@ -1013,6 +1013,12 @@
       },
       "title": "tolerations",
       "type": "array"
+    },
+    "updateStrategy": {
+      "description": "Update strategy for the DaemonSet",
+      "required": [],
+      "title": "updateStrategy",
+      "type": "object"
     }
   },
   "required": [
@@ -1031,6 +1037,7 @@
     "ingress",
     "route",
     "resources",
+    "updateStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",

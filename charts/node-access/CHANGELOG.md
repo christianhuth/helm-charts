@@ -1,7 +1,7 @@
 # node-access
 
-## 1.3.0
+## 1.4.0
 
-### Changed
+### Added
 
-- App Version to 1.38.0
+- support for deployment strategy and update strategy

@@ -1,7 +1,7 @@
 # promlens
 
-## 1.6.0
+## 1.7.0
 
-### Changed
+### Added
 
-- App Version to v0.4.0
+- support for deployment strategy

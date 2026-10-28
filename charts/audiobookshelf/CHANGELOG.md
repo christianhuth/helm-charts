@@ -1,7 +1,7 @@
 # audiobookshelf
 
-## 2.5.2
+## 2.5.3
 
 ### Changed
 
-- App Version to 2.37.2
+- the description of deploymentStrategy recommends `type: Recreate` for ReadWriteOnce volumes

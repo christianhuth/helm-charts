@@ -19,8 +19,15 @@ squest:
     # -- Overrides the image tag
     tag: "2.8.4"
 
-  # -- Upgrade strategy For Deployments, valid values are Recreate (default) and RollingUpdate
+  # -- Deprecated, use `squest.deploymentStrategy` instead. Update strategy type of the Squest deployment (`Recreate` or `RollingUpdate`), used if `squest.deploymentStrategy` is empty.
   strategy: Recreate
+
+  # -- Update strategy for the Squest deployment. Falls back to `squest.strategy` if empty. Set `type: Recreate` if the persistence uses `ReadWriteOnce` volumes, as a rolling update starts the new Pod before stopping the old one and it can't mount the volume on another node.
+  deploymentStrategy: {}
+    # type: RollingUpdate
+    # rollingUpdate:
+    #   maxSurge: 25%
+    #   maxUnavailable: 25%
 
   # -- Number of replicas
   replicaCount: 1
@@ -326,6 +333,10 @@ celery:
       targetCPUUtilizationPercentage: 80
       # targetMemoryUtilizationPercentage: 80
 
+    # -- Update strategy for the Celery beat deployment. Defaults to `Recreate`, so that two schedulers never run at the same time.
+    deploymentStrategy:
+      type: Recreate
+
     # -- Node labels for pod assignment
     nodeSelector: {}
 
@@ -422,6 +433,13 @@ celery:
       maxReplicas: 100
       targetCPUUtilizationPercentage: 80
       # targetMemoryUtilizationPercentage: 80
+
+    # -- Update strategy for the Celery worker deployment
+    deploymentStrategy: {}
+      # type: RollingUpdate
+      # rollingUpdate:
+      #   maxSurge: 25%
+      #   maxUnavailable: 25%
 
     # -- Node labels for pod assignment
     nodeSelector: {}

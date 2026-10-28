@@ -1,7 +1,7 @@
 # freshrss
 
-## 3.0.3
+## 3.0.4
 
 ### Changed
 
-- App Version to 1.30.4
+- the description of deploymentStrategy recommends `type: Recreate` for ReadWriteOnce volumes

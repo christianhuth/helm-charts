@@ -43,6 +43,12 @@
       "title": "autoscaling",
       "type": "object"
     },
+    "deploymentStrategy": {
+      "description": "Update strategy for the deployment. Set `type: Recreate` if the persistence uses `ReadWriteOnce` volumes, as a rolling update starts the new Pod before stopping the old one and it can't mount the volume on another node.",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
     "extraEnv": {
       "description": "additional environment variables to be added to the pods",
       "items": {
@@ -909,6 +915,7 @@
     "readinessProbe",
     "startupProbe",
     "resources",
+    "deploymentStrategy",
     "nodeSelector",
     "tolerations",
     "affinity",

@@ -63,6 +63,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | config.nextcloud.auth.username | string | `""` | Username for connecting to Nextcloud |
 | config.nextcloud.server | string | `""` | The URL to Nextcloud server including the scheme |
 | config.nextcloud.tlsSkipVerify | bool | `false` | Skip certificate verification of Nextcloud server |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | fullnameOverride | string | `""` | String to fully override `"nextcloud-exporter.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |

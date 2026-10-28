@@ -2,7 +2,7 @@ apiVersion: v2
 name: freshrss
 description: FreshRSS is a free, self-hostable feed aggregator
 type: application
-version: 3.0.3
+version: 3.0.4
 appVersion: "1.30.4"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/freshrss/icon.svg
@@ -21,7 +21,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: App Version to 1.30.4
+      description: "the description of deploymentStrategy recommends `type: Recreate` for ReadWriteOnce volumes"
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

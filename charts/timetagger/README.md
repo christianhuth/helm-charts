@@ -56,6 +56,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
 | autoscaling.targetMemoryUtilizationPercentage | int | `80` | Target Memory utilization percentage |
 | config.log.level | string | `"info"` | log level: debug, info, warn, error |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment. Set `type: Recreate` if the persistence uses `ReadWriteOnce` volumes, as a rolling update starts the new Pod before stopping the old one and it can't mount the volume on another node. |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
 | extraEnvFrom | list | `[]` | additional environment variables from ConfigMaps or Secrets |
 | fullnameOverride | string | `""` | String to fully override `"timetagger.fullname"` |

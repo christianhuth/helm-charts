@@ -1,8 +1,15 @@
 # squest
 
-## 7.0.6
+## 7.1.0
+
+### Added
+
+- support for deployment strategy (squest.deploymentStrategy, celery.worker.deploymentStrategy and celery.beat.deploymentStrategy)
 
 ### Changed
 
-- get the mariadb-cluster dependency from the OCI registry oci://ghcr.io/mariadb-operator/charts, as the Helm repository helm.mariadb.com is deprecated
-- install the mariadb-operator from the OCI registry in the README
+- the Celery beat deployment uses the update strategy Recreate by default, so that two schedulers never run at the same time
+
+### Deprecated
+
+- squest.strategy, use squest.deploymentStrategy instead

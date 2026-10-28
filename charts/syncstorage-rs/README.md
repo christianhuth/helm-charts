@@ -211,6 +211,7 @@ The Tokenserver database is configured the same way with `tokenserver-db` and `e
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| deploymentStrategy | object | `{}` | Update strategy for the deployment |
 | externalSyncserverDatabase.database | string | `"syncserver"` | Name of the database to use |
 | externalSyncserverDatabase.existingSecret | string | `""` | Name of an existing Secret containing the password of the user. The password must only contain URL-safe characters. |
 | externalSyncserverDatabase.existingSecretPasswordKey | string | `"password"` | Key in the existing Secret containing the password of the user |
