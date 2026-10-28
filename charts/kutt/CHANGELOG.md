@@ -1,7 +1,7 @@
 # kutt
 
-## 10.1.0
+## 10.1.1
 
-### Added
+### Changed
 
-- support for deployment strategy
+- dependency of valkey to 0.12.1
