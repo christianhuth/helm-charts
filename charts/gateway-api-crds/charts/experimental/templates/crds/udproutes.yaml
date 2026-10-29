@@ -7,8 +7,8 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
 {{- include "gateway-api-crds.resourcePolicyAnnotation" $ }}
-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-    gateway.networking.k8s.io/bundle-version: v1.6.3
+    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
+    gateway.networking.k8s.io/bundle-version: v1.7.0
     gateway.networking.k8s.io/channel: experimental
   name: udproutes.gateway.networking.k8s.io
 spec:
@@ -403,6 +403,8 @@ spec:
                           x-kubernetes-validations:
                             - message: Must have port for Service reference
                               rule: '(size(self.group) == 0 && self.kind == ''Service'') ? has(self.port) : true'
+                            - message: Must not have port for Backend reference
+                              rule: '(self.group == ''gateway.networking.x-k8s.io'' && self.kind == ''XBackend'') ? !has(self.port) : true'
                         maxItems: 16
                         minItems: 1
                         type: array
@@ -1102,6 +1104,8 @@ spec:
                           x-kubernetes-validations:
                             - message: Must have port for Service reference
                               rule: '(size(self.group) == 0 && self.kind == ''Service'') ? has(self.port) : true'
+                            - message: Must not have port for Backend reference
+                              rule: '(self.group == ''gateway.networking.x-k8s.io'' && self.kind == ''XBackend'') ? !has(self.port) : true'
                         maxItems: 16
                         minItems: 1
                         type: array
