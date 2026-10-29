@@ -67,6 +67,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | experimental.crds.xbackendtrafficpolicies | bool | `true` | Installs the XBackendTrafficPolicy CRD. |
 | experimental.crds.xlistenersets | bool | `true` | Installs the XListenerSet CRD. |
 | experimental.crds.xmeshes | bool | `true` | Installs the XMesh CRD. |
+| experimental.crds.xtelemetrypolicies | bool | `true` | Installs the XTelemetryPolicy CRD. |
 | standard.crds.backendtlspolicies | bool | `true` | Installs the BackendTLSPolicy CRD. |
 | standard.crds.gatewayclasses | bool | `true` | Installs the GatewayClass CRD. |
 | standard.crds.gateways | bool | `true` | Installs the Gateway CRD. |
