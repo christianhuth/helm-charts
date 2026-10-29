@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 12.0.5
+## 13.0.0
 
 ### Changed
 
-- dependency of valkey to 0.12.1
+- App Version to 13.0
