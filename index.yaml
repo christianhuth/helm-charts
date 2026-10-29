@@ -86604,6 +86604,49 @@ entries:
   squest:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: dependency of valkey to 0.12.1
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.31.8-alpine
+    created: "2026-10-29T01:40:00.03873736Z"
+    dependencies:
+    - alias: mariadb
+      condition: mariadb.enabled
+      name: mariadb-cluster
+      repository: oci://ghcr.io/mariadb-operator/charts
+      version: 26.10.2
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.21.32
+    - condition: valkey.enabled
+      name: valkey
+      repository: https://valkey.io/valkey-helm/
+      version: 0.12.1
+    description: Squest is a self-service portal that works on top of Red Hat Ansible
+      Automation Platform/AWX.
+    digest: 80e1c50bcf4b51d1efc4b1980b59cc35ce43a1a2bf73342a45cf8a252db3d332
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/squest/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: squest
+    sources:
+    - https://github.com/HewlettPackard/squest
+    - https://hewlettpackard.github.io/squest
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/squest-7.1.1/squest-7.1.1.tgz
+    version: 7.1.1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: support for deployment strategy (squest.deploymentStrategy, celery.worker.deploymentStrategy and celery.beat.deploymentStrategy)
         - kind: changed
@@ -118768,4 +118811,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-28T21:40:55.696636125Z"
+generated: "2026-10-29T01:40:00.044947166Z"
