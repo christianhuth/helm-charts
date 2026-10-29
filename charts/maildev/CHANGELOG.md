@@ -1,7 +1,7 @@
 # maildev
 
-## 1.7.0
+## 2.0.0
 
-### Added
+### Changed
 
-- support for deployment strategy
+- App Version to 3.0.0
