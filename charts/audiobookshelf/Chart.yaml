@@ -1,8 +1,8 @@
 apiVersion: v2
 name: audiobookshelf
-description: A Helm chart for installing the Argo CD Metrics Server, which connects to Prometheus and can be used to display Metrics in the Argo CD UI
+description: A Helm chart for installing Audiobookshelf, a self-hosted audiobook and podcast server
 type: application
-version: 2.5.3
+version: 2.5.4
 appVersion: "2.37.2"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/audiobookshelf/icon.svg
@@ -10,11 +10,13 @@ maintainers:
   - name: christianhuth
     email: christian@knell.it
 sources:
-  - https://github.com/argoproj-labs/argocd-extension-metrics
+  - https://github.com/advplyr/audiobookshelf
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: "the description of deploymentStrategy recommends `type: Recreate` for ReadWriteOnce volumes"
+    - kind: fixed
+      description: HorizontalPodAutoscaler failed to render when autoscaling.enabled was true
+    - kind: fixed
+      description: chart description, sources and nameOverride/fullnameOverride docs referred to argocd-extension-metrics
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
