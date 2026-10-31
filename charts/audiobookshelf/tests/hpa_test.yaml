@@ -1,0 +1,49 @@
+suite: test hpa
+templates:
+  - templates/hpa.yaml
+tests:
+  - it: should not render a HorizontalPodAutoscaler by default
+    asserts:
+      - hasDocuments:
+          count: 0
+  - it: should render CPU and memory targets from autoscaling values
+    capabilities:
+      majorVersion: 1
+      minorVersion: 31
+    set:
+      autoscaling:
+        enabled: true
+        minReplicas: 2
+        maxReplicas: 5
+        targetCPUUtilizationPercentage: 70
+        targetMemoryUtilizationPercentage: 60
+    asserts:
+      - isKind:
+          of: HorizontalPodAutoscaler
+      - equal:
+          path: apiVersion
+          value: autoscaling/v2
+      - equal:
+          path: spec.minReplicas
+          value: 2
+      - equal:
+          path: spec.maxReplicas
+          value: 5
+      - contains:
+          path: spec.metrics
+          content:
+            type: Resource
+            resource:
+              name: cpu
+              target:
+                type: Utilization
+                averageUtilization: 70
+      - contains:
+          path: spec.metrics
+          content:
+            type: Resource
+            resource:
+              name: memory
+              target:
+                type: Utilization
+                averageUtilization: 60
