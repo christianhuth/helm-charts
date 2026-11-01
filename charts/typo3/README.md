@@ -131,7 +131,7 @@ Instead of `externalDatabase.existingSecret` you can set `externalDatabase.passw
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"crinis/typo3"` | image repository |
-| image.tag | string | `"legacy-13.4.37"` | Overrides the image tag |
+| image.tag | string | `"legacy-14.3.10"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
