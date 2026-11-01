@@ -153,7 +153,7 @@ Charts using this chart as a dependency can call its named templates `mongodb-co
 | mongodb.security.authentication.modes | list | `["SCRAM"]` | Authentication mechanisms. `SCRAM` enables SCRAM-SHA-256 and SCRAM-SHA-1, `X509` requires TLS. |
 | mongodb.type | string | `"ReplicaSet"` | Type of the deployment. MongoDB Community only supports replica sets. |
 | mongodb.users | list | `[]` | Users of the database. If a user has no `passwordSecretRef`, the chart generates a password and stores it in the Secret `<fullname>-<name>-password` (key `password`). `scramCredentialsSecretName` defaults to `<fullname>-<name>`. |
-| mongodb.version | string | `"8.0.34"` | MongoDB version. The operator requires the exact version and runs the image `quay.io/mongodb/mongodb-community-server:<version>-ubi8`. |
+| mongodb.version | string | `"8.3.13"` | MongoDB version. The operator requires the exact version and runs the image `quay.io/mongodb/mongodb-community-server:<version>-ubi8`. |
 | nameOverride | string | `""` | Provide a name in place of `mongodb-community` |
 | search.enabled | bool | `false` | Deploy MongoDB Search (MongoDBSearch resource) for full-text and vector search. Adds the user `search-sync-source` used by the search nodes to the replica set. |
 | search.spec | object | see [values.yaml](./values.yaml) | Spec of the MongoDBSearch resource, rendered as is. See the [CRD](https://github.com/mongodb/mongodb-kubernetes/blob/master/helm_chart/crds/mongodb.com_mongodbsearch.yaml) for all options. |
