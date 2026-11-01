@@ -1,7 +1,7 @@
 # github-exporter
 
-## 2.7.0
+## 2.8.0
 
-### Added
+### Changed
 
-- support for deployment strategy
+- App Version to v2.4.1
