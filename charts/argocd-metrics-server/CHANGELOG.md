@@ -1,7 +1,7 @@
 # argocd-metrics-server
 
-## 1.2.0
+## 1.2.1
 
-### Changed
+### Added
 
-- App Version to v1.1.1
+- instructions for installing the chart from the OCI registry to the README
