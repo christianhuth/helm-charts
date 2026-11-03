@@ -1,7 +1,7 @@
-# -- Provide a name in place of `argocd-extension-metrics`
+# -- Provide a name in place of `audiobookshelf`
 nameOverride: ""
 
-# -- String to fully override `"argocd-extension-metrics.fullname"`
+# -- String to fully override `"audiobookshelf.fullname"`
 fullnameOverride: ""
 
 image:

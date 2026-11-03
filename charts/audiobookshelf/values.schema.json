@@ -449,7 +449,7 @@
     },
     "fullnameOverride": {
       "default": "",
-      "description": "String to fully override `\"argocd-extension-metrics.fullname\"`",
+      "description": "String to fully override `\"audiobookshelf.fullname\"`",
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -592,7 +592,7 @@
     },
     "nameOverride": {
       "default": "",
-      "description": "Provide a name in place of `argocd-extension-metrics`",
+      "description": "Provide a name in place of `audiobookshelf`",
       "title": "nameOverride",
       "type": "string"
     },

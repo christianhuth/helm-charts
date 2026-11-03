@@ -1,6 +1,6 @@
 # audiobookshelf
 
-A Helm chart for installing the Argo CD Metrics Server, which connects to Prometheus and can be used to display Metrics in the Argo CD UI
+A Helm chart for installing Audiobookshelf, a self-hosted audiobook and podcast server
 
 ## TL;DR;
 
@@ -90,7 +90,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | deploymentStrategy | object | `{}` | Update strategy for the deployment. Set `type: Recreate` if the persistence uses `ReadWriteOnce` volumes, as a rolling update starts the new Pod before stopping the old one and it can't mount the volume on another node. |
 | extraEnv | list | `[]` | additional environment variables to be added to the pods |
-| fullnameOverride | string | `""` | String to fully override `"argocd-extension-metrics.fullname"` |
+| fullnameOverride | string | `""` | String to fully override `"audiobookshelf.fullname"` |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"docker.io"` | image registory |
 | image.repository | string | `"advplyr/audiobookshelf"` | image repository |
@@ -103,7 +103,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | ingress.tls | list | `[]` |  |
-| nameOverride | string | `""` | Provide a name in place of `argocd-extension-metrics` |
+| nameOverride | string | `""` | Provide a name in place of `audiobookshelf` |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podSecurityContext | object | see [values.yaml](./values.yaml) | pod-level security context |
 | replicaCount | int | `1` | Number of replicas |
