@@ -7,8 +7,8 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
 {{- include "gateway-api-crds.resourcePolicyAnnotation" $ }}
-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-    gateway.networking.k8s.io/bundle-version: v1.6.3
+    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
+    gateway.networking.k8s.io/bundle-version: v1.7.0
     gateway.networking.k8s.io/channel: standard
   name: gateways.gateway.networking.k8s.io
 spec:
@@ -1415,6 +1415,7 @@ spec:
                     * "Accepted"
                     * "Programmed"
                     * "Ready"
+                    * "AddressesAssigned"
                   items:
                     description: Condition contains details for one aspect of the current state of this API Resource.
                     properties:
@@ -3007,6 +3008,7 @@ spec:
                     * "Accepted"
                     * "Programmed"
                     * "Ready"
+                    * "AddressesAssigned"
                   items:
                     description: Condition contains details for one aspect of the current state of this API Resource.
                     properties:

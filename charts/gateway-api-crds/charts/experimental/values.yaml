@@ -29,3 +29,5 @@ crds:
   xlistenersets: true
   # -- Installs the XMesh CRD.
   xmeshes: true
+  # -- Installs the XTelemetryPolicy CRD.
+  xtelemetrypolicies: true

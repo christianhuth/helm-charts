@@ -25,8 +25,8 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
 {{- include "gateway-api-crds.resourcePolicyAnnotation" $ }}
-    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/4530
-    gateway.networking.k8s.io/bundle-version: v1.6.3
+    api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/5371
+    gateway.networking.k8s.io/bundle-version: v1.7.0
     gateway.networking.k8s.io/channel: standard
   labels:
     gateway.networking.k8s.io/policy: Direct
@@ -192,6 +192,7 @@ spec:
                           resources, SectionName is interpreted as the following:
 
                           * Gateway: Listener name
+                          * ListenerSet: Listener name
                           * HTTPRoute: HTTPRouteRule name
                           * Service: Port name
 
@@ -842,6 +843,7 @@ spec:
                           resources, SectionName is interpreted as the following:
 
                           * Gateway: Listener name
+                          * ListenerSet: Listener name
                           * HTTPRoute: HTTPRouteRule name
                           * Service: Port name
 
