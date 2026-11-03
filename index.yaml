@@ -355,6 +355,36 @@ entries:
   audiobookshelf:
   - annotations:
       artifacthub.io/changes: |
+        - kind: fixed
+          description: HorizontalPodAutoscaler failed to render when autoscaling.enabled was true
+        - kind: fixed
+          description: chart description, sources and nameOverride/fullnameOverride docs referred to argocd-extension-metrics
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.37.2
+    created: "2026-11-03T19:36:09.981165024Z"
+    description: A Helm chart for installing Audiobookshelf, a self-hosted audiobook
+      and podcast server
+    digest: 84eba1da725df4a02ba4d79b015e9d4727fa44dd66deb8192ec12cc4b38cbb85
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/audiobookshelf/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: audiobookshelf
+    sources:
+    - https://github.com/advplyr/audiobookshelf
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/audiobookshelf-2.5.4/audiobookshelf-2.5.4.tgz
+    version: 2.5.4
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: "the description of deploymentStrategy recommends `type: Recreate` for ReadWriteOnce volumes"
       artifacthub.io/links: |
@@ -118949,4 +118979,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-11-03T19:24:24.388647186Z"
+generated: "2026-11-03T19:36:09.984981361Z"
