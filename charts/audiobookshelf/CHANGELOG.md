@@ -1,7 +1,8 @@
 # audiobookshelf
 
-## 2.5.3
+## 2.5.4
 
-### Changed
+### Fixed
 
-- the description of deploymentStrategy recommends `type: Recreate` for ReadWriteOnce volumes
+- HorizontalPodAutoscaler failed to render when autoscaling.enabled was true
+- chart description, sources and nameOverride/fullnameOverride docs referred to argocd-extension-metrics
