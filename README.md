@@ -18,6 +18,14 @@ helm repo update
 
 You can then run `helm search repo christianhuth` to see the current list of available charts.
 
+New chart releases are also published as OCI artifacts to the GitHub Container Registry, which needs no `helm repo add`:
+
+```shell
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/<chart-name>
+```
+
+Chart versions released before OCI publishing was introduced are only available from <https://charts.christianhuth.de>.
+
 ## License
 
 [MIT License](./LICENSE)

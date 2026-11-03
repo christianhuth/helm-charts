@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a collection of Kubernetes Helm charts maintained by christianhuth. Charts are published to https://charts.christianhuth.de and indexed on Artifact Hub.
+This is a collection of Kubernetes Helm charts maintained by christianhuth. Charts are published to https://charts.christianhuth.de and indexed on Artifact Hub. New releases are also pushed to `oci://ghcr.io/christianhuth/helm-charts/<chart-name>` (only versions released since then; older versions are not backfilled).
 
 ## Development Commands
 
@@ -90,7 +90,7 @@ The chart pipeline (`.github/workflows/chart-pipeline.yml`) runs on changes to `
 3. **Kubeconform** - Validate rendered manifests against Kubernetes schemas
 4. **Unit Testing** - Run helm-unittest tests
 5. **Testing** - Install charts in kind cluster
-6. **Releasing** - (main branch only) Package and release charts
+6. **Releasing** - (main branch only) Package and sign charts with chart-releaser, create GitHub releases, push them to ghcr.io (`oci_registry_url`) and update `index.yaml` on `gh-pages`
 
 ## Key Dependencies
 

@@ -15,6 +15,7 @@ jobs:
   release2github:
     permissions:
       contents: write
+      packages: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout git repository
@@ -43,9 +44,13 @@ jobs:
           echo "${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}" > passphrase-file.txt
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.7.0
+        uses: helm/chart-releaser-action@v1.9.0
         with:
           config: ./.github/config/chart-releasing.yaml
+          oci_registry_url: oci://ghcr.io/${{ github.repository }}
+          oci_username: ${{ github.actor }}
+          oci_password: ${{ secrets.GITHUB_TOKEN }}
+          skip_existing: true
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           CR_KEY: "${{ secrets.GPG_PRIVATE_KEY_UID }}"
