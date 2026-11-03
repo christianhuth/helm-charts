@@ -2,7 +2,7 @@ apiVersion: v2
 name: syncserver
 description: Helm chart for Firefox Syncserver
 type: application
-version: 1.4.0
+version: 1.4.1
 appVersion: "latest"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncserver/icon.svg
@@ -15,7 +15,9 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: support for deployment strategy
+      description: instructions for installing the chart from the OCI registry to the README
+    - kind: fixed
+      description: Helm repository in the README referred to the outdated christianknell.github.io repository
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

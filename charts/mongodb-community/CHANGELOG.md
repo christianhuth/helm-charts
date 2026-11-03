@@ -1,7 +1,7 @@
 # mongodb-community
 
-## 1.0.0
+## 1.0.1
 
 ### Added
 
-- initial release of the chart for the MongoDBCommunity resource of the MongoDB Controllers for Kubernetes
+- instructions for installing the chart from the OCI registry to the README

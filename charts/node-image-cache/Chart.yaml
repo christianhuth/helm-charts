@@ -2,7 +2,7 @@ apiVersion: v2
 name: node-image-cache
 description: Pre-pulls a fixed list of container images onto every node, so that pods using them start without waiting for an image pull.
 type: application
-version: 1.0.0
+version: 1.0.1
 kubeVersion: ">=1.33.0-0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/node-image-cache/icon.svg
@@ -19,7 +19,7 @@ keywords:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: Initial release
+      description: instructions for installing the chart from the OCI registry to the README
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

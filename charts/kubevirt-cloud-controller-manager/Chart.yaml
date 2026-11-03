@@ -2,7 +2,7 @@ apiVersion: v2
 name: kubevirt-cloud-controller-manager
 description: Kubernetes cloud-provider for KubeVirt
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "0.6.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kubevirt-cloud-controller-manager/icon.svg
@@ -14,7 +14,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: support for deployment strategy
+      description: instructions for installing the chart from the OCI registry to the README
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

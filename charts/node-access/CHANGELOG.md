@@ -1,7 +1,7 @@
 # node-access
 
-## 1.4.0
+## 1.4.1
 
 ### Added
 
-- support for deployment strategy and update strategy
+- instructions for installing the chart from the OCI registry to the README

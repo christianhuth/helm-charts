@@ -10,6 +10,12 @@ helm repo update
 helm install my-release christianhuth/squest
 ```
 
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/squest
+```
+
 ## Introduction
 
 This chart bootstraps [Squest](https://hewlettpackard.github.io/squest) using the [Helm](https://helm.sh) package manager.
@@ -38,6 +44,12 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/squest
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/squest
 ```
 
 These commands deploy Squest on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.

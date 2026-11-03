@@ -10,6 +10,12 @@ helm repo update
 helm install my-release christianhuth/mongodb-community
 ```
 
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/mongodb-community
+```
+
 ## Introduction
 
 This chart deploys a MongoDB Community replica set as a `MongoDBCommunity` resource of the [MongoDB Controllers for Kubernetes](https://github.com/mongodb/mongodb-kubernetes) (`mongodb-kubernetes`) using the [Helm](https://helm.sh) package manager. The values below `mongodb` are rendered as the spec of the resource, so all of its fields are supported. The chart adds what the operator expects to exist: generated passwords for users and the ServiceAccount of the database pods.
@@ -37,6 +43,12 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/mongodb-community
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/mongodb-community
 ```
 
 These commands deploy a replica set with 3 members on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.

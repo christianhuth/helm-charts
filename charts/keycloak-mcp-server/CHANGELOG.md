@@ -1,7 +1,11 @@
 # keycloak-mcp-server
 
-## 1.3.0
+## 1.3.1
 
 ### Added
 
-- support for deployment strategy
+- instructions for installing the chart from the OCI registry to the README
+
+### Fixed
+
+- chart name and introduction in the README referred to mcp-for-argocd

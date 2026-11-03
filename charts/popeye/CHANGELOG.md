@@ -1,7 +1,7 @@
 # popeye
 
-## 2.4.3
+## 2.4.4
 
-### Fixed
+### Added
 
-- helm schema
+- instructions for installing the chart from the OCI registry to the README

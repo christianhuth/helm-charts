@@ -1,7 +1,7 @@
 # cluster-api-visualizer
 
-## 0.6.0
+## 0.6.1
 
 ### Added
 
-- option to define route timeouts
+- instructions for installing the chart from the OCI registry to the README

@@ -1,7 +1,7 @@
 # goldpinger
 
-## 1.5.0
+## 1.5.1
 
 ### Added
 
-- support for update strategy
+- instructions for installing the chart from the OCI registry to the README

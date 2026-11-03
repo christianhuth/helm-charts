@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 12.0.5
+## 12.0.6
 
-### Changed
+### Added
 
-- dependency of valkey to 0.12.1
+- instructions for installing the chart from the OCI registry to the README

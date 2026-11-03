@@ -2,7 +2,7 @@ apiVersion: v2
 description: A Helm chart to deploy workload to gain direct access to the host of the Kubernetes cluster
 name: node-access
 type: application
-version: 1.4.0
+version: 1.4.1
 appVersion: "1.38.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/node-access/icon.svg
@@ -12,7 +12,7 @@ maintainers:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: support for deployment strategy and update strategy
+      description: instructions for installing the chart from the OCI registry to the README
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

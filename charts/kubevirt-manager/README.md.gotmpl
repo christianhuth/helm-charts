@@ -9,6 +9,12 @@ helm repo update
 helm install my-release christianhuth/kubevirt-manager
 ```
 
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/kubevirt-manager
+```
+
 ## Introduction
 
 This chart bootstraps the KubeVirt Web UI called [KubeVirt Manager](https://kubevirt-manager.io) using the [Helm](https://helm.sh) package manager.
@@ -25,6 +31,12 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/kubevirt-manager
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/kubevirt-manager
 ```
 
 These commands deploy the KubeVirt Manager on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.

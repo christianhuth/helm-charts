@@ -11,6 +11,14 @@ helm install my-release christianhuth/syncstorage-rs \
   --set syncstorage.config.publicUrl=https://sync.example.com
 ```
 
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/syncstorage-rs \
+  --set syncstorage.masterKey.value='<random secret>' \
+  --set syncstorage.config.publicUrl=https://sync.example.com
+```
+
 ## Introduction
 
 This chart bootstraps the [Mozilla Firefox Sync Storage server](https://github.com/mozilla-services/syncstorage-rs) on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
@@ -50,6 +58,14 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/syncstorage-rs \
+  --set syncstorage.masterKey.value='<random secret>' \
+  --set syncstorage.config.publicUrl=https://sync.example.com
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/syncstorage-rs \
   --set syncstorage.masterKey.value='<random secret>' \
   --set syncstorage.config.publicUrl=https://sync.example.com
 ```

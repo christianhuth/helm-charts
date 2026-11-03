@@ -1,7 +1,7 @@
 # prometheus-pve-exporter
 
-## 2.12.0
+## 2.12.1
 
-### Changed
+### Added
 
-- App Version to 3.11.0
+- instructions for installing the chart from the OCI registry to the README

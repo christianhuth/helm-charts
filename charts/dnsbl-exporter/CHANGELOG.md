@@ -1,7 +1,7 @@
 # dnsbl-exporter
 
-## 1.4.0
+## 1.4.1
 
 ### Added
 
-- option to define route timeouts
+- instructions for installing the chart from the OCI registry to the README

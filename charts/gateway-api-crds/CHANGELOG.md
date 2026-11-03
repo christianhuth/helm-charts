@@ -1,7 +1,7 @@
 # gateway-api-crds
 
-## 1.3.0
+## 1.3.1
 
-### Changed
+### Added
 
-- Gateway API CRDs to v1.7.0
+- instructions for installing the chart from the OCI registry to the README

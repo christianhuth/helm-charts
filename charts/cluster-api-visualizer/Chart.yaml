@@ -2,7 +2,7 @@ apiVersion: v2
 name: cluster-api-visualizer
 description: Multicluster resource visualization tool for Cluster API.
 type: application
-version: 0.6.0
+version: 0.6.1
 appVersion: "v1.5.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/cluster-api-visualizer/icon.svg
@@ -14,7 +14,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: option to define route timeouts
+      description: instructions for installing the chart from the OCI registry to the README
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

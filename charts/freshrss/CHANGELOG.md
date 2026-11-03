@@ -1,7 +1,7 @@
 # freshrss
 
-## 3.0.4
+## 3.0.5
 
-### Changed
+### Added
 
-- the description of deploymentStrategy recommends `type: Recreate` for ReadWriteOnce volumes
+- instructions for installing the chart from the OCI registry to the README

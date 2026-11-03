@@ -1,7 +1,7 @@
 # passbolt-ha
 
-## 6.1.0
+## 6.1.1
 
-### Deprecated
+### Added
 
-- the chart is deprecated in favor of the official Passbolt chart (https://download.passbolt.com/charts/passbolt), which deploys a current Passbolt version and supports HA itself. See the README for migration hints.
+- instructions for installing the chart from the OCI registry to the README

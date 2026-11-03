@@ -2,7 +2,7 @@ apiVersion: v2
 name: audiobookshelf
 description: A Helm chart for installing Audiobookshelf, a self-hosted audiobook and podcast server
 type: application
-version: 2.5.4
+version: 2.5.5
 appVersion: "2.37.2"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/audiobookshelf/icon.svg
@@ -13,10 +13,8 @@ sources:
   - https://github.com/advplyr/audiobookshelf
 annotations:
   artifacthub.io/changes: |
-    - kind: fixed
-      description: HorizontalPodAutoscaler failed to render when autoscaling.enabled was true
-    - kind: fixed
-      description: chart description, sources and nameOverride/fullnameOverride docs referred to argocd-extension-metrics
+    - kind: added
+      description: instructions for installing the chart from the OCI registry to the README
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
