@@ -356,7 +356,7 @@ helm install my-release -f values.yaml christianhuth/syncstorage-rs
 
 ### 8.0.0
 
-This major replaces the image `porelli/firefox-sync` with the official images of Mozilla and updates syncstorage-rs from 0.18.2 to 0.24.1. The official images are only available for `linux/amd64`, stay on 7.x if your nodes are `arm64`. The values changed as follows:
+This major replaces the image `porelli/firefox-sync` with the official images of Mozilla and updates syncstorage-rs from 0.18.2 to 0.24.0. The official images are only available for `linux/amd64`, stay on 7.x if your nodes are `arm64`. The values changed as follows:
 
 - `image.repository` is `mozilla-services/syncstorage-rs/syncserver-mysql` (`image.registry` stays `ghcr.io`)
 - `syncstorage.masterKey.value` or `syncstorage.masterKey.existingSecret` is required. syncstorage-rs signed its tokens with an empty secret before, if you didn't set one
