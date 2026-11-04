@@ -1,7 +1,7 @@
 # squest
 
-## 7.1.1
+## 7.1.2
 
-### Changed
+### Added
 
-- dependency of valkey to 0.12.1
+- instructions for installing the chart from the OCI registry to the README

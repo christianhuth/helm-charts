@@ -5,9 +5,15 @@ Helm chart for Firefox Syncserver
 ## TL;DR;
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
-helm install my-release christianknell/syncserver
+helm install my-release christianhuth/syncserver
+```
+
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/syncserver
 ```
 
 ## Introduction
@@ -28,9 +34,15 @@ This chart bootstraps the [Mozilla Syncserver](https://github.com/mozilla-servic
 To install the chart with the release name `my-release`:
 
 ```console
-helm repo add christianknell https://christianknell.github.io/helm-charts
+helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
-helm install my-release christianknell/syncserver
+helm install my-release christianhuth/syncserver
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/syncserver
 ```
 
 These commands deploy the Mozilla Syncserver on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.
@@ -117,5 +129,5 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml christianknell/syncserver
+helm install my-release -f values.yaml christianhuth/syncserver
 ```

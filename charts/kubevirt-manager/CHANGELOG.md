@@ -1,7 +1,7 @@
 # kubevirt-manager
 
-## 0.8.0
+## 0.8.1
 
 ### Added
 
-- support for deployment strategy
+- instructions for installing the chart from the OCI registry to the README

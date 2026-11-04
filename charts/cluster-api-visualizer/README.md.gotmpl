@@ -9,6 +9,12 @@ helm repo update
 helm install my-release christianhuth/cluster-api-visualizer
 ```
 
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/cluster-api-visualizer
+```
+
 ## Introduction
 
 This chart bootstraps a Multicluster resource visualization tool for Cluster API [Cluster API Visualizer](https://github.com/Jont828/cluster-api-visualizer) using the [Helm](https://helm.sh) package manager.
@@ -25,6 +31,12 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/cluster-api-visualizer
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/cluster-api-visualizer
 ```
 
 These commands deploy the Cluster API Visualizer on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.

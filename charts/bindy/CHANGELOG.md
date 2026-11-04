@@ -1,7 +1,7 @@
 # bindy
 
-## 1.9.3
+## 1.9.4
 
-### Changed
+### Added
 
-- App Version to v0.8.3
+- instructions for installing the chart from the OCI registry to the README

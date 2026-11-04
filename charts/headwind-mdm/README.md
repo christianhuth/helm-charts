@@ -10,6 +10,12 @@ helm repo update
 helm install my-release christianhuth/headwind-mdm
 ```
 
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/headwind-mdm
+```
+
 ## Introduction
 
 Headwind MDM is a Mobile device management (MDM) system for corporate Android devices, remote access to Android phones and tablets.
@@ -39,6 +45,12 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/headwind-mdm
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/headwind-mdm
 ```
 
 These commands deploy Headwind MDM on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.

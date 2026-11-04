@@ -1,7 +1,7 @@
 # tenant-namespace
 
-## 2.0.6
+## 2.0.7
 
-### Fixed
+### Added
 
-- helm schema
+- instructions for installing the chart from the OCI registry to the README

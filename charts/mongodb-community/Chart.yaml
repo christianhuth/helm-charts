@@ -2,7 +2,7 @@ apiVersion: v2
 name: mongodb-community
 description: MongoDB Community replica sets managed by the MongoDB Controllers for Kubernetes (mongodb-kubernetes)
 type: application
-version: 1.0.0
+version: 1.0.1
 appVersion: "8.0.34"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/mongodb-community/icon.svg
@@ -22,7 +22,7 @@ annotations:
   artifacthub.io/category: database
   artifacthub.io/changes: |
     - kind: added
-      description: initial release of the chart for the MongoDBCommunity resource of the MongoDB Controllers for Kubernetes
+      description: instructions for installing the chart from the OCI registry to the README
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

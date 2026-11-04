@@ -1,7 +1,7 @@
 # timetagger
 
-## 2.3.0
+## 2.3.1
 
 ### Added
 
-- support for deployment strategy
+- instructions for installing the chart from the OCI registry to the README

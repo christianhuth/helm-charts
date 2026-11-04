@@ -2,7 +2,7 @@ apiVersion: v2
 name: goldpinger
 description: Debugging tool for Kubernetes which tests and displays connectivity between nodes in the cluster.
 type: application
-version: 1.5.0
+version: 1.5.1
 appVersion: "3.11.5"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/goldpinger/icon.svg
@@ -14,7 +14,7 @@ sources:
 annotations:
   artifacthub.io/changes: |
     - kind: added
-      description: support for update strategy
+      description: instructions for installing the chart from the OCI registry to the README
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

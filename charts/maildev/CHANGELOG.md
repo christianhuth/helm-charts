@@ -1,7 +1,7 @@
 # maildev
 
-## 1.7.0
+## 1.7.1
 
 ### Added
 
-- support for deployment strategy
+- instructions for installing the chart from the OCI registry to the README

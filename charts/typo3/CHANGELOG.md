@@ -1,7 +1,7 @@
 # typo3
 
-## 8.0.5
+## 8.0.6
 
-### Changed
+### Added
 
-- the description of deploymentStrategy recommends `type: Recreate` for ReadWriteOnce volumes
+- instructions for installing the chart from the OCI registry to the README

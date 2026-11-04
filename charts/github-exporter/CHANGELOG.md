@@ -1,7 +1,7 @@
 # github-exporter
 
-## 2.8.0
+## 2.8.1
 
-### Changed
+### Added
 
-- App Version to v2.4.1
+- instructions for installing the chart from the OCI registry to the README

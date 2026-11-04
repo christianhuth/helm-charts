@@ -10,6 +10,12 @@ helm repo update
 helm install my-release christianhuth/bindy
 ```
 
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/bindy
+```
+
 ## Introduction
 
 This chart bootstraps [Bindy](https://github.com/firestoned/bindy) using the [Helm](https://helm.sh) package manager.
@@ -26,6 +32,12 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/bindy
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/bindy
 ```
 
 These commands deploy Bindy on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.

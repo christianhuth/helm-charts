@@ -9,6 +9,12 @@ helm repo update
 helm install my-release christianhuth/countly
 ```
 
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/countly
+```
+
 ## Introduction
 
 This chart bootstraps the product analytics platform [Countly](https://github.com/Countly/countly-server) with its API and frontend on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
@@ -36,6 +42,12 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/countly
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/countly
 ```
 
 These commands deploy Countly on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation. On the first visit of the frontend, Countly asks to create the first admin user.

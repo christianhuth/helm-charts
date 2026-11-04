@@ -1,8 +1,7 @@
 # audiobookshelf
 
-## 2.5.4
+## 2.5.5
 
-### Fixed
+### Added
 
-- HorizontalPodAutoscaler failed to render when autoscaling.enabled was true
-- chart description, sources and nameOverride/fullnameOverride docs referred to argocd-extension-metrics
+- instructions for installing the chart from the OCI registry to the README

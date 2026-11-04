@@ -1,7 +1,7 @@
 # proxysql
 
-## 3.2.0
+## 3.2.1
 
 ### Added
 
-- support for deployment strategy and update strategy
+- instructions for installing the chart from the OCI registry to the README

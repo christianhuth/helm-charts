@@ -1,7 +1,7 @@
 # countly
 
-## 6.1.0
+## 6.1.1
 
 ### Added
 
-- support for deployment strategy (api.deploymentStrategy and frontend.deploymentStrategy)
+- instructions for installing the chart from the OCI registry to the README

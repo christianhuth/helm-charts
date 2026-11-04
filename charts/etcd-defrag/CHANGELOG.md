@@ -1,7 +1,7 @@
 # etcd-defrag
 
-## 1.7.1
+## 1.7.2
 
-### Changed
+### Added
 
-- App Version to v3.7.3
+- instructions for installing the chart from the OCI registry to the README

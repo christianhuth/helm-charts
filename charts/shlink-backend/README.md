@@ -10,6 +10,12 @@ helm repo update
 helm install my-release christianhuth/shlink-backend
 ```
 
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/shlink-backend
+```
+
 ## Introduction
 
 This chart bootstraps a self-hosted URL shortener called [Shlink](https://shlink.io) using the [Helm](https://helm.sh) package manager.
@@ -44,6 +50,12 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/shlink-backend
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/shlink-backend
 ```
 
 These commands deploy Shlink on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.

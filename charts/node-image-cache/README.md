@@ -10,6 +10,12 @@ helm repo update
 helm install my-release christianhuth/node-image-cache --set images[0].name=nginx --set images[0].image=nginx:1.29.2
 ```
 
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/node-image-cache --set images[0].name=nginx --set images[0].image=nginx:1.29.2
+```
+
 ## Introduction
 
 Pulling a container image the first time it is scheduled onto a node can dominate
@@ -36,6 +42,12 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/node-image-cache -f values.yaml
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/node-image-cache -f values.yaml
 ```
 
 With a `values.yaml` along these lines:

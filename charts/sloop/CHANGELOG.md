@@ -1,7 +1,7 @@
 # sloop
 
-## 0.5.0
+## 0.5.1
 
 ### Added
 
-- support for deployment strategy
+- instructions for installing the chart from the OCI registry to the README

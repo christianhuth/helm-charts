@@ -10,6 +10,12 @@ helm repo update
 helm install my-release christianhuth/umami
 ```
 
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/umami
+```
+
 ## Introduction
 
 Umami is a simple, fast, privacy-focused alternative to Google Analytics.
@@ -39,6 +45,12 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/umami
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/umami
 ```
 
 These commands deploy Umami on the Kubernetes cluster in the default configuration. The [Values](#values) section lists the values that can be configured during installation.

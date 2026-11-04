@@ -1,7 +1,7 @@
 # kubenav
 
-## 1.0.8
+## 1.0.9
 
-### Fixed
+### Added
 
-- helm schema
+- instructions for installing the chart from the OCI registry to the README

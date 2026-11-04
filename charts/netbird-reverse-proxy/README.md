@@ -10,6 +10,12 @@ helm repo update
 helm install my-release christianhuth/netbird-reverse-proxy
 ```
 
+Or install it from the OCI registry:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/netbird-reverse-proxy
+```
+
 ## Introduction
 
 This chart bootstraps the [NetBird Reverse Proxy](https://docs.netbird.io/manage/reverse-proxy) on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
@@ -33,6 +39,15 @@ To install the chart with the release name `my-release`:
 helm repo add christianhuth https://charts.christianhuth.de
 helm repo update
 helm install my-release christianhuth/netbird-reverse-proxy \
+  --set proxy.managementServer.address="https://my-netbird-management.example.com" \
+  --set proxy.domain="my-proxy.example.com" \
+  --set proxy.managementServer.auth.token="my-proxy-token"
+```
+
+The chart is also published as an OCI artifact which can be installed like this:
+
+```console
+helm install my-release oci://ghcr.io/christianhuth/helm-charts/netbird-reverse-proxy \
   --set proxy.managementServer.address="https://my-netbird-management.example.com" \
   --set proxy.domain="my-proxy.example.com" \
   --set proxy.managementServer.auth.token="my-proxy-token"

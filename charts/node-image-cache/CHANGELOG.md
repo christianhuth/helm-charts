@@ -1,7 +1,7 @@
 # node-image-cache
 
-## 1.0.0
+## 1.0.1
 
 ### Added
 
-- Initial release
+- instructions for installing the chart from the OCI registry to the README
