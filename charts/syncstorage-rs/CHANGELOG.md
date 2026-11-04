@@ -1,7 +1,7 @@
 # syncstorage-rs
 
-## 8.1.1
+## 8.1.2
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- App Version to 0.24.1
