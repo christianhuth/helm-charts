@@ -167,7 +167,7 @@ syncserver:
   # -- additional environment variables to be added to the syncserver pods
   extraEnv: []
   persistence:
-    # use a PVC to persist data
+    # -- use a PVC for `/data`, which holds the SQLite database of the default `sqlUri`. If disabled, an emptyDir is used and the data is lost when the Pod is recreated.
     enabled: false
     # -- the desired access modes the volume should have.
     accessModes:
