@@ -1,7 +1,7 @@
 # squest
 
-## 7.1.2
+## 7.1.3
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- App Version to 2.8.5

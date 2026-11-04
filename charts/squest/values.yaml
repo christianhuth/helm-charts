@@ -17,7 +17,7 @@ squest:
     # -- image pull policy
     pullPolicy: Always
     # -- Overrides the image tag
-    tag: "2.8.4"
+    tag: "2.8.5"
 
   # -- Deprecated, use `squest.deploymentStrategy` instead. Update strategy type of the Squest deployment (`Recreate` or `RollingUpdate`), used if `squest.deploymentStrategy` is empty.
   strategy: Recreate
@@ -271,7 +271,7 @@ celery:
       # -- image pull policy
       pullPolicy: Always
       # -- Overrides the image tag
-      tag: "2.8.4"
+      tag: "2.8.5"
 
     # -- Number of replicas
     replicaCount: 1
@@ -372,7 +372,7 @@ celery:
       # -- image pull policy
       pullPolicy: Always
       # -- Overrides the image tag
-      tag: "2.8.4"
+      tag: "2.8.5"
 
     # -- Number of replicas
     replicaCount: 1
