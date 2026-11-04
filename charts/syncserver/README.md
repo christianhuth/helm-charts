@@ -118,7 +118,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | syncserver.extraEnv | list | `[]` | additional environment variables to be added to the syncserver pods |
 | syncserver.persistence.accessModes | list | `["ReadWriteOnce"]` | the desired access modes the volume should have. |
 | syncserver.persistence.annotations | object | `{}` |  |
-| syncserver.persistence.enabled | bool | `false` |  |
+| syncserver.persistence.enabled | bool | `false` | use a PVC for `/data`, which holds the SQLite database of the default `sqlUri`. If disabled, an emptyDir is used and the data is lost when the Pod is recreated. |
 | syncserver.persistence.existingClaim | string | `""` | provide an existing PersistentVolumeClaim |
 | syncserver.persistence.resources | object | `{}` | represents the minimum and maximum resources the volume should have. |
 | syncserver.persistence.storageClassName | string | `""` | Name of the StorageClass required by the claim. |

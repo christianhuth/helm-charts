@@ -2,7 +2,7 @@ apiVersion: v2
 name: syncserver
 description: Helm chart for Firefox Syncserver
 type: application
-version: 1.4.1
+version: 1.4.2
 appVersion: "latest"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncserver/icon.svg
@@ -14,10 +14,8 @@ sources:
   - https://github.com/mozilla-services/syncserver
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: instructions for installing the chart from the OCI registry to the README
     - kind: fixed
-      description: Helm repository in the README referred to the outdated christianknell.github.io repository
+      description: Pod crashed with the default values, as /data was not writable without persistence. An emptyDir is mounted to /data now if persistence is disabled
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

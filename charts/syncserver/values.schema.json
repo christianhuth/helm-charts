@@ -520,7 +520,7 @@
             },
             "enabled": {
               "default": false,
-              "description": "use a PVC to persist data",
+              "description": "use a PVC for `/data`, which holds the SQLite database of the default `sqlUri`. If disabled, an emptyDir is used and the data is lost when the Pod is recreated.",
               "title": "enabled",
               "type": "boolean"
             },
