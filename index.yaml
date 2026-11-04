@@ -93038,6 +93038,34 @@ entries:
   syncserver:
   - annotations:
       artifacthub.io/changes: |
+        - kind: fixed
+          description: Pod crashed with the default values, as /data was not writable without persistence. An emptyDir is mounted to /data now if persistence is disabled
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: latest
+    created: "2026-11-04T08:21:11.473198204Z"
+    description: Helm chart for Firefox Syncserver
+    digest: 3bfca010093399e99758bddf3b41000cdb249ac2b21cce7c2b0ce5a5e4bc5305
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncserver/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: syncserver
+    sources:
+    - https://hub.docker.com/r/mozilla/syncserver/
+    - https://github.com/mozilla-services/syncserver
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/syncserver-1.4.2/syncserver-1.4.2.tgz
+    version: 1.4.2
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: instructions for installing the chart from the OCI registry to the README
         - kind: fixed
@@ -120648,4 +120676,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-11-04T08:04:40.192883776Z"
+generated: "2026-11-04T08:21:11.476814754Z"
