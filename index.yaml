@@ -93495,6 +93495,52 @@ entries:
   syncstorage-rs:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to 0.24.1
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 0.24.1
+    created: "2026-11-05T10:44:28.602808924Z"
+    dependencies:
+    - alias: syncserver-db
+      condition: syncserver-db.enabled
+      name: mariadb-cluster
+      repository: oci://ghcr.io/mariadb-operator/charts
+      version: 26.10.2
+    - alias: tokenserver-db
+      condition: tokenserver-db.enabled
+      name: mariadb-cluster
+      repository: oci://ghcr.io/mariadb-operator/charts
+      version: 26.10.2
+    - alias: postgresql
+      condition: postgresql.enabled
+      name: cluster
+      repository: https://cloudnative-pg.github.io/charts
+      version: 0.9.0
+    description: A Helm chart for deploying Mozilla's Firefox Sync Storage server
+      to Kubernetes
+    digest: 80614d04c017ec6363ef20ae9dcc7f6c32c2dfca1e6bedd79be81bb4a2e22f73
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncstorage-rs/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: syncstorage-rs
+    sources:
+    - https://github.com/mozilla-services/syncstorage-rs
+    - https://github.com/mozilla-services/syncstorage-rs/pkgs/container/syncstorage-rs%2Fsyncserver-mysql
+    - https://github.com/mozilla-services/syncstorage-rs/pkgs/container/syncstorage-rs%2Fsyncserver-postgres
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/syncstorage-rs-8.1.2/syncstorage-rs-8.1.2.tgz
+    version: 8.1.2
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: instructions for installing the chart from the OCI registry to the README
       artifacthub.io/links: |
@@ -120719,4 +120765,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-11-04T21:30:19.02439509Z"
+generated: "2026-11-05T10:44:28.607788025Z"
