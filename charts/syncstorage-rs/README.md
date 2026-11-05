@@ -249,7 +249,7 @@ The Tokenserver database is configured the same way with `tokenserver-db` and `e
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.registry | string | `"ghcr.io"` | image registry |
 | image.repository | string | `"mozilla-services/syncstorage-rs/syncserver-mysql"` | image repository. Mozilla publishes one image per database type: `mozilla-services/syncstorage-rs/syncserver-mysql` for MariaDB and MySQL, `mozilla-services/syncstorage-rs/syncserver-postgres` for PostgreSQL. Both are only available for `linux/amd64`. |
-| image.tag | string | `"0.24.0"` | Overrides the image tag |
+| image.tag | string | `"0.24.1"` | Overrides the image tag |
 | imagePullSecrets | list | `[]` | If defined, uses a Secret to pull an image from a private Docker registry or repository. |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
