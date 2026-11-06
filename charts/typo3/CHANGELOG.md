@@ -1,7 +1,7 @@
 # typo3
 
-## 8.0.6
+## 9.0.0
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- App Version to legacy-14.3.10
