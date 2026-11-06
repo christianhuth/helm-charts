@@ -2,8 +2,8 @@ apiVersion: v2
 name: typo3
 description: TYPO3 — the Professional, Flexible Content Management System
 type: application
-version: 8.0.6
-appVersion: "legacy-13.4.36"
+version: 9.0.0
+appVersion: "13.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/typo3/icon.svg
 maintainers:
@@ -20,8 +20,8 @@ dependencies:
     condition: mariadb.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: instructions for installing the chart from the OCI registry to the README
+    - kind: changed
+      description: App Version to 13.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
