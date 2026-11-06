@@ -1,7 +1,7 @@
 # countly
 
-## 6.1.1
+## 6.1.2
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- dependency of mongodb-community to 1.0.1
