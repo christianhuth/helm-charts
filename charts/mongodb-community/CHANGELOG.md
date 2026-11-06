@@ -1,7 +1,7 @@
 # mongodb-community
 
-## 1.0.1
+## 1.1.0
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- App Version to 8.3.13

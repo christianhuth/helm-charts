@@ -76,7 +76,7 @@
           "type": "array"
         },
         "version": {
-          "default": "8.0.34",
+          "default": "8.3.13",
           "description": "MongoDB version. The operator requires the exact version and runs the image `quay.io/mongodb/mongodb-community-server:\u003cversion\u003e-ubi8`.",
           "title": "version",
           "type": "string"
