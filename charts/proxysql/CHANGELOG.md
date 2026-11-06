@@ -1,7 +1,7 @@
 # proxysql
 
-## 3.2.1
+## 3.2.2
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- App Version to 3.0.12
