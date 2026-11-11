@@ -3,8 +3,8 @@ apiVersion: v2
 name: syncstorage-rs
 description: A Helm chart for deploying Mozilla's Firefox Sync Storage server to Kubernetes
 type: application
-version: 8.1.2
-appVersion: "0.24.1"
+version: 8.2.0
+appVersion: "0.25.0"
 home: https://github.com/christianknell/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncstorage-rs/icon.svg
 maintainers:
@@ -33,7 +33,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: App Version to 0.24.1
+      description: App Version to 0.25.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
