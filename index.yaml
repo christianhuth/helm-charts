@@ -53226,6 +53226,46 @@ entries:
   - annotations:
       artifacthub.io/category: database
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to 8.0.38
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+        - name: MongoDBCommunity documentation
+          url: https://github.com/mongodb/mongodb-kubernetes/tree/master/docs/mongodbcommunity
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/mongodb-helm-charts/mongodb-kubernetes
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 8.0.38
+    created: "2026-11-11T07:01:13.204490802Z"
+    description: MongoDB Community replica sets managed by the MongoDB Controllers
+      for Kubernetes (mongodb-kubernetes)
+    digest: d4808c94611bf504ddf5b22278a7e956d12c3099735c38fa4c42a579690af475
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/mongodb-community/icon.svg
+    keywords:
+    - mongodb
+    - mongodb-kubernetes
+    - mongodbcommunity
+    - replicaset
+    - database
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: mongodb-community
+    sources:
+    - https://github.com/mongodb/mongodb-kubernetes
+    - https://github.com/mongodb/mongo
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/mongodb-community-1.0.2/mongodb-community-1.0.2.tgz
+    version: 1.0.2
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
         - kind: added
           description: instructions for installing the chart from the OCI registry to the README
       artifacthub.io/links: |
@@ -120840,4 +120880,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-11-11T00:14:59.704260536Z"
+generated: "2026-11-11T07:01:13.209631778Z"
