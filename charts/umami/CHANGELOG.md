@@ -1,7 +1,7 @@
 # umami
 
-## 8.1.1
+## 8.2.0
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- App Version to 3.5.0
