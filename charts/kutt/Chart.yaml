@@ -2,7 +2,7 @@ apiVersion: v2
 name: kutt
 description: Kutt is a free modern URL shortener.
 type: application
-version: 10.1.2
+version: 11.0.0
 appVersion: "v3.2.6"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.svg
@@ -19,12 +19,12 @@ dependencies:
     condition: postgresql.enabled
   - name: valkey
     repository: https://valkey.io/valkey-helm/
-    version: 0.12.1
+    version: 1.0.0
     condition: valkey.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: instructions for installing the chart from the OCI registry to the README
+    - kind: changed
+      description: dependency of valkey to 1.0.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
