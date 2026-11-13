@@ -1,7 +1,7 @@
 # squest
 
-## 7.1.3
+## 8.0.0
 
 ### Changed
 
-- App Version to 2.8.5
+- dependency of valkey to 1.0.0
