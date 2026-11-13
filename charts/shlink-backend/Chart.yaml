@@ -2,7 +2,7 @@ apiVersion: v2
 name: shlink-backend
 description: A PHP-based self-hosted URL shortener that can be used to serve shortened URLs under your own domain.
 type: application
-version: 12.0.6
+version: 13.0.0
 appVersion: "5.1.8"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/shlink-backend/icon.svg
@@ -29,12 +29,12 @@ dependencies:
     condition: rabbitmq.enabled
   - name: valkey
     repository: https://valkey.io/valkey-helm/
-    version: 0.12.1
+    version: 1.0.0
     condition: valkey.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: instructions for installing the chart from the OCI registry to the README
+    - kind: changed
+      description: dependency of valkey to 1.0.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
