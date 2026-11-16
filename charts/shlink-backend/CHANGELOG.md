@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 12.0.6
+## 12.0.7
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- dependency of rabbitmq to 0.21.33
