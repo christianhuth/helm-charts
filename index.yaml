@@ -67440,6 +67440,54 @@ entries:
   shlink-backend:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: dependency of rabbitmq to 0.21.33
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 5.1.8
+    created: "2026-11-16T07:07:45.207986108Z"
+    dependencies:
+    - alias: postgresql
+      condition: postgresql.enabled
+      name: cluster
+      repository: https://cloudnative-pg.github.io/charts
+      version: 0.9.0
+    - alias: mariadb
+      condition: mariadb.enabled
+      name: mariadb-cluster
+      repository: oci://ghcr.io/mariadb-operator/charts
+      version: 26.10.2
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.21.33
+    - condition: valkey.enabled
+      name: valkey
+      repository: https://valkey.io/valkey-helm/
+      version: 0.12.1
+    description: A PHP-based self-hosted URL shortener that can be used to serve shortened
+      URLs under your own domain.
+    digest: 41967e791a60751c083b9a0e52b09758f21997c146aab53148382e4a79704bf3
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/shlink-backend/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: shlink-backend
+    sources:
+    - https://github.com/shlinkio/shlink
+    - https://shlink.io
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/shlink-backend-12.0.7/shlink-backend-12.0.7.tgz
+    version: 12.0.7
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: instructions for installing the chart from the OCI registry to the README
       artifacthub.io/links: |
@@ -121020,4 +121068,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-11-12T18:46:44.845045658Z"
+generated: "2026-11-16T07:07:45.2112751Z"
