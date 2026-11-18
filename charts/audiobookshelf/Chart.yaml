@@ -2,8 +2,8 @@ apiVersion: v2
 name: audiobookshelf
 description: A Helm chart for installing Audiobookshelf, a self-hosted audiobook and podcast server
 type: application
-version: 2.5.5
-appVersion: "2.37.2"
+version: 2.6.0
+appVersion: "2.38.0"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/audiobookshelf/icon.svg
 maintainers:
@@ -13,8 +13,8 @@ sources:
   - https://github.com/advplyr/audiobookshelf
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: instructions for installing the chart from the OCI registry to the README
+    - kind: changed
+      description: App Version to 2.38.0
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
