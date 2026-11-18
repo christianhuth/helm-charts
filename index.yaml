@@ -383,6 +383,34 @@ entries:
   audiobookshelf:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to 2.38.0
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 2.38.0
+    created: "2026-11-18T08:59:56.153550453Z"
+    description: A Helm chart for installing Audiobookshelf, a self-hosted audiobook
+      and podcast server
+    digest: 79d2dcecd3a48e9fef4f639bbf58f5bc524e977f2769a4889489ba661c764a95
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/audiobookshelf/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: audiobookshelf
+    sources:
+    - https://github.com/advplyr/audiobookshelf
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/audiobookshelf-2.6.0/audiobookshelf-2.6.0.tgz
+    version: 2.6.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: instructions for installing the chart from the OCI registry to the README
       artifacthub.io/links: |
@@ -121068,4 +121096,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-11-16T07:07:45.2112751Z"
+generated: "2026-11-18T08:59:56.157875151Z"
