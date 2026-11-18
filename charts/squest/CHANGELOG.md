@@ -1,7 +1,7 @@
 # squest
 
-## 7.1.3
+## 7.1.4
 
 ### Changed
 
-- App Version to 2.8.5
+- App Version to 1.31.9-alpine
