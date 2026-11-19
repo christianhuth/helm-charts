@@ -1,7 +1,7 @@
 # syncstorage-rs
 
-## 8.2.0
+## 8.2.1
 
 ### Changed
 
-- App Version to 0.25.0
+- App Version to 0.25.1
