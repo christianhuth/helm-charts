@@ -93726,6 +93726,52 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: App Version to 0.25.1
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 0.25.1
+    created: "2026-11-19T16:02:53.649229883Z"
+    dependencies:
+    - alias: syncserver-db
+      condition: syncserver-db.enabled
+      name: mariadb-cluster
+      repository: oci://ghcr.io/mariadb-operator/charts
+      version: 26.10.2
+    - alias: tokenserver-db
+      condition: tokenserver-db.enabled
+      name: mariadb-cluster
+      repository: oci://ghcr.io/mariadb-operator/charts
+      version: 26.10.2
+    - alias: postgresql
+      condition: postgresql.enabled
+      name: cluster
+      repository: https://cloudnative-pg.github.io/charts
+      version: 0.9.0
+    description: A Helm chart for deploying Mozilla's Firefox Sync Storage server
+      to Kubernetes
+    digest: f2d78bc9e8b71ee636ac97d01fd1d0289d36f58821e7bea2f8205199a1c1e87f
+    home: https://github.com/christianknell/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/syncstorage-rs/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: syncstorage-rs
+    sources:
+    - https://github.com/mozilla-services/syncstorage-rs
+    - https://github.com/mozilla-services/syncstorage-rs/pkgs/container/syncstorage-rs%2Fsyncserver-mysql
+    - https://github.com/mozilla-services/syncstorage-rs/pkgs/container/syncstorage-rs%2Fsyncserver-postgres
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/syncstorage-rs-8.2.1/syncstorage-rs-8.2.1.tgz
+    version: 8.2.1
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: App Version to 0.25.0
       artifacthub.io/links: |
         - name: support
@@ -121191,4 +121237,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-11-19T06:23:49.719812357Z"
+generated: "2026-11-19T16:02:53.653711215Z"
