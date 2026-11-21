@@ -1,7 +1,7 @@
 # kube-ops-view
 
-## 9.0.2
+## 10.0.0
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- dependency of valkey to 1.0.0
