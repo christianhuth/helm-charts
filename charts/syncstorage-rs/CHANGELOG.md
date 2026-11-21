@@ -1,7 +1,7 @@
 # syncstorage-rs
 
-## 8.2.1
+## 9.0.0
 
 ### Changed
 
-- App Version to 0.25.1
+- App Version to 19-standard-trixie
