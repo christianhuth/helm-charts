@@ -2,8 +2,8 @@ apiVersion: v2
 name: headwind-mdm
 description: Headwind MDM - an open source mobile device management software for Android
 type: application
-version: 6.1.1
-appVersion: "0.1.9"
+version: 7.0.0
+appVersion: "19-standard-trixie"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/headwind-mdm/icon.svg
 maintainers:
@@ -21,8 +21,8 @@ dependencies:
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: instructions for installing the chart from the OCI registry to the README
+    - kind: changed
+      description: App Version to 19-standard-trixie
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues

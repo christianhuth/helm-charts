@@ -1,7 +1,7 @@
 # headwind-mdm
 
-## 6.1.1
+## 7.0.0
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- App Version to 19-standard-trixie
