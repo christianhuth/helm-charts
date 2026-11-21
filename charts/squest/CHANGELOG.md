@@ -1,7 +1,7 @@
 # squest
 
-## 7.1.5
+## 8.0.0
 
 ### Changed
 
-- dependency of rabbitmq to 0.21.34
+- dependency of valkey to 1.0.0
