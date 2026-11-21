@@ -1,7 +1,7 @@
 # umami
 
-## 8.2.0
+## 9.0.0
 
 ### Changed
 
-- App Version to 3.5.0
+- App Version to 19-standard-trixie
