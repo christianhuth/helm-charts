@@ -1,7 +1,7 @@
 # shlink-web
 
-## 1.14.1
+## 1.14.2
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- App Version to 4.9.1
