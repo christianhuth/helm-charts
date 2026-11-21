@@ -624,7 +624,7 @@
         "cluster": {
           "properties": {
             "imageName": {
-              "default": "ghcr.io/cloudnative-pg/postgresql:18-standard-trixie",
+              "default": "ghcr.io/cloudnative-pg/postgresql:19-standard-trixie",
               "description": "PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version.",
               "title": "imageName",
               "type": "string"
