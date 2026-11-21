@@ -1,7 +1,7 @@
 # shlink-backend
 
-## 12.0.8
+## 13.0.0
 
 ### Changed
 
-- dependency of rabbitmq to 0.21.34
+- App Version to 19-standard-trixie
