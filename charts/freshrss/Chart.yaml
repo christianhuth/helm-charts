@@ -2,8 +2,8 @@ apiVersion: v2
 name: freshrss
 description: FreshRSS is a free, self-hostable feed aggregator
 type: application
-version: 3.0.5
-appVersion: "1.30.4"
+version: 4.0.0
+appVersion: "19-standard-trixie"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/freshrss/icon.svg
 maintainers:
@@ -20,8 +20,8 @@ dependencies:
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: instructions for installing the chart from the OCI registry to the README
+    - kind: changed
+      description: App Version to 19-standard-trixie
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
