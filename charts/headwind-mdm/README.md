@@ -161,7 +161,7 @@ Instead of `externalDatabase.existingSecret` you can set `externalDatabase.passw
 | persistence.storageClass | string | `""` |  |
 | podAnnotations | object | `{}` | Annotations to be added to exporter pods |
 | podSecurityContext | object | `{}` | pod-level security context |
-| postgresql.cluster.imageName | string | `"ghcr.io/cloudnative-pg/postgresql:18-standard-trixie"` | PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version. |
+| postgresql.cluster.imageName | string | `"ghcr.io/cloudnative-pg/postgresql:19-standard-trixie"` | PostgreSQL image. The tag only pins the major version, so restarted instances get the latest minor version. |
 | postgresql.cluster.imagePullPolicy | string | `"Always"` | Pull the image on every start to get the latest minor version of the major version |
 | postgresql.cluster.initdb.database | string | `"hmdm"` | Name of the database to create |
 | postgresql.cluster.initdb.owner | string | `"hmdm"` | Name of the user owning the database |
