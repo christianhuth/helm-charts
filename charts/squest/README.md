@@ -306,7 +306,7 @@ Instead of `existingSecret` you can set `password`, which lets the chart create 
 | squest.nginx.image.pullPolicy | string | `"Always"` | image pull policy |
 | squest.nginx.image.registry | string | `"docker.io"` | image registry |
 | squest.nginx.image.repository | string | `"nginx"` | image repository |
-| squest.nginx.image.tag | string | `"1.31.9-alpine"` | Overrides the image tag |
+| squest.nginx.image.tag | string | `"1.31.10-alpine"` | Overrides the image tag |
 | squest.nodeSelector | object | `{}` | Node labels for pod assignment |
 | squest.podAnnotations | object | `{}` | Annotations to be added to pods |
 | squest.podLabels | object | `{}` | Labels to be added to pods |
