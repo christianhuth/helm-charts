@@ -1,7 +1,7 @@
 # freshrss
 
-## 3.0.5
+## 3.1.0
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- App Version to 1.31.0
