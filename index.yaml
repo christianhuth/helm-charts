@@ -18796,6 +18796,45 @@ entries:
   freshrss:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: App Version to 1.31.0
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/christianhuth/helm-charts/issues
+      artifacthub.io/screenshots: |
+        - title: FreshRSS is a self-hosted RSS and Atom feed aggregator.
+          url: https://freshrss.org/images/screenshot.webp
+        - title: FreshRSS natively supports basic Web scraping, based on XPath, for Web sites not providing any RSS / Atom feed. Also supports JSON documents.
+          url: https://raw.githubusercontent.com/FreshRSS/FreshRSS/edge/docs/img/FreshRSS-screenshot.png
+      artifacthub.io/signKey: |
+        fingerprint: EE24F8BB6D099E78FD704F83B5ECDBCDDD485D0E
+        url: https://charts.christianhuth.de/public.key
+    apiVersion: v2
+    appVersion: 1.31.0
+    created: "2026-11-24T03:56:58.35777713Z"
+    dependencies:
+    - alias: postgresql
+      condition: postgresql.enabled
+      name: cluster
+      repository: https://cloudnative-pg.github.io/charts
+      version: 0.9.0
+    description: FreshRSS is a free, self-hostable feed aggregator
+    digest: 1ade7995d0fa953d2536770056c4a67d2c3e0beaf8ab6a75f7671973cde4944d
+    home: https://github.com/christianhuth/helm-charts
+    icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/freshrss/icon.svg
+    maintainers:
+    - email: christian@knell.it
+      name: christianhuth
+    name: freshrss
+    sources:
+    - https://github.com/FreshRSS/FreshRSS
+    - https://freshrss.org/
+    type: application
+    urls:
+    - https://github.com/christianhuth/helm-charts/releases/download/freshrss-3.1.0/freshrss-3.1.0.tgz
+    version: 3.1.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: instructions for installing the chart from the OCI registry to the README
       artifacthub.io/links: |
@@ -121345,4 +121384,4 @@ entries:
     urls:
     - https://github.com/christianknell/helm-charts/releases/download/umami-1.0.0/umami-1.0.0.tgz
     version: 1.0.0
-generated: "2026-11-21T17:12:35.809718914Z"
+generated: "2026-11-24T03:56:58.359831918Z"
