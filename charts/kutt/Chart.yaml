@@ -2,8 +2,8 @@ apiVersion: v2
 name: kutt
 description: Kutt is a free modern URL shortener.
 type: application
-version: 10.1.2
-appVersion: "v3.2.6"
+version: 11.0.0
+appVersion: "19-standard-trixie"
 home: https://github.com/christianhuth/helm-charts
 icon: https://raw.githubusercontent.com/christianhuth/helm-charts/refs/heads/main/charts/kutt/icon.svg
 maintainers:
@@ -23,8 +23,8 @@ dependencies:
     condition: valkey.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: instructions for installing the chart from the OCI registry to the README
+    - kind: changed
+      description: App Version to 19-standard-trixie
   artifacthub.io/links: |
     - name: support
       url: https://github.com/christianhuth/helm-charts/issues
