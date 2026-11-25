@@ -1,7 +1,7 @@
 # typo3
 
-## 8.0.8
+## 9.0.0
 
 ### Changed
 
-- App Version to legacy-13.4.40
+- App Version to legacy-14.3.12
