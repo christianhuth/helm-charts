@@ -1,7 +1,7 @@
 # squest
 
-## 7.1.6
+## 8.0.0
 
 ### Changed
 
-- App Version to 1.31.10-alpine
+- dependency of valkey to 1.0.0
