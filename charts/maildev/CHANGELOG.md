@@ -1,7 +1,7 @@
 # maildev
 
-## 1.7.1
+## 2.0.0
 
-### Added
+### Changed
 
-- instructions for installing the chart from the OCI registry to the README
+- App Version to 3.0.0
